@@ -22,7 +22,7 @@ Write down how to write your code
 * 2
 * 3
 
-# Repositories utilized in this project
+## Repositories utilized in this project
 Indicate all code repositories you have referenced
 
 Example:
@@ -32,5 +32,5 @@ This project is based on the code provided by Ruizhi Cheng in the follwing repos
 </a>
 
 
-# Note
+## Note
 Any addional inforamtion you want to provide
