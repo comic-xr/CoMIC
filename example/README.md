@@ -1,4 +1,4 @@
-# An example of checking-in code
+# An example of README
 
 This repository contains code used for xxxx (Introduction)
 
