@@ -1,4 +1,4 @@
-# An example of checking-in code
+# An example of README.md
 
 This repository contains code used for xxxx (Introduction)
 
@@ -16,7 +16,7 @@ Repo Root
 ```
 
 ## Quick Start
-Write down how to write your code
+Write down how to run your code
 
 * 1
 * 2
