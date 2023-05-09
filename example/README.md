@@ -2,6 +2,15 @@
 
 This repository contains code used for xxxx (Introduction)
 
+## Repositories Utilized in this Project
+Indicate all code repositories you have referenced
+
+Example:
+
+This project is based on the code provided by Ruizhi Cheng in the follwing repository
+<a href="https://github.com/felixshing/Metaverse_IMC2022">Metaverse_IMC2022
+</a>
+
 ## Project Strcuture
 The following is an example of how to write a project structure
 ```
@@ -21,16 +30,6 @@ Write down how to write your code
 * 1
 * 2
 * 3
-
-## Repositories utilized in this project
-Indicate all code repositories you have referenced
-
-Example:
-
-This project is based on the code provided by Ruizhi Cheng in the follwing repository
-<a href="https://github.com/felixshing/Metaverse_IMC2022">Metaverse_IMC2022
-</a>
-
 
 ## Note
 Any addional inforamtion you want to provide
