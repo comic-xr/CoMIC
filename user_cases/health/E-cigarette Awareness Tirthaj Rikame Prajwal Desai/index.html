@@ -1,0 +1,139 @@
+<html>
+<style>
+video {
+    object-fit: fill;
+}
+body {
+    background-color: antiquewhite;
+}
+</style>
+<div>
+    <h1 style=" text-align: center;">E-Cigarette Awareness</h1>
+</div>
+<span id="fps">--</span> FPS</div>
+<div id='webcam-container'>
+</div>
+<div id='label-container'></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+    
+    let counter = 0;
+    let maxname = "";
+    var fps = document.getElementById("fps");
+    var startTime = Date.now();
+    var frame = 0;
+    
+    const URL = 'https://teachablemachine.withgoogle.com/models/9UUcfiGdl/';
+
+    let model, webcam, labelContainer, maxPredictions;
+
+    let isIos = false;
+    
+    if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
+      isIos = true;
+    }
+    
+    
+init();
+
+async function init() {
+  const modelURL = URL + 'model.json';
+  const metadataURL = URL + 'metadata.json';
+
+ 
+  model = await tmImage.load(modelURL, metadataURL);
+  maxPredictions = model.getTotalClasses();
+
+  
+  const flip = true; 
+  var ratio = window.devicePixelRatio;
+  var screenWidth = screen.width * ratio;
+  var screenHeight = screen.height * ratio;
+  webcam = new tmImage.Webcam(screenWidth, screenHeight, flip);
+  await webcam.setup(); 
+
+  if (isIos) {
+    document.getElementById('webcam-container').appendChild(webcam.webcam); 
+   
+    const webCamVideo = document.getElementsByTagName('video')[0];
+    webCamVideo.setAttribute('playsinline', true); 
+    webCamVideo.muted = 'true';
+    webCamVideo.style.width = screenWidth + 'px';
+    webCamVideo.style.height = screenHeight + 'px';
+  } else {
+    document.getElementById('webcam-container').appendChild(webcam.canvas);
+  }
+  labelContainer = document.getElementById('label-container');
+  for (let i = 0; i < maxPredictions; i++) {
+    // and class labels
+    labelContainer.appendChild(document.createElement('div'));
+  }
+  webcam.play();
+  window.requestAnimationFrame(loop);
+}
+
+
+    async function loop() {
+        webcam.update(); 
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    async function predict() {
+        let prediction;
+        if (isIos) {
+            prediction = await model.predict(webcam.webcam);
+        } else {
+            prediction = await model.predict(webcam.canvas);
+        }
+        
+        for (let i = 0; i < maxPredictions; i++) {
+            const classPrediction =
+                prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+                if (prediction[i].probability.toFixed(2) > 0.85){
+                    maxname = prediction[i].className;
+                    console.log(maxname);
+                    counter ++;
+                    console.log("Counter" +counter);
+                    if (counter > 200){
+                        console.log("For long" +maxname)
+                        // Redirect
+                        if (maxname == 'Blank'){
+                            counter = 0;
+                            continue;
+                        }
+                        else if (maxname=='Blume E-Cigarette'){
+                            window.location.href = "Blume_warning.html";
+                        }
+                        else if (maxname=='Swift E-cigarette'){
+                            window.location.href = "Swift_warning.html";
+                        }
+                        else if (maxname=='Diamond E-cigarette'){
+                            window.location.href = "Diamond_warning.html";
+                        }
+                        else if (maxname=='Golden E-cigarette'){
+                            window.location.href = "Lux_warning.html";
+                        }
+                        counter = 0;
+                    }
+                }
+
+
+        }
+    }
+    function tick() {
+    var time = Date.now();
+    frame++;
+    if (time - startTime > 1000) {
+        fps.innerHTML = (frame / ((time - startTime) / 1000)).toFixed(1);
+        startTime = time;
+        frame = 0;
+        }
+    window.requestAnimationFrame(tick);
+    }
+    tick();
+</script>
+
+</html>
