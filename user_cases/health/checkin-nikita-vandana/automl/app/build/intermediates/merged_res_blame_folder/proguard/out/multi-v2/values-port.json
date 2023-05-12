@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.google.mlkit.vision.automl.demo.app-mergeProguardResources-15:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/vandanakeshavamurthy/.gradle/caches/transforms-3/b94853629aa4a034b1dc2fe4db614ad1/transformed/appcompat-1.2.0/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}
