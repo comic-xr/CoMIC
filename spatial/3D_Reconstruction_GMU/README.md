@@ -1,7 +1,6 @@
 ## Heading
 This repository contains code used for 3D reconstruction of George Mason University Using COLMAP
 
-## Repositories Utilized in this Project
 This project is based on the code provided by colmap in the following repository
 <a href="https://colmap.github.io/cli.html"></a>
 
@@ -15,22 +14,29 @@ Camera calibration Reference
 Database 
 
 This Project is based on the following database
-<a href="https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=share_link"></a>
 
-The above database consists of two folders namely 
+* 1 <a href="https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=share_link"></a>
+
+* 2 <a href="https://drive.google.com/drive/folders/1lvwHE1UQHj231_njIHEKm4lfIfSWKWTk">
+```
+The above database 1 consists of two folders namely 
    +-- Research Hall : Images of Research hall building covered in all directions.
    +-- Johnson center : Images of Johnson center building covered in all directions.
 
-
+The above database 2 consists of two folders namely 
+   +-- Krug : Images of Krug hall building covered in all directions.
+   +-- JC : Images of Johnson center building covered in all directions.
+```
+```
 Repo Root
 +-- CameraCalibration
-    +--camcal.py                    #camera calibration
-    +--circularpattterncal.py       #camera calibration with circular grid. might be useful in future.
+    +-- camcal.py                    #camera calibration
+    +-- circularpattterncal.py       #camera calibration with circular grid. might be useful in future.
 +-- Johnson center
     +-- sparse                      #consists of Johnson center sparse model.
 +-- Research Hall
     +-- sparse                      #consists of Research Hall sparse model.
-
+```
 
 ## Quick Start
 For COLAMP : 
@@ -54,9 +60,9 @@ You can install colmap by downloading file. For MAC users i suggest to go with c
 
 You can find the installation process setp by step in colmap.
 
-You can use automatic reconstructor or Manual reconstruct of Sparse maps.
+You can use automatic reconstructor or Manual reconstructor of Sparse maps.
 
-As said for mac users mostly, generating model (automatic reconstructor) with Graphic user interface doesn't work. Use command Line argument.
+For mac users mostly, generating model (automatic reconstructor)  with Graphic user interface doesn't work. Use command Line argument.
 
 To generate a good sparse model you need close to 25k feature extraction points. But For Mac users with M2 chip you will be limited to 16392 points.
 
@@ -77,6 +83,3 @@ Somehow colmap was not working with anaconda environment and had conflicts with 
 We explored the code to see what variables and configurations were being used and also realized that we will have to remove anaconda. 
 Then we deactivated anaconda and had to reset the whole environment variables and path configurations.
 We ran it using the vanilla(standard python pyenv) python virtual environments and then it worked seamlessly on CLI.
-
-
-
