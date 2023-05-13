@@ -2,22 +2,22 @@
 This repository contains code used for 3D reconstruction of George Mason University Using COLMAP
 
 This project is based on the code provided by colmap in the following repository
-<a href="https://colmap.github.io/cli.html"></a>
+https://colmap.github.io/cli.html
 
 The clmap with GPS position prior is provided by Vincentqyw in the follwing repository
-<a href="https://github.com/Vincentqyw/colmap-gps"></a>
+https://github.com/Vincentqyw/colmap-gps
 
 Camera calibration Reference 
-<a href="https://learnopencv.com/camera-calibration-using-opencv/"></a>
+https://learnopencv.com/camera-calibration-using-opencv/
 
 ## Project Strcuture
 Database 
 
 This Project is based on the following database
 
-1 <a href="https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=share_link"></a>
+* 1 https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=share_link
 
-2 <a href="https://drive.google.com/drive/folders/1lvwHE1UQHj231_njIHEKm4lfIfSWKWTk"></a>
+* 2 https://drive.google.com/drive/folders/1lvwHE1UQHj231_njIHEKm4lfIfSWKWTk
 ```
 The above database 1 consists of two folders namely 
    +-- Research Hall : Images of Research hall building covered in all directions.
