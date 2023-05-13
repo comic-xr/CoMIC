@@ -1,0 +1,1036 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &353479809391316369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4321479697571720418}
+  - component: {fileID: 5283780678971090825}
+  m_Layer: 0
+  m_Name: LeftVelocity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4321479697571720418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353479809391316369}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4546463092509554744}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5283780678971090825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353479809391316369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5057aa7963531264ab4028cfb17e1bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocitySource:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Source
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e56154f0-b5fc-41f7-b4db-133f7005bebb
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6340230627164288718, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  angularVelocitySource:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Angular Velocity Source
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5d62589d-cb2d-4319-8832-274b833540cf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -7789005705964340313, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+--- !u!1 &1410198640978997401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7830959637886578938}
+  - component: {fileID: 8947723957707495974}
+  m_Layer: 0
+  m_Name: LeftPointer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7830959637886578938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410198640978997401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4546463092509554744}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8947723957707495974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410198640978997401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Position Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 87ea340d-1f4f-438c-b09f-06a56f79d79b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 2e57e9a8-8716-484c-956d-ddfafc5eb1b2
+        m_Path: <XRController>{LeftHand}/pointerPosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 4656139050818665804, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_RotationInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rotation Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: c855f3aa-b0f3-4caf-a8fd-887591395e8b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 40aef40a-3fb1-4d1c-aed8-5b7ad8977eb1
+        m_Path: <XRController>{LeftHand}/pointerRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 1761098436910761192, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_PositionAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_RotationAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_HasMigratedActions: 1
+--- !u!1 &1535799349444701254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8498404922143240242}
+  - component: {fileID: 4405376331278609248}
+  m_Layer: 0
+  m_Name: RightVelocity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8498404922143240242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535799349444701254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5338558038996692276}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4405376331278609248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535799349444701254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5057aa7963531264ab4028cfb17e1bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocitySource:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Source
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e56154f0-b5fc-41f7-b4db-133f7005bebb
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1053539590735587758, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  angularVelocitySource:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Angular Velocity Source
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 5d62589d-cb2d-4319-8832-274b833540cf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -7756524022069654225, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+--- !u!1 &2341299549837029693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2341299549837029692}
+  - component: {fileID: 3269629107003897906}
+  m_Layer: 0
+  m_Name: UnityInputSystem.Poses.GenericXR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2341299549837029692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341299549837029693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8536848645983038732}
+  - {fileID: 4546463092509554744}
+  - {fileID: 5338558038996692276}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3269629107003897906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341299549837029693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6885a32-53b6-49eb-8e7d-9c9ad4ed458c
+    m_ActionName: Generic XR/Left Device Position
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2fab288-ca87-4b0e-bd52-356fb936cc52
+    m_ActionName: Generic XR/Left Device Rotation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4facac82-eff3-492b-82c8-00572253494c
+    m_ActionName: Generic XR/Left Device Velocity
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ee42830-0994-4a7e-8140-9fafa4ec4a76
+    m_ActionName: Generic XR/Left Device Angular Velocity
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 888fa71e-070d-4309-a428-2c6994c71a01
+    m_ActionName: Generic XR/Left Device Acceleration
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6755d377-0a48-41cd-b4db-c6372503ec5f
+    m_ActionName: Generic XR/Left Device Angular Acceleration
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0ffef73-8fd7-4a8f-9b3c-1fd5b688ea67
+    m_ActionName: Generic XR/Left Device Pointer Position
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 303f6596-a8b5-49c5-8485-bc9ac959a7e3
+    m_ActionName: Generic XR/Left Device Pointer Rotation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ed2073bd-c6fe-42a1-926b-6b767f89baff
+    m_ActionName: Generic XR/Left Home Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f3f131f7-587f-4037-9f17-790aaa2fe45c
+    m_ActionName: Generic XR/Left Menu Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d94b983-91af-4800-af13-3f567a212d64
+    m_ActionName: Generic XR/Left Back Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c9716f43-0b1f-452b-a15e-30dcc9ba1066
+    m_ActionName: Generic XR/Left Primary Button Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2ae52c3-7207-4fbc-852f-2021ccf32835
+    m_ActionName: Generic XR/Left Primary Button Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b27b2f10-e9b3-4894-a9ac-dbe2846646c8
+    m_ActionName: Generic XR/Left Secondary Button Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c85167c1-42bf-43b5-92ae-3024a9c617f0
+    m_ActionName: Generic XR/Left Secondary Button Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7176fbf2-d63b-4d5d-8456-844dd623e3ab
+    m_ActionName: Generic XR/Left Trigger Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2dca5048-5503-4ac8-8a38-ae40abcf1566
+    m_ActionName: Generic XR/Left Trigger Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 277fdbb0-245f-4345-90e9-53c99611e8a4
+    m_ActionName: Generic XR/Left Grip Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 701f1a32-37a5-45f2-ade5-91cb8bd5b0d7
+    m_ActionName: Generic XR/Left Grip Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7368d246-9783-420f-9e21-4a3f37fc7885
+    m_ActionName: Generic XR/Left Thumbstick Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a0ee7b4-0d59-4764-8ddf-216b339ddf7b
+    m_ActionName: Generic XR/Left Thumbstick Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7c86e97-579b-4eb7-9024-93694615effd
+    m_ActionName: Generic XR/Left Thumbstick Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dfd596b0-b8da-44af-8e71-8a65f6dda55b
+    m_ActionName: Generic XR/Left Touchpad Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 02ba91d9-5bcc-4bd1-91ae-4a51bc4d5281
+    m_ActionName: Generic XR/Left Touchpad Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 91307b7f-1208-4338-8088-b0977ddf7def
+    m_ActionName: Generic XR/Left Touchpad Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b3c0e4f-511d-4081-8a93-435f741dcdc6
+    m_ActionName: Generic XR/Right Device Position
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b21482af-99d0-4e86-9035-0aba403d7edb
+    m_ActionName: Generic XR/Right Device Rotation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b91eff29-7f90-445e-a391-93576a5f1276
+    m_ActionName: Generic XR/Right Device Velocity
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1f95deb1-a67a-416a-8623-47b29dc2fb37
+    m_ActionName: Generic XR/Right Device Angular Velocity
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5df8048b-6a0d-4e35-992b-76cf447bbb7d
+    m_ActionName: Generic XR/Right Device Acceleration
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f00608bb-9b21-48ae-ac58-97373d4b67ab
+    m_ActionName: Generic XR/Right Device Angular Acceleration
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58069eb9-40bb-42cb-8c06-549928b78ce4
+    m_ActionName: Generic XR/Right Device Pointer Position
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 71982357-fea6-4469-9f28-0df60f94b352
+    m_ActionName: Generic XR/Right Device Pointer Rotation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 07b254a7-9c6a-41b4-95b5-1e56485edb57
+    m_ActionName: Generic XR/Right Home Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 12b063ad-5653-420f-bdc7-250f855857dc
+    m_ActionName: Generic XR/Right Menu Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0ebf30f2-3478-4c1e-934b-2d609c06b090
+    m_ActionName: Generic XR/Right Back Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78e4abd5-2b5e-4998-8bd9-7daaacfd167b
+    m_ActionName: Generic XR/Right Primary Button Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc363e57-1a27-4ca8-9bf3-8fe9d8650467
+    m_ActionName: Generic XR/Right Primary Button Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 32e567d4-fe6b-492e-a3e6-3000e6d6c318
+    m_ActionName: Generic XR/Right Secondary Button Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5fdacbea-e09b-4f3b-9e9e-f4f81348a3db
+    m_ActionName: Generic XR/Right Secondary Button Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ef10729-9944-4972-8e35-95405ba95f1e
+    m_ActionName: Generic XR/Right Trigger Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7610e470-5a69-40d7-ac47-e57edd615b34
+    m_ActionName: Generic XR/Right Trigger Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 706ad657-2fa5-46cd-b519-c53bf2de151d
+    m_ActionName: Generic XR/Right Grip Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1f58bfd8-abcd-431b-befe-352c4e464f22
+    m_ActionName: Generic XR/Right Grip Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 538130ae-e2d1-4ce8-bbd4-5eb81a2e0492
+    m_ActionName: Generic XR/Right Thumbstick Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb45b9d9-60f0-4a19-8cdf-052d9718e22e
+    m_ActionName: Generic XR/Right Thumbstick Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dcb62131-7b02-4b5c-b086-c288569c0f7f
+    m_ActionName: Generic XR/Right Thumbstick Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e1740b7-37a7-42fe-9d35-e2ea0e1340dd
+    m_ActionName: Generic XR/Right Touchpad Touched
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 787926ac-c187-48d1-9342-50f096b95154
+    m_ActionName: Generic XR/Right Touchpad Pressed
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e9abf06e-24a8-473e-a98b-b8a401b65f31
+    m_ActionName: Generic XR/Right Touchpad Axis
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f91f4716-30a9-46e2-8f65-51e4e9fa8349
+    m_ActionName: Generic XR/HMD Device Position
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81eede4b-e8ec-4a54-9db9-a48e41183537
+    m_ActionName: Generic XR/HMD Device Rotation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Generic XR
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!1 &3086591272479252224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8536848645983038732}
+  m_Layer: 0
+  m_Name: HMD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8536848645983038732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086591272479252224}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6339826337066568575}
+  m_Father: {fileID: 2341299549837029692}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4950690087568533986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637535433622450797}
+  - component: {fileID: 3300987687454194298}
+  m_Layer: 0
+  m_Name: RightPointer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &637535433622450797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4950690087568533986}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5338558038996692276}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3300987687454194298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4950690087568533986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Position Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 87ea340d-1f4f-438c-b09f-06a56f79d79b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 4abfabd6-ee7b-478f-b14a-a8ba332e064a
+        m_Path: <XRController>{RightHand}/pointerPosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -5351892268075011196, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_RotationInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rotation Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: c855f3aa-b0f3-4caf-a8fd-887591395e8b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: d816b4e7-2409-48d4-9910-25ac9d065df9
+        m_Path: <XRController>{RightHand}/pointerRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 4417759758834255164, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_PositionAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_RotationAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_HasMigratedActions: 1
+--- !u!1 &5528642188535249948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2242920649328070894}
+  - component: {fileID: 397890126422594809}
+  m_Layer: 0
+  m_Name: RightDevice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2242920649328070894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528642188535249948}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5338558038996692276}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &397890126422594809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528642188535249948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Position Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ef49658c-fad1-4345-bdf8-77d9e906b0d4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 8d586109-1e98-439a-a823-3da2a4cf6919
+        m_Path: <XRController>{RightHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 3686607140530417478, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_RotationInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rotation Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2ea9332b-9f47-463d-bc3a-39a6f01c318e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 0b17d3cb-1a71-4796-aff9-d5a0b5c3f230
+        m_Path: <XRController>{RightHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 3477539966844352003, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_PositionAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_RotationAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_HasMigratedActions: 1
+--- !u!1 &6046286683307060091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4546463092509554744}
+  m_Layer: 0
+  m_Name: LeftController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4546463092509554744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6046286683307060091}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5989700807936452869}
+  - {fileID: 7830959637886578938}
+  - {fileID: 4321479697571720418}
+  m_Father: {fileID: 2341299549837029692}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6147765951297469500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5338558038996692276}
+  m_Layer: 0
+  m_Name: RightController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5338558038996692276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6147765951297469500}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2242920649328070894}
+  - {fileID: 637535433622450797}
+  - {fileID: 8498404922143240242}
+  m_Father: {fileID: 2341299549837029692}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7803902354840847249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6339826337066568575}
+  - component: {fileID: 708183290132727740}
+  m_Layer: 0
+  m_Name: HMDDevice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6339826337066568575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803902354840847249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8536848645983038732}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &708183290132727740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803902354840847249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Position Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ef49658c-fad1-4345-bdf8-77d9e906b0d4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 8d586109-1e98-439a-a823-3da2a4cf6919
+        m_Path: <XRHMD>/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 1166739977079671303, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_RotationInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rotation Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2ea9332b-9f47-463d-bc3a-39a6f01c318e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 0b17d3cb-1a71-4796-aff9-d5a0b5c3f230
+        m_Path: <XRHMD>/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 5170883956632816888, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_PositionAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_RotationAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_HasMigratedActions: 1
+--- !u!1 &8008313086494045322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5989700807936452869}
+  - component: {fileID: 7428136866099797548}
+  m_Layer: 0
+  m_Name: LeftDevice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5989700807936452869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008313086494045322}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4546463092509554744}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7428136866099797548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008313086494045322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Position Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ef49658c-fad1-4345-bdf8-77d9e906b0d4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 8d586109-1e98-439a-a823-3da2a4cf6919
+        m_Path: <XRController>{LeftHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -4819670611972759391, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_RotationInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rotation Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2ea9332b-9f47-463d-bc3a-39a6f01c318e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 0b17d3cb-1a71-4796-aff9-d5a0b5c3f230
+        m_Path: <XRController>{LeftHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation Input
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -3393048429852869531, guid: 4ad928a61d9612a4685b1d2ab5c52c85, type: 3}
+  m_PositionAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_RotationAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_HasMigratedActions: 1
