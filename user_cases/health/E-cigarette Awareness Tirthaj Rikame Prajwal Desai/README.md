@@ -26,6 +26,15 @@ This project consists of Two parts;
 The project works as follows;
 (If you run this project, you can fully experience the AR experience using the mobile device(Android or IOS) as our Project uses GPS geo-location.)
 
+#Step 0: 
+If you want to train the model on your own, you can do it through this link: https://teachablemachine.withgoogle.com/
+Go to Get Started -> Image Project -> Standard Image Model
+Add images to the different classes and name the classes accordingly and train it. 
+Once the training is completed you can export the model and download it.
+
+To create a warning message we used this website: https://www.adobe.com/express/feature/image/editor
+Here you can edit the image according to your liking and while downloading it, download png image with transparent background. 
+
 # Step 1:
 Open the link for our project that is hosted onto github to see the live demo on mobile devices
 The Link: https://tirthaj.github.io/E-cigarette-Prevention/ 
