@@ -1,1 +1,1 @@
-Performance Evaluation of WebXR on Mobile Devices
+WebXR Application

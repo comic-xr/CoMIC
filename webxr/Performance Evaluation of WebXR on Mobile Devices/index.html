@@ -1,0 +1,80 @@
+<html> 
+  /* Loading your WebXr site*/
+  <head>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
+    <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="sphereexpand.js"></script>
+    <script src="backhome.js"></script>
+    <script src="examplefunctions.js"></script>
+    <script src="wasm-module.js"></script>
+  </head>
+  
+  <body>
+    
+     <a-scene >
+       /* getting images and assents*/
+       <a-assets>
+         <img id="woodfloor" src="https://cdn.glitch.global/fae4f3fc-0f15-4ca3-8e80-0e9d5a5ac871/wall.jpg?v=1678306396602">
+         <img id="wall" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2F4340689010_68c3b1bbb7_o%20(2).jpg?v=1547154870021">
+         <img id="starsky" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2Fstarry%20night.jpg?1547158907338">
+         <img id="picasso" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2FPablo_Picasso_-_Womanwith_a_Mandolin_-_Ermitage%20(1).jpg?1547166417213">
+         <img id="bordeauxtheater" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2FOp%C3%A9ra_National_de_Bordeaux%20(1).jpg?1547235572572">
+         <a-asset-item id="skullmodel" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2Ftriceratops.glb?15472402936079"
+         response-type="arraybuffer"></a-asset-item>
+       </a-assets>
+             
+      <a-entity id="camera" position="0 1.6 0" camera look-controls wasd-controls>
+        <a-entity cursor="rayOrigin: mouse"></a-entity>
+      </a-entity>
+      
+      <a-entity laser-controls="hand:right"></a-entity>
+
+
+      <a-sky id="sky" src="#starsky"></a-sky>
+       
+      <a-entity id="architecture" class="homeworld">
+         <a-plane id="floor" rotation="-90 90 0" width="30" height="30" src="#woodfloor" repeat="4 4"></a-plane>
+         <a-plane position="0 5 -15" width="30" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane position="-2.5 5 15" rotation="0 180 0" width="25" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane position="-15 5 0" rotation="0 90 0" width="30" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane position="15 5 0" rotation="0 -90 0" width="30" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane id = "ceiling" position="0 10 0" scale="1 1 1" width="30" height="30" rotation="90 0 0"
+           material="metalness:1; roughness:0; transparent: true; opacity: .7; shader: standard; 
+           color: #faaf52; side:double;"   ></a-plane>
+       </a-entity>
+       
+       <a-entity id="picassodisplay" class="homeworld" position="0 3 -14.9">
+         <a-plane id="picassoframe" color="#191817" width="3" height="4"></a-plane>
+         <a-plane id="picassopainting" src="#picasso" position="0 0 .1" width="2.5" height="3.5" ></a-plane>
+         <a-plane id="picassocaption" position="3.5 -1 .01" height=".6" width="auto" color="#191817"
+          text="value: First WebXR site; width: 3; align: center"></a-plane>
+       </a-entity>
+       
+       
+       <a-entity id="skulldisplay" class="homeworld" position="11 0 -11">
+         <a-box  color="black" width=".5" height="2" depth="1"></a-box>
+         <a-gltf-model position="0 1.8 0" rotation="0 0 -10" src="#skullmodel" scale=".5 .5 .5"
+         animation="property: rotation; to: 0 360 0; easing: easeInOutSine; dur: 30000; loop: true; elasticity: 0"
+         ></a-gltf-model>
+         <a-plane id="skullcaption" position="3.9 1 2" rotation="0 -90 0" height=".6" width="auto" color="#191817"
+          text="value: Hello Welcome to CS695 Course; width: 3; align: center"
+         ></a-plane>
+       </a-entity>
+       
+      <a-entity id="photospheredisplay" class="homeworld" position="-10 0 -12">
+          <a-box color="black" rotation="0 35 0" width="1" height="2" depth=".5" ></a-box>
+          <a-sphere position="0 1.8 0" radius=".7" src="#bordeauxtheater" sphereexpand         
+          animation="property: rotation; to: 0 360 0; easing: easeInOutSine; dur: 30000; loop: true; elasticity: 0"
+          ></a-sphere>
+          <a-plane id="photospherecaption" position=".5 .5 .5" rotation="-25 35 0" height=".6" width="auto" color="#191817"
+          text="value: This photosphere gallery; width: 2; wrapCount: 30; align: center"
+          ></a-plane>
+       </a-entity>
+       
+       <a-circle id="homebutton" position="0 .1 0" rotation="-90 0 0" backhome></a-circle>
+      
+     </a-scene>
+    
+  </body>
+  
+</html>
