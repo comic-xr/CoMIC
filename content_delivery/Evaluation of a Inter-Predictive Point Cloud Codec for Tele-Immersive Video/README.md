@@ -1,4 +1,4 @@
-# Evaluation Inter-Frame Predictive Point Cloud Compression
+# Evaluation of an Inter-Frame Predictive Point Cloud Codec
 
 
 This repository contains code used for the project "Evaluation Inter-Frame Predictive Point Cloud Compression" for CS695 at George Mason University in Spring 2023 Semester. This project is the performance evaluation of the Inter-Frame Predictive Point Cloud Compression codec which is described in detai in the journal paper(R. Mekuria, K. Blom, and P. Cesar, "Design, Implementation and Evaluation of a Point Cloud Codec for Tele-Immersive Video," IEEE Transactions on Circuits and Systems for Video Technology, 27(4): 828 -842, 2017, of which a preprint is available at: https://ir.cwi.nl/pub/24395.  The codec has served as the software to generate the anchors for the Call for Proposals for Point Cloud Compression by  the MPEG working group 3DG-PCC on PointCloud Compression
