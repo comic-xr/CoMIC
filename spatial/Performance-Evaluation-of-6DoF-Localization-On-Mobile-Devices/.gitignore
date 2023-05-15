@@ -1,0 +1,5 @@
+data/*
+sessions.sqlite
+.idea
+venv/*
+*.pyc
