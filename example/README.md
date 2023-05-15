@@ -1,35 +1,52 @@
-# An example of README
+USER IDENTIFICATION IN 360-DEGREE VIDEOS
+A new study introduces a novel approach to user identification, which utilizes gaze data as a biometric modality. The study explores different machine learning techniques, including deep neural networks and ensemble methods, to identify users based on their gaze patterns and evaluates their performance using real-world gaze data.
+Repositories Utilized in this Project
+This dataset is from the paper “Gaze Prediction in Dynamic 360◦ Immersive Videos”	provided by Yanyu Xu, Yanbing Dong, Junru Wu, Zhengzhong Sun, Zhiru Shi, Jingyi Yu, and Shenghua Gao	
+	In the above data set 45 participants were instructed to freely explore the 208 video clips were divided into six groups, each containing around 35 video clips. 
 
-This repository contains code used for xxxx (Introduction)
+We have selected 30 videos from each participant and made a final dataset
 
-## Repositories Utilized in this Project
-Indicate all code repositories you have referenced
+Code 
+Referenced https://scikit-learn.org/stable/  site for model developments
 
-Example:
+Project Structure
+ Repo root
 
-This project is based on the code provided by Ruizhi Cheng in the follwing repository
-<a href="https://github.com/felixshing/Metaverse_IMC2022">Metaverse_IMC2022
-</a>
++--  Preprocessing.ipynb                        # selecting 20 videos and creating final dataset
++--  UserIdentification.ipynb                 # User identification utilizing different models
+Dataset
++-- Gaze_txt_files_2                            # folder contains every user data(raw data)
++-- Final_data.csv                                # extracted dataset
+Models used 
+KNN
+DECISION TREE CLASSIFIER
+DEEP NEURAL NETWORK
+GAUSSIAN NB
+ROCKET CLASSIFIER
 
-## Project Strcuture
-The following is an example of how to write a project structure
-```
-Repo Root
-+-- disruption.py           # Sec. 8: Network Disruptions
-+-- ovr_plot.py             # Get data from OVR Metrics Tool and plot the results
-+-- E2Elatency              # Sec. 7: End-to-end Latency
-    +-- crop_video.py       # Crop video
-    +-- video2frame.py      # Extract the video frame from the video
-    +-- quest2_AP_sync.py   # Sync time between Quest2s
-    +-- E2Elatency.py       # Calculate the E2E latency
-```
 
-## Quick Start
-Write down how to write your code
+Quick Start
+Started with some feature extraction methods
+Built methods 
+Analyzed accuracy by giving gaze and head data separately 
+Note
+* Basic models work well with this dataset, for the future try to implement more basic models and analyze the accuracy
 
-* 1
-* 2
-* 3
 
-## Note
-Any addional inforamtion you want to provide
+
+ 						
+					 				
+			
+		
+
+
+
+
+	
+
+		
+				
+			
+		
+		
+
