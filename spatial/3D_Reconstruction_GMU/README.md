@@ -11,31 +11,35 @@ Camera calibration Reference
 https://learnopencv.com/camera-calibration-using-opencv/
 
 ## Project Strcuture
-Database 
+Database & Maps
 
 This Project is based on the following database
 
-* 1 https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=share_link
+* 1 https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=sharing
 
-* 2 https://drive.google.com/drive/folders/1lvwHE1UQHj231_njIHEKm4lfIfSWKWTk
 ```
-The above database 1 consists of two folders namely 
+The above database consists of three folders namely 
    +-- Research Hall : Images of Research hall building covered in all directions.
+   +-- Krug Hall : Images of Kurga Hall building covered in all directions.
    +-- Johnson center : Images of Johnson center building covered in all directions.
 
-The above database 2 consists of two folders namely 
-   +-- Krug : Images of Krug hall building covered in all directions.
-   +-- JC : Images of Johnson center building covered in all directions.
 ```
 ```
 Repo Root
 +-- CameraCalibration
     +-- camcal.py                    #camera calibration
     +-- circularpattterncal.py       #camera calibration with circular grid. might be useful in future.
-+-- Johnson center
-    +-- sparse                      #consists of Johnson center sparse model.
-+-- Research Hall
-    +-- sparse                      #consists of Research Hall sparse model.
+
+Drive Root
++CS695 
+    +-- Johnson center
+        +-- sparse                      #consists of Johnson center sparse model.
+    +-- Research Hall
+        +-- sparse                      #consists of Research Hall sparse model.
+    +-- KrugHall
+        +-- sparse                      #consists of Krug Hall sparse model.
+        
+
 ```
 
 ## Quick Start
