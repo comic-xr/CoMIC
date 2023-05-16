@@ -1,4 +1,4 @@
-## WebXR-application
+# WebXR-application
 
 Performance Evaluation of WebXR on Mobile Devices
 
