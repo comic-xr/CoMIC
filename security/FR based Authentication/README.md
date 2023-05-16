@@ -1,6 +1,8 @@
 # VR User Authenticaion with Federated Learning
 
-This repository contains code used for Federated Learning Based User Authentication in VR 
+This repository contains code used for Federated Learning Based User Authentication in VR. 
+
+The dataset is available upon request. 
 
 ## Repositories Utilized in this Project
 
