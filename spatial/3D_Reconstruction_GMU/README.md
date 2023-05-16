@@ -50,7 +50,6 @@ For COLAMP :
 * 3 Navigate to Research Hall -> spare -> 0
 * 4 CLick open.
 
-
 You can follow same method to view Johnson center, If the file consists of multiple files in Sparse (EX : 0,1,2,3)
 It indicates that the model is generated in different sets. This happends when colmap is unable to match feature or misses features else it may generate multiple sparse point clouds to handle different parts of the scene separately.
 
@@ -74,7 +73,6 @@ So suggested is to work on Windows machine with a better Graphic card (atleast 8
 
 For camera calibration use your phone camera to take images of chess board from multiple viewpoint points. 
 Use them as database to camera calibration.
-
 
 ## Warning
 If you update colmap with GPS position Prior, Rarely It affects your global bundle adjustment If it happens remove the GPS position prior code and update it again.
