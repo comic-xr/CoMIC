@@ -15,14 +15,19 @@ Database & Maps
 
 This Project is based on the following database
 
-Link : https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=sharing
+1 Link : https://drive.google.com/drive/folders/1bO3PbEiboPKaXBBmnur5CpAcbVO27kR_?usp=sharing
+
+2 Link : https://drive.google.com/drive/folders/1lvwHE1UQHj231_njIHEKm4lfIfSWKWTk
 
 ```
-The above database consists of three folders namely 
+The above database Link 1 consists of three folders namely 
    +-- Research Hall : Images of Research hall building covered in all directions.
    +-- Krug Hall : Images of Kurga Hall building covered in all directions.
    +-- Johnson center : Images of Johnson center building covered in all directions.
-
+   
+The above database Link 2 consists of three folders namely 
+   +-- Krug Hall : Images of Kurga Hall building covered in all directions.
+   +-- Johnson center : Images of Johnson center building covered in all directions.
 ```
 ```
 Repo Root
