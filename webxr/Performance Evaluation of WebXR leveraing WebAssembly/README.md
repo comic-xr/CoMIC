@@ -67,6 +67,15 @@ Perform image tracking which will give an augment reality or transformation in t
 
 image_tracker_wasm.cpp: In this we have defined GOOD_MATCH_RATIO with a value of 0.7, which is later used for filtering good matches between keypoints. The codes uses akaze and brute force object matrices for storing reference image data. Initialize the AR system by taking the reference image data and performing AKAZE feature detection and description on it. resetTracking is defined, which takes an image frame as input and performs AKAZE feature detection and description on it. It matches the features with the reference image using a brute-force matcher. If enough good matches are found, it estimates the homography transformation matrix using RANSAC and checks if the homography is valid. then, it fills the output structure with the homography matrix and the warped corner points. A track function is defined, which tracks the image features in subsequent frames using optical flow. It calculates the average variance of the feature points and checks if the number of good matches is sufficient and the variance is within a threshold. If the conditions are met, it estimates an affine transformation matrix, updates the homography matrix, and fills the output structure.
 
+Pure AR.js project:
+The project  is to render an 3D .GLB/.USDZ models in your browser. 
+First it create an ARToolkitSource object to track the AR using the webcam as the source. ARToolkitSource is initialized, and once it's ready, the renderer, camera, ARToolkitContext, and scene are set up. The ARToolkitContext is created, specifying the camera parameters file URL and detection mode.
+The ARToolkitContext is initialized, and once it's ready, the camera's projection matrix is copied from the ARToolkitContext. A GLTFLoader is created to load a virtual object in GLTF format. The object is loaded from the 'object.gltf' file, and when it's loaded, it's positioned, scaled, and added to the scene. 
+The renderer is created with antialiasing and an alpha channel, and its size is set to match the window dimensions. The renderer's DOM element is appended to the document body.
+A function is defined, which is called recursively using requestAnimationFrame. Inside the  function, ARToolkitSource and ARToolkitContext are updated, and if the ARToolkitSource is ready, the scene's visibility is set to match the camera's visibility, and the renderer renders the scene with the camera.
+
+
+
 
 Installation steps:
 
