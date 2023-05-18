@@ -1,13 +1,8 @@
-# TODO review python encapsulation -- I thought it didn't have encapsulation,
-#      but when I tried changing FeatureLine.__alignment outside of the class,
-#      it didn't seem to work until I changed "__alignment" to "alignment"
-
 import numpy as np
 import scipy
+import re3q3
 
-from numpy.random import default_rng
 from random import uniform # used to generate values between -1 and 1
-rng = default_rng()
 
 # A simplified version of colmap's Point3D class. Represents a point in 3D space
 # that can have additional information alongside its coordinates.
@@ -117,10 +112,13 @@ def cayley_param(c, R):
 
 	return R
 
+# Performs feature estimation for 6 2D lines and 6 3D points.
 # @param lines2D an array of FeatureLines. FeatureLines are basically a line
 #        specified by a 3D vector, plus some additional info (e.g. alignment)
 # @param points3D an array of Point3D. Point3Ds are basically 3D points (so 3
 #        coordinates, x, y, z), plus some additional info.
+# @return the various poses that are calculated
+#
 def estimate(lines2D, points3D):
 
 	# we have two 3x6 matrices that we use to store 6 lines and 6 points.
@@ -142,10 +140,10 @@ def estimate(lines2D, points3D):
 	print(f'raw points:\n{points}\n')
 	print(f'raw lines :\n{lines}\n')
 
-	# in the original code, this returns
+	# TODO in the original code, this returns
 	#     return std::vector<P6LEstimator::M_t>();
-	# need to figure out what we want to do here -- just printing whether
-	# everything is aligned for now
+	# need to figure out if we want to return anything here -- just printing
+	# whether everything is aligned for now
 	if (all_lines_aligned):
 		print("All lines are already aligned.")
 		return
@@ -237,9 +235,9 @@ def estimate(lines2D, points3D):
 	coeffs = np.zeros((3, 10))
 	coeffs = rotation_to_e3q3(Rcoeffs, coeffs)
 
-	# TODO implement re3q3()
+	# now call re3q3
 	solutions = np.zeros((3, 8))
-	n_sols = 5 #re3q3(coeffs, &solutions)
+	n_sols = re3q3.re3q3(coeffs, solutions, True)
 
 	output = []
 

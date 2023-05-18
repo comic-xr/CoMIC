@@ -107,6 +107,15 @@ def re3q3_random_matrix_initialize():
 #
 def re3q3(coeffs, solutions, try_random_var_change):
 
+	# some stuff happens up here
+
+#    int elim_var = 1;
+    
+#    Eigen::Matrix<double, 3, 3> Ax, Ay, Az;
+#    Ax << coeffs.col(3), coeffs.col(5), coeffs.col(4); // y^2, z^2, yz
+#    Ay << coeffs.col(0), coeffs.col(5), coeffs.col(2); // x^2, z^2, xz
+#    Az << coeffs.col(3), coeffs.col(0), coeffs.col(1); // y^2, x^2, yx
+
 	elim_var = 1
 
 	Ax = np.zeros((3, 3))
@@ -128,6 +137,21 @@ def re3q3(coeffs, solutions, try_random_var_change):
 	Az[:,1] = coeffs[:,0]
 	Az[:,2] = coeffs[:,1]
     
+#    double detx = std::fabs(Ax.determinant());
+#    double dety = std::fabs(Ay.determinant());
+#    double detz = std::fabs(Az.determinant());
+#
+#    double det = detx;
+#    
+#    if(det < dety) {
+#        det = dety;
+#        elim_var = 2;
+#    }
+#    if(det < detz) {
+#        det = detz;
+#        elim_var = 3;
+#    }
+
 	detx = abs(np.linalg.det(Ax))
 	dety = abs(np.linalg.det(Ay))
 	detz = abs(np.linalg.det(Az))
@@ -142,8 +166,34 @@ def re3q3(coeffs, solutions, try_random_var_change):
 		det = detz
 		elim_var = 3
 
-	# when try_random_var_change is true and the largest determinant is
-	# approximately 0, we do the recursive version of this method
+#    if(try_random_var_change && det < 1e-10) {
+#        Eigen::Matrix<double,3,4> A;
+#        A.block<3,3>(0,0) = Eigen::Quaternion<double>::UnitRandom().toRotationMatrix();
+#        A.block<3,1>(0,3).setRandom().normalize();
+        
+#        Eigen::Matrix<double,10,10> B;
+#        B << A(0,0)*A(0,0), 2*A(0,0)*A(0,1), 2*A(0,0)*A(0,2), A(0,1)*A(0,1), 2*A(0,1)*A(0,2), A(0,2)*A(0,2), 2*A(0,0)*A(0,3), 2*A(0,1)*A(0,3), 2*A(0,2)*A(0,3), A(0,3)*A(0,3),
+#                A(0,0)*A(1,0), A(0,0)*A(1,1) + A(0,1)*A(1,0), A(0,0)*A(1,2) + A(0,2)*A(1,0), A(0,1)*A(1,1), A(0,1)*A(1,2) + A(0,2)*A(1,1), A(0,2)*A(1,2), A(0,0)*A(1,3) + A(0,3)*A(1,0), A(0,1)*A(1,3) + A(0,3)*A(1,1), A(0,2)*A(1,3) + A(0,3)*A(1,2), A(0,3)*A(1,3),
+#                A(0,0)*A(2,0), A(0,0)*A(2,1) + A(0,1)*A(2,0), A(0,0)*A(2,2) + A(0,2)*A(2,0), A(0,1)*A(2,1), A(0,1)*A(2,2) + A(0,2)*A(2,1), A(0,2)*A(2,2), A(0,0)*A(2,3) + A(0,3)*A(2,0), A(0,1)*A(2,3) + A(0,3)*A(2,1), A(0,2)*A(2,3) + A(0,3)*A(2,2), A(0,3)*A(2,3),
+#                A(1,0)*A(1,0), 2*A(1,0)*A(1,1), 2*A(1,0)*A(1,2), A(1,1)*A(1,1), 2*A(1,1)*A(1,2), A(1,2)*A(1,2), 2*A(1,0)*A(1,3), 2*A(1,1)*A(1,3), 2*A(1,2)*A(1,3), A(1,3)*A(1,3),
+#                A(1,0)*A(2,0), A(1,0)*A(2,1) + A(1,1)*A(2,0), A(1,0)*A(2,2) + A(1,2)*A(2,0), A(1,1)*A(2,1), A(1,1)*A(2,2) + A(1,2)*A(2,1), A(1,2)*A(2,2), A(1,0)*A(2,3) + A(1,3)*A(2,0), A(1,1)*A(2,3) + A(1,3)*A(2,1), A(1,2)*A(2,3) + A(1,3)*A(2,2), A(1,3)*A(2,3),
+#                A(2,0)*A(2,0), 2*A(2,0)*A(2,1), 2*A(2,0)*A(2,2), A(2,1)*A(2,1), 2*A(2,1)*A(2,2), A(2,2)*A(2,2), 2*A(2,0)*A(2,3), 2*A(2,1)*A(2,3), 2*A(2,2)*A(2,3), A(2,3)*A(2,3),
+#                0, 0, 0, 0, 0, 0, A(0,0), A(0,1), A(0,2), A(0,3),
+#                0, 0, 0, 0, 0, 0, A(1,0), A(1,1), A(1,2), A(1,3),
+#                0, 0, 0, 0, 0, 0, A(2,0), A(2,1), A(2,2), A(2,3),
+#                0, 0, 0, 0, 0, 0, 0, 0, 0, 1;
+#        coeffs = coeffs*B;
+#        
+#        int n_sols = re3q3(coeffs, solutions, false);
+#        
+#        // Revert change of variables
+#        for(int k = 0; k < n_sols; k++) {
+#            solutions->col(k) = A.block<3,3>(0,0) * solutions->col(k) + A.col(3);
+#        }
+#        return n_sols;
+#    }
+
+
 	if ((try_random_var_change) and (det < 1e-10)):
 
 		A = re3q3_random_matrix_initialize()
@@ -177,7 +227,22 @@ def re3q3(coeffs, solutions, try_random_var_change):
 
 		return n_sols
 
-	# looks like we are eliminating the variable with the largest deteminant here
+# looks like we are eliminating the variable with the largest deteminant here    
+#    Eigen::Matrix<double, 3, 7> P;
+#    
+#    if (elim_var == 1) {
+#        // re-order columns to eliminate x (target: y^2 z^2 yz x^2 xy xz x y z 1)
+#        P << coeffs.col(0), coeffs.col(1), coeffs.col(2), coeffs.col(6), coeffs.col(7), coeffs.col(8), coeffs.col(9);
+#        P = -Ax.lu().solve(P);
+#    } else if (elim_var == 2) {
+#        // re-order columns to eliminate y (target: x^2 z^2 xz y^2 xy yz y x z 1)
+#        P << coeffs.col(3), coeffs.col(1), coeffs.col(4), coeffs.col(7), coeffs.col(6), coeffs.col(8), coeffs.col(9);
+#        P = -Ay.lu().solve(P);
+#    } else if (elim_var == 3) {
+#        // re-order columns to eliminate z (target: y^2 x^2 yx z^2 zy z y x 1)
+#        P << coeffs.col(5), coeffs.col(4), coeffs.col(2), coeffs.col(8), coeffs.col(7), coeffs.col(6), coeffs.col(9);
+#        P = -Az.lu().solve(P);
+#    }
 
 	P = np.zeros((3, 7))
 
@@ -294,15 +359,26 @@ def re3q3(coeffs, solutions, try_random_var_change):
 	c[7] = a16*a29*a34-a19*a26*a34-a13*a29*a38+a19*a23*a38-a25*a34*a110-a26*a33*a110+a22*a38*a110+a23*a37*a110+a15*a34*a210+a16*a33*a210-a12*a38*a210-a13*a37*a210+a12*a26*a313+a13*a25*a313+a13*a26*a312-a15*a23*a313-a16*a22*a313-a16*a23*a312
 	c[8] = -a26*a34*a110+a23*a38*a110+a16*a34*a210-a13*a38*a210+a13*a26*a313-a16*a23*a313
 
+	# and then we do some more stuff down here
+#	Eigen::Matrix<double, 8, 8> comp_matrix;
+#	comp_matrix << -c(1) / c(0), -c(2) / c(0), -c(3) / c(0), -c(4) / c(0), -c(5) / c(0), -c(6) / c(0), -c(7) / c(0), -c(8) / c(0),
+#		1, 0, 0, 0, 0, 0, 0, 0,
+#		0, 1, 0, 0, 0, 0, 0, 0,
+#		0, 0, 1, 0, 0, 0, 0, 0,
+#		0, 0, 0, 1, 0, 0, 0, 0,
+#		0, 0, 0, 0, 1, 0, 0, 0,
+#		0, 0, 0, 0, 0, 1, 0, 0,
+#		0, 0, 0, 0, 0, 0, 1, 0;
+
 	# comp_matrix is an 8x8 matrix. It looks like:
-	# [ <-- -c[j] / c[0] --> ] (row 0)
+	# [ <-- -c[*] / c[0] --> ] (row 0)
 	# [ 1   .   .   .    0 0 ]
 	# [ .                . 0 ]
 	# [ .      (I7)      . 0 ]
 	# [ .                . 0 ]
 	# [ 0   .   .   .    1 0 ] (row 7)
-	# the first row is made of -c[j] / c[0] (j is the column number)
-	# the last column (excluding row 0) is all 0s
+	# the first row is made of -c[*] / c[0]
+	# the last column is all 0s
 	# the remaining entries are equal to the 7x7 Identity matrix (I7)
 
 	comp_matrix = np.zeros((8, 8))
@@ -310,25 +386,48 @@ def re3q3(coeffs, solutions, try_random_var_change):
 	# add the Identity 7x7 to comp_matrix
 	comp_matrix[1:8,0:7] = np.identity(7)
 
-	# put -c[j]/c[0] along the top row
-	for j in range(0, 8):
-		comp_matrix[0, j] = -c[j + 1] / c[0]
+	# add the -c[*]/c[0] to the top row
+	for i in range(0, 8):
+		comp_matrix[0, i] = -c[i + 1] / c[0]
 
-	# get the eigen values of comp_matrix
+#	Eigen::EigenSolver<Eigen::Matrix<double, 8, 8>> es(comp_matrix, false);
+#	Eigen::Matrix<std::complex<double>, 8, 1> roots = es.eigenvalues();
+
+	# so we need to get the eigen values of comp_matrix
 	roots, eig_vectors = np.linalg.eig(comp_matrix)
+
+#	Eigen::Matrix<double, 3, 3> A;
+#   
+#	int root_cnt = 0;
 
 	A = np.zeros((3, 3))
 	root_cnt = 0
 
-	# go through each eigen value and for each one that doesn't have an
-	# imaginary component (i.e. is real), increment the number of solutions
-	# (root_cnt) and add the eigen value to the first row of the solution
-	# matrix at the corresponding column (a real eigen value k goes in column
-	# k). The remaining rows at column k of the solution matrix are based off
-	# the eigen value.
+#	for (int i = 0; i < 8; i++)
+#	{
+#
+#		if (std::fabs(roots(i).imag()) > 1e-8) {
+#			continue;
+#		}
+#
+#		double xs1 = roots[i].real();
+#		double xs2 = xs1 * xs1;
+#		double xs3 = xs1 * xs2;
+#		double xs4 = xs1 * xs3;
+#
+#		A << a11*xs2+a12*xs1+a13, a14*xs2+a15*xs1+a16, a17*xs3+a18*xs2+a19*xs1+a110,
+#			a21*xs2+a22*xs1+a23, a24*xs2+a25*xs1+a26, a27*xs3+a28*xs2+a29*xs1+a210,
+#			a31*xs3+a32*xs2+a33*xs1+a34, a35*xs3+a36*xs2+a37*xs1+a38, a39*xs4+a310*xs3+a311*xs2+a312*xs1+a313;
+#
+#		(*solutions)(0, root_cnt) = xs1;
+#		(*solutions)(1, root_cnt) = (A(1,2)*A(0,1)-A(0,2)*A(1,1))/(A(0,0)*A(1,1)-A(1,0)*A(0,1));
+#		(*solutions)(2, root_cnt) = (A(1,2)*A(0,0)-A(0,2)*A(1,0))/(A(0,1)*A(1,0)-A(1,1)*A(0,0));
+#
+#		root_cnt++;
+#	}
+
 	for i in range(0, 8):
 
-		# skip complex roots
 		if (abs(roots[i].imag) > 1e-8):
 			continue
 
@@ -337,6 +436,10 @@ def re3q3(coeffs, solutions, try_random_var_change):
 		xs3 = xs1 * xs2
 		xs4 = xs1 * xs3
 
+# A << a11*xs2+a12*xs1+a13, a14*xs2+a15*xs1+a16, a17*xs3+a18*xs2+a19*xs1+a110,
+#	a21*xs2+a22*xs1+a23, a24*xs2+a25*xs1+a26, a27*xs3+a28*xs2+a29*xs1+a210,
+#	a31*xs3+a32*xs2+a33*xs1+a34, a35*xs3+a36*xs2+a37*xs1+a38, a39*xs4+a310*xs3+a311*xs2+a312*xs1+a313;
+# goes to -->
 		A[0, 0] = a11*xs2+a12*xs1+a13
 		A[0, 1] = a14*xs2+a15*xs1+a16
 		A[0, 2] = a17*xs3+a18*xs2+a19*xs1+a110
@@ -349,15 +452,29 @@ def re3q3(coeffs, solutions, try_random_var_change):
 		A[2, 1] = a35*xs3+a36*xs2+a37*xs1+a38
 		A[2, 2] = a39*xs4+a310*xs3+a311*xs2+a312*xs1+a313
 
-		# remember, solutions is just a 3x8 matrix; in the first row
-		# we put the eigen value; in the others we put values based off
-		# that value and some of the stuff we calculated earlier
+#		(*solutions)(0, root_cnt) = xs1;
+#		(*solutions)(1, root_cnt) = (A(1,2)*A(0,1)-A(0,2)*A(1,1))/(A(0,0)*A(1,1)-A(1,0)*A(0,1));
+#		(*solutions)(2, root_cnt) = (A(1,2)*A(0,0)-A(0,2)*A(1,0))/(A(0,1)*A(1,0)-A(1,1)*A(0,0));
+
+#		[*solutions][1, root_cnt] = [A[1,2]*A[0,1]-A[0,2]*A[1,1]]/[A[0,0]*A[1,1]-A[1,0]*A[0,1]];
+#		[*solutions][2, root_cnt] = [A[1,2]*A[0,0]-A[0,2]*A[1,0]]/[A[0,1]*A[1,0]-A[1,1]*A[0,0]];
+
+		# remember, solutions is just a 3x8 matrix
 		solutions[0, root_cnt] = xs1
 		solutions[1, root_cnt] = (A[1,2]*A[0,1]-A[0,2]*A[1,1]) / (A[0,0]*A[1,1]-A[1,0]*A[0,1])
 		solutions[2, root_cnt] = (A[1,2]*A[0,0]-A[0,2]*A[1,0]) / (A[0,1]*A[1,0]-A[1,1]*A[0,0])
 
-		root_cnt += 1
+		root_cnt++
 
+#	if (elim_var == 2) {
+#		solutions->row(0).swap(solutions->row(1));
+#	} else if (elim_var == 3) {
+#		solutions->row(0).swap(solutions->row(2));
+#	}
+#
+#	return root_cnt;
+
+	# remember, solutions is a 3x8 matrix that was passed in to this function
 	# when elim_var is 2, swap rows 0 and 1
 	if (elim_var == 2):
 		swap(solutions, 0, 1)
