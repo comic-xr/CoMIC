@@ -10,8 +10,8 @@ This project is based on the code in the Privacy Preserving SFM repository
 (<a href="https://github.com/colmap/privacy_preserving_sfm">colmap/privacy\_preserving\_sfm
 </a>). This project uses a Python translation of re3q3. The original C++ version can be
 found at
-<a href="https://github.com/colmap/privacy_preserving_sfm/tree/master/lib/re3q3"
->colmap/privacy\_preserving\_sfm/lib/re3q3/</a>.
+<a href="https://github.com/colmap/privacy_preserving_sfm/tree/master/lib/re3q3">colmap/privacy\_preserving\_sfm/lib/re3q3
+</a>.
 
 ## Project Structure
 ```
