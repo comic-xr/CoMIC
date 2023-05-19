@@ -1,1 +1,1 @@
-Measurement Study of MR-based Remote Collaboration
+Measurement Study of MR-based Remote Collaboration.
