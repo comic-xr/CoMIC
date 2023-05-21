@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>GeoAR.js demo</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  </head>
+
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+    >
+      <a-text
+        value=""
+        color='red'
+        look-at="[gps-camera]"
+        scale="2000 2000 2000"
+        gps-entity-place="latitude: 38.8486; longitude: -77.3291;"
+      ></a-text>
+      <a-image src="img/Lux_warning.png"
+      look-at="[gps-camera]"
+      scale="4000 4000 4000"
+      gps-entity-place="latitude: 38.8488; longitude: -77.3393;"
+      ></a-image>
+      <a-camera gps-camera rotation-reader> </a-camera>
+    </a-scene>
+  </body>
+</html>
