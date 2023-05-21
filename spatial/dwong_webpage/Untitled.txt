@@ -1,0 +1,1 @@
+Also requires three.js, specifically /examples/models/ply/
