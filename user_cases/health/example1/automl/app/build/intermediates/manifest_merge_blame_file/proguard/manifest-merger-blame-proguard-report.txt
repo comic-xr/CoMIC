@@ -1,0 +1,273 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.google.mlkit.vision.automl.demo"
+4    android:installLocation="auto"
+5    android:versionCode="11"
+6    android:versionName="1.11" >
+7    <!--
+8 CameraX libraries require minSdkVersion 21, while this quickstart app
+9  supports low to 19. Needs to use overrideLibrary to make the merger tool
+10  ignore this conflict and import the libraries while keeping the app's lower
+11  minSdkVersion value. In code, will check SDK version, before calling CameraX
+12  APIs.
+13    -->
+14    <uses-sdk
+14-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:13:3-16:63
+15        android:minSdkVersion="19"
+15-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:13:3-16:63
+16        android:targetSdkVersion="31" />
+16-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:13:3-16:63
+17
+18    <uses-feature android:name="android.hardware.camera" />
+18-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:18:3-57
+18-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:18:17-55
+19
+20    <uses-permission android:name="android.permission.INTERNET" />
+20-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:20:3-64
+20-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:20:20-62
+21    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+21-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:21:3-78
+21-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:21:20-76
+22    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+22-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:22:3-77
+22-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:22:20-75
+23    <uses-permission android:name="android.permission.CAMERA" />
+23-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:23:3-62
+23-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:23:20-60
+24
+25    <queries>
+25-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:71:3-75:13
+26        <intent>
+26-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:72:5-74:14
+27            <action android:name="android.media.action.IMAGE_CAPTURE" />
+27-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:73:7-67
+27-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:73:15-64
+28        </intent>
+29    </queries>
+30    <!-- For allowlist service -->
+31    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+31-->[com.google.mlkit:vision-internal-vkp:18.2.2] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/8479460b87345d0c8d0ce0cb48e5a977/transformed/jetified-vision-internal-vkp-18.2.2/AndroidManifest.xml:7:5-79
+31-->[com.google.mlkit:vision-internal-vkp:18.2.2] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/8479460b87345d0c8d0ce0cb48e5a977/transformed/jetified-vision-internal-vkp-18.2.2/AndroidManifest.xml:7:22-76
+32    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+32-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:24:5-68
+32-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:24:22-65
+33    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+33-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+33-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:22-79
+34
+35    <application
+35-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:25:3-70:17
+36        android:name="androidx.multidex.MultiDexApplication"
+36-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:26:7-59
+37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+37-->[androidx.core:core:1.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/b87c76087dac3757e32f340d64d2a47f/transformed/core-1.3.1/AndroidManifest.xml:24:18-86
+38        android:icon="@drawable/logo_mlkit"
+38-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:27:7-42
+39        android:label="@string/app_name"
+39-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:28:7-39
+40        android:theme="@style/Theme.AppCompat" >
+40-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:29:7-45
+41        <meta-data
+41-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:31:5-33:64
+42            android:name="com.google.android.gms.version"
+42-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:32:9-54
+43            android:value="@integer/google_play_services_version" />
+43-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:33:9-62
+44        <meta-data
+44-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:34:5-36:37
+45            android:name="com.google.mlkit.vision.DEPENDENCIES"
+45-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:35:9-60
+46            android:value="custom_ica" />
+46-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:36:9-35
+47
+48        <activity
+48-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:38:5-46:16
+49            android:name="com.google.mlkit.vision.automl.demo.ChooserActivity"
+49-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:39:9-40
+50            android:exported="true"
+50-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:40:9-32
+51            android:theme="@style/AppTheme" >
+51-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:41:9-40
+52            <intent-filter>
+52-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:42:7-45:23
+53                <action android:name="android.intent.action.MAIN" />
+53-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:43:9-60
+53-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:43:17-58
+54
+55                <category android:name="android.intent.category.LAUNCHER" />
+55-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:44:9-68
+55-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:44:19-66
+56            </intent-filter>
+57        </activity>
+58        <activity
+58-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:48:5-52:16
+59            android:name="com.google.mlkit.vision.automl.demo.LivePreviewActivity"
+59-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:49:9-44
+60            android:exported="true"
+60-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:50:9-32
+61            android:theme="@style/AppTheme" >
+61-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:51:9-40
+62        </activity>
+63        <activity
+63-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:54:5-58:16
+64            android:name="com.google.mlkit.vision.automl.demo.CameraXLivePreviewActivity"
+64-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:55:9-51
+65            android:exported="true"
+65-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:56:9-32
+66            android:theme="@style/AppTheme" >
+66-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:57:9-40
+67        </activity>
+68        <activity
+68-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:60:5-64:16
+69            android:name="com.google.mlkit.vision.automl.demo.StillImageActivity"
+69-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:61:9-43
+70            android:exported="true"
+70-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:62:9-32
+71            android:theme="@style/AppTheme" >
+71-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:63:9-40
+72        </activity>
+73        <activity
+73-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:66:5-68:35
+74            android:name="com.google.mlkit.vision.automl.demo.preference.SettingsActivity"
+74-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:67:9-52
+75            android:exported="false" />
+75-->/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/src/main/AndroidManifest.xml:68:9-33
+76
+77        <service
+77-->[com.google.mlkit:image-labeling-custom:17.0.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/414efbf16a3a56ad718c0fc835fc4424/transformed/jetified-image-labeling-custom-17.0.1/AndroidManifest.xml:8:9-14:19
+78            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+78-->[com.google.mlkit:image-labeling-custom:17.0.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/414efbf16a3a56ad718c0fc835fc4424/transformed/jetified-image-labeling-custom-17.0.1/AndroidManifest.xml:9:13-91
+79            android:directBootAware="true"
+79-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:17:13-43
+80            android:exported="false" >
+80-->[com.google.mlkit:image-labeling-custom:17.0.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/414efbf16a3a56ad718c0fc835fc4424/transformed/jetified-image-labeling-custom-17.0.1/AndroidManifest.xml:10:13-37
+81            <meta-data
+81-->[com.google.mlkit:image-labeling-custom:17.0.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/414efbf16a3a56ad718c0fc835fc4424/transformed/jetified-image-labeling-custom-17.0.1/AndroidManifest.xml:11:13-13:85
+82                android:name="com.google.firebase.components:com.google.mlkit.vision.label.custom.internal.CustomLabelRegistrar"
+82-->[com.google.mlkit:image-labeling-custom:17.0.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/414efbf16a3a56ad718c0fc835fc4424/transformed/jetified-image-labeling-custom-17.0.1/AndroidManifest.xml:12:17-129
+83                android:value="com.google.firebase.components.ComponentRegistrar" />
+83-->[com.google.mlkit:image-labeling-custom:17.0.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/414efbf16a3a56ad718c0fc835fc4424/transformed/jetified-image-labeling-custom-17.0.1/AndroidManifest.xml:13:17-82
+84            <meta-data
+84-->[com.google.mlkit:object-detection-custom:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/95824b8cdd935ac0a234909c86b598ca/transformed/jetified-object-detection-custom-17.0.0/AndroidManifest.xml:11:13-13:85
+85                android:name="com.google.firebase.components:com.google.mlkit.vision.objects.custom.internal.CustomObjectsRegistrar"
+85-->[com.google.mlkit:object-detection-custom:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/95824b8cdd935ac0a234909c86b598ca/transformed/jetified-object-detection-custom-17.0.0/AndroidManifest.xml:12:17-133
+86                android:value="com.google.firebase.components.ComponentRegistrar" />
+86-->[com.google.mlkit:object-detection-custom:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/95824b8cdd935ac0a234909c86b598ca/transformed/jetified-object-detection-custom-17.0.0/AndroidManifest.xml:13:17-82
+87            <meta-data
+87-->[com.google.mlkit:linkfirebase:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/656949ba02d658b481bf289bc4780754/transformed/jetified-linkfirebase-17.0.0/AndroidManifest.xml:12:13-14:85
+88                android:name="com.google.firebase.components:com.google.mlkit.linkfirebase.internal.LinkFirebaseComponentRegistrar"
+88-->[com.google.mlkit:linkfirebase:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/656949ba02d658b481bf289bc4780754/transformed/jetified-linkfirebase-17.0.0/AndroidManifest.xml:13:17-132
+89                android:value="com.google.firebase.components.ComponentRegistrar" />
+89-->[com.google.mlkit:linkfirebase:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/656949ba02d658b481bf289bc4780754/transformed/jetified-linkfirebase-17.0.0/AndroidManifest.xml:14:17-82
+90            <meta-data
+90-->[com.google.mlkit:vision-internal-vkp:18.2.2] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/8479460b87345d0c8d0ce0cb48e5a977/transformed/jetified-vision-internal-vkp-18.2.2/AndroidManifest.xml:14:13-16:85
+91                android:name="com.google.firebase.components:com.google.mlkit.vision.vkp.VkpRegistrar"
+91-->[com.google.mlkit:vision-internal-vkp:18.2.2] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/8479460b87345d0c8d0ce0cb48e5a977/transformed/jetified-vision-internal-vkp-18.2.2/AndroidManifest.xml:15:17-103
+92                android:value="com.google.firebase.components.ComponentRegistrar" />
+92-->[com.google.mlkit:vision-internal-vkp:18.2.2] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/8479460b87345d0c8d0ce0cb48e5a977/transformed/jetified-vision-internal-vkp-18.2.2/AndroidManifest.xml:16:17-82
+93            <meta-data
+93-->[com.google.mlkit:vision-common:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/da85f0c979422a0941e3602383c3021b/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:12:13-14:85
+94                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+94-->[com.google.mlkit:vision-common:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/da85f0c979422a0941e3602383c3021b/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:13:17-124
+95                android:value="com.google.firebase.components.ComponentRegistrar" />
+95-->[com.google.mlkit:vision-common:17.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/da85f0c979422a0941e3602383c3021b/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:14:17-82
+96            <meta-data
+96-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:20:13-22:85
+97                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+97-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:21:17-120
+98                android:value="com.google.firebase.components.ComponentRegistrar" />
+98-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:22:17-82
+99        </service>
+100        <service
+100-->[com.google.firebase:firebase-functions:20.3.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/4bcfe14c809117e9de8827ba6e71e2ff/transformed/jetified-firebase-functions-20.3.0/AndroidManifest.xml:14:9-20:19
+101            android:name="com.google.firebase.components.ComponentDiscoveryService"
+101-->[com.google.firebase:firebase-functions:20.3.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/4bcfe14c809117e9de8827ba6e71e2ff/transformed/jetified-firebase-functions-20.3.0/AndroidManifest.xml:15:13-84
+102            android:directBootAware="true"
+102-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:34:13-43
+103            android:exported="false" >
+103-->[com.google.firebase:firebase-functions:20.3.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/4bcfe14c809117e9de8827ba6e71e2ff/transformed/jetified-firebase-functions-20.3.0/AndroidManifest.xml:16:13-37
+104            <meta-data
+104-->[com.google.firebase:firebase-functions:20.3.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/4bcfe14c809117e9de8827ba6e71e2ff/transformed/jetified-firebase-functions-20.3.0/AndroidManifest.xml:17:13-19:85
+105                android:name="com.google.firebase.components:com.google.firebase.functions.FunctionsRegistrar"
+105-->[com.google.firebase:firebase-functions:20.3.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/4bcfe14c809117e9de8827ba6e71e2ff/transformed/jetified-firebase-functions-20.3.0/AndroidManifest.xml:18:17-111
+106                android:value="com.google.firebase.components.ComponentRegistrar" />
+106-->[com.google.firebase:firebase-functions:20.3.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/4bcfe14c809117e9de8827ba6e71e2ff/transformed/jetified-firebase-functions-20.3.0/AndroidManifest.xml:19:17-82
+107            <meta-data
+107-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+108                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+108-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+109                android:value="com.google.firebase.components.ComponentRegistrar" />
+109-->[com.google.firebase:firebase-iid:21.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e9106ccd9e5cc0732b516a3c1fbde46e/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+110            <meta-data
+110-->[com.google.firebase:firebase-installations:16.3.5] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/ca5e725f878e75d0765fd7947451d84b/transformed/jetified-firebase-installations-16.3.5/AndroidManifest.xml:18:13-20:85
+111                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+111-->[com.google.firebase:firebase-installations:16.3.5] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/ca5e725f878e75d0765fd7947451d84b/transformed/jetified-firebase-installations-16.3.5/AndroidManifest.xml:19:17-127
+112                android:value="com.google.firebase.components.ComponentRegistrar" />
+112-->[com.google.firebase:firebase-installations:16.3.5] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/ca5e725f878e75d0765fd7947451d84b/transformed/jetified-firebase-installations-16.3.5/AndroidManifest.xml:20:17-82
+113        </service>
+114
+115        <provider
+115-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:9:9-13:38
+116            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+116-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:10:13-78
+117            android:authorities="com.google.mlkit.vision.automl.demo.mlkitinitprovider"
+117-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:11:13-69
+118            android:exported="false"
+118-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:12:13-37
+119            android:initOrder="99" />
+119-->[com.google.mlkit:common:18.0.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/244f89872b0f74bb9b58199290c779e6/transformed/jetified-common-18.0.0/AndroidManifest.xml:13:13-35
+120
+121        <activity
+121-->[com.google.android.gms:play-services-base:18.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e36faf701e962227b7c2d1b9fc3f49a3/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+122            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+122-->[com.google.android.gms:play-services-base:18.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e36faf701e962227b7c2d1b9fc3f49a3/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+123            android:exported="false"
+123-->[com.google.android.gms:play-services-base:18.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e36faf701e962227b7c2d1b9fc3f49a3/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+124            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+124-->[com.google.android.gms:play-services-base:18.1.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/e36faf701e962227b7c2d1b9fc3f49a3/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+125
+126        <provider
+126-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:25:9-30:39
+127            android:name="com.google.firebase.provider.FirebaseInitProvider"
+127-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:26:13-77
+128            android:authorities="com.google.mlkit.vision.automl.demo.firebaseinitprovider"
+128-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:27:13-72
+129            android:directBootAware="true"
+129-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:28:13-43
+130            android:exported="false"
+130-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:29:13-37
+131            android:initOrder="100" />
+131-->[com.google.firebase:firebase-common:20.3.1] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/663410c1c6103a6dd7a345d877c5c919/transformed/jetified-firebase-common-20.3.1/AndroidManifest.xml:30:13-36
+132
+133        <service
+133-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/12152a9e3ed5514ee302d3e71cfa34c4/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+134            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+134-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/12152a9e3ed5514ee302d3e71cfa34c4/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+135            android:exported="false" >
+135-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/12152a9e3ed5514ee302d3e71cfa34c4/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+136            <meta-data
+136-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/12152a9e3ed5514ee302d3e71cfa34c4/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+137                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+137-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/12152a9e3ed5514ee302d3e71cfa34c4/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+138                android:value="cct" />
+138-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/12152a9e3ed5514ee302d3e71cfa34c4/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+139        </service>
+140        <service
+140-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:26:9-30:19
+141            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+141-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:27:13-117
+142            android:exported="false"
+142-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:28:13-37
+143            android:permission="android.permission.BIND_JOB_SERVICE" >
+143-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:29:13-69
+144        </service>
+145
+146        <receiver
+146-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:32:9-34:40
+147            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+147-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:33:13-132
+148            android:exported="false" />
+148-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/435e964c139305ba48e02ac4449e4d51/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:34:13-37
+149    </application>
+150
+151</manifest>

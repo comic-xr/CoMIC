@@ -1,0 +1,36 @@
+<variant
+    name="proguard"
+    useSupportLibraryVectorDrawables="true"
+    package="com.google.mlkit.vision.automl.demo"
+    minSdkVersion="19"
+    targetSdkVersion="31"
+    shrinking="true"
+    mergedManifest="build/intermediates/merged_manifest/proguard/AndroidManifest.xml"
+    manifestMergeReport="build/outputs/logs/manifest-merger-proguard-report.txt"
+    proguardFiles="build/intermediates/default_proguard_files/global/proguard-android.txt-7.3.1:proguard-rules.pro:proguard.cfg"
+    partialResultsDir="build/intermediates/lint_vital_partial_results/proguard/out">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+    <sourceProvider
+        manifest="src/main/AndroidManifest.xml"
+        javaDirectories="src/main/java:src/main/kotlin"
+        resDirectories="src/main/res"
+        assetsDirectories="src/main/assets"/>
+    <sourceProvider
+        manifest="src/proguard/AndroidManifest.xml"
+        javaDirectories="src/proguard/java:src/proguard/kotlin"
+        resDirectories="src/proguard/res"
+        assetsDirectories="src/proguard/assets"/>
+  </sourceProviders>
+  <testSourceProviders>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <mainArtifact
+      classOutputs="build/intermediates/javac/proguard/classes:build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/proguard/R.jar"
+      applicationId="com.google.mlkit.vision.automl.demo"
+      generatedSourceFolders="build/generated/ap_generated_sources/proguard/out:build/generated/aidl_source_output_dir/proguard/out:build/generated/source/buildConfig/proguard:build/generated/renderscript_source_output_dir/proguard/out"
+      generatedResourceFolders="build/generated/res/google-services/proguard:build/generated/res/rs/proguard:build/generated/res/resValues/proguard">
+  </mainArtifact>
+</variant>

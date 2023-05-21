@@ -1,0 +1,1 @@
+com.google.mlkit.vision.automl.demo

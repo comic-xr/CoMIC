@@ -1,0 +1,4 @@
+#Wed May 10 22:39:21 EDT 2023
+base.0=/Users/vandanakeshavamurthy/Downloads/mlkit-master/android/automl/app/build/intermediates/dex/proguard/minifyProguardWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

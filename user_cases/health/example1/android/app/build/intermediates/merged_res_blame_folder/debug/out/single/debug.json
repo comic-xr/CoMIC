@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/drawable_ic_plus.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/drawable/ic_plus.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/layout_info_bottom_sheet.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/layout/info_bottom_sheet.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/drawable-v24_tfl_logo.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/drawable-v24/tfl_logo.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/generated/res/pngs/debug/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/layout_activity_main.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/color_selector_ic.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/color/selector_ic.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/drawable_icn_chevron_up.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/drawable/icn_chevron_up.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/drawable_ic_minus.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/drawable/ic_minus.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/navigation_nav_graph.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/build/intermediates/merged_res/debug/layout_fragment_camera.xml.flat",
+        "source": "/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/res/layout/fragment_camera.xml"
+    }
+]

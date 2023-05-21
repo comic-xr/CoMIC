@@ -1,0 +1,143 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3    ~ Copyright 2022 The TensorFlow Authors. All Rights Reserved.
+4    ~
+5    ~ Licensed under the Apache License, Version 2.0 (the "License");
+6    ~ you may not use this file except in compliance with the License.
+7    ~ You may obtain a copy of the License at
+8    ~
+9    ~       http://www.apache.org/licenses/LICENSE-2.0
+10    ~
+11    ~ Unless required by applicable law or agreed to in writing, software
+12    ~ distributed under the License is distributed on an "AS IS" BASIS,
+13    ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14    ~ See the License for the specific language governing permissions and
+15    ~ limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    xmlns:dist="http://schemas.android.com/apk/distribution"
+19    package="org.tensorflow.lite.examples.objectdetection"
+20    android:versionCode="1"
+21    android:versionName="1.0.0" >
+22
+23    <uses-sdk
+24        android:minSdkVersion="21"
+24-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml
+25        android:targetSdkVersion="32" />
+25-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml
+26
+27    <!-- Enable instant app support -->
+28    <dist:module dist:instant="true" />
+28-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:24:5-40
+28-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:24:18-37
+29
+30    <!-- Declare features -->
+31    <uses-feature android:name="android.hardware.camera" />
+31-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:27:5-60
+31-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:27:19-57
+32
+33    <!-- Declare permissions -->
+34    <uses-permission android:name="android.permission.CAMERA" />
+34-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:30:5-65
+34-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:30:22-62
+35    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+36    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+37    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+38
+39    <application
+39-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:32:5-62:19
+40        android:allowBackup="true"
+40-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:36:9-35
+41        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+41-->[androidx.core:core:1.6.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/5a87cf4110f68e1cf82394b1fba8462d/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+42        android:debuggable="true"
+43        android:icon="@mipmap/ic_launcher"
+43-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:33:9-43
+44        android:label="@string/app_name"
+44-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:35:9-41
+45        android:roundIcon="@mipmap/ic_launcher_round"
+45-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:34:9-54
+46        android:taskAffinity="" >
+46-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:37:9-32
+47        <activity
+47-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:40:9-60:20
+48            android:name="org.tensorflow.lite.examples.objectdetection.MainActivity"
+48-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:41:13-41
+49            android:clearTaskOnLaunch="true"
+49-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:42:13-45
+50            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
+50-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:48:13-91
+51            android:exported="true"
+51-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:44:13-36
+52            android:icon="@mipmap/ic_launcher"
+52-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:45:13-47
+53            android:resizeableActivity="true"
+53-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:47:13-46
+54            android:rotationAnimation="seamless"
+54-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:46:13-49
+55            android:theme="@style/AppTheme" >
+55-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:43:13-44
+56
+57            <!-- Main app intent filter -->
+58            <intent-filter>
+58-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:52:13-55:29
+59                <action android:name="android.intent.action.MAIN" />
+59-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:53:17-69
+59-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:53:25-66
+60
+61                <category android:name="android.intent.category.LAUNCHER" />
+61-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:54:17-77
+61-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:54:27-74
+62            </intent-filter>
+63
+64            <!-- Declare notch support -->
+65            <meta-data
+65-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:58:13-83
+66                android:name="android.notch_support"
+66-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:58:24-60
+67                android:value="true" />
+67-->/Users/vandanakeshavamurthy/Downloads/examples-master/lite/examples/object_detection/android/app/src/main/AndroidManifest.xml:58:61-81
+68        </activity>
+69
+70        <uses-library
+70-->[androidx.window:window:1.0.0-alpha09] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/a8de75245e5900cbaae160c8381d134e/transformed/jetified-window-1.0.0-alpha09/AndroidManifest.xml:25:9-27:40
+71            android:name="androidx.window.extensions"
+71-->[androidx.window:window:1.0.0-alpha09] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/a8de75245e5900cbaae160c8381d134e/transformed/jetified-window-1.0.0-alpha09/AndroidManifest.xml:26:13-54
+72            android:required="false" />
+72-->[androidx.window:window:1.0.0-alpha09] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/a8de75245e5900cbaae160c8381d134e/transformed/jetified-window-1.0.0-alpha09/AndroidManifest.xml:27:13-37
+73        <uses-library
+73-->[androidx.window:window:1.0.0-alpha09] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/a8de75245e5900cbaae160c8381d134e/transformed/jetified-window-1.0.0-alpha09/AndroidManifest.xml:28:9-30:40
+74            android:name="androidx.window.sidecar"
+74-->[androidx.window:window:1.0.0-alpha09] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/a8de75245e5900cbaae160c8381d134e/transformed/jetified-window-1.0.0-alpha09/AndroidManifest.xml:29:13-51
+75            android:required="false" />
+75-->[androidx.window:window:1.0.0-alpha09] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/a8de75245e5900cbaae160c8381d134e/transformed/jetified-window-1.0.0-alpha09/AndroidManifest.xml:30:13-37
+76
+77        <service
+77-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:26:9-35:19
+78            android:name="androidx.camera.core.impl.MetadataHolderService"
+78-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:27:13-75
+79            android:enabled="false"
+79-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:28:13-36
+80            android:exported="false" >
+80-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:29:13-37
+81            <meta-data
+81-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:32:13-34:89
+82                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+82-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:33:17-103
+83                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+83-->[androidx.camera:camera-camera2:1.1.0-beta03] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/780dd7349eefd1b7172c3ad2acc3c36e/transformed/jetified-camera-camera2-1.1.0-beta03/AndroidManifest.xml:34:17-86
+84        </service>
+85
+86        <provider
+86-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/6bc45f26fe52c9ef5ffcdd5432f82849/transformed/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+87            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+87-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/6bc45f26fe52c9ef5ffcdd5432f82849/transformed/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
+88            android:authorities="org.tensorflow.lite.examples.objectdetection.lifecycle-process"
+88-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/6bc45f26fe52c9ef5ffcdd5432f82849/transformed/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+89            android:exported="false"
+89-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/6bc45f26fe52c9ef5ffcdd5432f82849/transformed/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+90            android:multiprocess="true" />
+90-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/vandanakeshavamurthy/.gradle/caches/transforms-3/6bc45f26fe52c9ef5ffcdd5432f82849/transformed/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+91    </application>
+92
+93</manifest>
