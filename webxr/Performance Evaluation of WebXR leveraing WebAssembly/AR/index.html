@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Web AR</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="demo-styles.css">
+    <script src="https://github.com/lightlessdays/web-ar/blob/main/focus.js" defer></script>
+  </head> 
+<body>
+  <div id="card">
+    <model-viewer src="Heart.glb"
+                  ios-src="Heart.usdz"
+                  poster="https://raw.githubusercontent.com/lightlessdays/web-ar/main/loading_screen.gif"
+                  alt="A 3D model"
+                  shadow-intensity="1"
+                  camera-controls
+                  auto-rotate ar>
+    </model-viewer>
+    <section class="attribution">
+      <span>
+        <h1>Web AR Viewer</h1>
+        <span>To view the source code, <a href="https://github.com/lightlessdays/web-ar" target="_blank">click here.</a></span>
+      </span>
+      <a class="cc" href="https://github.com/lightlessdays/web-ar/blob/main/LICENSE.md" target="_blank">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg">
+      </a>
+    </section>
+  </div>
+  <script type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+</body>
+</html>
