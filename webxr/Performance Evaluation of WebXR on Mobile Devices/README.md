@@ -41,4 +41,4 @@ https://developer.mozilla.org/en-US/docs/WebAssembly/Using_the_JavaScript_API
 
 https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface
 
-https://caniuse.com/wasm (Used for checking the compatability for WebAssembly) 
+https://caniuse.com/wasm  (Used for checking the compatability for WebAssembly) 
