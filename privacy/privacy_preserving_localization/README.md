@@ -15,7 +15,6 @@ Object detection results generated manually using the following repository
 +-- client-server_desc            # 
     +-- Client.java               # Sends keypoints and descriptors
     +-- Server.py                 # Receives keypoints and descriptors
-    +-- guava-31.1-jre.jar        # **might remove
 +-- image_patch_extract           # 
     +-- SIFT_extract.ipynb        # Extracts descriptor patch from image
 +-- obj_detect_res                # 
