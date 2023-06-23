@@ -1,0 +1,86 @@
+var ss, resp, form
+
+//Creates new form based on spreadsheet - modify the spreadsheet if you want to create/modify a new form
+function start_form() {
+  ss = SpreadsheetApp.getActiveSpreadsheet()
+
+  var name = ss.getRange('Form!D2').getValue()
+  var desc = ss.getRange('Form!E2').getValue()
+
+  form = FormApp.create(name).setDescription(desc)
+  var form_id = form.getId()
+  DriveApp.getFileById(form_id).moveTo(DriveApp.getFolderById('1lxFqQNEAzRT91jEeshOx48LT2hRztW7e'))
+
+  form.addPageBreakItem().setTitle('Preliminary Questions')
+  add_prelim_questions()
+  add_repeat_ques()
+}
+
+//Function to add any questions - non repeating sections
+//Currently only adds multiple choice (2-choice), and long answer (paragraph)
+function add_prelim_questions() {
+  //# of questions
+  var nques = ss.getRange('Form!B3').getValue()
+
+  var i = 0
+  for(; i < nques; i++) {
+    var row = String(3 + i)
+    var type = ss.getRange('Form!C' + row).getValue()
+
+    switch(type) {
+      //Adds multiple choice question
+      case 1:
+        var item = form.addMultipleChoiceItem()
+
+        item.setTitle(ss.getRange('Form!D' + row).getValue())
+
+        item.setChoices([
+          item.createChoice(ss.getRange('Form!F' + row).getValue()),
+          item.createChoice(ss.getRange('Form!G' + row).getValue())
+        ])
+
+        item.setRequired(true)
+
+        break
+      //Adds paragraph question
+      case 2:
+        var item = form.addParagraphTextItem()
+
+        item.setTitle(ss.getRange('Form!D' + row).getValue())
+        item.setRequired(true)
+
+        break
+    }
+  }
+}
+
+//Function to add sections of repeating questions
+function add_repeat_ques() {
+  var row = 3 + ss.getRange('Form!B3').getValue()
+  var nset = ss.getRange('Form!A' + String(row)).getValue()
+  var nrep = ss.getRange('Form!B' + String(row)).getValue()
+  
+  var i = 1
+  for(; i <= nset; i++) {
+    var item = form.addPageBreakItem()
+    item.setTitle(ss.getRange('Form!D' + String(row)).getValue() + String(i))
+
+    item = form.addImageItem()
+    item.setTitle('Original Image')
+
+    var j = 0
+    for(; j < nrep; j++) {
+      item = form.addImageItem()
+      item.setTitle('Reconstructed Image')
+
+      item = form.addScaleItem()
+      item.setTitle(ss.getRange('Form!D' + String(row + 2)).getValue())
+      item.setBounds(1,10)
+      item.setRequired(true)
+
+      item = form.addParagraphTextItem()
+      item.setTitle(ss.getRange('Form!D' + String(row + 3)).getValue())
+      item.setRequired(false)
+    }
+  }
+}

@@ -1,0 +1,117 @@
+var img_order = [], img_id = [];
+var j = 0; //0 or 113
+
+function updateForm() {
+  //Access sheet for values (sets and image names)
+  var ss = SpreadsheetApp.openById('1apRG5IBilZH2Mhh6vHsx7gn4Ir350rjknv6zmK_pJ7U');
+  var image_name = ss.getRange('Questions!A2:T2').getValues();
+  var feat_set = ss.getRange('Sets!B1:F20').getValues();
+
+  //Open form for changing
+  var form = FormApp.openById('19ObgxDQwdWqdec0WDFZ1_bmeDTQYoTZm6PaNv7LtDNY');
+  var allitems = form.getItems();
+  
+  //Loop to replace images
+  var i = 0; //0 or 8
+  for(; i < image_name[0].length; i++) {
+    Logger.log('j:' + j)
+    Logger.log('i:' + i)
+    img_order = [], img_id = [];
+
+    get_id(image_name[0][i], feat_set[i]);
+    replace_images(feat_set[i], allitems);
+  };
+};
+
+function replace_images(features, allitems) {
+  var i = 0, thisItem, myImageItem, image;
+
+  for(; i < img_id.length; i++) {
+    image = DriveApp.getFileById(img_id[img_order.indexOf(features[i])]);
+
+    for(; j < allitems.length; j++) {
+      thisItem = allitems[j];
+      
+      if(thisItem.getType() == FormApp.ItemType.IMAGE) {
+        myImageItem = thisItem.asImageItem();
+        myImageItem.setImage(image);
+
+        j++;
+        break;
+      };
+    };
+  };
+};
+
+//Function returing array of IDs for images with the provided filename in Dustin's drive
+//  filename - string, name of the image
+//  arr - array of strings, strings should be only 2 characters long
+//    ex. 100 >> '00', 90 >> '90', 40 >> '40'
+function get_id(filename, arr) {
+  //gets all files with the same provided name
+  var files = DriveApp.getFilesByName(filename);
+
+  //loops through each file, checks parent directories
+  var tmp, dir, folder, folder_name, parent_dir, parent_name;
+  while(files.hasNext()) {
+    tmp = files.next();
+    dir = tmp.getParents();
+
+    folder = dir.next();
+    parent_dir = folder.getParents();
+
+    folder_name = folder.getName();
+    parent_name = parent_dir.next().getName();
+
+    //parent directory check
+    //only adds if in correct directory and in array
+    if(((folder_name.includes('SLI_results_hybrid_') && parent_name == 'wu_sp') || folder_name.includes('original_images_')) && arr.includes(folder_name.slice(folder_name.length - 2))) {
+      img_id.push(tmp.getId()); //ID
+      img_order.push(folder_name.slice(folder_name.length - 2)); //order
+    };
+  };
+};
+
+function refresh_sheet() {
+  var ss = SpreadsheetApp.openById('1apRG5IBilZH2Mhh6vHsx7gn4Ir350rjknv6zmK_pJ7U');
+  ss.getRange('Bank!A2').setValue(ss.getRange('Bank!A2').getValue());
+  SpreadsheetApp.flush();
+}
+
+//Function to add sections of repeating questions
+function add_repeat_ques() {
+  var ss = SpreadsheetApp.openById('1apRG5IBilZH2Mhh6vHsx7gn4Ir350rjknv6zmK_pJ7U');
+  var form = FormApp.openById('19ObgxDQwdWqdec0WDFZ1_bmeDTQYoTZm6PaNv7LtDNY');
+
+  var nset = ss.getRange('Questions!B5').getValue()
+  var nrep = ss.getRange('Questions!B6').getValue()
+  
+  var i = 1
+  for(; i <= nset; i++) {
+    //Start of new section
+    var item = form.addPageBreakItem()
+    item.setTitle(ss.getRange('Questions!B7').getValue() + String(i))
+
+    //Original image for comparison
+    item = form.addImageItem()
+    item.setTitle('Original Image')
+
+    var j = 0
+    for(; j < nrep; j++) {
+      //Reconstructed image
+      item = form.addImageItem()
+      item.setTitle('Reconstructed Image')
+
+      //Scale rating of security/privacy
+      item = form.addScaleItem()
+      item.setTitle(ss.getRange('Questions!B9').getValue())
+      item.setBounds(1,10)
+      item.setRequired(true)
+
+      //Reason for rating
+      item = form.addParagraphTextItem()
+      item.setTitle(ss.getRange('Questions!B10').getValue())
+      item.setRequired(false)
+    }
+  }
+}
