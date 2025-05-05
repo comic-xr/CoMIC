@@ -1,0 +1,35 @@
+This repository contains the complete code for AI-Powered WebRTC Video Call Application for Online Education.
+
+Project Structure  
+The following outlines the backend and frontend structure for the WebAI application
+
+<pre> Repo Root ├── backend/ │ ├── .env # Environment variables for backend │ ├── dump.rdb # Redis database dump │ ├── index.js # Entry point for the backend server │ └── src/ │ ├── controllers/ │ │ ├── dynamoDB_controller.js # Handles DynamoDB logic │ │ ├── meeting_controller.js # Manages meeting-related endpoints │ │ └── openai_controller.js # Interfaces with OpenAI APIs │ ├── routes/ │ │ ├── meeting_room.js # Routing for meeting endpoints │ │ └── openai.js # Routing for OpenAI endpoints │ └── services/ │ ├── awsDynamoDB.js # AWS DynamoDB service functions │ ├── openai.js # OpenAI helper functions │ └── redis.js # Redis caching logic │ ├── frontend/ │ ├── .env # Environment variables for frontend │ ├── .eslintrc.cjs # ESLint configuration │ ├── .gitignore # Git ignored files │ ├── App.css # Global CSS │ ├── App.tsx # Main React component │ ├── index.css # Global styles │ ├── main.tsx # ReactDOM render entry │ ├── vite-env.d.ts # Vite environment types │ ├── public/ │ │ ├── audioProcessor.js # Handles audio processing logic │ │ └── vite.svg # Static Vite logo │ └── src/ │ ├── assets/ │ │ ├── .gitkeep # Placeholder for asset folder │ │ └── placeholder.jpg # Placeholder image │ ├── components/ │ │ ├── ChatBox.tsx # Chat box UI │ │ ├── ChatInput.tsx # Chat input field │ │ └── ChatMessage.tsx # Chat message display │ ├── constants/ │ │ └── colors.ts # Color constants │ ├── features/ │ │ ├── auth/ # Auth-related logic (folder) │ │ └── rtcSlice.ts # Redux slice for WebRTC │ ├── hooks/ │ │ └── useTranscribe.ts # Custom hook for transcription │ ├── pages/ │ │ ├── error.tsx # Error page │ │ ├── home.tsx # Home/landing page │ │ └── meeting.tsx # Main meeting interface │ ├── services/ │ │ ├── initialize.tsx # Initialization service │ │ ├── meeting.tsx # Meeting-related service logic │ │ ├── sdp.tsx # SDP (Session Description Protocol) logic │ │ ├── socket.tsx # WebSocket connection logic │ │ └── transcribe.ts # Audio transcription logic │ ├── shared/ │ │ ├── button.tsx # Reusable button component │ │ ├── loading.tsx # Loading spinner │ │ └── navbar.tsx # Navigation bar │ └── store/ │ └── store.ts # Global state management (Redux) </pre>
+
+Commands to run:
+
+Terminal 1 [Redis]: redis-server  
+Terminal 2 [Backend]: npm run dev  
+Terminal 3: [Frontend]: npm run dev
+
+DynamoDB Local Installation:
+
+- Download DynamoDB Local from - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
+- Unzip
+- Run cmd : java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+
+Path - /Users/sruthi/Downloads/Spring\ 2025/WebRTC/dynamodb-local/dynamodb_local_latest
+
+aws dynamodb describe-table --table-name TranscriptionStore --endpoint-url http://localhost:8000
+
+aws dynamodb scan --table-name TranscriptionStore --endpoint-url http://localhost:8000 --output table
+
+Environmental Variables:
+
+REDIS_URL=localhost  
+REDIS_PORT=6379  
+PORT=3000  
+DYNAMO_DB_ACCESS_ID=fake  
+DYNAMO_DB_SECRET_KEY=fake  
+AWS_REGION=us-east-2  
+DYNAMO_DB_ENDPOINT=http://localhost:8000  
+OPENAI_API_KEY= KEY
