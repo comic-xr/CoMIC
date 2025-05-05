@@ -3,66 +3,71 @@ This repository contains the complete code for AI-Powered WebRTC Video Call Appl
 Project Structure  
 The following outlines the backend and frontend structure for the WebAI application
 
-+-- backend/
-|   +-- .env                        # Environment variables for backend  
-|   +-- dump.rdb                    # Redis database dump  
-|   +-- index.js                   # Entry point for the backend server  
-|   +-- src/
-|       +-- controllers/  
-|           +-- dynamoDB_controller.js    # Handles DynamoDB logic  
-|           +-- meeting_controller.js     # Manages meeting-related endpoints  
-|           +-- openai_controller.js      # Interfaces with OpenAI APIs  
-|       +-- routes/  
-|           +-- meeting_room.js           # Routing for meeting endpoints  
-|           +-- openai.js                 # Routing for OpenAI endpoints  
-|       +-- services/  
-|           +-- awsDynamoDB.js            # AWS DynamoDB service functions  
-|           +-- openai.js                 # OpenAI helper functions  
-|           +-- redis.js                  # Redis caching logic  
+<pre>
 
-+-- frontend/  
-|   +-- .env                       # Environment variables for frontend  
-|   +-- .eslintrc.cjs             # ESLint configuration  
-|   +-- .gitignore                # Git ignored files  
-|   +-- App.css                   # Global CSS  
-|   +-- App.tsx                   # Main React component  
-|   +-- index.css                 # Global styles  
-|   +-- main.tsx                  # ReactDOM render entry    
-|   +-- vite-env.d.ts             # Vite environment types  
-|   +-- public/  
-|       +-- audioProcessor.js     # Handles audio processing logic  
-|       +-- vite.svg              # Static Vite logo  
-|   +-- src/  
-|       +-- assets/  
-|           +-- .gitkeep          # Placeholder for asset folder  
-|           +-- placeholder.jpg   # Placeholder image  
-|       +-- components/  
-|           +-- ChatBox.tsx       # Chat box UI  
-|           +-- ChatInput.tsx     # Chat input field  
-|           +-- ChatMessage.tsx   # Chat message display  
-|       +-- constants/  
-|           +-- colors.ts         # Color constants  
-|       +-- features/
-|           +-- auth/             # Auth-related logic (folder)  
-|           +-- rtcSlice.ts       # Redux slice for WebRTC  
-|       +-- hooks/  
-|           +-- useTranscribe.ts  # Custom hook for transcription  
-|       +-- pages/  
-|           +-- error.tsx         # Error page  
-|           +-- home.tsx          # Home/landing page  
-|           +-- meeting.tsx       # Main meeting interface  
-|       +-- services/
-|           +-- initialize.tsx    # Initialization service  
-|           +-- meeting.tsx       # Meeting-related service logic    
-|           +-- sdp.tsx           # SDP (Session Description Protocol) logic  
-|           +-- socket.tsx        # WebSocket connection logic  
-|           +-- transcribe.ts     # Audio transcription logic  
-|       +-- shared/  
-|           +-- button.tsx        # Reusable button component  
-|           +-- loading.tsx       # Loading spinner  
-|           +-- navbar.tsx        # Navigation bar  
-|       +-- store/  
-|           +-- store.ts          # Global state management (Redux)  
+|-- backend  
+|   |-- .env                          # Backend environment variables  
+|   |-- dump.rdb                      # Redis dump file  
+|   |-- index.js                      # Entry point for backend server  
+|   |-- src/  
+|   |   |-- controllers/  
+|   |   |   |-- dynamoDB_controller.js   # Handles DynamoDB logic  
+|   |   |   |-- meeting_controller.js    # Manages meeting routes  
+|   |   |   |-- openai_controller.js     # Interfaces with OpenAI API  
+|   |   |-- routes/  
+|   |   |   |-- meeting_room.js          # Endpoints for meeting rooms  
+|   |   |   |-- openai.js                # OpenAI endpoint routing  
+|   |   |-- services/  
+|   |       |-- awsDynamoDB.js           # AWS DynamoDB service logic  
+|   |       |-- openai.js                # OpenAI utility functions  
+|   |       |-- redis.js                 # Redis helper functions  
+
+|-- frontend/  
+|   |-- .env                            # Frontend environment variables  
+|   |-- .eslintrc.cjs                   # ESLint config  
+|   |-- .gitignore                      # Git ignore rules  
+|   |-- App.css                         # Global styles  
+|   |-- App.tsx                         # Main React component  
+|   |-- index.css                       # Global stylesheet  
+|   |-- main.tsx                        # React entry point  
+|   |-- vite-env.d.ts                   # Vite environment types  
+|   |-- public/  
+|   |   |-- audioProcessor.js           # Audio processing logic  
+|   |   |-- vite.svg                    # Static Vite logo  
+|   |-- src/  
+|       |-- assets/  
+|       |   |-- .gitkeep                # Keeps assets folder in Git  
+|       |   |-- placeholder.jpg         # Placeholder image  
+|       |-- components/  
+|       |   |-- ChatBox.tsx             # Chat UI container  
+|       |   |-- ChatInput.tsx           # Chat input field  
+|       |   |-- ChatMessage.tsx         # Chat message renderer  
+|       |-- constants/  
+|       |   |-- colors.ts               # App color constants  
+|       |-- features/  
+|       |   |-- auth/                   # Authentication logic  
+|       |   |-- rtcSlice.ts             # Redux slice for RTC state  
+|       |-- hooks/  
+|       |   |-- useTranscribe.ts        # Custom transcription hook  
+|       |-- pages/  
+|       |   |-- error.tsx               # Error fallback page  
+|       |   |-- home.tsx                # Landing page  
+|       |   |-- meeting.tsx             # Video meeting page  
+|       |-- services/  
+|       |   |-- initialize.tsx          # Init logic  
+|       |   |-- meeting.tsx             # Meeting utilities  
+|       |   |-- sdp.tsx                 # SDP helpers  
+|       |   |-- socket.tsx              # Socket.io client  
+|       |   |-- transcribe.ts           # Transcription service  
+|       |-- shared/  
+|       |   |-- button.tsx              # Reusable button component  
+|       |   |-- loading.tsx             # Loader/spinner  
+|       |   |-- navbar.tsx              # App navigation bar  
+|       |-- store/  
+|           |-- store.ts                # Redux store setup 
+</pre>
+
+
 
 Commands to run:
 
