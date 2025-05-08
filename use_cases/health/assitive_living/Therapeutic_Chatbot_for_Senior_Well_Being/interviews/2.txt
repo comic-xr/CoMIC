@@ -1,0 +1,51 @@
+--- Persona 2: Eleanor (Anxious Evenings, Values Empathy) ---
+
+Name: Eleanor
+
+General Well-Being & Mood:
+Q: How would you describe your overall mood over the past few weeks?
+A: It's been... variable. Mostly calm during the day, but I tend to get anxious in the evenings, especially before bed. A bit up and down.
+Q: What emotions do you find yourself experiencing most often (e.g., happiness, sadness, anxiety)?
+A: Anxiety, mostly in the evenings. Some loneliness creeps in then too. During the day, I feel reasonably content, sometimes happy if the sun's out.
+
+Social Connections and Support:
+Q: How often do you interact with family, friends, or members of your community?
+A: My son calls twice a week, usually Tuesdays and Fridays. My friend Joan comes for coffee on Thursdays. I see neighbours briefly when I put the bins out.
+Q: Do you often feel lonely or isolated? If yes, when does this feeling typically arise?
+A: Yes, quite often, particularly in the evenings after dinner, when the house goes quiet. Weekends can feel long if my son is busy.
+
+Daily Routines and Interests:
+Q: Can you describe a typical day for you?
+A: I get up, have breakfast, listen to the radio. I like to do the crossword. Maybe some light housework or reading mid-morning. Lunch, then I often watch a bit of television or listen to an audiobook. Evenings are quiet - dinner, more TV, reading before bed.
+Q: What activities or hobbies bring you joy or help you relax?
+A: Reading novels, definitely. Listening to audiobooks is relaxing. Knitting, though my eyesight isn't what it was. A good cup of tea and a biscuit brings simple joy.
+
+Mental Health History and Coping Strategies:
+Q: Have you ever been diagnosed with a mental health condition, or have you sought help from a mental health professional?
+A: I saw a counsellor years ago for anxiety, which helped a bit. No formal diagnosis recently.
+Q: What methods or activities have you found helpful in managing stress, anxiety, or sadness?
+A: Deep breathing sometimes helps with the anxiety. Trying to distract myself with a book or TV. Sometimes just accepting the feeling and knowing it will pass. Meditation used to help, maybe I should try again.
+
+Emotional Expression and Communication:
+Q: How comfortable are you discussing your emotions or personal challenges?
+A: It depends who I'm talking to. With my son or Joan, I'm fairly comfortable. With others, less so. I don't like to burden people.
+Q: What type of language or tone makes you feel understood and supported?
+A: A gentle, calm tone. Simple words, please – no jargon. Someone who sounds like they genuinely care and aren't just ticking boxes. Empathy is important.
+
+Expectations from a Digital Companion:
+Q: What qualities do you value most in a supportive companion or conversational partner?
+A: Empathy, patience, non-judgment. Someone (or something) that just listens and understands without trying to 'fix' everything immediately. Clarity is good too.
+Q: In what ways would you like a chatbot to assist you during difficult times?
+A: Maybe just to acknowledge how I'm feeling. Offer a calming thought or a gentle distraction. Remind me to breathe. Just knowing something is 'there' might help the loneliness.
+
+Technology Use and Accessibility:
+Q: How comfortable are you using digital devices for communication?
+A: I use my tablet every day for reading and email. I have a smartphone but mainly just for calls from my son. I find it a bit complicated otherwise.
+Q: Do you have any preferences or difficulties with technology that we should consider?
+A: I prefer larger text. Simple layouts are best. I wouldn't want anything too complex to navigate.
+
+Privacy and Trust:
+Q: How important is confidentiality when discussing your personal feelings?
+A: Extremely important. Absolutely essential.
+Q: Do you have any concerns about sharing personal information with a digital tool?
+A: Yes, definitely. I'd worry about where the information goes. I need strong reassurance about privacy.

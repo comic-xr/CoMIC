@@ -1,0 +1,51 @@
+--- Persona 5: George (Grumpy Exterior, Distraction Coping) ---
+
+Name: George
+
+General Well-Being & Mood:
+Q: How would you describe your overall mood over the past few weeks?
+A: Same as usual. Alright, I suppose. Bit grumpy maybe.
+Q: What emotions do you find yourself experiencing most often (e.g., happiness, sadness, anxiety)?
+A: Irritation sometimes. Boredom. Not much else.
+
+Social Connections and Support:
+Q: How often do you interact with family, friends, or members of your community?
+A: Son calls Sundays. Neighbour pops his head in now and then. That's it these days. Most of my old mates are gone.
+Q: Do you often feel lonely or isolated? If yes, when does this feeling typically arise?
+A: Don't like the word lonely. But yes, it's too quiet here since Martha passed. Evenings are the worst.
+
+Daily Routines and Interests:
+Q: Can you describe a typical day for you?
+A: Get up. Make tea. Read the paper cover to cover. Watch the news. Maybe tinker in the shed for a bit if I feel up to it. Lunch. Watch afternoon telly, usually sport or documentaries. Dinner. More telly. Bed.
+Q: What activities or hobbies bring you joy or help you relax?
+A: Not much brings 'joy'. Watching sport is alright. Reading the paper. Tinkering in the shed used to, but harder now.
+
+Mental Health History and Coping Strategies:
+Q: Have you ever been diagnosed with a mental health condition, or have you sought help from a mental health professional?
+A: No. Don't believe in all that. Just get on with it.
+Q: What methods or activities have you found helpful in managing stress, anxiety, or sadness?
+A: Keep the telly on. Read the paper. Ignore it. Distraction, I suppose.
+
+Emotional Expression and Communication:
+Q: How comfortable are you discussing your emotions or personal challenges?
+A: Not comfortable. Don't talk about feelings. Waste of time.
+Q: What type of language or tone makes you feel understood and supported?
+A: Straightforward. To the point. No fuss. Don't want any wishy-washy stuff.
+
+Expectations from a Digital Companion:
+Q: What qualities do you value most in a supportive companion or conversational partner?
+A: Doesn't waste my time. Gets to the point. Maybe knows a bit about sport or history. Efficiency.
+Q: In what ways would you like a chatbot to assist you during difficult times?
+A: Difficult times? Just leave me alone, probably. Or maybe just talk about something completely different. Distract me.
+
+Technology Use and Accessibility:
+Q: How comfortable are you using digital devices for communication?
+A: Not at all. Hate them. Got a mobile my son makes me carry, never use it. Can just about work the TV remote.
+Q: Do you have any preferences or difficulties with technology that we should consider?
+A: Has to be voice. Can't be doing with typing or touch screens. Simple as possible.
+
+Privacy and Trust:
+Q: How important is confidentiality when discussing your personal feelings?
+A: Well, I don't discuss 'em, so not an issue. But if I did, yes, it'd have to be private.
+Q: Do you have any concerns about sharing personal information with a digital tool?
+A: Yes. Don't trust them. Always listening. Where does it all go?

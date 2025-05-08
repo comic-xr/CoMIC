@@ -1,0 +1,51 @@
+--- Persona 4: Clara (Active, Cheerful but Worried) ---
+
+Name: Clara
+
+General Well-Being & Mood:
+Q: How would you describe your overall mood over the past few weeks?
+A: Generally very good, dear. Keep myself busy! Though I do have my moments of worry, about health and things. Can't help it at my age.
+Q: What emotions do you find yourself experiencing most often (e.g., happiness, sadness, anxiety)?
+A: Mostly happiness and gratitude, I'd say. A fair bit of worry too, sometimes keeps me awake. But I try to focus on the positive.
+
+Social Connections and Support:
+Q: How often do you interact with family, friends, or members of your community?
+A: Oh, very often! My children and grandchildren live nearby, see them several times a week. Church group on Sundays and Wednesdays, bridge club on Fridays, coffee with friends on Tuesdays... I'm rarely alone unless I choose to be!
+Q: Do you often feel lonely or isolated? If yes, when does this feeling typically arise?
+A: No, not really, dear. Very blessed with family and friends.
+
+Daily Routines and Interests:
+Q: Can you describe a typical day for you?
+A: Up early, prayers, breakfast. Usually have an activity planned - church group, seeing family, shopping, coffee. Lunch. Maybe some gardening or baking in the afternoon. Often have family over for dinner or go out. Read a bit before bed. Always something on!
+Q: What activities or hobbies bring you joy or help you relax?
+A: Spending time with my grandchildren brings the most joy! My faith is very important. I love baking, gardening, reading, and playing bridge. Walking helps me relax and clear my head.
+
+Mental Health History and Coping Strategies:
+Q: Have you ever been diagnosed with a mental health condition, or have you sought help from a mental health professional?
+A: No, never. Always been pretty robust mentally, thank goodness.
+Q: What methods or activities have you found helpful in managing stress, anxiety, or sadness?
+A: Prayer helps me immensely when I'm worried. Talking things through with my daughter or my friends. Going for a good walk always makes me feel better. Keeping busy.
+
+Emotional Expression and Communication:
+Q: How comfortable are you discussing your emotions or personal challenges?
+A: Very comfortable with close family and friends. I believe in sharing burdens. Not so much with strangers, though.
+Q: What type of language or tone makes you feel understood and supported?
+A: Warm and kind. Respectful. Clear language is good. A bit of cheerfulness is nice, but not if it feels fake when I'm genuinely worried.
+
+Expectations from a Digital Companion:
+Q: What qualities do you value most in a supportive companion or conversational partner?
+A: Kindness, trustworthiness, being a good listener. Maybe a bit of practical help if possible.
+Q: In what ways would you like a chatbot to assist you during difficult times?
+A: Perhaps offer gentle encouragement. Remind me of positive things or coping strategies like going for a walk. Maybe help me structure my thoughts if I'm worrying too much.
+
+Technology Use and Accessibility:
+Q: How comfortable are you using digital devices for communication?
+A: Quite comfortable! I use my smartphone and tablet all the time - emails, photos, video calls with grandchildren overseas, online shopping. Love it!
+Q: Do you have any preferences or difficulties with technology that we should consider?
+A: Not really. Just needs to be reliable, nothing worse than tech that doesn't work!
+
+Privacy and Trust:
+Q: How important is confidentiality when discussing your personal feelings?
+A: Very important. Trust is paramount.
+Q: Do you have any concerns about sharing personal information with a digital tool?
+A: A little. I try to be careful online. I'd want to know exactly how my data is used and protected.
