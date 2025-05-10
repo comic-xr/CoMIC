@@ -1,99 +1,172 @@
-This repository contains the complete code for AI-Powered WebRTC Video Call Application for Online Education.
-
-Project Structure  
-The following outlines the backend and frontend structure for the WebAI application
-
-<pre>
-
-|-- backend  
-|   |-- .env                          # Backend environment variables  
-|   |-- dump.rdb                      # Redis dump file  
-|   |-- index.js                      # Entry point for backend server  
-|   |-- src/  
-|   |   |-- controllers/  
-|   |   |   |-- dynamoDB_controller.js   # Handles DynamoDB logic  
-|   |   |   |-- meeting_controller.js    # Manages meeting routes  
-|   |   |   |-- openai_controller.js     # Interfaces with OpenAI API  
-|   |   |-- routes/  
-|   |   |   |-- meeting_room.js          # Endpoints for meeting rooms  
-|   |   |   |-- openai.js                # OpenAI endpoint routing  
-|   |   |-- services/  
-|   |       |-- awsDynamoDB.js           # AWS DynamoDB service logic  
-|   |       |-- openai.js                # OpenAI utility functions  
-|   |       |-- redis.js                 # Redis helper functions  
-
-|-- frontend/  
-|   |-- .env                            # Frontend environment variables  
-|   |-- .eslintrc.cjs                   # ESLint config  
-|   |-- .gitignore                      # Git ignore rules  
-|   |-- App.css                         # Global styles  
-|   |-- App.tsx                         # Main React component  
-|   |-- index.css                       # Global stylesheet  
-|   |-- main.tsx                        # React entry point  
-|   |-- vite-env.d.ts                   # Vite environment types  
-|   |-- public/  
-|   |   |-- audioProcessor.js           # Audio processing logic  
-|   |   |-- vite.svg                    # Static Vite logo  
-|   |-- src/  
-|       |-- assets/  
-|       |   |-- .gitkeep                # Keeps assets folder in Git  
-|       |   |-- placeholder.jpg         # Placeholder image  
-|       |-- components/  
-|       |   |-- ChatBox.tsx             # Chat UI container  
-|       |   |-- ChatInput.tsx           # Chat input field  
-|       |   |-- ChatMessage.tsx         # Chat message renderer  
-|       |-- constants/  
-|       |   |-- colors.ts               # App color constants  
-|       |-- features/  
-|       |   |-- auth/                   # Authentication logic  
-|       |   |-- rtcSlice.ts             # Redux slice for RTC state  
-|       |-- hooks/  
-|       |   |-- useTranscribe.ts        # Custom transcription hook  
-|       |-- pages/  
-|       |   |-- error.tsx               # Error fallback page  
-|       |   |-- home.tsx                # Landing page  
-|       |   |-- meeting.tsx             # Video meeting page  
-|       |-- services/  
-|       |   |-- initialize.tsx          # Init logic  
-|       |   |-- meeting.tsx             # Meeting utilities  
-|       |   |-- sdp.tsx                 # SDP helpers  
-|       |   |-- socket.tsx              # Socket.io client  
-|       |   |-- transcribe.ts           # Transcription service  
-|       |-- shared/  
-|       |   |-- button.tsx              # Reusable button component  
-|       |   |-- loading.tsx             # Loader/spinner  
-|       |   |-- navbar.tsx              # App navigation bar  
-|       |-- store/  
-|           |-- store.ts                # Redux store setup 
-</pre>
+# WebAI: AI-Powered WebRTC Video Conferencing for Online Education
 
 
 
-Commands to run:
+## Overview
 
-Terminal 1 [Redis]: redis-server  
-Terminal 2 [Backend]: npm run dev  
-Terminal 3: [Frontend]: npm run dev
+WebAI is a cutting-edge video conferencing platform that enhances remote collaboration through AI-powered features. Built on WebRTC technology, it provides real-time communication with integrated speech-to-text transcription and AI-assisted conversation analysis to make meetings more productive and accessible.
 
-DynamoDB Local Installation:
+## Demo
 
-- Download DynamoDB Local from - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
-- Unzip
-- Run cmd : java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+[Watch Demo Video](screenshots/demo.mp4)
 
-Path - /Users/sruthi/Downloads/Spring\ 2025/WebRTC/dynamodb-local/dynamodb_local_latest
+## ✨ Features
 
-aws dynamodb describe-table --table-name TranscriptionStore --endpoint-url http://localhost:8000
+- **Real-time Video Conferencing**: Connect with peers through high-quality, low-latency WebRTC connections
+- **Live Transcription**: Automatic speech-to-text conversion using AWS Transcribe
+- **AI Assistant**: Intelligent meeting assistant powered by OpenAI to summarize discussions and answer questions
+- **Meeting History**: Store and retrieve meeting transcriptions for future reference
+- **Modern UI**: Clean, responsive interface built with React and Tailwind CSS
 
-aws dynamodb scan --table-name TranscriptionStore --endpoint-url http://localhost:8000 --output table
+## 🛠️ Tech Stack
 
-Environmental Variables:
+### Frontend
+- **React**: UI library for building the user interface
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first CSS framework
+- **Socket.io Client**: Real-time bidirectional communication
+- **WebRTC**: Peer-to-peer audio/video communication
+- **Redux Toolkit**: State management
+- **Vite**: Modern frontend build tool
 
-REDIS_URL=localhost  
-REDIS_PORT=6379  
-PORT=3000  
-DYNAMO_DB_ACCESS_ID=fake  
-DYNAMO_DB_SECRET_KEY=fake  
-AWS_REGION=us-east-2  
-DYNAMO_DB_ENDPOINT=http://localhost:8000  
-OPENAI_API_KEY= KEY
+### Backend
+- **Node.js**: JavaScript runtime
+- **Express**: Web framework
+- **Socket.io**: WebSocket server implementation
+- **AWS Transcribe**: Speech-to-text service
+- **AWS DynamoDB**: NoSQL database for meeting data
+- **OpenAI API**: AI model for natural language processing
+- **Redis**: In-memory data structure store for caching
+
+## 🏗️ Architecture
+
+![WebAI Screenshot](screenshots/architecture.png)
+
+The application follows a client-server architecture with peer-to-peer media streaming:
+
+1. **Signaling Server**: Handles WebRTC signaling for establishing peer connections
+2. **Media Streaming**: Direct peer-to-peer connection for audio/video transfer
+3. **Transcription Pipeline**: Processes audio streams for real-time transcription
+4. **AI Processing**: Analyzes conversation in real-time for insights and responses
+
+## 📁 Project Structure
+
+```
+webai/
+├── frontend/                 # React frontend application
+│   ├── src/                  # Source code
+│   │   ├── components/       # Reusable React components
+│   │   ├── pages/            # Page components
+│   │   ├── services/         # API services
+│   │   ├── features/         # Redux slices
+│   │   ├── store/            # Redux store configuration
+│   │   ├── hooks/            # Custom React hooks
+│   │   └── assets/           # Static assets
+│   ├── public/               # Public assets
+│   └── ...                   # Configuration files
+├── backend/                  # Node.js backend server
+│   ├── index.js              # Entry point
+│   ├── src/                  # Source code
+│   │   ├── controllers/      # Route controllers
+│   │   ├── routes/           # API routes
+│   │   ├── services/         # Business logic
+│   │   └── models/           # Data models
+│   └── ...                   # Configuration files
+├── screenshots/              # Application screenshots
+└── dynamodb-local/           # Local DynamoDB for development
+```
+
+### Screenshots
+
+![WebAI Screenshot](screenshots/img1.png)
+![WebAI Screenshot](screenshots/img2.png)
+
+## 🚦 Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or later)
+- npm or yarn
+- Browser that supports WebRTC and WebSpeechAPI
+- DynamoDB local
+- OpenAI API key
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file with the following variables:
+   ```
+   PORT=3000
+   AWS_ACCESS_KEY_ID=your_access_key
+   AWS_SECRET_ACCESS_KEY=your_secret_key
+   AWS_REGION=us-east-1
+   OPENAI_API_KEY=your_openai_api_key
+   ```
+
+4. Start the server:
+   ```bash
+   npm run dev
+   ```
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Usage
+
+1. **Create a Meeting**: Enter your name and click "Create New Meeting"
+2. **Join a Meeting**: Enter your name and a meeting ID, then click "Join Meeting"
+3. **During the Meeting**:
+   - Allow camera and microphone access when prompted
+   - Use the AI assistant to get insights or ask questions
+   - View real-time transcription of the conversation
+
+## AI Assistant Capabilities
+
+The integrated AI assistant can:
+- Summarize discussion points
+- Answer questions based on meeting context
+- Provide real-time insights
+- Create action items from the conversation
+
+## Roadmap
+
+- [ ] Gesture detection
+- [ ] Individual user context response
+- [ ] End-to-end encryption
+- [ ] Screen sharing capabilities
+- [ ] Meeting recording and playback
+- [ ] Mobile application support
+
+## Contributors  
+👤 [Baalavignesh Arunachalam](https://github.com/Baalavignesh) <br>  
+👤 [Sruthi Sivasamy](https://github.com/sruthisivasamy) <br>  
+
+## Acknowledgements
+
+- Thanks to Professor Bo Han for the support and guidance
+- Thanks to Ruizhi Cheng for the support and guidance
