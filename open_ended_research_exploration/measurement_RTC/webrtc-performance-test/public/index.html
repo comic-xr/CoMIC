@@ -1,0 +1,139 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebRTC Performance Testing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    video {
+      width: 320px;
+      background: #2f3542;
+      border-radius: 5px;
+    }
+    .controls {
+      margin: 20px 0;
+    }
+    button {
+      padding: 8px 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    select, input {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    #status {
+      margin-top: 20px;
+    }
+    #metrics {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+    #connectionsList {
+      margin-top: 10px;
+    }
+    .parameter-group {
+      margin: 10px 0;
+    }
+    .hidden {
+      display: none;
+    }
+    #localFileInput {
+      margin-top: 10px;
+    }
+    #fileSourceControls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .file-preview {
+      max-width: 320px;
+      margin-top: 10px;
+    }
+    .file-label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>WebRTC Performance Testing</h1>
+  
+  <div class="parameter-group">
+    <label for="role">Role:</label>
+    <select id="role">
+      <option value="auto">Auto (Negotiate)</option>
+      <option value="sender">Sender</option>
+      <option value="receiver">Receiver</option>
+    </select>
+    <input type="text" id="clientId" placeholder="Client ID (optional)" />
+  </div>
+  
+  <div class="parameter-group">
+    <label for="videoSource">Video Source:</label>
+    <select id="videoSource">
+      <option value="file">Video File</option>
+      <option value="webcam">Webcam</option>
+    </select>
+    <div id="fileSourceControls">
+      <!-- Local file input replaces the dropdown -->
+      <div class="file-label">Select a video file from your device:</div>
+      <input type="file" id="localFileInput" accept="video/*" />
+      <!-- Preview for the selected video -->
+      <video id="videoPreview" class="file-preview" controls muted></video>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <button id="startBtn">Start Stream</button>
+    <button id="stopBtn" disabled>Stop All</button>
+  </div>
+  
+  <div class="videos">
+    <div>
+      <h3>Local Stream</h3>
+      <video id="localVideo" autoplay muted playsinline></video>
+    </div>
+    <div>
+      <h3>Remote Streams</h3>
+      <div id="remoteVideos"></div>
+    </div>
+  </div>
+  
+  <div id="status">Status: Not connected</div>
+  
+  <div id="metrics">
+    <h3>Performance Metrics</h3>
+    <div>Connected Peers: <span id="peerCount">0</span></div>
+    <div>Bandwidth Usage: <span id="bandwidth">0 kbps</span></div>
+    <div>Average Round Trip Time: <span id="rtt">0 ms</span></div>
+    <div>Packet Loss: <span id="packetLoss">0%</span></div>
+    <div>Frame Rate: <span id="frameRate">0 fps</span></div>
+    <div>
+      <h4>Active Connections:</h4>
+      <ul id="connectionsList"></ul>
+    </div>
+  </div>
+  
+  <!-- Automation hooks for Puppeteer -->
+  <div id="automation-status" class="hidden"></div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/main.js"></script>
+  
+</body>
+</html>
