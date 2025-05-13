@@ -1,4 +1,4 @@
-##Performance Analysis of LLM Inference Across Web Browser Backends
+# Performance Analysis of LLM Inference Across Web Browser Backends
 This folder contains code for analyzing and comparing the performance of WebLLM running in different browsers/backends against native LLM implementations.
 
 The project is organized into following parts:
