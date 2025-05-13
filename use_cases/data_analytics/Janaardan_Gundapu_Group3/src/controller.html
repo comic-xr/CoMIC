@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>vtk.js Controller Panel</title>
+</head>
+<body>
+  <table>
+    <!-- Always‐visible: VR toggle -->
+    <tr class="widget-row always">
+      <td>
+        <button class="vrbutton" style="width:100%">Send To VR</button>
+      </td>
+    </tr>
+
+    <!-- Always‐visible: Widget selector -->
+    <tr class="widget-row always">
+      <td>
+        <label for="widgetSelector">Widget:</label>
+        <select id="widgetSelector" style="width:100%">
+          <option value="file">File / Representation</option>
+          <option value="label">Label Widget</option>
+          <option value="line">Line Widget</option>
+          <option value="axes">Axes Widget</option>
+          <option value="quadview">Quad View</option>
+          <option value="deviceOrientation">Device Orientation</option>
+          <option value="depthTest">Depth Test</option>
+        </select>
+      </td>
+    </tr>
+
+    <!-- File group -->
+    <tr class="widget-row file">
+      <td>
+        <label for="representationSelector">Representation:</label>
+        <select id="representationSelector" class="representations" style="width:100%">
+          <option value="0">Points</option>
+          <option value="1">Wireframe</option>
+          <option value="2" selected>Surface</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="widget-row file">
+      <td>
+        <input type="file" id="fileInput" style="width:100%"/>
+      </td>
+    </tr>
+
+
+    <!-- Depth Test controls -->
+    <tr class="widget-row depthTest" style="display:none">
+      <td>
+        <button id="enableDepthTest" style="width:100%">Enable Depth Test</button>
+      </td>
+    </tr>
+    <tr class="widget-row depthTest" style="display:none">
+      <td>
+        <button id="disableDepthTest" style="width:100%">Disable Depth Test</button>
+      </td>
+    </tr>
+
+
+    <!-- Quad View group -->
+    <tr class="widget-row quadview" style="display:none">
+      <td><button id="enableQuadView" style="width:100%">Enable Quad View</button></td>
+    </tr>
+    <tr class="widget-row quadview" style="display:none">
+      <td><button id="disableQuadView" style="width:100%">Disable Quad View</button></td>
+    </tr>
+    <tr class="widget-row quadview" style="display:none">
+      <td>
+        <label for="repBL">BL View:</label>
+        <select id="repBL" style="width:100%">
+          <option value="0">Points</option>
+          <option value="1">Wireframe</option>
+          <option value="2" selected>Surface</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="widget-row quadview" style="display:none">
+      <td>
+        <label for="repBR">BR View:</label>
+        <select id="repBR" style="width:100%">
+          <option value="0">Points</option>
+          <option value="1">Wireframe</option>
+          <option value="2" selected>Surface</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="widget-row quadview" style="display:none">
+      <td>
+        <label for="repTL">TL View:</label>
+        <select id="repTL" style="width:100%">
+          <option value="0">Points</option>
+          <option value="1">Wireframe</option>
+          <option value="2" selected>Surface</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="widget-row quadview" style="display:none">
+      <td>
+        <label for="repTR">TR View:</label>
+        <select id="repTR" style="width:100%">
+          <option value="0">Points</option>
+          <option value="1">Wireframe</option>
+          <option value="2" selected>Surface</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr class="widget-row deviceOrientation" style="display:none">
+      <td><button id="enableDeviceOrientation" style="width:100%">Enable Device Orientation</button></td>
+    </tr>
+    <tr class="widget-row deviceOrientation" style="display:none">
+      <td><button id="disableDeviceOrientation" style="width:100%">Disable Device Orientation</button></td>
+    </tr>
+    
+
+    <!-- Label Widget group -->
+    <tr class="widget-row label" style="display:none">
+      <td><button id="addLabel" style="width:100%">Add Label</button></td>
+    </tr>
+    <tr class="widget-row label" style="display:none">
+      <td><button id="deleteLabel" style="width:100%">Delete Label</button></td>
+    </tr>
+    <tr class="widget-row label" style="display:none">
+      <td><input type="text" id="txtIpt" placeholder="Label Text" style="width:100%"/></td>
+    </tr>
+    <tr class="widget-row label" style="display:none">
+      <td><input type="number" id="fontSize" placeholder="Font Size" style="width:100%"/></td>
+    </tr>
+    <tr class="widget-row label" style="display:none">
+      <td><input type="color" id="color" value="#ffffff" style="width:100%"/></td>
+    </tr>
+
+    <!-- Line Widget group -->
+    <tr class="widget-row line" style="display:none">
+      <td><button id="addLine" style="width:100%">Add Line</button></td>
+    </tr>
+    <tr class="widget-row line" style="display:none">
+      <td><button id="removeLine" style="width:100%">Remove Line</button></td>
+    </tr>
+    <tr class="widget-row line" style="display:none">
+      <td>
+        <label for="idh1">Handle 1 Shape:</label>
+        <select id="idh1" style="width:100%">
+          <option value="sphere">Sphere</option>
+          <option value="cone">Cone</option>
+          <option value="cube">Cube</option>
+          <option value="voidSphere">Void Sphere</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="widget-row line" style="display:none">
+      <td><label><input type="checkbox" id="visiH1" checked/> Handle 1 Visible</label></td>
+    </tr>
+    <tr class="widget-row line" style="display:none">
+      <td>
+        <label for="idh2">Handle 2 Shape:</label>
+        <select id="idh2" style="width:100%">
+          <option value="sphere">Sphere</option>
+          <option value="cone">Cone</option>
+          <option value="cube">Cube</option>
+          <option value="voidSphere">Void Sphere</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="widget-row line" style="display:none">
+      <td><label><input type="checkbox" id="visiH2" checked/> Handle 2 Visible</label></td>
+    </tr>
+    <tr class="widget-row line" style="display:none">
+      <td><div id="distance" style="width:100%; background:#444; color:white; padding:5px; text-align:center;">--</div></td>
+    </tr>
+
+    <!-- Axes Widget group -->
+    <tr class="widget-row axes" style="display:none">
+      <td><button id="addAxes" style="width:100%">Add Axes</button></td>
+    </tr>
+    <tr class="widget-row axes" style="display:none">
+      <td><button id="removeAxes" style="width:100%">Remove Axes</button></td>
+    </tr>
+    <tr class="widget-row axes" style="display:none">
+      <td><label><input type="checkbox" class="recenter"/> Recenter</label></td>
+    </tr>
+    <tr class="widget-row axes" style="display:none">
+      <td><label><input type="checkbox" class="xAxisInvert"/> Invert X Axis</label></td>
+    </tr>
+    <tr class="widget-row axes" style="display:none">
+      <td><label><input type="checkbox" class="yAxisInvert"/> Invert Y Axis</label></td>
+    </tr>
+    <tr class="widget-row axes" style="display:none">
+      <td><label><input type="checkbox" class="zAxisInvert"/> Invert Z Axis</label></td>
+    </tr>
+  </table>
+</body>
+</html>
