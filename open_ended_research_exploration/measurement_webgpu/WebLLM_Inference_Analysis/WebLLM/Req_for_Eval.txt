@@ -1,0 +1,6 @@
+#Requirement for eval.py
+
+openai
+google-genai
+deepeval
+requests
