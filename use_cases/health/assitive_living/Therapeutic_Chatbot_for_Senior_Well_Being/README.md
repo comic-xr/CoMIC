@@ -1,6 +1,6 @@
 # README: Therapeutic Chatbot for Senior Well-being
 
-This is the final project for the course CS692 under the guidance of Professor Bo Han and TA Ruizhi Cheng
+This is the final project for the course CS692 under the guidance of Professor Bo Han and TA Ruizhi Cheng.
 
 ## 1. Project Overview
 
