@@ -1,5 +1,5 @@
 Humanoid Robot: Replay of collected motion trajectories
-Students: Marcus Barreto and Venkata Ravi Sridhar Devarakonda
+Students: Marcus Barreto & Venkata Ravi Sridhar Devarakonda
 
 NOTE: Make sure NO ONE is near H1's reach for safety; teleoperation is sometimes unpredictable and erratic.
 
