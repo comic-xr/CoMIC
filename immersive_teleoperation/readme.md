@@ -39,7 +39,7 @@ For setup info, please refer to https://support.unitree.com/home/en/Teleoperatio
    The code structure is as follows:
    ![image](https://github.com/user-attachments/assets/fd3a302b-14ae-469d-98af-536cacaed50c)
 
-main.cpp (driver code) is the only file of interest; but we did have to change CMakeLists.txt significantly for the lab computer to compile correctly.
+main.cpp (driver/logic code) is the only file of interest; but we did have to change CMakeLists.txt significantly for the lab computer to compile correctly.
 
 To run arm teleoperation:
 a. Make sure the kinect camera is connected to computer (USB)
@@ -51,5 +51,10 @@ c. Have someone stand in front of camera; once they are in the ready position (p
 ![image](https://github.com/user-attachments/assets/d52873dc-2c62-4473-bd83-7a08d2b37bfe)
 
 NOTE: When teleoperation begins, the H1 will SUDDENLY go from hanging slack to the ready state and moving with the kinect user. 
+
+For setup info, please refer to https://support.unitree.com/home/en/Teleoperation/kinect_teleoperate
+
+Here is a video of Kinect teleoperation in action:
+
 
 Humanoid Robot: Chatbot powered by LLMs
