@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wl,--as-needed,-rpath-link=/home/cs/h1Dev/kinect_teleoperate -rdynamic "CMakeFiles/test-pointer_access.dir/src/unit-pointer_access.cpp.o" CMakeFiles/doctest_main.dir/src/unit.cpp.o -o ../../../test-pointer_access  -Wl,-rpath,"\$ORIGIN" 
