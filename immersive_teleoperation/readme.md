@@ -32,6 +32,9 @@ f. When the AVP user is ready, and when the `Please enter the start signal (ente
 
 For setup info, please refer to https://support.unitree.com/home/en/Teleoperation/avp_teleoperate
 
+Here is a video of teleoperation with AVP: https://drive.google.com/file/d/19RjfZ9_660kgiYIy4TJiJ0mGHlTos2Ps/view?usp=sharing
+
+NOTE: the right hand of H1 unit (specifically its thumb) is damaged, so users should avoid using the right hand in hand control until it is fixed/replaced.
 
 
 2. kinect_teleoperate
@@ -55,6 +58,7 @@ NOTE: When teleoperation begins, the H1 will SUDDENLY go from hanging slack to t
 For setup info, please refer to https://support.unitree.com/home/en/Teleoperation/kinect_teleoperate
 
 Here is a video of Kinect teleoperation in action:
+https://drive.google.com/file/d/1x1ipnGIySA6PTLOquYtfVDPJbr0rESzS/view?usp=drive_link
 
 
 Humanoid Robot: Chatbot powered by LLMs
