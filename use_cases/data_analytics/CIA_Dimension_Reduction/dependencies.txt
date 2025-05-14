@@ -1,0 +1,5 @@
+npm install umap-js tsnejs pca-js
+npm install @kitware/vtk.js webpack webpack-cli webpack-dev-server html-webpack-plugin
+npm install file-loader raw-loader url-loader
+npm install -D css-loader style-loader
+

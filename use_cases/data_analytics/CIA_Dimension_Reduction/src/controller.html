@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Point Cloud Visualization with Console Logger</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<div class="color-chart-container">
+  <div class="color-chart">
+      <div class="color-bar" style="background-color: #0000FF;"></div>
+      <div class="color-label">Low</div>
+
+      <div class="color-bar" style="background-color: #00FF00;"></div>
+      <div class="color-label">Moderate</div>
+
+      <div class="color-bar" style="background-color: #FFFF00;"></div>
+      <div class="color-label">Elevated</div>
+
+      <div class="color-bar" style="background-color: #FF7F00;"></div>
+      <div class="color-label">High</div>
+
+      <div class="color-bar" style="background-color: #FF0000;"></div>
+      <div class="color-label">Severe</div>
+  </div>
+</div>
+<body>
+<table>
+  <!-- Added display for Perplexity and Iterations values -->
+  <tr>
+    <td>
+      <div id="perplexityDisplay" style="font-weight: bold; text-align: center;">
+        Perplexity: 30
+      </div>
+      <div id="iterationsDisplay" style="font-weight: bold; text-align: center;">
+        Iterations: 500
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button class='vrbutton' style="width: 100%">Send To VR</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <select class='representations' style="width: 100%">
+        <option value='0'>Points</option>
+        <option value='1'>Wireframe</option>
+        <option value='2' selected>Surface</option>
+      </select>
+    </td>
+  </tr> 
+  <tr>
+    <td>
+      <!--File input for user to upload their file-->
+      <input type="file" id="fileInput" style="width: 100%">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <select class='dimReduction' style="width: 100%">
+        <option value='none'>No Reduction</option>
+        <option value='pca'>PCA</option>
+        <option value='tsne'>t-SNE</option>
+        <option value='umap'>UMAP</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <div>Iterations: <span id="iterationsValue">500</span></div>
+      <input class='iterations' type='range' min='100' max='1000' value='500' style="width: 100%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button class="diffButton" style="width:100%">
+        Show Differences
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button class="resetButton" style="width:100%">
+        Reset View
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <title>Color Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .color-chart-container {
+            position: fixed;
+            bottom: 40;
+            width: 40%;
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .color-chart-title {
+          font-weight: bold;
+          margin-bottom: 8px;
+          width: 100%;
+          text-align: center;
+          font-size: 14px;
+      }
+      
+      .color-chart {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+
+        .color-bar {
+            width: 70px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .color-label {
+            margin-right: 15px;
+            font-weight: bold;
+        }
+    </style>
+  </tr>
+</table>
+<div class="color-chart-container">
+  <div class="color-chart">
+      <div class="color-chart-title">Dimensional Reduction Difference Magnitude</div>
+      <div class="color-bar" style="background-color: #0000FF;"></div>
+      <div class="color-label">Low</div>
+
+      <div class="color-bar" style="background-color: #00FF00;"></div>
+      <div class="color-label">Moderate</div>
+
+      <div class="color-bar" style="background-color: #FFFF00;"></div>
+      <div class="color-label">Elevated</div>
+
+      <div class="color-bar" style="background-color: #FF7F00;"></div>
+      <div class="color-label">High</div>
+
+      <div class="color-bar" style="background-color: #FF0000;"></div>
+      <div class="color-label">Severe</div>
+  </div>
+</div>
