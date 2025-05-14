@@ -7,26 +7,7 @@ The code is split in two directories;
 1. avp_teleoperat-h1
   This is the directory responsible for the Apple Vision Pro hand-arm teleoperation; the relevant code structure is as follows
 
-avp_teleoperate/
-│
-├── act                       [Documents Related to ACT Policy for Imitation Learning]
-│
-├── assets                    [Storage of robot URDF-related files]
-│  
-├── scripts
-│
-├── teleop
-│   ├── image_server/         [Image Transfer Server and Client Code]
-│   │     ├── image_client.py [Client (only used to test whether the image stream service is OK, not used for teleoperation)]
-│   │     ├── image_server.py [Capture images from binocular cameras and send via network (performed on Unitree H1_2)]
-│   │         
-│   ├── robot_control/          [Storage of IK solver, arm and hand control related documents]
-│   │      ├── robot_arm_ik.py  [Inverse kinematics of the arm]  
-│   │      ├── robot_arm.py     [Control dual arm joints and lock the others]
-│   │      ├── robot_hand.py    [Control hand joints]
-│   │
-│   │──teleop_hand_and_arm.py   [Startup execution code for teleoperation]
-|   |——teleop_hand.py           [Can be used for testing the environment configuration]
+![image](https://github.com/user-attachments/assets/71a21b11-6d89-4f8f-8b50-0fd3674d381d)
 
 The code we changed specifically are:
 - teleop_hand_and_arm.py (driver code)
@@ -47,6 +28,7 @@ d. On computer (connected to H1 via Ethernet), execute teleop_hand_and_arm.py (p
 e. When the driver code is running, the Apple Vision Pro user (connected to "_LinksysSetup2d2" wifi api) needs to access the web endpoint at https://192.168.123.222:8012?ws=wss://192.168.123.222:8012 and then we have to click the "Enter VR" option in the bottom of the screen
 
 f. When the AVP user is ready, and when the `Please enter the start signal (enter 's' to start the subsequent program):` prompt appears, click 's'; The teleoperation should begin.
+      To end the teleoperation, simply hit ctrl-C (^C)
 
 For setup info, please refer to https://support.unitree.com/home/en/Teleoperation/avp_teleoperate
 
@@ -55,23 +37,19 @@ For setup info, please refer to https://support.unitree.com/home/en/Teleoperatio
 2. kinect_teleoperate
    This directory is responsible for the arm-only teleoperation via kinect camera; the movement is smoother than AVP teleoperation.
    The code structure is as follows:
-   ├── CMakeLists.txt       [cmake config]
-   ├── lib                  [Backup of relevant library files]
-   └── src
-      ├── CMakeLists.txt
-      ├── extern           [GLFW and other third-party libraries]
-      ├── kinect_teleoperate_robot
-      │   ├── CMakeLists.txt
-      │   ├── include           
-      │   │   ├── jointRetargeting.hpp      [used to retarget skeletal joint angles to motor joints]
-      │   │   ├── math_tool.hpp             [filters and quaternion conversion tools]
-      │   │   └── StartEndPoseDetector.hpp  [wake-up action detection code]
-      │   └── main.cpp                      [main program code]
-      ├── mujoco-3.1.5                      [Mujoco library]
-      ├── sample_helper_includes
-      ├── sample_helper_libs
-      ├── unitree_g1                        [Unitree g1 URDF]
-      └── unitree_h1                        [Unitree h1 URDF]
+   ![image](https://github.com/user-attachments/assets/fd3a302b-14ae-469d-98af-536cacaed50c)
 
+main.cpp (driver code) is the only file of interest; but we did have to change CMakeLists.txt significantly for the lab computer to compile correctly.
+
+To run arm teleoperation:
+a. Make sure the kinect camera is connected to computer (USB)
+
+b. run the 'kinect_teleoperate' in kinect_teleoperate/src/kinect_teleoperate_robot/build
+    To build executable, run "Cmake .. -GNinja", then "ninja" from the build directory.
+
+c. Have someone stand in front of camera; once they are in the ready position (pose matching H1 simulator model), teleoperation will begin
+![image](https://github.com/user-attachments/assets/d52873dc-2c62-4473-bd83-7a08d2b37bfe)
+
+NOTE: When teleoperation begins, the H1 will SUDDENLY go from hanging slack to the ready state and moving with the kinect user. 
 
 Humanoid Robot: Chatbot powered by LLMs
