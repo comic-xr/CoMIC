@@ -1,14 +1,15 @@
-# Measuring RTC Performance – Team Alpha
+# Measuring RTC Performance 
+# QOE Evaluation in Real Time Video Communication
 
-## 📖 About This Project
+##  About This Project
 
-This project focuses on understanding the performance of real-time video calls using Google Meet by simulating browser-to-browser sessions between AWS EC2 instances in different global regions. Our goal is to measure Quality of Experience (QoE) using metrics like bitrate, jitter, frame rate, packet loss, and visual quality (e.g., VMAF, SSIM, PSNR).
+This project focuses on understanding the performance of real-time video calls like using Google Meet by simulating browser-to-browser sessions between AWS EC2 instances in different global regions. Our goal is to measure Quality of Experience (QoE) like visual quality (e.g., noise,VMAF, PSNR, vqm etc.. ).
 
 ---
 
 ## 🌍 Call Routes Tested
 
-We established test calls between AWS EC2 nodes in these regions:
+We establish test calls between AWS EC2 nodes in these regions:
 
 - San Francisco → Seattle
 - Seattle → Fairfax
@@ -18,16 +19,17 @@ We established test calls between AWS EC2 nodes in these regions:
 
 ---
 
-## ✅ What We Did
+## ✅ What We've Done
 
 - Set up EC2 nodes across multiple AWS regions.
 - Conducted browser-to-browser Google Meet calls between nodes.
-- Collected WebRTC statistics using the `getStats()` API during active sessions.
+- Get the call recording
+- Uploaded call recordings to the `videos/dist/vp6` `videos/dist/x264`  directory files  for analysis.
 - Extracted and analyzed video and audio quality metrics from the recordings:
   - VMAF (Video Multi-Method Assessment Fusion)
-  - SSIM (Structural Similarity Index)
   - PSNR (Peak Signal-to-Noise Ratio)
-- Began correlating packet loss and bitrate variation with perceptual quality issues.
+  - packet loss, jitter, RTT
+      etc .. 
 
 ---
 
@@ -35,68 +37,55 @@ We established test calls between AWS EC2 nodes in these regions:
 
 ### Step 1: Launch EC2 Nodes
 
-- Create two AWS EC2 instances in two different regions listed above.
-- Make sure each node has:
+- Create two AWS EC2 instances in different regions (based on the call routes listed above).
+- Ensure each instance has:
   - Python 3 installed
   - Google Chrome or Chromium
   - `chromedriver` in the system PATH
-  - This project’s scripts (cloned or copied)
+  - This project’s scripts
 
-### Step 2: Start a Google Meet Call Between Nodes
+### Step 2: Record a Video Call (Manual Step)
 
-- Manually or programmatically initiate a call between the two EC2 nodes using a shared Google Meet URL.
-- Run `collect_stats.py` on each node to capture WebRTC statistics during the session.
-
-```bash
-python collect_stats.py
-```
-
-This script:
-- Joins the Meet call via headless Chrome
-- Collects `getStats()` data in real time
-- Saves it to a local file
+- Join a Google Meet call between the two EC2 instances and **record the session manually**.
+- Save the recording and **place it into the `videos/dist/vp6` `videos/dist/x264`  folder** within the project directory.
+  - File format: MP4 or compatible
+  - Naming convention: `{location1}-{location2}-timestamp.mp4`
 
 ### Step 3: Extract and Analyze Quality Metrics
 
 Run:
 
-```bash
-python analyze_results.py
-```
 
-Or open the notebook:
 
 ```bash
 jupyter notebook vqm.ipynb
 ```
-
-This step includes:
-- Extracting VMAF, SSIM, PSNR from recorded video streams
-- Comparing objective metrics against network stats for insights
+similarly all the ipynb files
+This step will:
+- Analyze the uploaded recording for noise,VMAF, PSNR, vqm etc ..
 
 ---
 
 ## 📁 Project Files
 
-- `collect_stats.py` – Collects WebRTC stats from a Google Meet call.
-- `analyze_results.py` – Parses the collected data.
-- `vqm.ipynb` – Visual analysis of call quality.
-- `examples/` – Sample results and logs.
+- `collect_stats.py` – Optional: collect WebRTC stats from a call.
+- `vqm.ipynb` – Notebook for visual analysis.
+- `videos/vp6-x264/` – Folder to upload test videos.
+- `examples/` – Sample output logs and visualizations.
 - `README.md` – This guide.
 
 ---
 
 ## 👥 Team Members
 
-- Alice Smith (asmith@gmu.edu)
-- Bob Nguyen (bnguyen@gmu.edu)
+- Nikhita Shreya Bondela
+- Brundha Boora
 
 ---
 
 ## 🧾 Notes
 
-- All tests used real Google Meet sessions.
-- Calls were launched from EC2 instances across different AWS regions.
+- All videos analyzed were recorded from actual Google Meet sessions between AWS EC2 nodes.
 - This project is part of the **CoMIC XR course at GMU**.
 
 Thanks for checking out our work!
