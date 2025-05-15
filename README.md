@@ -1,7 +1,7 @@
 # Measuring RTC Performance 
 # QOE Evaluation in Real Time Video Communication
 
-## 📖 About This Project
+## About This Project
 
 This project focuses on understanding the performance of real-time video calls like using Google Meet by simulating browser-to-browser sessions between AWS EC2 instances in different global regions. Our goal is to measure Quality of Experience (QoE) like visual quality (e.g., VMAF, SSIM, PSNR, vqm etc.. ).
 
