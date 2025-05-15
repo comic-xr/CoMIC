@@ -1,4 +1,4 @@
-# 📡 WebRTC Performance Evaluation with Network Emulation
+# 📡 WebRTC Performance Evaluation with Network Emulation and WhatsApp Video Call Automation.
 
 ## 📁 Project Overview
 
@@ -8,6 +8,17 @@ This project explores **real-time communication (RTC)** performance under both *
 - **Network condition emulation** using `tc`, `pf`, and `dummynet` to introduce bandwidth limits, delay, and packet loss.
 
 ---
+##webrtc-performance & Whatsapp Automation. 
+|
+├── chrome_test/              - Chrome WebRTC test framework
+│   ├── webrtc-controller.js  - Node.js signaling server
+│   ├── index.html            - Frontend video call interface
+│   ├── puppeteer_test.js     - Puppeteer automation script
+│   └── ssl/                  - SSL certs for HTTPS
+|
+├── whatsapp_test/            - WhatsApp automation scripts
+│   ├── automate_call.py      - Python automation script
+│   └── adb_commands.sh       - ADB shell scripts
 
 ## 🔧 Components
 
@@ -63,15 +74,9 @@ bash script.sh
 
 ---
 
-## 📄 Final Report
-
-See [`Final_report.docx`](./Final_report.docx) for full results, graphs, and explanations of each test scenario.
-
----
 
 ## 📌 Notes
 
 - Tested across Linux (server) and macOS (client).
 - WebRTC dumps were parsed manually and programmatically to extract throughput metrics.
 - Emulation scripts compatible with both `tc` and `pfctl/dnctl`.
-
