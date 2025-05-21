@@ -1,3 +1,6 @@
 [submodule "spatial/Performance-Evaluation-of-6DoF-Localization-On-Mobile-Devices/hloc_src"]
 	path = spatial/Performance-Evaluation-of-6DoF-Localization-On-Mobile-Devices/hloc_src
 	url = https://github.com/ViswanathBalusu/Hierarchical-Localization.git
+[submodule "security/FL-XR-User-Auth"]
+	path = security/FL-XR-User-Auth
+	url = git@github.com:4piu/FL-XR-User-Auth.git
