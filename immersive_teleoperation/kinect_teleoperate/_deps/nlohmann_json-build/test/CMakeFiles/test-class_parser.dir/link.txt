@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wl,--as-needed,-rpath-link=/home/cs/h1Dev/kinect_teleoperate -rdynamic "CMakeFiles/test-class_parser.dir/src/unit-class_parser.cpp.o" CMakeFiles/doctest_main.dir/src/unit.cpp.o -o ../../../test-class_parser  -Wl,-rpath,"\$ORIGIN" 

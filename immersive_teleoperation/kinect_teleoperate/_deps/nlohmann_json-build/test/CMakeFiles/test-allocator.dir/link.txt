@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wl,--as-needed,-rpath-link=/home/cs/h1Dev/kinect_teleoperate -rdynamic "CMakeFiles/test-allocator.dir/src/unit-allocator.cpp.o" CMakeFiles/doctest_main.dir/src/unit.cpp.o -o ../../../test-allocator  -Wl,-rpath,"\$ORIGIN" 

@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wl,--as-needed,-rpath-link=/home/cs/h1Dev/kinect_teleoperate -rdynamic "CMakeFiles/test-deserialization.dir/src/unit-deserialization.cpp.o" CMakeFiles/doctest_main.dir/src/unit.cpp.o -o ../../../test-deserialization  -Wl,-rpath,"\$ORIGIN" 

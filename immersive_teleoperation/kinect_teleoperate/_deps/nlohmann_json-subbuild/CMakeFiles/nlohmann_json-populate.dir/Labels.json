@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate-complete.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test.rule"
+		},
+		{
+			"file" : "/home/cs/h1Dev/kinect_teleoperate/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"nlohmann_json-populate"
+		],
+		"name" : "nlohmann_json-populate"
+	}
+}

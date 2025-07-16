@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wl,--as-needed,-rpath-link=/home/cs/h1Dev/kinect_teleoperate -rdynamic "CMakeFiles/test-alt-string.dir/src/unit-alt-string.cpp.o" CMakeFiles/doctest_main.dir/src/unit.cpp.o -o ../../../test-alt-string  -Wl,-rpath,"\$ORIGIN" 

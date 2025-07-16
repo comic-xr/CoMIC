@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wl,--as-needed,-rpath-link=/home/cs/h1Dev/kinect_teleoperate -rdynamic "CMakeFiles/test-iterators1.dir/src/unit-iterators1.cpp.o" CMakeFiles/doctest_main.dir/src/unit.cpp.o -o ../../../test-iterators1  -Wl,-rpath,"\$ORIGIN" 

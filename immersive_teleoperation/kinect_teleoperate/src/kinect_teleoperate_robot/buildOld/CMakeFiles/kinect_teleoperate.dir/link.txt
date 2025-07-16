@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -rdynamic CMakeFiles/kinect_teleoperate.dir/main.o -o kinect_teleoperate   -L/home/cs/h1Dev/kinect_teleoperate/src/kinect_teleoperate_robot/../mujoco-3.1.5/lib  -Wl,-rpath,/home/cs/h1Dev/kinect_teleoperate/src/kinect_teleoperate_robot/../mujoco-3.1.5/lib -lk4a -lk4abt -lk4arecord -lwindow_controller_3d::window_controller_3d -lglfw::glfw -lmujoco 
