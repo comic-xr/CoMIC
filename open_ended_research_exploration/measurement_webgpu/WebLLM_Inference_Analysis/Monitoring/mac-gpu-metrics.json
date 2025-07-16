@@ -1,0 +1,218 @@
+[
+  {
+    "timestamp": "2025-04-17T21:00:20.764Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 20.9453125,
+      "active": 10443.1015625,
+      "inactive": 10440.3203125,
+      "wired": 3005.52734375
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 66.27697139146305,
+      "temperature": 45.20387144181492
+    },
+    "cpu": {
+      "user": 12.63,
+      "system": 21.78,
+      "idle": 65.57
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:25.000Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 18.38671875,
+      "active": 10428.0625,
+      "inactive": 10438.39453125,
+      "wired": 3007.80859375
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 89.04189210250479,
+      "temperature": 45.00472040270127
+    },
+    "cpu": {
+      "user": 8.5,
+      "system": 17.37,
+      "idle": 74.57
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:28.799Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 16.421875,
+      "active": 10426.1484375,
+      "inactive": 10401.91015625,
+      "wired": 3006.234375
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 31.177385718378005,
+      "temperature": 50.21592867665155
+    },
+    "cpu": {
+      "user": 11.94,
+      "system": 26.72,
+      "idle": 61.33
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:32.681Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 14.8046875,
+      "active": 10392.51171875,
+      "inactive": 10105.31640625,
+      "wired": 3006.14453125
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 13.274767105782459,
+      "temperature": 45.57942007038422
+    },
+    "cpu": {
+      "user": 10.19,
+      "system": 23.85,
+      "idle": 65.95
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:36.533Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 17.41796875,
+      "active": 10390.03515625,
+      "inactive": 10035.6875,
+      "wired": 3004.76171875
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 79.08964068216733,
+      "temperature": 49.48204268047167
+    },
+    "cpu": {
+      "user": 14.3,
+      "system": 26.28,
+      "idle": 59.41
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:40.434Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 57.4453125,
+      "active": 10347.75390625,
+      "inactive": 9911.359375,
+      "wired": 2999.21484375
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 56.52666555611703,
+      "temperature": 45.00655570994221
+    },
+    "cpu": {
+      "user": 11.21,
+      "system": 24.36,
+      "idle": 64.42
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:44.302Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 26.4296875,
+      "active": 10352.3515625,
+      "inactive": 9930.26171875,
+      "wired": 2998.86328125
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 72.41099076330184,
+      "temperature": 60.63886748070493
+    },
+    "cpu": {
+      "user": 11.37,
+      "system": 25.51,
+      "idle": 63.11
+    }
+  },
+  {
+    "timestamp": "2025-04-17T21:00:48.770Z",
+    "system": {
+      "model": "iMac",
+      "chip": "Unknown",
+      "totalMemory": "24 GB",
+      "gpuModel": "Radeon Pro 570X",
+      "vram": "Unknown"
+    },
+    "memory": {
+      "free": 14.12890625,
+      "active": 10105.19921875,
+      "inactive": 9950.828125,
+      "wired": 3007.6328125
+    },
+    "gpu": {
+      "model": "Radeon Pro 570X",
+      "vram": "Unknown",
+      "utilization": 35.438301218315196,
+      "temperature": 50.13863521932397
+    },
+    "cpu": {
+      "user": 18.97,
+      "system": 30.52,
+      "idle": 50.5
+    }
+  }
+]

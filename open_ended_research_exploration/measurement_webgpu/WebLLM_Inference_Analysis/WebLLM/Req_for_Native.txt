@@ -1,0 +1,18 @@
+#Requirements for Native LLM 
+torch
+transformers
+accelerate
+tqdm
+huggingface_hub
+bitsandbytes
+
+
+# NOTE: A Hugging Face token is required for model access
+
+#General Command
+python nativeLLM.py
+--models <model_name>
+--json_files <file.json>
+--device <device_type>
+--output_dir <output_dir>
+

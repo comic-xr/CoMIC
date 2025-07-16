@@ -1,0 +1,4134 @@
+{
+  "samples": [
+    {
+      "timestamp": "2025-04-18T01:30:52.559Z",
+      "performance": {
+        "Timestamp": 123350.110478,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 6,
+        "LayoutObjects": 171,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 652,
+        "Resources": 4,
+        "ContextLifecycleStateObservers": 4,
+        "V8PerContextDatas": 4,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 2,
+        "ArrayBufferContents": 0,
+        "LayoutCount": 2,
+        "RecalcStyleCount": 3,
+        "LayoutDuration": 0.002217,
+        "RecalcStyleDuration": 0.008296,
+        "DevToolsCommandDuration": 0.00002,
+        "ScriptDuration": 0.00459,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 0.034409,
+        "TaskOtherDuration": 0.0191,
+        "ThreadTime": 0.03508,
+        "ProcessTime": 0.258656,
+        "JSHeapUsedSize": 1577060,
+        "JSHeapTotalSize": 3035136,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:30:49.297Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 977,
+          "active": 9611.87109375,
+          "inactive": 9502.4765625,
+          "wired": 3118.15234375
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 55.215,
+          "temperature": 56.043
+        },
+        "cpu": {
+          "user": 14.54,
+          "system": 22.25,
+          "idle": 63.19
+        }
+      },
+      "fps": {
+        "fps": 60.50987005203749,
+        "frameCount": 61,
+        "elapsed": 1008.1000000089407
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 218732672,
+        "usedJSHeapSize": 214440824
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Start to fetch params",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "unknown",
+        "timestamp": "2025-04-18T01:30:51.548Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:30:56.377Z",
+      "performance": {
+        "Timestamp": 123354.375072,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 177,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 656,
+        "Resources": 15,
+        "ContextLifecycleStateObservers": 7,
+        "V8PerContextDatas": 4,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 2,
+        "ArrayBufferContents": 36,
+        "LayoutCount": 8,
+        "RecalcStyleCount": 12,
+        "LayoutDuration": 0.003954,
+        "RecalcStyleDuration": 0.008632,
+        "DevToolsCommandDuration": 0.025767,
+        "ScriptDuration": 0.009596,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 0.394567,
+        "TaskOtherDuration": 0.346432,
+        "ThreadTime": 0.385342,
+        "ProcessTime": 0.851907,
+        "JSHeapUsedSize": 6950040,
+        "JSHeapTotalSize": 12132352,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:30:53.561Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 666.47265625,
+          "active": 9683.06640625,
+          "inactive": 9556.3671875,
+          "wired": 3118.4296875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 55.980000000000004,
+          "temperature": 56.196
+        },
+        "cpu": {
+          "user": 11.62,
+          "system": 25.68,
+          "idle": 62.68
+        }
+      },
+      "fps": {
+        "fps": 60.5819843079143,
+        "frameCount": 61,
+        "elapsed": 1006.9000000059605
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 218869109,
+        "usedJSHeapSize": 214674033
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Fetching param cache[4/24]: 126MB fetched. 21% completed, 5 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "unknown",
+        "timestamp": "2025-04-18T01:30:55.367Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:00.177Z",
+      "performance": {
+        "Timestamp": 123358.193271,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 181,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 660,
+        "Resources": 19,
+        "ContextLifecycleStateObservers": 7,
+        "V8PerContextDatas": 4,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 2,
+        "ArrayBufferContents": 36,
+        "LayoutCount": 12,
+        "RecalcStyleCount": 16,
+        "LayoutDuration": 0.004514,
+        "RecalcStyleDuration": 0.00871,
+        "DevToolsCommandDuration": 0.026414,
+        "ScriptDuration": 0.013803,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 0.458059,
+        "TaskOtherDuration": 0.404432,
+        "ThreadTime": 0.493398,
+        "ProcessTime": 1.134078,
+        "JSHeapUsedSize": 7037684,
+        "JSHeapTotalSize": 12132352,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:30:57.379Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 395.03515625,
+          "active": 9684.08984375,
+          "inactive": 9577.484375,
+          "wired": 3116.9296875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 52.14000000000001,
+          "temperature": 55.428
+        },
+        "cpu": {
+          "user": 11.19,
+          "system": 23.56,
+          "idle": 65.24
+        }
+      },
+      "fps": {
+        "fps": 60.509870052931916,
+        "frameCount": 61,
+        "elapsed": 1008.0999999940395
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 218869838,
+        "usedJSHeapSize": 214765118
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Fetching param cache[10/24]: 276MB fetched. 46% completed, 9 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "unknown",
+        "timestamp": "2025-04-18T01:30:59.166Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:03.978Z",
+      "performance": {
+        "Timestamp": 123361.992455,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 187,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 666,
+        "Resources": 25,
+        "ContextLifecycleStateObservers": 7,
+        "V8PerContextDatas": 4,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 2,
+        "ArrayBufferContents": 36,
+        "LayoutCount": 18,
+        "RecalcStyleCount": 22,
+        "LayoutDuration": 0.005308,
+        "RecalcStyleDuration": 0.008846,
+        "DevToolsCommandDuration": 0.026961,
+        "ScriptDuration": 0.017801,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 0.523635,
+        "TaskOtherDuration": 0.464533,
+        "ThreadTime": 0.603081,
+        "ProcessTime": 1.415639,
+        "JSHeapUsedSize": 7133840,
+        "JSHeapTotalSize": 12132352,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:01.178Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 141.93359375,
+          "active": 9676.01171875,
+          "inactive": 9596.140625,
+          "wired": 3116.234375
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 53.654999999999994,
+          "temperature": 55.730999999999995
+        },
+        "cpu": {
+          "user": 11.6,
+          "system": 24.7,
+          "idle": 64.23
+        }
+      },
+      "fps": {
+        "fps": 60.378105513392,
+        "frameCount": 61,
+        "elapsed": 1010.2999999970198
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 218870942,
+        "usedJSHeapSize": 214854978
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Fetching param cache[15/24]: 402MB fetched. 67% completed, 13 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "unknown",
+        "timestamp": "2025-04-18T01:31:02.966Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:07.770Z",
+      "performance": {
+        "Timestamp": 123365.793757,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 193,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 672,
+        "Resources": 31,
+        "ContextLifecycleStateObservers": 7,
+        "V8PerContextDatas": 4,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 2,
+        "ArrayBufferContents": 36,
+        "LayoutCount": 24,
+        "RecalcStyleCount": 28,
+        "LayoutDuration": 0.006101,
+        "RecalcStyleDuration": 0.008966,
+        "DevToolsCommandDuration": 0.027517,
+        "ScriptDuration": 0.021617,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 0.588769,
+        "TaskOtherDuration": 0.524382,
+        "ThreadTime": 0.712034,
+        "ProcessTime": 1.695039,
+        "JSHeapUsedSize": 7223012,
+        "JSHeapTotalSize": 12132352,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:04.980Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 15.65625,
+          "active": 9679.5234375,
+          "inactive": 9618.30859375,
+          "wired": 3115.25
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 51.56999999999999,
+          "temperature": 55.314
+        },
+        "cpu": {
+          "user": 10.63,
+          "system": 23.73,
+          "idle": 65.62
+        }
+      },
+      "fps": {
+        "fps": 43.724535426940584,
+        "frameCount": 44,
+        "elapsed": 1006.2999999970198
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 536202499,
+        "usedJSHeapSize": 534324343
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Fetching param cache[22/24]: 567MB fetched. 95% completed, 16 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "unknown",
+        "timestamp": "2025-04-18T01:31:06.761Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:11.733Z",
+      "performance": {
+        "Timestamp": 123369.584692,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 206,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 685,
+        "Resources": 32,
+        "ContextLifecycleStateObservers": 7,
+        "V8PerContextDatas": 4,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 2,
+        "ArrayBufferContents": 361,
+        "LayoutCount": 37,
+        "RecalcStyleCount": 41,
+        "LayoutDuration": 0.007668,
+        "RecalcStyleDuration": 0.00926,
+        "DevToolsCommandDuration": 0.027998,
+        "ScriptDuration": 0.02463,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 1.825133,
+        "TaskOtherDuration": 1.755391,
+        "ThreadTime": 1.952728,
+        "ProcessTime": 3.148826,
+        "JSHeapUsedSize": 7163648,
+        "JSHeapTotalSize": 9248768,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:08.771Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 60.19140625,
+          "active": 10058,
+          "inactive": 9835.52734375,
+          "wired": 3118.83984375
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 87.72,
+          "temperature": 62.544
+        },
+        "cpu": {
+          "user": 20.17,
+          "system": 38.29,
+          "idle": 41.52
+        }
+      },
+      "fps": {
+        "fps": 49.92012779582423,
+        "frameCount": 50,
+        "elapsed": 1001.5999999940395
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 286768995,
+        "usedJSHeapSize": 277965263
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Loading model from cache[21/24]: 591MB loaded. 100% completed, 17 secs elapsed.",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "unknown",
+        "timestamp": "2025-04-18T01:31:10.728Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.601Z",
+      "performance": {
+        "Timestamp": 123373.548302,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 41,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 654,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 7,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 1,
+        "ArrayBufferContents": 86,
+        "LayoutCount": 54,
+        "RecalcStyleCount": 59,
+        "LayoutDuration": 0.009583,
+        "RecalcStyleDuration": 0.00969,
+        "DevToolsCommandDuration": 0.028578,
+        "ScriptDuration": 0.028216,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 3.686676,
+        "TaskOtherDuration": 3.610423,
+        "ThreadTime": 3.801541,
+        "ProcessTime": 5.295125,
+        "JSHeapUsedSize": 9363860,
+        "JSHeapTotalSize": 19034112,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:12.734Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1230.8125,
+          "active": 9213.1953125,
+          "inactive": 9160.59765625,
+          "wired": 3124.0546875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 93.92999999999999,
+          "temperature": 63.786
+        },
+        "cpu": {
+          "user": 41.43,
+          "system": 21.18,
+          "idle": 37.38
+        }
+      },
+      "fps": {
+        "fps": 60.28859458408744,
+        "frameCount": 61,
+        "elapsed": 1011.7999999970198
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 288115934,
+        "usedJSHeapSize": 279251914
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:31:14.586Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:19.337Z",
+      "performance": {
+        "Timestamp": 123377.416978,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 69,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 680,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 8,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 1,
+        "ArrayBufferContents": 3137,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.037616,
+        "ScriptDuration": 0.067318,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.027305,
+        "TaskOtherDuration": 3.895502,
+        "ThreadTime": 4.170947,
+        "ProcessTime": 5.874698,
+        "JSHeapUsedSize": 11659572,
+        "JSHeapTotalSize": 19558400,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:16.603Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1193.92578125,
+          "active": 9223.75,
+          "inactive": 9172.015625,
+          "wired": 3137.84765625
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 38.34,
+          "temperature": 52.668
+        },
+        "cpu": {
+          "user": 7.81,
+          "system": 17.73,
+          "idle": 74.44
+        }
+      },
+      "fps": {
+        "fps": 60.64221095590236,
+        "frameCount": 61,
+        "elapsed": 1005.8999999910593
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 273404588,
+        "usedJSHeapSize": 271024912
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:31:18.329Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:31:23.087Z",
+      "performance": {
+        "Timestamp": 123381.153187,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.038136,
+        "ScriptDuration": 0.122506,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.128348,
+        "TaskOtherDuration": 3.940837,
+        "ThreadTime": 4.27636,
+        "ProcessTime": 6.03705,
+        "JSHeapUsedSize": 7323100,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:20.340Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1202.06640625,
+          "active": 9219.90234375,
+          "inactive": 9153.08984375,
+          "wired": 3136.703125
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 52.93500000000001,
+          "temperature": 55.587
+        },
+        "cpu": {
+          "user": 14.33,
+          "system": 20.95,
+          "idle": 64.71
+        }
+      },
+      "fps": {
+        "fps": 60.702557468944896,
+        "frameCount": 61,
+        "elapsed": 1004.8999999910593
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272913053,
+        "usedJSHeapSize": 271571265
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:31:22.079Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:32:54.027Z",
+      "performance": {
+        "Timestamp": 123384.902771,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.038758,
+        "ScriptDuration": 0.180838,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.21646,
+        "TaskOtherDuration": 3.969995,
+        "ThreadTime": 4.368989,
+        "ProcessTime": 6.167372,
+        "JSHeapUsedSize": 7623296,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:31:24.089Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1189.63671875,
+          "active": 9227.4921875,
+          "inactive": 9160.2421875,
+          "wired": 3134.83203125
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 48.135000000000005,
+          "temperature": 54.627
+        },
+        "cpu": {
+          "user": 13.12,
+          "system": 18.95,
+          "idle": 67.91
+        }
+      },
+      "fps": {
+        "fps": 0.011352851155037924,
+        "frameCount": 1,
+        "elapsed": 88083.60000000894
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272655005,
+        "usedJSHeapSize": 271762365
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:31:25.908Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:32:57.799Z",
+      "performance": {
+        "Timestamp": 123475.838628,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.040849,
+        "ScriptDuration": 0.192518,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.289081,
+        "TaskOtherDuration": 4.028845,
+        "ThreadTime": 4.400405,
+        "ProcessTime": 6.214985,
+        "JSHeapUsedSize": 7686312,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:32:55.029Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1806.33984375,
+          "active": 8943.03515625,
+          "inactive": 8843.61328125,
+          "wired": 3099.68359375
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 40.199999999999996,
+          "temperature": 53.04
+        },
+        "cpu": {
+          "user": 8.15,
+          "system": 18.63,
+          "idle": 73.2
+        }
+      },
+      "fps": {
+        "fps": 61.20434353405726,
+        "frameCount": 62,
+        "elapsed": 1013
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272655005,
+        "usedJSHeapSize": 271771233
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:32:56.783Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:01.517Z",
+      "performance": {
+        "Timestamp": 123479.610915,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.041481,
+        "ScriptDuration": 0.194167,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.300191,
+        "TaskOtherDuration": 4.037674,
+        "ThreadTime": 4.413321,
+        "ProcessTime": 6.24086,
+        "JSHeapUsedSize": 7695180,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:32:58.802Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1805.984375,
+          "active": 8943.6328125,
+          "inactive": 8842.80078125,
+          "wired": 3099.1015625
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 41.35499999999999,
+          "temperature": 53.271
+        },
+        "cpu": {
+          "user": 9.26,
+          "system": 18.3,
+          "idle": 72.43
+        }
+      },
+      "fps": {
+        "fps": 60.72672971627675,
+        "frameCount": 61,
+        "elapsed": 1004.5
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272655005,
+        "usedJSHeapSize": 271780089
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:00.509Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:05.385Z",
+      "performance": {
+        "Timestamp": 123483.389621,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.042167,
+        "ScriptDuration": 0.195527,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.310176,
+        "TaskOtherDuration": 4.045613,
+        "ThreadTime": 4.424837,
+        "ProcessTime": 6.264119,
+        "JSHeapUsedSize": 7704036,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:02.589Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1796.1875,
+          "active": 8948.33984375,
+          "inactive": 8845.68359375,
+          "wired": 3101.3125
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 42.705,
+          "temperature": 53.541
+        },
+        "cpu": {
+          "user": 9.78,
+          "system": 18.68,
+          "idle": 71.53
+        }
+      },
+      "fps": {
+        "fps": 61.011611887244804,
+        "frameCount": 62,
+        "elapsed": 1016.2000000029802
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272655005,
+        "usedJSHeapSize": 271789065
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:04.365Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:09.120Z",
+      "performance": {
+        "Timestamp": 123487.195708,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.042783,
+        "ScriptDuration": 0.196936,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.32047,
+        "TaskOtherDuration": 4.053882,
+        "ThreadTime": 4.436665,
+        "ProcessTime": 6.287624,
+        "JSHeapUsedSize": 7713012,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:06.387Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1804.6640625,
+          "active": 8946.57421875,
+          "inactive": 8845.24609375,
+          "wired": 3095.26171875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 35.85000000000001,
+          "temperature": 52.17
+        },
+        "cpu": {
+          "user": 7.7,
+          "system": 16.81,
+          "idle": 76.1
+        }
+      },
+      "fps": {
+        "fps": 61.125899635396,
+        "frameCount": 62,
+        "elapsed": 1014.2999999970198
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271797913
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:08.102Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:12.804Z",
+      "performance": {
+        "Timestamp": 123490.930455,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.043373,
+        "ScriptDuration": 0.198131,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.329451,
+        "TaskOtherDuration": 4.061078,
+        "ThreadTime": 4.446984,
+        "ProcessTime": 6.308494,
+        "JSHeapUsedSize": 7721860,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:10.122Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1807.79296875,
+          "active": 8944.86328125,
+          "inactive": 8844.29296875,
+          "wired": 3094.57421875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 36.73499999999999,
+          "temperature": 52.347
+        },
+        "cpu": {
+          "user": 6.91,
+          "system": 17.57,
+          "idle": 75.51
+        }
+      },
+      "fps": {
+        "fps": 60.41398435160934,
+        "frameCount": 61,
+        "elapsed": 1009.7000000029802
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271806733
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:11.791Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:16.506Z",
+      "performance": {
+        "Timestamp": 123494.614927,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.043968,
+        "ScriptDuration": 0.199392,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.339206,
+        "TaskOtherDuration": 4.068977,
+        "ThreadTime": 4.458178,
+        "ProcessTime": 6.330741,
+        "JSHeapUsedSize": 7730680,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:13.807Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1833.296875,
+          "active": 8933.8671875,
+          "inactive": 8832.8984375,
+          "wired": 3091.48046875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 36.614999999999995,
+          "temperature": 52.323
+        },
+        "cpu": {
+          "user": 6.86,
+          "system": 17.54,
+          "idle": 75.59
+        }
+      },
+      "fps": {
+        "fps": 61.24666600737912,
+        "frameCount": 62,
+        "elapsed": 1012.3000000119209
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271815553
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:15.490Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:20.207Z",
+      "performance": {
+        "Timestamp": 123498.315984,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.044579,
+        "ScriptDuration": 0.200682,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.348858,
+        "TaskOtherDuration": 4.076728,
+        "ThreadTime": 4.469347,
+        "ProcessTime": 6.353704,
+        "JSHeapUsedSize": 7739500,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:17.509Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1831.45703125,
+          "active": 8934.33984375,
+          "inactive": 8834.5234375,
+          "wired": 3091.765625
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 38.85000000000001,
+          "temperature": 52.77
+        },
+        "cpu": {
+          "user": 8.13,
+          "system": 17.85,
+          "idle": 74.1
+        }
+      },
+      "fps": {
+        "fps": 61.216429699121484,
+        "frameCount": 62,
+        "elapsed": 1012.8000000119209
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271824385
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:19.190Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:23.907Z",
+      "performance": {
+        "Timestamp": 123502.015146,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.045201,
+        "ScriptDuration": 0.201875,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.357903,
+        "TaskOtherDuration": 4.083958,
+        "ThreadTime": 4.479807,
+        "ProcessTime": 6.375089,
+        "JSHeapUsedSize": 7748332,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:21.208Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1832.78515625,
+          "active": 8934.93359375,
+          "inactive": 8833.484375,
+          "wired": 3089.83203125
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 37.545,
+          "temperature": 52.509
+        },
+        "cpu": {
+          "user": 7.44,
+          "system": 17.58,
+          "idle": 74.97
+        }
+      },
+      "fps": {
+        "fps": 60.43193976673302,
+        "frameCount": 61,
+        "elapsed": 1009.3999999910593
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271833277
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:22.894Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:27.593Z",
+      "performance": {
+        "Timestamp": 123505.71584,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.045786,
+        "ScriptDuration": 0.203164,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.367361,
+        "TaskOtherDuration": 4.091542,
+        "ThreadTime": 4.490634,
+        "ProcessTime": 6.397019,
+        "JSHeapUsedSize": 7757224,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:24.909Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1825.0859375,
+          "active": 8939.29296875,
+          "inactive": 8836.1328125,
+          "wired": 3089.78515625
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 33.85499999999999,
+          "temperature": 51.771
+        },
+        "cpu": {
+          "user": 6.12,
+          "system": 16.43,
+          "idle": 77.43
+        }
+      },
+      "fps": {
+        "fps": 61.34969325189558,
+        "frameCount": 62,
+        "elapsed": 1010.5999999940395
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271842217
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:26.579Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:31.293Z",
+      "performance": {
+        "Timestamp": 123509.401794,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.046351,
+        "ScriptDuration": 0.204351,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.376233,
+        "TaskOtherDuration": 4.098662,
+        "ThreadTime": 4.500875,
+        "ProcessTime": 6.418075,
+        "JSHeapUsedSize": 7766164,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:28.595Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1832.96875,
+          "active": 8935.7734375,
+          "inactive": 8833.734375,
+          "wired": 3088.24609375
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 36.165,
+          "temperature": 52.233
+        },
+        "cpu": {
+          "user": 6.72,
+          "system": 17.37,
+          "idle": 75.89
+        }
+      },
+      "fps": {
+        "fps": 60.86002194969707,
+        "frameCount": 61,
+        "elapsed": 1002.2999999970198
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272704157,
+        "usedJSHeapSize": 271851085
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:30.288Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:34.978Z",
+      "performance": {
+        "Timestamp": 123513.10278,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.046983,
+        "ScriptDuration": 0.205608,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.385856,
+        "TaskOtherDuration": 4.106396,
+        "ThreadTime": 4.511894,
+        "ProcessTime": 6.439788,
+        "JSHeapUsedSize": 7775032,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:32.296Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1846.37109375,
+          "active": 8929.36328125,
+          "inactive": 8826.40625,
+          "wired": 3087.44140625
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 36.31499999999999,
+          "temperature": 52.263
+        },
+        "cpu": {
+          "user": 6.59,
+          "system": 17.61,
+          "idle": 75.79
+        }
+      },
+      "fps": {
+        "fps": 60.53989678479639,
+        "frameCount": 61,
+        "elapsed": 1007.5999999940395
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272913053,
+        "usedJSHeapSize": 271859869
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:33.967Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:38.663Z",
+      "performance": {
+        "Timestamp": 123516.786009,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.047606,
+        "ScriptDuration": 0.206818,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.395081,
+        "TaskOtherDuration": 4.113788,
+        "ThreadTime": 4.522474,
+        "ProcessTime": 6.460959,
+        "JSHeapUsedSize": 6977876,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:35.979Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1845.32421875,
+          "active": 8929.70703125,
+          "inactive": 8828.13671875,
+          "wired": 3087.38671875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 32.77499999999999,
+          "temperature": 51.555
+        },
+        "cpu": {
+          "user": 5.68,
+          "system": 16.15,
+          "idle": 78.15
+        }
+      },
+      "fps": {
+        "fps": 61.083743842364534,
+        "frameCount": 62,
+        "elapsed": 1015
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272138909,
+        "usedJSHeapSize": 271062737
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:37.644Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:42.347Z",
+      "performance": {
+        "Timestamp": 123520.47084,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.048243,
+        "ScriptDuration": 0.20806,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.404449,
+        "TaskOtherDuration": 4.121277,
+        "ThreadTime": 4.53335,
+        "ProcessTime": 6.483069,
+        "JSHeapUsedSize": 6986684,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:39.664Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1846.96484375,
+          "active": 8929.4296875,
+          "inactive": 8825.9609375,
+          "wired": 3087.07421875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 38.10000000000001,
+          "temperature": 52.620000000000005
+        },
+        "cpu": {
+          "user": 8.7,
+          "system": 17.86,
+          "idle": 74.6
+        }
+      },
+      "fps": {
+        "fps": 60.63618290258449,
+        "frameCount": 61,
+        "elapsed": 1006
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272138909,
+        "usedJSHeapSize": 271071413
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:41.337Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:46.014Z",
+      "performance": {
+        "Timestamp": 123524.155568,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.048944,
+        "ScriptDuration": 0.209267,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.413862,
+        "TaskOtherDuration": 4.128782,
+        "ThreadTime": 4.544184,
+        "ProcessTime": 6.504636,
+        "JSHeapUsedSize": 6995360,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:43.349Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1845.8671875,
+          "active": 8929.80078125,
+          "inactive": 8826.79296875,
+          "wired": 3087.109375
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 36.345000000000006,
+          "temperature": 52.269
+        },
+        "cpu": {
+          "user": 6.74,
+          "system": 17.48,
+          "idle": 75.77
+        }
+      },
+      "fps": {
+        "fps": 60.96342194719506,
+        "frameCount": 61,
+        "elapsed": 1000.5999999940395
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272138909,
+        "usedJSHeapSize": 271080317
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:45.010Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    },
+    {
+      "timestamp": "2025-04-18T01:33:49.716Z",
+      "performance": {
+        "Timestamp": 123527.823122,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 1,
+        "Frames": 1,
+        "JSEventListeners": 7,
+        "LayoutObjects": 49,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 653,
+        "Resources": 2,
+        "ContextLifecycleStateObservers": 5,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 0,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 1,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 7,
+        "LayoutCount": 104,
+        "RecalcStyleCount": 117,
+        "LayoutDuration": 0.015162,
+        "RecalcStyleDuration": 0.011521,
+        "DevToolsCommandDuration": 0.049568,
+        "ScriptDuration": 0.21049,
+        "V8CompileDuration": 0.000186,
+        "TaskDuration": 4.423061,
+        "TaskOtherDuration": 4.136134,
+        "ThreadTime": 4.554741,
+        "ProcessTime": 6.526126,
+        "JSHeapUsedSize": 7004264,
+        "JSHeapTotalSize": 8986624,
+        "FirstMeaningfulPaint": 123349.628589,
+        "DomContentLoaded": 123349.588741,
+        "NavigationStart": 123349.261724
+      },
+      "system": {
+        "timestamp": "2025-04-18T01:33:47.017Z",
+        "system": {
+          "model": "iMac",
+          "chip": "Unknown",
+          "totalMemory": "24 GB",
+          "gpuModel": "Radeon Pro 570X",
+          "vram": "Unknown"
+        },
+        "memory": {
+          "free": 1846.21484375,
+          "active": 8929.87109375,
+          "inactive": 8826.265625,
+          "wired": 3087.046875
+        },
+        "gpu": {
+          "model": "Radeon Pro 570X",
+          "vram": "Unknown",
+          "utilization": 33.01500000000001,
+          "temperature": 51.603
+        },
+        "cpu": {
+          "user": 5.86,
+          "system": 16.13,
+          "idle": 77.99
+        }
+      },
+      "fps": {
+        "fps": 60.50987005203749,
+        "frameCount": 61,
+        "elapsed": 1008.1000000089407
+      },
+      "memory": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 272138909,
+        "usedJSHeapSize": 271089077
+      },
+      "webllm": {
+        "elements": {
+          "downloadStatus": "Finish loading on WebGPU - amd",
+          "promptInput": "",
+          "outputArea": "",
+          "inferenceStatus": ""
+        },
+        "state": "model_loaded",
+        "timestamp": "2025-04-18T01:33:48.704Z"
+      },
+      "webgpu": {
+        "adapter": "Unknown",
+        "features": [],
+        "initialized": true
+      }
+    }
+  ],
+  "events": [
+    {
+      "timestamp": "2025-04-18T01:30:48.326Z",
+      "name": "Navigation started"
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.294Z",
+      "name": "Page loaded"
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.295Z",
+      "name": "Phase started: overall"
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.299Z",
+      "name": "Phase started: model_selection"
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.403Z",
+      "name": "Available models",
+      "models": [
+        "Llama-3.2-1B-Instruct-q4f32_1-MLC",
+        "Llama-3.2-1B-Instruct-q4f16_1-MLC",
+        "Llama-3.2-1B-Instruct-q0f32-MLC",
+        "Llama-3.2-1B-Instruct-q0f16-MLC",
+        "Llama-3.2-3B-Instruct-q4f32_1-MLC",
+        "Llama-3.2-3B-Instruct-q4f16_1-MLC",
+        "Llama-3.1-8B-Instruct-q4f32_1-MLC-1k",
+        "Llama-3.1-8B-Instruct-q4f16_1-MLC-1k",
+        "Llama-3.1-8B-Instruct-q4f32_1-MLC",
+        "Llama-3.1-8B-Instruct-q4f16_1-MLC",
+        "DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC",
+        "DeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLC",
+        "DeepSeek-R1-Distill-Llama-8B-q4f32_1-MLC",
+        "DeepSeek-R1-Distill-Llama-8B-q4f16_1-MLC",
+        "Hermes-2-Theta-Llama-3-8B-q4f16_1-MLC",
+        "Hermes-2-Theta-Llama-3-8B-q4f32_1-MLC",
+        "Hermes-2-Pro-Llama-3-8B-q4f16_1-MLC",
+        "Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC",
+        "Hermes-3-Llama-3.2-3B-q4f32_1-MLC",
+        "Hermes-3-Llama-3.2-3B-q4f16_1-MLC",
+        "Hermes-3-Llama-3.1-8B-q4f32_1-MLC",
+        "Hermes-3-Llama-3.1-8B-q4f16_1-MLC",
+        "Hermes-2-Pro-Mistral-7B-q4f16_1-MLC",
+        "Phi-3.5-mini-instruct-q4f16_1-MLC",
+        "Phi-3.5-mini-instruct-q4f32_1-MLC",
+        "Phi-3.5-mini-instruct-q4f16_1-MLC-1k",
+        "Phi-3.5-mini-instruct-q4f32_1-MLC-1k",
+        "Phi-3.5-vision-instruct-q4f16_1-MLC",
+        "Phi-3.5-vision-instruct-q4f32_1-MLC",
+        "Mistral-7B-Instruct-v0.3-q4f16_1-MLC",
+        "Mistral-7B-Instruct-v0.3-q4f32_1-MLC",
+        "Mistral-7B-Instruct-v0.2-q4f16_1-MLC",
+        "OpenHermes-2.5-Mistral-7B-q4f16_1-MLC",
+        "NeuralHermes-2.5-Mistral-7B-q4f16_1-MLC",
+        "WizardMath-7B-V1.1-q4f16_1-MLC",
+        "SmolLM2-1.7B-Instruct-q4f16_1-MLC",
+        "SmolLM2-1.7B-Instruct-q4f32_1-MLC",
+        "SmolLM2-360M-Instruct-q0f16-MLC",
+        "SmolLM2-360M-Instruct-q0f32-MLC",
+        "SmolLM2-360M-Instruct-q4f16_1-MLC",
+        "SmolLM2-360M-Instruct-q4f32_1-MLC",
+        "SmolLM2-135M-Instruct-q0f16-MLC",
+        "SmolLM2-135M-Instruct-q0f32-MLC",
+        "gemma-2-2b-it-q4f16_1-MLC",
+        "gemma-2-2b-it-q4f32_1-MLC",
+        "gemma-2-2b-it-q4f16_1-MLC-1k",
+        "gemma-2-2b-it-q4f32_1-MLC-1k",
+        "gemma-2-9b-it-q4f16_1-MLC",
+        "gemma-2-9b-it-q4f32_1-MLC",
+        "gemma-2-2b-jpn-it-q4f16_1-MLC",
+        "gemma-2-2b-jpn-it-q4f32_1-MLC",
+        "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-0.5B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-0.5B-Instruct-q0f16-MLC",
+        "Qwen2.5-0.5B-Instruct-q0f32-MLC",
+        "Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-1.5B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-3B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-3B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-7B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-7B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-Coder-0.5B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-Coder-0.5B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-Coder-0.5B-Instruct-q0f16-MLC",
+        "Qwen2.5-Coder-0.5B-Instruct-q0f32-MLC",
+        "Qwen2.5-Coder-1.5B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-Coder-1.5B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-Coder-3B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-Coder-7B-Instruct-q4f32_1-MLC",
+        "Qwen2.5-Math-1.5B-Instruct-q4f16_1-MLC",
+        "Qwen2.5-Math-1.5B-Instruct-q4f32_1-MLC",
+        "stablelm-2-zephyr-1_6b-q4f16_1-MLC",
+        "stablelm-2-zephyr-1_6b-q4f32_1-MLC",
+        "stablelm-2-zephyr-1_6b-q4f16_1-MLC-1k",
+        "stablelm-2-zephyr-1_6b-q4f32_1-MLC-1k",
+        "RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC",
+        "RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC",
+        "RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1k",
+        "RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1k",
+        "TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC",
+        "TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC",
+        "TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1k",
+        "TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1k",
+        "Llama-3.1-70B-Instruct-q3f16_1-MLC",
+        "Qwen2-0.5B-Instruct-q4f16_1-MLC",
+        "Qwen2-0.5B-Instruct-q0f16-MLC",
+        "Qwen2-0.5B-Instruct-q0f32-MLC",
+        "Qwen2-1.5B-Instruct-q4f16_1-MLC",
+        "Qwen2-1.5B-Instruct-q4f32_1-MLC",
+        "Qwen2-7B-Instruct-q4f16_1-MLC",
+        "Qwen2-7B-Instruct-q4f32_1-MLC",
+        "Qwen2-Math-1.5B-Instruct-q4f16_1-MLC",
+        "Qwen2-Math-1.5B-Instruct-q4f32_1-MLC",
+        "Qwen2-Math-7B-Instruct-q4f16_1-MLC",
+        "Qwen2-Math-7B-Instruct-q4f32_1-MLC",
+        "Llama-3-8B-Instruct-q4f32_1-MLC-1k",
+        "Llama-3-8B-Instruct-q4f16_1-MLC-1k",
+        "Llama-3-8B-Instruct-q4f32_1-MLC",
+        "Llama-3-8B-Instruct-q4f16_1-MLC",
+        "Llama-3-70B-Instruct-q3f16_1-MLC",
+        "Phi-3-mini-4k-instruct-q4f16_1-MLC",
+        "Phi-3-mini-4k-instruct-q4f32_1-MLC",
+        "Phi-3-mini-4k-instruct-q4f16_1-MLC-1k",
+        "Phi-3-mini-4k-instruct-q4f32_1-MLC-1k",
+        "Llama-2-7b-chat-hf-q4f32_1-MLC-1k",
+        "Llama-2-7b-chat-hf-q4f16_1-MLC-1k",
+        "Llama-2-7b-chat-hf-q4f32_1-MLC",
+        "Llama-2-7b-chat-hf-q4f16_1-MLC",
+        "Llama-2-13b-chat-hf-q4f16_1-MLC",
+        "gemma-2b-it-q4f16_1-MLC",
+        "gemma-2b-it-q4f32_1-MLC",
+        "gemma-2b-it-q4f16_1-MLC-1k",
+        "gemma-2b-it-q4f32_1-MLC-1k",
+        "phi-2-q4f16_1-MLC",
+        "phi-2-q4f32_1-MLC",
+        "phi-2-q4f16_1-MLC-1k",
+        "phi-2-q4f32_1-MLC-1k",
+        "phi-1_5-q4f16_1-MLC",
+        "phi-1_5-q4f32_1-MLC",
+        "phi-1_5-q4f16_1-MLC-1k",
+        "phi-1_5-q4f32_1-MLC-1k",
+        "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC",
+        "TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC",
+        "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1k",
+        "TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1k",
+        "snowflake-arctic-embed-m-q0f32-MLC-b32",
+        "snowflake-arctic-embed-m-q0f32-MLC-b4",
+        "snowflake-arctic-embed-s-q0f32-MLC-b32",
+        "snowflake-arctic-embed-s-q0f32-MLC-b4"
+      ]
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.409Z",
+      "name": "Model selected",
+      "model": "TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC"
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.409Z",
+      "name": "Phase completed: model_selection",
+      "durationMs": 110
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.411Z",
+      "name": "Phase started: model_download"
+    },
+    {
+      "timestamp": "2025-04-18T01:30:49.433Z",
+      "name": "Download button clicked"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.348Z",
+      "name": "Model loaded successfully"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.348Z",
+      "name": "Phase completed: model_download",
+      "durationMs": 24937
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.348Z",
+      "name": "Phase started: inference"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.420Z",
+      "name": "Test prompt entered",
+      "prompt": "What is the name of our galaxy?"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.421Z",
+      "name": "Submit button found",
+      "buttonId": "send"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.463Z",
+      "name": "Submit button clicked"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.463Z",
+      "name": "Waiting for generation to start"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.477Z",
+      "name": "Generation started",
+      "status": "Generating"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:14.479Z",
+      "name": "Waiting for output to stabilize"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.084Z",
+      "name": "Output increasing",
+      "currentLength": 25,
+      "delta": 16
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.388Z",
+      "name": "Output increasing",
+      "currentLength": 40,
+      "delta": 15
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.389Z",
+      "name": "chat-stats element is now visible"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.889Z",
+      "name": "Extracting performance statistics"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.892Z",
+      "name": "Performance metrics found",
+      "rawStats": "Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec\nTotal Inference Time: 909.50 ms\nTime to First Token: 317.50 ms \n    Simple Chatbot\n    \n    \n    \n  \n\n  \n    Step 1: Initialize WebLLM and Download Model\n    \n      Llama-3.2-1B-Instruct-q4f32_1-MLCLlama-3.2-1B-Instruct-q4f16_1-MLCLlama-3.2-1B-Instruct-q0f32-MLCLlama-3.2-1B-Instruct-q0f16-MLCLlama-3.2-3B-Instruct-q4f32_1-MLCLlama-3.2-3B-Instruct-q4f16_1-MLCLlama-3.1-8B-Instruct-q4f32_1-MLC-1kLlama-3.1-8B-Instruct-q4f16_1-MLC-1kLlama-3.1-8B-Instruct-q4f32_1-MLCLlama-3.1-8B-Instruct-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f32_1-MLCHermes-2-Pro-Llama-3-8B-q4f16_1-MLCHermes-2-Pro-Llama-3-8B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f16_1-MLCHermes-3-Llama-3.1-8B-q4f32_1-MLCHermes-3-Llama-3.1-8B-q4f16_1-MLCHermes-2-Pro-Mistral-7B-q4f16_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLCPhi-3.5-mini-instruct-q4f32_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLC-1kPhi-3.5-mini-instruct-q4f32_1-MLC-1kPhi-3.5-vision-instruct-q4f16_1-MLCPhi-3.5-vision-instruct-q4f32_1-MLCMistral-7B-Instruct-v0.3-q4f16_1-MLCMistral-7B-Instruct-v0.3-q4f32_1-MLCMistral-7B-Instruct-v0.2-q4f16_1-MLCOpenHermes-2.5-Mistral-7B-q4f16_1-MLCNeuralHermes-2.5-Mistral-7B-q4f16_1-MLCWizardMath-7B-V1.1-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f32_1-MLCSmolLM2-360M-Instruct-q0f16-MLCSmolLM2-360M-Instruct-q0f32-MLCSmolLM2-360M-Instruct-q4f16_1-MLCSmolLM2-360M-Instruct-q4f32_1-MLCSmolLM2-135M-Instruct-q0f16-MLCSmolLM2-135M-Instruct-q0f32-MLCgemma-2-2b-it-q4f16_1-MLCgemma-2-2b-it-q4f32_1-MLCgemma-2-2b-it-q4f16_1-MLC-1kgemma-2-2b-it-q4f32_1-MLC-1kgemma-2-9b-it-q4f16_1-MLCgemma-2-9b-it-q4f32_1-MLCgemma-2-2b-jpn-it-q4f16_1-MLCgemma-2-2b-jpn-it-q4f32_1-MLCQwen2.5-0.5B-Instruct-q4f16_1-MLCQwen2.5-0.5B-Instruct-q4f32_1-MLCQwen2.5-0.5B-Instruct-q0f16-MLCQwen2.5-0.5B-Instruct-q0f32-MLCQwen2.5-1.5B-Instruct-q4f16_1-MLCQwen2.5-1.5B-Instruct-q4f32_1-MLCQwen2.5-3B-Instruct-q4f16_1-MLCQwen2.5-3B-Instruct-q4f32_1-MLCQwen2.5-7B-Instruct-q4f16_1-MLCQwen2.5-7B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q0f16-MLCQwen2.5-Coder-0.5B-Instruct-q0f32-MLCQwen2.5-Coder-1.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-1.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-3B-Instruct-q4f16_1-MLCQwen2.5-Coder-3B-Instruct-q4f32_1-MLCQwen2.5-Coder-7B-Instruct-q4f16_1-MLCQwen2.5-Coder-7B-Instruct-q4f32_1-MLCQwen2.5-Math-1.5B-Instruct-q4f16_1-MLCQwen2.5-Math-1.5B-Instruct-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLCstablelm-2-zephyr-1_6b-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLC-1kstablelm-2-zephyr-1_6b-q4f32_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1kLlama-3.1-70B-Instruct-q3f16_1-MLCQwen2-0.5B-Instruct-q4f16_1-MLCQwen2-0.5B-Instruct-q0f16-MLCQwen2-0.5B-Instruct-q0f32-MLCQwen2-1.5B-Instruct-q4f16_1-MLCQwen2-1.5B-Instruct-q4f32_1-MLCQwen2-7B-Instruct-q4f16_1-MLCQwen2-7B-Instruct-q4f32_1-MLCQwen2-Math-1.5B-Instruct-q4f16_1-MLCQwen2-Math-1.5B-Instruct-q4f32_1-MLCQwen2-Math-7B-Instruct-q4f16_1-MLCQwen2-Math-7B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f32_1-MLC-1kLlama-3-8B-Instruct-q4f16_1-MLC-1kLlama-3-8B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f16_1-MLCLlama-3-70B-Instruct-q3f16_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLCPhi-3-mini-4k-instruct-q4f32_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLC-1kPhi-3-mini-4k-instruct-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f16_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLCLlama-2-7b-chat-hf-q4f16_1-MLCLlama-2-13b-chat-hf-q4f16_1-MLCgemma-2b-it-q4f16_1-MLCgemma-2b-it-q4f32_1-MLCgemma-2b-it-q4f16_1-MLC-1kgemma-2b-it-q4f32_1-MLC-1kphi-2-q4f16_1-MLCphi-2-q4f32_1-MLCphi-2-q4f16_1-MLC-1kphi-2-q4f32_1-MLC-1kphi-1_5-q4f16_1-MLCphi-1_5-q4f32_1-MLCphi-1_5-q4f16_1-MLC-1kphi-1_5-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1ksnowflake-arctic-embed-m-q0f32-MLC-b32snowflake-arctic-embed-m-q0f32-MLC-b4snowflake-arctic-embed-s-q0f32-MLC-b32snowflake-arctic-embed-s-q0f32-MLC-b4\n      Download\n    \n    Finish loading on WebGPU - amd\n\n    \n\n    \n      Warm-up Time:\n       ms\n    \n\n    Step 2: Upload Data File and Process\n    \n      \n      Start Processing\n    \n\n    \n    \n      Top 10 Prompts Inference Times:\n      \n    \n\n    \n        \n    \n\n    \n    \n    Total initialization time: 24906.10 ms\n\n    \n   \n\n    Download Output JSON\n    \n\n\n    Step 3: Chat\n    \n      What is the name of our galaxy?The name of our galaxy is the Milky Way.\n      Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec\nTotal Inference Time: 909.50 ms\nTime to First Token: 317.50 ms\n      \n        \n        Send\n      \n    \n\n    \n  \n\n\t// <![CDATA[  <-- For SVG support\n\tif ('WebSocket' in window) {\n\t\t(function () {\n\t\t\tfunction refreshCSS() {\n\t\t\t\tvar sheets = [].slice.call(document.getElementsByTagName(\"link\"));\n\t\t\t\tvar head = document.getElementsByTagName(\"head\")[0];\n\t\t\t\tfor (var i = 0; i < sheets.length; ++i) {\n\t\t\t\t\tvar elem = sheets[i];\n\t\t\t\t\tvar parent = elem.parentElement || head;\n\t\t\t\t\tparent.removeChild(elem);\n\t\t\t\t\tvar rel = elem.rel;\n\t\t\t\t\tif (elem.href && typeof rel != \"string\" || rel.length == 0 || rel.toLowerCase() == \"stylesheet\") {\n\t\t\t\t\t\tvar url = elem.href.replace(/(&|\\?)_cacheOverride=\\d+/, '');\n\t\t\t\t\t\telem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());\n\t\t\t\t\t}\n\t\t\t\t\tparent.appendChild(elem);\n\t\t\t\t}\n\t\t\t}\n\t\t\tvar protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';\n\t\t\tvar address = protocol + window.location.host + window.location.pathname + '/ws';\n\t\t\tvar socket = new WebSocket(address);\n\t\t\tsocket.onmessage = function (msg) {\n\t\t\t\tif (msg.data == 'reload') window.location.reload();\n\t\t\t\telse if (msg.data == 'refreshcss') refreshCSS();\n\t\t\t};\n\t\t\tif (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {\n\t\t\t\tconsole.log('Live reload enabled.');\n\t\t\t\tsessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);\n\t\t\t}\n\t\t})();\n\t}\n\telse {\n\t\tconsole.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');\n\t}\n\t// ]]>\n\n\n \n    Step 1: Initialize WebLLM and Download Model\n    \n      Llama-3.2-1B-Instruct-q4f32_1-MLCLlama-3.2-1B-Instruct-q4f16_1-MLCLlama-3.2-1B-Instruct-q0f32-MLCLlama-3.2-1B-Instruct-q0f16-MLCLlama-3.2-3B-Instruct-q4f32_1-MLCLlama-3.2-3B-Instruct-q4f16_1-MLCLlama-3.1-8B-Instruct-q4f32_1-MLC-1kLlama-3.1-8B-Instruct-q4f16_1-MLC-1kLlama-3.1-8B-Instruct-q4f32_1-MLCLlama-3.1-8B-Instruct-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f32_1-MLCHermes-2-Pro-Llama-3-8B-q4f16_1-MLCHermes-2-Pro-Llama-3-8B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f16_1-MLCHermes-3-Llama-3.1-8B-q4f32_1-MLCHermes-3-Llama-3.1-8B-q4f16_1-MLCHermes-2-Pro-Mistral-7B-q4f16_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLCPhi-3.5-mini-instruct-q4f32_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLC-1kPhi-3.5-mini-instruct-q4f32_1-MLC-1kPhi-3.5-vision-instruct-q4f16_1-MLCPhi-3.5-vision-instruct-q4f32_1-MLCMistral-7B-Instruct-v0.3-q4f16_1-MLCMistral-7B-Instruct-v0.3-q4f32_1-MLCMistral-7B-Instruct-v0.2-q4f16_1-MLCOpenHermes-2.5-Mistral-7B-q4f16_1-MLCNeuralHermes-2.5-Mistral-7B-q4f16_1-MLCWizardMath-7B-V1.1-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f32_1-MLCSmolLM2-360M-Instruct-q0f16-MLCSmolLM2-360M-Instruct-q0f32-MLCSmolLM2-360M-Instruct-q4f16_1-MLCSmolLM2-360M-Instruct-q4f32_1-MLCSmolLM2-135M-Instruct-q0f16-MLCSmolLM2-135M-Instruct-q0f32-MLCgemma-2-2b-it-q4f16_1-MLCgemma-2-2b-it-q4f32_1-MLCgemma-2-2b-it-q4f16_1-MLC-1kgemma-2-2b-it-q4f32_1-MLC-1kgemma-2-9b-it-q4f16_1-MLCgemma-2-9b-it-q4f32_1-MLCgemma-2-2b-jpn-it-q4f16_1-MLCgemma-2-2b-jpn-it-q4f32_1-MLCQwen2.5-0.5B-Instruct-q4f16_1-MLCQwen2.5-0.5B-Instruct-q4f32_1-MLCQwen2.5-0.5B-Instruct-q0f16-MLCQwen2.5-0.5B-Instruct-q0f32-MLCQwen2.5-1.5B-Instruct-q4f16_1-MLCQwen2.5-1.5B-Instruct-q4f32_1-MLCQwen2.5-3B-Instruct-q4f16_1-MLCQwen2.5-3B-Instruct-q4f32_1-MLCQwen2.5-7B-Instruct-q4f16_1-MLCQwen2.5-7B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q0f16-MLCQwen2.5-Coder-0.5B-Instruct-q0f32-MLCQwen2.5-Coder-1.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-1.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-3B-Instruct-q4f16_1-MLCQwen2.5-Coder-3B-Instruct-q4f32_1-MLCQwen2.5-Coder-7B-Instruct-q4f16_1-MLCQwen2.5-Coder-7B-Instruct-q4f32_1-MLCQwen2.5-Math-1.5B-Instruct-q4f16_1-MLCQwen2.5-Math-1.5B-Instruct-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLCstablelm-2-zephyr-1_6b-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLC-1kstablelm-2-zephyr-1_6b-q4f32_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1kLlama-3.1-70B-Instruct-q3f16_1-MLCQwen2-0.5B-Instruct-q4f16_1-MLCQwen2-0.5B-Instruct-q0f16-MLCQwen2-0.5B-Instruct-q0f32-MLCQwen2-1.5B-Instruct-q4f16_1-MLCQwen2-1.5B-Instruct-q4f32_1-MLCQwen2-7B-Instruct-q4f16_1-MLCQwen2-7B-Instruct-q4f32_1-MLCQwen2-Math-1.5B-Instruct-q4f16_1-MLCQwen2-Math-1.5B-Instruct-q4f32_1-MLCQwen2-Math-7B-Instruct-q4f16_1-MLCQwen2-Math-7B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f32_1-MLC-1kLlama-3-8B-Instruct-q4f16_1-MLC-1kLlama-3-8B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f16_1-MLCLlama-3-70B-Instruct-q3f16_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLCPhi-3-mini-4k-instruct-q4f32_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLC-1kPhi-3-mini-4k-instruct-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f16_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLCLlama-2-7b-chat-hf-q4f16_1-MLCLlama-2-13b-chat-hf-q4f16_1-MLCgemma-2b-it-q4f16_1-MLCgemma-2b-it-q4f32_1-MLCgemma-2b-it-q4f16_1-MLC-1kgemma-2b-it-q4f32_1-MLC-1kphi-2-q4f16_1-MLCphi-2-q4f32_1-MLCphi-2-q4f16_1-MLC-1kphi-2-q4f32_1-MLC-1kphi-1_5-q4f16_1-MLCphi-1_5-q4f32_1-MLCphi-1_5-q4f16_1-MLC-1kphi-1_5-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1ksnowflake-arctic-embed-m-q0f32-MLC-b32snowflake-arctic-embed-m-q0f32-MLC-b4snowflake-arctic-embed-s-q0f32-MLC-b32snowflake-arctic-embed-s-q0f32-MLC-b4\n      Download\n    \n    Finish loading on WebGPU - amd\n\n    \n\n    \n      Warm-up Time:\n       ms\n    \n\n    Step 2: Upload Data File and Process\n    \n      \n      Start Processing\n    \n\n    \n    \n      Top 10 Prompts Inference Times:\n      \n    \n\n    \n        \n    \n\n    \n    \n    Total initialization time: 24906.10 ms\n\n    \n   \n\n    Download Output JSON\n    \n\n\n    Step 3: Chat\n    \n      What is the name of our galaxy?The name of our galaxy is the Milky Way.\n      Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec\nTotal Inference Time: 909.50 ms\nTime to First Token: 317.50 ms\n      \n        \n        Send\n      \n    \n\n    \n  \n\n\t// <![CDATA[  <-- For SVG support\n\tif ('WebSocket' in window) {\n\t\t(function () {\n\t\t\tfunction refreshCSS() {\n\t\t\t\tvar sheets = [].slice.call(document.getElementsByTagName(\"link\"));\n\t\t\t\tvar head = document.getElementsByTagName(\"head\")[0];\n\t\t\t\tfor (var i = 0; i < sheets.length; ++i) {\n\t\t\t\t\tvar elem = sheets[i];\n\t\t\t\t\tvar parent = elem.parentElement || head;\n\t\t\t\t\tparent.removeChild(elem);\n\t\t\t\t\tvar rel = elem.rel;\n\t\t\t\t\tif (elem.href && typeof rel != \"string\" || rel.length == 0 || rel.toLowerCase() == \"stylesheet\") {\n\t\t\t\t\t\tvar url = elem.href.replace(/(&|\\?)_cacheOverride=\\d+/, '');\n\t\t\t\t\t\telem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());\n\t\t\t\t\t}\n\t\t\t\t\tparent.appendChild(elem);\n\t\t\t\t}\n\t\t\t}\n\t\t\tvar protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';\n\t\t\tvar address = protocol + window.location.host + window.location.pathname + '/ws';\n\t\t\tvar socket = new WebSocket(address);\n\t\t\tsocket.onmessage = function (msg) {\n\t\t\t\tif (msg.data == 'reload') window.location.reload();\n\t\t\t\telse if (msg.data == 'refreshcss') refreshCSS();\n\t\t\t};\n\t\t\tif (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {\n\t\t\t\tconsole.log('Live reload enabled.');\n\t\t\t\tsessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);\n\t\t\t}\n\t\t})();\n\t}\n\telse {\n\t\tconsole.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');\n\t}\n\t// ]]>\n\n\n \n      Top 10 Prompts Inference Times:\n      \n     Top 10 Prompts Inference Times: \n      What is the name of our galaxy?The name of our galaxy is the Milky Way.\n      Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec\nTotal Inference Time: 909.50 ms\nTime to First Token: 317.50 ms\n      \n        \n        Send\n      \n     Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec\nTotal Inference Time: 909.50 ms\nTime to First Token: 317.50 ms"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.892Z",
+      "name": "Performance metrics",
+      "prefillSpeed": "127.19 tokens/sec",
+      "decodingSpeed": "20.42 tokens/sec",
+      "inferenceTime": "909.50 ms",
+      "timeToFirstToken": "317.50 ms"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.893Z",
+      "name": "Output captured",
+      "outputLength": 40,
+      "output": "The name of our galaxy is the Milky Way."
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.893Z",
+      "name": "Phase completed: inference",
+      "durationMs": 1545
+    },
+    {
+      "timestamp": "2025-04-18T01:31:15.893Z",
+      "name": "Continuing metric collection for additional 10 seconds"
+    },
+    {
+      "timestamp": "2025-04-18T01:31:25.894Z",
+      "name": "Phase completed: overall",
+      "durationMs": 36599
+    }
+  ],
+  "phases": {
+    "overall": {
+      "start": "2025-04-18T01:30:49.295Z",
+      "samples": [
+        {
+          "timestamp": "2025-04-18T01:30:52.559Z",
+          "performance": {
+            "Timestamp": 123350.110478,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 6,
+            "LayoutObjects": 171,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 652,
+            "Resources": 4,
+            "ContextLifecycleStateObservers": 4,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 0,
+            "LayoutCount": 2,
+            "RecalcStyleCount": 3,
+            "LayoutDuration": 0.002217,
+            "RecalcStyleDuration": 0.008296,
+            "DevToolsCommandDuration": 0.00002,
+            "ScriptDuration": 0.00459,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.034409,
+            "TaskOtherDuration": 0.0191,
+            "ThreadTime": 0.03508,
+            "ProcessTime": 0.258656,
+            "JSHeapUsedSize": 1577060,
+            "JSHeapTotalSize": 3035136,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:30:49.297Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 977,
+              "active": 9611.87109375,
+              "inactive": 9502.4765625,
+              "wired": 3118.15234375
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 55.215,
+              "temperature": 56.043
+            },
+            "cpu": {
+              "user": 14.54,
+              "system": 22.25,
+              "idle": 63.19
+            }
+          },
+          "fps": {
+            "fps": 60.50987005203749,
+            "frameCount": 61,
+            "elapsed": 1008.1000000089407
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218732672,
+            "usedJSHeapSize": 214440824
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Start to fetch params",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:30:51.548Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:30:56.377Z",
+          "performance": {
+            "Timestamp": 123354.375072,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 177,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 656,
+            "Resources": 15,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 8,
+            "RecalcStyleCount": 12,
+            "LayoutDuration": 0.003954,
+            "RecalcStyleDuration": 0.008632,
+            "DevToolsCommandDuration": 0.025767,
+            "ScriptDuration": 0.009596,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.394567,
+            "TaskOtherDuration": 0.346432,
+            "ThreadTime": 0.385342,
+            "ProcessTime": 0.851907,
+            "JSHeapUsedSize": 6950040,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:30:53.561Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 666.47265625,
+              "active": 9683.06640625,
+              "inactive": 9556.3671875,
+              "wired": 3118.4296875
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 55.980000000000004,
+              "temperature": 56.196
+            },
+            "cpu": {
+              "user": 11.62,
+              "system": 25.68,
+              "idle": 62.68
+            }
+          },
+          "fps": {
+            "fps": 60.5819843079143,
+            "frameCount": 61,
+            "elapsed": 1006.9000000059605
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218869109,
+            "usedJSHeapSize": 214674033
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[4/24]: 126MB fetched. 21% completed, 5 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:30:55.367Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:00.177Z",
+          "performance": {
+            "Timestamp": 123358.193271,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 181,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 660,
+            "Resources": 19,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 12,
+            "RecalcStyleCount": 16,
+            "LayoutDuration": 0.004514,
+            "RecalcStyleDuration": 0.00871,
+            "DevToolsCommandDuration": 0.026414,
+            "ScriptDuration": 0.013803,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.458059,
+            "TaskOtherDuration": 0.404432,
+            "ThreadTime": 0.493398,
+            "ProcessTime": 1.134078,
+            "JSHeapUsedSize": 7037684,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:30:57.379Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 395.03515625,
+              "active": 9684.08984375,
+              "inactive": 9577.484375,
+              "wired": 3116.9296875
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 52.14000000000001,
+              "temperature": 55.428
+            },
+            "cpu": {
+              "user": 11.19,
+              "system": 23.56,
+              "idle": 65.24
+            }
+          },
+          "fps": {
+            "fps": 60.509870052931916,
+            "frameCount": 61,
+            "elapsed": 1008.0999999940395
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218869838,
+            "usedJSHeapSize": 214765118
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[10/24]: 276MB fetched. 46% completed, 9 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:30:59.166Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:03.978Z",
+          "performance": {
+            "Timestamp": 123361.992455,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 187,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 666,
+            "Resources": 25,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 18,
+            "RecalcStyleCount": 22,
+            "LayoutDuration": 0.005308,
+            "RecalcStyleDuration": 0.008846,
+            "DevToolsCommandDuration": 0.026961,
+            "ScriptDuration": 0.017801,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.523635,
+            "TaskOtherDuration": 0.464533,
+            "ThreadTime": 0.603081,
+            "ProcessTime": 1.415639,
+            "JSHeapUsedSize": 7133840,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:01.178Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 141.93359375,
+              "active": 9676.01171875,
+              "inactive": 9596.140625,
+              "wired": 3116.234375
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 53.654999999999994,
+              "temperature": 55.730999999999995
+            },
+            "cpu": {
+              "user": 11.6,
+              "system": 24.7,
+              "idle": 64.23
+            }
+          },
+          "fps": {
+            "fps": 60.378105513392,
+            "frameCount": 61,
+            "elapsed": 1010.2999999970198
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218870942,
+            "usedJSHeapSize": 214854978
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[15/24]: 402MB fetched. 67% completed, 13 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:31:02.966Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:07.770Z",
+          "performance": {
+            "Timestamp": 123365.793757,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 193,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 672,
+            "Resources": 31,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 24,
+            "RecalcStyleCount": 28,
+            "LayoutDuration": 0.006101,
+            "RecalcStyleDuration": 0.008966,
+            "DevToolsCommandDuration": 0.027517,
+            "ScriptDuration": 0.021617,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.588769,
+            "TaskOtherDuration": 0.524382,
+            "ThreadTime": 0.712034,
+            "ProcessTime": 1.695039,
+            "JSHeapUsedSize": 7223012,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:04.980Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 15.65625,
+              "active": 9679.5234375,
+              "inactive": 9618.30859375,
+              "wired": 3115.25
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 51.56999999999999,
+              "temperature": 55.314
+            },
+            "cpu": {
+              "user": 10.63,
+              "system": 23.73,
+              "idle": 65.62
+            }
+          },
+          "fps": {
+            "fps": 43.724535426940584,
+            "frameCount": 44,
+            "elapsed": 1006.2999999970198
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 536202499,
+            "usedJSHeapSize": 534324343
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[22/24]: 567MB fetched. 95% completed, 16 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:31:06.761Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:11.733Z",
+          "performance": {
+            "Timestamp": 123369.584692,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 206,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 685,
+            "Resources": 32,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 361,
+            "LayoutCount": 37,
+            "RecalcStyleCount": 41,
+            "LayoutDuration": 0.007668,
+            "RecalcStyleDuration": 0.00926,
+            "DevToolsCommandDuration": 0.027998,
+            "ScriptDuration": 0.02463,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 1.825133,
+            "TaskOtherDuration": 1.755391,
+            "ThreadTime": 1.952728,
+            "ProcessTime": 3.148826,
+            "JSHeapUsedSize": 7163648,
+            "JSHeapTotalSize": 9248768,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:08.771Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 60.19140625,
+              "active": 10058,
+              "inactive": 9835.52734375,
+              "wired": 3118.83984375
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 87.72,
+              "temperature": 62.544
+            },
+            "cpu": {
+              "user": 20.17,
+              "system": 38.29,
+              "idle": 41.52
+            }
+          },
+          "fps": {
+            "fps": 49.92012779582423,
+            "frameCount": 50,
+            "elapsed": 1001.5999999940395
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 286768995,
+            "usedJSHeapSize": 277965263
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Loading model from cache[21/24]: 591MB loaded. 100% completed, 17 secs elapsed.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:31:10.728Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:15.601Z",
+          "performance": {
+            "Timestamp": 123373.548302,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 41,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 654,
+            "Resources": 2,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 2,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 1,
+            "ArrayBufferContents": 86,
+            "LayoutCount": 54,
+            "RecalcStyleCount": 59,
+            "LayoutDuration": 0.009583,
+            "RecalcStyleDuration": 0.00969,
+            "DevToolsCommandDuration": 0.028578,
+            "ScriptDuration": 0.028216,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 3.686676,
+            "TaskOtherDuration": 3.610423,
+            "ThreadTime": 3.801541,
+            "ProcessTime": 5.295125,
+            "JSHeapUsedSize": 9363860,
+            "JSHeapTotalSize": 19034112,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:12.734Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 1230.8125,
+              "active": 9213.1953125,
+              "inactive": 9160.59765625,
+              "wired": 3124.0546875
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 93.92999999999999,
+              "temperature": 63.786
+            },
+            "cpu": {
+              "user": 41.43,
+              "system": 21.18,
+              "idle": 37.38
+            }
+          },
+          "fps": {
+            "fps": 60.28859458408744,
+            "frameCount": 61,
+            "elapsed": 1011.7999999970198
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 288115934,
+            "usedJSHeapSize": 279251914
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Finish loading on WebGPU - amd",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "model_loaded",
+            "timestamp": "2025-04-18T01:31:14.586Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:19.337Z",
+          "performance": {
+            "Timestamp": 123377.416978,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 69,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 680,
+            "Resources": 2,
+            "ContextLifecycleStateObservers": 8,
+            "V8PerContextDatas": 2,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 1,
+            "ArrayBufferContents": 3137,
+            "LayoutCount": 104,
+            "RecalcStyleCount": 117,
+            "LayoutDuration": 0.015162,
+            "RecalcStyleDuration": 0.011521,
+            "DevToolsCommandDuration": 0.037616,
+            "ScriptDuration": 0.067318,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 4.027305,
+            "TaskOtherDuration": 3.895502,
+            "ThreadTime": 4.170947,
+            "ProcessTime": 5.874698,
+            "JSHeapUsedSize": 11659572,
+            "JSHeapTotalSize": 19558400,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:16.603Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 1193.92578125,
+              "active": 9223.75,
+              "inactive": 9172.015625,
+              "wired": 3137.84765625
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 38.34,
+              "temperature": 52.668
+            },
+            "cpu": {
+              "user": 7.81,
+              "system": 17.73,
+              "idle": 74.44
+            }
+          },
+          "fps": {
+            "fps": 60.64221095590236,
+            "frameCount": 61,
+            "elapsed": 1005.8999999910593
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 273404588,
+            "usedJSHeapSize": 271024912
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Finish loading on WebGPU - amd",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "model_loaded",
+            "timestamp": "2025-04-18T01:31:18.329Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:23.087Z",
+          "performance": {
+            "Timestamp": 123381.153187,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 1,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 49,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 653,
+            "Resources": 2,
+            "ContextLifecycleStateObservers": 5,
+            "V8PerContextDatas": 2,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 1,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 0,
+            "ArrayBufferContents": 7,
+            "LayoutCount": 104,
+            "RecalcStyleCount": 117,
+            "LayoutDuration": 0.015162,
+            "RecalcStyleDuration": 0.011521,
+            "DevToolsCommandDuration": 0.038136,
+            "ScriptDuration": 0.122506,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 4.128348,
+            "TaskOtherDuration": 3.940837,
+            "ThreadTime": 4.27636,
+            "ProcessTime": 6.03705,
+            "JSHeapUsedSize": 7323100,
+            "JSHeapTotalSize": 8986624,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:20.340Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 1202.06640625,
+              "active": 9219.90234375,
+              "inactive": 9153.08984375,
+              "wired": 3136.703125
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 52.93500000000001,
+              "temperature": 55.587
+            },
+            "cpu": {
+              "user": 14.33,
+              "system": 20.95,
+              "idle": 64.71
+            }
+          },
+          "fps": {
+            "fps": 60.702557468944896,
+            "frameCount": 61,
+            "elapsed": 1004.8999999910593
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 272913053,
+            "usedJSHeapSize": 271571265
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Finish loading on WebGPU - amd",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "model_loaded",
+            "timestamp": "2025-04-18T01:31:22.079Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        }
+      ],
+      "end": "2025-04-18T01:31:25.894Z",
+      "duration": 36599
+    },
+    "model_selection": {
+      "start": "2025-04-18T01:30:49.299Z",
+      "samples": [],
+      "end": "2025-04-18T01:30:49.409Z",
+      "duration": 110
+    },
+    "model_download": {
+      "start": "2025-04-18T01:30:49.411Z",
+      "samples": [
+        {
+          "timestamp": "2025-04-18T01:30:52.559Z",
+          "performance": {
+            "Timestamp": 123350.110478,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 6,
+            "LayoutObjects": 171,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 652,
+            "Resources": 4,
+            "ContextLifecycleStateObservers": 4,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 0,
+            "LayoutCount": 2,
+            "RecalcStyleCount": 3,
+            "LayoutDuration": 0.002217,
+            "RecalcStyleDuration": 0.008296,
+            "DevToolsCommandDuration": 0.00002,
+            "ScriptDuration": 0.00459,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.034409,
+            "TaskOtherDuration": 0.0191,
+            "ThreadTime": 0.03508,
+            "ProcessTime": 0.258656,
+            "JSHeapUsedSize": 1577060,
+            "JSHeapTotalSize": 3035136,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:30:49.297Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 977,
+              "active": 9611.87109375,
+              "inactive": 9502.4765625,
+              "wired": 3118.15234375
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 55.215,
+              "temperature": 56.043
+            },
+            "cpu": {
+              "user": 14.54,
+              "system": 22.25,
+              "idle": 63.19
+            }
+          },
+          "fps": {
+            "fps": 60.50987005203749,
+            "frameCount": 61,
+            "elapsed": 1008.1000000089407
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218732672,
+            "usedJSHeapSize": 214440824
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Start to fetch params",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:30:51.548Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:30:56.377Z",
+          "performance": {
+            "Timestamp": 123354.375072,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 177,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 656,
+            "Resources": 15,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 8,
+            "RecalcStyleCount": 12,
+            "LayoutDuration": 0.003954,
+            "RecalcStyleDuration": 0.008632,
+            "DevToolsCommandDuration": 0.025767,
+            "ScriptDuration": 0.009596,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.394567,
+            "TaskOtherDuration": 0.346432,
+            "ThreadTime": 0.385342,
+            "ProcessTime": 0.851907,
+            "JSHeapUsedSize": 6950040,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:30:53.561Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 666.47265625,
+              "active": 9683.06640625,
+              "inactive": 9556.3671875,
+              "wired": 3118.4296875
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 55.980000000000004,
+              "temperature": 56.196
+            },
+            "cpu": {
+              "user": 11.62,
+              "system": 25.68,
+              "idle": 62.68
+            }
+          },
+          "fps": {
+            "fps": 60.5819843079143,
+            "frameCount": 61,
+            "elapsed": 1006.9000000059605
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218869109,
+            "usedJSHeapSize": 214674033
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[4/24]: 126MB fetched. 21% completed, 5 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:30:55.367Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:00.177Z",
+          "performance": {
+            "Timestamp": 123358.193271,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 181,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 660,
+            "Resources": 19,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 12,
+            "RecalcStyleCount": 16,
+            "LayoutDuration": 0.004514,
+            "RecalcStyleDuration": 0.00871,
+            "DevToolsCommandDuration": 0.026414,
+            "ScriptDuration": 0.013803,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.458059,
+            "TaskOtherDuration": 0.404432,
+            "ThreadTime": 0.493398,
+            "ProcessTime": 1.134078,
+            "JSHeapUsedSize": 7037684,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:30:57.379Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 395.03515625,
+              "active": 9684.08984375,
+              "inactive": 9577.484375,
+              "wired": 3116.9296875
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 52.14000000000001,
+              "temperature": 55.428
+            },
+            "cpu": {
+              "user": 11.19,
+              "system": 23.56,
+              "idle": 65.24
+            }
+          },
+          "fps": {
+            "fps": 60.509870052931916,
+            "frameCount": 61,
+            "elapsed": 1008.0999999940395
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218869838,
+            "usedJSHeapSize": 214765118
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[10/24]: 276MB fetched. 46% completed, 9 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:30:59.166Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:03.978Z",
+          "performance": {
+            "Timestamp": 123361.992455,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 187,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 666,
+            "Resources": 25,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 18,
+            "RecalcStyleCount": 22,
+            "LayoutDuration": 0.005308,
+            "RecalcStyleDuration": 0.008846,
+            "DevToolsCommandDuration": 0.026961,
+            "ScriptDuration": 0.017801,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.523635,
+            "TaskOtherDuration": 0.464533,
+            "ThreadTime": 0.603081,
+            "ProcessTime": 1.415639,
+            "JSHeapUsedSize": 7133840,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:01.178Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 141.93359375,
+              "active": 9676.01171875,
+              "inactive": 9596.140625,
+              "wired": 3116.234375
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 53.654999999999994,
+              "temperature": 55.730999999999995
+            },
+            "cpu": {
+              "user": 11.6,
+              "system": 24.7,
+              "idle": 64.23
+            }
+          },
+          "fps": {
+            "fps": 60.378105513392,
+            "frameCount": 61,
+            "elapsed": 1010.2999999970198
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 218870942,
+            "usedJSHeapSize": 214854978
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[15/24]: 402MB fetched. 67% completed, 13 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:31:02.966Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:07.770Z",
+          "performance": {
+            "Timestamp": 123365.793757,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 193,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 672,
+            "Resources": 31,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 36,
+            "LayoutCount": 24,
+            "RecalcStyleCount": 28,
+            "LayoutDuration": 0.006101,
+            "RecalcStyleDuration": 0.008966,
+            "DevToolsCommandDuration": 0.027517,
+            "ScriptDuration": 0.021617,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 0.588769,
+            "TaskOtherDuration": 0.524382,
+            "ThreadTime": 0.712034,
+            "ProcessTime": 1.695039,
+            "JSHeapUsedSize": 7223012,
+            "JSHeapTotalSize": 12132352,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:04.980Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 15.65625,
+              "active": 9679.5234375,
+              "inactive": 9618.30859375,
+              "wired": 3115.25
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 51.56999999999999,
+              "temperature": 55.314
+            },
+            "cpu": {
+              "user": 10.63,
+              "system": 23.73,
+              "idle": 65.62
+            }
+          },
+          "fps": {
+            "fps": 43.724535426940584,
+            "frameCount": 44,
+            "elapsed": 1006.2999999970198
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 536202499,
+            "usedJSHeapSize": 534324343
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Fetching param cache[22/24]: 567MB fetched. 95% completed, 16 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:31:06.761Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        },
+        {
+          "timestamp": "2025-04-18T01:31:11.733Z",
+          "performance": {
+            "Timestamp": 123369.584692,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 206,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 685,
+            "Resources": 32,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 4,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 2,
+            "ArrayBufferContents": 361,
+            "LayoutCount": 37,
+            "RecalcStyleCount": 41,
+            "LayoutDuration": 0.007668,
+            "RecalcStyleDuration": 0.00926,
+            "DevToolsCommandDuration": 0.027998,
+            "ScriptDuration": 0.02463,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 1.825133,
+            "TaskOtherDuration": 1.755391,
+            "ThreadTime": 1.952728,
+            "ProcessTime": 3.148826,
+            "JSHeapUsedSize": 7163648,
+            "JSHeapTotalSize": 9248768,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:08.771Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 60.19140625,
+              "active": 10058,
+              "inactive": 9835.52734375,
+              "wired": 3118.83984375
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 87.72,
+              "temperature": 62.544
+            },
+            "cpu": {
+              "user": 20.17,
+              "system": 38.29,
+              "idle": 41.52
+            }
+          },
+          "fps": {
+            "fps": 49.92012779582423,
+            "frameCount": 50,
+            "elapsed": 1001.5999999940395
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 286768995,
+            "usedJSHeapSize": 277965263
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Loading model from cache[21/24]: 591MB loaded. 100% completed, 17 secs elapsed.",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "unknown",
+            "timestamp": "2025-04-18T01:31:10.728Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        }
+      ],
+      "end": "2025-04-18T01:31:14.348Z",
+      "duration": 24937
+    },
+    "inference": {
+      "start": "2025-04-18T01:31:14.348Z",
+      "samples": [
+        {
+          "timestamp": "2025-04-18T01:31:15.601Z",
+          "performance": {
+            "Timestamp": 123373.548302,
+            "AudioHandlers": 0,
+            "AudioWorkletProcessors": 0,
+            "Documents": 3,
+            "Frames": 1,
+            "JSEventListeners": 7,
+            "LayoutObjects": 41,
+            "MediaKeySessions": 0,
+            "MediaKeys": 0,
+            "Nodes": 654,
+            "Resources": 2,
+            "ContextLifecycleStateObservers": 7,
+            "V8PerContextDatas": 2,
+            "WorkerGlobalScopes": 0,
+            "UACSSResources": 0,
+            "RTCPeerConnections": 0,
+            "ResourceFetchers": 3,
+            "AdSubframes": 0,
+            "DetachedScriptStates": 1,
+            "ArrayBufferContents": 86,
+            "LayoutCount": 54,
+            "RecalcStyleCount": 59,
+            "LayoutDuration": 0.009583,
+            "RecalcStyleDuration": 0.00969,
+            "DevToolsCommandDuration": 0.028578,
+            "ScriptDuration": 0.028216,
+            "V8CompileDuration": 0.000186,
+            "TaskDuration": 3.686676,
+            "TaskOtherDuration": 3.610423,
+            "ThreadTime": 3.801541,
+            "ProcessTime": 5.295125,
+            "JSHeapUsedSize": 9363860,
+            "JSHeapTotalSize": 19034112,
+            "FirstMeaningfulPaint": 123349.628589,
+            "DomContentLoaded": 123349.588741,
+            "NavigationStart": 123349.261724
+          },
+          "system": {
+            "timestamp": "2025-04-18T01:31:12.734Z",
+            "system": {
+              "model": "iMac",
+              "chip": "Unknown",
+              "totalMemory": "24 GB",
+              "gpuModel": "Radeon Pro 570X",
+              "vram": "Unknown"
+            },
+            "memory": {
+              "free": 1230.8125,
+              "active": 9213.1953125,
+              "inactive": 9160.59765625,
+              "wired": 3124.0546875
+            },
+            "gpu": {
+              "model": "Radeon Pro 570X",
+              "vram": "Unknown",
+              "utilization": 93.92999999999999,
+              "temperature": 63.786
+            },
+            "cpu": {
+              "user": 41.43,
+              "system": 21.18,
+              "idle": 37.38
+            }
+          },
+          "fps": {
+            "fps": 60.28859458408744,
+            "frameCount": 61,
+            "elapsed": 1011.7999999970198
+          },
+          "memory": {
+            "jsHeapSizeLimit": 4294705152,
+            "totalJSHeapSize": 288115934,
+            "usedJSHeapSize": 279251914
+          },
+          "webllm": {
+            "elements": {
+              "downloadStatus": "Finish loading on WebGPU - amd",
+              "promptInput": "",
+              "outputArea": "",
+              "inferenceStatus": ""
+            },
+            "state": "model_loaded",
+            "timestamp": "2025-04-18T01:31:14.586Z"
+          },
+          "webgpu": {
+            "adapter": "Unknown",
+            "features": [],
+            "initialized": true
+          }
+        }
+      ],
+      "end": "2025-04-18T01:31:15.893Z",
+      "duration": 1545
+    }
+  },
+  "config": {
+    "modelName": "TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC",
+    "testPrompt": "What is the name of our galaxy?",
+    "timeouts": {
+      "modelLoading": 300000,
+      "inference": 120000,
+      "maxTotal": 180000,
+      "postLoadingSamples": 10
+    },
+    "sampleIntervalMs": 1000,
+    "outputFiles": {
+      "metrics": "webllm-metrics.json",
+      "visualization": "webllm-visualization.html"
+    }
+  },
+  "system": {
+    "model": "iMac",
+    "chip": "Unknown",
+    "totalMemory": "24 GB",
+    "gpuModel": "Radeon Pro 570X",
+    "vram": "Unknown"
+  }
+}

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebLLM Performance Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2/dist/chartjs-plugin-annotation.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+    .container { max-width: 1400px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; }
+    h1, h2 { color: #333; }
+    .chart-container { width: 100%; height: 300px; margin-bottom: 30px; }
+    .section { margin-bottom: 40px; }
+    .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+    .grid .chart-container { flex: 1 1 45%; }
+    .info-box { background: #f8f9fa; border-radius: 5px; padding: 15px; margin-bottom: 20px; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+    .info-item { margin-bottom: 8px; }
+    .info-label { font-weight: bold; }
+    .phase { background: #e9ecef; border-radius: 5px; padding: 10px; margin-bottom: 10px; }
+    .phase-name { font-weight: bold; }
+    .events-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .events-table th, .events-table td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+    .events-table th { background-color: #f2f2f2; }
+    .tab { overflow: hidden; border: 1px solid #ccc; background-color: #f1f1f1; border-radius: 5px 5px 0 0; }
+    .tab button { background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; }
+    .tab button:hover { background-color: #ddd; }
+    .tab button.active { background-color: #fff; border-bottom: 2px solid #4CAF50; }
+    .tabcontent { display: none; padding: 20px; border: 1px solid #ccc; border-top: none; border-radius: 0 0 5px 5px; }
+    .tabcontent.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>WebLLM Performance Analysis</h1>
+    <p>Data collected at 4/17/2025, 9:33:50 PM</p>
+    
+    <!-- Tabs -->
+    <div class="tab">
+      <button class="tablinks active" onclick="openTab(event, 'overview')">Overview</button>
+      <button class="tablinks" onclick="openTab(event, 'cpu-gpu')">CPU & GPU</button>
+      <button class="tablinks" onclick="openTab(event, 'memory')">Memory</button>
+      <button class="tablinks" onclick="openTab(event, 'events')">Events Log</button>
+    </div>
+    
+    <!-- Overview Tab -->
+    <div id="overview" class="tabcontent active">
+      <!-- System Information Section -->
+      <div class="section">
+        <h2>System Information</h2>
+        <div class="info-box">
+          <div class="info-grid">
+            <div class="info-item"><span class="info-label">Model:</span> iMac</div>
+            <div class="info-item"><span class="info-label">Chip:</span> Unknown</div>
+            <div class="info-item"><span class="info-label">Memory:</span> 24 GB</div>
+            <div class="info-item"><span class="info-label">GPU:</span> Radeon Pro 570X</div>
+            <div class="info-item"><span class="info-label">VRAM:</span> Unknown</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Test Configuration -->
+      <div class="section">
+        <h2>Test Configuration</h2>
+        <div class="info-box">
+          <div class="info-grid">
+            <div class="info-item"><span class="info-label">WebLLM URL:</span> http://127.0.0.1:5500/WebLLM/</div>
+            <div class="info-item"><span class="info-label">Model:</span> TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC</div>
+            <div class="info-item"><span class="info-label">Test Prompt:</span> What is the name of our galaxy?</div>
+            <div class="info-item"><span class="info-label">Sample Interval:</span> 1000ms</div>
+            <div class="info-item"><span class="info-label">Total Samples:</span> 25</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Test Phases -->
+      <div class="section">
+        <h2>Test Phases</h2>
+        <div class="info-box">
+          
+            <div class="phase">
+              <div class="phase-name">overall</div>
+              <div>Start: 9:30:49 PM | End: 9:31:25 PM | Duration: 36.6s</div>
+            </div>
+          
+            <div class="phase">
+              <div class="phase-name">model_selection</div>
+              <div>Start: 9:30:49 PM | End: 9:30:49 PM | Duration: 0.1s</div>
+            </div>
+          
+            <div class="phase">
+              <div class="phase-name">model_download</div>
+              <div>Start: 9:30:49 PM | End: 9:31:14 PM | Duration: 24.9s</div>
+            </div>
+          
+            <div class="phase">
+              <div class="phase-name">inference</div>
+              <div>Start: 9:31:14 PM | End: 9:31:15 PM | Duration: 1.5s</div>
+            </div>
+          
+        </div>
+      </div>
+      
+      <!-- FPS Chart Section -->
+      <div class="section">
+        <h2>FPS Over Time</h2>
+        <div class="chart-container">
+          <canvas id="fpsChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CPU & GPU Tab -->
+    <div id="cpu-gpu" class="tabcontent">
+      <!-- CPU Utilization Section -->
+      <div class="section">
+        <h2>CPU Utilization (%)</h2>
+        <div class="chart-container">
+          <canvas id="cpuChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- GPU Section -->
+      <div class="section">
+        <h2>GPU Metrics</h2>
+        <div class="grid">
+          <div class="chart-container"><canvas id="gpuUtilChart"></canvas></div>
+          <div class="chart-container"><canvas id="gpuTempChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Memory Tab -->
+    <div id="memory" class="tabcontent">
+      <!-- System Memory Section -->
+      <div class="section">
+        <h2>System Memory (MB)</h2>
+        <div class="chart-container">
+          <canvas id="memoryChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- JS Memory Section -->
+      <div class="section">
+        <h2>JavaScript Memory</h2>
+        <div class="chart-container">
+          <canvas id="jsMemoryChart"></canvas>
+        </div>
+        <p><em>Note: JavaScript memory metrics might be unavailable on some browsers.</em></p>
+      </div>
+    </div>
+    
+    <!-- Events Tab -->
+    <div id="events" class="tabcontent">
+      <div class="section">
+        <h2>Events Log</h2>
+        <table class="events-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Event</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+    <tr>
+      <td>9:30:48 PM</td>
+      <td>Navigation started</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Page loaded</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Phase started: overall</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Phase started: model_selection</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Available models</td>
+      <td><strong>models:</strong> ["Llama-3.2-1B-Instruct-q4f32_1-MLC","Llama-3.2-1B-Instruct-q4f16_1-MLC","Llama-3.2-1B-Instruct-q0f32-MLC","Llama-3.2-1B-Instruct-q0f16-MLC","Llama-3.2-3B-Instruct-q4f32_1-MLC","Llama-3.2-3B-Instruct-q4f16_1-MLC","Llama-3.1-8B-Instruct-q4f32_1-MLC-1k","Llama-3.1-8B-Instruct-q4f16_1-MLC-1k","Llama-3.1-8B-Instruct-q4f32_1-MLC","Llama-3.1-8B-Instruct-q4f16_1-MLC","DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC","DeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLC","DeepSeek-R1-Distill-Llama-8B-q4f32_1-MLC","DeepSeek-R1-Distill-Llama-8B-q4f16_1-MLC","Hermes-2-Theta-Llama-3-8B-q4f16_1-MLC","Hermes-2-Theta-Llama-3-8B-q4f32_1-MLC","Hermes-2-Pro-Llama-3-8B-q4f16_1-MLC","Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC","Hermes-3-Llama-3.2-3B-q4f32_1-MLC","Hermes-3-Llama-3.2-3B-q4f16_1-MLC","Hermes-3-Llama-3.1-8B-q4f32_1-MLC","Hermes-3-Llama-3.1-8B-q4f16_1-MLC","Hermes-2-Pro-Mistral-7B-q4f16_1-MLC","Phi-3.5-mini-instruct-q4f16_1-MLC","Phi-3.5-mini-instruct-q4f32_1-MLC","Phi-3.5-mini-instruct-q4f16_1-MLC-1k","Phi-3.5-mini-instruct-q4f32_1-MLC-1k","Phi-3.5-vision-instruct-q4f16_1-MLC","Phi-3.5-vision-instruct-q4f32_1-MLC","Mistral-7B-Instruct-v0.3-q4f16_1-MLC","Mistral-7B-Instruct-v0.3-q4f32_1-MLC","Mistral-7B-Instruct-v0.2-q4f16_1-MLC","OpenHermes-2.5-Mistral-7B-q4f16_1-MLC","NeuralHermes-2.5-Mistral-7B-q4f16_1-MLC","WizardMath-7B-V1.1-q4f16_1-MLC","SmolLM2-1.7B-Instruct-q4f16_1-MLC","SmolLM2-1.7B-Instruct-q4f32_1-MLC","SmolLM2-360M-Instruct-q0f16-MLC","SmolLM2-360M-Instruct-q0f32-MLC","SmolLM2-360M-Instruct-q4f16_1-MLC","SmolLM2-360M-Instruct-q4f32_1-MLC","SmolLM2-135M-Instruct-q0f16-MLC","SmolLM2-135M-Instruct-q0f32-MLC","gemma-2-2b-it-q4f16_1-MLC","gemma-2-2b-it-q4f32_1-MLC","gemma-2-2b-it-q4f16_1-MLC-1k","gemma-2-2b-it-q4f32_1-MLC-1k","gemma-2-9b-it-q4f16_1-MLC","gemma-2-9b-it-q4f32_1-MLC","gemma-2-2b-jpn-it-q4f16_1-MLC","gemma-2-2b-jpn-it-q4f32_1-MLC","Qwen2.5-0.5B-Instruct-q4f16_1-MLC","Qwen2.5-0.5B-Instruct-q4f32_1-MLC","Qwen2.5-0.5B-Instruct-q0f16-MLC","Qwen2.5-0.5B-Instruct-q0f32-MLC","Qwen2.5-1.5B-Instruct-q4f16_1-MLC","Qwen2.5-1.5B-Instruct-q4f32_1-MLC","Qwen2.5-3B-Instruct-q4f16_1-MLC","Qwen2.5-3B-Instruct-q4f32_1-MLC","Qwen2.5-7B-Instruct-q4f16_1-MLC","Qwen2.5-7B-Instruct-q4f32_1-MLC","Qwen2.5-Coder-0.5B-Instruct-q4f16_1-MLC","Qwen2.5-Coder-0.5B-Instruct-q4f32_1-MLC","Qwen2.5-Coder-0.5B-Instruct-q0f16-MLC","Qwen2.5-Coder-0.5B-Instruct-q0f32-MLC","Qwen2.5-Coder-1.5B-Instruct-q4f16_1-MLC","Qwen2.5-Coder-1.5B-Instruct-q4f32_1-MLC","Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC","Qwen2.5-Coder-3B-Instruct-q4f32_1-MLC","Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC","Qwen2.5-Coder-7B-Instruct-q4f32_1-MLC","Qwen2.5-Math-1.5B-Instruct-q4f16_1-MLC","Qwen2.5-Math-1.5B-Instruct-q4f32_1-MLC","stablelm-2-zephyr-1_6b-q4f16_1-MLC","stablelm-2-zephyr-1_6b-q4f32_1-MLC","stablelm-2-zephyr-1_6b-q4f16_1-MLC-1k","stablelm-2-zephyr-1_6b-q4f32_1-MLC-1k","RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC","RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC","RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1k","RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1k","TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC","TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC","TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1k","TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1k","Llama-3.1-70B-Instruct-q3f16_1-MLC","Qwen2-0.5B-Instruct-q4f16_1-MLC","Qwen2-0.5B-Instruct-q0f16-MLC","Qwen2-0.5B-Instruct-q0f32-MLC","Qwen2-1.5B-Instruct-q4f16_1-MLC","Qwen2-1.5B-Instruct-q4f32_1-MLC","Qwen2-7B-Instruct-q4f16_1-MLC","Qwen2-7B-Instruct-q4f32_1-MLC","Qwen2-Math-1.5B-Instruct-q4f16_1-MLC","Qwen2-Math-1.5B-Instruct-q4f32_1-MLC","Qwen2-Math-7B-Instruct-q4f16_1-MLC","Qwen2-Math-7B-Instruct-q4f32_1-MLC","Llama-3-8B-Instruct-q4f32_1-MLC-1k","Llama-3-8B-Instruct-q4f16_1-MLC-1k","Llama-3-8B-Instruct-q4f32_1-MLC","Llama-3-8B-Instruct-q4f16_1-MLC","Llama-3-70B-Instruct-q3f16_1-MLC","Phi-3-mini-4k-instruct-q4f16_1-MLC","Phi-3-mini-4k-instruct-q4f32_1-MLC","Phi-3-mini-4k-instruct-q4f16_1-MLC-1k","Phi-3-mini-4k-instruct-q4f32_1-MLC-1k","Llama-2-7b-chat-hf-q4f32_1-MLC-1k","Llama-2-7b-chat-hf-q4f16_1-MLC-1k","Llama-2-7b-chat-hf-q4f32_1-MLC","Llama-2-7b-chat-hf-q4f16_1-MLC","Llama-2-13b-chat-hf-q4f16_1-MLC","gemma-2b-it-q4f16_1-MLC","gemma-2b-it-q4f32_1-MLC","gemma-2b-it-q4f16_1-MLC-1k","gemma-2b-it-q4f32_1-MLC-1k","phi-2-q4f16_1-MLC","phi-2-q4f32_1-MLC","phi-2-q4f16_1-MLC-1k","phi-2-q4f32_1-MLC-1k","phi-1_5-q4f16_1-MLC","phi-1_5-q4f32_1-MLC","phi-1_5-q4f16_1-MLC-1k","phi-1_5-q4f32_1-MLC-1k","TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC","TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC","TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1k","TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1k","snowflake-arctic-embed-m-q0f32-MLC-b32","snowflake-arctic-embed-m-q0f32-MLC-b4","snowflake-arctic-embed-s-q0f32-MLC-b32","snowflake-arctic-embed-s-q0f32-MLC-b4"]</td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Model selected</td>
+      <td><strong>model:</strong> TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC</td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Phase completed: model_selection</td>
+      <td><strong>durationMs:</strong> 110</td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Phase started: model_download</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:30:49 PM</td>
+      <td>Download button clicked</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Model loaded successfully</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Phase completed: model_download</td>
+      <td><strong>durationMs:</strong> 24937</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Phase started: inference</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Test prompt entered</td>
+      <td><strong>prompt:</strong> What is the name of our galaxy?</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Submit button found</td>
+      <td><strong>buttonId:</strong> send</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Submit button clicked</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Waiting for generation to start</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Generation started</td>
+      <td><strong>status:</strong> Generating</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:14 PM</td>
+      <td>Waiting for output to stabilize</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Output increasing</td>
+      <td><strong>currentLength:</strong> 25<br><strong>delta:</strong> 16</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Output increasing</td>
+      <td><strong>currentLength:</strong> 40<br><strong>delta:</strong> 15</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>chat-stats element is now visible</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Extracting performance statistics</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Performance metrics found</td>
+      <td><strong>rawStats:</strong> Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec
+Total Inference Time: 909.50 ms
+Time to First Token: 317.50 ms 
+    Simple Chatbot
+    
+    
+    
+  
+
+  
+    Step 1: Initialize WebLLM and Download Model
+    
+      Llama-3.2-1B-Instruct-q4f32_1-MLCLlama-3.2-1B-Instruct-q4f16_1-MLCLlama-3.2-1B-Instruct-q0f32-MLCLlama-3.2-1B-Instruct-q0f16-MLCLlama-3.2-3B-Instruct-q4f32_1-MLCLlama-3.2-3B-Instruct-q4f16_1-MLCLlama-3.1-8B-Instruct-q4f32_1-MLC-1kLlama-3.1-8B-Instruct-q4f16_1-MLC-1kLlama-3.1-8B-Instruct-q4f32_1-MLCLlama-3.1-8B-Instruct-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f32_1-MLCHermes-2-Pro-Llama-3-8B-q4f16_1-MLCHermes-2-Pro-Llama-3-8B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f16_1-MLCHermes-3-Llama-3.1-8B-q4f32_1-MLCHermes-3-Llama-3.1-8B-q4f16_1-MLCHermes-2-Pro-Mistral-7B-q4f16_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLCPhi-3.5-mini-instruct-q4f32_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLC-1kPhi-3.5-mini-instruct-q4f32_1-MLC-1kPhi-3.5-vision-instruct-q4f16_1-MLCPhi-3.5-vision-instruct-q4f32_1-MLCMistral-7B-Instruct-v0.3-q4f16_1-MLCMistral-7B-Instruct-v0.3-q4f32_1-MLCMistral-7B-Instruct-v0.2-q4f16_1-MLCOpenHermes-2.5-Mistral-7B-q4f16_1-MLCNeuralHermes-2.5-Mistral-7B-q4f16_1-MLCWizardMath-7B-V1.1-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f32_1-MLCSmolLM2-360M-Instruct-q0f16-MLCSmolLM2-360M-Instruct-q0f32-MLCSmolLM2-360M-Instruct-q4f16_1-MLCSmolLM2-360M-Instruct-q4f32_1-MLCSmolLM2-135M-Instruct-q0f16-MLCSmolLM2-135M-Instruct-q0f32-MLCgemma-2-2b-it-q4f16_1-MLCgemma-2-2b-it-q4f32_1-MLCgemma-2-2b-it-q4f16_1-MLC-1kgemma-2-2b-it-q4f32_1-MLC-1kgemma-2-9b-it-q4f16_1-MLCgemma-2-9b-it-q4f32_1-MLCgemma-2-2b-jpn-it-q4f16_1-MLCgemma-2-2b-jpn-it-q4f32_1-MLCQwen2.5-0.5B-Instruct-q4f16_1-MLCQwen2.5-0.5B-Instruct-q4f32_1-MLCQwen2.5-0.5B-Instruct-q0f16-MLCQwen2.5-0.5B-Instruct-q0f32-MLCQwen2.5-1.5B-Instruct-q4f16_1-MLCQwen2.5-1.5B-Instruct-q4f32_1-MLCQwen2.5-3B-Instruct-q4f16_1-MLCQwen2.5-3B-Instruct-q4f32_1-MLCQwen2.5-7B-Instruct-q4f16_1-MLCQwen2.5-7B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q0f16-MLCQwen2.5-Coder-0.5B-Instruct-q0f32-MLCQwen2.5-Coder-1.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-1.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-3B-Instruct-q4f16_1-MLCQwen2.5-Coder-3B-Instruct-q4f32_1-MLCQwen2.5-Coder-7B-Instruct-q4f16_1-MLCQwen2.5-Coder-7B-Instruct-q4f32_1-MLCQwen2.5-Math-1.5B-Instruct-q4f16_1-MLCQwen2.5-Math-1.5B-Instruct-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLCstablelm-2-zephyr-1_6b-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLC-1kstablelm-2-zephyr-1_6b-q4f32_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1kLlama-3.1-70B-Instruct-q3f16_1-MLCQwen2-0.5B-Instruct-q4f16_1-MLCQwen2-0.5B-Instruct-q0f16-MLCQwen2-0.5B-Instruct-q0f32-MLCQwen2-1.5B-Instruct-q4f16_1-MLCQwen2-1.5B-Instruct-q4f32_1-MLCQwen2-7B-Instruct-q4f16_1-MLCQwen2-7B-Instruct-q4f32_1-MLCQwen2-Math-1.5B-Instruct-q4f16_1-MLCQwen2-Math-1.5B-Instruct-q4f32_1-MLCQwen2-Math-7B-Instruct-q4f16_1-MLCQwen2-Math-7B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f32_1-MLC-1kLlama-3-8B-Instruct-q4f16_1-MLC-1kLlama-3-8B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f16_1-MLCLlama-3-70B-Instruct-q3f16_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLCPhi-3-mini-4k-instruct-q4f32_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLC-1kPhi-3-mini-4k-instruct-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f16_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLCLlama-2-7b-chat-hf-q4f16_1-MLCLlama-2-13b-chat-hf-q4f16_1-MLCgemma-2b-it-q4f16_1-MLCgemma-2b-it-q4f32_1-MLCgemma-2b-it-q4f16_1-MLC-1kgemma-2b-it-q4f32_1-MLC-1kphi-2-q4f16_1-MLCphi-2-q4f32_1-MLCphi-2-q4f16_1-MLC-1kphi-2-q4f32_1-MLC-1kphi-1_5-q4f16_1-MLCphi-1_5-q4f32_1-MLCphi-1_5-q4f16_1-MLC-1kphi-1_5-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1ksnowflake-arctic-embed-m-q0f32-MLC-b32snowflake-arctic-embed-m-q0f32-MLC-b4snowflake-arctic-embed-s-q0f32-MLC-b32snowflake-arctic-embed-s-q0f32-MLC-b4
+      Download
+    
+    Finish loading on WebGPU - amd
+
+    
+
+    
+      Warm-up Time:
+       ms
+    
+
+    Step 2: Upload Data File and Process
+    
+      
+      Start Processing
+    
+
+    
+    
+      Top 10 Prompts Inference Times:
+      
+    
+
+    
+        
+    
+
+    
+    
+    Total initialization time: 24906.10 ms
+
+    
+   
+
+    Download Output JSON
+    
+
+
+    Step 3: Chat
+    
+      What is the name of our galaxy?The name of our galaxy is the Milky Way.
+      Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec
+Total Inference Time: 909.50 ms
+Time to First Token: 317.50 ms
+      
+        
+        Send
+      
+    
+
+    
+  
+
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+
+
+ 
+    Step 1: Initialize WebLLM and Download Model
+    
+      Llama-3.2-1B-Instruct-q4f32_1-MLCLlama-3.2-1B-Instruct-q4f16_1-MLCLlama-3.2-1B-Instruct-q0f32-MLCLlama-3.2-1B-Instruct-q0f16-MLCLlama-3.2-3B-Instruct-q4f32_1-MLCLlama-3.2-3B-Instruct-q4f16_1-MLCLlama-3.1-8B-Instruct-q4f32_1-MLC-1kLlama-3.1-8B-Instruct-q4f16_1-MLC-1kLlama-3.1-8B-Instruct-q4f32_1-MLCLlama-3.1-8B-Instruct-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLCDeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f32_1-MLCDeepSeek-R1-Distill-Llama-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f16_1-MLCHermes-2-Theta-Llama-3-8B-q4f32_1-MLCHermes-2-Pro-Llama-3-8B-q4f16_1-MLCHermes-2-Pro-Llama-3-8B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f32_1-MLCHermes-3-Llama-3.2-3B-q4f16_1-MLCHermes-3-Llama-3.1-8B-q4f32_1-MLCHermes-3-Llama-3.1-8B-q4f16_1-MLCHermes-2-Pro-Mistral-7B-q4f16_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLCPhi-3.5-mini-instruct-q4f32_1-MLCPhi-3.5-mini-instruct-q4f16_1-MLC-1kPhi-3.5-mini-instruct-q4f32_1-MLC-1kPhi-3.5-vision-instruct-q4f16_1-MLCPhi-3.5-vision-instruct-q4f32_1-MLCMistral-7B-Instruct-v0.3-q4f16_1-MLCMistral-7B-Instruct-v0.3-q4f32_1-MLCMistral-7B-Instruct-v0.2-q4f16_1-MLCOpenHermes-2.5-Mistral-7B-q4f16_1-MLCNeuralHermes-2.5-Mistral-7B-q4f16_1-MLCWizardMath-7B-V1.1-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f16_1-MLCSmolLM2-1.7B-Instruct-q4f32_1-MLCSmolLM2-360M-Instruct-q0f16-MLCSmolLM2-360M-Instruct-q0f32-MLCSmolLM2-360M-Instruct-q4f16_1-MLCSmolLM2-360M-Instruct-q4f32_1-MLCSmolLM2-135M-Instruct-q0f16-MLCSmolLM2-135M-Instruct-q0f32-MLCgemma-2-2b-it-q4f16_1-MLCgemma-2-2b-it-q4f32_1-MLCgemma-2-2b-it-q4f16_1-MLC-1kgemma-2-2b-it-q4f32_1-MLC-1kgemma-2-9b-it-q4f16_1-MLCgemma-2-9b-it-q4f32_1-MLCgemma-2-2b-jpn-it-q4f16_1-MLCgemma-2-2b-jpn-it-q4f32_1-MLCQwen2.5-0.5B-Instruct-q4f16_1-MLCQwen2.5-0.5B-Instruct-q4f32_1-MLCQwen2.5-0.5B-Instruct-q0f16-MLCQwen2.5-0.5B-Instruct-q0f32-MLCQwen2.5-1.5B-Instruct-q4f16_1-MLCQwen2.5-1.5B-Instruct-q4f32_1-MLCQwen2.5-3B-Instruct-q4f16_1-MLCQwen2.5-3B-Instruct-q4f32_1-MLCQwen2.5-7B-Instruct-q4f16_1-MLCQwen2.5-7B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-0.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-0.5B-Instruct-q0f16-MLCQwen2.5-Coder-0.5B-Instruct-q0f32-MLCQwen2.5-Coder-1.5B-Instruct-q4f16_1-MLCQwen2.5-Coder-1.5B-Instruct-q4f32_1-MLCQwen2.5-Coder-3B-Instruct-q4f16_1-MLCQwen2.5-Coder-3B-Instruct-q4f32_1-MLCQwen2.5-Coder-7B-Instruct-q4f16_1-MLCQwen2.5-Coder-7B-Instruct-q4f32_1-MLCQwen2.5-Math-1.5B-Instruct-q4f16_1-MLCQwen2.5-Math-1.5B-Instruct-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLCstablelm-2-zephyr-1_6b-q4f32_1-MLCstablelm-2-zephyr-1_6b-q4f16_1-MLC-1kstablelm-2-zephyr-1_6b-q4f32_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLCRedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1kRedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLCTinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1kLlama-3.1-70B-Instruct-q3f16_1-MLCQwen2-0.5B-Instruct-q4f16_1-MLCQwen2-0.5B-Instruct-q0f16-MLCQwen2-0.5B-Instruct-q0f32-MLCQwen2-1.5B-Instruct-q4f16_1-MLCQwen2-1.5B-Instruct-q4f32_1-MLCQwen2-7B-Instruct-q4f16_1-MLCQwen2-7B-Instruct-q4f32_1-MLCQwen2-Math-1.5B-Instruct-q4f16_1-MLCQwen2-Math-1.5B-Instruct-q4f32_1-MLCQwen2-Math-7B-Instruct-q4f16_1-MLCQwen2-Math-7B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f32_1-MLC-1kLlama-3-8B-Instruct-q4f16_1-MLC-1kLlama-3-8B-Instruct-q4f32_1-MLCLlama-3-8B-Instruct-q4f16_1-MLCLlama-3-70B-Instruct-q3f16_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLCPhi-3-mini-4k-instruct-q4f32_1-MLCPhi-3-mini-4k-instruct-q4f16_1-MLC-1kPhi-3-mini-4k-instruct-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLC-1kLlama-2-7b-chat-hf-q4f16_1-MLC-1kLlama-2-7b-chat-hf-q4f32_1-MLCLlama-2-7b-chat-hf-q4f16_1-MLCLlama-2-13b-chat-hf-q4f16_1-MLCgemma-2b-it-q4f16_1-MLCgemma-2b-it-q4f32_1-MLCgemma-2b-it-q4f16_1-MLC-1kgemma-2b-it-q4f32_1-MLC-1kphi-2-q4f16_1-MLCphi-2-q4f32_1-MLCphi-2-q4f16_1-MLC-1kphi-2-q4f32_1-MLC-1kphi-1_5-q4f16_1-MLCphi-1_5-q4f32_1-MLCphi-1_5-q4f16_1-MLC-1kphi-1_5-q4f32_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLCTinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1kTinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1ksnowflake-arctic-embed-m-q0f32-MLC-b32snowflake-arctic-embed-m-q0f32-MLC-b4snowflake-arctic-embed-s-q0f32-MLC-b32snowflake-arctic-embed-s-q0f32-MLC-b4
+      Download
+    
+    Finish loading on WebGPU - amd
+
+    
+
+    
+      Warm-up Time:
+       ms
+    
+
+    Step 2: Upload Data File and Process
+    
+      
+      Start Processing
+    
+
+    
+    
+      Top 10 Prompts Inference Times:
+      
+    
+
+    
+        
+    
+
+    
+    
+    Total initialization time: 24906.10 ms
+
+    
+   
+
+    Download Output JSON
+    
+
+
+    Step 3: Chat
+    
+      What is the name of our galaxy?The name of our galaxy is the Milky Way.
+      Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec
+Total Inference Time: 909.50 ms
+Time to First Token: 317.50 ms
+      
+        
+        Send
+      
+    
+
+    
+  
+
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+
+
+ 
+      Top 10 Prompts Inference Times:
+      
+     Top 10 Prompts Inference Times: 
+      What is the name of our galaxy?The name of our galaxy is the Milky Way.
+      Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec
+Total Inference Time: 909.50 ms
+Time to First Token: 317.50 ms
+      
+        
+        Send
+      
+     Prefill Speed: 127.19 tokens/sec, Decoding Speed: 20.42 tokens/sec
+Total Inference Time: 909.50 ms
+Time to First Token: 317.50 ms</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Performance metrics</td>
+      <td><strong>prefillSpeed:</strong> 127.19 tokens/sec<br><strong>decodingSpeed:</strong> 20.42 tokens/sec<br><strong>inferenceTime:</strong> 909.50 ms<br><strong>timeToFirstToken:</strong> 317.50 ms</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Output captured</td>
+      <td><strong>outputLength:</strong> 40<br><strong>output:</strong> The name of our galaxy is the Milky Way.</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Phase completed: inference</td>
+      <td><strong>durationMs:</strong> 1545</td>
+    </tr>
+  
+    <tr>
+      <td>9:31:15 PM</td>
+      <td>Continuing metric collection for additional 10 seconds</td>
+      <td></td>
+    </tr>
+  
+    <tr>
+      <td>9:31:25 PM</td>
+      <td>Phase completed: overall</td>
+      <td><strong>durationMs:</strong> 36599</td>
+    </tr>
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Tab functionality
+    function openTab(evt, tabName) {
+      const tabcontent = document.getElementsByClassName("tabcontent");
+      for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+      
+      const tablinks = document.getElementsByClassName("tablinks");
+      for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+    
+    // Phase annotation plugin setup
+    const phaseAnnotations = [{"name":"overall","startIndex":0,"endIndex":9},{"name":"model_selection","startIndex":0,"endIndex":0},{"name":"model_download","startIndex":0,"endIndex":6},{"name":"inference","startIndex":6,"endIndex":7}].map(marker => {
+      return {
+        type: 'box',
+        xMin: marker.startIndex,
+        xMax: marker.endIndex,
+        backgroundColor: 'rgba(200, 200, 200, 0.2)',
+        borderColor: 'rgba(100, 100, 100, 0.2)',
+        label: {
+          display: true,
+          content: marker.name,
+          position: 'start'
+        }
+      };
+    });
+    
+    // Helper function to create a simple line chart with phase annotations
+    function createChart(canvasId, label, data, borderColor) {
+      return new Chart(document.getElementById(canvasId).getContext('2d'), {
+        type: 'line',
+        data: { 
+          labels: ["9:30:52 PM","9:30:56 PM","9:31:00 PM","9:31:03 PM","9:31:07 PM","9:31:11 PM","9:31:15 PM","9:31:19 PM","9:31:23 PM","9:32:54 PM","9:32:57 PM","9:33:01 PM","9:33:05 PM","9:33:09 PM","9:33:12 PM","9:33:16 PM","9:33:20 PM","9:33:23 PM","9:33:27 PM","9:33:31 PM","9:33:34 PM","9:33:38 PM","9:33:42 PM","9:33:46 PM","9:33:49 PM"], 
+          datasets: [{ 
+            label: label, 
+            data: data, 
+            borderColor: borderColor, 
+            fill: false, 
+            tension: 0.1 
+          }] 
+        },
+        options: { 
+          responsive: true, 
+          maintainAspectRatio: false,
+          plugins: {
+            annotation: {
+              annotations: phaseAnnotations
+            },
+            legend: { display: true, position: 'top' }
+          }
+        }
+      });
+    }
+    
+    // FPS Chart
+    createChart('fpsChart', 'Frames Per Second', [60.50987005203749,60.5819843079143,60.509870052931916,60.378105513392,43.724535426940584,49.92012779582423,60.28859458408744,60.64221095590236,60.702557468944896,0.011352851155037924,61.20434353405726,60.72672971627675,61.011611887244804,61.125899635396,60.41398435160934,61.24666600737912,61.216429699121484,60.43193976673302,61.34969325189558,60.86002194969707,60.53989678479639,61.083743842364534,60.63618290258449,60.96342194719506,60.50987005203749], 'green');
+    
+    // CPU Usage Chart
+    new Chart(document.getElementById('cpuChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ["9:30:52 PM","9:30:56 PM","9:31:00 PM","9:31:03 PM","9:31:07 PM","9:31:11 PM","9:31:15 PM","9:31:19 PM","9:31:23 PM","9:32:54 PM","9:32:57 PM","9:33:01 PM","9:33:05 PM","9:33:09 PM","9:33:12 PM","9:33:16 PM","9:33:20 PM","9:33:23 PM","9:33:27 PM","9:33:31 PM","9:33:34 PM","9:33:38 PM","9:33:42 PM","9:33:46 PM","9:33:49 PM"],
+        datasets: [
+          { label: 'User', data: [14.54,11.62,11.19,11.6,10.63,20.17,41.43,7.81,14.33,13.12,8.15,9.26,9.78,7.7,6.91,6.86,8.13,7.44,6.12,6.72,6.59,5.68,8.7,6.74,5.86], borderColor: 'blue', fill: false },
+          { label: 'System', data: [22.25,25.68,23.56,24.7,23.73,38.29,21.18,17.73,20.95,18.95,18.63,18.3,18.68,16.81,17.57,17.54,17.85,17.58,16.43,17.37,17.61,16.15,17.86,17.48,16.13], borderColor: 'red', fill: false },
+          { label: 'Idle', data: [63.19,62.68,65.24,64.23,65.62,41.52,37.38,74.44,64.71,67.91,73.2,72.43,71.53,76.1,75.51,75.59,74.1,74.97,77.43,75.89,75.79,78.15,74.6,75.77,77.99], borderColor: 'green', fill: false }
+        ]
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            title: {
+              display: true,
+              text: 'Percentage (%)'
+            }
+          }
+        },
+        plugins: {
+          annotation: {
+            annotations: phaseAnnotations
+          }
+        }
+      }
+    });
+    
+    // Memory Chart
+    new Chart(document.getElementById('memoryChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ["9:30:52 PM","9:30:56 PM","9:31:00 PM","9:31:03 PM","9:31:07 PM","9:31:11 PM","9:31:15 PM","9:31:19 PM","9:31:23 PM","9:32:54 PM","9:32:57 PM","9:33:01 PM","9:33:05 PM","9:33:09 PM","9:33:12 PM","9:33:16 PM","9:33:20 PM","9:33:23 PM","9:33:27 PM","9:33:31 PM","9:33:34 PM","9:33:38 PM","9:33:42 PM","9:33:46 PM","9:33:49 PM"],
+        datasets: [
+          { label: 'Free', data: [977,666.47265625,395.03515625,141.93359375,15.65625,60.19140625,1230.8125,1193.92578125,1202.06640625,1189.63671875,1806.33984375,1805.984375,1796.1875,1804.6640625,1807.79296875,1833.296875,1831.45703125,1832.78515625,1825.0859375,1832.96875,1846.37109375,1845.32421875,1846.96484375,1845.8671875,1846.21484375], borderColor: 'green', fill: false },
+          { label: 'Active', data: [9611.87109375,9683.06640625,9684.08984375,9676.01171875,9679.5234375,10058,9213.1953125,9223.75,9219.90234375,9227.4921875,8943.03515625,8943.6328125,8948.33984375,8946.57421875,8944.86328125,8933.8671875,8934.33984375,8934.93359375,8939.29296875,8935.7734375,8929.36328125,8929.70703125,8929.4296875,8929.80078125,8929.87109375], borderColor: 'blue', fill: false },
+          { label: 'Inactive', data: [9502.4765625,9556.3671875,9577.484375,9596.140625,9618.30859375,9835.52734375,9160.59765625,9172.015625,9153.08984375,9160.2421875,8843.61328125,8842.80078125,8845.68359375,8845.24609375,8844.29296875,8832.8984375,8834.5234375,8833.484375,8836.1328125,8833.734375,8826.40625,8828.13671875,8825.9609375,8826.79296875,8826.265625], borderColor: 'purple', fill: false },
+          { label: 'Wired', data: [3118.15234375,3118.4296875,3116.9296875,3116.234375,3115.25,3118.83984375,3124.0546875,3137.84765625,3136.703125,3134.83203125,3099.68359375,3099.1015625,3101.3125,3095.26171875,3094.57421875,3091.48046875,3091.765625,3089.83203125,3089.78515625,3088.24609375,3087.44140625,3087.38671875,3087.07421875,3087.109375,3087.046875], borderColor: 'orange', fill: false }
+        ]
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false,
+        plugins: {
+          annotation: {
+            annotations: phaseAnnotations
+          }
+        }
+      }
+    });
+    
+    // GPU Charts (with phases)
+    createChart('gpuUtilChart', 'GPU Utilization (%)', [55.215,55.980000000000004,52.14000000000001,53.654999999999994,51.56999999999999,87.72,93.92999999999999,38.34,52.93500000000001,48.135000000000005,40.199999999999996,41.35499999999999,42.705,35.85000000000001,36.73499999999999,36.614999999999995,38.85000000000001,37.545,33.85499999999999,36.165,36.31499999999999,32.77499999999999,38.10000000000001,36.345000000000006,33.01500000000001], 'red');
+    createChart('gpuTempChart', 'GPU Temperature (°C)', [56.043,56.196,55.428,55.730999999999995,55.314,62.544,63.786,52.668,55.587,54.627,53.04,53.271,53.541,52.17,52.347,52.323,52.77,52.509,51.771,52.233,52.263,51.555,52.620000000000005,52.269,51.603], 'orange');
+    
+    // JS Memory Chart
+    new Chart(document.getElementById('jsMemoryChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ["9:30:52 PM","9:30:56 PM","9:31:00 PM","9:31:03 PM","9:31:07 PM","9:31:11 PM","9:31:15 PM","9:31:19 PM","9:31:23 PM","9:32:54 PM","9:32:57 PM","9:33:01 PM","9:33:05 PM","9:33:09 PM","9:33:12 PM","9:33:16 PM","9:33:20 PM","9:33:23 PM","9:33:27 PM","9:33:31 PM","9:33:34 PM","9:33:38 PM","9:33:42 PM","9:33:46 PM","9:33:49 PM"],
+        datasets: [
+          { 
+            label: 'JS Heap Size Limit', 
+            data: [4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75,4095.75],
+            borderColor: 'blue', 
+            fill: false 
+          },
+          { 
+            label: 'Total JS Heap Size', 
+            data: [208.5997314453125,208.72984790802002,208.73054313659668,208.731595993042,511.36255168914795,273.4842252731323,274.76876640319824,260.7389335632324,260.2701692581177,260.0240755081177,260.0240755081177,260.0240755081177,260.0240755081177,260.0709505081177,260.0709505081177,260.0709505081177,260.0709505081177,260.0709505081177,260.0709505081177,260.0709505081177,260.2701692581177,259.5318880081177,259.5318880081177,259.5318880081177,259.5318880081177], 
+            borderColor: 'orange', 
+            fill: false 
+          },
+          { 
+            label: 'Used JS Heap Size', 
+            data: [204.50670623779297,204.72911167144775,204.81597709655762,204.90167427062988,509.57140254974365,265.0883321762085,266.3153781890869,258.46949768066406,258.99054050445557,259.1727876663208,259.1812448501587,259.1896905899048,259.19825077056885,259.2066888809204,259.2151002883911,259.2235116958618,259.2319345474243,259.2404146194458,259.2489404678345,259.25739765167236,259.2657747268677,258.50557041168213,258.51384449005127,258.52233600616455,258.53069019317627], 
+            borderColor: 'red', 
+            fill: false 
+          }
+        ]
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Size (MB)'
+            }
+          }
+        },
+        plugins: {
+          annotation: {
+            annotations: phaseAnnotations
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
