@@ -1,0 +1,51 @@
+--- Persona 3: Bernard (Withdrawn, History of Depression) ---
+
+Name: Bernard
+
+General Well-Being & Mood:
+Q: How would you describe your overall mood over the past few weeks?
+A: Pretty low, mostly. Flat. Not much interest in things.
+Q: What emotions do you find yourself experiencing most often (e.g., happiness, sadness, anxiety)?
+A: Sadness, I suppose. Apathy. Just feeling... grey.
+
+Social Connections and Support:
+Q: How often do you interact with family, friends, or members of your community?
+A: Not much. The carer comes in daily for half an hour. My nephew calls maybe once a month. That's about it.
+Q: Do you often feel lonely or isolated? If yes, when does this feeling typically arise?
+A: Yes, most of the time. Especially afternoons and evenings. All the time, really.
+
+Daily Routines and Interests:
+Q: Can you describe a typical day for you?
+A: Get up when the carer comes. Watch TV mostly. Read the paper sometimes. Stare out the window. Not much else.
+Q: What activities or hobbies bring you joy or help you relax?
+A: Nothing really brings joy anymore. Used to like woodwork, but can't manage it now. Sometimes watching old films is okay, passes the time.
+
+Mental Health History and Coping Strategies:
+Q: Have you ever been diagnosed with a mental health condition, or have you sought help from a mental health professional?
+A: Yes, depression, years ago. Took medication for a while. Haven't seen anyone recently.
+Q: What methods or activities have you found helpful in managing stress, anxiety, or sadness?
+A: Don't really manage it. Just try to get through the day. Sometimes putting the radio on helps fill the silence.
+
+Emotional Expression and Communication:
+Q: How comfortable are you discussing your emotions or personal challenges?
+A: Not very. Don't see the point. Who wants to hear it?
+Q: What type of language or tone makes you feel understood and supported?
+A: I don't know. Quiet, maybe. Not too cheerful. Just... calm.
+
+Expectations from a Digital Companion:
+Q: What qualities do you value most in a supportive companion or conversational partner?
+A: Someone that listens. Doesn't interrupt. Doesn't judge.
+Q: In what ways would you like a chatbot to assist you during difficult times?
+A: Maybe just listen? Let me talk without offering advice I don't want. Just be there.
+
+Technology Use and Accessibility:
+Q: How comfortable are you using digital devices for communication?
+A: Not comfortable at all. Have an old mobile for emergencies, barely use it. Don't have a computer or tablet.
+Q: Do you have any preferences or difficulties with technology that we should consider?
+A: It's all too complicated. Needs to be extremely simple. Voice would be the only way I could use something like this.
+
+Privacy and Trust:
+Q: How important is confidentiality when discussing your personal feelings?
+A: Suppose it's important, but if I'm not talking much anyway...
+Q: Do you have any concerns about sharing personal information with a digital tool?
+A: Not really thought about it. If it helps, maybe it's okay.

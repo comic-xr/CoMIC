@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Therapeutic Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f4f4f4; margin: 0; }
+        .login-container { text-align: center; background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { margin-bottom: 30px; color: #333; }
+        .auth-button { padding: 12px 25px; font-size: 1.1em; border: none; border-radius: 5px; color: #fff; cursor: pointer; transition: background-color 0.2s ease; text-decoration: none; display: inline-block; background-color: #6c757d; }
+        .auth-button:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Welcome to Your Companion</h1>
+        <p>Please log in to continue.</p>
+        <a href="{{ url_for('google_login') }}" class="auth-button">Login with Google</a>
+         {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes style="color: red; list-style: none; padding-top: 15px;">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

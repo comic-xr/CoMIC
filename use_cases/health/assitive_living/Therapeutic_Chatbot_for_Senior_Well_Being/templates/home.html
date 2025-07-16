@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Therapeutic Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.6; background-color: #f4f4f4; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .chat-container { width: 95%; max-width: 700px; background-color: #fff; border-radius: 10px; padding: 25px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; height: calc(100vh - 120px); max-height: 800px; margin-top: 10px; }
+        .header { width: 95%; max-width: 700px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 10px; }
+        .header h2 { margin: 0; color: #333; }
+        #chat-box { flex-grow: 1; overflow-y: auto; border: 1px solid #e0e0e0; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #fafafa; }
+        .message { margin-bottom: 15px; padding: 10px 15px; border-radius: 8px; max-width: 85%; word-wrap: break-word; }
+        .user { background-color: #e7f0ff; color: #333; margin-left: auto; text-align: left; }
+        .bot { background-color: #fdecec; color: #333; margin-right: auto; text-align: left; }
+        .message strong { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9em; color: #555; }
+        #chat-form { display: flex; gap: 10px; align-items: center; /* Align items vertically */ }
+        #user_input { flex-grow: 1; padding: 12px 15px; font-size: 1em; border: 1px solid #ccc; border-radius: 5px; }
+        #chat-form button, .auth-button {
+            padding: 12px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+        #send-button { background-color: #007bff; }
+        #mic-button { background-color: #28a745; }
+        #tts-toggle-button { background-color: #ffc107;color: #333; }
+        .auth-button { background-color: #6c757d; }
+        #send-button:hover { background-color: #0056b3; }
+        #mic-button:hover { background-color: #1f7a34; }
+        #tts-toggle-button:hover { background-color: #e0a800; }
+        .auth-button:hover { background-color: #5a6268; }
+        #mic-button.listening { background-color: #dc3545; }
+        #tts-toggle-button.tts-disabled { background-color: #adb5bd; text-decoration: line-through;}
+        .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+        .user-info { font-size: 0.9em; color: #555; margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Your Companion</h2>
+        <div>
+            <span class="user-info">Logged in as {{ current_user_name }}</span>
+            <a href="{{ url_for('logout') }}" class="auth-button">Logout</a>
+        </div>
+    </div>
+
+    <input type="hidden" id="currentUserName" value="{{ current_user_name | e }}">
+
+    <div class="chat-container">
+        <div id="chat-box">
+            <p style="text-align: center; color: #888;">Loading conversation...</p>
+        </div>
+        <form id="chat-form" action="javascript:void(0);">
+            <label for="user_input" class="visually-hidden">Your message:</label>
+            <input type="text" name="user_input" id="user_input" placeholder="Type or press mic..." required autocomplete="off">
+            <button type="button" id="tts-toggle-button" title="Toggle Voice Output">🔊</button>
+            <button type="button" id="mic-button" title="Use Voice Input">🎤</button>
+            <button type="submit" id="send-button">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const currentUserName = document.getElementById('currentUserName')?.value || 'User';
+        const chatBox = document.getElementById('chat-box');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user_input');
+        const micButton = document.getElementById('mic-button');
+        const sendButton = document.getElementById('send-button');
+        const ttsToggleButton = document.getElementById('tts-toggle-button');
+        let isTtsEnabled = true;
+        let preferredVoice = null;
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition;
+        let isListening = false;
+        if (SpeechRecognition) {
+             recognition = new SpeechRecognition();
+             recognition.continuous = false; recognition.lang = 'en-US'; recognition.interimResults = false;
+             recognition.onstart = () => { isListening = true; micButton.textContent = '👂'; micButton.classList.add('listening'); console.log("SR started"); };
+             recognition.onresult = (event) => { userInput.value = event.results[event.results.length - 1][0].transcript.trim(); console.log("Transcript:", userInput.value); };
+             recognition.onerror = (event) => { console.error("SR error:", event.error); };
+             recognition.onend = () => { isListening = false; micButton.textContent = '🎤'; micButton.classList.remove('listening'); console.log("SR ended"); };
+             micButton.addEventListener('click', () => { if (isListening) { try { recognition.stop(); } catch(e){ console.log("SR stop err:", e); } } else { try { recognition.start(); } catch(e) { console.error("SR start failed:", e); alert("Mic active/permission?"); } } });
+        } else { console.warn("SR not supported."); if(micButton) { micButton.disabled = true; micButton.title = "Voice input not supported"; micButton.textContent = '🚫'; } }
+
+        const synth = window.speechSynthesis;
+        let canSpeak = synth !== undefined;
+
+        function findAndSetFemaleVoice() {
+            if (!canSpeak) return;
+            let voices = synth.getVoices();
+            preferredVoice = voices.find(v => v.lang.startsWith('en-US') && v.name.toLowerCase().includes('female')) ||
+                             voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female')) ||
+                             voices.find(v => v.name.toLowerCase().includes('female')) ||
+                             voices.find(v => v.lang.startsWith('en')) ||
+                             voices[0];
+            if (preferredVoice) {
+                console.log(`Preferred voice set: ${preferredVoice.name} (${preferredVoice.lang})`);
+            } else {
+                console.warn("Could not find a suitable female voice. Using default.");
+            }
+        }
+
+        if (canSpeak) {
+            if (synth.getVoices().length > 0) {
+                findAndSetFemaleVoice();
+            } else {
+                synth.onvoiceschanged = findAndSetFemaleVoice;
+            }
+        }
+
+        function speakText(text) {
+            if (!isTtsEnabled || !canSpeak || !text || text.trim() === '' || synth.speaking) {
+                 if (!isTtsEnabled) console.log("TTS is disabled.");
+                 return;
+            }
+            const textToSpeak = text.replace(/\/\*Companion's Note:.*?\*\//gs, '');
+            if (!textToSpeak.trim()) return;
+
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+            utterance.pitch = 1; utterance.rate = 0.9; utterance.volume = 1;
+            utterance.onerror = (event) => { console.error("Speech Synthesis Error:", event.error); };
+            utterance.onend = () => { console.log("Finished speaking."); };
+            try { synth.speak(utterance); console.log("Attempting to speak:", textToSpeak.substring(0, 50) + "..."); } catch (e) { console.error("Failed to initiate speech synthesis:", e); }
+        }
+
+        function addMessageToChat(sender, text, speak = true) {
+            const messageDiv = document.createElement('div');
+            let senderName = sender; let senderClass = sender.toLowerCase();
+            if (sender.toLowerCase() === 'user') { senderName = currentUserName; senderClass = 'user'; }
+            else { senderClass = 'bot'; }
+            messageDiv.classList.add('message', senderClass);
+            const senderStrong = document.createElement('strong');
+            senderStrong.textContent = senderName + ':';
+            messageDiv.appendChild(senderStrong);
+            messageDiv.appendChild(document.createTextNode(' ' + text));
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+            if (senderClass === 'bot' && speak) { speakText(text); }
+        }
+
+        async function loadInitialMessages() {
+             try {
+                 const response = await fetch('/get_initial');
+                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                 const messages = await response.json();
+                 chatBox.innerHTML = '';
+                 if (messages && Array.isArray(messages) && messages.length > 0) {
+                      messages.forEach(msg => addMessageToChat(msg.sender, msg.text, false));
+                 } else { addMessageToChat('Bot', `Hello ${currentUserName}! How are you feeling today?`, false); }
+             } catch (error) { console.error("Error loading initial message:", error); chatBox.innerHTML = '<p style="color: red; text-align: center;">Error loading conversation start. Please check console.</p>'; }
+        }
+
+        async function sendMessage() {
+             const text = userInput.value.trim(); if (!text) return;
+             addMessageToChat('User', text, false);
+             userInput.value = ''; userInput.disabled = true; sendButton.disabled = true; if(micButton) micButton.disabled = true;
+             const botMessageDiv = document.createElement('div'); botMessageDiv.classList.add('message', 'bot');
+             const botSenderStrong = document.createElement('strong'); botSenderStrong.textContent = 'Bot:'; botMessageDiv.appendChild(botSenderStrong);
+             const botTextNode = document.createTextNode(' Thinking...'); botMessageDiv.appendChild(botTextNode);
+             chatBox.appendChild(botMessageDiv); chatBox.scrollTop = chatBox.scrollHeight;
+             let fullBotResponse = ""; let accumulatedStream = "";
+             try {
+                 const response = await fetch('/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_input: text }) });
+                 if (!response.ok) throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                 const reader = response.body.getReader(); const decoder = new TextDecoder(); let firstChunk = true;
+                 while(true) {
+                     const {value, done} = await reader.read(); if (done) break;
+                     const chunk = decoder.decode(value, {stream: true}); accumulatedStream += chunk;
+                     if (firstChunk) { botTextNode.nodeValue = ' ' + chunk; firstChunk = false; } else { botTextNode.nodeValue += chunk; }
+                     chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+                 }
+                 fullBotResponse = accumulatedStream; speakText(fullBotResponse);
+             } catch (error) { console.error("Error sending/receiving message:", error); botTextNode.nodeValue = ' [Error communicating with bot]'; fullBotResponse = 'Sorry...'; speakText(fullBotResponse); }
+             finally { userInput.disabled = false; sendButton.disabled = false; if(micButton && SpeechRecognition) micButton.disabled = false; userInput.focus(); }
+        }
+
+        chatForm.addEventListener('submit', (e) => { e.preventDefault(); sendMessage(); });
+
+        if (ttsToggleButton) {
+            ttsToggleButton.addEventListener('click', () => {
+                isTtsEnabled = !isTtsEnabled;
+                if (isTtsEnabled) {
+                    ttsToggleButton.textContent = '🔊';
+                    ttsToggleButton.title = 'Disable Voice Output';
+                    ttsToggleButton.classList.remove('tts-disabled');
+                    console.log("TTS Enabled");
+                } else {
+                    ttsToggleButton.textContent = '🔇';
+                    ttsToggleButton.title = 'Enable Voice Output';
+                    ttsToggleButton.classList.add('tts-disabled');
+                    if (synth.speaking) {
+                        synth.cancel();
+                    }
+                    console.log("TTS Disabled");
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadInitialMessages);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+--- Persona 1: Arthur (Generally Content, Physically Limited) ---
+
+Name: Arthur
+
+General Well-Being & Mood:
+Q: How would you describe your overall mood over the past few weeks?
+A: Generally quite good, thank you. Fairly content, though I get a bit frustrated sometimes that I can't garden as much as I used to. Ups and downs, you know.
+Q: What emotions do you find yourself experiencing most often (e.g., happiness, sadness, anxiety)?
+A: Mostly contentment, I'd say. A bit of happiness when my daughter visits or when I manage a good walk. Occasional frustration, as I said. Not much anxiety, thankfully.
+
+Social Connections and Support:
+Q: How often do you interact with family, friends, or members of your community?
+A: My daughter visits every Sunday, bless her. I chat with my neighbour, Martha, over the fence most days. And I go to the Men's Shed group on Wednesdays.
+Q: Do you often feel lonely or isolated? If yes, when does this feeling typically arise?
+A: Not often, really. Maybe sometimes late in the evening if there's nothing good on the telly and it's quiet. But the Shed helps, keeps me busy.
+
+Daily Routines and Interests:
+Q: Can you describe a typical day for you?
+A: Up around 7, cup of tea, read the paper. Potter about in the morning, maybe a short walk if my hip allows. Lunch, then perhaps watch some television or listen to the radio. Try to do a bit in the garden in the afternoon, even if it's just deadheading. Quiet evening, dinner, telly again.
+Q: What activities or hobbies bring you joy or help you relax?
+A: My garden, definitely, even if I can't do the heavy digging now. Watching the birds. Listening to old jazz music relaxes me. And the Men's Shed, good company there.
+
+Mental Health History and Coping Strategies:
+Q: Have you ever been diagnosed with a mental health condition, or have you sought help from a mental health professional?
+A: No, nothing diagnosed. Had a tough patch after my wife passed, but didn't see anyone formally.
+Q: What methods or activities have you found helpful in managing stress, anxiety, or sadness?
+A: Keeping busy helps. Staying in routine. A good cup of tea. Chatting with Martha or the folks at the Shed. Listening to my music.
+
+Emotional Expression and Communication:
+Q: How comfortable are you discussing your emotions or personal challenges?
+A: I'm alright, I suppose. Not one for pouring my heart out, but I can talk if something's really bothering me, especially with my daughter.
+Q: What type of language or tone makes you feel understood and supported?
+A: Plain speaking, mostly. Kind, but not overly sentimental. Just straightforward and understanding.
+
+Expectations from a Digital Companion:
+Q: What qualities do you value most in a supportive companion or conversational partner?
+A: Patience is key. Someone, or something, that listens without interrupting. And reliability.
+Q: In what ways would you like a chatbot to assist you during difficult times?
+A: Maybe just to chat about everyday things, take my mind off worries. Perhaps remind me of things I enjoy doing if I'm feeling a bit low.
+
+Technology Use and Accessibility:
+Q: How comfortable are you using digital devices for communication?
+A: I manage okay with my tablet for emails and reading the news. Smartphones are a bit fiddly for me. Video calls are nice with my daughter.
+Q: Do you have any preferences or difficulties with technology that we should consider?
+A: Big buttons are good! And clear text. Voice commands would be easier than typing sometimes.
+
+Privacy and Trust:
+Q: How important is confidentiality when discussing your personal feelings?
+A: Very important. I wouldn't want my private thoughts shared around.
+Q: Do you have any concerns about sharing personal information with a digital tool?
+A: A little bit, yes. You hear stories. I'd need reassurance it was secure and private.
