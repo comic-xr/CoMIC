@@ -1,0 +1,51 @@
+/* 
+ * Vision Mode Filters
+ * Defines CSS image filters to simulate various optical sensors.
+ */
+
+/* Container for the main webcam feed */
+.video-container { 
+    position: relative; 
+    width: 100vw; 
+    height: 100vh; 
+}
+
+/* Base video styling */
+video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: filter 0.5s ease; /* Smooth transition between vision modes */
+}
+
+/* 
+ * Standard Optical Mode
+ * Slightly dimmed to allow HUD elements to pop.
+ */
+video.mode-std { 
+    filter: brightness(0.7) contrast(1.1) grayscale(0.2); 
+}
+
+/* 
+ * Night Vision Goggles (NVG) Mode
+ * Classic green-tinted high contrast.
+ */
+video.mode-nvg { 
+    filter: sepia(100%) hue-rotate(85deg) saturate(300%) contrast(1.2) brightness(0.9); 
+}
+
+/* 
+ * FLIR (Forward Looking Infrared) Mode
+ * High contrast black-and-white inversion.
+ */
+video.mode-flir { 
+    filter: invert(100%) grayscale(100%) contrast(200%) brightness(1.2); 
+}
+
+/* 
+ * LiDAR Simulation Mode
+ * Psychedelic, high-contrast false colors for topological representation.
+ */
+video.mode-lidar { 
+    filter: grayscale(1) invert(1) contrast(3) sepia(1) hue-rotate(130deg) saturate(3); 
+}

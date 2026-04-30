@@ -1,0 +1,22 @@
+/* 
+ * Global UI Variables
+ * Defines the core color palette and typography for the Robot HUD.
+ */
+:root {
+    /* Primary Colors */
+    --primary: #f8f9fa;
+    --accent: #00e5ff;
+    
+    /* Status Colors */
+    --warning: #ffb300;
+    --danger: #ff2a2a;
+    --success: #00e676;
+    
+    /* Panel Styling */
+    --panel-bg: rgba(6, 9, 15, 0.75);
+    --panel-border: rgba(255, 255, 255, 0.1);
+    
+    /* Typography */
+    --font-heading: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}

@@ -1,0 +1,23 @@
+/* 
+ * Base Styles & Resets
+ * Resets default browser margins and sets up the full-screen layout.
+ */
+
+/* Universal reset for predictable sizing */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+/* Body setup for a full-screen, unscrollable tactical interface */
+body {
+    background: #000; 
+    color: var(--primary); 
+    font-family: var(--font-heading);
+    overflow: hidden; 
+    height: 100vh; 
+    font-size: 13px; 
+    font-weight: 600;
+    user-select: none; /* Prevent accidental text selection during operation */
+}

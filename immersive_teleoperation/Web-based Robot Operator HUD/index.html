@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Operator HUD // DEFENSE GRADE</title>
+    <!-- Modular CSS Subsystems -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/vision-modes.css">
+    <link rel="stylesheet" href="css/alerts.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet GPS Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Real-time AI Object Tracking Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<body>
+    <div class="video-container" id="video-container">
+        <video id="webcam" autoplay playsinline muted></video>
+        
+        <!-- Live AI Tracking Layer -->
+        <div id="live-tracking-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 500;"></div>
+        
+        <div class="corner-frame top-left"></div>
+        <div class="corner-frame top-right"></div>
+        <div class="corner-frame bottom-left"></div>
+        <div class="corner-frame bottom-right"></div>
+        
+        <div class="hud-overlay">
+            
+            <header class="hud-header">
+                <div class="header-brand">SYS // HAZMAT-OP-T3</div>
+                <div class="vision-controls">
+                    <button class="btn-tech vision-btn active" data-mode="std">OPTICAL</button>
+                    <button class="btn-tech vision-btn" data-mode="nvg">NVG</button>
+                    <button class="btn-tech vision-btn" data-mode="flir">FLIR</button>
+                    <button class="btn-tech vision-btn" data-mode="lidar">LIDAR</button>
+                </div>
+                <div class="header-status">
+                    <span class="pulse-ring"></span>
+                    <span id="video-status">ONLINE // SECURE</span>
+                </div>
+            </header>
+
+            <div class="grid-layout">
+                <div class="hud-panel left-flank">
+                    <div class="panel-section">
+                        <div class="section-title">HAZMAT SENSORS</div>
+                        <div class="data-block">
+                            <div class="data-label">O2 CONCENTRATION</div>
+                            <div class="data-val"><span id="o2-level" class="val-text safe">21.0%</span></div>
+                            <div class="progress-track"><div class="progress-fill safe-fill" id="o2-bar" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="data-block">
+                            <div class="data-label">CO2 LEVELS</div>
+                            <div class="data-val"><span id="co2-level" class="val-text safe">400 ppm</span></div>
+                            <div class="progress-track"><div class="progress-fill safe-fill" id="co2-bar" style="width: 10%;"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <div class="section-title">TELEMETRY</div>
+                        <div class="telemetry-grid">
+                            <div class="t-cell"><span>LAT</span><span id="coord-x" class="mono">0.000</span></div>
+                            <div class="t-cell"><span>LNG</span><span id="coord-y" class="mono">0.000</span></div>
+                            <div class="t-cell"><span>PTCH</span><span id="pitch" class="mono">0.0&deg;</span></div>
+                            <div class="t-cell"><span>YAW</span><span id="yaw" class="mono">0.0&deg;</span></div>
+                            <div class="t-cell w-full"><span>VELOCITY</span><span id="speed" class="mono highlight">0.0 m/s</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hud-panel right-flank">
+                    <div class="panel-section">
+                        <div class="section-title">POWER MODULE</div>
+                        <div class="data-block">
+                            <div class="data-label" style="display:flex; justify-content:space-between"><span>MAIN CELL</span><span id="battery">100.0%</span></div>
+                            <div class="battery-track"><div class="battery-fill" id="battery-bar" style="width:100%"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <div class="section-title">DIAGNOSTICS</div>
+                        <div class="telemetry-grid">
+                            <div class="t-cell"><span>CPU</span><span id="cpu-temp" class="mono">45.0&deg;C</span></div>
+                            <div class="t-cell"><span>LOD</span><span id="sys-load" class="mono">12%</span></div>
+                            <div class="t-cell"><span>EXT</span><span id="temp" class="mono">22.0&deg;C</span></div>
+                            <div class="t-cell"><span>HUM</span><span id="humidity" class="mono">45%</span></div>
+                            <div class="t-cell w-full" style="display:flex; align-items:center; justify-content:space-between;">
+                                <span>NET RTT</span>
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span class="net-dots"><span></span><span></span><span></span></span>
+                                    <span id="latency" class="mono highlight">24ms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tactical Map at Bottom Right -->
+            <div id="tactical-map-container" class="tactical-map"></div>
+
+            <div class="voice-cmd-panel hidden" id="voice-cmd-panel">
+                <span class="pulse-ring"></span>
+                <span id="voice-cmd-text">SYSTEM // M.I.C. ENGAGED</span>
+            </div>
+
+            <!-- Radio Feed at Bottom -->
+            <div class="radio-feed">
+                <div class="feed-header">
+                    <span class="feed-title">COMM INTERCEPT // NLP FILTER</span>
+                    <div class="feed-controls">
+                        <button id="toggle-listen-btn" class="btn-tech">INIT COMM</button>
+                        <span id="nlp-status" class="status-badge idle">STANDBY</span>
+                    </div>
+                </div>
+                <div class="feed-container" id="radio-feed-container">
+                    <div class="radio-msg system-msg">AWAITING TRANSMISSION...</div>
+                </div>
+            </div>
+
+            <div class="center-reticle">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none" />
+                    <circle cx="100" cy="100" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none" stroke-dasharray="4 8" />
+                    <line x1="100" y1="10" x2="100" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="2" />
+                    <line x1="100" y1="160" x2="100" y2="190" stroke="rgba(255,255,255,0.5)" stroke-width="2" />
+                    <line x1="10" y1="100" x2="40" y2="100" stroke="rgba(255,255,255,0.5)" stroke-width="2" />
+                    <line x1="160" y1="100" x2="190" y2="100" stroke="rgba(255,255,255,0.5)" stroke-width="2" />
+                    <circle cx="100" cy="100" r="2" fill="var(--accent)" />
+                </svg>
+            </div>
+        </div>
+
+        <div id="critical-alert" class="critical-banner hidden">
+            <div class="banner-stripes"></div>
+            <div class="banner-content">
+                <span class="banner-icon">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </span>
+                <div class="banner-text">
+                    <div class="alert-title">CRITICAL HAZARD DETECTED</div>
+                    <div class="alert-desc" id="alert-desc">O2 LEVELS CRITICALLY LOW</div>
+                </div>
+            </div>
+            <div class="banner-stripes right"></div>
+        </div>
+    </div>
+    <!-- Main Application Entry Point -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

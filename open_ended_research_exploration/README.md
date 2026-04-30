@@ -1,1 +1,0 @@
-Open-ended Research Exploration

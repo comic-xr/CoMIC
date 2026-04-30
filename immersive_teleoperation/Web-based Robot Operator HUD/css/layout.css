@@ -1,0 +1,72 @@
+/* 
+ * Layout & Positioning
+ * Handles the structural alignment of the HUD overlay.
+ */
+
+/* Framing Corners - Decorative borders in the 4 corners */
+.corner-frame {
+    position: absolute; 
+    width: 50px; 
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.2); 
+    pointer-events: none; 
+    z-index: 10;
+}
+.top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.top-right { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+/* Main HUD wrapper */
+.hud-overlay { 
+    position: absolute; 
+    inset: 0; 
+    pointer-events: none; 
+    padding: 40px; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+/* Header structural layout */
+.hud-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 25px; 
+}
+
+/* Grid layout for left/right side panels */
+.grid-layout { 
+    display: flex; 
+    justify-content: space-between; 
+    flex-grow: 1; 
+}
+
+/* Side panels base styling */
+.hud-panel { 
+    width: 320px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+/* Individual data sections inside panels */
+.panel-section { 
+    background: var(--panel-bg); 
+    backdrop-filter: blur(10px); 
+    padding: 20px; 
+    border: 1px solid var(--panel-border); 
+    position: relative; 
+}
+
+/* Left accent line for panel sections */
+.panel-section::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 3px; 
+    height: 100%; 
+    background: var(--accent); 
+    opacity: 0.5; 
+}

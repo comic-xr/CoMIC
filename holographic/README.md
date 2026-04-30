@@ -1,1 +1,0 @@
-Interactive Live Volumetric Video Streaming

@@ -1,0 +1,92 @@
+/* 
+ * UI Components
+ * Buttons, data blocks, progress bars, and tactical map elements.
+ */
+
+/* --- Header Elements --- */
+.header-brand { 
+    font-size: 16px; 
+    letter-spacing: 4px; 
+    color: var(--accent); 
+    font-weight: 700; 
+    text-transform: uppercase; 
+}
+.vision-controls { pointer-events: auto; display: flex; gap: 5px; }
+.vision-btn { margin-left: 5px; opacity: 0.5; }
+.vision-btn.active { opacity: 1; border-color: var(--primary); background: rgba(255,255,255,0.15); color: var(--primary); }
+
+.header-status { 
+    display: flex; align-items: center; gap: 10px; 
+    background: rgba(0,0,0,0.5); padding: 6px 12px; 
+    border-radius: 4px; border: 1px solid var(--panel-border); 
+    font-family: var(--font-mono); font-size: 12px; 
+}
+
+/* --- Typography Helpers --- */
+.section-title { 
+    font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.5); 
+    margin-bottom: 15px; border-bottom: 1px solid var(--panel-border); 
+    padding-bottom: 8px; text-transform: uppercase; 
+    font-family: var(--font-heading); font-weight: 700; 
+}
+
+/* --- Progress Bars & Data Displays --- */
+.data-block { margin-bottom: 15px; }
+.data-label { 
+    display: flex; justify-content: space-between; font-size: 10px; 
+    color: rgba(255,255,255,0.6); margin-bottom: 4px; 
+    font-family: var(--font-mono); letter-spacing: 1px; 
+}
+.val-text { font-family: var(--font-mono); font-size: 18px; font-weight: 700; }
+.progress-track, .battery-track { 
+    height: 4px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 6px; position: relative; 
+}
+.progress-fill, .battery-fill { height: 100%; width: 50%; transition: width 0.3s ease, background 0.3s ease; }
+.battery-track { height: 8px; border: 1px solid rgba(255,255,255,0.2); background: transparent; padding: 1px; }
+.battery-fill { background: var(--success); }
+
+/* --- Telemetry Grid Layout --- */
+.telemetry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.t-cell { 
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); 
+    padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; 
+}
+.t-cell span:first-child { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 1px; font-family: var(--font-heading);}
+.t-cell .mono { font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+.w-full { grid-column: span 2; }
+.highlight { color: var(--accent); }
+
+/* --- Tactical Map Module --- */
+.tactical-map {
+    position: absolute; bottom: 40px; right: 40px; width: 220px; height: 160px;
+    border: 2px solid var(--accent); background: rgba(0,0,0,0.5); z-index: 200;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* --- Center Reticle --- */
+.center-reticle { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    opacity: 0.5; pointer-events: none; 
+}
+
+/* --- Common UI Buttons --- */
+.btn-tech { 
+    background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent); 
+    font-family: var(--font-mono); font-size: 10px; padding: 4px 12px; cursor: pointer; 
+    transition: all 0.2s; text-transform: uppercase; font-weight: 700; 
+}
+.btn-tech:hover, .btn-tech.active { background: var(--accent); color: #000; box-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+
+/* Status Colors */
+.safe { color: var(--primary) !important; }
+.safe-fill { background: var(--accent) !important; box-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+.warning { color: var(--warning) !important; text-shadow: 0 0 8px rgba(255, 179, 0, 0.5); }
+.warning-fill { background: var(--warning) !important; box-shadow: 0 0 10px rgba(255, 179, 0, 0.5); }
+.danger { color: var(--danger) !important; text-shadow: 0 0 8px rgba(255, 42, 42, 0.5); }
+.danger-fill { background: var(--danger) !important; box-shadow: 0 0 10px rgba(255, 42, 42, 0.5); animation: alertPulse 0.5s infinite alternate; }
+
+/* Status Badge Styles */
+.status-badge { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 2px; }
+.status-badge.idle { background: rgba(255,255,255,0.1); color: var(--primary); }
+.status-badge.active { background: rgba(0, 230, 118, 0.2); color: var(--success); border: 1px solid var(--success); }
+.status-badge.processing { background: rgba(255, 179, 0, 0.2); color: var(--warning); border: 1px solid var(--warning); }
