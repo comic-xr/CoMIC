@@ -1,0 +1,760 @@
+chart_id,chart_type,question,expected,response,correct,cost
+3D-Bar_42,3D-Bar,How many units were sold in the East region?,450,The East region sold **450 units**.,True,0.001188
+3D-Bar_202,3D-Bar,How many more research reports were published in Electrical Engineering compared,20,"From the chart, **Research Reports Published** are:
+
+- **Electrical Engineering:** 60  
+- **Civil En",True,0.003062
+3D-Bar_114,3D-Bar,What is the increase in revenue from online sales from 2021 to 2023?,$1000 billion,"From the chart, **online sales revenue** was:
+
+- **2021:** \$4,200 billion  
+- **2023:** \$5,500 bil",False,0.003268
+3D-Bar_269,3D-Bar,In which year did the Total Global Forest Area decrease to below 3.0 Billion Acr,2019,"From the chart, Total Global Forest Area values are:
+
+- 2018: 3.2 billion acres  
+- 2019: 3.1 billio",True,0.0067
+3D-Bar_100,3D-Bar,Which month had the highest Grain Yield?,May,The highest **Grain Yield** was in **May**.,True,0.00567
+3D-Bar_174,3D-Bar,What is the total Government Spending on Education Budget for the years 2020 and,48,"From the chart, the **Education Budget** is:
+
+- **2020:** \$22B  
+- **2021:** \$25B  
+
+**Total for 2",True,0.002762
+3D-Bar_148,3D-Bar,In which area were the most civil cases filed?,Metropolitan Area,The most civil cases were filed in the Metropolitan Area.,True,0.002716
+3D-Bar_119,3D-Bar,"Which company has the highest total sales for alcohol, non-alcoholic beverages, ",McDonald's,,False,0.005536
+3D-Bar_21,3D-Bar,Which category has the highest average price per tonne?,Oils,"From the chart, **Oils** has the highest average price per tonne, at about **$600/tonne**.",True,0.00278
+3D-Bar_127,3D-Bar,Which country has the highest public healthcare expenditure as a percentage of G,USA,"From the chart, **the UK** has the highest **public healthcare expenditure as a percentage of GDP**,",False,0.002228
+3D-Bar_203,3D-Bar,Which department has the highest number of new employees and what is that number,"Marketing, 90","The department with the highest number of new employees is **Marketing**, with **90** new employees.",True,0.002102
+3D-Bar_259,3D-Bar,Which department has the highest employee retention rate?,IT,"From the chart, **Sales** has the highest employee retention rate at **95%**.",False,0.002074
+3D-Bar_180,3D-Bar,How much did donations increase from 2019 to 2023?,$1100,"From the chart, donations were:
+
+- **2019:** 1200 ($000)
+- **2023:** 2100 ($000)
+
+So the increase wa",True,0.003316
+3D-Bar_131,3D-Bar,How many millions of museums visits were recorded in USA?,30,The USA recorded **30 million** museum visits.,True,0.000966
+3D-Bar_287,3D-Bar,What was the growth in the software market from 2019 to 2023?,$65 billion,"From the chart, the **software market** grew from **$450 billion in 2019** to **$650 billion in 2023",False,0.003666
+3D-Bar_36,3D-Bar,What is the percentage increase in sports revenue from 2019 to 2023?,33%,"From the chart, sports revenue was:
+
+- **2019:** \$60 billion  
+- **2023:** \$80 billion
+
+Percentage",True,0.004906
+3D-Bar_40,3D-Bar,How many more students are there in college compared to high school?,1000 students,"From the chart:
+
+- High School students: 2,000
+- College students: 3,000
+
+Difference:
+3,000 − 2,000 ",True,0.001706
+3D-Bar_70,3D-Bar,In which year did the donations received exceed the total expenditure for the fi,2023,"From the chart:
+
+- **2019:** Donations = 150, Expenditure = 180 → donations did **not** exceed expen",True,0.004256
+3D-Bar_181,3D-Bar,By how much did the Alternative Energy Production increase from 2020 to 2022?,200 GW,"From the chart, Alternative Energy Production was:
+
+- **2020:** 450 GW  
+- **2022:** 700 GW  
+
+So th",False,0.00334
+3D-Bar_95,3D-Bar,How many academic positions are there in the field of Philosophy?,4,"The chart shows **6 hundred academic positions** in **Philosophy**, i.e. **600 positions**.",False,0.005838
+3D-Bar_69,3D-Bar,Which school has the smallest number of students according to the data?,Princeton,"According to the chart, **Brown** has the smallest number of students, with about **9,000 students**",False,0.002394
+3D-Bar_110,3D-Bar,By how much did processed food sales increase from 2017 to 2021?,$120 million,Processed food sales increased from **300 million dollars in 2017** to **400 million dollars in 2021,False,0.002954
+3D-Bar_77,3D-Bar,By how many million units did Automobile Production increase from Q1-2021 to Q1-,2.6 million units,Automobile Production increased from **5 million units** in **Q1-2021** to **7 million units** in **,False,0.006484
+3D-Bar_285,3D-Bar,What was the percentage increase in gross profit from 2019 to 2020?,8.96%,"From the chart, **gross profit** was:
+
+- **2019:** 900 million $
+- **2020:** 1000 million $
+
+Percent",False,0.003658
+3D-Bar_60,3D-Bar,How much pork was consumed in 2021?,24 Kg,Pork consumption in **2021** was **24 kg**.,True,0.00569
+3D-Bar_177,3D-Bar,Which country has the highest average expenditure in the data provided?,UK,"The **UK** has the highest average expenditure in the data provided, at **$400 million**.",True,0.004032
+3D-Bar_277,3D-Bar,In which year did the Video Games Industry Revenue surpass the Film Industry Rev,2019,"From the chart, the Video Games Industry Revenue is higher than the Film Industry Revenue in every y",True,0.006148
+3D-Bar_34,3D-Bar,How much greater is the revenue from rail compared to water transportation?,$10 billion,"From the chart:
+
+- **Rail revenue** = **$25 billion**
+- **Water revenue** = **$15 billion**
+
+So, the",True,0.002714
+3D-Bar_252,3D-Bar,How many more units were sold in the South region compared to the East region?,150 units,"From the chart, **Sales Volume (Units)** is:
+
+- **South:** 600 units  
+- **East:** 400 units  
+
+So, ",False,0.001504
+3D-Bar_43,3D-Bar,How much did the total retail sales increase from 2019 to 2023?,6.5 billion dollars,"From the chart, **total retail sales** were:
+
+- **2019:** \$8.0 billion  
+- **2023:** \$12.3 billion",False,0.002098
+3D-Bar_234,3D-Bar,Which country has the highest number of tourists according to the data given?,France,"According to the chart, **France** has the highest number of tourists, with **20 million**.",True,0.002708
+3D-Bar_167,3D-Bar,How many more faculty members are there in Psychology than in Anthropology?,25,"Psychology has **30 more faculty members** than Anthropology.
+
+- **Psychology faculty:** 80  
+- **An",False,0.002618
+3D-Bar_235,3D-Bar,How many more homes are there in the West region compared to the East region?,50 homes,"From the chart:
+
+- **West region homes:** 180  
+- **East region homes:** 130  
+
+**Difference = 180 -",True,0.0021
+3D-Bar_134,3D-Bar,What was the total sale for Q1?,$20 billion,The total sales for **Q1** were **$25 billion**.,False,0.005764
+3D-Bar_61,3D-Bar,How much research funding did the Electrical Engineering department receive?,125 million dollars,The Electrical Engineering department received **$150 million** in research funding.,False,0.003228
+3D-Bar_19,3D-Bar,Which field has the smallest difference between the number of scientists and the,Mathematics,"From the chart:
+
+- Physics: Scientists 200, Engineers 400 → difference = 200  
+- Chemistry: Scientis",True,0.00262
+3D-Bar_257,3D-Bar,"In which year did family cases reach exactly 200,000?",2018,"Family cases reached exactly **200,000 in 2018**.",True,0.00277
+3D-Bar_8,3D-Bar,How many average vacation days do Remote employees have?,14,Remote employees have an average of **15 vacation days**.,True,0.000996
+3D-Bar_57,3D-Bar,How much did the Carbon Dioxide Emissions decrease from 2019 to 2023?,6000 kilotonnes,"From the chart, **Carbon Dioxide Emissions** were:
+
+- **2019:** 25,000 kilotonnes  
+- **2023:** 21,0",False,0.003806
+3D-Bar_188,3D-Bar,By how many thousands did the number of Commerce Graduates increase from 2019 to,"50,000s","Commerce graduates increased from **180 thousand in 2019** to **240 thousand in 2023**.
+
+So, the inc",False,0.00265
+3D-Bar_91,3D-Bar,What is the average cost difference between a family law case and a criminal cha,$75,"From the chart:
+
+- **Family Law average cost:** **$60**
+- **Criminal Charges average cost:** **$70**",True,0.002882
+3D-Bar_222,3D-Bar,How many stores does Subway have?,10000,"Subway has **12,000 stores** according to the chart.",False,0.00368
+3D-Bar_171,3D-Bar,What is the education budget of the UK?,$15.2 billion,"From the chart, the **UK education budget** is **$20 billion**.",False,0.00281
+3D-Bar_139,3D-Bar,By how much does the average tuition for Doctorate level exceed the average tuit,$1.5k,"From the chart:
+
+- **Undergraduate average tuition** = **3.0** (thousand dollars)
+- **Doctorate aver",False,0.00199
+3D-Bar_186,3D-Bar,How many passengers are carried by road transport?,20.6 million,"From the chart, **road transport carries about 80 million passengers**.",False,0.001042
+3D-Bar_116,3D-Bar,How many more Sociology Publications were there in 2022 compared to 2018?,150,"Sociology publications increased from **300** in 2018 to **450** in 2022.
+
+So, there were **150 more",True,0.00321
+3D-Bar_14,3D-Bar,Which country has the highest energy efficiency as measured in MtCO2e/GDP?,China,"From the chart, the **USA** has the highest value for **Energy Efficiency (MtCO2e/GDP)** at about **",False,0.00337
+3D-Bar_33,3D-Bar,How many more chemistry students enrolled in 2023 compared to 2019?,"20,000 students","Chemistry enrollment was **50 thousand** in **2019** and **60 thousand** in **2023**.
+
+So, the incre",False,0.002576
+3D-Bar_126,3D-Bar,Which platform has the highest annual revenue?,LinkedIn,"From the chart, **YouTube** has the highest annual revenue, at about **$150 billion**.",False,0.002712
+3D-Bar_56,3D-Bar,By how much did Online Sales exceed In-Store Sales in 2023?,$2300 billion,"From the chart for **2023**:
+
+- **Online Sales** = **$3,000 billion**
+- **In-Store Sales** = **$700 ",True,0.0034
+3D-Bar_184,3D-Bar,In which year did the volunteer work see the highest increase compared to the pr,2023,"From the chart, volunteer work values are approximately:
+
+- 2020: 200 hours  
+- 2021: 220 hours  
+- ",True,0.00393
+3D-Bar_205,3D-Bar,In which year did coal production drop below 25 million tonnes for the first tim,2019,Coal production first dropped below **25 million tonnes in 2020**.,True,0.002626
+3D-Bar_3,3D-Bar,Which country has the highest unemployment rate according to the data?,Canada,"According to the chart, **New Zealand** has the highest unemployment rate at **5.0%**.",False,0.001552
+3D-Bar_289,3D-Bar,By what percentage did the Growth in Digital Media Consumption increase from 201,33 percent,"From the chart, **Growth in Digital Media Consumption** was:
+
+- **2019:** 50
+- **2023:** 100
+
+Percen",False,0.003016
+3D-Bar_143,3D-Bar,Which year saw the biggest drop in Carbon Emission from the previous year accord,2023,"From the chart, Carbon Emission values are:
+
+- 2019: 35
+- 2020: 33
+- 2021: 31
+- 2022: 29
+- 2023: 27
+",True,0.004688
+3D-Bar_68,3D-Bar,What is the percentage growth of the Population from 2019 to 2020?,0.1%,"From the chart, **Population Growth (%)** is:
+
+- **2019:** 1.4%
+- **2020:** 1.3%
+
+Percentage change ",False,0.00357
+3D-Bar_296,3D-Bar,What is the average Math score for High school?,76,The average Math score for **High school** is **70**.,True,0.002764
+3D-Bar_230,3D-Bar,What was the operating expense in Q3 2020?,500,The operating expense in **Q3 2020** was **500 million dollars**.,True,0.002296
+3D-Bar_233,3D-Bar,How many accidents occurred in Water transport?,150,The number of accidents in **Water transport** is **150**.,True,0.002224
+3D-Bar_227,3D-Bar,How much more does the West region spend on average in restaurants compared to t,$30,"From the chart, **Average Restaurant Spending** is:
+
+- **North:** \$50  
+- **West:** \$80  
+
+So, the",True,0.004428
+3D-Bar_288,3D-Bar,Which region has the lowest unemployment rate?,East,"The **East** region has the **lowest unemployment rate**, at **4%**.",True,0.001088
+3D-Bar_41,3D-Bar,How many million tonnes of livestock production were there in 2021?,42,"In **2021**, livestock production was **35 million tonnes**.",False,0.002596
+3D-Bar_120,3D-Bar,How many more Daily Active Users does Facebook have compared to Instagram?,1000 million,"From the chart:
+
+- **Facebook DAU** = **1500 million**
+- **Instagram DAU** = **500 million**
+
+So, **",True,0.002842
+3D-Bar_38,3D-Bar,Which restaurant has the highest consumption of non-alcoholic beverages?,Catering,"From the chart, **Catering** has the highest consumption of **non-alcoholic beverages**, at about **",True,0.002442
+3D-Bar_219,3D-Bar,By how many did the number of humanities graduates exceed the number of social s,1000,"From the chart for **2022**:
+
+- **Humanities graduates** = **4800**
+- **Social science graduates** =",False,0.002986
+3D-Bar_182,3D-Bar,Which city has the highest number of New Housing Permits Issued?,New York,"From the chart, **New York** has the highest number of **New Housing Permits Issued**.",True,0.002724
+3D-Bar_263,3D-Bar,Which activity has the highest growth rate?,Online Gaming,"From the chart, **Online Gaming** has the highest growth rate at **8.5%**.",True,0.001556
+3D-Bar_154,3D-Bar,By how much did the Food Industry Revenue increase from 2018 to 2022?,$100 billion,"From the chart, **Food Industry Revenue** was:
+
+- **2018:** 300 billion $
+- **2022:** 360 billion $
+",False,0.002884
+3D-Bar_129,3D-Bar,How much did Online Sales increase from Q2 2020 to Q4 2020?,$125 million,"Online Sales increased from **$280M in Q2 2020** to **$400M in Q4 2020**.
+
+**Increase = $120M**.",True,0.00612
+3D-Bar_10,3D-Bar,How many million Youtube users were there in 2019?,3.5,"In **2019**, YouTube had **3,500 million users**.",False,0.002264
+3D-Bar_66,3D-Bar,Which month has the highest total number of deliveries when combining all four m,June,"From the chart, the monthly totals across all four transport modes are:
+
+- **January:** 80 + 100 + 1",True,0.00417
+3D-Bar_112,3D-Bar,How much has food manufacturing production increased from 2019 to 2023?,19.5 million units,"From the chart, **food manufacturing production** was:
+
+- **2019:** 20 million units  
+- **2023:** 3",True,0.00348
+3D-Bar_215,3D-Bar,How much more was allocated to Services & Advocacy than to Education & Research ,$120 million,"In 2022:
+
+- **Services & Advocacy** = **$420M**
+- **Education & Research** = **$300M**
+
+Difference: ",True,0.006076
+3D-Bar_128,3D-Bar,What is the market share of Spirits?,23%,The market share of **Spirits** is **20%**.,False,0.005762
+3D-Bar_37,3D-Bar,Which region has the highest number of galleries?,West,"From the chart, the number of **galleries** by region is:
+
+- **North:** 30  
+- **South:** 35  
+- **E",True,0.003418
+3D-Bar_124,3D-Bar,How much did the Internet Users (Millions) increase from 2019 to 2023?,1200,"From the chart, **Internet Users (Millions)** were:
+
+- **2019:** 3000 million  
+- **2023:** 4500 mil",False,0.00363
+3D-Bar_162,3D-Bar,How many volunteers were there in 2021?,230,"In **2021**, the number of **volunteers** was **210**.",True,0.002636
+3D-Bar_144,3D-Bar,How many more graduate students than undergraduate students were there in 2019?,4400,"From the chart for **2019**:
+
+- **Graduate students:** 12,500  
+- **Undergraduate students:** 9,500 ",False,0.00642
+3D-Bar_271,3D-Bar,How many more '000 units were shipped in May compared to April?,6,"From the chart, the **Number of Dispatched Units (in '000)** is:
+
+- **April:** 330  
+- **May:** 380 ",False,0.00267
+3D-Bar_22,3D-Bar,How much Renewable Energy was produced in 2023?,3200 Million KWh,"In **2023**, **Renewable Energy production** was **3,500 million kWh**.",True,0.003242
+3D-Bar_79,3D-Bar,In which year did the renewable energy utilization reach or exceed 20%?,2019,"From the chart, renewable energy utilization reached or exceeded **20%** in:
+
+- **2020** — **20%**
+-",True,0.00639
+3D-Bar_54,3D-Bar,How many citations does Sociology have?,7500,"Sociology has **7,800 citations**.",True,0.001514
+3D-Bar_248,3D-Bar,How many more video games were sold in the Sci-Fi genre than in the Comedy genre,18 million,"From the chart, **Video Game Sales** are:
+
+- **Sci-Fi:** 130 million  
+- **Comedy:** 110 million  
+
+",False,0.003452
+3D-Bar_223,3D-Bar,How many million tonnes of meat does Canada produce?,33,Canada produces **25 million tonnes** of meat.,False,0.002164
+3D-Bar_11,3D-Bar,What is the value of Online Retail Sales in the East region?,600 million,The **Online Retail Sales** in the **East** region is **$600 million**.,True,0.001114
+3D-Bar_138,3D-Bar,How much longer is the Daily Time Spent on Facebook compared to Twitter?,25 minutes,"From the chart, **Daily Time Spent** is:
+
+- **Facebook:** 58 minutes  
+- **Twitter:** 30 minutes  
+
+",False,0.003062
+3D-Bar_113,3D-Bar,Which city has the highest number of new homes built?,New York,"From the chart, **New York** has the highest number of new homes built, with **5,000**.",True,0.00173
+3D-Bar_165,3D-Bar,Which mode of transport has the highest average price?,Sea,"From the chart, **Sea transport** has the **highest average price**, at about **18**.",True,0.00156
+3D-Bar_172,3D-Bar,What is the average amount raised per donor for the Educational organizations?,$1.67,"For **Educational organizations**:
+
+- **Amount Raised** = **$2,500**
+- **Total Donors** = **1,800**
+",False,0.002716
+3D-Bar_23,3D-Bar,Which item has the highest Average Price ($)?,Vegetables,"From the chart, **Vegetables** has the highest **Average Price ($)** at **$25,000**.",True,0.001966
+3D-Bar_242,3D-Bar,By how much did the total sales increase from 2017 to 2021?,$80 billion,"From the chart, **Total Sales** were:
+
+- **2017:** \$450 billion  
+- **2021:** \$570 billion  
+
+So t",False,0.00657
+3D-Bar_64,3D-Bar,How much CO2 does the East region emit?,20 million tonnes,The East region emits **20 million tonnes of CO2**.,True,0.002212
+3D-Bar_52,3D-Bar,By how many kilograms did tea production increase from 2020 to 2024?,130 kgs,"Tea production increased from **500 kg in 2020** to **620 kg in 2024**.
+
+**Increase = 620 - 500 = 12",True,0.002754
+3D-Bar_86,3D-Bar,How many more exhibitions are there for paintings than for photography?,20,"From the chart:
+
+- **Painting exhibitions** = 70  
+- **Photography exhibitions** = 40  
+
+So, there a",False,0.00218
+3D-Bar_83,3D-Bar,Which region has the highest number of law firms and the highest average cost pe,West,"From the chart, the **West** region has:
+
+- the **highest number of law firms**: about **700**
+- the",True,0.002246
+3D-Bar_236,3D-Bar,In which year was the growth in e-commerce sales from the previous year the high,2020,"From the chart, e-commerce sales are:
+
+- 2018: 2500
+- 2019: 2800
+- 2020: 3200
+- 2021: 3500
+- 2022: 4",True,0.003874
+3D-Bar_12,3D-Bar,Which mode of transport has the smallest freight volume?,Rail,The mode of transport with the smallest freight volume is **Rail**.,True,0.001028
+3D-Bar_85,3D-Bar,Which mode of transport has the highest volume for shipping in million tonnes?,Sea,"The mode of transport with the highest shipping volume is **Sea**, at **50 million tonnes**.",True,0.002332
+3D-Bar_18,3D-Bar,How many check-ups were there in 2023?,155 million,There were **150 million check-ups** in **2023**.,True,0.001538
+3D-Bar_245,3D-Bar,Which region has the lowest average home value?,West,"The **West** region has the **lowest average home value**, at **$250,000**.",True,0.001138
+3D-Bar_75,3D-Bar,What is the increase in smartphone usage from 2019 to 2023?,500 million,"From the chart, smartphone usage was:
+
+- **2019:** 1200 million  
+- **2023:** 1500 million  
+
+**Incr",True,0.00439
+3D-Bar_94,3D-Bar,What was the Production Volume in April?,74,"The chart shown is about **government funding allocation** for Education, Healthcare, and Defense fr",False,0.003336
+3D-Bar_150,3D-Bar,Which department has the highest number of employees?,Production,"The **Production** department has the highest number of employees, with **100 employees**.",True,0.002826
+3D-Bar_198,3D-Bar,What is the yearly revenue of Instagram?,200,"From the chart, **Instagram's yearly revenue is about $20 billion**.",False,0.002256
+3D-Bar_149,3D-Bar,In which year was the production of automobiles closest to the production of shi,2023,"From the chart:
+
+- **Automobiles**: 500, 550, 530, 600, 620  
+- **Ships**: 300, 320, 310, 330, 340
+
+",True,0.005888
+3D-Bar_195,3D-Bar,By how many points do the reading scores decrease from Grade 3 to Grade 6?,3 points,"Reading scores go from **85** in Grade 3 to **76** in Grade 6.
+
+So, the decrease is **9 points**.",True,0.00172
+3D-Bar_249,3D-Bar,What is the number of criminal cases at the federal level?,500,The number of criminal cases at the federal level is **500**.,True,0.00392
+3D-Bar_78,3D-Bar,Which month had the highest volume for truck deliveries?,May,"Truck deliveries had the highest volume in **May**, at **35 million tonnes**.",True,0.002044
+3D-Bar_299,3D-Bar,What was the Production Volume in April?,74,The chart shown does not include **Production Volume** or **months like April**. It displays yearly ,False,0.003432
+3D-Bar_191,3D-Bar,What was the Global Temperature increase from 2015 to 2019?,0.8°C,"From the chart, **Global Temperature** increased from **0.87°C in 2015** to **0.98°C in 2019**.
+
+**I",True,0.003198
+3D-Bar_232,3D-Bar,How much did the expenditure on Biomedical Research increase from 2019 to 2023?,$2.8 billion,"Biomedical Research increased from **3.0 USD billion in 2019** to **6.0 USD billion in 2023**.
+
+**In",True,0.002342
+3D-Bar_17,3D-Bar,What is the difference between the average reading score and the average math sc,10 points,"In **Grade 6**:
+
+- **Average Reading Score** = **100**
+- **Average Math Score** = **95**
+
+**Differen",False,0.002806
+3D-Bar_39,3D-Bar,What is the Total Shopping Volume in 2022?,100,The Total Shopping Volume in 2022 is **100 units**.,True,0.001998
+3D-Bar_137,3D-Bar,How much did the Research Expenditure increase from 2020 to 2024?,$200 million,"From the chart, **Research Expenditure** was:
+
+- **2020:** \$800 million  
+- **2024:** \$1,000 milli",True,0.003338
+3D-Bar_229,3D-Bar,Which country has the highest average download speed according to the data?,China,"According to the chart, the **USA** has the highest **average download speed**, at about **150 Mbps*",False,0.002394
+3D-Bar_246,3D-Bar,How many total researchers are there in psychology?,120,Psychology has **120 total researchers**.,True,0.002506
+3D-Bar_155,3D-Bar,Which department has the highest average annual salary?,IT,"From the chart, **IT** has the highest average annual salary, at about **$850** (likely representing",True,0.002294
+3D-Bar_224,3D-Bar,By how much did the number of Prescription Drugs increase from 2019 to 2023?,25 million,"Prescription Drugs increased from **80 million** in 2019 to **100 million** in 2023.
+
+**Increase = 1",False,0.002598
+3D-Bar_262,3D-Bar,Which age group has the highest average healthcare spending according to the dat,65+,"According to the chart, the **65+ age group** has the **highest average healthcare spending**, at ab",True,0.00282
+3D-Bar_82,3D-Bar,How many more Art Exhibition Visitors were there in 2022 compared to 2020?,16 million,"Art Exhibition Visitors were about **12 million** in **2020** and **27 million** in **2022**.
+
+So, t",True,0.003196
+3D-Bar_2,3D-Bar,What was the Music Concert Attendance in the year 2020?,2.1 million,The Music Concert Attendance in 2020 was **2.8 million**.,False,0.001066
+3D-Bar_151,3D-Bar,What is the English score for 8th grade?,85,The English score for **8th grade** is **82**.,True,0.00103
+3D-Bar_141,3D-Bar,How much did the Defense Policy Expenditure increase from 2019 to 2023?,$250 billion,"Defense Policy Expenditure increased from **$700 billion in 2019** to **$950 billion in 2023**.
+
+So,",True,0.005782
+3D-Bar_267,3D-Bar,Which region has the highest fruit production?,West,"From the chart, **West** has the highest fruit production, at **220 tons**.",True,0.001524
+3D-Bar_158,3D-Bar,Which region has the highest average income?,East,"The **North** region has the highest average income, at **$50,000**.",False,0.002664
+3D-Bar_163,3D-Bar,What is the predicted number of publications for Sociology in the time period of,30,The predicted number of publications for **Sociology** in **2022–2027** is **30**.,True,0.00218
+3D-Bar_118,3D-Bar,How much more meat does the USA produce than Australia?,70 million tonnes,"From the chart:
+
+- **USA meat production:** 120 million tonnes  
+- **Australia meat production:** 50",True,0.0062
+3D-Bar_153,3D-Bar,By how much did the Defense Policy Funding increase from 2018 to 2021?,$50 billion,"Defense Policy Funding increased from **$250 billion in 2018** to **$300 billion in 2021**.
+
+**Incre",True,0.002316
+3D-Bar_121,3D-Bar,By how many million units did electronics production increase from 2019 to 2023?,9,"Electronics production increased from **15 million units in 2019** to **25 million units in 2023**.
+",True,0.00266
+3D-Bar_256,3D-Bar,By how much does Nuclear Energy Production increase from 2019 to 2023?,40 Million kWh,"From the chart, **Nuclear Energy Production** is:
+
+- **2019:** 80 million kWh  
+- **2023:** 120 mill",True,0.002516
+3D-Bar_279,3D-Bar,In which year was the movie box office revenue the lowest between 2019 and 2023?,2020,The movie box office revenue was lowest in **2020**.,True,0.001812
+3D-Bar_1,3D-Bar,Which region has the highest average working hours?,South,"The **South** region has the highest average working hours, at **45 hours**.",True,0.00133
+3D-Bar_221,3D-Bar,How many organizations are there in Illinois?,600,Illinois has **600 organizations**.,True,0.00165
+3D-Bar_55,3D-Bar,In what year was the inflation rate the lowest from 2019 to 2023?,2020,"From the chart, the inflation rates are approximately:
+
+- 2019: 1.8%
+- 2020: 1.2%
+- 2021: 2.5%
+- 202",True,0.00404
+3D-Bar_201,3D-Bar,Which country has the highest Revenue Per Available Room (RevPAR)?,France,"From the chart, the **UK** has the highest **Revenue Per Available Room (RevPAR)** at **$140**.",False,0.006114
+3D-Bar_145,3D-Bar,How many more research projects does Mechanical Engineering have compared to Civ,35,"Mechanical Engineering has **10 more research projects** than Civil Engineering.
+
+- **Mechanical Eng",False,0.003092
+3D-Bar_65,3D-Bar,What is the increase in the number of cases from 2017 to 2020?,"40,000 cases","From the chart, the **number of cases** was:
+
+- **2017:** 220 thousand  
+- **2020:** 260 thousand  
+",False,0.003308
+3D-Bar_108,3D-Bar,How many volunteers are there at Doctors Without Borders?,600,"From the chart, **Doctors Without Borders has 600 volunteers**.",True,0.002228
+3D-Bar_146,3D-Bar,Which month had the lowest Average Delivery Time?,February,The month with the lowest **Average Delivery Time** is **June**.,False,0.002242
+3D-Bar_175,3D-Bar,By how much did the number of doctoral degrees awarded increase from 2019 to 202,80000,"From the chart, doctoral degrees awarded were:
+
+- **2019:** 150,000  
+- **2023:** 190,000  
+
+So the ",False,0.00304
+3D-Bar_59,3D-Bar,How many more paintings are there in Art Festivals compared to Concerts?,15,"From the chart:
+
+- **Paintings at Art Festivals** = **45**
+- **Paintings at Concerts** = **20**
+
+So,",False,0.001788
+3D-Bar_255,3D-Bar,Which platform has the lowest number of average monthly active users?,Twitter,"From the chart, **Twitter** has the **lowest average monthly active users**, at about **0.2 billion ",True,0.001994
+3D-Bar_15,3D-Bar,In which year was the difference between non-renewable and renewable energy prod,2019,"From the chart:
+
+- **Renewable energy production**: 4500, 4700, 5000, 5300, 5600  
+- **Non-renewable",True,0.005044
+3D-Bar_73,3D-Bar,How many more concerts are there in the West compared to the South?,2,"From the chart:
+
+- **West concerts** = 18  
+- **South concerts** = 15  
+
+So, the **West has 3 more c",False,0.002604
+3D-Bar_160,3D-Bar,Which city has the highest housing prices among the given cities?,New York,"Among the cities shown, **New York** has the highest housing prices, at about **$1,200,000**.",True,0.002424
+3D-Bar_281,3D-Bar,What was the difference in the e-commerce volume between the years 2020 and 2023,$680 billion,"From the chart, **e-commerce volume** was:
+
+- **2020:** 2000 billion dollars  
+- **2023:** 2600 bill",False,0.003536
+3D-Bar_123,3D-Bar,By how much did the renewable energy production increase from 2017 to 2021?,600 GWh,"From the chart, renewable energy production was:
+
+- **2017:** 3000 GWh  
+- **2021:** 3800 GWh  
+
+So ",False,0.003156
+3D-Bar_93,3D-Bar,By how much do Total Sales in the North region exceed those in the East region?,$1.0 billion,"From the chart:
+
+- **North Total Sales** = **6 billion**
+- **East Total Sales** = **5 billion**
+
+So,",True,0.001442
+3D-Bar_152,3D-Bar,How much did the Salvation Army collect in donations?,3600,"The Salvation Army collected **$8,000 thousand**, i.e. **$8 million** in donations.",False,0.002716
+3D-Bar_9,3D-Bar,Which region has the highest production of poultry?,West,"From the chart, **South** has the highest poultry production, at about **9,500 tonnes**.",False,0.002714
+3D-Bar_211,3D-Bar,What was the growth in the number of employees from 2019 to 2023?,50,"From the chart, the number of employees was:
+
+- 2019: 300
+- 2023: 340
+
+Growth = 340 - 300 = 40 emplo",False,0.001748
+3D-Bar_254,3D-Bar,Which platform has the highest ad revenue?,Facebook,"From the chart, **Facebook** has the highest ad revenue, at about **$85 billion**.",True,0.005858
+3D-Bar_276,3D-Bar,What is the website traffic in 2020?,70 million,The website traffic in **2020** is **80 million**.,False,0.002588
+3D-Bar_295,3D-Bar,What was the graduation rate in 2016?,84.6%,The graduation rate in **2016** was **78%**.,True,0.001028
+3D-Bar_90,3D-Bar,By how much did the number of broadband subscriptions increase from 2015 to 2019,0.53 billion,"From the chart, broadband subscriptions were:
+
+- **2015:** 0.9 billion  
+- **2019:** 1.3 billion  
+
+",False,0.003582
+3D-Bar_272,3D-Bar,Which region has the highest e-commerce sales?,South,"The chart shown is about **global economic indicators** from 2019 to 2023—GDP growth, inflation, une",False,0.003202
+3D-Bar_62,3D-Bar,How many students are in Urban regions compared to Coastal regions?,10000 more students in Urban regions,"Urban regions have **50,000 students**, while Coastal regions have **40,000 students**.
+
+So, **Urban",True,0.002568
+3D-Bar_31,3D-Bar,By how much did the renewable energy production increase from 2019 to 2023?,8 hundred kilowatt-hours,"From the chart, renewable energy production increased from **30** in 2019 to **38** in 2023.
+
+**Incr",True,0.003228
+3D-Bar_105,3D-Bar,How much more did In-Store Sales generate than Online Sales in Q3?,62.8 million dollars,"In Q3:
+
+- **Online Sales** = **$130 million**
+- **In-Store Sales** = **$220 million**
+
+So, **In-Stor",False,0.006368
+3D-Bar_74,3D-Bar,What was the percentage increase in alcoholic beverage sales from 2018 to 2022?,35.7%,"From the chart, **Alcoholic Beverage** sales were:
+
+- **2018:** 700 million  
+- **2022:** 950 millio",True,0.003316
+3D-Bar_185,3D-Bar,In which month was the difference between music concert ticket sales and movie t,May,"From the chart:
+
+- **Movie sales**: Jan 120, Feb 130, Mar 150, Apr 160, May 140  
+- **Music concert ",True,0.007446
+3D-Bar_237,3D-Bar,Which country has the lowest average expenditure per tourist according to the da,Spain,"According to the chart, **Spain** has the **lowest average expenditure per tourist**, at **$1,200**.",True,0.002774
+3D-Bar_204,3D-Bar,What is the total production of soybeans across all regions according to the dat,625 million tonnes,"From the chart, soybean production by region is:
+
+- North: 180 million tonnes
+- South: 220 million t",False,0.002096
+3D-Bar_214,3D-Bar,Which School Type has the least Enrollment (Thousand)?,Home School,"The school type with the least **Enrollment (Thousand)** is **Home-school**, with about **100 thousa",False,0.00275
+3D-Bar_51,3D-Bar,What was the average global temperature in the year 2021?,11.4°C,"From the chart, the **average global temperature in 2021** was **14.9°C**.",False,0.001162
+3D-Bar_193,3D-Bar,Which country has the lowest GDP according to the data?,China,"According to the chart, **China** has the lowest GDP.",True,0.004908
+3D-Bar_159,3D-Bar,By how much did the Hydro Power Generation increase from 2018 to 2022?,800 TWh,"From the chart, **Hydro Power Generation** was:
+
+- **2018:** 1800 TWh  
+- **2022:** 2600 TWh  
+
+So t",True,0.00298
+3D-Bar_96,3D-Bar,By how many did the Computer Science Graduates increase from 2017 to 2021?,60,"From the chart, **Computer Science graduates** were:
+
+- **2017:** 800  
+- **2021:** 900  
+
+So the in",False,0.003166
+3D-Bar_47,3D-Bar,"In which year did Textiles Production reach 50,000 units?",2023,"Textiles Production reached **50,000 units in 2023**.",True,0.00202
+3D-Bar_101,3D-Bar,How many judgments were made in the field of Administrative Law?,7,"In the field of **Administrative Law**, the **number of judgments** was **8 thousand**.",False,0.001866
+3D-Bar_239,3D-Bar,What was the increase in Food Product Manufacturing from 2018 to 2022 in million,200 million units,Food Product Manufacturing increased from **500 million units in 2018** to **650 million units in 20,False,0.006186
+3D-Bar_53,3D-Bar,How much is the average monthly salary in the Sales department?,$55,The average monthly salary in the **Sales** department is **$60**.,True,0.001802
+3D-Bar_282,3D-Bar,What is the life expectancy in the UK?,81.8 years,"From the chart, the **life expectancy in the UK is 81 years**.",True,0.004968
+3D-Bar_207,3D-Bar,Which type of technology has the highest number of transactions?,Laptops,"From the chart, **Laptops** have the highest number of transactions, at **30 million**.",True,0.002342
+3D-Bar_168,3D-Bar,How many more million did music concert tickets sold amount to than museum visit,1 million,"In 2019:
+
+- **Music concert tickets sold** = **5.0 million**
+- **Museum visits** = **4.2 million**
+
+",False,0.00319
+3D-Bar_50,3D-Bar,Which country has the highest number of property crime cases according to the gi,USA,"According to the chart, the **USA** has the highest number of **property crime cases**, with **20,00",True,0.001668
+3D-Bar_243,3D-Bar,By how much did the oil production increase from 2019 to 2023?,20 million bbl/day,"From the chart, **oil production** was about **45 million barrels/day in 2019** and **49 million bar",False,0.002396
+3D-Bar_264,3D-Bar,What is the difference between Online Sales and In-Store Sales in 2021?,400,"From the chart for **2021**:
+
+- **Online Sales** = **700 billion**
+- **In-Store Sales** = **250 bill",False,0.003466
+3D-Bar_170,3D-Bar,In which year did IT Service Spending reach $450 billion?,2022,IT Service Spending reached **$450 billion in 2022**.,True,0.002232
+3D-Bar_24,3D-Bar,"Which country spends more time on social media per day, India or the UK?",UK,"India spends more time on social media per day than the UK.
+
+From the chart:
+- India: about 150 minu",True,0.001868
+3D-Bar_200,3D-Bar,How many more non-profit organizations are there in New York compared to Texas?,2000,"From the chart, the **number of non-profit organizations** is:
+
+- **New York:** 4,000  
+- **Texas:**",False,0.00163
+3D-Bar_166,3D-Bar,How much did health care spending increase from 2001 to 2005?,$80 billion,"From the chart, **health care spending** was:
+
+- **$200 billion** in **2001**
+- **$280 billion** in ",True,0.00655
+3D-Bar_189,3D-Bar,How many posts per day are made on Instagram?,95,"According to the chart, Instagram has **95 million posts per day**.",True,0.005932
+3D-Bar_206,3D-Bar,By how much did Beverage Sales ($B) increase from 2017 to 2021?,70,"From the chart, **Beverage Sales** were:
+
+- **2017:** \$150B  
+- **2021:** \$220B  
+
+So the increase",True,0.003342
+3D-Bar_32,3D-Bar,Which category has the lowest average time of manufacturing?,Machinery,"The category with the **lowest average manufacturing time** is **Machinery**.
+
+From the chart:
+- Mac",True,0.002208
+3D-Bar_169,3D-Bar,Which region has the highest average donation per organization?,North,"From the chart:
+
+- North: 500 total / 50 orgs = 10
+- South: 800 total / 70 orgs ≈ 11.4
+- East: 600 t",True,0.004016
+3D-Bar_72,3D-Bar,How much was donated to Medecins Sans Frontieres?,"$750,000","Medecins Sans Frontieres received **$800,000** in donations.",True,0.002624
+3D-Bar_28,3D-Bar,How many hospital beds are there in rural areas?,200,There are **250 hospital beds** in rural areas.,False,0.00098
+3D-Bar_291,3D-Bar,By how much did the revenue increase from Q1-2020 to Q4-2020?,$0.6 billion,"From the chart:
+
+- **Q1-2020 revenue** = **$0.8B**
+- **Q4-2020 revenue** = **$1.3B**
+
+So the increas",False,0.003536
+3D-Bar_89,3D-Bar,By how much did global E-commerce sales increase from 2019 to 2020?,$300 billion,"From the chart, global E-commerce sales were:
+
+- **2019:** **$3,000 billion**
+- **2020:** **$3,200 b",False,0.003388
+3D-Bar_183,3D-Bar,What was the Movie Box Office Revenue in 2021?,$24.6 billion,The **Movie Box Office Revenue in 2021** was **$25 billion**.,True,0.002656
+3D-Bar_173,3D-Bar,Which country has the highest road freight volume according to the data?,China,"According to the chart, **China** has the highest **road freight volume**, at about **1,200 million ",True,0.002194
+3D-Bar_199,3D-Bar,By how much did the Renewable Energy Production increase from 2019 to 2023?,60 GWh,"From the chart, **Renewable Energy Production** was:
+
+- **2019:** 180 GWh  
+- **2023:** 240 GWh  
+
+S",True,0.003276
+3D-Bar_45,3D-Bar,Which food item has the highest gross revenue?,Burgers,"From the chart, **Burgers** has the highest gross revenue, at **$1600**.",True,0.001202
+3D-Bar_251,3D-Bar,How many sport events were held in 2018?,235,"In **2018**, there were **250 sport events** held.",True,0.00259
+3D-Bar_142,3D-Bar,In what year did Sporting Event Tickets Sold see the largest decrease compared t,2020,"From the chart, **Sporting Event Tickets Sold** values are approximately:
+
+- 2018: **50 million**
+- ",True,0.00759
+3D-Bar_241,3D-Bar,Which department has the highest promotion rate?,Marketing,"From the chart, **Marketing** has the highest promotion rate at **25%**.",True,0.002288
+3D-Bar_247,3D-Bar,How much have Carbon Emissions (Million Tonnes) decreased from 2019 to 2023?,160,"From the chart, **Carbon Emissions** were:
+
+- **2019:** 500 million tonnes  
+- **2023:** 380 million",False,0.004818
+3D-Bar_210,3D-Bar,How much did the e-commerce sales grow from 2019 to 2023?,$3.03 trillion,"From the chart, **e-commerce sales** increased from **$3.5 trillion in 2019** to **$7.0 trillion in ",False,0.006564
+3D-Bar_35,3D-Bar,How many art galleries are there in Germany?,650,Germany has **650 art galleries**.,True,0.00135
+3D-Bar_147,3D-Bar,What is the Staff Retention Rate (%) for the Finance department?,80,The Staff Retention Rate for the Finance department is 85%.,True,0.002218
+3D-Bar_111,3D-Bar,How much is the average spending per tourist in Spain?,110$,"From the chart, the **average spending per tourist in Spain** is **$110**.",True,0.00231
+3D-Bar_46,3D-Bar,What is the hotel occupancy rate in Germany?,78%,Germany’s hotel occupancy rate is **78%**.,True,0.002538
+3D-Bar_268,3D-Bar,How many employees are there in the HR and Finance departments combined?,80,"HR has **50** employees and Finance has **30** employees.
+
+So, combined, they have **80 employees**.",True,0.00277
+3D-Bar_109,3D-Bar,By how much did the donations increase from 2019 to 2023?,700 million USD,"From the chart, donations were:
+
+- **2019:** **$2,000 million**
+- **2023:** **$3,000 million**
+
+So t",False,0.002
+3D-Bar_194,3D-Bar,How much longer is the Average Time Spent on Facebook compared to Twitter?,15 minutes,"From the chart, **Average Time Spent** is:
+
+- **Facebook:** 25 minutes  
+- **Twitter:** 10 minutes  ",True,0.002192
+3D-Bar_107,3D-Bar,Which region has the highest sales volume in units?,West,"The **West** region has the highest **sales volume**, with about **550 units**.",True,0.002308
+3D-Bar_176,3D-Bar,By how much did the Confectionery Sales increase from 2019 to 2023?,$80 million,Confectionery Sales increased from **220 million dollars in 2019** to **300 million dollars in 2023*,True,0.002838
+3D-Bar_187,3D-Bar,How much was spent on Defense in 2015 compared to 2019?,$320 billion more was spent in 2019,"Defense spending was **$800 billion in 2015** and **$1,100 billion in 2019**.
+
+So, spending on Defen",True,0.002536
+3D-Bar_125,3D-Bar,How much did the Renewable Energy Production (GWh) increase from 2019 to 2023?,10.5 GWh,"From the chart, Renewable Energy Production increased from **20 GWh in 2019** to **35 GWh in 2023**.",False,0.002938
+3D-Bar_30,3D-Bar,What was the highest expenditure category in the year 2023?,Sculpture,"In 2023, **Sculpture** had the highest expenditure category, at **1500**.",True,0.002898
+3D-Bar_197,3D-Bar,In which year was the Consumer Price Index (CPI) the highest from 2019 to 2023?,2022,"From the chart, the Consumer Price Index (CPI) was highest in **2022**.",True,0.004038
+3D-Bar_273,3D-Bar,What was the number of pending cases in thousands for the year 2018?,370,The number of pending cases in **2018** was **380 thousand**.,True,0.002272
+3D-Bar_84,3D-Bar,What was the revenue from tourism in 2022?,$100 billion,The revenue from tourism in **2022** was **$100 billion**.,True,0.002622
+3D-Bar_81,3D-Bar,Which platform has the highest revenue last quarter compared to its monthly acti,Twitter,"From the chart:
+
+- Facebook: revenue 29 / MAU 2.9 = 10
+- Instagram: 20 / 1.4 ≈ 14.3
+- Twitter: 1.5 /",True,0.003646
+3D-Bar_25,3D-Bar,What was the total increase in the number of family cases from 2015 to 2019?,600 thousand cases,"From the chart, family cases were:
+
+- 2015: 3000
+- 2019: 3600
+
+Total increase = 3600 - 3000 = 600
+
+S",True,0.003222
+3D-Bar_286,3D-Bar,Which region has the highest average time spent on social media?,North,"From the chart, the **North** region has the highest average time spent on social media, at **150 mi",True,0.003488
+3D-Bar_250,3D-Bar,Which country has the highest number of cultural events according to the data?,France,"According to the chart, **France** has the highest number of cultural events, with **75 thousand**.",True,0.002724
+3D-Bar_103,3D-Bar,Which region has the lowest average utility bill?,East,"From the chart, the **East** region has the **lowest average utility bill**, at about **$90**.",True,0.002386
+3D-Bar_49,3D-Bar,What was the renewable energy generation in 2022?,5000 GWh,"The renewable energy generation in **2022** was **5,200 GWh**.",True,0.003194
+3D-Bar_161,3D-Bar,In which year was coal production at 1.6 million tonnes?,2021,Coal production was **1.6 million tonnes in 2020**.,True,0.002252
+3D-Bar_220,3D-Bar,By how much did the revenue increase from Q1 to Q4?,$70 million,"From the chart, **Revenue** is:
+
+- **Q1:** 200 million $
+- **Q4:** 260 million $
+
+So the revenue inc",False,0.00322
+3D-Bar_115,3D-Bar,How much revenue does basketball generate in millions of dollars?,0.7,Basketball generates **850 million dollars** in revenue.,False,0.002182
+3D-Bar_7,3D-Bar,How many job openings were there in 2021?,30,"In **2021**, the **number of job openings** was **25**.",False,0.001078
+3D-Bar_226,3D-Bar,By how many does the number of Film Festivals in Germany exceed that in France?,100,"Germany has **350** film festivals and France has **300**.
+
+So, the number of film festivals in Germ",False,0.002528
+3D-Bar_208,3D-Bar,How many more donations did United Way receive compared to WWF?,20000 donations,"From the chart:
+
+- **United Way donations:** 70,000  
+- **WWF donations:** 30,000  
+
+**Difference = ",False,0.001688
+3D-Bar_253,3D-Bar,What is the job placement rate for Electrical Engineering?,87%,The job placement rate for **Electrical Engineering** is **88%**.,True,0.002604
+3D-Bar_63,3D-Bar,In which city is the difference between new constructions and sold properties th,Chicago,"From the chart:
+
+- New York: 400 vs 350 → difference 50  
+- Los Angeles: 350 vs 300 → difference 50 ",True,0.006976
+3D-Bar_130,3D-Bar,What is the percentage of individuals who have regular check-ups in the '35-44' ,60%,The percentage of individuals in the **35–44** age group who have **regular check-ups** is **60%**.,True,0.00221
+3D-Bar_280,3D-Bar,How many more hospital visits are there for the age group over 80 compared to th,750 visits,"From the chart, the **number of hospital visits** is:
+
+- **Under 20:** 200  
+- **Over 80:** 1000  
+
+",True,0.003302
+3D-Bar_20,3D-Bar,"Which type has the least viewership: Outdoor Sports, Indoor Sports, Music Concer",Outdoor Sports,The type with the least viewership is **Outdoor Sports**.,True,0.001642
+3D-Bar_140,3D-Bar,Which stadium has the highest tickets sold?,Soccer Stadium,"From the chart, the **highest tickets sold** is **10 million**, which corresponds to the **Music Con",False,0.001802
+3D-Bar_258,3D-Bar,How much has Renewable Energy Production increased from 2019 to 2023?,1250 Gigawatt Hours,"From the chart, **Renewable Energy Production** increased from **2500 gigawatt-hours in 2019** to **",True,0.00308
+3D-Bar_274,3D-Bar,How many fundraising events does the North region have?,4,The North region has **4 fundraising events**.,True,0.001702
+3D-Bar_97,3D-Bar,What is the total expenditure for Outpatient Services according to the data prov,$3 trillion,"According to the chart, the **total expenditure for Outpatient Services is $3.5 trillion**.",False,0.004038
+3D-Bar_260,3D-Bar,How many more legal services requests were there in 2022 compared to 2018?,700,"From the chart, **Legal Services Requests** were:
+
+- **2018:** 3000  
+- **2022:** 3800  
+
+Difference",False,0.003228
+3D-Bar_27,3D-Bar,In which year was the number of patents issued the highest according to the data,2020,"According to the chart, the highest number of patents issued was in **2020**.",True,0.001344
+3D-Bar_244,3D-Bar,What was the profit margin of the company in the year 2021?,18%,The profit margin in **2021** was **18%**.,True,0.002598
+3D-Bar_217,3D-Bar,Which region has the highest number of cases in process?,South,"The **East** region has the highest number of **cases in process**, with **220 thousand** cases.",False,0.002358
+3D-Bar_190,3D-Bar,By how many millions did the Computer Science Research Paper Output increase fro,1.2 million,"From the chart, **Computer Science Research Paper Output** was:
+
+- **2.5 million** in **2015**
+- **3",False,0.003066
+3D-Bar_218,3D-Bar,Which production saw the smallest increase in absolute terms from 2019 to 2023?,Dairy Production,"From the chart:
+
+- Dairy: 10 → 18, increase of 8
+- Fruit: 25 → 33, increase of 8
+- Vegetable: 20 → 2",False,0.003788
+3D-Bar_290,3D-Bar,How many Employment Law Cases were settled?,260,The number of **Employment Law Cases settled** is **300**.,False,0.003124
+3D-Bar_26,3D-Bar,Which plant has the least difference between Machinery Output and Finished Produ,Plant D,"Compare **Machinery Output** vs **Finished Products** for each plant:
+
+- **Plant A:** 50 vs 45 → dif",True,0.002394
+3D-Bar_48,3D-Bar,What was the average salary in the year 2021?,$550,"The average salary in **2021** was **$58,000**.",False,0.003344
+3D-Bar_298,3D-Bar,By how much did hydropower generation exceed wind energy production in 2020?,1000 GWh,"From the chart for **2020**:
+
+- **Hydropower generation** = **2400 GWh**
+- **Wind energy production*",False,0.004088
+3D-Bar_294,3D-Bar,By how much did football attendance increase from 2020 to 2023?,0.9 million,"From the chart, football attendance was:
+
+- 2020: 4.8 million
+- 2023: 5.2 million
+
+Increase = 5.2 − ",False,0.00226
+3D-Bar_283,3D-Bar,"Which category has the greatest total number of Museums, Theatres, Art Galleries",Visual Arts,"From the chart, totals by category are:
+
+- **Visual Arts**: 20 + 60 + 110 + 300 = **490**
+- **Perfor",True,0.004144
+3D-Bar_192,3D-Bar,In which year was the difference between the number of new cases and the number ,2020,"From the chart:
+
+- 2016: New 800, Resolved 600 → Difference = 200  
+- 2017: New 1000, Resolved 650 →",True,0.00437
+3D-Bar_212,3D-Bar,Which country has the highest GDP per capita according to the data?,"USA, Germany, and China have the same highest GDP per Capita of 40 USD","According to the chart, the **USA** has the highest **GDP per capita**.",False,0.002298
+3D-Bar_99,3D-Bar,How many active users does Facebook have?,2450 million,"Facebook has **2,400 million active users**, i.e. **2.4 billion**.",True,0.002406
+3D-Bar_228,3D-Bar,Which region has the smallest Wheat Production?,North,"From the chart, the **North** region has the smallest **Wheat Production**, at about **20 million to",True,0.001802
+3D-Bar_6,3D-Bar,Which mode of transport has the highest capacity?,Train,"The **train** has the highest capacity, at **2000 people**.",True,0.001478
+3D-Bar_284,3D-Bar,Which region has the highest average price?,West,"From the chart, the **West** region has the highest **average price**, at about **$90**.",True,0.001168
+3D-Bar_270,3D-Bar,How many hours on average are spent in the South region?,4.3,"In the **South** region, the **average time spent is 6 hours**.",False,0.002656
+3D-Bar_213,3D-Bar,In which year is the difference in revenue between the Sports and Entertainment ,2023,"From the chart:
+
+- **2019:** Entertainment 250 vs Sports 200 → difference **50**
+- **2020:** 270 vs ",True,0.00373
+3D-Bar_87,3D-Bar,What is the publication count for Linguistics?,100,The publication count for **Linguistics** is **100**.,True,0.003914
+3D-Bar_13,3D-Bar,What is the revenue growth rate of KFC?,180%,"From the chart, **KFC's revenue growth rate is 180%**.",True,0.001496
+3D-Bar_278,3D-Bar,How many more Cultural Events does Germany have compared to Italy?,30,"From the chart, **Germany** has **550 Cultural Events** and **Italy** has **450 Cultural Events**.
+
+",False,0.003136
+3D-Bar_122,3D-Bar,How much did the revenue of the food and beverage industry increase from 2015 to,35 billion $,"From the chart, revenue was:
+
+- **2015:** \$100 billion  
+- **2020:** \$150 billion  
+
+So the revenu",False,0.003266
+3D-Bar_44,3D-Bar,By how many millions did the number of internet users increase from 2018 to 2021,4.8 million,"From the chart, internet users were:
+
+- **2018:** 6 million  
+- **2021:** 10 million  
+
+So the incre",False,0.003692
+3D-Bar_67,3D-Bar,Which event had the lowest merchandise sales according to the data?,Formula 1,"According to the chart, **Formula 1** had the **lowest merchandise sales**, at **$0.4 million**.",True,0.006096
+3D-Bar_293,3D-Bar,Which platform has the highest Average Daily Use (Minutes)?,Facebook,"From the chart, **Facebook** has the highest **Average Daily Use**, at about **58 minutes**.",True,0.002126
+3D-Bar_240,3D-Bar,What was the difference in net profit between Q4-2021 and Q1-2021?,$90 million,"From the chart:
+
+- **Q1-2021 net profit** = **$200M**
+- **Q4-2021 net profit** = **$280M**
+
+**Differ",False,0.006746
+3D-Bar_238,3D-Bar,How many more houses were sold in New York compared to Chicago?,40 units,"From the chart:
+
+- **New York house sales** = **500**
+- **Chicago house sales** = **450**
+
+So, **New",False,0.002634
+3D-Bar_275,3D-Bar,How many more undergraduate students were enrolled in 2023 compared to 2019?,250,"From the chart, undergraduate enrollment was:
+
+- **2019:** 2000
+- **2023:** 2200
+
+So the increase is",False,0.003386
+3D-Bar_300,3D-Bar,How much did the forest area decrease from 2019 to 2023?,2 million sq. km,"From the chart, forest area was:
+
+- **2019:** 40 million sq. km  
+- **2023:** 36 million sq. km  
+
+S",False,0.006374
+3D-Bar_5,3D-Bar,What is the amount of donations received in the year 2021?,"150,000 K USD","The amount of donations received in **2021** is **180 (K USD)**, i.e. **$180,000**.",False,0.00246
+3D-Bar_98,3D-Bar,What is the average spending per tourist in Spain?,$14,"From the chart, the **average spending per tourist in Spain** is **$1,300**.",False,0.00234
+3D-Bar_133,3D-Bar,Which art form has the highest museum visits according to the data?,Classical,"According to the chart, **Rock** has the highest **museum visits**, with about **3.5 million** visit",False,0.001948
+3D-Bar_261,3D-Bar,How many lawyers are involved on average in Criminal law cases?,220,"From the chart, **Criminal law cases involve 2 lawyers on average**.",False,0.00228
+3D-Bar_29,3D-Bar,"Between 2019 and 2023, did Public Debt as a percentage of GDP increase each year",Yes,"Yes. The chart shows Public Debt (% of GDP) rising each year:
+
+- 2019: about 8.0%
+- 2020: about 8.1%",True,0.00373
+3D-Bar_16,3D-Bar,What is the Average Final Grade (%) for the 2nd Grade?,80,The **Average Final Grade (%) for 2nd Grade** is **78%**.,True,0.0023
+3D-Bar_132,3D-Bar,By how many units did the number of research grants increase from 2020 to 2024?,30,"From the chart, the **number of research grants** was:
+
+- **2020:** 180  
+- **2024:** 200  
+
+So the ",False,0.006378
+3D-Bar_164,3D-Bar,Which country has the highest life expectancy?,Japan,"From the chart, **Japan** has the highest life expectancy at **84 years**.",True,0.00575
+3D-Bar_58,3D-Bar,In which year did smartphone users reach 3400 millions?,2021,Smartphone users reached **3400 million in 2021**.,True,0.003132
+3D-Bar_216,3D-Bar,By how much did the net profit increase from Q2-2020 to Q4-2020?,$15 million,"From the chart:
+
+- **Net profit in Q2-2020** = **$55M**
+- **Net profit in Q4-2020** = **$70M**
+
+So t",True,0.006512
+3D-Bar_292,3D-Bar,How many more listings are there in the South compared to the East?,150,"From the chart, the **South** has **1,200 listings** and the **East** has **900 listings**.
+
+So, the",False,0.002652
+3D-Bar_4,3D-Bar,How many more listings are there for Beverages compared to Fast Food?,200,"Beverages has **150 more listings** than Fast Food.
+
+- **Beverages:** 500 listings  
+- **Fast Food:*",False,0.001516
+3D-Bar_88,3D-Bar,In which field is the number of granted patents the same as the number of new pr,Aeronautics,"From the chart:
+
+- Electrical Engineering: patents 700, new projects 800  
+- Aeronautics: patents 50",True,0.006998
+3D-Bar_71,3D-Bar,How many training hours are provided in the IT department?,120,The IT department is provided **120 training hours**.,True,0.005704

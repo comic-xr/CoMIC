@@ -1,0 +1,930 @@
+chart_id,chart_type,question,expected,response,correct,cost,input_tokens,output_tokens,latency_ms
+area_chart_100,area_chart,In what year did the legislation passed reach 60%?,2018,2018.,True,0.0298425,11895,7,15599.275583866984
+area_chart_101,area_chart,How many more students are there in Education compared to Computer Science?,30,Education has **80 more students** than Computer Science.,False,0.0299425,11887,15,26094.998500309885
+area_chart_102,area_chart,In which year did Accommodation bookings surpass Food & Beverage bookings?,2019,2022.,True,0.0299225,11927,7,17511.891334317625
+area_chart_103,area_chart,How many tons of dairy products does North America produce more than South America?,15000 tons,"North America produces **7,500 tons** more dairy products than South America.",False,0.030045,11898,20,16136.956749949604
+area_chart_104,area_chart,How many more trucks does South America have compared to Africa?,100,South America has **50 more trucks** than Africa.,False,0.0299625,11895,15,11402.861542068422
+area_chart_105,area_chart,How many more visitors did hotels have in December compared to January?,11000 visitors,"Hotels had **14,000** more visitors in December than in January.",False,0.030025,11896,19,14417.375042103231
+area_chart_106,area_chart,Which category has the highest number of Streaming Services users?,Digital Marketing,Internet.,False,0.0298275,11895,6,9277.883000206202
+area_chart_107,area_chart,Which month had the highest percentage of Cruise Ship Bookings?,February,February.,True,0.0298525,11905,6,7110.323583241552
+area_chart_108,area_chart,What was the difference in millions between food sales and beverage sales in 2017?,-400,"In 2017, food sales were **5100 million** and beverage sales were **3500 million**, so the difference was **1600 million**.",False,0.03034,11920,36,27915.694792289287
+area_chart_10,area_chart,Which month had the highest waste production?,January,January.,True,0.0298175,11891,6,3119.6588343009353
+area_chart_110,area_chart,How much more energy does the Industrial sector consume compared to the Residential sector?,7000 kWh,"Industrial energy consumption is **8,000 kWh more** than Residential.",False,0.0300425,11903,19,21763.295541983098
+area_chart_111,area_chart,By how much did the educational budget increase from 2019 to 2023?,$4000,"The educational budget increased by **$4,000** from 2019 to 2023.",True,0.03011,11900,24,13353.585500270128
+area_chart_112,area_chart,How many more ships are there in North America compared to South America?,1000 units,700 more ships.,False,0.0298625,11897,8,11540.101833175868
+area_chart_113,area_chart,In which year did Political Science publications reach 1500?,2009,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5972 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+area_chart_114,area_chart,In which year did online sales surpass in-store sales?,2020,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_115,area_chart,Which period shows the highest influence for Psychology?,Medieval,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_116,area_chart,How many Web Users were there in October?,290 million,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_117,area_chart,How many Comedy events are there in 2023?,210,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_118,area_chart,Which category has the highest revenue across all five areas combined?,Fast Food,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_11,area_chart,How many more hours were spent on athletics than on gaming in December?,10 hours,10 hours.,True,0.0298475,11897,7,13023.709083907306
+area_chart_132,area_chart,Which academic level shows the highest enrollment for Biology?,Undergraduate,Undergraduate.,True,0.0298375,11893,7,22552.913750056177
+area_chart_133,area_chart,In which year did Computer Science have the smallest increase in student enrollment compared to the previous year?,2021,"Computer Science had the smallest increase in **2022** (from 310 to 320, an increase of 10).",True,0.0302475,11925,29,12481.652083341032
+area_chart_135,area_chart,Which policy area has the highest percentage allocation for Social Services?,Economic Development,Economic Development.,True,0.0301025,11999,7,24757.687082979828
+area_chart_136,area_chart,In which category is the training of employees the highest?,Education,Finance.,False,0.02982,11892,6,7137.382999993861
+area_chart_137,area_chart,How much is allocated to Training in the Education department?,60,Training in the Education department is **55**.,True,0.0299225,11885,14,22581.077666953206
+area_chart_138,area_chart,Which region has the lowest dairy production according to the data?,Africa,Africa.,True,0.029985,11958,6,11541.786292102188
+area_chart_139,area_chart,What was the Operating Expenses figure in Q3?,"$50,000","Operating Expenses in Q3 were **$65,000**.",False,0.0299875,11893,17,10791.367582976818
+area_chart_140,area_chart,How much did the Logistics Companies spend in September?,550,$600$,True,0.02985,11898,7,17989.160541910678
+area_chart_141,area_chart,What is the difference in expenses between January and December?,5500,"$4,000
+",False,0.02987,11894,9,28540.58783315122
+area_chart_142,area_chart,How many more employees were there in Sales than in R&D in 2021?,110 employees,70,False,0.029875,11920,5,7973.258624784648
+area_chart_143,area_chart,How much are the e-commerce sales for Electronics?,"$200,000","E-commerce sales for Electronics are **$140,000**.",False,0.0299875,11893,17,7505.611917003989
+area_chart_144,area_chart,What is the Profit ($) for the IT industry?,60000,"$110,000",False,0.029855,11894,8,6586.251208093017
+area_chart_145,area_chart,Which mode of transportation has the highest volume of freight for Continental?,Shipping (Tons),Shipping.,False,0.02983,11896,6,14618.751166854054
+area_chart_146,area_chart,What was the mileage trend for truck transportation between 2015 and 2019?,"It increased from 20,000 miles in 2015 to 28,000 miles in 2019","Truck mileage increased steadily each year, rising from about 18,000 miles in 2015 to 28,000 miles in 2019.",True,0.03026,11900,34,18020.447167102247
+area_chart_147,area_chart,How many intellectual property cases were there in 2021?,120,150,False,0.0298125,11895,5,6938.475958071649
+area_chart_148,area_chart,Which country has the highest number of researchers in Computer Science?,Germany,Germany.,True,0.029885,11918,6,11720.139875076711
+area_chart_149,area_chart,Which field saw the smallest increase in publications from 2019 to 2023?,Literature,Literature.,True,0.0299125,11923,7,11303.134041838348
+area_chart_14,area_chart,How many more appeals were filed in 2021 compared to 2017?,40,50 more.,False,0.0298525,11899,7,9265.957250259817
+area_chart_150,area_chart,How much more coffee was sold at dinner compared to during snacks?,600,Coffee sales at **dinner** were **700 more** than during **snacks**.,False,0.030085,11896,23,9866.541542112827
+area_chart_152,area_chart,Which category has the least number of stadiums?,Soccer,Tennis.,False,0.0298375,11893,7,17551.047833636403
+area_chart_153,area_chart,In which year did Soccer events have the highest number?,2034,2029.,True,0.02984,11894,7,11665.087708737701
+area_chart_154,area_chart,What is the sum of applications for the Materials category across all the fields?,970,"From the chart, the **Materials** category values are:
+
+- Biology: **450**
+- Computer Science: **100**
+- Physics: **180**
+- Chemistry: **160**
+- Geology: **170**
+
+Sum = **1060**.",True,0.030855,12012,55,17603.51512534544
+area_chart_155,area_chart,Which country has the smallest audience for baseball?,Australia,China.,False,0.02982,11892,6,14784.942333120853
+area_chart_156,area_chart,Which sector has the highest consumption of Natural Gas?,Residential,Industrial.,False,0.0298225,11893,6,11273.000082932413
+area_chart_157,area_chart,How many users did Instagram have in the year 2020?,270,Instagram had **300** users in **2020**.,False,0.02998,11896,16,5035.069625359029
+area_chart_158,area_chart,By how much did the import exceed export in the year 2018?,1400 tonnes,"In 2018, import exceeded export by **1,200 tonnes**.",False,0.030045,11898,20,8184.076999779791
+area_chart_159,area_chart,How many more users are there on Facebook compared to Twitter for the Web category?,-20,20 more users.,False,0.0298675,11899,8,12887.975958641618
+area_chart_15,area_chart,Which type of housing unit shows the highest increase in units from January to May?,Single Family Homes (Units),Single Family Homes show the highest increase from January to May.,False,0.03,11904,16,3092.3406668007374
+area_chart_160,area_chart,Which plant has the highest production according to the given data?,Wheat,Wheat has the highest production.,True,0.0299525,11915,11,8938.515209127218
+area_chart_161,area_chart,What was the government spending for healthcare in the year 2021?,$4900,"3500
+",False,0.0298475,11897,7,5451.174042187631
+area_chart_162,area_chart,In which year did Physics have the highest number of publications?,2022,2023.,True,0.0298625,11903,7,14513.683166820556
+area_chart_163,area_chart,What was the highest productivity recorded in the given years?,250 units in 2020,The highest productivity recorded was **250 units**.,True,0.029945,11894,14,18256.79887458682
+area_chart_164,area_chart,How much is the Food and Beverage Expenses of the Grocery Store?,80 thousand,The Grocery Store’s Food and Beverage Expenses are **60** (thousand).,False,0.0300925,11917,20,15919.026583898813
+area_chart_165,area_chart,By how much did the number of Instagram users increase from January to June?,110 users,Instagram increased by **80 users** from January to June.,False,0.029985,11898,16,12291.462583933026
+area_chart_166,area_chart,What percentage of students studying Language are enrolled in Mathematics?,30%,22%,False,0.0298025,11885,6,5488.8782082125545
+area_chart_167,area_chart,What is the Seed Cost in the month of April?,$1200,1000,False,0.029825,11894,6,11285.400541033596
+area_chart_168,area_chart,What was the profit in 2017?,"$30,000","$45,000",False,0.02993,11924,8,13579.390874598175
+area_chart_169,area_chart,What is the total cost ($) of electricity and gas for the Mining category?,$1300,"For **Mining**, electricity cost is **$550** and gas is **800 therms**, so the total is **1350**.",True,0.030205,11890,32,8493.907458148897
+area_chart_170,area_chart,What is the trend for the Cybersecurity (Users) from 2020 to 2023?,Increasing,"Cybersecurity users **rose from 2020 to 2021, dipped in 2022, then rose again in 2023** — roughly **50 → 70 → 50 → 70**.",False,0.03052,11926,47,20680.578416679054
+area_chart_171,area_chart,How many students are enrolled in History at the Undergraduate level?,200,450,False,0.0298125,11895,5,11024.07049993053
+area_chart_172,area_chart,How many more users does YouTube have for News compared to YouTube users for Health?,70,70,True,0.0298275,11901,5,5277.380042243749
+area_chart_174,area_chart,How many inpatient visits were there in Q4 of 2017?,180,90,False,0.0298175,11897,5,5051.525749731809
+area_chart_175,area_chart,By how much did restaurant reservations increase from Q1 to Q12 in 2019?,"330,000",Restaurant reservations increased by **390 thousand** from Q1 to Q12.,False,0.03007,11914,19,17264.82995832339
+area_chart_176,area_chart,How many sites are associated with E-learning according to the data?,250,100 sites.,False,0.0298575,11901,7,12546.534959226847
+area_chart_177,area_chart,What is the total revenue of Clothing sales combining E-commerce and Retail?,$18000,"Clothing total revenue = **$10,500**.",False,0.0300625,11929,16,8759.810999967158
+area_chart_178,area_chart,What percentage of Arts participation was for Music in the year 2020?,30%,30%,True,0.029835,11898,6,9493.669250048697
+area_chart_179,area_chart,How many more vacation rentals were available in 2023 compared to 2019?,200,100 more.,False,0.0298675,11905,7,10373.124250210822
+area_chart_17,area_chart,How many truck units were shipped in March?,220,210 units.,True,0.029835,11892,7,13920.365582685918
+area_chart_181,area_chart,What is the total increase in Food Production from 2016 to 2020?,4000 Tons,"Food Production increases from **10,000 tons in 2016** to **14,000 tons in 2020**, so the total increase is **4,000 tons**.",True,0.0304225,11923,41,24966.12554229796
+area_chart_182,area_chart,In which year did Literature Publications reach the number of 600?,2019,2019.,True,0.0299025,11919,7,9547.545083798468
+area_chart_183,area_chart,How much water does the Agricultural category use?,25000 gallons,"Agricultural uses **25,000 gallons** of water.",True,0.030125,11954,16,11347.11162513122
+area_chart_184,area_chart,How many more undergraduate students are there in Education compared to Engineering?,150,Education has **150 more** undergraduate students than Engineering.,True,0.030045,11928,15,9348.753458354622
+area_chart_185,area_chart,What percentage of Medication is allocated for Surgery?,10%,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5971 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+area_chart_186,area_chart,"Which category has the largest total amount of Donations, Grants, and Fundraising combined?",Disaster Relief,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_187,area_chart,How many listings are there for 3 Bedroom Apartments in July?,1000,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_188,area_chart,Which industry category has the lowest water usage according to the data?,Waste Management,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_189,area_chart,Which cuisine has the highest Beverage sales?,American,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_18,area_chart,What was the incremental increase in revenue from 2020 to 2021?,5 million $,"Revenue rises from about 95 in 2020 to 110 in 2021, so the incremental increase was **15 million dollars**.",True,0.0302425,11899,33,9528.213875368237
+area_chart_190,area_chart,How much did the company spend on Marketing in 2020?,"$28,000","ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_19,area_chart,What was the percentage increase in donations from 2016 to 2020?,80%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_1,area_chart,What percentage of government spending was allocated to infrastructure in 2020?,20%,20%,True,0.0298325,11897,6,9764.759249985218
+area_chart_205,area_chart,In which year was the number of employees under performance management the highest?,2019 and 2020,2020.,True,0.0297625,11863,7,21031.628790777177
+area_chart_206,area_chart,Which grade has the highest total number of study hours across all subjects?,Grade 12,Grade 12.,True,0.0298625,11897,8,3684.689790941775
+area_chart_208,area_chart,In which quarter was the total number of residential sales the highest?,4th Quarter,4th Quarter.,True,0.0298725,11901,8,34294.20387512073
+area_chart_209,area_chart,What is the total sales for the Home Goods category?,"250,000","Home Goods total sales are **$220,000**.",False,0.0299525,11885,16,13127.99366703257
+area_chart_210,area_chart,Which subject had the lowest number of student enrollments in 2019?,Sociology,Psychology.,False,0.0298625,11903,7,7877.676290925592
+area_chart_211,area_chart,In which year did Legal Aid Services have the largest percentage increase compared to the previous year?,2020,2023.,True,0.0298575,11901,7,13660.655125044286
+area_chart_212,area_chart,Which country has the highest rice production according to the data?,USA,China.,False,0.0298525,11905,6,10095.607958734035
+area_chart_213,area_chart,Which industry has the highest number of Twitter users?,Food,News.,False,0.0298225,11893,6,19321.384208276868
+area_chart_214,area_chart,Which category has the highest expenditure for Development?,Engineering,Engineering.,True,0.02982,11892,6,13545.421750284731
+area_chart_216,area_chart,"In which year was the waste production exactly 4,800 pounds?",2020,2021.,True,0.02986,11902,7,14459.845791105181
+area_chart_217,area_chart,In which year did Political Science see the highest number of enrollments?,2021,2020.,True,0.02986,11902,7,17316.98541622609
+area_chart_218,area_chart,What was the Production Volume in April?,74,800,False,0.0298025,11891,5,6477.299542166293
+area_chart_219,area_chart,In which year was the highest amount of hours dedicated to Research?,2015,2019,True,0.0299875,11959,6,13369.072333909571
+area_chart_21,area_chart,Which month had the highest production output?,May,May.,True,0.0298175,11891,6,15838.615542277694
+area_chart_220,area_chart,Which field had the highest increase in the number of publications from 2015 to 2019?,Psychology,Political Science had the highest increase from 2015 to 2019.,False,0.0301225,11935,19,5645.938875153661
+area_chart_221,area_chart,In which quarter did the number of mobile users reach 150 million?,Q3,Q3.,True,0.02986,11902,7,15003.554333001375
+area_chart_222,area_chart,How much is the total revenue for Europe?,400000,"Europe’s total revenue is **330,000**.",False,0.029955,11892,15,8418.895207811147
+area_chart_223,area_chart,Which product has the highest energy consumption according to the data?,Renewable Energy Credits,Renewable Energy Credits.,True,0.0296875,11821,9,6629.81850001961
+area_chart_224,area_chart,In which year did Waste Management see an annual average increase of 10% from the previous year?,2020,2018.,True,0.0299025,11919,7,21019.68549983576
+area_chart_225,area_chart,In which year was the fish production the highest according to the data?,2015,2019.,True,0.0298475,11897,7,14024.745707865804
+area_chart_226,area_chart,How many condominiums were built in 2020?,500,500,True,0.029825,11900,5,9343.100249767303
+area_chart_227,area_chart,In which year were there the most Theatre events?,2021,2019.,True,0.0298375,11893,7,5049.369500018656
+area_chart_228,area_chart,What is the English score for a Doctorate level?,170,170,True,0.02981,11894,5,10919.89625012502
+area_chart_229,area_chart,How much did the government spend on Public Safety in 2021?,4500,"Public Safety in 2021 was **$4,700**.",True,0.0300125,11897,18,7960.937165655196
+area_chart_22,area_chart,How many bushels were harvested in October?,950,950 bushels.,True,0.0298675,11893,9,15760.680083185434
+area_chart_230,area_chart,How many vacation rentals are available in the Caribbean?,200,70,False,0.0298075,11893,5,6882.697416935116
+area_chart_231,area_chart,What is the difference between total retail sales and e-commerce sales for Furniture and Home Decor?,10000,"For **Furniture and Home Decor**, total retail sales are **$60,000** and e-commerce sales are **$25,000**, so the difference is **$35,000**.",False,0.0303,11862,43,8209.922707639635
+area_chart_232,area_chart,In which month did Music concerts have the lowest attendance?,April,August.,False,0.029825,11894,6,13601.591292303056
+area_chart_233,area_chart,What is the total amount of cargo (in tons) handled by Air and Maritime methods in Africa?,310000,"Africa: Air = 110,000 tons and Maritime = 130,000 tons, so total = **240,000 tons**.",False,0.0303925,11965,32,17026.142583228648
+area_chart_235,area_chart,Which department has the highest percentage in the R&D field?,Finance and Government,Government and E-commerce (tie).,False,0.02988,11886,11,15961.181208956987
+area_chart_237,area_chart,Which category has the highest number of YouTube users?,Entertainment,Fashion.,False,0.029825,11894,6,15148.811916820705
+area_chart_238,area_chart,Which mode of transport covers the greatest distance by road?,Truck,Truck.,True,0.029825,11894,6,10591.344499960542
+area_chart_239,area_chart,What was the increase in the number of hospitals from 2019 to 2023?,80,The number of hospitals increased by **80** from 2019 to 2023.,True,0.0300825,11901,22,19717.918458394706
+area_chart_23,area_chart,Which type of property had the highest increase in sales units from 2019 to 2023?,Condo Sales,"Single-family homes and condos tied for the highest increase, each rising by 150 units from 2019 to 2023.",False,0.030265,11926,30,6095.722166821361
+area_chart_240,area_chart,How much higher is the median house price for 5+ bedroom houses compared to 2 bedroom apartments?,"$300,000","From the chart, median house price for **5+ bedroom houses = $550,000** and for **2 bedroom apartments = $200,000**.
+
+**Difference: $350,000.**",False,0.03045,11910,45,7759.0856668539345
+area_chart_241,area_chart,Which mode of transportation has the lowest number of Transportation Units?,Sea,Rail and Air.,False,0.02987,11900,8,13548.850750084966
+area_chart_242,area_chart,How much Gas Usage is recorded in the month of September?,190 m^3,Gas Usage in **September** is **220 m³**.,False,0.0299925,11895,17,8467.974666971713
+area_chart_243,area_chart,In which year did Sociology publications reach the number of 240?,2019,2018.,True,0.0299025,11919,7,12666.79283278063
+area_chart_244,area_chart,How many more users did Instagram have compared to Twitter in Q3 of 2019?,40,40 users.,True,0.0298575,11901,7,13790.359000209719
+area_chart_245,area_chart,How many visitors attended Festivals in 2023?,320,320 visitors.,True,0.0299175,11925,7,8551.57795874402
+area_chart_246,area_chart,Which industry category utilizes air transport the most?,Retail,Retail.,True,0.029845,11902,6,15799.233375117183
+area_chart_247,area_chart,Which venue had the highest number of visitors in August?,Art Gallery Visitors,Art Gallery Visitors.,True,0.029855,11894,8,14588.413624558598
+area_chart_248,area_chart,Which category showed a decreasing trend in the number of publications from 2019 to 2023?,Economics,Economics and Literature.,True,0.02995,11926,9,12500.553791876882
+area_chart_249,area_chart,What is the difference between the condo sales and vacant land sales in 2017?,"60,000","In 2017, condo sales were **180** and vacant land sales were **120**, so the difference is **60**.",False,0.030215,11900,31,8823.406666982919
+area_chart_24,area_chart,Which category has the highest number of users in Cybersecurity?,Education,E-commerce.,False,0.0298375,11893,7,8568.255083169788
+area_chart_250,area_chart,What was the growth percentage in Q1?,10%,17%,False,0.02982,11892,6,6375.640584155917
+area_chart_251,area_chart,Which category has the highest number of legal cases won?,Corporate,Tax.,False,0.02981,11888,6,7494.719333015382
+area_chart_252,area_chart,Which level of education has the highest number of students enrolled in Computer Science?,Post-Graduate,Graduate.,False,0.0298925,11921,6,10522.878209128976
+area_chart_253,area_chart,Which category has the smallest difference between retail sales and e-commerce sales?,Toys,Books.,False,0.029955,11946,6,16153.143167030066
+area_chart_254,area_chart,"What is the total energy consumption of the Retail, Hospitality, and Government sectors combined?",6000 kWh,"Energy consumption values are:
+
+- Retail: 3000  
+- Hospitality: 2500  
+- Government: 1500  
+
+Total = **7000 kWh**.",False,0.030415,11932,39,21014.760000165552
+area_chart_255,area_chart,How many more users does Facebook have in the Fashion category than LinkedIn?,1500 users,"In the Fashion category, Facebook has **1000 more users** than LinkedIn.",False,0.02978,11786,21,6430.562959052622
+area_chart_256,area_chart,Which country has the lowest difference between production and imports?,Canada,Australia.,False,0.03011,12008,6,3284.6338748931885
+area_chart_258,area_chart,In which category is the highest percentage allocated to Healthcare?,Social Welfare,Education.,False,0.030085,11998,6,14783.007165882736
+area_chart_259,area_chart,Which sector has the highest revenue according to the data?,IT,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5972 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+area_chart_25,area_chart,How much did the Average Price ($) increase from 2019 to 2023?,"$200,000","$100,000.",False,0.0298875,11901,9,52291.18449985981
+area_chart_260,area_chart,"In which month did the Customers reach 30,000 for the first time?",August,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_261,area_chart,Which region has the highest number of Livestock heads?,Middle East,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_262,area_chart,How many attendees were there at art galleries in April?,60,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_263,area_chart,How many artists are associated with the Visual Arts category?,150,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_26,area_chart,In which quarter did Profit ($) have the highest value?,Q1,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_279,area_chart,Which region has the highest number of fans for Baseball?,Africa,North America.,False,0.02984,11894,7,13810.376457870007
+area_chart_280,area_chart,In which year did History have the lowest student enrollment according to the dataset?,2018,2018.,True,0.02985,11898,7,14677.85929236561
+area_chart_281,area_chart,How many more employees are there in the Human Resources department compared to the Finance department across all listed departments?,40 employees,Human Resources has **30 more employees** than Finance.,False,0.0301075,11953,15,16437.662708107382
+area_chart_282,area_chart,Which region has the lowest corn production?,Oceania,Africa.,False,0.0298175,11891,6,9481.705042067915
+area_chart_283,area_chart,How many Grants were Awarded to the field of Physics?,150,200,False,0.0300725,11999,5,20954.573499970138
+area_chart_284,area_chart,How much is the Food Production value for the Produce category?,4000,2000,False,0.02942,11732,6,13897.246875334531
+area_chart_285,area_chart,Which country has the highest average stay in days according to the data provided?,Spain,Thailand.,False,0.029835,11898,6,8024.314290843904
+area_chart_286,area_chart,Which industry has the highest percentage of Energy Consumption according to the chart?,Energy Sector and Construction,Construction.,False,0.0298325,11897,6,5543.04033331573
+area_chart_287,area_chart,Which category has the highest Revenue Generated ($) according to the given data?,Automotive,Automotive has the highest Revenue Generated ($).,True,0.02999,11918,13,3993.079708889127
+area_chart_288,area_chart,What is the total sales for Food and Beverage in 2019?,5300 millions of USD,Food sales in 2019 are **2500 million USD**.,False,0.0300375,11907,18,10548.099166247994
+area_chart_289,area_chart,Which category has the lowest number of Exhibitions events?,"Music, Film, Architecture",Culture.,False,0.02985,11904,6,7068.895624950528
+area_chart_290,area_chart,How many more employees were there in Sales than in R&D in 2021?,110 employees,70,False,0.007699,11920,5,11541.810833849013
+area_chart_292,area_chart,How many awards does the field of Environmental Science have?,80,Environmental Science has **80 awards**.,True,0.030175,11998,12,5052.72312508896
+area_chart_293,area_chart,Which sector has the highest water usage and how many gallons is it?,Energy; 15000 gallons,"Energy, 14,000 gallons.",True,0.0299225,11897,12,8541.38262476772
+area_chart_295,area_chart,By how much did potato production (lbs) increase from 2015 to 2019?,200 lbs,Potato production increased by **200 lbs** from 2015 to 2019.,True,0.030085,11902,22,8890.057541429996
+area_chart_296,area_chart,"In which year did the Revenue ($) first exceed $150,000?",2020,2020.,True,0.02985,11898,7,8026.701834052801
+area_chart_297,area_chart,How many clothing units were manufactured in September?,1700,Clothing units in September were **1500**.,False,0.029955,11892,15,11318.154125008732
+area_chart_298,area_chart,Which degree has the highest number of enrolled students in History?,Doctorate,Doctorate.,True,0.0298425,11895,7,21016.883249860257
+area_chart_299,area_chart,During which quarter did the company have the highest expenses?,Q3,Q3.,True,0.02984,11894,7,13825.997416861355
+area_chart_29,area_chart,How many more units of Product J were produced compared to Product H?,3000 units,"Product J was produced **2,500 units** more than Product H.",False,0.0300275,11897,19,13235.535874962807
+area_chart_300,area_chart,Which field has the highest number of Physics publications?,Physics,Geology.,False,0.03,11958,7,16686.245958320796
+area_chart_30,area_chart,What is the revenue for Baseball in the year 2017?,"120,000",120000,True,0.02983,11896,6,4743.19824995473
+area_chart_31,area_chart,What is the renewable energy usage in the Agriculture sector?,3000,The renewable energy usage in the Agriculture sector is **1000 metric tons**.,False,0.030075,11910,20,16883.75349994749
+area_chart_32,area_chart,Which education level has the highest enrollment for Science students?,Post-Graduate,Post-Graduate.,True,0.029855,11894,8,10487.435542047024
+area_chart_33,area_chart,How much waste is generated by the Construction industry?,500 pounds,Construction generates **400 pounds** of waste.,False,0.0299275,11893,13,6075.936417095363
+area_chart_34,area_chart,How much more funding does Policy 1 receive in 2024 compared to Policy 5?,$24000,"Policy 1 receives **$24,000 more** than Policy 5 in 2024.",True,0.030115,11902,24,11022.461582906544
+area_chart_35,area_chart,How many more medical tests were conducted for patients with chronic conditions compared to preventive care visits?,300,Medical tests were **180 more** for patients with chronic conditions than for preventive care visits.,False,0.03021,11952,22,9352.986709214747
+area_chart_36,area_chart,Which department has the highest Employee Satisfaction percentage?,Marketing,Marketing has the highest Employee Satisfaction percentage.,True,0.029975,11918,12,16106.587667018175
+area_chart_37,area_chart,In which month did airline bookings reach the highest units according to the given data?,July,July.,True,0.0298625,11909,6,17006.643834058195
+area_chart_38,area_chart,What is the average price of a 3 Bedroom condo compared to a 4 Bedroom apartment?,"$100,000 less","A 3 Bedroom condo is **$400,000**, compared to a 4 Bedroom apartment at **$450,000** — so the condo is **$50,000 cheaper**.",False,0.0304,11902,43,12490.04775006324
+area_chart_39,area_chart,Which organization received the highest amount of donations according to the data?,Feeding America,St. Jude Children’s Research Hospital.,False,0.0300875,11963,12,15484.927957877517
+area_chart_3,area_chart,How many Middle Management employees were there in 2020?,210,220,True,0.029845,11908,5,7131.86916615814
+area_chart_40,area_chart,How many arbitration cases were disposed of in 2021?,90,90,True,0.02997,11958,5,14528.473458252847
+area_chart_41,area_chart,Which industry has the highest Energy Usage percentage?,Real Estate,Real Estate.,True,0.0299775,11949,7,14420.60095909983
+area_chart_42,area_chart,In which year did diabetes cases reach 800?,2017,2017.,True,0.0298375,11893,7,5196.331040933728
+area_chart_43,area_chart,How much more wind energy does the commercial sector consume compared to the residential sector?,1000 kWh,"From the wind series, commercial is about **2500 kWh** and residential is about **2000 kWh**, so the commercial sector consumes **500 kWh more**.",False,0.0303475,11899,40,14661.615625023842
+area_chart_44,area_chart,What is the increase in sales for Home & Kitchen from 2016 to 2020?,"$40,000","Home & Kitchen increased by **40,000** (from **100,000** in 2016 to **140,000** in 2020).",True,0.03036,11928,36,15673.240415751934
+area_chart_45,area_chart,How many points did the graduate students score in Science?,30,25 points.,False,0.0301,11998,7,6918.858999852091
+area_chart_46,area_chart,Which category had the highest number of YouTube posts?,User Engagement,Advertising.,False,0.0298025,11885,6,17471.483082976192
+area_chart_47,area_chart,How many legal cases were settled in 2020?,20,20,True,0.02981,11894,5,12809.202125295997
+area_chart_48,area_chart,How many units were produced in December?,3400,3400 units.,True,0.0298475,11891,8,19535.27475008741
+area_chart_49,area_chart,How many Environmental Science projects are there in Category 9?,25,20,False,0.0298375,11905,5,13286.633375100791
+area_chart_4,area_chart,In which month was the water usage at its highest for the year 2020?,May,May.,True,0.0298525,11905,6,10716.38850029558
+area_chart_50,area_chart,What was the Production Volume in April?,74,"April falls in Q2. The chart labels Q2 as **10,000**.
+
+**Answer: 10,000**",False,0.0301775,11891,30,6019.912749994546
+area_chart_52,area_chart,What is the increase in water usage from 2016 to 2018?,20000 gallons,"Water usage increased by **20,000 gallons** from 2016 to 2018.",True,0.0301175,11909,23,16289.814417250454
+area_chart_53,area_chart,How much is the Revenue from Food & Beverage?,100000,"Revenue from Food & Beverage is **$90,000**.",True,0.029965,11884,17,6359.838250093162
+area_chart_54,area_chart,In which region is the number of Hockey fans equal to the number of Basketball fans?,Asia,Africa.,False,0.02984,11900,6,7472.612458281219
+area_chart_55,area_chart,In which year did concerts see the highest number of attendees according to the data?,2019,2019.,True,0.02991,11922,7,9576.716708019376
+area_chart_56,area_chart,Which education level has the smallest difference between student enrollment in Science and History?,Graduate,Graduate.,True,0.0298125,11889,6,8477.481875102967
+area_chart_57,area_chart,How much higher were Beverage Sales than Food Sales in March?,"$2,000","In March, Beverage Sales were **$2,000** higher than Food Sales.",True,0.0300525,11895,21,18532.09804231301
+area_chart_58,area_chart,By how much did the Gross Profit increase from Q1 to Q4 of 2021?,$70 million,Gross Profit increased by **70 million** from Q1 to Q4 of 2021.,True,0.0302575,11965,23,16788.003916852176
+area_chart_59,area_chart,By how much do the online sales of Clothing exceed the in-store sales?,$20000,"Clothing online sales exceed in-store sales by **$5,000**.",False,0.0300225,11889,20,15876.151375006884
+area_chart_5,area_chart,In which year was the difference between the number of legal cases filed and the number of laws passed the greatest?,2020,2022.,True,0.02988,11910,7,18488.641208969057
+area_chart_60,area_chart,What was the total in-store sales in thousands for all quarters?,1680,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_61,area_chart,"In which year did rice production reach 40,000 tons?",2018,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_62,area_chart,Which state has the least number of condos?,Pennsylvania,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_63,area_chart,How many publications were there in Engineering in 2020?,550,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_65,area_chart,Which country has the least number of airport arrivals according to the data?,Russia,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+area_chart_6,area_chart,By how much did the revenue increase from the year 2016 to 2020?,$30000,"Revenue increased from **$85,000 to $130,000**, so the increase was **$45,000**.",True,0.0301875,11901,29,9926.442250143737
+area_chart_80,area_chart,By how much did the Revenue ($) increase from Q1 to Q4?,"$50,000","$150,000.",True,0.0298825,11899,9,14141.897749621421
+area_chart_81,area_chart,Which department has the highest number of employees in Customer Service?,Administration,Administration.,True,0.03011,12008,6,15715.206833090633
+area_chart_83,area_chart,Which month had the highest renewable energy usage in the year 2020?,December,October.,False,0.029835,11898,6,8219.017082825303
+area_chart_84,area_chart,How many 5-star resorts are available?,50,50,True,0.0298175,11897,5,14910.01887479797
+area_chart_85,area_chart,In which quarter was the Electronics Production the lowest?,Q1,Q1.,True,0.029895,11916,7,3710.8675413765013
+area_chart_86,area_chart,How many more Litigation cases does Law Firm A handle than Law Firm D?,50 cases,20,False,0.0298325,11903,5,10829.464416019619
+area_chart_87,area_chart,In what year did Mathematics publications first reach 800?,2019,2019.,True,0.0298975,11917,7,12210.628374945372
+area_chart_88,area_chart,By how much did the CO2 Emission increase from 2015 to 2019?,2000 tons,"CO2 Emission increased by **2,000 tons** from 2015 to 2019.",True,0.0301425,11907,25,6367.573083844036
+area_chart_89,area_chart,Which product category had the lowest sales in the 4th Quarter?,Alcoholic Beverages,Alcoholic Beverages.,True,0.0298775,11897,9,15025.323125068098
+area_chart_90,area_chart,Which category has the highest Water Usage?,Government,Manufacturing.,False,0.029845,11896,7,14096.292374655604
+area_chart_91,area_chart,Which field of study had the lowest number of graduates every year from 2016 to 2020?,Political Science,Political Science.,True,0.0299225,11927,7,9809.282000176609
+area_chart_92,area_chart,Which category has shown a continuous increase in percentage from Q1 to Q4?,Chemistry,Chemistry (%) and Geology (%).,True,0.0299275,11899,12,10342.005458194762
+area_chart_93,area_chart,How many more employees were there in Sales than in R&D in 2021?,110 employees,70,False,0.007699,11920,5,16476.177709177136
+area_chart_94,area_chart,By how much did electricity usage increase from 2015 to 2019?,4000 kWh,"Electricity usage increased by **9,000 kWh** from 2015 to 2019.",False,0.0301225,11899,25,9036.489374935627
+area_chart_95,area_chart,How many videos related to the Travel category were posted on YouTube?,450,120,False,0.0298175,11897,5,15121.021583210677
+area_chart_96,area_chart,What were the expenses in May?,"$48,000","$25,000",False,0.029845,11890,8,6438.658332917839
+area_chart_97,area_chart,How many more users are in Data Science compared to Artificial Intelligence across all categories combined?,110 users,"From the chart labels: Data Science = 180 users, Artificial Intelligence = 130 users.  
+Difference = **50 users**.",False,0.03011,11858,31,22274.812208022922
+area_chart_98,area_chart,Which field experienced a consistent increase in percentage from 2018 to 2020?,Psychology,Psychology and Anthropology.,True,0.029885,11900,9,17170.118833892047
+area_chart_99,area_chart,Which category has the highest waste units?,Food & Beverage,Food & Beverage.,True,0.029825,11882,8,18033.535874914378
+area_chart_9,area_chart,What was the Vacation Rental Occupancy Rate in April?,70%,70%,True,0.029865,11910,6,8140.89237479493
+bubble_101,bubble,How many lawyers are there in the field of Intellectual Property Law in thousands?,8,8 thousand,True,0.0298825,11917,6,37138.24366685003
+bubble_103,bubble,How many merit-based scholarships are offered by Harvard University?,200,200,True,0.0298575,11913,5,8615.775250364095
+bubble_104,bubble,What is the Revenue of Amazon?,419,Amazon’s revenue is **401 billion dollars**.,True,0.0299825,11909,14,25893.9895844087
+bubble_106,bubble,How much revenue did Instagram generate?,20.1 billion USD,Instagram generated **$23 billion**.,False,0.0299525,11909,12,9695.849749725312
+bubble_107,bubble,How much more funding does Engineering receive compared to Chemistry?,$150 million,Engineering receives **$150 million** more funding than Chemistry.,True,0.0300225,11913,16,29106.069416739047
+bubble_108,bubble,What is the safety rating for the production of smart phones?,8,7.8,True,0.02989,11914,7,33701.96424983442
+bubble_109,bubble,How many active users does WhatsApp have in millions?,2000,"WhatsApp has **2,160 million** active users.",True,0.0300225,11913,16,14683.612457942218
+bubble_10,bubble,Which technology has the lowest Cost and Time?,Automation,Automation.,True,0.0298675,11911,6,17223.163625225425
+bubble_110,bubble,What is the Impact Score of UNICEF?,80,80,True,0.02985,11910,5,22882.574499584734
+bubble_111,bubble,Which company has the highest employee count?,Amazon,Amazon.,True,0.029865,11910,6,17754.738790914416
+bubble_112,bubble,Which university has the highest graduation rate according to the list?,Harvard,Harvard has the highest graduation rate (98%).,True,0.029995,11914,14,27487.855416256934
+bubble_114,bubble,What is Facebook's user base in millions?,70,Facebook's user base is **99 million**.,False,0.0299875,11911,14,17914.86316686496
+bubble_115,bubble,What was the Production Volume in April?,74,April’s Production Volume was **200**.,False,0.02997,11910,13,16537.299584131688
+bubble_116,bubble,What was the Production Volume in April?,74,"The chart shows regions, not months—there is no “Production Volume in April” shown.",False,0.03012,11910,23,12027.599125169218
+bubble_119,bubble,Which city has the least number of properties sold?,Hong Kong,Hong Kong.,True,0.029885,11912,7,35775.85600037128
+bubble_120,bubble,What is the Overall Revenue for Visual Arts?,25000 Million $,"45,000 million dollars.",False,0.0299275,11911,10,38123.811666853726
+bubble_121,bubble,What is the average settlement amount for Michael Davis?,"$90,000","$90,000",True,0.0299,11912,8,10454.2641248554
+bubble_122,bubble,What is the Public Interest Score for Soccer?,10,10,True,0.0298525,11911,5,31727.445125114173
+bubble_123,bubble,What is the Economic Impact of the Defense policy area?,$450 billion,The Economic Impact of **Defense** is **500 billion dollars**.,False,0.0300525,11913,18,18342.5369579345
+bubble_124,bubble,How many countries does the Red Cross have outreach in?,160,180 countries.,False,0.0298875,11913,7,21520.925582852215
+bubble_125,bubble,What was the Production Volume in April?,74,April’s Production Volume was **170**.,False,0.02997,11910,13,9481.003874912858
+bubble_126,bubble,Which field received the highest research funding according to the dataset?,Anthropology,Anthropology.,True,0.029905,11914,8,16553.21279214695
+bubble_127,bubble,How many millions of beneficiaries does the American Red Cross have?,50,50 million.,True,0.02989,11914,7,18015.584541019052
+bubble_128,bubble,How much higher is the implementation cost for Defence Strategies compared to Immigration Policies?,$500 billion,Defence Strategies is **$500 billion** higher than Immigration Policies.,True,0.0300625,11917,18,17174.42962527275
+bubble_129,bubble,How much revenue does LinkedIn generate?,$8.05 billion,LinkedIn generates **$16 billion** in revenue.,False,0.03,11910,15,7193.799667060375
+bubble_12,bubble,What is the Retention (Score) for the Manufacturing department?,90,90,True,0.0298125,11895,5,28119.712125044316
+bubble_130,bubble,Which artist has the highest number of artworks sold according to the dataset?,Pablo Picasso,Pablo Picasso.,True,0.02991,11916,8,14695.874291937798
+bubble_131,bubble,What is the efficiency percentage of Solar Energy?,90%,90%,True,0.0298675,11911,6,5492.0228333212435
+bubble_132,bubble,What is the market share percentage of Soft Drinks?,30%,Soft Drinks has a market share of **32%**.,True,0.03002,11912,16,30305.62612460926
+bubble_133,bubble,In which category did sales exceed the advertising budget by the largest margin?,Clothing,Clothing.,True,0.029895,11916,7,5979.435583110899
+bubble_135,bubble,How much has been invested in research for Cancer?,150 billion dollars,Cancer research investment is **$150 billion**.,True,0.02999,11912,14,16828.627250157297
+bubble_136,bubble,How many more gallons of water per acre does rice use compared to soybeans?,20000,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5975 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+bubble_137,bubble,What is the tourism revenue of Dubai?,44 billion $,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_138,bubble,What was the Production Volume in April?,74,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_139,bubble,What is the annual cost for the Environment policy?,500 Billion $,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_13,bubble,What is the Environmental Impact score of Wind power plants?,500,500,True,0.0298575,11913,5,24683.576916810125
+bubble_140,bubble,How many million tonnes of emission does ship transport produce?,1500,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_141,bubble,What was the Production Volume in April?,74,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_14,bubble,Which region has the lowest education level score?,Australia,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_156,bubble,What is the profit margin for computers? ,25%,25%,True,0.0298675,11911,6,9072.97437498346
+bubble_157,bubble,What is the Quality Assurance Score for Electronics?,9,9.2,True,0.0298825,11911,7,29673.602084163576
+bubble_158,bubble,Which university has the highest research output score?,MIT,MIT.,True,0.0298675,11911,6,19702.36216671765
+bubble_159,bubble,How much higher is the job availability in Arts compared to Anthropology?,25 thousand,Arts has **15 thousand** more jobs available than Anthropology.,False,0.0300275,11915,16,15008.884334005415
+bubble_160,bubble,How many artworks (in thousands) did Rembrandt sell?,90,Rembrandt sold **95 thousand** artworks.,True,0.02998,11914,13,8354.267042130232
+bubble_161,bubble,Which category has the highest customer ratings average score?,Home and Kitchen,Home and Kitchen.,True,0.0299,11912,8,14552.058916073292
+bubble_162,bubble,What was the Production Volume in April?,74,20 billion dollars.,False,0.029895,11910,8,28435.667916201055
+bubble_163,bubble,Which company has the highest debt according to the data?,Amazon,Amazon.,True,0.0298725,11913,6,10491.748958826065
+bubble_164,bubble,Which company has the largest User Base according to the data?,Google,Google.,True,0.029875,11914,6,39526.667666155845
+bubble_165,bubble,Which government policy has the highest public satisfaction score?,Social Security,Digitalisation.,False,0.029885,11912,7,25959.10149998963
+bubble_166,bubble,How many artworks has Rembrandt sold more than Caravaggio?,200,Rembrandt has sold **200 more artworks** than Caravaggio.,True,0.0300575,11915,18,20236.81249981746
+bubble_167,bubble,What is the fuel efficiency of rail transport?,400 miles per gallon,Rail transport’s fuel efficiency is **100 miles per gallon**.,False,0.0300325,11911,17,27975.427124649286
+bubble_168,bubble,What is the average player salary in Formula 1?,12,Formula 1’s average player salary is **$12 million**.,True,0.0300525,11913,18,44546.5819160454
+bubble_169,bubble,Which company has the highest active user count?,Google,Google.,True,0.0298675,11911,6,11233.496875036508
+bubble_16,bubble,How many more millions of visitors did Europe have compared to Asia?,10 million,Europe had **42 million** more visitors than Asia.,False,0.0300125,11915,15,11020.539958029985
+bubble_170,bubble,Which product has the highest profit margin percentage?,Cosmetics,Cosmetics has the highest profit margin percentage (40%).,True,0.0300025,11911,15,28916.207999922335
+bubble_171,bubble,What is the stock for the product category with the highest annual sales?,50 million,50 million.,True,0.029895,11916,7,18705.12295793742
+bubble_172,bubble,Which farm has the highest total yield when combining both fruit and vegetable yields?,Golden Plains Farm,Golden Plains Farm.,True,0.0299125,11917,8,21071.074499748647
+bubble_173,bubble,What is the difference in Market Capitalization between Apple Inc. and Microsoft?,$300 billion,Apple Inc. has about **$200 billion** more market capitalization than Microsoft.,False,0.0300925,11917,20,33956.76020812243
+bubble_174,bubble,What is the market capitalization of Facebook in billion dollars?,800,Facebook’s market capitalization is **740 billion dollars**.,True,0.0300075,11913,15,25771.784708369523
+bubble_177,bubble,How many products does Nestle have?,200,Nestle has **155 products**.,False,0.029955,11910,12,26818.25862498954
+bubble_179,bubble,How many million units of Wine were sold?,500,Wine sold **500 million units**.,True,0.0299575,11911,12,30268.234417308122
+bubble_17,bubble,Which company has the lowest debt among those listed?,Microsoft,JPMorgan.,False,0.0299,11912,8,29000.611041206867
+bubble_180,bubble,What is the market share of Instagram?,30%,30%,True,0.029815,11890,6,7976.632917299867
+bubble_181,bubble,What was the Production Volume in April?,74,April’s Production Volume was **180**.,False,0.02997,11910,13,12691.842208150774
+bubble_183,bubble,How much profit did Southern Company make in $ billion?,5.2,$5.2$ billion,True,0.0299325,11913,10,19566.215292084962
+bubble_184,bubble,Which sport has the highest Athlete Salaries in millions of dollars?,Football,Football.,True,0.0298775,11915,6,8243.851291015744
+bubble_185,bubble,What is the Global Reach in Millions for Film?,1500,1500 million.,True,0.0299,11912,8,32007.45545886457
+bubble_186,bubble,What is the employee turnover rate in the Sales department?,20%,18%,True,0.0298725,11913,6,31799.480583053082
+bubble_188,bubble,Which platform has the least average time spent but more advertising revenue than Snapchat?,LinkedIn,LinkedIn.,True,0.0298975,11917,7,9486.720874905586
+bubble_189,bubble,Which platform has the highest average ad revenue per user?,Instagram,Facebook.,False,0.0298725,11913,6,20612.23066598177
+bubble_18,bubble,How much does the treatment of Liver Disease cost compared to Stroke?,$1000 less,"Liver Disease costs **$5,500 thousand ($5.5 million)**, compared to **$4,000 thousand ($4.0 million)** for Stroke — so **Liver Disease costs $1.5 million more**.",False,0.0305675,11915,52,25613.956957589835
+bubble_190,bubble,Which product category has the highest Digital Marketing Expenditure?,Electronics,Electronics.,True,0.0298875,11913,7,32765.60004102066
+bubble_191,bubble,What is the revenue of Twitter as shown in the chart?,3.1 billion $,Twitter’s revenue is **3.1 billion dollars**.,True,0.030025,11914,16,58525.53191734478
+bubble_192,bubble,What is the difference in research funding between Psychology and Sociology?,$20 million,Psychology has **$20 million** more research funding than Sociology.,True,0.030055,11914,18,12017.014665994793
+bubble_193,bubble,How many theaters are showing comedy genre films?,300,300 theaters.,True,0.0298825,11911,7,9012.006625067443
+bubble_194,bubble,What is the annual revenue of Silver Lake farm?,$400 million,Silver Lake farm’s annual revenue is **$450 million**.,False,0.030035,11912,17,13167.516082990915
+bubble_195,bubble,How many hours a day is Amazon used on average?,1.5 hours,Amazon is used on average **1.5 hours per day**.,True,0.0300525,11913,18,39399.64716695249
+bubble_196,bubble,What is the Satisfaction Score for graduates in Social Sciences?,9.1,9.0,True,0.0298875,11913,7,23674.5804999955
+bubble_197,bubble,How many years of research time is associated with quantum computing?,2,2 years,True,0.029875,11914,6,46019.176832865924
+bubble_198,bubble,Which policy has the highest Implementation Cost?,International Trade Policy,International Trade Policy.,True,0.029895,11910,8,37716.15479094908
+bubble_199,bubble,Which department has the highest annual turnover rate?,IT,IT has the highest annual turnover rate.,True,0.0299575,11911,12,23268.828582949936
+bubble_19,bubble,Which project has the least number of scientists working on it?,Autonomous Vehicle,Autonomous Vehicle.,True,0.029905,11914,8,17967.66141615808
+bubble_1,bubble,How much higher is the energy output of nuclear plants compared to natural gas plants?,1300 Megawatts,"Nuclear plants output about **1,300 MW more** than natural gas plants.",True,0.03011,11918,21,11396.920584142208
+bubble_200,bubble,What was the Production Volume in April?,74,"The chart does not show monthly production volume or April. It shows country data on renewable energy use, CO2 emissions, sustainability index, and population.",False,0.030285,11910,34,19361.0744997859
+bubble_201,bubble,Which product category has the largest market share percentage according to the data?,Smartphones,"Smartphones, at 25%.",True,0.029955,11916,11,15476.994290947914
+bubble_202,bubble,How many average patent applications do aerospace engineers have?,4,Aerospace engineers have **4 average patent applications**.,True,0.03002,11912,16,33690.71670807898
+bubble_204,bubble,What is the profit margin for washing machines?,18%,The profit margin for washing machines is **18%**.,True,0.0300175,11911,16,13065.038832835853
+bubble_205,bubble,By how many percentage points is Hospitality Employment in Dubai greater than in New York?,5%,"Dubai hospitality employment is 23% and New York is 18%, so Dubai is **5 percentage points** higher.",True,0.030215,11918,28,23513.9402076602
+bubble_206,bubble,What was the Production Volume in April?,74,550 million.,False,0.02988,11910,7,8045.372125227004
+bubble_207,bubble,What is the Impact Score of Intellectual Property Law according to the given dataset?,87,The Impact Score of **Intellectual Property Law** is **87**.,True,0.0300775,11917,19,13934.442542027682
+bubble_208,bubble,How many Museum Exhibitions does Damien Hirst have?,120,140,False,0.0298575,11913,5,27568.107541184872
+bubble_209,bubble,Which organization has the highest number of volunteer hours?,World Vision,World Vision.,True,0.029885,11912,7,9826.360249891877
+bubble_20,bubble,How much higher is the price of the Painting compared to the Photograph?,$3 million,Painting is **$3 million** higher than Photograph.,True,0.030015,11916,15,18009.39300004393
+bubble_211,bubble,Which category has the lowest number of employees and in which year was it established?,"The Coffee category has the lowest number of employees, and it was established in 2020","ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_212,bubble,What is the cargo capacity of a ship according to the given data?,20000 Tonnes,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_213,bubble,Which vehicle type has the lowest CO2 emissions per million tonnes of transport volume?,Pipeline,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_214,bubble,What is the Popularity Score of Music Concerts?,95,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_215,bubble,How much did Van Gogh's artwork sell for in millions USD?,700,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_21,bubble,What is the total number of cases filed for Immigration and Taxation combined?,0.4 million,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5976 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+bubble_230,bubble,How many more billions of dollars in revenue did the Fast Food industry generate compared to the Seafood industry?,$150 billion,Fast Food generated **$150 billion** more in revenue than Seafood.,True,0.030075,11922,18,15479.300625156611
+bubble_231,bubble,How many employees does Microsoft have in millions?,1.7,1.7 million,True,0.0298975,11911,8,37059.517791029066
+bubble_232,bubble,What are the carbon emissions for solar energy?,0 kg per KWh,Solar energy’s carbon emissions are **50 kg per KWh**.,True,0.0300475,11911,18,41026.89916593954
+bubble_233,bubble,How many millions of users do Smart Home Devices have?,700,700 million.,True,0.0298875,11913,7,26221.616374794394
+bubble_234,bubble,Which product has the highest consumer satisfaction score?,Wine,Wine.,True,0.0298675,11911,6,14161.023499909788
+bubble_235,bubble,How many more millions of patrons does Film have compared to Literature?,450 million patrons,Film has **380 million** more patrons than Literature.,False,0.0300125,11915,15,29552.558332681656
+bubble_236,bubble,Which product has the highest global demand according to the data?,Corn,Corn.,True,0.029875,11914,6,19013.121125288308
+bubble_239,bubble,What was the Production Volume in April?,74,2700 million MWh.,False,0.029925,11910,10,6518.527249805629
+bubble_23,bubble,What is the Environmental Impact score for the Education policy?,600,500,False,0.0298575,11913,5,30040.872500278056
+bubble_240,bubble,Which organization has the highest fundraising revenue?,Salvation Army,Salvation Army.,True,0.029895,11910,8,24041.709582787007
+bubble_241,bubble,What is the cost for investing in Renewable Energy?,2.5 Billion $,$2.5$ billion.,True,0.029945,11912,11,11896.699082572013
+bubble_242,bubble,Which vehicle type has the highest environmental impact score?,Pipelines,Trains.,False,0.029885,11912,7,29795.763957779855
+bubble_243,bubble,Which material has the highest Efficiency Score?,Silicon,Silicon.,True,0.02988,11910,7,18647.552250418812
+bubble_244,bubble,What is the profit margin for laptops?,20%,20%,True,0.029865,11910,6,15551.394124981016
+bubble_246,bubble,What is the average salary difference between Administrative and Technical job types?,$1000,"Administrative salary = 3000, Technical salary = 4000, so the difference is **1000**.",True,0.0301925,11915,27,13020.755500067025
+bubble_247,bubble,Which Research Area has the highest Public Interest Score?,Philosophy,Philosophy.,True,0.0299,11912,8,11999.28200012073
+bubble_248,bubble,How much greater is the viewership of basketball compared to hockey?,1.2 million,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_249,bubble,How many tonnes of pesticides are used for grapes?,20 tonnes,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_24,bubble,How much revenue does Basketball generate in billions of dollars?,70,70 billion dollars.,True,0.0299025,11913,8,44322.42350000888
+bubble_250,bubble,What is the Quality Life Years score for Heart Disease?,7.5,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_251,bubble,By how much does the Average Price of Shoes exceed that of Clothing?,$50,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_252,bubble,Which company has the highest number of employment (in thousands)?,Amazon,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_25,bubble,What is the score for Victim Impact in the case of Assault?,95,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_267,bubble,Which destination has the highest revenue according to the data?,USA,USA.,True,0.0298725,11913,6,41709.4062496908
+bubble_268,bubble,What is the efficiency score for the Smartphones sector?,90,88,True,0.029855,11912,5,34190.05550025031
+bubble_269,bubble,Which crop has the highest employment rate?,Sugar Cane,Sugar Cane.,True,0.02983,11890,7,12847.80737478286
+bubble_270,bubble,Which platform has the highest user satisfaction score?,Instagram,Instagram.,True,0.0298675,11911,6,26114.77450001985
+bubble_271,bubble,What is the property value of the city with the highest rental price?,800 million $,"The highest rental price is **San Jose ($3500)**, and its property value is **$800 million**.",True,0.03021,11916,28,37199.19762481004
+bubble_272,bubble,What is the cost of wind energy in USD?,250,Wind energy costs **$250**.,True,0.02996,11912,12,23444.643541704863
+bubble_273,bubble,Which utility company has the highest number of customers served?,State Grid Corporation of China,State Grid Corporation of China.,True,0.0299325,11913,10,29999.776292126626
+bubble_275,bubble,What was the Production Volume in April?,74,April’s Production Volume was **350 thousand units**.,False,0.03,11910,15,8667.225375305861
+bubble_276,bubble,What was the Production Volume in April?,74,450 million kilometers.,False,0.029895,11910,8,36976.18329105899
+bubble_277,bubble,What was the Production Volume in April?,74,750 million dollars.,False,0.029895,11910,8,11990.69079104811
+bubble_278,bubble,How many employees are there in the Department of Health & Human Services?,1.0 million,1 million.,True,0.029895,11916,7,13123.051291331649
+bubble_279,bubble,What is the capital investment for wind energy?,$160 billion,150 billion dollars.,True,0.0298975,11911,8,15831.17845794186
+bubble_27,bubble,How many more months does it take to develop nanotechnology compared to energy storage technologies?,36 months,Nanotechnology takes **36 more months** than energy storage.,True,0.0300375,11919,16,11003.532791975886
+bubble_281,bubble,Which legal subject has the highest Justice Delay Rate?,Constitution Law,Constitution Law.,True,0.0299,11912,8,30475.13375012204
+bubble_282,bubble,How much funding does Literature receive?,420 million $,Literature receives **$420 million** in funding.,True,0.0299975,11909,15,24761.208792217076
+bubble_283,bubble,What was the Production Volume in April?,74,April’s Production Volume was **220**.,False,0.02997,11910,13,15343.68541603908
+bubble_284,bubble,Which crime has the highest Law Enforcement (Score)?,Assault,Assault.,True,0.029885,11912,7,16215.603665914387
+bubble_285,bubble,How many faculties are there at Stanford?,349,Stanford has **350 faculties**.,True,0.029955,11910,12,12963.305416982621
+bubble_287,bubble,What is the dropout rate at Harvard University?,2%,Harvard University’s dropout rate is **2%**.,True,0.0300175,11911,16,26539.029124658555
+bubble_288,bubble,What was the Production Volume in April?,74,"8,000 million dollars.",False,0.029925,11910,10,8026.2819160707295
+bubble_289,bubble,What is the population difference between Tokyo and New York?,29 million,"Tokyo’s population is 37.4 million and New York’s is 8.4 million, so the difference is **29.0 million**.",True,0.0303075,11913,35,29201.85300009325
+bubble_28,bubble,Which restaurant type has the highest sustainability score?,Home Delivery,Home Delivery.,True,0.0298825,11911,7,32176.329500041902
+bubble_290,bubble,How much greater is the carbon footprint of Exxon Mobil compared to Total?,"350,000 metric tons","Exxon Mobil’s carbon footprint is about **220,000 metric tons** greater than Total’s.",False,0.03015,11916,24,12008.805208839476
+bubble_291,bubble,Which charity has the highest annual fundraising but the lowest number of beneficiaries?,World Vision International,World Vision International.,True,0.02991,11916,8,23519.8539160192
+bubble_292,bubble,How much revenue did Clifford Chance generate?,30 Million $,Clifford Chance generated **$30 million**.,True,0.03,11910,15,6319.092832971364
+bubble_293,bubble,Which policy has the highest Budget Allocation percentage?,Defense Policy with 40%,Defense Policy.,False,0.0298825,11911,7,21254.884249996394
+bubble_294,bubble,Which organization has the highest Impact Score?,World Wildlife Fund,World Wildlife Fund.,True,0.029895,11910,8,31362.619291990995
+bubble_295,bubble,What is the Citizen Satisfaction score for Germany?,75,Germany’s Citizen Satisfaction score is **75**.,True,0.0299875,11911,14,10809.10824984312
+bubble_296,bubble,How much research funding does the Massachusetts Institute of Technology receive?,320,Massachusetts Institute of Technology receives **$320 million** in research funding.,True,0.03007,11914,19,27231.28700023517
+bubble_297,bubble,Which platform has the highest average time spent?,Facebook,Facebook.,True,0.0298675,11911,6,26963.67045911029
+bubble_298,bubble,What is the Sustainability Score of Paris?,9,Paris’s Sustainability Score is **9.3**.,True,0.03,11910,15,17483.024707995355
+bubble_299,bubble,Which device has the lowest convenience score?,Router,Router.,True,0.029865,11910,6,18658.374541904777
+bubble_29,bubble,Which tax type has the highest revenue collected?,Income Tax,Income Tax.,True,0.0298825,11911,7,24763.164708856493
+bubble_2,bubble,What is the difference in satisfaction scores between Asia and North America?,0.8,"Asia’s satisfaction score is 7.2 and North America’s is 8.0, so the difference is **0.8 points**.",True,0.0302975,11915,34,22900.50583286211
+bubble_300,bubble,How many more millions of monthly active users does Facebook have compared to Instagram?,1700 million users,"Facebook has **1,900 million** more monthly active users than Instagram.",False,0.0300775,11917,19,10752.726207952946
+bubble_30,bubble,What is the difference between the Financial Return Score of Music and Theater?,10 points,"Music’s Financial Return Score is 50 and Theater’s is 65, so the difference is **15**.",False,0.030195,11916,27,20016.248625237495
+bubble_31,bubble,Which company has invested the most in 2023?,Microsoft,Microsoft.,True,0.0298725,11913,6,10801.17658386007
+bubble_32,bubble,Which health issue has the highest mortality rate according to the data?,Cardiovascular Disease,Cardiovascular Disease.,True,0.0299225,11915,9,6851.729707792401
+bubble_33,bubble,Which topic has the highest popularity score?,Psychology,Psychology.,True,0.02988,11910,7,11481.125707738101
+bubble_34,bubble,What is the 'Attitudes to Education (Score)' for Non-Binary individuals?,7,7,True,0.0298725,11919,5,8979.42554205656
+bubble_35,bubble,Which sector has the highest Environmental Impact score?,Energy Production,Energy Production.,True,0.0298825,11911,7,37247.085832990706
+bubble_36,bubble,How much revenue is generated from soccer?,60 billion $,Soccer generates **$60 billion** in revenue.,True,0.03,11910,15,7483.587707858533
+bubble_37,bubble,Which network technology has the highest cost?,5G,5G.,True,0.02988,11910,7,23653.959040995687
+bubble_38,bubble,Which destination has the highest average spending?,Japan,Japan.,True,0.029865,11910,6,30487.991959322244
+bubble_39,bubble,What is the legality score for Intellectual Property Law?,90,89,True,0.029855,11912,5,15009.905125014484
+bubble_3,bubble,Which restaurant type has the highest employee satisfaction score?,Fine Dining,Fine Dining.,True,0.029885,11912,7,26060.393041931093
+bubble_40,bubble,What is the difference in average house prices between Downtown and Suburbs?,"$50,000","Downtown is **$50,000** higher than Suburbs.",True,0.03006,11916,18,11906.220792327076
+bubble_41,bubble,How much is the User Growth for Instagram?,1.2 million,Instagram’s user growth is **1.8 million**.,False,0.0300175,11911,16,27531.23024990782
+bubble_42,bubble,In which category is the average spend per customer the highest?,Electronics,Electronics.,True,0.02989,11914,7,31461.03679202497
+bubble_43,bubble,How much is the Broadcast Audience for the NBA Finals?,120 million,150 million.,False,0.0298875,11913,7,15893.701750319451
+bubble_44,bubble,What is the revenue in billions of dollars generated by Basketball?,25,25 billion dollars.,True,0.029905,11914,8,16774.75529164076
+bubble_45,bubble,What is the appeal rate for cases in the County Court?,15%,15%,True,0.029875,11914,6,13525.678083766252
+bubble_46,bubble,What is the total number of employees (in thousands) for XYZ Corp. and RST Co. combined?,65,"XYZ Corp. has **30** thousand employees and RST Co. has **35** thousand, so combined they have **65 thousand**.",True,0.030305,11924,33,18903.53758307174
+bubble_47,bubble,How many more hours per week is the engagement in music compared to dance?,5 hours,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_48,bubble,Which crop has the highest production volume according to the data?,Corn,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_4,bubble,What is the total number of users (in millions) for Twitter and Reddit combined?,0.9 million,"0.76 million
+",False,0.0299325,11919,9,20118.557250127196
+bubble_50,bubble,How much energy does the Solar Farm project use?,25 Megawatts,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_51,bubble,How many factory workers are employed in the production of smartphones?,1200 thousand,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_52,bubble,What is the market share percentage for Coffee?,20%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_53,bubble,What was the Production Volume in April?,74,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_5,bubble,How many thousands of Engineering Graduates are there in the field of Artificial Intelligence?,2.4,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+bubble_67,bubble,What is the Carbon Footprint for the Recycling Program?,5000 Metric Tons,5000 metric tons.,True,0.0299175,11913,9,15861.154375132173
+bubble_68,bubble,What is the profit margin for electronics?,30%,30%,True,0.029865,11910,6,24749.321832787246
+bubble_69,bubble,Which field has the second-largest number of researchers?,Civil Engineering,Civil Engineering.,True,0.029885,11912,7,14957.592125050724
+bubble_70,bubble,Which material has an environmental impact score of 5?,Silicon,Silicon.,True,0.0298875,11913,7,50015.5192501843
+bubble_71,bubble,Which website has the highest conversion rate?,YouTube,YouTube.,True,0.02988,11910,7,28277.98195881769
+bubble_72,bubble,What is the Bureaucratic Complexity score of the Climate Change Policies?,400,500,False,0.029865,11916,5,13676.321791950613
+bubble_73,bubble,Which product has the highest reliability score?,Home essentials,Home essentials.,True,0.02988,11910,7,23495.66537514329
+bubble_74,bubble,Which renewable source has the largest generation capacity?,Solar,Solar has the largest generation capacity.,True,0.0299425,11911,11,15334.963832981884
+bubble_75,bubble,How many deliveries did FedEx complete?,300 million,FedEx completed **350 million** deliveries.,False,0.02997,11910,13,15520.155041944236
+bubble_76,bubble,Which subject has the highest research output?,Computer Science,Biology has the highest research output.,False,0.029955,11910,12,12929.35400037095
+bubble_77,bubble,How many millions of units of furniture are produced?,25,Furniture is **22 million units**.,False,0.02996,11912,12,10231.879374943674
+bubble_78,bubble,How much research funding in million dollars is allocated to Sociology?,200,Sociology is allocated **$210 million**.,True,0.03001,11914,15,29880.560416728258
+bubble_79,bubble,What is the customer satisfaction score for PepsiCo?,80,80,True,0.029855,11912,5,25993.641666136682
+bubble_7,bubble,Which property type has the greatest area?,Vacation Homes,Vacation Homes.,True,0.02988,11910,7,26795.66816613078
+bubble_80,bubble,What was the Production Volume in April?,74,"3000
+",False,0.02988,11910,7,11600.198834203184
+bubble_81,bubble,How much greater is the health spending for Mental Disorders compared to that for Heart Disease?,$800 billion,Mental Disorders spending is **$800 billion** greater than Heart Disease.,True,0.0300675,11919,18,6769.310375209898
+bubble_82,bubble,What is the profit margin of electronic gadgets compared to trucks?,30%,Electronic gadgets have a **30%** profit margin versus **19%** for trucks — **11 percentage points higher**.,True,0.03022,11914,29,12007.986249867827
+bubble_84,bubble,What is the difference in the number of employees between the Clothing and Beauty and Personal Care categories?,1000 employees,Clothing has 500 more employees than Beauty and Personal Care.,False,0.0300575,11921,17,29450.445417314768
+bubble_85,bubble,How many training hours are provided to each employee in the Sales department?,20,Sales employees receive **25 training hours** each.,False,0.03,11916,14,13223.312749993056
+bubble_87,bubble,What was the Production Volume in April?,74,April’s Production Volume was **500**.,False,0.02997,11910,13,22975.611583329737
+bubble_88,bubble,What is the customer satisfaction score for dairy products?,7,8.5,False,0.029885,11912,7,9238.054250366986
+bubble_89,bubble,Which department has the smallest employee size and what is their turnover rate?,HR; 8%,"HR has the smallest employee size, and its turnover rate is 7%.",False,0.030075,11916,19,24740.083541255444
+bubble_8,bubble,Which platform has the highest engagement score?,Facebook,Facebook.,True,0.029865,11910,6,6340.113000012934
+bubble_90,bubble,Which field has the highest number of journals published?,Psychology,Psychology.,True,0.029885,11912,7,26071.53733400628
+bubble_91,bubble,Which department has the highest Employee Satisfaction score?,Finance,Finance.,True,0.0298175,11891,6,26583.79887510091
+bubble_92,bubble,Which law firm has the highest client satisfaction score?,Kirkland & Ellis,Kirkland & Ellis.,True,0.02993,11912,10,32004.58891596645
+bubble_93,bubble,What was the Production Volume in April?,74,"April corresponds to **Cars**, and its Production Volume is **1,000 thousand units**.",False,0.03012,11910,23,40170.338542200625
+bubble_94,bubble,How many jobs are generated by the AI Technology sector?,4.5 million,4.5 million jobs.,True,0.0299325,11913,10,26366.46783305332
+bubble_95,bubble,How many thousands of beneficiaries does the Salvation Army serve annually?,40,42 thousand.,True,0.02989,11914,7,17231.761333998293
+bubble_96,bubble,Whose artwork was created in the earliest year?,Van Gogh's artwork was created in 1888,Van Gogh.,False,0.029885,11912,7,12543.271833099425
+bubble_97,bubble,What was the Production Volume in April?,74,1400,False,0.029865,11910,6,14551.316166296601
+bubble_98,bubble,What is the Global Reach of Cinema in millions?,150,150 million,True,0.02987,11912,6,18534.85312499106
+bubble_99,bubble,What is the employment rate for Oats?,6.5%,8%,False,0.0292575,11667,6,23534.199667163193
+bubble_9,bubble,What is the Satisfaction Score for the South Pacific destination?,5,5,True,0.0298575,11913,5,26905.502542387694
+radar_100,radar,Which category has the highest Guest Satisfaction score?,Luxury Cruise,Luxury Cruise.,True,0.0304025,12119,7,11483.217583037913
+radar_101,radar,Which category has the lowest score in Pollution Management?,Energy Usage,Energy Usage.,True,0.030405,12120,7,3340.668666642159
+radar_102,radar,Which university has the highest faculty Quality Score?,Cambridge,Oxford.,False,0.0303875,12119,6,7221.122832968831
+radar_103,radar,What score did Barcelona receive for Local Cuisine?,90,90,True,0.0303725,12119,5,3870.376417413354
+radar_104,radar,What is the Cost per unit of Nuclear Energy?,$66,"64
+",True,0.03039,12120,6,17680.54766720161
+radar_105,radar,Which health facility has the highest Treatment Effectiveness score?,Dental Clinic,Physiotherapy Center has the highest Treatment Effectiveness score (95).,False,0.0305725,12121,18,11506.576291751117
+radar_106,radar,Which team scored the lowest on Resource Allocation?,Team A,Team B.,False,0.0303125,12083,7,11242.287250235677
+radar_107,radar,Which product category has the highest customer satisfaction score?,Groceries,Clothing.,False,0.030405,12120,7,4772.221416700631
+radar_109,radar,What is the score in Science for a Bachelors degree?,86,91,True,0.02974,11866,5,10166.952208150178
+radar_10,radar,How much did the tax rate (%) increase from Q1 to Q4?,15%,Tax rate increased by **15 percentage points** (from **80%** in Q1 to **95%** in Q4).,True,0.0307775,12125,31,7247.189125046134
+radar_110,radar,What is the publication count for Sociology?,70,82,False,0.02973,11862,5,9745.611541904509
+radar_111,radar,Which power source has the lowest Sustainability Index (%)?,Hydro Power,Hydro Power.,True,0.03042,12120,8,6485.370582900941
+radar_113,radar,Which criteria has the highest percentage for Green Energy?,Carbon Footprint Reduction,"For **Green Energy**, the highest percentage is **Sustainable Materials Use (95%)**.",False,0.030645,12120,23,15552.110207732767
+radar_114,radar,Which subject has the highest classroom participation percentage?,Physics,Chemistry.,False,0.0304025,12119,7,7002.328666858375
+radar_115,radar,What is the sales number for Electronics in E-commerce Platforms?,90,95,True,0.02965,11830,5,6144.148624967784
+radar_116,radar,Which factory has the highest Production Efficiency percentage?,Factory E,Factory D.,False,0.0297625,11863,7,8487.47079167515
+radar_118,radar,Which organization has the lowest Administrative Cost?,UNICEF,UNICEF.,True,0.02967,11826,7,4438.721624668688
+radar_119,radar,What is the Revenue (Millions) for Baseball?,600,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5967 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+radar_11,radar,What is the score difference between waste management in Region 1 and Region 4?,15,"Waste management scores: Region 1 = 80, Region 4 = 95, so the difference is **15**.",True,0.0307675,12127,30,10663.556667044759
+radar_120,radar,What was the percentage increase in Renewable Energy Usage from Q1 to Q4?,9%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_121,radar,Which academic field has the highest average score across all the evaluated categories?,Psychology,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_122,radar,Which healthcare facility has the highest average score across all aspects?,Rehabilitation Center,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_123,radar,Which hospital has the highest Doctor Retention Rate?,Orthopedic Hospital,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_124,radar,Which property type has the highest Location Score?,Apartments,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_12,radar,Which category showed the least improvement from Q1 to Q4?,Employee Retention (%),"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5970 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+radar_140,radar,Which Region has the highest Hotel Occupancy Rate (%)?,Region D,Region D.,True,0.0304075,12121,7,10020.729708950967
+radar_141,radar,What is the Policy Impact score for Healthcare?,79,79,True,0.0303725,12119,5,8250.03575021401
+radar_142,radar,What is the score difference between Quality Control in Q4 and Cost Reduction in Q2?,25,"Quality Control in Q4 is **95** and Cost Reduction in Q2 is **70**, so the difference is **25**.",True,0.030785,12128,31,6032.087957952172
+radar_143,radar,What is the efficiency percentage of Geological Engineering?,92%,The efficiency of Geological Engineering is **91%**.,True,0.0297925,11827,15,4755.150374956429
+radar_145,radar,How many more retail properties are there in New York compared to Chicago?,5,New York has **10 more** retail properties than Chicago.,False,0.03055,12124,16,10212.974625173956
+radar_146,radar,By how much do the English scores increase from Elementary to High school?,10 points,"English goes from **85** in Elementary to **95** in High school, so it increases by **10 points**.",True,0.030745,12124,29,11361.62633402273
+radar_147,radar,By what percentage did the Market Share increase from Q1 to Q5?,20%,"Market Share went from **20% in Q1** to **40% in Q5**, so it increased by **100%**.",True,0.0307925,12125,32,8466.967249754816
+radar_149,radar,Which energy source had the highest performance in the fourth quarter?,Nuclear,Nuclear.,True,0.03041,12122,7,5379.012791905552
+radar_150,radar,Which topic has the highest Societal Impact score according to the dataset?,Education,Culture has the highest **Societal Impact** score (**95**).,False,0.0305975,12125,19,10995.87120860815
+radar_151,radar,Which court has the highest score in Legal Aid Availability?,Civil Court,Family Court.,False,0.0304075,12121,7,7018.079833127558
+radar_152,radar,Which category has shown a consistent increase of 5 units per quarter in 2023?,All of them,**Tax Revenue** and **Infrastructure Investment**.,False,0.03053,12128,14,5544.078458100557
+radar_153,radar,Which area of law has the highest enforcement index according to the data?,Employment Law,Employment Law.,True,0.030415,12124,7,7965.442541055381
+radar_154,radar,How much fuel does Truck 2 consume?,85 liters,Truck 2 consumes **95 liters** of fuel.,False,0.0305225,12119,15,7041.475874837488
+radar_155,radar,What is the daily new sign-ups difference between Youtube and Twitter?,55 thousand,"Youtube has **60 thousand** daily new sign-ups and Twitter has **25 thousand**, so the difference is **35 thousand**.",True,0.0307575,12123,30,14787.911916617304
+radar_156,radar,Which type of educational institute has the highest Faculty Quality Score?,Private School,Private School.,True,0.03041,12122,7,9700.205750297755
+radar_157,radar,What is the Cost Efficiency Score of Environmental Law?,65,65,True,0.030375,12120,5,7838.935540989041
+radar_158,radar,What is the difference between the Streaming Subscriptions revenue on Sunday and Monday?,$600,Streaming Subscriptions revenue is **$200 higher on Sunday than Monday**.,False,0.0305975,12125,19,5956.207207869738
+radar_159,radar,Which platform has the highest user engagement according to the data?,Instagram,Instagram has the highest user engagement (85%).,True,0.0305,12122,13,8496.747375000268
+radar_15,radar,Which location has the highest score in waste management?,Location D,Location D.,True,0.030405,12120,7,14013.928290922195
+radar_161,radar,Which establishment has the highest score for Customer Service?,Vegan Café,Vegan Café.,True,0.03042,12120,8,13781.292750034481
+radar_162,radar,By how much did the Market Share (%) increase from Q1 to Q4?,15%,Market Share increased by **15 percentage points** from Q1 (**65%**) to Q4 (**80%**).,True,0.030735,12126,28,5631.029124837369
+radar_163,radar,How much more RAM does a desktop have compared to a smart watch?,15 G,Desktop RAM is **15 GB more** than a smart watch (**16 GB vs 1 GB**).,True,0.030685,12124,25,3935.5302923358977
+radar_164,radar,Which category has the highest percentage for Food Bank and what is the percentage?,Charitable Programs; 100%,"For **Food Bank**, the highest percentage is **Charitable Programs — 100%**.",True,0.0306575,12125,23,4263.84541625157
+radar_165,radar,Which category has the highest Volunteer Satisfaction Score?,Animal Welfare,Animal Welfare.,True,0.0296725,11827,7,4294.617041014135
+radar_166,radar,What is the percentage for Energy Efficiency in Q4?,80%,80%,True,0.0303925,12121,6,6815.676082856953
+radar_167,radar,What is the Job Satisfaction Score for Training?,80,75,True,0.0295225,11779,5,6181.728958152235
+radar_168,radar,What is the percentage increase in Hospital Bed Availability from Q1 to Q4?,25%,"Hospital Bed Availability rises from **60% in Q1** to **75% in Q4**.
+
+Percentage increase = \(\frac{75-60}{60}\times100 = 25\%\).
+
+**Answer: 25%**",True,0.03111,12126,53,4050.1781669445336
+radar_169,radar,Which institution has the highest Cultural Significance Score?,History Museum,History Museum.,True,0.030405,12120,7,11805.58841722086
+radar_16,radar,Which item has the highest yield per acre according to the data?,Corn,Corn has the highest yield per acre.,True,0.0304875,12123,12,7071.943416260183
+radar_170,radar,Which category has the highest average percentage across all devices?,Streaming Media Consumption (%),**Streaming Media Consumption (%)** has the highest average across all devices.,True,0.0305725,12121,18,15969.105917029083
+radar_171,radar,What is the percentage difference between Education Investment and Healthcare Investment under Foreign Policy?,2%,"Under **Foreign Policy**, **Education Investment = 7%** and **Healthcare Investment = 8%**, so the difference is **1%**.",False,0.0308375,12125,35,3810.177749954164
+radar_172,radar,How many tons per acre is the Fruit Yield at the Fruit Orchard?,6.8,6.8 tons per acre.,True,0.030475,12124,11,14011.734291911125
+radar_173,radar,What is the data security score for LinkedIn?,80,80,True,0.030375,12120,5,5423.587500117719
+radar_174,radar,What is the Customer Satisfaction score for the French B&B?,82,80,True,0.03038,12122,5,18017.857083119452
+radar_175,radar,Which country has the highest average score across all the variables?,Country D,Country E.,False,0.03041,12122,7,4977.207582909614
+radar_176,radar,What is the average score of Social Sciences across all quarters?,77.5,"Social Sciences scores are 70, 75, 80, and 85.
+
+Average = \( (70 + 75 + 80 + 85) / 4 = 77.5 \).",True,0.030995,12122,46,27012.03220896423
+radar_178,radar,By how many percentage points did Technology Adoption increase from Q1 to Q4?,15%,Technology Adoption increased by **15 percentage points** (from **65%** in Q1 to **80%** in Q4).,True,0.03078,12126,31,7212.095167022198
+radar_179,radar,Which material has the lowest cost per kilogram?,Plastic,Plastic.,True,0.0303875,12119,6,8199.200666043907
+radar_17,radar,What is the difference in the Quality of Service score between Shanghai and Guangzhou?,15,"Shanghai’s Quality of Service score is 90 and Guangzhou’s is 80, so the difference is **10**.",False,0.0307325,12125,28,8245.633666869253
+radar_180,radar,Which organization has the highest focus on Disaster Relief?,Red Cross,Red Cross.,True,0.030405,12120,7,7414.311500266194
+radar_181,radar,Which renewable energy source has the highest Energy Efficiency according to the data?,Hydropower,Hydropower.,True,0.03043,12124,8,9951.58112514764
+radar_182,radar,What is the score for Sanitation Standards at a Dental Clinic?,90,80,False,0.0303825,12123,5,9008.016666397452
+radar_183,radar,Which energy source has the highest score in the category of Renewable Energy Potential?,Hydropower,Hydropower.,True,0.0304325,12125,8,7993.353082798421
+radar_184,radar,How much higher is the rental price in Sydney compared to Brisbane?,8 units,Sydney’s rental price is **8 higher** than Brisbane’s.,True,0.0299225,11867,17,9010.131082963198
+radar_185,radar,Which sector had the highest performance in Q4 of 2024?,Financial Services,Financial Services.,True,0.030415,12124,7,10989.520916715264
+radar_186,radar,Which energy source has the highest Maintenance score?,Gas,Wind has the highest Maintenance score.,False,0.0304625,12119,11,3425.8608748205006
+radar_187,radar,Which technology showed the least growth from Q1 to Q4 in 2023?,Artificial Intelligence,"Internet Security, Cloud Computing, Automation, and Artificial Intelligence (tie) — each grew by 15 from Q1 to Q4.",True,0.0307825,12127,31,8733.616208191961
+radar_188,radar,What is the maintenance cost of trains compared to trucks?,5 thousand dollars for trains and 10 thousand dollars for trucks,"Train maintenance cost is **5 thousand dollars**, compared to **10 thousand dollars for trucks** — so **trains cost half as much to maintain**.",True,0.0308275,12121,35,11144.660790916532
+radar_189,radar,Which aspect has the highest rating in Gallery C?,Exhibition Quality,Exhibition Quality.,True,0.03042,12120,8,8129.574833903462
+radar_18,radar,What is the difference in public image score between Social Services and Animal Rescue organizations?,5,Social Services has a public image score **5 points higher** than Animal Rescue (**85 vs 80**).,True,0.030705,12126,26,18321.340959053487
+radar_190,radar,Which policy area has the highest score in Q2?,Security,Security.,True,0.0303925,12121,6,4618.037417065352
+radar_191,radar,What was the Production Volume in April?,74,"April corresponds to **Spring**, and the **Production Volume / Food Production** value there is **75**.",True,0.030045,11862,26,6786.949709057808
+radar_192,radar,What is the performance difference between Route 3 in March and Route 4 in February?,5,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_193,radar,What month had the highest Website Traffic in the first half of the year?,January,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_195,radar,Which aspect has the lowest performance score for hydroelectric energy?,Energy Production,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_196,radar,What was the Production Volume in April?,74,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_197,radar,Which material has the highest thermal conductivity?,Material E,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_198,radar,Which environmental aspect has the highest recorded value in April?,Renewable Energy Use,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_19,radar,Which hotel category has the highest room occupancy rate?,Luxury hotel,Beach hotel.,False,0.030405,12120,7,5133.771042339504
+radar_1,radar,What is the percentage change in taxation from Q1 to Q4?,30%,"Taxation rises from **50** in Q1 to **65** in Q4, a **30% increase**.",True,0.030745,12124,29,5757.088792044669
+radar_212,radar,By how many units did Fundraising Events increase from Q1 to Q4?,15,15 units.,True,0.02969,11834,7,7717.809792142361
+radar_213,radar,How many scores does Festival 2 have that are greater than or equal to 80?,1,Festival 2 has **3** scores greater than or equal to 80.,False,0.02998,11872,20,8007.984582800418
+radar_214,radar,Which category has the highest score in Quarter 4?,Performance Assessment,Performance Assessment.,True,0.0304075,12121,7,6637.388834264129
+radar_215,radar,Which category showed the greatest improvement from Q1 to Q4?,Cost Efficiency,Care Quality and Cost Efficiency (tie).,True,0.0304875,12123,12,5323.3483750373125
+radar_216,radar,By how many percentage points did the mortgage rate increase from Q1 to Q4?,1.5,"Mortgage rate rose from **3.0% in Q1** to **4.5% in Q4**, an increase of **1.5 percentage points**.",True,0.0308875,12127,38,13647.671125363559
+radar_217,radar,Which museum has the highest rating for Staff Friendliness?,Museum E,Museum E.,True,0.0304075,12121,7,8214.467790909111
+radar_218,radar,Which sector has shown consistent improvement over all four quarters?,Public Health,Transportation.,False,0.0303925,12121,6,9534.535957966
+radar_219,radar,Which product has the highest sales in May?,Meat Products,Meat Products.,True,0.0297775,11863,8,5020.070457831025
+radar_220,radar,Which sport had the highest increase in popularity from 2020 to 2021?,Baseball,"Tennis and Baseball (tie, both increased by 10).",True,0.0305725,12127,17,5010.668749921024
+radar_221,radar,What is the average score for Science across all four quarters?,74.5,"Science scores are 70, 76, 79, and 73.
+
+Average = (70 + 76 + 79 + 73) / 4 = **74.5**.",True,0.030965,12122,44,3404.233332723379
+radar_222,radar,What is the average score in English across all terms?,77.5,"English scores by term are 70, 75, 80, and 85, so the average is **77.5**.",True,0.0307825,12121,32,11793.486875016242
+radar_223,radar,Which state has the highest Case Closure Time?,State D,State C.,False,0.0304025,12119,7,9594.417499843985
+radar_224,radar,What is the food and beverage revenue score in Q2?,82,86,True,0.03038,12122,5,4453.343166038394
+radar_225,radar,How much did the dairy products sales increase from Month 1 to Month 6?,13 Million $,Dairy products sales increased by **13 million dollars** from Month 1 to Month 6.,True,0.0306775,12127,24,10226.469084154814
+radar_226,radar,Which factory has the highest Machine Efficiency score?,Factory D,Factory D.,True,0.0304025,12119,7,4325.137582607567
+radar_227,radar,Which energy source has the lowest utility cost according to the data?,Geothermal,Geothermal has the lowest utility cost.,True,0.0304875,12123,12,9009.19770821929
+radar_228,radar,By how many points does rail transportation in Q4 exceed air transportation in Q1?,15,"Rail in Q4 is 85 and Air in Q1 is 65, so it exceeds by **20 points**.",False,0.0307525,12127,29,30543.501832988113
+radar_229,radar,Which Engineering group has the highest Innovation Index?,Engineering C,Engineering D.,False,0.0304025,12119,7,5047.903707716614
+radar_22,radar,By how many points did Job Satisfaction score increase from Q1 to Q4?,15 points,15 points.,True,0.03042,12126,7,12790.861708112061
+radar_230,radar,Which housing aspect has the highest satisfaction score in Q4?,Price,Price.,True,0.029755,11866,6,5486.898750066757
+radar_231,radar,Which power station has the highest rating in Safety Measures?,Power Station D,Power Station D.,True,0.0304225,12121,8,4519.723208155483
+radar_232,radar,Which charity has the highest volunteer participation?,Charity A,Charity A has the highest volunteer participation.,True,0.0304,12082,13,3258.080458268523
+radar_233,radar,Which website has the highest user engagement according to the data?,Web C,Web C.,True,0.03041,12122,7,4647.643375210464
+radar_234,radar,Which healthcare facility has the highest score for Infection Prevention?,Healthcare Facility D,Healthcare Facility B.,False,0.0304225,12121,8,5622.472291812301
+radar_235,radar,By how much did the score for Quality increase from Q1 to Q4?,15,"Quality was **70 in Q1** and **85 in Q4**, so it increased by **15 points**.",True,0.030735,12126,28,5540.893749799579
+radar_236,radar,Which product category has the smallest difference in scores between Cafe B and Restaurant B?,Service Quality,Service Quality.,True,0.03042,12126,7,9656.204999890178
+radar_237,radar,What is the value of Liabilities in Q3?,60,Liabilities in Q3 is **60**.,True,0.0305125,12121,14,3878.349750302732
+radar_238,radar,Which exhibition has the highest score for 'Accessible for Everyone' category?,Exhibition D,Exhibition D.,True,0.03043,12124,8,5456.38612518087
+radar_239,radar,Which subject showed continuous improvement over all four terms?,All listed subjects,Science and Foreign Language.,False,0.030435,12120,9,11229.160792194307
+radar_23,radar,Which organization has the highest score in Fundraising Performance?,Organization A,Organization A.,True,0.0304075,12121,7,6222.581041045487
+radar_240,radar,What is the impact factor of Philosophy?,55,60,True,0.02973,11862,5,3519.972125068307
+radar_241,radar,How much higher is Region D's score in Waste Management compared to Region A?,15,Region D’s Waste Management score is **10 points** higher than Region A’s.,False,0.03063,12126,21,8241.899915970862
+radar_242,radar,What is the yield difference between wheat and tomato in Farm C?,10,"Farm C has wheat = 80 and tomato = 70, so the difference is **10**.",True,0.0306825,12123,25,4154.220666736364
+radar_243,radar,Which subject showed the least improvement from Term 1 to Term 4?,Physical Education Scores,Physical Education showed the least improvement.,False,0.0304775,12125,11,10680.69479195401
+radar_244,radar,What is the energy efficiency ratio of Wind Power?,85%,85%,True,0.02975,11864,6,17244.585083797574
+radar_246,radar,Which category shows a consistent increase of 5 units every quarter?,Audience Size,Sponsorship.,False,0.0304275,12123,8,24218.003124929965
+radar_247,radar,What is the score for Product Quality in Q3?,88,88,True,0.0303775,12121,5,8097.495541907847
+radar_249,radar,How much has Online Shopping usage increased from Q1 to Q4?,15,Online Shopping increased by **15** from Q1 to Q4.,True,0.03058,12124,18,16211.017832625657
+radar_24,radar,How much higher is the vegetable production in Canada compared to France?,15,Vegetable production in Canada is **15 units** higher than in France.,True,0.0305925,12123,19,8083.371750079095
+radar_250,radar,What is the resolution rate for environmental law?,85,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_251,radar,How much is the Cost Efficiency score of Prototype D?,90,Prototype D’s Cost Efficiency score is **90**.,True,0.0305275,12121,15,6217.422834131867
+radar_254,radar,What is the environmental impact rating of solar energy?,65,70,True,0.029735,11864,5,25460.302374791354
+radar_255,radar,Which aspect has the highest rating for Court A?,Judicial Fairness,Judicial Fairness.,True,0.030435,12120,9,5504.908457864076
+radar_256,radar,How much more does it cost to maintain Model D compared to Model A?,$15,$10 more.,False,0.0304325,12125,8,6035.265958867967
+radar_257,radar,Which category showed steady improvement in every decade from the 1990s to the 2020s?,Waste Management,Air Quality and Renewable Energy Use.,False,0.0304925,12131,11,6782.1912500076
+radar_258,radar,Which crop has the highest yield in the autumn season?,Corn,Corn.,True,0.0303925,12121,6,12018.010292202234
+radar_259,radar,Which sector shows a consistent growth of 5 billion dollars each quarter throughout 2023?,All sectors,"Technology, Healthcare, Retail, and Energy.",False,0.030515,12128,13,7764.0687501989305
+radar_25,radar,What are the High School Science Scores according to the data?,85,High School Science Score: **85**.,True,0.0305,12122,13,7133.228125050664
+radar_260,radar,Which sector had the least performance in Q2?,Healthcare,Healthcare.,True,0.03039,12120,6,4525.943291373551
+radar_261,radar,What is the popularity of Dubai during the Mild Season?,85,Dubai during the Mild Season is **85**.,True,0.0305125,12121,14,7408.245790749788
+radar_262,radar,What is the score for wind energy in terms of environmental impact?,65,60,True,0.0303825,12123,5,11500.106166116893
+radar_263,radar,What is the difference in Hotel Occupancy Rate between Spring and Autumn?,10%,20 percentage points.,False,0.03043,12124,8,5473.809042014182
+radar_264,radar,Which aspect has the highest value in Location A?,Housing Prices,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_268,radar,Which organisation has the highest Nonprofit Program Expense Percentage?,Organisation D,Organisation C.,False,0.0296775,11829,7,17013.87545792386
+radar_269,radar,What is the score of Teamwork Quality in Q2?,80,80,True,0.03029,12086,5,6789.0484584495425
+radar_26,radar,What is the score difference between Cafes and Diners in the Brand Awareness category?,10,"Cafes score 90 and Diners score 80 in Brand Awareness, so the difference is **10 points**.",True,0.0307525,12127,29,11014.31562518701
+radar_270,radar,Which Nonprofit has the lowest score in Community Outreach?,Nonprofit C,Nonprofit C.,True,0.0297825,11865,8,8987.228459212929
+radar_271,radar,What is the difference in Staffing Efficiency between Large Firms and Government?,-10%,"Large Firms have a Staffing Efficiency of 90 and Government has 85, so the difference is **5**.",False,0.0307125,12123,27,11807.153541129082
+radar_272,radar,Which mode of transportation has the lowest Average Transit Time?,Air,Air.,True,0.0303925,12121,6,11493.406416848302
+radar_273,radar,Which aspect has the highest rate in Quarter 4?,Regulatory Compliance,Regulatory Compliance.,True,0.0304225,12121,8,10542.267833836377
+radar_274,radar,What is the score difference between Economic Policy in Q2 and National Defense in Q4?,5,"Economic Policy in Q2 is **90** and National Defense in Q4 is **95**, so the difference is **5**.",True,0.030785,12128,31,5653.08512467891
+radar_275,radar,Which test has the lowest Recall score?,Test A,Test B.,False,0.02967,11826,7,3269.718333147466
+radar_276,radar,What is the score for Cost Efficiency for a Medium Law Firm?,65,60,True,0.0303825,12123,5,14442.49074999243
+radar_277,radar,Which category has the highest performance score in Region D?,Public Safety,Public Safety.,True,0.0304075,12121,7,23732.130583375692
+radar_278,radar,What is the score for Facility Comfort at Theatre D?,88,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_27,radar,Which category has the highest quality percentage?,Dance,The category with the highest **Quality (%)** is **Dance**.,True,0.030565,12118,18,11037.634084001184
+radar_281,radar,Which category showed a decrease in the fourth quarter compared to the first quarter?,Product Returns,Customer Retention and Market Expansion.,False,0.0304775,12125,11,5715.938082896173
+radar_282,radar,How much did Residential Sales increase from Q1 to Q4?,15,Residential Sales increased by **20** (from **60** in Q1 to **80** in Q4).,False,0.0307125,12123,27,10283.825582824647
+radar_284,radar,What is the average score for Science across all four terms?,87.5,"Science scores are 80, 85, 90, and 95, so the average is **87.5**.",True,0.030115,11866,30,6375.7657911628485
+radar_285,radar,What is the difference in score between Collaboration in Q4 and Resources in Q2?,25,"Collaboration in Q4 is **90** and Resources in Q2 is **65**, so the difference is **25**.",True,0.0307675,12127,30,5990.90175004676
+radar_286,radar,Which sport has the highest popularity according to the data?,Soccer,Basketball.,False,0.0297675,11865,7,4414.22237502411
+radar_287,radar,Which category has the highest score for Online?,Inventory Efficiency,Inventory Efficiency.,True,0.0304025,12119,7,3335.7003750279546
+radar_289,radar,What is the client satisfaction score for Employment Law?,89,82,True,0.030375,12120,5,7246.525916736573
+radar_290,radar,Which aspect has the highest score in Philosophy?,Ethical Understanding,Ethical Understanding.,True,0.0304175,12119,8,9510.536209214479
+radar_291,radar,Which aspect does Web D score the lowest?,Content Quality,Content Quality.,True,0.0296725,11827,7,3732.309291139245
+radar_293,radar,What is the difference in the score for Schedule Adherence between Factory A and Factory D?,15,"Schedule Adherence: Factory A = 80, Factory D = 95, so the difference is **15**.",True,0.03074,12128,28,26126.573416870087
+radar_295,radar,Which hospital provides the highest number of services for Nursing and Residential Care?,Hospital B,Hospital B and Hospital D (tie at 95).,True,0.030535,12124,15,18967.390291858464
+radar_297,radar,What is the score for Economic Development in Q2?,92,92,True,0.0303775,12121,5,2899.44383315742
+radar_298,radar,Which hospital has the highest staff responsiveness score?,Hospital D,Hospital D.,True,0.0304025,12119,7,4983.97708311677
+radar_299,radar,What is Engineer A's score in Quality Assurance?,90,90,True,0.030285,12084,5,7505.349707789719
+radar_29,radar,What is the Production Volume of Factory D?,400 Unit/hour,Factory D’s Production Volume is **200 units/hour**.,False,0.0305375,12119,16,3823.8597083836794
+radar_300,radar,By how much does rice yield increase from Q1 to Q4?,160,"Rice yield goes from **400** in Q1 to **560** in Q4, so it increases by **160**.",True,0.03076,12124,30,9804.839750286192
+radar_30,radar,Which category has the highest percentage for Greenpeace?,Donations (%),Volunteering (%) at 90%.,False,0.0304775,12119,12,16192.607417237014
+radar_31,radar,Which category had the highest total advancement by the end of Q4 2023?,Cloud Computing,Cloud Computing.,True,0.0304225,12127,7,22330.01079177484
+radar_32,radar,Who has the lowest score in Work-Life Balance?,Susan,Bob.,False,0.02966,11828,6,4260.077957995236
+radar_33,radar,Which subject shows a steady increase of 5 score points from Class 1 through Class 4?,Art,"English, Science, History, and Art.",True,0.03052,12130,13,13763.13537498936
+radar_34,radar,What is the pass rate for middle school?,90%,85%,True,0.0303875,12119,6,3050.7557499222457
+radar_35,radar,Which country has the lowest score for Environmental Protection?,Austria,Austria.,True,0.029675,11828,7,11634.674333967268
+radar_36,radar,What is the cost of Solar energy per MWh?,50 dollars,Solar energy costs **$50/MWh**.,True,0.0305125,12121,14,5772.0768339931965
+radar_37,radar,What is the average number of customers in the third quarter?,70,70,True,0.03038,12122,5,4361.788332927972
+radar_39,radar,Which category showed a 15% increase from Q1 to Q4 in 2021?,Product Quality,Delivery Speed (%) and Return Policy (%)。,False,0.0298625,11873,12,4490.960834082216
+radar_40,radar,Which category showed the highest percentage in Q4?,Home Sales (%),Home Sales (%) at 95%.,True,0.030465,12120,11,12790.751916822046
+radar_41,radar,By how much is the Water Consumption expected to decrease from 2020 to 2025?,25 m3/capita,"Water Consumption decreases from **90** in 2020 to **65** in 2025, so the expected decrease is **25 m³/capita**.",True,0.0308925,12129,38,4767.778208013624
+radar_42,radar,Which category had the highest increase in its figures from Q1 to Q4?,Fertilizer Use (kg),Fertilizer Use (kg).,True,0.03048,12126,11,8547.452208120376
+radar_43,radar,Which category had the highest consumption/generation in Q4?,Nuclear Generation,Fuel Costs (USD).,False,0.03044,12122,9,3933.3452079445124
+radar_44,radar,What is the engagement score for Q2?,95,95,True,0.0303725,12119,5,6001.947375014424
+radar_45,radar,By how much did the Education (%) score increase from Q1 to Q4?,15%,15 percentage points.,True,0.030435,12126,8,4915.421959012747
+radar_46,radar,Which category scored exactly 95 in Q3?,Product Quality,Online Experience.,False,0.030405,12120,7,9016.002249903977
+radar_47,radar,Which city has the highest home ownership rate according to the data?,City D,City D.,True,0.0304125,12123,7,14256.13341666758
+radar_48,radar,By how many percentage points did the Market Share increase from Q1 to Q4?,15 percentage points,Market Share increased by **15 percentage points** from Q1 (**65%**) to Q4 (**80%**).,True,0.0307375,12127,28,5377.569083124399
+radar_49,radar,What is the increase in Customer Satisfaction from Q1 to Q4?,15%,Customer Satisfaction increased by **15 points** (from **60** in Q1 to **75** in Q4).,True,0.03073,12124,28,12108.797875232995
+radar_4,radar,What is the Delivery Speed score for Q4?,100,100,True,0.030375,12120,5,8339.870041236281
+radar_50,radar,Which category scored the lowest in Q3?,Creativity (Score),Creativity scored the lowest in Q3.,False,0.0304925,12119,13,5663.206250406802
+radar_51,radar,Which platform has the highest Ad Reach (%)?,Facebook,Instagram has the highest Ad Reach (%) at **90%**.,False,0.0305525,12119,17,5918.356416746974
+radar_52,radar,What is the score for Adult Education in terms of Staff Qualification?,82,82,True,0.0303825,12123,5,12456.10775006935
+radar_53,radar,Which category has the highest popularity percentage?,NBA,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_54,radar,Which element has the lowest Waste Recycling Ratio?,Noise,Noise has the lowest Waste Recycling Ratio.,True,0.0304775,12119,12,5482.099458109587
+radar_55,radar,What is the Recruitment Efficiency score for HR Team 5?,85,85,True,0.03019,12046,5,3390.6456250697374
+radar_56,radar,Which factory has the highest waste management percentage according to the data?,Factory E,Factory B.,False,0.0304125,12123,7,17704.004458151758
+radar_57,radar,Which aspect has the highest score in Labs Condition?,Robotics,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_5,radar,"Who gives a higher friendliness score for Central & Western Europe, Susan or Bob?",Susan,Bob.,False,0.030315,12090,6,13891.815499868244
+radar_60,radar,Which platform has the highest Ad Revenue according to the data?,YouTube,YouTube.,True,0.03041,12122,7,17659.649833105505
+radar_61,radar,What is the fuel efficiency of river barges?,10 MPG,10 MPG.,True,0.029765,11864,7,4237.433874979615
+radar_63,radar,Which platform has the highest user engagement percentage?,YouTube,YouTube has the highest user engagement percentage at **85%**.,True,0.0305675,12119,18,15393.594208639115
+radar_64,radar,What is the change in the Policy Approval Rating from Q1 to Q4?,15%,"Policy Approval Rating rises from **65% in Q1 to 80% in Q4**, a change of **+15 percentage points**.",True,0.03081,12126,33,8678.40762482956
+radar_65,radar,What is the maintenance cost of a solar panel?,$20K,"20K
+",True,0.029765,11864,7,9932.296541985124
+radar_67,radar,What is the Teacher-Student Ratio at Lee University?,12,12,True,0.0303775,12121,5,24810.43400010094
+radar_68,radar,Which organization has the highest Volunteer Satisfaction score?,World Vision,UNICEF.,False,0.0297625,11863,7,18280.004707630724
+radar_69,radar,Which product category has the highest inventory turnover?,Alcohol,Alcohol has the highest inventory turnover.,True,0.0298225,11863,11,16018.336458131671
+radar_70,radar,Which category has the lowest Student Satisfaction score?,History,Anthropology.,False,0.0303275,12083,8,7976.597958710045
+radar_71,radar,Which aspect of law scored the highest in 'Client Satisfaction'?,Employment Law,Property Law.,False,0.0304125,12123,7,6290.800209157169
+radar_72,radar,What is the score difference between NASA and European Space Agency in terms of Resource Management?,3,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_76,radar,Which activity shows the highest percentage increase from Q1 to Q4?,Program Expenses (%),Public Support (%) shows the highest percentage increase from Q1 to Q4.,False,0.029955,11868,19,7931.021624710411
+radar_77,radar,What is the total revenue for Beverage across all quarters?,$374 million,"Beverage revenue by quarter is 90, 92, 95, and 97, totaling **374**.",True,0.0300975,11865,29,17446.59091718495
+radar_79,radar,What is the market share percentage of Bakery Items?,25%,28%,False,0.03039,12120,6,12237.450582906604
+radar_7,radar,Which category shows the smallest percentage increase from Q1 to Q4?,Economic Equality,"From the chart:
+
+- Education: Q1 85 → Q4 100, increase = 15/85 ≈ 17.6%
+- Social Development: 70 → 85, increase ≈ 21.4%
+- Human Rights: 80 → 95, increase = 18.75%
+- Arts and Culture: 65 → 80, increase ≈ 23.1%
+- Economic Equality: 60 → 75, increase = 25%
+
+**Education** shows the smallest percentage increase from Q1 to Q4.",True,0.03208,12124,118,13221.047833096236
+radar_80,radar,How much higher is the fuel efficiency of a plane compared to a cargo van?,285 MPG,"Plane fuel efficiency is 300 MPG and cargo van is 15 MPG, so the plane is **285 MPG higher**.",True,0.03075,12126,29,15739.974707830697
+radar_81,radar,Which court has the highest conviction rate?,International Court,Federal Court.,False,0.0304,12118,7,4478.223625104874
+radar_82,radar,Which product has the highest Supply Chain Efficiency percentage?,Organic Food,Wine (90%).,False,0.03042,12120,8,11300.244457554072
+radar_83,radar,What is the average cost for commercial property?,50,"10
+",False,0.0297475,11863,6,12013.84412497282
+radar_85,radar,Which product has the highest price?,Whole Foods,Whole Foods has the highest price.,True,0.0304575,12117,11,12685.740542132407
+radar_86,radar,How many thousands of website traffic does the Books category have?,260,280 thousand.,True,0.02977,11866,7,13098.27325027436
+radar_87,radar,Which activity has the highest media coverage per week?,Football,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+radar_88,radar,What is the Sustainability Index Score for Bioenergy?,95,90,True,0.030375,12120,5,10515.585042070597
+radar_89,radar,Which food crop requires the highest water usage per hectare?,Wheat,Corn.,False,0.0303925,12121,6,6788.185584358871
+radar_8,radar,What is the Public Safety score in the West region?,75,80,True,0.0303775,12121,5,13773.00149993971
+radar_90,radar,Which company has the highest profit margin according to the data?,Etsy,eBay has the highest profit margin.,False,0.030485,12122,12,5811.537750065327
+radar_91,radar,Which platform has the highest ad revenue according to the data?,Facebook,Facebook.,True,0.030395,12122,6,29535.8151672408
+radar_92,radar,Which sector has the lowest Operating Cost (%) as per the data provided?,Banking,Insurance.,False,0.0304,12124,6,11019.209125079215
+radar_93,radar,What is the Sale Price of a Duplex (in $100k)?,2.75,2.5,True,0.030415,12124,7,12438.258707989007
+radar_95,radar,Which energy source has the lowest cost in USD Million according to the data?,Geothermal Power,Solar Power has the lowest cost: **60 USD Million**.,False,0.0305675,12125,17,9550.109708216041
+radar_96,radar,Which museum has the highest score for conservation efforts?,Louvre Museum,Saatchi Gallery.,False,0.030435,12120,9,6943.291832692921
+radar_97,radar,What is the total production of wheat in January and February?,2100 tons,"Wheat production was **1600 tons in January** and **1800 tons in February**, for a total of **3400 tons**.",False,0.0308,12122,33,16237.028207629919
+radar_98,radar,Which product has the lowest Operating Costs percentage?,Product C,Product B.,False,0.0304025,12119,7,5869.766667019576
+radar_99,radar,What is the Production Efficiency percentage of Factory E?,95%,90%,True,0.02975,11864,6,6932.843875139952
+0,treemap,How much higher is the allocation percentage for Renewable Energy Production than for Biodiversity Preservation?,24%,Renewable Energy Production is **24 percentage points** higher than Biodiversity Preservation.,True,0.03005,11900,20,6290.016292128712
+100,treemap,What is the market share percentage of Fresh Produce?,15%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+104,treemap,What is the combined market share percentage of Rail Transport and Intermodal Transport?,13%,"Rail Transport is 10% and Intermodal Transport is 3%, so the combined market share is **13%**.",True,0.03018,11898,29,16236.801584251225
+105,treemap,"How much is the percentage for ""Oilseeds""?",3%,3%,True,0.029825,11894,6,7685.954625252634
+106,treemap,What percentage of research funding is allocated to Computer Science?,15,15%,True,0.029665,11830,6,3213.1490423344076
+107,treemap,What percentage of the workforce is allocated to IT Services?,5%,5%,True,0.029755,11866,6,4055.53283309564
+108,treemap,What category has the smallest market share percentage according to the data?,Corporate Finance,Corporate Finance.,True,0.029845,11896,7,9276.702375151217
+109,treemap,What is the percentage of market share for Intermodal transportation?,5%,5%,True,0.0298775,11915,6,13510.400749742985
+10,treemap,What percentage of employee training hours is allocated to Customer Service?,8%,8%,True,0.0298275,11895,6,10305.980375036597
+110,treemap,Which department has the lowest percentage allocation?,Finance,Finance.,True,0.0298975,11923,6,18020.64879098907
+111,treemap,"What is the combined percentage share of TikTok, Twitter, LinkedIn, and Snapchat?",14%,TikTok 7% + Twitter 4% + LinkedIn 2% + Snapchat 1% = **14%**,True,0.0300425,11837,30,7437.171333003789
+112,treemap,Which category accounts for the smallest percentage of revenue in the Sports and Entertainment Industry?,Publishing,Publishing (1%).,True,0.0298675,11899,8,8623.66179190576
+113,treemap,How much percentage is allocated to Home Healthcare?,3%,Home Healthcare is allocated **3%**.,True,0.030005,11924,13,12360.345750115812
+114,treemap,How much larger is the market share of Professional Sports than that of Books and Publishing?,18%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+118,treemap,By how much does Banking exceed Insurance in market share percentage?,7%,7 percentage points.,True,0.0298575,11895,8,4618.351665791124
+119,treemap,What is the combined market share percentage of Snack Foods and Seafood?,10%,"Snack Foods is 8% and Seafood is 2%, so the combined market share is **10%**.",True,0.030225,11928,27,8185.120915994048
+11,treemap,What percentage of the food production is dedicated to vegetables?,25%,25%,True,0.029825,11894,6,5577.841832768172
+120,treemap,What percentage of the manufacturing process is taken up by Component Fabrication?,22%,22%,True,0.0298825,11917,6,3125.678166747093
+121,treemap,What percentage of legal expenditures is allocated to Public Defense?,15%,15%,True,0.029825,11894,6,7530.046375002712
+122,treemap,Which department has the smallest allocation of government spending according to the data?,Agriculture,Agriculture.,True,0.0304775,12149,7,10016.382875386626
+124,treemap,What transportation type has the smallest share of logistics volume?,Pipeline and Intermodal,Pipeline and Intermodal.,True,0.007982,11894,9,10723.104333039373
+125,treemap,What percentage of the government budget is allocated to Science and Technology?,3%,3%,True,0.02976,11868,6,7016.322750132531
+126,treemap,Which Social Media Platform has the least web traffic percentage?,TikTok and Reddit share the lowest percentage with 2% each,Reddit and TikTok (2% each).,True,0.029875,11866,14,14930.044250097126
+127,treemap,What is the combined percentage of the Clothing and Food & Beverage categories?,32%,32%,True,0.0299125,11929,6,18903.15041691065
+128,treemap,What percentage of E-commerce sales does Health and Beauty represent?,4%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+12,treemap,How much higher is the funding percentage for Anthropology compared to Political Science?,10%,Anthropology is **10 percentage points** higher than Political Science.,True,0.0304925,12089,18,3441.4869998581707
+133,treemap,How much less does the Information Technology sector contribute to the economy compared to the Investment sector?,10%,Information Technology contributes **10 percentage points less** than Investment.,True,0.0306225,12153,16,6003.957000095397
+135,treemap,What percentage of students are enrolled in High School education?,30%,30%,True,0.029825,11894,6,5550.990208983421
+136,treemap,Which legal sector has the smallest proportional case load according to the data?,Environmental Law,Environmental Law.,True,0.0298475,11897,7,7137.374208774418
+137,treemap,What is the combined percentage allocated to Health Services and Educational Programs?,45%,45%,True,0.02991,11928,6,12785.980750340968
+139,treemap,Which sector has the highest percentage according to the portfolio diversification?,Stock Market,Stock Market (22%).,True,0.0298725,11895,9,9151.85841685161
+140,treemap,What percentage of government spending is allocated to Social Security and Infrastructure combined?,25%,"Social Security is 15% and Infrastructure is 10%, so combined they account for **25%**.",True,0.0307025,12125,26,9823.503874707967
+141,treemap,What is the percentage of the Electronics category?,20%,20%,True,0.02975,11864,6,7088.4443749673665
+142,treemap,Which branch of legal affairs has the lowest percentage focus according to the data?,Immigration Law,"Immigration Law, at 2%.",True,0.030495,12126,12,14000.839542131871
+143,treemap,Which discipline has the highest percentage of research funding according to the data?,Engineering,Engineering (20%).,True,0.0077665,11929,8,4238.668833393604
+144,treemap,What type of property has the smallest market share percentage?,"Manufactured Home, Co-op, and Vacation Home (all are tied with 5%)","ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+145,treemap,How much larger is the percentage of Cereals compared to Poultry?,33%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+149,treemap,Which two sectors together sum up to a smaller percentage than 'Hotels' alone?,'Cruises' and 'Tourist Attractions',"Hotels is 35%. One such pair is **Travel Agencies and Airlines**: **15% + 10% = 25%**, which is smaller than Hotels alone.",False,0.0304125,11931,39,17251.031707972288
+14,treemap,How much percentage is allocated to Medicine and Health?,17%,17%,True,0.0298225,11893,6,12550.984166096896
+150,treemap,Which crop type has the lowest production share according to the data?,Beverages,Beverages.,True,0.02986,11896,8,12476.302082650363
+151,treemap,How much percentage is allocated to Healthcare?,10%,Healthcare is allocated **10%**.,True,0.0304775,12119,12,10896.986667066813
+153,treemap,How much less is the percentage of Snack Foods as compared to Meat & Poultry in the Food and Beverage Industry?,10%,Snack Foods is 10 percentage points less than Meat & Poultry.,True,0.030035,11906,18,3904.5395413413644
+154,treemap,What is the freight volume percentage for the sea transportation mode?,20%,20%,True,0.0298275,11895,6,15487.316417042166
+155,treemap,What percentage of the energy mix does nuclear power constitute?,15%,15%,True,0.029825,11894,6,11923.778249882162
+156,treemap,How much more is the percentage of sales for Electronics compared to Jewelry?,28%,Electronics is 28 percentage points more than Jewelry.,True,0.0299675,11897,15,14313.429958187044
+157,treemap,"Which category has a higher percentage, Video Games or Theater?",Video Games,Video Games.,True,0.0296825,11831,7,8348.507541697472
+158,treemap,What is the combined market share percentage of Condos and Townhouses?,25%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+159,treemap,What percentage of healthcare expenditure is spent on Outpatient Care?,18%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+15,treemap,How much higher is the percentage allocation for the Executive branch compared to Defense?,25%,25 percentage points.,True,0.029915,11918,8,8477.213208097965
+162,treemap,What percentage of online usage is taken up by E-Learning?,3%,3%,True,0.007704,11916,6,11039.544958155602
+163,treemap,What is the total revenue percentage of Music Concerts and Broadcasting Rights combined?,33%,"Music Concerts is 19% and Broadcasting Rights is 14%, so combined they are **33%**.",True,0.0302,11918,27,14302.873833104968
+164,treemap,What is the combined percentage of Food Services and Recreational Activities in the tourism revenue distribution?,30%,"Food Services is 20% and Recreational Activities is 10%, so combined they are **30%**.",True,0.0301575,11901,27,4116.250957828015
+165,treemap,What percentage of the total is represented by E-commerce and Artificial Intelligence combined?,24%,"E-commerce is 20% and Artificial Intelligence is 4%, so combined they represent **24%**.",True,0.030135,11898,26,10454.72858287394
+166,treemap,What is the combined percentage of Classicism and Impressionism styles?,33%,33%,True,0.0304,12124,6,5548.545292112976
+167,treemap,How much more percentage is allocated to the Executive branch than to the Judicial branch?,15%,15% more.,True,0.0298675,11899,8,11544.917958788574
+168,treemap,What percentage of the budget is spent on Early Childhood education?,12%,12%,True,0.0298275,11895,6,8993.667542003095
+169,treemap,What is the combined percentage for Online Gaming and Educational Platforms according to the Global Internet Usage Distribution?,15%,15%,True,0.029845,11902,6,8530.002042185515
+170,treemap,What percentage is assigned to Water Conservation in the chart?,15%,15%,True,0.029825,11894,6,6803.689958062023
+171,treemap,How much larger is the market share of Single-Family Homes compared to Condominiums?,25%,25 percentage points.,True,0.0299225,11921,8,5420.291916001588
+172,treemap,Which department has the smallest percentage according to the given data?,Production,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+173,treemap,What percentage of the renewable energy utilization is accounted for by Geothermal and Nuclear together?,21%,"Geothermal is 11% and Nuclear is 10%, so together they account for **21%**.",True,0.03022,11932,26,18020.220916718245
+176,treemap,How much more percentage of the budget is allocated to Defense compared to Healthcare?,10%,Defense is allocated **10 percentage points** more than Healthcare.,True,0.030065,11930,16,5969.527500215918
+177,treemap,What percentage of the Sustainable Agriculture aspect is represented in the data?,10%,10%,True,0.02991,11928,6,14645.98337514326
+178,treemap,What is the percentage difference between Renewable Energy and Water Conservation?,20%,"Renewable Energy is 35% and Water Conservation is 15%, so the difference is **20%**.",True,0.0301425,11895,27,3858.532292302698
+179,treemap,What percentage of the budget is allocated to Corrections?,15%,15%,True,0.029825,11894,6,5087.546082679182
+17,treemap,What percentage of E-commerce Sales Distribution is attributed to Food & Beverage?,10%,10%,True,0.0298325,11897,6,7276.124292053282
+180,treemap,What percentage of freight volume is transported by air?,15%,15%,True,0.0298225,11893,6,18211.91312512383
+181,treemap,What percentage of total healthcare spending is for Hospital Care and Physician Services combined?,60%,"Hospital Care is 38% and Physician Services is 22%, so combined they are **60%**.",True,0.030135,11898,26,3560.1327498443425
+183,treemap,By how much does the percentage for Health exceed that for the Environment in the charity sectors?,10%,Health is 10 percentage points higher than Environment.,True,0.0298025,11837,14,5115.752375219017
+184,treemap,"What is the combined percentage of the bottom three categories: Toys & Hobbies, Books, and Stationery?",7%,Toys & Hobbies (4) + Books (2) + Stationery (1) = **7%**,True,0.0300225,11841,28,15360.696457792073
+185,treemap,Which category has the highest percentage in the Tourism and Hospitality Industry Breakdown?,Accommodation,Accommodation (25%).,True,0.0297925,11869,8,16819.002542179078
+186,treemap,What percentage of Internet usage is dedicated to Search Engines?,20%,20%,True,0.029825,11894,6,12010.116000194103
+187,treemap,How much bigger is the percentage of Cereals production compared to Fisheries?,17%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+18,treemap,Which renewable energy source has the smallest usage percentage according to the data?,Nuclear,Nuclear (5%).,True,0.0299575,11929,9,13362.607291899621
+190,treemap,What is the percentage difference between Road and Air transportation modes?,25%,"Road is 40% and Air is 15%, so the difference is **25 percentage points**.",True,0.0307425,12147,25,13945.450208615512
+191,treemap,What percentage of the workforce is distributed between Sales and Marketing departments combined?,35%,"Sales is 20% and Marketing is 15%, so combined they make up **35%** of the workforce.",True,0.0302125,11917,28,7942.83420778811
+192,treemap,What is the market share percentage of Rail transportation?,25%,25%,True,0.0298725,11913,6,28015.723292250186
+193,treemap,Which legal branch has the same expenditure allocation as the Legislative branch?,Law Enforcement,Law Enforcement.,True,0.007957,11896,7,6662.397209089249
+194,treemap,How much more funding does Health receive compared to Animal Welfare?,22%,Health receives 22 percentage points more than Animal Welfare.,True,0.0299625,11895,15,14611.847916152328
+195,treemap,What is the combined market sales percentage for Tea and Coffee and Organic Foods?,15%,"Tea and Coffee is 10% and Organic Foods is 5%, so the combined percentage is **15%**.",True,0.030245,11930,28,15916.62387503311
+196,treemap,Which discipline has the least percentage of research funding allocation?,Environmental Science,Environmental Science.,True,0.02989,11914,7,14800.276167225093
+197,treemap,How much higher is the percentage of fuel usage in Road Transport compared to Maritime Shipping?,15%,Road Transport is **15 percentage points** higher than Maritime Shipping.,True,0.030005,11900,17,10976.53004201129
+198,treemap,What is the percentage difference between Fashion and Books & Media sales? ,6%,"Fashion is **8%** and Books & Media is **2%**, so the difference is **6 percentage points**.",True,0.0301775,11897,29,9409.49466591701
+199,treemap,What percentage of the workforce is involved in Sales and Marketing according to the chart?,20%,20%,True,0.0297675,11871,6,4841.639708261937
+202,treemap,What percentage of research funding is allocated to Psychology?,6%,6%,True,0.0299025,11925,6,15456.243249587715
+203,treemap,What percentage of the total Healthcare Expenditure is allocated to Mental Health Services?,10%,10%,True,0.029835,11898,6,14203.49229220301
+204,treemap,Which product category has the smallest market share according to the data?,Frozen Foods,Frozen Foods.,True,0.029925,11928,7,18489.301917143166
+205,treemap,Which legal branch has the same expenditure allocation as the Legislative branch?,Law Enforcement,Law Enforcement.,True,0.007957,11896,7,4430.289582815021
+206,treemap,Which legal branch has the same expenditure allocation as the Legislative branch?,Law Enforcement,Law Enforcement.,True,0.007957,11896,7,10050.863542128354
+207,treemap,How much more percentage does Painting have compared to Film in exhibition attendance?,18%,18 percentage points.,True,0.0298625,11897,8,7614.703082945198
+208,treemap,What is the combined market share percentage of Confectionery and Bakery Products?,28%,"Confectionery is 15% and Bakery Products is 13%, so combined they are **28%**.",True,0.03023,11930,27,7843.337332829833
+209,treemap,What is the total percentage allocated to Early Childhood and Special Education combined?,15%,15%,True,0.0298325,11897,6,11013.513459358364
+210,treemap,What is the percentage of Proportional Investments in Water Conservation?,10%,10%,True,0.02983,11896,6,10305.61854178086
+211,treemap,What is the percentage for Food Services in the revenue distribution?,25%,25%,True,0.0299075,11927,6,20813.284582924098
+212,treemap,What percentage of government spending is allocated to Social Security and Infrastructure combined?,25%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+216,treemap,What percentage of healthcare expenditure is allocated to Mental Health Services and Long-Term Care combined?,10%,Mental Health Services (5%) + Long-Term Care (5%) = **10%**.,True,0.030145,11920,23,7540.520166046917
+217,treemap,What percentage of research funding is allocated to Environmental Science?,7%,Environmental Science is allocated **7%**.,True,0.0305,12122,13,4361.186875030398
+218,treemap,How much higher is the percentage contribution of Solar energy compared to Geothermal?,19%,Solar is 19 percentage points higher than Geothermal.,True,0.02997,11898,15,14592.206042259932
+219,treemap,What percentage of the portfolio is comprised of Banking and Insurance sectors combined?,45%,45%,True,0.0297625,11869,6,4440.82058314234
+21,treemap,"What is the total percentage of research funding allocated to Biology, Physics, and Chemistry combined?",47%,Biology 18% + Physics 15% + Chemistry 14% = **47%**,True,0.0301125,11901,24,7538.7244168668985
+220,treemap,What percentage of the HR management focus is dedicated to Compensation and Benefits?,14%,14%,True,0.0299125,11929,6,13752.333458978683
+221,treemap,What is the combined percentage of the Marketing and Human Resources departments?,25%,25%,True,0.02983,11896,6,3606.2056669034064
+222,treemap,What percentage of the research funding is allocated to Political Science?,10%,10%,True,0.0303975,12123,6,16018.066999968141
+223,treemap,What is the least used energy source according to the data?,Hydroelectric,Hydroelectric.,True,0.0298575,11895,8,6223.350542131811
+224,treemap,What percentage of legal issues does Real Estate Litigation represent?,10%,10%,True,0.030395,12122,6,9189.814417157322
+225,treemap,What percentage of the revenue is contributed by Food Services in the tourism and hospitality industry?,25%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+22,treemap,What percentage of the budget is allocated for Energy?,3%,3%,True,0.0297525,11865,6,9491.394457872957
+230,treemap,What is the combined percentage of investment in Artificial Intelligence and Biotechnology?,33%,"Artificial Intelligence is 17% and Biotechnology is 16%, so combined they are **33%**.",True,0.030195,11928,25,7748.402082826942
+231,treemap,How much higher is the market share percentage of Beverages than Dairy Products?,15%,Beverages is 15 percentage points higher than Dairy Products.,True,0.03008,11930,17,14241.832833737135
+232,treemap,By how much does Administration exceed IT Support in terms of workforce percentage?,5%,"Administration is 15% and IT Support is 10%, so Administration exceeds IT Support by **5 percentage points**.",True,0.0307925,12149,28,4547.306500375271
+234,treemap,What is the combined market share percentage of Renewable and Hydropower energy sources?,22%,"Renewable is 20% and Hydropower is 2%, so combined they are **22%**.",True,0.0301525,11899,27,7088.4307497181
+235,treemap,What is the combined percentage of Clothing and Home & Garden categories?,35%,35%,True,0.02988,11916,6,8183.1319578923285
+236,treemap,How much higher is the percentage of research funds for Computer Science compared to Chemical Engineering?,5%,Computer Science is **5 percentage points** higher than Chemical Engineering.,True,0.030085,11932,17,13233.910374809057
+237,treemap,What is the combined percentage of energy usage for Nuclear and Renewables in the utilities sector?,36%,"Nuclear is 19% and Renewables is 17%, so combined they are **36%**.",True,0.0301925,11921,26,11377.804750110954
+238,treemap,Which field has the smallest percentage of practicing lawyers according to the data provided?,Environmental Law,Environmental Law (3%).,True,0.02981,11870,9,16942.72187491879
+239,treemap,What percentage more is the market share of Snacks compared to Bakery Goods?,17%,Snacks is **212.5% more** than Bakery Goods.,False,0.0300925,11929,18,14473.060375079513
+23,treemap,What percentage is allotted to Law Enforcement?,25%,25%,True,0.0298675,11911,6,13710.66129207611
+240,treemap,Which crop type has the lowest percentage distribution in global agricultural production?,Sugar Crops,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+244,treemap,What percentage of E-commerce Sales is made up by Toys & Games?,5%,5%,True,0.0298325,11897,6,4607.677166815847
+245,treemap,"What is the total percentage represented by Modernism, Surrealism, and Pop Art?",31%,Modernism 16% + Surrealism 8% + Pop Art 7% = **31%**,True,0.0299975,11837,27,22676.18695832789
+246,treemap,What percentage of research funding is allocated to Linguistics?,12%,12%,True,0.029905,11926,6,5481.921500060707
+247,treemap,What is the percentage difference in research funding between Biology and Physics?,3%,"Biology is 18% and Physics is 15%, so the difference is **3 percentage points**.",True,0.03013,11896,26,6075.8213750086725
+248,treemap,How much more is the usage share percentage of YouTube compared to Twitter?,18%,YouTube is 18 percentage points higher than Twitter.,True,0.03054,12126,15,13503.580583725125
+24,treemap,What is the combined percentage for Pharmaceuticals and Food Products in Manufacturing Production?,33%,33%,True,0.0298325,11897,6,18127.517249900848
+250,treemap,What transportation type has the smallest share of logistics volume?,Pipeline and Intermodal,Pipeline and Intermodal.,True,0.02987,11894,9,9011.486625298858
+251,treemap,What percentage of the energy utilization breakdown is covered by Nuclear and Renewables combined?,32%,"Nuclear is 20% and Renewables is 12%, so combined they cover **32%**.",True,0.0301375,11899,26,3395.7839999347925
+252,treemap,Which sector has the smallest percentage of revenue distribution?,Live Theatre,Live Theatre (5%).,True,0.0298675,11893,9,4739.569125231355
+253,treemap,"What is the combined percentage of expenditure on Physician Services, Prescription Drugs, and Mental Health Services?",48%,"Physician Services = 25%, Prescription Drugs = 20%, Mental Health Services = 3% → combined **48%**.",True,0.02966,11678,31,14758.013291750103
+254,treemap,What are the combined percentages for Social Media and Online Shopping according to the Internet Usage Distribution?,40%,"Social Media is 25% and Online Shopping is 15%, so combined they are **40%**.",True,0.0301425,11901,26,15108.03429223597
+255,treemap,How much percentage does Nursing Home Care represent in the healthcare expenditures?,6%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+25,treemap,Which category has the smallest market share according to the data?,Others,Others has the smallest market share (2%).,True,0.0304125,12087,13,6838.933041784912
+260,treemap,What is the combined percentage allocation for Defense and Healthcare departments?,39%,39%,True,0.0297575,11867,6,4923.356290906668
+261,treemap,How much greater is the percentage for Hotels compared to Event Planning in the revenue distribution?,30%,Hotels are 30 percentage points greater than Event Planning (35% vs 5%).,True,0.030145,11932,21,3935.3522923775017
+262,treemap,How much higher is the market share of Single-Family Homes compared to Townhouses?,20%,20 percentage points.,True,0.02987,11900,8,11599.323499947786
+263,treemap,What is the percentage of revenue for Home and Garden category?,15%,15%,True,0.0303975,12123,6,6669.426458887756
+264,treemap,"What is the combined market share percentage of Private Equity, Real Estate, and Venture Capital?",15%,Private Equity (7) + Real Estate (5) + Venture Capital (3) = **15%**.,True,0.0301575,11901,27,6541.27745795995
+265,treemap,What transportation type has the smallest share of logistics volume?,Pipeline and Intermodal,Pipeline and Intermodal.,True,0.007982,11894,9,3215.896709356457
+266,treemap,What percentage of the government budget is allocated to Science and Technology?,3%,3%,True,0.02976,11868,6,4011.2114171497524
+267,treemap,"What is the total percentage for Apartments, Townhouses, and Multi-family Units together?",40%,40%,True,0.02984,11900,6,8002.090583089739
+268,treemap,What percentage of the utility usage is covered by Nuclear energy?,20%,20%,True,0.0298275,11895,6,11999.181166756898
+269,treemap,"What is the combined percentage of the workforce in the Engineering, IT, and Finance departments?",25%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+26,treemap,What percentage of online usage is taken up by E-Learning?,3%,3%,True,0.02988,11916,6,5779.6573750674725
+273,treemap,How much higher is the funding percentage for Anthropology compared to Political Science?,12%,Anthropology is **12 percentage points** higher than Political Science.,True,0.0300125,11897,18,11347.01295895502
+274,treemap,Which legal branch has the same expenditure allocation as the Legislative branch?,Law Enforcement,Law Enforcement.,True,0.007957,11896,7,7226.349833421409
+275,treemap,What is the combined percentage of Beverage Manufacturers and Confectionery in the Food and Beverage Industry market revenue shares?,20%,20%,True,0.0296925,11841,6,12530.518000014126
+276,treemap,What percentage of resources is allocated to Legal Services?,15%,15%,True,0.0298225,11893,6,7890.67079173401
+277,treemap,How much greater is the Internet usage share for Streaming Services than for Internet of Things?,12%,12 percentage points.,True,0.02987,11900,8,6624.636500142515
+278,treemap,What is the percentage difference between Social Networking and Blogging Platforms?,30%,"Social Networking is 35% and Blogging Platforms is 5%, so the difference is **30%**.",True,0.0080315,11927,26,13278.380167204887
+280,treemap,What percentage of healthcare expenditure is allocated to Dental Services?,10%,10%,True,0.029875,11914,6,10785.354332998395
+281,treemap,What is the total percentage of Film and Video Gaming in the revenue share distribution in the Sports and Entertainment Industry?,36%,36%,True,0.0299325,11937,6,5694.98712522909
+283,treemap,How much more is the public engagement percentage for painting compared to literature?,15%,15 percentage points.,True,0.0298625,11897,8,3092.2554996795952
+284,treemap,What is the combined government funding percentage for Primary Education and Secondary Education?,45%,"ERROR: Error code: 402 - {'error': {'message': 'Prompt tokens limit exceeded: 5981 > 3144. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_2xmp6VJFKRi9uUscZmDo8S2llow'}",False,0.0,0,0,0.0
+285,treemap,What percentage of the budget is allocated to Social Security?,10%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+28,treemap,How much larger is the percentage of Social Media compared to Cloud Services in the internet usage distribution?,21%,Social Media is **21 percentage points** larger than Cloud Services.,True,0.03001,11902,17,17383.45104083419
+292,treemap,How much higher is the share of Automotive production compared to Chemicals in 2023?,18%,Automotive is **18 percentage points** higher than Chemicals in 2023.,True,0.03013,11932,20,19476.842916104943
+293,treemap,Which subject area has the lowest percentage of research funding allocation?,Arts,Arts (5%).,True,0.0299075,11915,8,10507.22762523219
+294,treemap,By what percentage do Health Services exceed Arts and Culture in fundraising efficiency?,15%,Health Services is **150%** higher than Arts and Culture in fundraising efficiency.,True,0.0300425,11897,20,3721.1928754113615
+295,treemap,What region has the smallest percentage of global tourist visits?,Oceania,Oceania.,True,0.029855,11894,8,16272.176416125149
+296,treemap,What is the market share percentage of the Retail sector?,8,8%,True,0.029825,11894,6,10543.987375218421
+298,treemap,What is the combined percentage for the Environmental and Immigration Departments?,5%,"Environmental is 2% and Immigration is 3%, so combined they are **5%**.",True,0.0300975,11895,24,11338.332584127784
+299,treemap,What is the combined percentage of Multi-Family Buildings and Luxury Residences in the sales distribution?,12%,"Multi-Family Buildings is 10% and Luxury Residences is 2%, so the combined percentage is **12%**.",True,0.030255,11922,30,12536.145040765405
+29,treemap,Which discipline has the highest percentage of research funding according to the data?,Engineering,Engineering (20%).,True,0.0299425,11929,8,7653.180292341858
+2,treemap,What percentage of Global Internet Usage is dedicated to Cybersecurity?,10%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+30,treemap,What percentage of focus does Public Interest Law have within Legal Affairs?,13%,13%,True,0.02976,11868,6,13019.983500242233
+35,treemap,What percentage of spending is allocated to Early Childhood Education and Continuing Education combined?,25%,"Early Childhood Education is 15% and Continuing Education is 10%, so combined they are **25%**.",True,0.03015,11898,27,5214.381416793913
+36,treemap,What is the combined percentage of production for Fruits and Vegetables?,40%,40%,True,0.02983,11896,6,7491.07841681689
+37,treemap,How much more is the internet usage percentage of Social Media compared to Online Education?,15%,Social Media is **15 percentage points** higher than Online Education.,True,0.0300025,11899,17,3999.866417143494
+38,treemap,How much larger is the Banking sector's market share compared to Real Estate's in 2023?,15%,Banking is 15 percentage points larger than Real Estate in 2023.,True,0.0301075,11923,20,6373.276375234127
+39,treemap,What is the percentage allocated to Educational Technology?,4%,4%,True,0.0299,11924,6,9360.835374798626
+40,treemap,What is the percentage of e-commerce sales for Health & Beauty?,10%,10%,True,0.02988,11916,6,9012.110250070691
+41,treemap,How much greater is Facebook's percentage of active users than TikTok's?,23%,Facebook is 23 percentage points higher than TikTok.,True,0.02997,11898,15,4054.819291923195
+42,treemap,Which category has the smallest percentage of revenue distribution in the sports and entertainment industry?,Amusement Parks,Amusement Parks (2%).,True,0.0299475,11919,10,10703.66150001064
+43,treemap,"What is the combined percentage of funding for Social Sciences, Business, and Law?",38%,38%,True,0.0298375,11899,6,11284.413541667163
+44,treemap,What percentage of the revenue is attributed to Cultural Attractions?,5%,5%,True,0.029665,11830,6,13493.150874972343
+45,treemap,Which category has the smallest percentage in manufacturing output?,Machinery,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+49,treemap,What is the combined percentage market share of Meat and Poultry and Seafood?,15%,15%,True,0.029885,11918,6,9306.339708156884
+4,treemap,What percentage of Internet usage is taken up by Online Shopping?,15%,15%,True,0.0303975,12123,6,14588.952416088432
+50,treemap,How much greater is the percentage focus on Consumer Protection compared to Intellectual Property Rights within the Jurisprudence System?,7%,Consumer Protection is **7 percentage points** greater than Intellectual Property Rights.,True,0.029965,11878,18,13560.891167260706
+51,treemap,What percentage of efficiency is attributed to Molding in the Manufacturing Processes?,17%,Molding is **17%**.,True,0.0304925,12125,12,9875.698500312865
+52,treemap,What is the market share percentage of Dairy Products?,10%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+53,treemap,What percentage of the manufacturing and production phases is dedicated to Research and Development?,5%,Research and Development is **5%**.,True,0.02987,11870,13,8507.87229090929
+54,treemap,What is the combined percentage of Vegetables and Fruits in the global agricultural production?,45%,45%,True,0.0298875,11919,6,6011.912208050489
+55,treemap,What percentage of donations are allocated to Environment and Wildlife and Arts and Culture combined?,25%,"Environment and Wildlife is 15% and Arts and Culture is 10%, so combined they are **25%**.",True,0.0301675,11899,28,3155.63604189083
+56,treemap,What percentage of government spending is allocated to Social Security and Infrastructure combined?,25%,"Social Security is 15% and Infrastructure is 10%, so combined they are **25%**.",True,0.0082235,12125,25,13516.714333090931
+57,treemap,What is the combined percentage of usage for Online Education and Web Development?,13%,"Online Education is 10% and Web Development is 3%, so the combined usage is **13%**.",True,0.0301975,11917,27,16393.205208238214
+58,treemap,"Which sector has a higher revenue percentage, Insurance or Real Estate?",Insurance,Insurance.,True,0.03031,12088,6,21132.726791780442
+59,treemap,How much greater is the percentage of Single-Family Homes compared to Condominiums in the Real Estate Market Composition?,10%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+5,treemap,Which legal branch has the same expenditure allocation as the Legislative branch?,Law Enforcement,Law Enforcement.,True,0.029845,11896,7,5355.927667114884
+62,treemap,How much higher is the percentage of Apartments sold compared to Duplexes?,18%,Apartments are **18 percentage points** higher than Duplexes.,True,0.0299975,11897,17,5877.476792316884
+63,treemap,Which environmental aspect has the smallest allocation of resources according to the data?,Eco-friendly Transport,Eco-friendly Transport.,True,0.0298625,11897,8,4767.643583007157
+64,treemap,What percentage of Academic Funds is allocated to Secondary Education?,25%,25%,True,0.029825,11894,6,17404.47629103437
+65,treemap,What percentage of investment is allocated to the Real Estate sector?,15%,15%,True,0.0299075,11927,6,17015.66412486136
+66,treemap,What percentage of the efforts is dedicated to Conservation Efforts?,25%,25%,True,0.0298275,11895,6,7939.546583220363
+67,treemap,What percentage of internet activity is represented by remote work?,10%,10%,True,0.029825,11894,6,17929.717457853258
+68,treemap,How much more is the percentage of Single-Family Homes compared to Rental Markets in the housing segments?,20%,Single-Family Homes is **20 percentage points** higher than Rental Markets.,True,0.0300425,11903,19,4020.7927082665265
+70,treemap,What percentage of Global Agriculture Production is represented by Dairy?,15%,15%,True,0.029825,11894,6,11234.056625049561
+71,treemap,How much larger is the share of Consumer Electronics compared to Chemicals in National Manufacturing Production?,19%,Consumer Electronics is **19 percentage points** larger than Chemicals (**22% vs 3%**).,True,0.03068,12128,24,6309.141291771084
+72,treemap,What is the sum of the percentages allocated to Conservation Efforts and Sustainable Agriculture?,40%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+76,treemap,How much percentage is allocated to Biodiversity Conservation in the environmental efforts?,10%,Biodiversity Conservation is allocated **10%**.,True,0.0299675,11897,15,2949.781332630664
+77,treemap,Which category holds the smallest percentage in global agricultural production?,Sugar Crops,Sugar Crops (2%).,True,0.029885,11894,10,13637.778916861862
+78,treemap,How much more is invested in Artificial Intelligence than in Quantum Computing?,18%,Artificial Intelligence has 18 percentage points more investment than Quantum Computing.,True,0.030075,11928,17,15241.773792076856
+79,treemap,"Which department has a higher percentage of workforce distribution, Marketing or IT Support?",Marketing,Marketing has a higher percentage (17%) than IT Support (10%).,True,0.030095,11930,18,3962.584124878049
+7,treemap,"What is the combined percentage of the workforce in Human Resources, Finance, and IT departments?",30%,"Human Resources = 10%, Finance = 10%, IT = 10%, so combined = **30%**.",True,0.0301725,11901,28,13234.180875122547
+80,treemap,What percentage of the initiatives is allocated for Water Conservation?,15%,15%,True,0.030455,12146,6,14009.627125225961
+81,treemap,What percentage of HR resources is allocated to Employee Relations?,9%,9%,True,0.029905,11926,6,8522.09729095921
+82,treemap,What percentage of government spending is allocated to Science/Technology?,3%,3%,True,0.0298775,11915,6,13018.788292072713
+84,treemap,How much more is the Banking category's percentage compared to Wealth Management?,23%,Banking is **23 percentage points** more than Wealth Management.,True,0.0299975,11897,17,15410.377792082727
+85,treemap,What is the percentage difference between Social Networking and Blogging Platforms?,30%,"Social Networking is 35% and Blogging Platforms is 5%, so the difference is **30%**.",True,0.0302075,11927,26,7516.314333770424
+86,treemap,What are the combined percentages of Bakery Goods and Beverages in the sales distribution?,37%,"Bakery Goods is 15% and Beverages is 22%, so combined they are **37%**.",True,0.0302025,11919,27,12004.089499823749
+87,treemap,How much higher is the market share of Banking compared to Consumer Finance?,13%,"ERROR: Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}",False,0.0,0,0,0.0
+8,treemap,What percentage of the total research funding is allocated to Artificial Intelligence?,14%,14%,True,0.02983,11896,6,17620.61862507835
+90,treemap,What percentage of the revenue is shared by Video Games and Amusement Parks together in the industry?,15%,Video Games and Amusement Parks together share **15%** of the revenue.,True,0.030055,11902,20,26778.596749994904
+91,treemap,How many percentage points higher is the funding for Secondary Education compared to Postgraduate?,0%,0 percentage points.,True,0.0299475,11931,8,16636.622791178524
+92,treemap,What percentage of online usage is taken up by E-Learning?,3%,3%,True,0.007704,11916,6,8036.7537923157215
+93,treemap,What two categories make up 45% of the Internet usage distribution?,Social Media and Online Shopping,Social Media and Online Shopping.,True,0.0298925,11897,10,11925.815292168409
+94,treemap,What percentage of cases are managed by Special Jurisdiction Courts?,20%,20%,True,0.0298275,11895,6,3158.7909581139684
+95,treemap,What percentage of the initiatives is dedicated to Pollution Control?,10%,10%,True,0.029875,11914,6,6921.716374810785
+97,treemap,What is the combined percentage of the Consumer Goods and Automotive sectors?,45%,45%,True,0.02976,11868,6,12301.77008267492
+98,treemap,What is the combined percentage of Instagram and WhatsApp usage?,30%,30%,True,0.0297575,11867,6,3985.8370409347117
+99,treemap,Which sector has the smallest percentage according to the given data?,Government Bonds,Government Bonds (3%).,True,0.0298725,11895,9,6869.926666840911

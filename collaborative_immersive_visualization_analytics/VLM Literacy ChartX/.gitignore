@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg
+
+# Environment / secrets
+.env
+.env.local
+*.env
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+Thumbs.db
+
+# Project-specific
+data/chartx_raw/
+data/chartx_3d_worst4/
+data/chartx_3d_multiangle_worst4/
+data/chartx_3d_smoke/
+data/vlat/
+results/responses/
+*.log
+/tmp/
+
+# LaTeX build by-products
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
