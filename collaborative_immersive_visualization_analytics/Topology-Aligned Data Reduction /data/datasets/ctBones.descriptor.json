@@ -1,0 +1,18 @@
+{
+  "id": "ctBones",
+  "gridDimensions": [256, 256, 256],
+  "resolutionLevel": "fine",
+  "lodLevel": "high",
+  "scalarFields": [
+    {
+      "name": "ImageScalars",
+      "numberOfComponents": 1,
+      "dataType": "Float64",
+      "range": [0, 255]
+    }
+  ],
+  "voxelCount": 16777216,
+  "spacing": [1, 1, 1],
+  "origin": [0, 0, 0],
+  "path": "ctBones.vti"
+}

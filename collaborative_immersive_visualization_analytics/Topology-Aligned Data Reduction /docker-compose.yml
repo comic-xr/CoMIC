@@ -1,0 +1,20 @@
+# CIVA Reduction backend with TTK in Linux (Docker).
+# From project root: docker compose up --build
+# Then open app at http://localhost:5173 (run npm run dev separately).
+#
+# If you see "Bind for 0.0.0.0:8000 failed: port is already allocated":
+#   stop the other process (e.g. local uvicorn, another container) or change ports below to "8001:8000"
+#   and set VITE_REDUCTION_API_URL=http://localhost:8001
+services:
+  backend:
+    platform: linux/amd64
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/datasets:/data/datasets:ro
+    environment:
+      - DATA_DIR=/data/datasets

@@ -1,0 +1,9 @@
+# CIVA Reduction backend: dynamic topology-aligned reduction via TTK
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+vtk>=9.3.0
+
+# TTK (Topology ToolKit) - install separately if not using conda:
+# Conda: conda install -c conda-forge ttk
+# Or build from source: https://topology-tool-kit.github.io/
+# If TTK is not installed, the backend falls back to VTK-only spatial reduction.
