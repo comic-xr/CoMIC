@@ -4,23 +4,25 @@
  */
 
 export function initBatteryAndNetwork() {
+    const batteryText = document.getElementById("battery");
+    const batteryBar = document.getElementById("battery-bar");
+    const latencyText = document.getElementById("latency");
+
     // Battery monitoring via the navigator.getBattery API
-    if ("getBattery" in navigator) {
+    if (batteryText && batteryBar && "getBattery" in navigator) {
         navigator.getBattery().then(b => {
             const updateBattery = () => { 
                 const pct = (b.level * 100).toFixed(1);
-                document.getElementById("battery").innerText = pct + "%"; 
-                
-                const bar = document.getElementById("battery-bar");
-                bar.style.width = pct + "%";
+                batteryText.innerText = pct + "%";
+                batteryBar.style.width = pct + "%";
                 
                 // Change color based on charge state
                 if (b.level <= 0.2) {
-                    bar.style.background = "var(--danger)";
+                    batteryBar.style.background = "var(--danger)";
                 } else if (b.charging) {
-                    bar.style.background = "var(--accent)";
+                    batteryBar.style.background = "var(--accent)";
                 } else {
-                    bar.style.background = "var(--success)";
+                    batteryBar.style.background = "var(--success)";
                 }
             };
             
@@ -31,10 +33,10 @@ export function initBatteryAndNetwork() {
     }
 
     // Network latency monitoring
-    if (navigator.connection) {
+    if (latencyText && navigator.connection) {
         const updateNetwork = () => { 
             // Display estimated round-trip time.
-            document.getElementById("latency").innerText = (navigator.connection.rtt || 0) + "ms"; 
+            latencyText.innerText = (navigator.connection.rtt || 0) + "ms";
         };
         
         updateNetwork(); 

@@ -8,6 +8,9 @@ import { playBeep } from '../utils/audio.js';
 
 export function initCamera() {
     const video = document.getElementById("webcam");
+    const videoStatus = document.getElementById("video-status");
+    const statusPulse = document.querySelector('.pulse-ring');
+    if (!video) return;
     
     // Request access to the user's camera hardware.
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -24,8 +27,12 @@ export function initCamera() {
             .catch(error => {
                 // Failsafe UI update if camera is denied or unavailable.
                 console.warn("Camera hardware unavailable.", error);
-                document.getElementById("video-status").innerText = "CAM ERROR / OFFLINE";
-                document.querySelector('.pulse-ring').style.background = 'var(--danger)';
+                if (videoStatus) {
+                    videoStatus.innerText = "CAM ERROR / OFFLINE";
+                }
+                if (statusPulse) {
+                    statusPulse.style.background = 'var(--danger)';
+                }
             });
     }
 
@@ -47,11 +54,12 @@ export function setVisionMode(modeStr) {
     playBeep(1200, 'square', 0.05, 0.05);
     
     const video = document.getElementById("webcam");
+    if (!video) return;
     
     // Update the active state on the UI buttons.
     document.querySelectorAll(".vision-btn").forEach(b => b.classList.remove("active"));
     const targetBtn = document.querySelector(`.vision-btn[data-mode="${modeStr}"]`);
-    if(targetBtn) {
+    if (targetBtn) {
         targetBtn.classList.add("active");
     }
     

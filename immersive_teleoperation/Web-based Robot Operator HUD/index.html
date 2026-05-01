@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="css/alerts.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Leaflet GPS Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- 3D Topological Tracker Rendering Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- Real-time AI Object Tracking Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
@@ -115,10 +114,14 @@
 
             <!-- Radio Feed at Bottom -->
             <div class="radio-feed">
+                <!-- Summary Banner -->
+                <div id="comms-summary-banner" class="hidden" style="background: rgba(20,50,100,0.8); border: 1px solid var(--accent); padding: 10px; margin-bottom: 5px; font-family: 'JetBrains Mono'; font-size: 11px; text-transform: uppercase;"></div>
+                
                 <div class="feed-header">
                     <span class="feed-title">COMM INTERCEPT // NLP FILTER</span>
                     <div class="feed-controls">
                         <button id="toggle-listen-btn" class="btn-tech">INIT COMM</button>
+                        <button id="summarize-logs-btn" class="btn-tech">SUMMARIZE LOGS</button>
                         <span id="nlp-status" class="status-badge idle">STANDBY</span>
                     </div>
                 </div>

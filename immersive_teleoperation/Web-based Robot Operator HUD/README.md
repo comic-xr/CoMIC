@@ -17,18 +17,17 @@ The Web-based Robot Operator HUD is a professional, tactical interface designed 
 
 ## Tech Stack
 - **Frontend**: Vanilla HTML5, CSS3 (Custom Properties, CSS Grid/Flexbox), JavaScript (ES6 Modules)
+- **Backend**: Node.js with Express
 - **AI/ML**: TensorFlow.js (COCO-SSD model for real-time inference)
-- **Mapping**: Leaflet.js
+- **Local LLM**: Ollama for voice-command decoding, summaries, and co-pilot chat
 - **APIs**: Web Speech API (Speech Recognition/Synthesis), Web Audio API, Geolocation API, Battery Status API
 
 ## How to Run the Project
-1. Clone the repository: `git clone https://github.com/comic-xr/CoMIC.git`
-2. Navigate to the project directory: `cd "immersive_teleoperation/Web-based Robot Operator HUD"`
-3. Start a local development server (e.g., using Node or Python).
-   - *Example (Node.js)*: Run `npx http-server`
-   - *Example (Python)*: Run `python -m http.server 8080`
-4. Open your browser and navigate to `http://localhost:8080`.
-5. *Note: Ensure you allow camera and microphone permissions when prompted for full feature functionality.*
+1. Install dependencies with `npm install`.
+2. Start the local server with `npm start`.
+3. Open `http://127.0.0.1:8080` in a browser.
+4. Allow camera and microphone permissions when prompted for full feature functionality.
+5. For LLM-backed voice decoding and summaries, make sure Ollama is running locally on `http://127.0.0.1:11434`.
 
 ## Folder Structure
 ```text

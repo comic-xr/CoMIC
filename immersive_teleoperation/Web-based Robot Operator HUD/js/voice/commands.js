@@ -1,6 +1,6 @@
 /**
  * Voice Commands Processor Module
- * Parses transcribed text from the operator and triggers corresponding HUD functions.
+ * Uses the expressive LLM JSON backend strictly as a silent decoder.
  */
 
 import { playBeep, speak } from '../utils/audio.js';
@@ -8,78 +8,68 @@ import { setVisionMode, currentDetectCount } from '../vision/index.js';
 import { toggleComms } from '../comms/index.js';
 import { muteAlarms } from '../sensors/index.js';
 
-export function processVoiceCommand(command) {
+export async function processVoiceCommand(command) {
     const voicePanel = document.getElementById("voice-cmd-panel");
     const voiceText = document.getElementById("voice-cmd-text");
+    if (!voicePanel || !voiceText) return;
     
     let executedCmdStr = null;
 
-    // --- 1. NLP: Vision Control ---
-    if (command.includes("vision") || command.includes("optics") || command.includes("mode") || command.includes("thermal") || command.includes("lidar") || command.includes("scan")) {
-        if (command.includes("night") || command.includes("dark")) {
-            setVisionMode('nvg'); 
-            speak("Engaging night vision mode."); 
-            executedCmdStr = "NVG OPTICS ENGAGED";
-        } else if (command.includes("thermal") || command.includes("heat")) {
-            setVisionMode('flir'); 
-            speak("Engaging thermal tracking."); 
-            executedCmdStr = "THERMAL OPTICS ENGAGED";
-        } else if (command.includes("lidar") || command.includes("scan")) {
-            setVisionMode('lidar'); 
-            speak("Initiating topological LiDAR sweep."); 
-            executedCmdStr = "LIDAR SCAN ACTIVE";
-        } else if (command.includes("normal") || command.includes("optical") || command.includes("standard")) {
-            setVisionMode('std'); 
-            speak("Returning to standard optical feed."); 
-            executedCmdStr = "STANDARD OPTICS ENGAGED";
+    try {
+        console.log("Sending unstructured voice to AI decoder:", command);
+        const response = await fetch('/api/voice-command', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ transcript: command })
+        });
+        
+        const data = await response.json();
+        console.log("JSON Intent Decoded:", data);
+
+        const action = data.action;
+        const param = data.param;
+
+        // SILENT EXECUTIONS. NO TALK BACK UNLESS CONTEXTUALLY REQUIRED (like QUERY_TARGETS).
+        switch (action) {
+            case "VISION_MODE":
+                if (param === 'nvg') {
+                    setVisionMode('nvg'); executedCmdStr = "NVG OPTICS ENGAGED";
+                } else if (param === 'flir') {
+                    setVisionMode('flir'); executedCmdStr = "THERMAL OPTICS ENGAGED";
+                } else if (param === 'lidar') {
+                    setVisionMode('lidar'); executedCmdStr = "LIDAR SCAN ACTIVE";
+                } else if (param === 'std') {
+                    setVisionMode('std'); executedCmdStr = "STANDARD OPTICS ENGAGED";
+                }
+                break;
+            case "QUERY_TARGETS":
+                // the ONLY time it speaks back is if it's retrieving intel for the user.
+                const cnt = currentDetectCount;
+                if (cnt === 0) speak("0 personnel detected.");
+                else if (cnt === 1) speak("Tracking one target.");
+                else speak(`Tracking ${cnt} targets.`);
+                executedCmdStr = "AI QUERY: TARGET COUNT";
+                break;
+            case "MUTE_ALARM":
+                const minutes = Number.parseInt(param, 10) || 5; // default 5 mins
+                muteAlarms(minutes);
+                executedCmdStr = `ALARM OVERRIDE [${minutes}M]`;
+                break;
+            case "TOGGLE_COMMS":
+                toggleComms(param);
+                if (param) { executedCmdStr = "COMMS INITIATED"; }
+                else { executedCmdStr = "COMMS HALTED"; }
+                break;
+            default:
+                console.log("LLM decoded invalid or UNKNOWN action.");
+                break;
         }
+
+    } catch (e) {
+        console.error("Error connecting to AI decoder:", e);
     }
 
-    // --- 2. NLP: AI Query (How many people?) ---
-    if (command.includes("how many") || command.includes("what is") || command.includes("report")) {
-        if (command.includes("people") || command.includes("person") || command.includes("human") || command.includes("target")) {
-            let cnt = currentDetectCount;
-            if (cnt === 0) { 
-                speak("I do not detect any personnel on screen."); 
-            } else if (cnt === 1) { 
-                speak("I am tracking exactly one target."); 
-            } else { 
-                speak(`I am currently tracking ${cnt} active targets.`); 
-            }
-            executedCmdStr = "AI QUERY: TARGET COUNT";
-        }
-    }
-
-    // --- 3. NLP: Audio/Alarm Muting ---
-    if (command.includes("mute") || command.includes("shut") || command.includes("stop") || command.includes("quiet") || command.includes("disable")) {
-        if (command.includes("warning") || command.includes("alarm") || command.includes("alert")) {
-            let minutes = 1; // Default to 1 minute
-            
-            // Try to parse a specific number of minutes from the command
-            let match = command.match(/(\d+)\s*(min|minute)/);
-            if(match) minutes = parseInt(match[1]);
-            
-            muteAlarms(minutes);
-            speak(`Acknowledged. Muting atmospheric hazard alarms for ${minutes} minute${minutes > 1 ? 's' : ''}.`);
-            executedCmdStr = `ALARM OVERRIDE [${minutes}M]`;
-        }
-    }
-
-    // --- 4. NLP: Comms Interaction ---
-    if (command.includes("comm") || command.includes("radio") || command.includes("communications")) {
-        if (command.includes("start") || command.includes("begin") || command.includes("engage") || command.includes("init")) {
-            toggleComms(true); 
-            speak("Intercepting local radio bands."); 
-            executedCmdStr = "COMMS INITIATED";
-        } else if (command.includes("stop") || command.includes("halt") || command.includes("cut")) {
-            toggleComms(false); 
-            speak("Radio intercept halted."); 
-            executedCmdStr = "COMMS HALTED";
-        }
-    }
-
-    // --- Visual Feedback ---
-    // If a command was successfully parsed, display it on the HUD temporarily.
+    // --- Minimal Visual Feedback ---
     if (executedCmdStr) {
         voicePanel.classList.remove("hidden");
         voicePanel.classList.add("active");
@@ -87,10 +77,9 @@ export function processVoiceCommand(command) {
         
         playBeep(1500, "square", 0.1, 0.05);
         
-        // Hide the feedback panel after 3 seconds
         setTimeout(() => {
             voicePanel.classList.remove("active");
             voicePanel.classList.add("hidden");
-        }, 3000);
+        }, 1500);
     }
 }

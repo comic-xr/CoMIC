@@ -6,13 +6,17 @@
 import { playBeep } from '../utils/audio.js';
 import { processRadioMessage } from './nlp-filter.js';
 import { MOCK_TRANSMISSIONS } from '../data/mock-transmissions.js';
+import { initSummarizer } from './summarizer.js';
 
 export let isListeningComms = false;
 let radioInterval = null;
 
 export function initComms() {
     const btnToggleListen = document.getElementById("toggle-listen-btn");
+    if (!btnToggleListen) return;
+
     btnToggleListen.addEventListener("click", () => toggleComms());
+    initSummarizer();
 }
 
 /**
@@ -21,8 +25,9 @@ export function initComms() {
  */
 export function toggleComms(forceState = null) {
     const btnToggleListen = document.getElementById("toggle-listen-btn");
-    const STATUS_NLP = document.getElementById("nlp-status");
+    const statusNlp = document.getElementById("nlp-status");
     const radioFeedContainer = document.getElementById("radio-feed-container");
+    if (!btnToggleListen || !statusNlp || !radioFeedContainer) return;
 
     if (forceState !== null) {
         if (forceState === isListeningComms) return;
@@ -38,14 +43,14 @@ export function toggleComms(forceState = null) {
         // System ON
         btnToggleListen.innerText = "HALT COMM";
         btnToggleListen.classList.add("active");
-        
-        STATUS_NLP.innerText = "ACTIVE";
-        STATUS_NLP.className = "status-badge active";
-        
+
+        statusNlp.innerText = "ACTIVE";
+        statusNlp.className = "status-badge active";
+
         if (radioFeedContainer.innerHTML.includes("AWAITING TRANSMISSION")) {
             radioFeedContainer.innerHTML = "";
         }
-        
+
         // Start polling for mock transmissions
         radioInterval = setInterval(simulateIncomingRadio, 3000);
         simulateIncomingRadio(true);
@@ -53,11 +58,12 @@ export function toggleComms(forceState = null) {
         // System OFF
         btnToggleListen.innerText = "INIT COMM";
         btnToggleListen.classList.remove("active");
-        
-        STATUS_NLP.innerText = "STANDBY";
-        STATUS_NLP.className = "status-badge idle";
-        
+
+        statusNlp.innerText = "STANDBY";
+        statusNlp.className = "status-badge idle";
+
         clearInterval(radioInterval);
+        radioInterval = null;
     }
 }
 

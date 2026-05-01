@@ -12,6 +12,7 @@
  */
 export function addRadioLog(msg, tags) {
     const radioFeedContainer = document.getElementById("radio-feed-container");
+    if (!radioFeedContainer) return;
     
     // Create new message wrapper
     const div = document.createElement("div");
