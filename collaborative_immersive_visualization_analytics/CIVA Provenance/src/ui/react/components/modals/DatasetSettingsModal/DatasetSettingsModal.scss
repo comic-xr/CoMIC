@@ -1,0 +1,103 @@
+/**
+ * @file DatasetSettingsModal.scss
+ * @description Styles for DatasetSettingsModal content.
+ * Modal container styles are handled by base Modal component.
+ */
+
+@use "theme" as *;
+
+.dataset-settings-modal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.dataset-settings-modal__section {
+  h4 {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-sm 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    svg {
+      color: $color-accent-blue;
+    }
+  }
+}
+
+.dataset-settings-modal__info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+}
+
+.dataset-settings-modal__info-item {
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+
+  .label {
+    display: block;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin-bottom: 2px;
+  }
+
+  .value {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+}
+
+.dataset-settings-modal__view-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.dataset-settings-modal__view-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-secondary;
+  border-radius: $radius-sm;
+
+  .status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-text-muted;
+    flex-shrink: 0;
+
+    &.active {
+      background: $color-success;
+    }
+  }
+
+  .name {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+}
+
+.dataset-settings-modal__empty,
+.dataset-settings-modal__more {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  font-style: italic;
+  margin: 0;
+  padding: $spacing-sm;
+}
+
+.dataset-settings-modal__placeholder {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  padding: $spacing-md;
+  text-align: center;
+  border: 1px dashed $color-border-subtle;
+  border-radius: $radius-sm;
+}

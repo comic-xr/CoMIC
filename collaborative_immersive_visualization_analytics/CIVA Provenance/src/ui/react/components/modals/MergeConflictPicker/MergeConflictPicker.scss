@@ -1,0 +1,384 @@
+/**
+ * @file MergeConflictPicker.scss
+ * @description Styles for the MergeConflictPicker component and subcomponents.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// MERGE CONFLICT PICKER
+// =============================================================================
+
+.merge-conflict-picker {
+  &__description {
+    font-size: 13px;
+    color: $color-text-secondary;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+  }
+
+  &__count {
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// =============================================================================
+// VIEW CARDS GRID
+// =============================================================================
+
+.merge-conflict-picker__views {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+// =============================================================================
+// VIEW CARD
+// =============================================================================
+
+.view-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background: $color-bg-tertiary;
+  border: 2px solid $color-border-subtle;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-default;
+    background: $color-bg-elevated;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px $color-accent-purple;
+  }
+
+  &--selected {
+    border-color: $color-accent-purple;
+    background: rgba($color-accent-purple, 0.05);
+
+    &:hover {
+      border-color: $color-accent-purple;
+    }
+  }
+
+  &__thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: $color-bg-secondary;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    // Placeholder icon
+    &--placeholder {
+      color: $color-text-muted;
+    }
+  }
+
+  &__name {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+
+  &__meta {
+    font-size: 10px;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  &__dataset {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__type-badge {
+    padding: 2px 6px;
+    background: $color-bg-secondary;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    align-self: flex-start;
+  }
+
+  &__color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  // Selection checkmark
+  &__check {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-accent-purple;
+    border-radius: 50%;
+    color: white;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all $transition-fast;
+
+    .view-card--selected & {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+// =============================================================================
+// DISPLACED VIEWS SECTION
+// =============================================================================
+
+.merge-conflict-picker__displaced {
+  padding: 16px;
+  background: $color-bg-tertiary;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  &__title {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px 0;
+  }
+}
+
+// =============================================================================
+// DISPLACED OPTIONS
+// =============================================================================
+
+.displaced-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.displaced-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: $color-bg-secondary;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-elevated;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px $color-accent-purple;
+  }
+
+  &--selected {
+    border-color: $color-accent-purple;
+    background: rgba($color-accent-purple, 0.05);
+  }
+
+  &__radio {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    border: 2px solid $color-border-default;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all $transition-fast;
+
+    &::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $color-accent-purple;
+      opacity: 0;
+      transform: scale(0);
+      transition: all $transition-fast;
+    }
+
+    .displaced-option--selected & {
+      border-color: $color-accent-purple;
+
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &__icon {
+    margin-top: 2px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+
+    .displaced-option--selected & {
+      color: $color-accent-purple;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__label {
+    font-size: 13px;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__description {
+    font-size: 11px;
+    color: $color-text-muted;
+    line-height: 1.4;
+  }
+}
+
+// =============================================================================
+// REMEMBER CHECKBOX
+// =============================================================================
+
+.merge-conflict-picker__remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid $color-border-default;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px $color-accent-purple;
+    }
+
+    &--checked {
+      background: $color-accent-purple;
+      border-color: $color-accent-purple;
+      color: white;
+    }
+  }
+
+  &__label {
+    font-size: 12px;
+    color: $color-text-secondary;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+// =============================================================================
+// FOOTER
+// =============================================================================
+
+.merge-conflict-picker__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+// =============================================================================
+// RESPONSIVE ADJUSTMENTS
+// =============================================================================
+
+@media (max-width: 480px) {
+  .merge-conflict-picker__views {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .view-card {
+    padding: 6px;
+
+    &__thumbnail {
+      margin-bottom: 6px;
+    }
+
+    &__name {
+      font-size: 11px;
+    }
+
+    &__check {
+      width: 18px;
+      height: 18px;
+      top: 6px;
+      right: 6px;
+    }
+  }
+
+  .displaced-option {
+    padding: 8px 10px;
+
+    &__icon {
+      display: none;
+    }
+  }
+
+  .merge-conflict-picker__footer {
+    flex-direction: column-reverse;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

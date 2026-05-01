@@ -1,0 +1,488 @@
+/**
+ * @file VRViewLinking.scss
+ * @description Styles for VR view linking components.
+ * Optimized for VR with large touch targets and high contrast.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// VR LINK BADGE
+// =============================================================================
+
+.vr-link-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 16px;
+    background: rgba(45, 212, 191, 0.1);
+    border: 2px solid rgba(45, 212, 191, 0.4);
+    border-radius: $radius-md;
+    color: $color-accent-teal;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover,
+    &--hovered {
+        background: rgba(45, 212, 191, 0.15);
+    }
+
+    &--active {
+        background: rgba(45, 212, 191, 0.3);
+        border-color: $color-accent-teal;
+        box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
+    }
+
+    &--hub {
+        .vr-link-badge__hub-star {
+            color: $color-warning;
+        }
+    }
+}
+
+.vr-link-badge__hub-star {
+    display: flex;
+    align-items: center;
+}
+
+.vr-link-badge__label {
+    white-space: nowrap;
+}
+
+.vr-link-badge__active-hint {
+    font-size: $font-size-xs;
+    opacity: 0.8;
+    margin-left: 4px;
+}
+
+// =============================================================================
+// VR LINK TARGET OVERLAY
+// =============================================================================
+
+.vr-link-target-overlay {
+    position: relative;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: all $transition-base;
+
+    &--source {
+        border: 3px solid $color-accent-teal;
+        box-shadow: 0 0 30px rgba(45, 212, 191, 0.3),
+            inset 0 0 20px rgba(45, 212, 191, 0.1);
+    }
+
+    &--valid {
+        border: 3px solid rgba(45, 212, 191, 0.4);
+    }
+
+    &--valid-hovered {
+        border-color: $color-accent-teal;
+        box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
+    }
+
+    &--invalid {
+        opacity: 0.4;
+        border: 3px solid transparent;
+    }
+}
+
+.vr-link-target-overlay__source-badge {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    background: $color-accent-teal;
+    border-radius: 20px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: #000;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.vr-link-target-overlay__prompt {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.vr-link-target-overlay__prompt-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.vr-link-target-overlay__prompt-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 212, 191, 0.2);
+    border: 2px solid $color-accent-teal;
+    border-radius: 50%;
+    color: $color-accent-teal;
+}
+
+.vr-link-target-overlay__prompt-text {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+}
+
+.vr-link-target-overlay__prompt-name {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+}
+
+.vr-link-target-overlay__invalid-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    z-index: 10;
+}
+
+// =============================================================================
+// VR QUICK LINK PANEL
+// =============================================================================
+
+.vr-quick-link-panel__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+}
+
+.vr-quick-link-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 95vw;
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px);
+    border: 2px solid $color-border-default;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    z-index: 9999;
+    animation: vrPanelIn 0.2s ease-out;
+}
+
+@keyframes vrPanelIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.vr-quick-link-panel__header {
+    padding: $spacing-md;
+    border-bottom: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.vr-quick-link-panel__title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: 8px;
+}
+
+.vr-quick-link-panel__views {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+}
+
+.vr-quick-link-panel__view-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.vr-quick-link-panel__view-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vr-quick-link-panel__arrow {
+    color: $color-text-muted;
+}
+
+.vr-quick-link-panel__section {
+    padding: $spacing-md;
+}
+
+.vr-quick-link-panel__section-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-muted;
+    margin-bottom: $spacing-sm;
+}
+
+.vr-quick-link-panel__property-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+}
+
+.vr-quick-link-panel__property-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    min-height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: $radius-md;
+    color: $color-text-primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--selected {
+        background: color-mix(in srgb, var(--property-color) 20%, transparent);
+        border-color: var(--property-color);
+        color: var(--property-color);
+    }
+}
+
+.vr-quick-link-panel__property-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+}
+
+.vr-quick-link-panel__mode-row {
+    display: flex;
+    gap: $spacing-sm;
+}
+
+.vr-quick-link-panel__mode-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 10px;
+    min-height: 64px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--selected {
+        background: rgba(45, 212, 191, 0.2);
+        border-color: $color-accent-teal;
+
+        .vr-quick-link-panel__mode-icon,
+        .vr-quick-link-panel__mode-label {
+            color: $color-accent-teal;
+        }
+    }
+}
+
+.vr-quick-link-panel__mode-icon {
+    font-size: 24px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+}
+
+.vr-quick-link-panel__mode-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+}
+
+.vr-quick-link-panel__mode-desc {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-align: center;
+}
+
+.vr-quick-link-panel__actions {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    border-top: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.vr-quick-link-panel__btn {
+    flex: 1;
+    padding: 14px;
+    min-height: 48px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &--cancel {
+        background: transparent;
+        border: 2px solid $color-border-default;
+        color: $color-text-secondary;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+
+    &--confirm {
+        background: $color-accent-teal;
+        border: none;
+        color: #000;
+        font-weight: $font-weight-semibold;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-teal 90%, white);
+        }
+    }
+}
+
+.vr-quick-link-panel__hints {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    padding: $spacing-sm $spacing-md;
+    border-top: 1px solid $color-border-default;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+}
+
+// =============================================================================
+// VR LINKING INSTRUCTIONS
+// =============================================================================
+
+.vr-linking-instructions {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 32px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(45, 212, 191, 0.3);
+    border-radius: $radius-xl;
+    z-index: 9990;
+    animation: instructionsSlideIn 0.2s ease-out;
+}
+
+@keyframes instructionsSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.vr-linking-instructions__progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vr-linking-instructions__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-text-muted;
+    transition: background $transition-fast;
+
+    &--active {
+        background: $color-accent-teal;
+    }
+}
+
+.vr-linking-instructions__line {
+    width: 24px;
+    height: 2px;
+    background: $color-text-muted;
+    transition: background $transition-fast;
+
+    &--active {
+        background: $color-accent-teal;
+    }
+}
+
+.vr-linking-instructions__main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+}
+
+.vr-linking-instructions__sub {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+}
+
+.vr-linking-instructions__cancel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.vr-linking-instructions__cancel-key {
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-sm;
+    font-weight: $font-weight-semibold;
+}

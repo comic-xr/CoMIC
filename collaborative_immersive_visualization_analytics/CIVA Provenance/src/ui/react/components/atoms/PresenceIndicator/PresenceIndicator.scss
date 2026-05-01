@@ -1,0 +1,134 @@
+// =============================================================================
+// PresenceIndicator Component Styles
+// =============================================================================
+
+@use "theme" as *;
+
+.presence-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+
+  // ---------------------------------------------------------------------------
+  // Dot Variant
+  // ---------------------------------------------------------------------------
+
+  &__dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Icon Variant
+  // ---------------------------------------------------------------------------
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Label
+  // ---------------------------------------------------------------------------
+
+  &__label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Size Variants
+  // ---------------------------------------------------------------------------
+
+  &--xs {
+    .presence-indicator__label {
+      font-size: 10px;
+    }
+  }
+
+  &--sm {
+    .presence-indicator__label {
+      font-size: 11px;
+    }
+  }
+
+  &--md {
+    .presence-indicator__label {
+      font-size: 12px;
+    }
+  }
+
+  &--lg {
+    .presence-indicator__label {
+      font-size: 13px;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Status Colors (for label text when needed)
+  // ---------------------------------------------------------------------------
+
+  &--online .presence-indicator__label {
+    color: var(--status-online);
+  }
+
+  &--idle .presence-indicator__label {
+    color: var(--status-idle);
+  }
+
+  &--away .presence-indicator__label {
+    color: var(--status-away);
+  }
+
+  &--dnd .presence-indicator__label,
+  &--busy .presence-indicator__label {
+    color: var(--status-dnd);
+  }
+
+  &--offline .presence-indicator__label {
+    color: var(--status-offline);
+  }
+
+  &--active .presence-indicator__label {
+    color: var(--status-online);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Pulse Animation
+  // ---------------------------------------------------------------------------
+
+  &--pulse {
+    .presence-indicator__dot {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: inherit;
+        animation: presence-pulse 2s ease-out infinite;
+      }
+    }
+  }
+}
+
+// Pulse animation keyframes
+@keyframes presence-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

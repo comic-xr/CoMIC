@@ -1,0 +1,28 @@
+/**
+ * PreviewHintBanner styles
+ * Banner shown when panel is in preview mode
+ */
+
+@use "theme" as *;
+
+.preview-hint-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: rgba($color-accent-blue, 0.1);
+    border-bottom: 1px solid rgba($color-accent-blue, 0.2);
+    font-size: 11px;
+    flex-shrink: 0;
+
+    &__label {
+        font-weight: 600;
+        color: $color-accent-blue;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__text {
+        color: $color-text-muted;
+    }
+}

@@ -1,0 +1,396 @@
+/**
+ * @file Toast.scss
+ * @description Styles for Toast notifications in CIA Web.
+ * Uses BEM naming convention and theme tokens.
+ *
+ * Structure:
+ * - .toast-container - Fixed container at bottom-right
+ * - .toast - Individual toast notification
+ * - .toast__icon - Severity icon
+ * - .toast__content - Message and action wrapper
+ * - .toast__message - Toast message text
+ * - .toast__action - Action button
+ * - .toast__close - Dismiss button
+ *
+ * Modifiers:
+ * - .toast--info, .toast--success, .toast--warning, .toast--error
+ * - .toast--exiting - Exit animation state
+ */
+
+@use "theme" as *;
+
+// ============================================================================
+// Z-INDEX (per design spec - above modals)
+// ============================================================================
+
+$toast-z-index: 600;
+
+// ============================================================================
+// ANIMATION KEYFRAMES
+// ============================================================================
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+// ============================================================================
+// TOAST CONTAINER
+// ============================================================================
+
+.toast-container {
+  position: fixed;
+  bottom: 60px; // Above status bar (32px + margin)
+  right: 16px;
+  z-index: $toast-z-index;
+
+  // Stack toasts vertically with gap
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  // Allow clicks through container to elements below
+  pointer-events: none;
+
+  // Prevent overflow
+  max-height: calc(100vh - 120px);
+  overflow: hidden;
+}
+
+// ============================================================================
+// TOAST BASE
+// ============================================================================
+
+.toast {
+  // Restore pointer events on individual toasts
+  pointer-events: auto;
+
+  // Layout
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  // Dimensions
+  min-width: 280px;
+  max-width: 360px;
+  padding: 12px 16px;
+
+  // Appearance
+  background: $color-glass-panel;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  // Enter animation
+  animation: toast-enter 0.2s ease-out;
+
+  // Exit animation state
+  &--exiting {
+    animation: toast-exit 0.15s ease-in forwards;
+  }
+
+  // ============================================================================
+  // SEVERITY VARIANTS
+  // ============================================================================
+
+  &--info {
+    border-left: 3px solid $color-info;
+    background: linear-gradient(90deg, color-mix(in srgb, $color-info 12%, transparent) 0%, transparent 50%), $color-glass-panel;
+
+    .toast__icon {
+      color: $color-info;
+    }
+
+    .toast__action {
+      color: $color-info;
+    }
+  }
+
+  &--success {
+    border-left: 3px solid $color-success;
+    background: linear-gradient(90deg, color-mix(in srgb, $color-success 12%, transparent) 0%, transparent 50%), $color-glass-panel;
+
+    .toast__icon {
+      color: $color-success;
+    }
+
+    .toast__action {
+      color: $color-success;
+    }
+  }
+
+  &--warning {
+    border-left: 3px solid $color-warning;
+    background: linear-gradient(90deg, color-mix(in srgb, $color-warning 12%, transparent) 0%, transparent 50%), $color-glass-panel;
+
+    .toast__icon {
+      color: $color-warning;
+    }
+
+    .toast__action {
+      color: $color-warning;
+    }
+  }
+
+  &--error {
+    border-left: 3px solid $color-error;
+    background: linear-gradient(90deg, color-mix(in srgb, $color-error 12%, transparent) 0%, transparent 50%), $color-glass-panel;
+
+    .toast__icon {
+      color: $color-error;
+    }
+
+    .toast__action {
+      color: $color-error;
+    }
+  }
+
+  &--sync {
+    border-left: 3px solid $color-accent-teal;
+    background: linear-gradient(90deg, color-mix(in srgb, $color-accent-teal 12%, transparent) 0%, transparent 50%), $color-glass-panel;
+
+    .toast__icon {
+      color: $color-accent-teal;
+    }
+
+    .toast__action {
+      color: $color-accent-teal;
+    }
+  }
+}
+
+// ============================================================================
+// TOAST ICON
+// ============================================================================
+
+.toast__icon {
+  flex-shrink: 0;
+  margin-top: 2px; // Align with first line of text
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ============================================================================
+// TOAST CONTENT
+// ============================================================================
+
+.toast__content {
+  flex: 1;
+  min-width: 0; // Allow text truncation
+}
+
+.toast__message {
+  margin: 0;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+  word-break: break-word;
+}
+
+.toast__description {
+  margin: 4px 0 0;
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+}
+
+// ============================================================================
+// TOAST VIEW INDICATOR (for link toasts)
+// ============================================================================
+
+.toast__view-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.toast__view-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.toast__view-name {
+  color: $color-text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.toast__user-name {
+  color: $color-text-muted;
+  white-space: nowrap;
+}
+
+// ============================================================================
+// TOAST ACTION BUTTON
+// ============================================================================
+
+.toast__action {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 8px;
+  margin-left: -8px; // Align with message text
+
+  // Reset button styles
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  // Typography
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+
+  // Appearance
+  border-radius: $radius-sm;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px $color-focus-ring;
+  }
+
+  &:active {
+    background: $color-glass-medium;
+  }
+}
+
+// ============================================================================
+// TOAST CLOSE BUTTON
+// ============================================================================
+
+.toast__close {
+  flex-shrink: 0;
+  padding: 4px;
+
+  // Reset button styles
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  // Appearance
+  color: $color-text-tertiary;
+  border-radius: $radius-sm;
+
+  // Layout
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Transition
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-hover-bg;
+    color: $color-text-primary;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px $color-focus-ring;
+  }
+
+  &:active {
+    background: $color-active-bg;
+  }
+}
+
+// ============================================================================
+// VR MODE - Larger touch targets
+// ============================================================================
+
+.toast--vr {
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  min-width: 320px;
+  max-width: 420px;
+  border-radius: $radius-xl;
+
+  .toast__icon {
+    margin-top: 0;
+  }
+
+  .toast__message {
+    font-size: $font-size-base;
+    line-height: $line-height-relaxed;
+  }
+
+  .toast__action {
+    min-height: 44px;
+    padding: $spacing-sm $spacing-md;
+    margin-top: $spacing-sm;
+    margin-left: calc($spacing-md * -1);
+    font-size: $font-size-base;
+    border-radius: $radius-md;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  .toast__close {
+    min-width: 44px;
+    min-height: 44px;
+    padding: $spacing-sm;
+    border-radius: $radius-md;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// VR Container adjustments
+.toast-container--vr {
+  bottom: 80px;
+  right: 24px;
+  gap: $spacing-md;
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 480px) {
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 48px;
+  }
+
+  .toast {
+    min-width: 0;
+    max-width: 100%;
+  }
+}

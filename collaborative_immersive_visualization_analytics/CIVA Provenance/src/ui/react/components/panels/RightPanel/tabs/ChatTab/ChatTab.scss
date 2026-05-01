@@ -1,0 +1,729 @@
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CHAT TAB CONTAINER
+// =============================================================================
+
+.chat-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  // Status badge styling - keep same size as other header counts
+  .panel-header__status {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// =============================================================================
+// MATRIX FEDERATION BAR
+// =============================================================================
+
+.chat-tab__federation-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-md;
+  background: rgba($color-accent-purple, 0.05);
+  border-bottom: 1px solid rgba($color-accent-purple, 0.2);
+}
+
+// =============================================================================
+// CHAT STATUS INDICATOR
+// =============================================================================
+
+.chat-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: $font-size-xs;
+  padding: 2px $spacing-xs;
+  border-radius: $radius-sm;
+
+  &--loading {
+    color: $color-text-muted;
+
+    .spin {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  &--connected {
+    color: $color-accent-green;
+    background: rgba($color-accent-green, 0.1);
+  }
+
+  &--offline {
+    color: $color-text-muted;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--federation {
+    color: $color-accent-purple;
+    background: rgba($color-accent-purple, 0.1);
+    border: 1px solid rgba($color-accent-purple, 0.2);
+    margin-left: $spacing-xs;
+  }
+
+  &--directory-btn {
+    color: $color-accent-purple;
+    background: transparent;
+    border: 1px solid rgba($color-accent-purple, 0.2);
+    margin-left: $spacing-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: rgba($color-accent-purple, 0.4);
+    }
+  }
+}
+
+.chat-status__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: rgba($color-accent-purple, 0.3);
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  color: white;
+  margin-left: 2px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================================================
+// SCOPE INDICATOR (shows current chat scope: room/project/DM)
+// =============================================================================
+
+.chat-tab__scope-indicator {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid $color-border-subtle;
+
+  svg {
+    color: $color-accent-blue;
+  }
+}
+
+.chat-tab__message-count {
+  margin-left: auto;
+  color: $color-text-tertiary;
+}
+
+.chat-tab__room-selector {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+
+  select {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    padding: 4px 24px 4px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $color-accent-blue;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-blue;
+      box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.1);
+    }
+  }
+
+  svg {
+    position: absolute;
+    right: 6px;
+    pointer-events: none;
+  }
+}
+
+.chat-tab__create-room-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: rgba($color-accent-blue, 0.1);
+  border: 1px solid rgba($color-accent-blue, 0.3);
+  border-radius: $radius-sm;
+  color: $color-accent-blue;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.2);
+    border-color: $color-accent-blue;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.chat-tab__dm-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex: 1;
+
+  span {
+    font-weight: $font-weight-medium;
+  }
+}
+
+.chat-tab__dm-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px $spacing-xs;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: $color-accent-blue;
+    color: $color-accent-blue;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// =============================================================================
+// MESSAGES CONTAINER
+// =============================================================================
+
+.chat-tab__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.chat-tab__loading,
+.chat-tab__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+
+  svg {
+    opacity: 0.4;
+  }
+
+  span {
+    font-size: $font-size-sm;
+  }
+}
+
+.chat-tab__empty-hint {
+  font-size: $font-size-xs !important;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// MESSAGE BUBBLE
+// =============================================================================
+
+.message {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-xs;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: $radius-md;
+  }
+
+  &--me {
+    flex-direction: row-reverse;
+
+    .message__content {
+      align-items: flex-end;
+    }
+
+    .message__bubble {
+      background: rgba($color-accent-blue, 0.2);
+      border-color: rgba($color-accent-blue, 0.3);
+    }
+  }
+
+  &--system {
+    justify-content: center;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: $radius-full;
+    margin: $spacing-xs 0;
+  }
+
+  &--federated {
+    .message__bubble {
+      background: rgba($color-accent-purple, 0.08);
+      border-color: rgba($color-accent-purple, 0.2);
+      border-left: 2px solid rgba($color-accent-purple, 0.5);
+    }
+
+    &:hover {
+      background: rgba($color-accent-purple, 0.03);
+    }
+  }
+}
+
+.message__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-full;
+  background: var(--avatar-color, $color-accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: white;
+  flex-shrink: 0;
+}
+
+.message__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 80%;
+}
+
+.message__user-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+}
+
+.message__user {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+}
+
+.message__federation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px $spacing-xs;
+  background: rgba($color-accent-purple, 0.15);
+  border: 1px solid rgba($color-accent-purple, 0.3);
+  border-radius: $radius-full;
+  font-size: 9px;
+  color: $color-accent-purple;
+  font-weight: $font-weight-medium;
+
+  svg {
+    color: $color-accent-purple;
+  }
+}
+
+.message__server-name {
+  font-size: 9px;
+  color: $color-accent-purple;
+  opacity: 0.9;
+}
+
+.message__bubble {
+  padding: $spacing-sm $spacing-md;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  line-height: $line-height-normal;
+  word-wrap: break-word;
+
+  &--mention {
+    background: rgba($color-accent-amber, 0.15);
+    border-color: rgba($color-accent-amber, 0.3);
+  }
+}
+
+.message__time {
+  font-size: 10px;
+  color: $color-text-tertiary;
+  padding: 0 $spacing-xs;
+}
+
+// Message actions container (edit + delete)
+.message__actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  align-self: center;
+  transition: opacity $transition-fast;
+}
+
+.message:hover .message__actions {
+  opacity: 1;
+}
+
+.message__action-btn {
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-accent-blue;
+    background: rgba($color-accent-blue, 0.1);
+  }
+
+  &--delete:hover {
+    color: $color-accent-red;
+    background: rgba($color-accent-red, 0.1);
+  }
+}
+
+// Legacy delete button (keep for backwards compatibility)
+.message__delete {
+  opacity: 0;
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  align-self: center;
+
+  &:hover {
+    color: $color-accent-red;
+    background: rgba($color-accent-red, 0.1);
+  }
+}
+
+.message:hover .message__delete {
+  opacity: 1;
+}
+
+// Edit mode styles
+.message--editing {
+  background: rgba($color-accent-blue, 0.05);
+  border-radius: $radius-md;
+
+  .message__content {
+    max-width: 100%;
+  }
+}
+
+.message__edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+.message__edit-input {
+  width: 100%;
+  min-height: 36px;
+  padding: $spacing-sm;
+  background: $color-glass-light;
+  border: 1px solid $color-accent-blue;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+
+  &:focus {
+    border-color: $color-accent-blue;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.2);
+  }
+}
+
+.message__edit-actions {
+  display: flex;
+  gap: $spacing-xs;
+  justify-content: flex-end;
+}
+
+.message__edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  font-size: $font-size-xs;
+
+  &--save {
+    background: $color-accent-green;
+    color: white;
+
+    &:hover {
+      background: color.adjust($color-accent-green, $lightness: 5%);
+    }
+  }
+
+  &--cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-muted;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// Edited indicator
+.message__edited {
+  font-size: 10px;
+  color: $color-text-tertiary;
+  font-style: italic;
+  margin-left: $spacing-xs;
+}
+
+// =============================================================================
+// CHAT INPUT
+// =============================================================================
+
+.chat-input {
+  padding: $spacing-sm;
+  border-top: 1px solid $color-border-subtle;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.chat-input__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: $spacing-xs;
+  background: $color-glass-light;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  padding: $spacing-xs $spacing-sm;
+  transition: border-color $transition-fast;
+
+  &:focus-within {
+    border-color: $color-accent-blue;
+  }
+}
+
+.chat-input__textarea {
+  flex: 1 1 100px; // Grow, shrink, min-width of 100px
+  min-width: 80px;
+  background: transparent;
+  border: none;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  padding: $spacing-xs;
+  resize: none; // Disable manual resize - we auto-expand
+  outline: none;
+  min-height: 24px;
+  max-height: 150px; // Cap the auto-expand height
+  overflow-y: auto; // Scroll when max height reached
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.chat-input__actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.chat-input__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    color: $color-text-secondary;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.chat-input__send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  background: $color-glass-light;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-full;
+  transition: all $transition-fast;
+  flex-shrink: 0;
+
+  &--active {
+    background: $color-accent-blue;
+    color: white;
+
+    &:hover {
+      background: color.adjust($color-accent-blue, $lightness: 5%);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// LEGACY CHAT TABS (for future breakout/DM support)
+// =============================================================================
+
+.chat-tabs {
+  display: flex;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.chat-tabs__btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px $spacing-sm;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+  }
+}
+
+.chat-tabs__badge {
+  padding: 0 4px;
+  min-width: 16px;
+  height: 14px;
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+// =============================================================================
+// ROOM DIRECTORY OVERLAY (Phase 7)
+// =============================================================================
+
+.chat-tab__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+
+  > * {
+    max-width: 600px;
+    width: 100%;
+    max-height: 90%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

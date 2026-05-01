@@ -1,0 +1,364 @@
+/**
+ * @file VoiceTab.scss
+ * @description Styles for VoiceTab component.
+ * Uses BEM naming convention.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// VOICE PANEL CONTAINER
+// =============================================================================
+
+.voice-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &__header {
+    flex-shrink: 0;
+    padding: $spacing-sm;
+  }
+
+  &__list {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    text-align: center;
+  }
+}
+
+// =============================================================================
+// VOICE STATUS (inside CollapsibleHeaderSection)
+// =============================================================================
+
+.voice-status {
+  &__room {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    border-bottom: 1px solid rgba($color-accent-green, 0.15);
+
+    svg {
+      color: $color-accent-green;
+    }
+  }
+
+  &__room-name {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__state {
+    font-size: 12px;
+    color: $color-accent-green;
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__join {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacing-sm;
+    margin-top: $spacing-sm;
+    border-top: 1px solid rgba($color-accent-green, 0.15);
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $spacing-sm;
+    margin-top: $spacing-sm;
+    border-top: 1px solid rgba($color-accent-green, 0.15);
+  }
+
+  &__controls-left {
+    display: flex;
+    gap: $spacing-sm;
+  }
+}
+
+// =============================================================================
+// PARTICIPANTS LIST
+// =============================================================================
+
+.participants-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+}
+
+// =============================================================================
+// PARTICIPANT CARD
+// =============================================================================
+
+.participant-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: $color-border-default;
+  }
+
+  &--speaking {
+    border-color: rgba($color-accent-green, 0.7);
+    background: rgba($color-accent-green, 0.12);
+    box-shadow: 0 0 0 1px rgba($color-accent-green, 0.25), 0 8px 20px rgba($color-accent-green, 0.12);
+    transform: translateY(-1px);
+  }
+
+  &__avatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--user-color, $color-accent-blue);
+    color: white;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    flex-shrink: 0;
+  }
+
+  &__speaking-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg-secondary;
+    border-radius: 50%;
+
+    svg {
+      color: $color-accent-green;
+      animation: pulse-speaking 1s infinite;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__you {
+    font-weight: $font-weight-normal;
+    color: $color-text-muted;
+    margin-left: $spacing-xs;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-top: 2px;
+
+    svg {
+      color: $color-accent-red;
+    }
+  }
+
+  &__status-text {
+    color: $color-text-tertiary;
+
+    &--speaking {
+      color: $color-accent-green;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__actions {
+    flex-shrink: 0;
+  }
+
+  &__volume-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-text-secondary;
+    }
+  }
+}
+
+@keyframes pulse-speaking {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+// =============================================================================
+// INPUT LEVEL METER
+// =============================================================================
+
+.input-level-meter {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-md;
+  margin-bottom: $spacing-sm;
+
+  &--muted {
+    opacity: 0.5;
+
+    .input-level-meter__bar--active {
+      background: $color-text-muted !important;
+    }
+  }
+
+  &__icon {
+    color: $color-accent-green;
+    flex-shrink: 0;
+  }
+
+  &__bars {
+    display: flex;
+    gap: 2px;
+    flex: 1;
+    height: 16px;
+    align-items: flex-end;
+  }
+
+  &__bar {
+    flex: 1;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    transition: background 0.05s ease;
+
+    &--active {
+      background: $color-accent-green;
+    }
+
+    &--active.input-level-meter__bar--medium {
+      background: $color-accent-amber;
+    }
+
+    &--active.input-level-meter__bar--high {
+      background: $color-accent-red;
+    }
+  }
+
+  &__value {
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    min-width: 28px;
+    text-align: right;
+  }
+}
+
+// =============================================================================
+// PTT INDICATOR
+// =============================================================================
+
+.ptt-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-accent-amber, 0.1);
+  border: 1px solid rgba($color-accent-amber, 0.3);
+  border-radius: $radius-md;
+  margin-bottom: $spacing-sm;
+  font-size: 11px;
+  color: $color-accent-amber;
+  transition: all $transition-fast;
+
+  svg {
+    color: $color-accent-amber;
+  }
+
+  &--active {
+    background: rgba($color-accent-green, 0.15);
+    border-color: rgba($color-accent-green, 0.4);
+    color: $color-accent-green;
+
+    svg {
+      color: $color-accent-green;
+      animation: pulse-transmit 0.5s infinite;
+    }
+  }
+}
+
+@keyframes pulse-transmit {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

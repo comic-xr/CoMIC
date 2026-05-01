@@ -1,0 +1,108 @@
+// src/ui/react/components/panels/SelectionToolbar.scss
+// Styles for SelectionToolbar component (floating toolbar)
+
+.selection-toolbar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--toolbar-bg, #1e1e2e);
+  border: 1px solid var(--border-color, #444);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+
+  // Info section
+  &__info {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  &__count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color, #6366f1);
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #ccc);
+  }
+
+  // Divider
+  &__divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color, #444);
+  }
+
+  // Actions
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &--primary {
+      background: var(--primary-color, #6366f1);
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background: var(--primary-hover, #5558e3);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &--secondary {
+      background: var(--secondary-bg, #3b3b5c);
+      color: var(--text-secondary, #ccc);
+
+      &:hover {
+        background: var(--secondary-hover, #4b4b6c);
+      }
+    }
+  }
+
+  // Hint
+  &__hint {
+    font-size: 0.75rem;
+    color: var(--text-muted, #888);
+    white-space: nowrap;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .selection-toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    padding: 12px 16px;
+
+    &__hint {
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
+    }
+  }
+}

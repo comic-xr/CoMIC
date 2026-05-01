@@ -1,0 +1,85 @@
+/**
+ * @file CreateSubsetDialog.scss
+ * @description Styles for CreateSubsetDialog component.
+ * FormModal handles container styles.
+ */
+
+@use "theme" as *;
+
+// Selection info banner
+.create-subset-dialog__selection-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: rgba($color-accent-purple, 0.1);
+  border: 1px solid rgba($color-accent-purple, 0.2);
+  border-radius: $radius-md;
+  margin-bottom: $spacing-md;
+}
+
+.create-subset-dialog__count {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-accent-purple;
+}
+
+.create-subset-dialog__label {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.create-subset-dialog__hint {
+  margin: $spacing-md 0 0 0;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  line-height: $line-height-normal;
+}
+
+// Form field styles
+.form-field {
+  margin-bottom: $spacing-md;
+
+  &__label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__optional {
+    font-weight: $font-weight-normal;
+    color: $color-text-muted;
+    margin-left: $spacing-xs;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    transition: border-color $transition-fast;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-blue;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}

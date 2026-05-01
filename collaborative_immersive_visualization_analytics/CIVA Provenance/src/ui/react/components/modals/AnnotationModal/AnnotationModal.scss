@@ -1,0 +1,201 @@
+/**
+ * @file AnnotationModal.scss
+ * @description Styles for the AnnotationModal component.
+ * Modal dialog for creating annotations with type selection.
+ * Uses BEM naming convention.
+ */
+
+@use "theme" as *;
+
+// ============================================================================
+// MAIN CONTAINER
+// ============================================================================
+
+.annotation-modal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// ============================================================================
+// POSITION INFO
+// ============================================================================
+
+.annotation-modal__position {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  font-family: $font-family-mono;
+
+  .label {
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+  }
+
+  .coord {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    span:first-child {
+      color: $color-text-muted;
+    }
+  }
+}
+
+// ============================================================================
+// TYPE SELECTION
+// ============================================================================
+
+.annotation-modal__types {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.annotation-modal__type {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    border-color: $color-border-medium;
+  }
+
+  &--active {
+    background: rgba($color-accent-green, 0.1);
+    border-color: rgba($color-accent-green, 0.4);
+    color: $color-accent-green;
+  }
+
+  // Type-specific colors when active
+  &--note.annotation-modal__type--active {
+    background: rgba($color-accent-green, 0.1);
+    border-color: rgba($color-accent-green, 0.4);
+    color: $color-accent-green;
+  }
+
+  &--warning.annotation-modal__type--active {
+    background: rgba($color-warning, 0.1);
+    border-color: rgba($color-warning, 0.4);
+    color: $color-warning;
+  }
+
+  &--info.annotation-modal__type--active {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.4);
+    color: $color-accent-blue;
+  }
+
+  &--measurement.annotation-modal__type--active {
+    background: rgba($color-accent-purple, 0.1);
+    border-color: rgba($color-accent-purple, 0.4);
+    color: $color-accent-purple;
+  }
+}
+
+.annotation-modal__type-icon {
+  font-size: $font-size-base;
+}
+
+.annotation-modal__type-label {
+  font-weight: $font-weight-medium;
+}
+
+// ============================================================================
+// TEXT INPUT
+// ============================================================================
+
+.annotation-modal__input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.annotation-modal__input-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+}
+
+.annotation-modal__input {
+  width: 100%;
+  min-height: 100px;
+  padding: $spacing-md;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  resize: vertical;
+  transition: border-color $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-green;
+  }
+}
+
+// ============================================================================
+// CHECKBOX
+// ============================================================================
+
+.annotation-modal__checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.annotation-modal__checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: $color-accent-green;
+}
+
+.annotation-modal__checkbox-label {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+}
+
+// ============================================================================
+// HINT
+// ============================================================================
+
+.annotation-modal__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding-top: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+
+  kbd {
+    padding: 2px $spacing-xs;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+  }
+}

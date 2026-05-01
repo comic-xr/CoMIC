@@ -1,0 +1,88 @@
+// src/ui/react/components/molecules/PositionGridPicker/PositionGridPicker.scss
+// Position grid picker molecule styles
+
+@use "theme" as *;
+
+.position-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+.position-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: $spacing-xs;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+}
+
+.position-grid-row {
+    display: flex;
+    gap: 4px;
+}
+
+.position-grid-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: $spacing-sm;
+    min-width: 64px;
+    min-height: 48px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    position: relative;
+
+    &:hover:not(.empty) {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: $color-border-default;
+    }
+
+    &.active {
+        background: rgba($color-accent-sky, 0.15);
+        border-color: $color-accent-sky;
+
+        .position-grid-icon,
+        .position-grid-label {
+            color: $color-accent-sky;
+        }
+    }
+
+    &.empty {
+        background: transparent;
+        border-color: transparent;
+        cursor: default;
+    }
+}
+
+.position-grid-icon {
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+}
+
+.position-grid-label {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    white-space: nowrap;
+    transition: color $transition-fast;
+}
+
+.position-grid-check {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: $color-accent-sky;
+}
+
+.position-grid-hint {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    text-align: center;
+    text-transform: capitalize;
+}

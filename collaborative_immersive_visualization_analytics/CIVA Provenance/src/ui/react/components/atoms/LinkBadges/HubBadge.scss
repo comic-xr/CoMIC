@@ -1,0 +1,91 @@
+// src/ui/react/components/atoms/LinkBadges/HubBadge.scss
+// HubBadge atom styles
+
+@use "theme" as *;
+
+.hub-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba($color-accent-amber, 0.15);
+    border-radius: $radius-sm;
+    color: $color-accent-amber;
+    font-weight: 600;
+    box-shadow: 0 0 4px rgba($color-accent-amber, 0.2);
+
+    // Size variants
+    &--small {
+        gap: 2px;
+        padding: 1px 4px;
+        font-size: 8px;
+
+        .hub-badge__star {
+            font-size: 8px;
+        }
+    }
+
+    &--default {
+        gap: 3px;
+        padding: 2px 6px;
+        font-size: 9px;
+
+        .hub-badge__star {
+            font-size: 10px;
+        }
+    }
+
+    &--large {
+        gap: 4px;
+        padding: 3px 8px;
+        font-size: 10px;
+
+        .hub-badge__star {
+            font-size: 12px;
+        }
+    }
+
+    // Icon only mode (no label)
+    &--icon-only {
+        padding: 2px 4px;
+    }
+
+    // VR mode - larger for visibility
+    &--vr {
+        &.hub-badge--small {
+            gap: 3px;
+            padding: 2px 6px;
+            font-size: 10px;
+
+            .hub-badge__star {
+                font-size: 10px;
+            }
+        }
+
+        &.hub-badge--default {
+            gap: 4px;
+            padding: 3px 8px;
+            font-size: 11px;
+
+            .hub-badge__star {
+                font-size: 12px;
+            }
+        }
+
+        &.hub-badge--large {
+            gap: 5px;
+            padding: 4px 10px;
+            font-size: 12px;
+
+            .hub-badge__star {
+                font-size: 14px;
+            }
+        }
+    }
+
+    &__star {
+        line-height: 1;
+    }
+
+    &__label {
+        line-height: 1;
+    }
+}

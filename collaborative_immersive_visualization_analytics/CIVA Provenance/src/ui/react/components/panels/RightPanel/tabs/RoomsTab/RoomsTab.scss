@@ -1,0 +1,246 @@
+/**
+ * @file RoomsTab.scss
+ * @description Styles for RoomsTab component.
+ * Uses BEM naming convention.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// ROOMS PANEL CONTAINER
+// =============================================================================
+
+.rooms-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &__header {
+    flex-shrink: 0;
+    padding: $spacing-sm;
+  }
+
+  &__list {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}
+
+// =============================================================================
+// LOCATION STATUS (inside CollapsibleHeaderSection)
+// =============================================================================
+
+.location-status {
+  &__project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    border-bottom: 1px solid rgba($color-accent-purple, 0.15);
+
+    svg {
+      color: $color-accent-purple;
+    }
+  }
+
+  &__project-name {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__detail {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    svg {
+      color: $color-accent-purple;
+      flex-shrink: 0;
+    }
+
+    &--subtle {
+      svg {
+        color: $color-text-muted;
+      }
+
+      .location-status__value {
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  &__label {
+    font-size: 11px;
+    color: $color-text-muted;
+    min-width: 70px;
+  }
+
+  &__value {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid rgba($color-accent-purple, 0.15);
+  }
+
+  &__stats-right {
+    display: flex;
+    gap: $spacing-md;
+  }
+}
+
+// =============================================================================
+// ROOMS LIST
+// =============================================================================
+
+.rooms-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: $color-text-primary;
+      font-size: $font-size-xs;
+      outline: none;
+
+      &::placeholder {
+        color: $color-text-muted;
+      }
+    }
+
+    svg {
+      color: $color-text-muted;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: $color-text-muted;
+      cursor: pointer;
+      padding: 2px;
+
+      &:hover {
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  &__group {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    border: 1px solid rgba($color-accent-red, 0.25);
+    border-radius: $radius-sm;
+    background: rgba($color-accent-red, 0.08);
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+
+    svg {
+      color: $color-accent-red;
+      flex-shrink: 0;
+    }
+  }
+
+  &__group-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-2xl;
+    color: $color-text-muted;
+    text-align: center;
+
+    svg {
+      opacity: 0.4;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-xs $spacing-sm;
+      background: $color-accent-primary;
+      border: none;
+      border-radius: $radius-sm;
+      color: white;
+      font-size: $font-size-xs;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// SECTION CREATE BUTTON
+// =============================================================================
+
+.rooms-section__create-btn {
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: $radius-xs;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-accent-primary;
+    background: rgba($color-accent-primary, 0.1);
+  }
+}

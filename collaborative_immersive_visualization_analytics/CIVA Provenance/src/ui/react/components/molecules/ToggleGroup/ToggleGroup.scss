@@ -1,0 +1,196 @@
+// src/ui/react/components/molecules/ToggleGroup/ToggleGroup.scss
+// ToggleGroup molecule styles
+
+.toggle-group {
+    --toggle-group-bg: rgba(255, 255, 255, 0.05);
+    --toggle-group-border: rgba(255, 255, 255, 0.1);
+    --toggle-group-color: var(--color-text-secondary, #a0a0a0);
+    --toggle-group-active-color: var(--color-text-primary, #e0e0e0);
+    --toggle-group-active-bg: rgba(255, 255, 255, 0.1);
+    --toggle-group-accent: var(--color-accent, #4ecdc4);
+    --toggle-group-hover-bg: rgba(255, 255, 255, 0.08);
+
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--toggle-group-bg);
+
+    // Variant: Default
+    &--default {
+        // Default styling above
+    }
+
+    // Variant: Etched (deeper inset look)
+    &--etched {
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+
+        .toggle-group__option--active {
+            background: var(--toggle-group-active-bg);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    // Variant: Segmented (more pronounced separation)
+    &--segmented {
+        background: transparent;
+        border: 1px solid var(--toggle-group-border);
+        padding: 0;
+
+        .toggle-group__option {
+            border-radius: 0;
+            border-right: 1px solid var(--toggle-group-border);
+
+            &:first-child {
+                border-radius: 5px 0 0 5px;
+            }
+
+            &:last-child {
+                border-radius: 0 5px 5px 0;
+                border-right: none;
+            }
+        }
+
+        .toggle-group__option--active {
+            background: var(--toggle-group-accent);
+            color: var(--color-background, #1a1a2e);
+            border-color: var(--toggle-group-accent);
+
+            .toggle-group__icon {
+                color: var(--color-background, #1a1a2e);
+            }
+        }
+    }
+
+    // Size: Small
+    &--sm {
+        padding: 2px;
+        border-radius: 4px;
+
+        .toggle-group__option {
+            padding: 4px 8px;
+            font-size: 11px;
+            gap: 4px;
+        }
+    }
+
+    // Size: Medium
+    &--md {
+        padding: 2px;
+        border-radius: 6px;
+
+        .toggle-group__option {
+            padding: 6px 12px;
+            font-size: 12px;
+            gap: 6px;
+        }
+    }
+
+    // Size: Large
+    &--lg {
+        padding: 3px;
+        border-radius: 8px;
+
+        .toggle-group__option {
+            padding: 8px 16px;
+            font-size: 13px;
+            gap: 8px;
+        }
+    }
+
+    // Full width
+    &--full-width {
+        display: flex;
+        width: 100%;
+
+        .toggle-group__option {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+
+    // Disabled state
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    // VR mode
+    &--vr {
+        padding: 3px;
+        border-radius: 8px;
+
+        &.toggle-group--sm .toggle-group__option {
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+
+        &.toggle-group--md .toggle-group__option {
+            padding: 10px 16px;
+            font-size: 14px;
+        }
+
+        &.toggle-group--lg .toggle-group__option {
+            padding: 12px 20px;
+            font-size: 15px;
+        }
+    }
+}
+
+// Individual toggle option
+.toggle-group__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 12px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--toggle-group-color);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+
+    &:hover:not(:disabled):not(.toggle-group__option--active) {
+        background: var(--toggle-group-hover-bg);
+        color: var(--toggle-group-active-color);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--toggle-group-accent);
+        outline-offset: -2px;
+    }
+
+    // Active state
+    &--active {
+        background: var(--toggle-group-active-bg);
+        color: var(--toggle-group-active-color);
+    }
+
+    // Disabled state
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+// Icon
+.toggle-group__icon {
+    flex-shrink: 0;
+}
+
+// Label
+.toggle-group__label {
+    flex-shrink: 0;
+}

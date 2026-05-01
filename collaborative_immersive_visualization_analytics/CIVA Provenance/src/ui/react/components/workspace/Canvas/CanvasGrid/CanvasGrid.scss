@@ -1,0 +1,671 @@
+// src/ui/react/components/workspace/Canvas/CanvasGrid/CanvasGrid.scss
+// Canvas grid styles - Updated December 2025
+//
+// ARCHITECTURE:
+// - Edge-to-edge layout with no artificial borders
+// - Virtual scrolling with spacer pattern
+// - Render mode indicators for progressive UI
+// - No minimum cell sizes - cells scale with viewport
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CANVAS GRID - Root container
+// =============================================================================
+
+.canvas-grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: $color-bg-tertiary;
+  overflow: hidden;
+
+  // Loading/error states
+  &--loading,
+  &--error {
+    .canvas-grid__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  // Focus mode styling
+  &--focus-mode {
+    .canvas-grid__container {
+      border: 2px solid $color-accent-amber;
+      border-radius: $radius-lg;
+    }
+  }
+
+  // Render mode data attribute (for CSS debugging)
+  &[data-render-mode="full"] {
+    --render-mode-indicator: #{$color-accent-primary};
+  }
+  &[data-render-mode="compact"] {
+    --render-mode-indicator: #{$color-accent-teal};
+  }
+  &[data-render-mode="thumbnail"] {
+    --render-mode-indicator: #{$color-accent-amber};
+  }
+  &[data-render-mode="snapshot"] {
+    --render-mode-indicator: #{$color-accent-red};
+  }
+}
+
+// =============================================================================
+// CONTAINER - Edge-to-edge wrapper
+// =============================================================================
+
+.canvas-grid__container {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+// =============================================================================
+// MEASUREMENT CONTAINER - Provides stable size reference
+// =============================================================================
+
+.canvas-grid__measure-container {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+
+  // Don't use flex for centering - it collapses the container
+  // Use absolute positioning for the loader instead
+}
+
+// =============================================================================
+// SCROLL CONTAINER - Handles virtual scrolling
+// =============================================================================
+
+.canvas-grid__scroll-container {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  // 8px gap per canvas-theme-explorer-v2 prototype, extra on right/bottom for scrollbar
+  padding: $spacing-sm $spacing-lg $spacing-lg $spacing-sm;
+
+  // Focus outline for keyboard navigation
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgba($color-accent-primary, 0.3);
+  }
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.canvas-grid__viewport {
+  position: absolute;
+  inset: 0;
+  // 8px gap per canvas-theme-explorer-v2 prototype, extra on right/bottom for scrollbar
+  padding: $spacing-sm $spacing-lg $spacing-lg $spacing-sm;
+
+  // Focus outline for keyboard navigation
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgba($color-accent-primary, 0.3);
+  }
+
+  // Loading state - dim but keep visible to preserve VTK instances
+  &--loading {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  // Selection mode - show crosshair cursor when Ctrl/Shift held
+  &--selection-mode {
+    cursor: crosshair;
+
+    .canvas-cell {
+      cursor: crosshair;
+    }
+  }
+
+  // Pan tool mode - show grab cursor
+  &--pan-tool {
+    cursor: grab;
+
+    .canvas-cell {
+      cursor: grab;
+    }
+
+    &:active {
+      cursor: grabbing;
+
+      .canvas-cell {
+        cursor: grabbing;
+      }
+    }
+  }
+
+  // Edit mode indicator
+  &--edit-mode {
+    // Add subtle border to indicate edit mode
+    box-shadow: inset 0 0 0 2px rgba($color-accent-amber, 0.2);
+  }
+
+  // Merge mode indicator
+  &--merge-mode {
+    // Add purple border for merge mode
+    box-shadow: inset 0 0 0 2px rgba($color-accent-purple, 0.3);
+  }
+}
+
+// =============================================================================
+// GRID OVERLAY (optional coordinates)
+// =============================================================================
+
+.canvas-grid__grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba($color-border-subtle, 0.6) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba($color-border-subtle, 0.6) 1px,
+      transparent 1px
+    );
+  background-size:
+    calc(var(--grid-cell-width, 120px) + var(--grid-gap, 8px))
+    calc(var(--grid-cell-height, 90px) + var(--grid-gap, 8px));
+  background-position: var(--grid-pad-left, 12px) var(--grid-pad-top, 12px);
+}
+
+// =============================================================================
+// VIEWGROUP BORDERS
+// =============================================================================
+
+.canvas-grid__viewgroup-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.canvas-grid__viewgroup-outline {
+  position: absolute;
+  border: 2px solid var(--viewgroup-color, $color-accent-purple);
+  border-radius: $radius-md;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
+  background: color-mix(in srgb, var(--viewgroup-color, #7c3aed) 8%, transparent);
+}
+
+// =============================================================================
+// LOADING OVERLAY - Shows over grid without unmounting it
+// =============================================================================
+
+.canvas-grid__loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba($color-bg-tertiary, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+// =============================================================================
+// SPACER - Creates scroll area for virtual scrolling
+// =============================================================================
+
+.canvas-grid__spacer {
+  position: relative;
+}
+
+// =============================================================================
+// CELL WRAPPER - Absolute positioning for cells
+// =============================================================================
+
+.canvas-grid__cell-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  > .canvas-cell {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// =============================================================================
+// LOADING STATE
+// =============================================================================
+
+.canvas-grid__loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.canvas-grid__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: $color-accent-primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.canvas-grid__error-icon {
+  font-size: 32px;
+}
+
+.canvas-grid__error-message {
+  font-size: $font-size-sm;
+  color: $color-accent-red;
+  max-width: 300px;
+}
+
+.canvas-grid__error-hint {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+// =============================================================================
+// MODE BANNERS
+// =============================================================================
+
+.canvas-grid__focus-banner,
+.canvas-grid__selection-banner,
+.canvas-grid__edit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  flex-shrink: 0;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+}
+
+.canvas-grid__focus-banner {
+  background: rgba($color-accent-amber, 0.15);
+  border-bottom: 1px solid rgba($color-accent-amber, 0.3);
+  color: $color-accent-amber;
+}
+
+.canvas-grid__selection-banner {
+  background: rgba($color-accent-teal, 0.15);
+  border-bottom: 1px solid rgba($color-accent-teal, 0.3);
+  color: $color-accent-teal;
+  justify-content: space-between;
+}
+
+.canvas-grid__selection-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.canvas-grid__selection-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 4px $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: none;
+  background: transparent;
+
+  &--create {
+    background: $color-accent-teal;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: color.adjust($color-accent-teal, $lightness: 5%);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-secondary;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: $color-text-primary;
+    }
+  }
+}
+
+.canvas-grid__edit-banner {
+  background: rgba($color-accent-amber, 0.1);
+  border-bottom: 1px solid rgba($color-accent-amber, 0.2);
+  color: $color-text-secondary;
+  justify-content: space-between;
+
+  &--merge {
+    background: rgba($color-accent-purple, 0.15);
+    border-bottom: 1px solid rgba($color-accent-purple, 0.3);
+    color: $color-accent-purple;
+  }
+}
+
+.canvas-grid__edit-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.canvas-grid__selection-btn--merge {
+  background: $color-accent-purple;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color.adjust($color-accent-purple, $lightness: 5%);
+  }
+}
+
+.canvas-grid__selection-btn--swap {
+  background: $color-accent-blue;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color.adjust($color-accent-blue, $lightness: 5%);
+  }
+}
+
+// =============================================================================
+// RUBBER BAND SELECTION
+// =============================================================================
+
+.canvas-grid__rubber-band {
+  position: absolute;
+  background: rgba($color-accent-teal, 0.15);
+  border: 2px solid $color-accent-teal;
+  border-radius: $radius-sm;
+  pointer-events: none;
+  z-index: 100;
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 768px) {
+  .canvas-grid__focus-banner,
+  .canvas-grid__selection-banner,
+  .canvas-grid__edit-banner {
+    padding: $spacing-xs $spacing-sm;
+    font-size: 10px;
+  }
+}
+
+// =============================================================================
+// UTILITY CLASSES
+// =============================================================================
+
+.bar-divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-default;
+  margin: 0 $spacing-xs;
+}
+
+// =============================================================================
+// VIEW FOCUS MODE - Single cell fullscreen
+// =============================================================================
+
+.canvas-grid--view-focus-mode {
+  // Override subset focus mode if both are active
+  .canvas-grid__container {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+// Focus mode header bar
+.canvas-grid__view-focus-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-bg-elevated, 0.95);
+  border-bottom: 1px solid $color-border-default;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.canvas-grid__view-focus-back {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.canvas-grid__view-focus-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-grid__view-focus-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.canvas-grid__view-focus-hint {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    font-family: $font-family-mono;
+    font-size: 10px;
+  }
+}
+
+// Focus view container - fills available space
+.canvas-grid__focus-view-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+
+  // Make the canvas cell fill the container
+  > .canvas-cell {
+    width: 100%;
+    height: 100%;
+    border-radius: 0; // No rounded corners in fullscreen
+  }
+}
+
+// Viewport in focus mode
+.canvas-grid__viewport--focus-mode {
+  padding: 0; // Remove padding in focus mode
+}
+
+// =============================================================================
+// SUBSET VIEW MODE - Multiple cells in optimized grid layout
+// =============================================================================
+
+.canvas-grid--subset-view-mode {
+  .canvas-grid__container {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+// Subset mode header bar
+.canvas-grid__subset-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-bg-elevated, 0.95);
+  border-bottom: 1px solid $color-border-default;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.canvas-grid__subset-back {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.canvas-grid__subset-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  color: $color-success; // Green accent for subset mode
+}
+
+.canvas-grid__subset-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.canvas-grid__subset-count {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.canvas-grid__subset-hint {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    font-family: $font-family-mono;
+    font-size: 10px;
+  }
+}
+
+// Subset view container - grid layout for subset cells
+.canvas-grid__subset-view-container {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+}
+
+// Individual cell in subset grid
+.canvas-grid__subset-cell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+
+  > .canvas-cell {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Viewport in subset mode
+.canvas-grid__viewport--subset-mode {
+  padding: 0;
+}

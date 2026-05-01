@@ -1,0 +1,81 @@
+/**
+ * ModeSelector Styles
+ * Frosted glassmorphism aesthetic with VR-friendly blue hues
+ */
+
+@use "theme" as *;
+
+.mode-selector {
+    padding: 12px;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.mode-selector__label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+}
+
+.mode-selector__options {
+    display: flex;
+    gap: 6px;
+}
+
+.mode-selector__option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-lg;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+        background: $color-glass-medium;
+        border-color: $color-border-subtle;
+    }
+
+    &--active {
+        background: rgba(var(--mode-color-rgb, 96, 165, 250), 0.12);
+        border-color: var(--mode-color, $color-accent-blue);
+        box-shadow: 0 0 12px rgba(var(--mode-color-rgb, 96, 165, 250), 0.15);
+
+        .mode-selector__icon-char {
+            color: var(--mode-color);
+            text-shadow: 0 0 8px var(--mode-color);
+        }
+
+        .mode-selector__name {
+            color: var(--mode-color);
+        }
+    }
+}
+
+.mode-selector__icon-char {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-text-muted;
+    transition: all $transition-fast;
+}
+
+.mode-selector__name {
+    font-size: 11px;
+    font-weight: 600;
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+}
+
+.mode-selector__desc {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-align: center;
+    line-height: 1.3;
+}

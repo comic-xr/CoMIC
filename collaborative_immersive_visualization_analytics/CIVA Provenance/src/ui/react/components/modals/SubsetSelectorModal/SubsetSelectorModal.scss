@@ -1,0 +1,523 @@
+// src/ui/react/components/modals/SubsetSelectorModal/SubsetSelectorModal.scss
+@use "sass:color";
+@use "theme" as *;
+
+.subset-selector-modal__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fade-in 0.15s ease-out;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.subset-selector-modal {
+    width: 400px;
+    max-width: 90vw;
+    max-height: 80vh;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: modal-in 0.2s ease-out;
+}
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.subset-selector-modal__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    border-bottom: 1px solid $color-border-default;
+    background: $color-bg-secondary;
+
+    h3 {
+        flex: 1;
+        margin: 0;
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+    }
+
+    > svg {
+        color: $color-success;
+    }
+}
+
+.subset-selector-modal__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-tertiary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// SEARCH
+// =============================================================================
+
+.subset-selector-modal__search {
+    margin: $spacing-sm $spacing-md;
+    --search-input-bg: rgba(0, 0, 0, 0.2);
+    --search-input-border: $color-border-default;
+    --search-input-focus-border: $color-accent-blue;
+    --search-input-color: $color-text-primary;
+    --search-input-placeholder: $color-text-muted;
+    --search-input-icon: $color-text-muted;
+    --search-input-gap: 6px;
+}
+
+.subset-selector-modal__content {
+    padding: $spacing-md;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.subset-selector-modal__section {
+    &:not(:last-child) {
+        margin-bottom: $spacing-lg;
+    }
+}
+
+.subset-selector-modal__section-title {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-muted;
+    margin-bottom: $spacing-sm;
+}
+
+.subset-selector-modal__selection-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($color-success, 0.15);
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    color: $color-success;
+    margin-bottom: $spacing-md;
+
+    svg {
+        flex-shrink: 0;
+    }
+}
+
+.subset-selector-modal__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+// =============================================================================
+// ITEM CONTAINER (wrapper for expandable items)
+// =============================================================================
+
+.subset-selector-modal__item-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius-md;
+    overflow: hidden;
+    transition: all $transition-fast;
+
+    &--expanded {
+        background: rgba(0, 0, 0, 0.15);
+        border: 1px solid $color-border-subtle;
+    }
+}
+
+.subset-selector-modal__item-row {
+    display: flex;
+    gap: $spacing-xs;
+    width: 100%;
+}
+
+.subset-selector-modal__expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        color: $color-text-primary;
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.subset-selector-modal__place-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    flex-shrink: 0;
+    background: rgba($color-accent-amber, 0.1);
+    border: 1px solid rgba($color-accent-amber, 0.3);
+    border-radius: $radius-md;
+    color: $color-accent-amber;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba($color-accent-amber, 0.2);
+        border-color: rgba($color-accent-amber, 0.5);
+    }
+}
+
+.subset-selector-modal__add-to-canvas-btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    flex-shrink: 0;
+    background: $color-accent-amber;
+    border: none;
+    border-radius: $radius-md;
+    color: #000;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    &:hover {
+        background: color.adjust($color-accent-amber, $lightness: 5%);
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.subset-selector-modal__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-align: left;
+    width: 100%;
+
+    &:hover {
+        background: rgba($color-success, 0.1);
+        border-color: rgba($color-success, 0.3);
+    }
+
+    svg {
+        color: $color-success;
+        flex-shrink: 0;
+    }
+}
+
+.subset-selector-modal__item-name {
+    flex: 1;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+}
+
+.subset-selector-modal__item-count {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+}
+
+.subset-selector-modal__item-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba($color-success, 0.2);
+    border-radius: $radius-sm;
+    color: $color-success;
+    margin-left: $spacing-xs;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// EXPANDED VIEW LIST
+// =============================================================================
+
+.subset-selector-modal__view-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-xs $spacing-sm $spacing-sm;
+    padding-left: 36px; // Align with content after expand button
+    gap: 2px;
+}
+
+.subset-selector-modal__view-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    transition: all $transition-fast;
+
+    svg {
+        color: $color-text-muted;
+        flex-shrink: 0;
+    }
+
+    &--selected {
+        background: rgba($color-success, 0.1);
+        color: $color-text-primary;
+
+        svg {
+            color: $color-success;
+        }
+    }
+}
+
+.subset-selector-modal__view-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.subset-selector-modal__view-check {
+    color: $color-success;
+    flex-shrink: 0;
+}
+
+.subset-selector-modal__view-empty {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-style: italic;
+    padding: $spacing-xs;
+}
+
+// =============================================================================
+// NO RESULTS
+// =============================================================================
+
+.subset-selector-modal__no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+    text-align: center;
+
+    svg {
+        opacity: 0.4;
+    }
+
+    span {
+        font-size: $font-size-sm;
+    }
+}
+
+.subset-selector-modal__create {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+}
+
+.subset-selector-modal__create-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($color-success, 0.1);
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    color: $color-success;
+
+    svg {
+        flex-shrink: 0;
+    }
+}
+
+.subset-selector-modal__input {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    outline: none;
+    transition: all $transition-fast;
+
+    &::placeholder {
+        color: $color-text-muted;
+    }
+
+    &:focus {
+        border-color: $color-success;
+        background: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.subset-selector-modal__checkbox {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid $color-border-default;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: all $transition-fast;
+        position: relative;
+
+        &:checked {
+            background: $color-accent-amber;
+            border-color: $color-accent-amber;
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 5px;
+                top: 2px;
+                width: 4px;
+                height: 8px;
+                border: solid #000;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        }
+
+        &:hover {
+            border-color: rgba($color-accent-amber, 0.5);
+        }
+    }
+
+    span {
+        color: $color-text-secondary;
+    }
+
+    &:hover span {
+        color: $color-text-primary;
+    }
+}
+
+.subset-selector-modal__create-btn {
+    padding: $spacing-sm $spacing-md;
+    background: $color-success;
+    border: none;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: white;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+        background: color.adjust($color-success, $lightness: 5%);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.subset-selector-modal__no-selection {
+    text-align: center;
+    padding: $spacing-md;
+
+    p {
+        margin: 0 0 $spacing-md;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+    }
+}
+
+.subset-selector-modal__selection-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color-text-primary;
+    }
+}
+
+.subset-selector-modal__empty {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+
+    svg {
+        margin-bottom: $spacing-md;
+        opacity: 0.3;
+    }
+
+    p {
+        margin: 0 0 $spacing-xs;
+        font-size: $font-size-md;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+    }
+
+    span {
+        font-size: $font-size-sm;
+    }
+}

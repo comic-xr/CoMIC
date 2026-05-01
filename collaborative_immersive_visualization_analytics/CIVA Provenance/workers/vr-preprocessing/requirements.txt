@@ -1,0 +1,6 @@
+# VR Preprocessing Worker Dependencies
+redis>=4.0.0
+requests>=2.28.0
+minio>=7.0.0
+numpy>=1.21.0
+vtk>=9.0.0

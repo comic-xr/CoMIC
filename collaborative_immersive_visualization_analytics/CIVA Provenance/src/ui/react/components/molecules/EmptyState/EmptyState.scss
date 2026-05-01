@@ -1,0 +1,145 @@
+/**
+ * @file EmptyState.scss
+ * @description Adaptive styles for the EmptyState component.
+ * Supports both desktop and VR modes.
+ */
+
+@use "theme" as *;
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $spacing-xl;
+
+  // Size variants (Desktop)
+  &--sm {
+    padding: $spacing-md;
+
+    .empty-state__title {
+      font-size: $font-size-xs;
+    }
+
+    .empty-state__description {
+      font-size: 11px;
+    }
+  }
+
+  &--md {
+    padding: $spacing-xl;
+
+    .empty-state__title {
+      font-size: $font-size-md;
+    }
+
+    .empty-state__description {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &--lg {
+    padding: $spacing-2xl;
+
+    .empty-state__title {
+      font-size: $font-size-base;
+    }
+
+    .empty-state__description {
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Icon
+  &__icon {
+    color: $color-text-muted;
+    margin-bottom: $spacing-md;
+    opacity: 0.5;
+  }
+
+  // Content
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__title {
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+    margin: 0;
+  }
+
+  &__description {
+    color: $color-text-muted;
+    margin: 0;
+    max-width: 280px;
+    line-height: $line-height-normal;
+  }
+
+  // Action button
+  &__action {
+    margin-top: $spacing-lg;
+  }
+}
+
+// =============================================================================
+// VR MODE - Larger text and spacing
+// =============================================================================
+
+.empty-state--vr {
+  padding: $spacing-2xl;
+
+  .empty-state__icon {
+    margin-bottom: $spacing-lg;
+  }
+
+  .empty-state__content {
+    gap: $spacing-sm;
+  }
+
+  .empty-state__title {
+    font-size: 18px;
+  }
+
+  .empty-state__description {
+    font-size: $font-size-base;
+    max-width: 360px;
+    line-height: $line-height-relaxed;
+  }
+
+  .empty-state__action {
+    margin-top: $spacing-xl;
+  }
+
+  // VR size variants
+  &.empty-state--sm {
+    padding: $spacing-lg;
+
+    .empty-state__title {
+      font-size: $font-size-base;
+    }
+
+    .empty-state__description {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &.empty-state--lg {
+    padding: $spacing-3xl;
+
+    .empty-state__title {
+      font-size: 22px;
+    }
+
+    .empty-state__description {
+      font-size: 16px;
+      max-width: 420px;
+    }
+
+    .empty-state__action {
+      margin-top: $spacing-2xl;
+    }
+  }
+}

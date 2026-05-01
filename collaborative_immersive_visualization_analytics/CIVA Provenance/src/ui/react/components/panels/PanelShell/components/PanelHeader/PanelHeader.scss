@@ -1,0 +1,117 @@
+@use "theme" as *;
+
+// =============================================================================
+// PANEL HEADER
+// =============================================================================
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+  cursor: grab;
+  flex-shrink: 0;
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  // ===========================================================================
+  // CHROME VARIANTS
+  // ===========================================================================
+
+  &--full {
+    padding: $spacing-sm $spacing-md;
+    gap: $spacing-sm;
+  }
+
+  &--compact {
+    padding: $spacing-xs $spacing-sm;
+    gap: $spacing-xs;
+  }
+
+  // ===========================================================================
+  // ELEMENTS
+  // ===========================================================================
+
+  &__drag-handle {
+    color: $color-text-muted;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--panel-color, $color-accent-blue);
+  }
+
+  &__title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__size-indicator {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 2px;
+    margin-right: 4px;
+    align-items: center;
+  }
+
+  &__button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: $color-text-secondary;
+    }
+
+    &--close:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+  }
+}

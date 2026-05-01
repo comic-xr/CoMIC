@@ -1,0 +1,663 @@
+/**
+ * @file SettingsTab.scss
+ * @description Styles for SettingsTab and its sections.
+ */
+
+@use "theme" as *;
+
+.settings-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &--loading {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__sections {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+
+    // SectionNavGroup fills the container
+    .section-nav-group {
+      height: 100%;
+    }
+  }
+
+  // Section styles
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    padding: $spacing-md;
+
+    &--danger {
+      background: rgba(var(--color-red-rgb, 239, 68, 68), 0.05);
+      border-radius: $radius-md;
+    }
+  }
+
+  // Setting row (toggle or input)
+  &__setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid
+      var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__setting-label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: var(--color-text-primary, #e5e5e5);
+
+    svg {
+      color: var(--color-text-tertiary, #737373);
+      flex-shrink: 0;
+    }
+  }
+
+  // Group of settings with a title
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__group-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: 11px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-xs;
+    border-bottom: 1px solid $color-border-subtle;
+
+    svg {
+      color: $color-text-muted;
+    }
+  }
+
+  &__group-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__group-title {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+    color: var(--color-text-secondary, #a3a3a3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: $spacing-sm 0 $spacing-xs;
+    margin-top: $spacing-sm;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    svg {
+      color: var(--color-text-tertiary, #737373);
+    }
+  }
+
+  // Info row styles (for ProjectInfo)
+  &__info-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: $radius-sm;
+  }
+
+  &__info-icon {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__info-label {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__info-value {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  &__info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  // Owner info styles
+  &__owner-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin-top: $spacing-sm;
+
+    svg {
+      color: $color-accent-amber;
+    }
+  }
+
+  &__owner-name {
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  // Project ID styles
+  &__project-id {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+    margin-top: $spacing-sm;
+  }
+
+  &__id-label {
+    font-size: 10px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__id-value {
+    font-family: "SF Mono", "Monaco", "Consolas", monospace;
+    font-size: 10px;
+    color: $color-text-secondary;
+    word-break: break-all;
+  }
+
+  // Action row styles (for AdminSettings)
+  &__action-row {
+    display: flex;
+    gap: $spacing-sm;
+    padding-top: $spacing-sm;
+    margin-top: $spacing-sm;
+    border-top: 1px solid $color-border-subtle;
+  }
+
+  // Roles info styles
+  &__roles-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: $radius-sm;
+
+    p {
+      margin: 0;
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      line-height: 1.4;
+    }
+  }
+
+  // Empty section state
+  &__section--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-2xl;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  // Toggle switch styles
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+  }
+
+  &__toggle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__toggle-label {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+
+  &__toggle-desc {
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__toggle-switch {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: background $transition-fast;
+    flex-shrink: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: $color-text-muted;
+      border-radius: 50%;
+      transition: all $transition-fast;
+    }
+
+    input:checked + & {
+      background: $color-accent-blue;
+
+      &::after {
+        left: 18px;
+        background: white;
+      }
+    }
+  }
+
+  // Project info styles
+  &__project-header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid
+      var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+  }
+
+  &__project-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: var(--color-text-primary, #e5e5e5);
+    margin: 0;
+  }
+
+  &__project-desc {
+    font-size: $font-size-sm;
+    color: var(--color-text-secondary, #a3a3a3);
+    margin: 0;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+    padding: $spacing-sm 0;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: var(--color-bg-tertiary, #262626);
+    border-radius: $radius-sm;
+  }
+
+  &__stat-value {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: var(--color-text-primary, #e5e5e5);
+  }
+
+  &__stat-label {
+    font-size: 10px;
+    color: var(--color-text-tertiary, #737373);
+  }
+
+  &__owner {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: var(--color-bg-tertiary, #262626);
+    border-radius: $radius-sm;
+  }
+
+  &__owner-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-bg-secondary, #1e1e1e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary, #a3a3a3);
+  }
+
+  &__owner-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__owner-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--color-text-primary, #e5e5e5);
+  }
+
+  &__owner-label {
+    font-size: 10px;
+    color: var(--color-text-tertiary, #737373);
+  }
+
+  // Admin settings styles
+  &__admin-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm;
+    background: var(--color-bg-tertiary, #262626);
+    border-radius: $radius-sm;
+  }
+
+  &__admin-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__admin-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--color-text-primary, #e5e5e5);
+    margin: 0;
+  }
+
+  &__admin-desc {
+    font-size: 10px;
+    color: var(--color-text-tertiary, #737373);
+    margin: 0;
+  }
+
+  // Danger zone styles
+  &__danger-warning {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: rgba(var(--color-red-rgb, 239, 68, 68), 0.1);
+    border: 1px solid rgba(var(--color-red-rgb, 239, 68, 68), 0.2);
+    border-radius: $radius-sm;
+    font-size: 10px;
+    color: var(--color-red, #ef4444);
+  }
+
+  &__danger-actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__danger-action {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: var(--color-bg-tertiary, #262626);
+    border-radius: $radius-sm;
+  }
+
+  &__danger-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    background: rgba(var(--color-red-rgb, 239, 68, 68), 0.1);
+    color: var(--color-red, #ef4444);
+    flex-shrink: 0;
+  }
+
+  &__danger-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__danger-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--color-text-primary, #e5e5e5);
+    margin: 0;
+  }
+
+  &__danger-desc {
+    font-size: 10px;
+    color: var(--color-text-tertiary, #737373);
+    margin: $spacing-xs 0 0;
+  }
+
+  // Confirmation dialog
+  &__confirm-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    padding: $spacing-lg;
+  }
+
+  &__confirm-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    padding: $spacing-lg;
+    background: var(--color-bg-primary, #171717);
+    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+    border-radius: $radius-lg;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  &__confirm-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    h3 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: var(--color-text-primary, #e5e5e5);
+      margin: 0;
+    }
+  }
+
+  &__confirm-icon {
+    color: var(--color-red, #ef4444);
+  }
+
+  &__confirm-message {
+    font-size: $font-size-sm;
+    color: var(--color-text-secondary, #a3a3a3);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  &__confirm-input {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    label {
+      font-size: $font-size-sm;
+      color: var(--color-text-secondary, #a3a3a3);
+
+      strong {
+        color: var(--color-red, #ef4444);
+      }
+    }
+
+    input {
+      padding: $spacing-sm $spacing-md;
+      background: var(--color-bg-secondary, #1e1e1e);
+      border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+      border-radius: $radius-sm;
+      font-size: $font-size-sm;
+      color: var(--color-text-primary, #e5e5e5);
+      outline: none;
+      transition: border-color 0.15s ease;
+
+      &:focus {
+        border-color: var(--color-red, #ef4444);
+      }
+
+      &::placeholder {
+        color: var(--color-text-tertiary, #737373);
+      }
+    }
+  }
+
+  &__confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+  }
+
+  // Button item (for settings that open modals)
+  &__button-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: background $transition-fast;
+    text-align: left;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+  }
+
+  &__button-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__button-label {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+
+  &__button-desc {
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__button-arrow {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  // Summary display
+  &__summary {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: $radius-sm;
+    margin-top: $spacing-sm;
+  }
+
+  &__summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+  }
+
+  &__summary-label {
+    color: $color-text-muted;
+  }
+
+  &__summary-value {
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Spin animation
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

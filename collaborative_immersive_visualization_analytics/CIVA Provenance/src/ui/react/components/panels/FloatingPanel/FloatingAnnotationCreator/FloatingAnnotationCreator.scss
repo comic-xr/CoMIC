@@ -1,0 +1,368 @@
+/**
+ * @file FloatingAnnotationCreator.scss
+ * @description Styles for the FloatingAnnotationCreator component.
+ * Draggable floating panel for creating annotations.
+ * Uses BEM naming convention and CIA Web moonlight theme.
+ */
+
+@use "theme" as *;
+
+.floating-annotation-creator {
+  position: fixed;
+  z-index: 10001;
+  width: 300px;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  font-size: $font-size-sm;
+  animation: floatIn 0.15s ease-out;
+  user-select: none;
+
+  &--dragging {
+    cursor: grabbing;
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.6), 0 0 0 1px $color-accent-blue;
+  }
+
+  @keyframes floatIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  // Header - draggable
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__drag-handle {
+    color: $color-text-muted;
+    display: flex;
+    padding: 2px;
+    border-radius: $radius-sm;
+    transition: color $transition-fast;
+
+    .floating-annotation-creator__header:hover & {
+      color: $color-text-tertiary;
+    }
+  }
+
+  &__icon {
+    color: $color-accent-green;
+  }
+
+  &__close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    padding: $spacing-xs;
+    border-radius: $radius-sm;
+    display: flex;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-medium;
+      color: $color-text-primary;
+    }
+  }
+
+  // Position section
+  &__position {
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid $color-border-subtle;
+    background: $color-bg-secondary;
+  }
+
+  &__position-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    color: $color-text-tertiary;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__edit-btn {
+    margin-left: auto;
+    background: none;
+    border: 1px solid $color-border-default;
+    color: $color-text-muted;
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: $radius-sm;
+    display: flex;
+    font-size: $font-size-xs;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-light;
+      border-color: $color-accent-blue;
+      color: $color-accent-blue;
+    }
+  }
+
+  &__position-display {
+    display: flex;
+    gap: $spacing-sm;
+    background: $color-bg-tertiary;
+    padding: $spacing-sm;
+    border-radius: $radius-md;
+    font-family: var(--font-mono, "SF Mono", monospace);
+
+    .coord {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: $color-text-secondary;
+      font-size: $font-size-sm;
+
+      .label {
+        color: $color-text-muted;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+
+  &__position-edit {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__coord-input {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    label {
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      text-transform: uppercase;
+      font-weight: $font-weight-medium;
+    }
+
+    input {
+      width: 100%;
+      background: $color-bg-tertiary;
+      border: 1px solid $color-border-default;
+      border-radius: $radius-sm;
+      padding: $spacing-xs $spacing-sm;
+      color: $color-text-primary;
+      font-family: var(--font-mono, "SF Mono", monospace);
+      font-size: $font-size-sm;
+      text-align: center;
+
+      &:focus {
+        outline: none;
+        border-color: $color-accent-blue;
+        background: rgba($color-accent-blue, 0.05);
+      }
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  // Type selection
+  &__types {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: $spacing-sm $spacing-xs;
+    background: $color-bg-tertiary;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-medium;
+      border-color: $color-border-default;
+    }
+
+    // Color variants
+    &--green.active {
+      background: rgba($color-accent-green, 0.1);
+      border-color: rgba($color-accent-green, 0.4);
+
+      .floating-annotation-creator__type-label {
+        color: $color-accent-green;
+      }
+    }
+
+    &--amber.active {
+      background: rgba($color-accent-amber, 0.1);
+      border-color: rgba($color-accent-amber, 0.4);
+
+      .floating-annotation-creator__type-label {
+        color: $color-accent-amber;
+      }
+    }
+
+    &--blue.active {
+      background: rgba($color-accent-blue, 0.1);
+      border-color: rgba($color-accent-blue, 0.4);
+
+      .floating-annotation-creator__type-label {
+        color: $color-accent-blue;
+      }
+    }
+
+    &--purple.active {
+      background: rgba($color-accent-purple, 0.1);
+      border-color: rgba($color-accent-purple, 0.4);
+
+      .floating-annotation-creator__type-label {
+        color: $color-accent-purple;
+      }
+    }
+  }
+
+  &__type-icon {
+    font-size: 16px;
+  }
+
+  &__type-label {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: $font-weight-medium;
+  }
+
+  // Text input
+  &__input-wrapper {
+    padding: $spacing-sm $spacing-md;
+  }
+
+  &__input {
+    width: 100%;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    padding: $spacing-sm;
+    color: $color-text-primary;
+    font-family: inherit;
+    font-size: $font-size-sm;
+    resize: none;
+    transition: border-color $transition-fast;
+    line-height: 1.5;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.02);
+    }
+  }
+
+  // Actions
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    padding: 0 $spacing-md $spacing-md;
+  }
+
+  &__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &--cancel {
+      background: transparent;
+      border: 1px solid $color-border-default;
+      color: $color-text-secondary;
+
+      &:hover {
+        background: $color-glass-light;
+        border-color: $color-border-medium;
+        color: $color-text-primary;
+      }
+    }
+
+    &--submit {
+      background: rgba($color-accent-green, 0.15);
+      border: 1px solid rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+
+      &:hover:not(:disabled) {
+        background: rgba($color-accent-green, 0.25);
+        border-color: rgba($color-accent-green, 0.6);
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Hint
+  &__hint {
+    padding: $spacing-sm $spacing-md;
+    background: $color-bg-secondary;
+    border-top: 1px solid $color-border-subtle;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+
+    kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      background: $color-bg-tertiary;
+      border: 1px solid $color-border-default;
+      border-radius: $radius-sm;
+      font-family: var(--font-mono, "SF Mono", monospace);
+      font-size: 10px;
+      color: $color-text-tertiary;
+    }
+  }
+}

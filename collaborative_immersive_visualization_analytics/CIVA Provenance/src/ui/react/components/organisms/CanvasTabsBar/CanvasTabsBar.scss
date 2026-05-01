@@ -1,0 +1,544 @@
+/**
+ * @file CanvasTabsBar.scss
+ * @description Styles for CanvasTabsBar and related components
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// CANVAS TABS BAR
+// =============================================================================
+
+.canvas-tabs-bar {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 $spacing-md;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+    gap: $spacing-sm;
+}
+
+.canvas-tabs-bar__tabs {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    flex: 1;
+    min-width: 0;
+}
+
+.canvas-tabs-bar__separator {
+    width: 1px;
+    height: 24px;
+    background: $color-border-subtle;
+    margin: 0 $spacing-sm;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// CANVAS TAB
+// =============================================================================
+
+.canvas-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 $spacing-md;
+    height: 36px;
+    min-width: 80px;
+    max-width: 180px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+    }
+
+    &--active {
+        background: $color-bg-tertiary;
+        border-color: $color-border-default;
+    }
+
+    &--drag-target {
+        background: color-mix(in srgb, $color-accent-cyan 15%, transparent);
+        border: 1px dashed color-mix(in srgb, $color-accent-cyan 50%, transparent);
+    }
+
+    // Color variants
+    &--blue {
+        --tab-accent: #{$color-accent-blue};
+    }
+
+    &--amber {
+        --tab-accent: #{$color-accent-amber};
+    }
+
+    &--green {
+        --tab-accent: #{$color-accent-green};
+    }
+}
+
+.canvas-tab__drag-handle {
+    color: $color-text-muted;
+    opacity: 0.5;
+    margin-left: -4px;
+    flex-shrink: 0;
+}
+
+.canvas-tab__type-icon {
+    flex-shrink: 0;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+}
+
+.canvas-tab__unsaved-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-accent-amber;
+    flex-shrink: 0;
+}
+
+.canvas-tab__breakout-icon {
+    color: $color-accent-green;
+    flex-shrink: 0;
+}
+
+.canvas-tab__name {
+    flex: 1;
+    font-size: $font-size-xs;
+    font-weight: 400;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .canvas-tab--active & {
+        font-weight: 500;
+        color: $color-text-primary;
+    }
+}
+
+.canvas-tab__prefix {
+    margin-right: 4px;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+}
+
+.canvas-tab__input {
+    flex: 1;
+    min-width: 60px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    padding: 0;
+}
+
+.canvas-tab__close {
+    width: 18px;
+    height: 18px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-secondary;
+    }
+}
+
+// =============================================================================
+// OVERFLOW DROPDOWN
+// =============================================================================
+
+.canvas-tabs-bar__overflow {
+    position: relative;
+}
+
+.canvas-tabs-bar__overflow-trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 0 10px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: $color-text-secondary;
+        background: $color-hover-bg;
+    }
+}
+
+.canvas-tabs-bar__overflow-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: $spacing-xs;
+    min-width: 200px;
+    padding: $spacing-xs;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-dropdown;
+}
+
+.canvas-tabs-bar__overflow-item {
+    display: block;
+    width: 100%;
+    padding: $spacing-sm 10px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// CREATE BUTTON
+// =============================================================================
+
+.canvas-tabs-bar__create {
+    position: relative;
+}
+
+.canvas-tabs-bar__create-btn--active {
+    background: $color-active-bg;
+}
+
+// =============================================================================
+// MODE TOGGLE
+// =============================================================================
+
+.mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: $color-bg-secondary;
+    border-radius: $radius-md;
+}
+
+.mode-toggle__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    color: $color-text-muted;
+    font-size: 11px;
+    font-weight: 400;
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: $color-text-secondary;
+    }
+
+    &--active {
+        background: $color-bg-tertiary;
+        color: $color-text-primary;
+        font-weight: 500;
+    }
+}
+
+// =============================================================================
+// MANAGER BUTTONS
+// =============================================================================
+
+.canvas-tabs-bar__manager-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    height: 32px;
+    background: $color-bg-secondary;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-secondary;
+    font-size: 11px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+        border-color: $color-border-subtle;
+    }
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-green 15%, transparent);
+        border-color: color-mix(in srgb, $color-accent-green 40%, transparent);
+        color: $color-accent-green;
+    }
+}
+
+// =============================================================================
+// CREATE/OPEN POPOVER
+// =============================================================================
+
+.create-open-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: $spacing-xs;
+    width: 300px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-popover;
+    overflow: hidden;
+}
+
+.create-open-popover__section {
+    padding: $spacing-sm;
+}
+
+.create-open-popover__header {
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 $spacing-xs;
+    margin-bottom: $spacing-sm;
+}
+
+.create-open-popover__header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+    padding: 0 $spacing-xs;
+}
+
+.create-open-popover__count {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+.create-open-popover__divider {
+    height: 1px;
+    background: $color-border-subtle;
+}
+
+.create-open-popover__create-option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    width: 100%;
+    padding: 10px $spacing-sm;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+    }
+}
+
+.create-open-popover__option-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-md;
+    background: color-mix(in srgb, $color-accent-cyan 15%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-accent-cyan;
+    flex-shrink: 0;
+}
+
+.create-open-popover__option-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.create-open-popover__option-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: $color-text-primary;
+}
+
+.create-open-popover__option-desc {
+    font-size: 11px;
+    color: $color-text-muted;
+}
+
+.create-open-popover__search {
+    margin-bottom: $spacing-sm;
+    --search-input-bg: #{$color-bg-secondary};
+    --search-input-border: #{$color-border-subtle};
+    --search-input-focus-border: #{$color-accent-blue};
+    --search-input-color: #{$color-text-primary};
+    --search-input-placeholder: #{$color-text-muted};
+    --search-input-icon: #{$color-text-muted};
+
+    .search-input__field {
+        font-size: $font-size-xs;
+    }
+}
+
+.create-open-popover__list {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.create-open-popover__workspace {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+    }
+}
+
+.create-open-popover__workspace-icon {
+    flex-shrink: 0;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+}
+
+.create-open-popover__workspace-name {
+    flex: 1;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.create-open-popover__workspace-action {
+    font-size: 10px;
+    color: $color-accent-cyan;
+    flex-shrink: 0;
+}
+
+.create-open-popover__empty {
+    padding: $spacing-md;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+}
+
+.create-open-popover__more {
+    padding: $spacing-sm;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: 10px;
+}
+
+// =============================================================================
+// CLOSE CONFIRMATION
+// =============================================================================
+
+.canvas-tabs-bar__confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: $color-overlay-medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: $z-modal;
+}
+
+.canvas-tabs-bar__confirm-dialog {
+    width: 320px;
+    padding: $spacing-lg;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-xl;
+}
+
+.canvas-tabs-bar__confirm-title {
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin-bottom: $spacing-sm;
+}
+
+.canvas-tabs-bar__confirm-message {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-lg;
+}
+
+.canvas-tabs-bar__confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+}

@@ -1,0 +1,232 @@
+/**
+ * PriorityPanel styles
+ * Modal-like floating panel for priority dialogs
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// BACKDROP
+// =============================================================================
+
+.priority-panel-backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 200ms ease;
+
+    &--visible {
+        opacity: 1;
+    }
+}
+
+// =============================================================================
+// PANEL
+// =============================================================================
+
+.priority-panel {
+    display: flex;
+    flex-direction: column;
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-glass-lg;
+    max-height: 90vh;
+    animation: priorityPanelEnter 200ms ease;
+
+    // ---------------------------------------------------------------------
+    // SEVERITY VARIANTS
+    // ---------------------------------------------------------------------
+
+    &--info {
+        border-top: 3px solid $color-info;
+    }
+
+    &--warning {
+        border-top: 3px solid $color-warning;
+    }
+
+    &--danger {
+        border-top: 3px solid $color-error;
+    }
+
+    &--success {
+        border-top: 3px solid $color-success;
+    }
+
+    // ---------------------------------------------------------------------
+    // VR MODE
+    // ---------------------------------------------------------------------
+
+    &--vr {
+        // Larger touch targets and text for VR
+        .priority-panel__title {
+            font-size: 1.25rem;
+        }
+
+        .priority-panel__content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .priority-panel__footer {
+            gap: $spacing-md;
+
+            button {
+                min-height: 48px;
+                min-width: 120px;
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.priority-panel__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.priority-panel__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--info {
+        color: $color-info;
+    }
+
+    &--warning {
+        color: $color-warning;
+    }
+
+    &--danger {
+        color: $color-error;
+    }
+
+    &--success {
+        color: $color-success;
+    }
+}
+
+.priority-panel__title {
+    margin: 0;
+    flex: 1;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $color-text-primary;
+    line-height: 1.3;
+}
+
+.priority-panel__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-tertiary;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-primary;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-accent-blue;
+        outline-offset: 2px;
+    }
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.priority-panel__content {
+    flex: 1;
+    padding: $spacing-lg;
+    overflow-y: auto;
+    color: $color-text-secondary;
+    line-height: 1.5;
+
+    // Prose styling
+    p {
+        margin: 0 0 $spacing-sm;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul, ol {
+        margin: 0 0 $spacing-sm;
+        padding-left: $spacing-lg;
+    }
+
+    strong {
+        color: $color-text-primary;
+        font-weight: 600;
+    }
+}
+
+// =============================================================================
+// FOOTER
+// =============================================================================
+
+.priority-panel__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
+    border-top: 1px solid $color-border-subtle;
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes priorityPanelEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+// =============================================================================
+// REDUCED MOTION
+// =============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+    .priority-panel-backdrop {
+        transition: none;
+    }
+
+    .priority-panel {
+        animation: none;
+    }
+}

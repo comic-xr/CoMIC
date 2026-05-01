@@ -1,0 +1,68 @@
+// src/ui/react/components/atoms/StatusDot/StatusDot.scss
+// StatusDot atom styles
+
+@use "theme" as *;
+
+.status-dot {
+    display: inline-block;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    // Status-specific styles
+    &--online {
+        box-shadow: 0 0 0 2px rgba($color-accent-green, 0.2);
+    }
+
+    &--offline {
+        opacity: 0.6;
+    }
+
+    &--busy {
+        box-shadow: 0 0 0 2px rgba($color-accent-red, 0.2);
+    }
+
+    &--away {
+        box-shadow: 0 0 0 2px rgba($color-accent-amber, 0.2);
+    }
+
+    &--loading {
+        box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.2);
+    }
+
+    // Pulse animation
+    &--pulse {
+        animation: status-dot-pulse 2s ease-in-out infinite;
+    }
+
+    // VR mode - larger glow rings
+    &--vr {
+        &.status-dot--online {
+            box-shadow: 0 0 0 3px rgba($color-accent-green, 0.25);
+        }
+
+        &.status-dot--busy {
+            box-shadow: 0 0 0 3px rgba($color-accent-red, 0.25);
+        }
+
+        &.status-dot--away {
+            box-shadow: 0 0 0 3px rgba($color-accent-amber, 0.25);
+        }
+
+        &.status-dot--loading {
+            box-shadow: 0 0 0 3px rgba($color-accent-blue, 0.25);
+        }
+    }
+}
+
+@keyframes status-dot-pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.15);
+    }
+}

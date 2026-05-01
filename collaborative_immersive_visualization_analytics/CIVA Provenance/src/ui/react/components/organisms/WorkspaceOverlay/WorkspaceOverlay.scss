@@ -1,0 +1,136 @@
+@use "theme" as *;
+
+.workspace-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-4xl;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: $blur-subtle;
+  animation: overlay-fade-in 0.2s ease-out;
+
+  @keyframes overlay-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  // Container - the actual overlay panel
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: calc(100vw - 360px); // Leave space for side panels
+    max-height: calc(100vh - 120px); // Leave space for top/bottom bars
+    background: $color-glass-panel;
+    backdrop-filter: $blur-strong;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-glass-lg;
+    overflow: hidden;
+    animation: overlay-slide-in 0.25s ease-out;
+
+    @keyframes overlay-slide-in {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+  }
+
+  // Header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+    height: 48px;
+    padding: 0 $spacing-lg;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid transparent;
+    background: transparent;
+    color: $color-text-tertiary;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-light;
+      border-color: $color-border-default;
+      color: $color-text-secondary;
+    }
+
+    &:active {
+      background: $color-glass-medium;
+    }
+  }
+
+  // Content
+  &__content {
+    flex: 1;
+    overflow: auto;
+    @include glass-scrollable;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1200px) {
+  .workspace-overlay {
+    padding: $spacing-xl;
+
+    &__container {
+      max-width: calc(100vw - 200px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .workspace-overlay {
+    padding: $spacing-md;
+
+    &__container {
+      max-width: calc(100vw - $spacing-lg);
+      max-height: calc(100vh - $spacing-lg);
+      border-radius: $radius-lg;
+    }
+  }
+}

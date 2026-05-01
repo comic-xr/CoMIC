@@ -1,0 +1,455 @@
+// src/ui/react/components/workspace/Canvas/LinksDropdown/LinksDropdown.scss
+// Links dropdown styling
+//
+// Based on canvas-chrome-v12.jsx LinksDropdown spec
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.links-dropdown {
+  position: relative;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// TRIGGER BUTTON
+// =============================================================================
+
+.links-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-elevated;
+    border-color: $color-border-default;
+    color: $color-accent-teal;
+  }
+
+  &--open {
+    background: $color-bg-elevated;
+    border-color: $color-accent-teal;
+    color: $color-accent-teal;
+  }
+
+  &--has-links {
+    color: $color-accent-teal;
+  }
+}
+
+.links-dropdown__trigger-label {
+  font-weight: $font-weight-medium;
+}
+
+.links-dropdown__badge {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 $spacing-xs;
+  background: $color-accent-teal;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// =============================================================================
+// DROPDOWN PANEL
+// =============================================================================
+
+.links-dropdown__panel {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: $spacing-sm;
+  width: 300px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  z-index: $z-dropdown;
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.links-dropdown__header {
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.links-dropdown__header-label {
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+}
+
+.links-dropdown__header-view {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.links-dropdown__header-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.links-dropdown__header-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.links-dropdown__content {
+  padding: $spacing-sm;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+// =============================================================================
+// LINK TYPE
+// =============================================================================
+
+.links-dropdown__link-type {
+  margin-bottom: $spacing-xs;
+}
+
+.links-dropdown__link-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  text-align: left;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.05);
+  }
+
+  &--expanded {
+    background: $color-bg-tertiary;
+  }
+}
+
+.links-dropdown__link-icon {
+  flex-shrink: 0;
+  color: $color-text-muted;
+
+  &--active {
+    // Color applied via modifier class
+  }
+
+  &--teal { color: $color-accent-teal; }
+  &--amber { color: $color-accent-amber; }
+  &--purple { color: $color-accent-purple; }
+  &--pink { color: $color-accent-pink; }
+  &--cyan { color: $color-accent-teal; } // Using teal for cyan
+  &--orange { color: $color-accent-amber; } // Using amber for orange
+}
+
+.links-dropdown__link-label {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  flex: 1;
+}
+
+.links-dropdown__not-linked {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.links-dropdown__link-target {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.links-dropdown__direction {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.links-dropdown__target-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.links-dropdown__target-name {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.links-dropdown__unlink-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-accent-red;
+    background: rgba($color-accent-red, 0.1);
+  }
+}
+
+.links-dropdown__expand-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// LINK BODY (Expanded)
+// =============================================================================
+
+.links-dropdown__link-body {
+  padding: $spacing-sm $spacing-sm $spacing-sm $spacing-lg;
+  background: $color-bg-canvas;
+  border-radius: $radius-sm;
+  margin-top: $spacing-xs;
+}
+
+.links-dropdown__section-label {
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+}
+
+.links-dropdown__view-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.links-dropdown__view-option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.05);
+  }
+
+  &--selected {
+    background: rgba(var(--link-color-rgb, 45, 212, 191), 0.1);
+    border-color: var(--link-color, $color-accent-teal);
+  }
+}
+
+.links-dropdown__radio {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid $color-border-medium;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &--checked {
+    border-color: var(--link-color, $color-accent-teal);
+  }
+}
+
+.links-dropdown__radio-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--link-color, $color-accent-teal);
+}
+
+.links-dropdown__view-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.links-dropdown__view-name {
+  font-size: $font-size-xs;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// DIRECTION SECTION
+// =============================================================================
+
+.links-dropdown__direction-section {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.links-dropdown__direction-buttons {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.links-dropdown__direction-btn {
+  width: 28px;
+  height: 22px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  transition: all $transition-fast;
+
+  &:hover:not(.links-dropdown__direction-btn--active) {
+    background: $color-bg-elevated;
+    border-color: $color-border-default;
+  }
+
+  &--active {
+    background: rgba(var(--link-color-rgb, 45, 212, 191), 0.2);
+    border-color: var(--link-color, $color-accent-teal);
+    color: var(--link-color, $color-accent-teal);
+  }
+}
+
+// =============================================================================
+// RECENT UNLINKS
+// =============================================================================
+
+.links-dropdown__recent {
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-canvas;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.links-dropdown__recent-label {
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+}
+
+.links-dropdown__recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.links-dropdown__recent-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 3px 6px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-elevated;
+    border-color: $color-border-default;
+  }
+}
+
+.links-dropdown__recent-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// FOOTER - Open Link Manager
+// =============================================================================
+
+.links-dropdown__footer {
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-tertiary;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.links-dropdown__open-manager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  cursor: pointer;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-teal, 0.1);
+    border-color: $color-accent-teal;
+    color: $color-accent-teal;
+  }
+}

@@ -1,0 +1,965 @@
+/**
+ * @file ViewSettingsModal.scss
+ * @description Styles for ViewSettingsModal content.
+ * Modal container, backdrop, and base footer are handled by base Modal component.
+ */
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CONTENT CONTAINER
+// =============================================================================
+
+.view-settings-modal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+// =============================================================================
+// NAME SECTION (Editable title)
+// =============================================================================
+
+.view-settings-modal__name-section {
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+}
+
+.view-settings-modal__name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  cursor: text;
+
+  &:hover .view-settings-modal__name-hint {
+    opacity: 0.7;
+  }
+}
+
+.view-settings-modal__name-hint {
+  color: $color-text-muted;
+  opacity: 0.3;
+  transition: opacity $transition-fast;
+}
+
+.view-settings-modal__name-input {
+  width: 100%;
+  padding: 4px $spacing-sm;
+  background: $color-bg-secondary;
+  border: 1px solid $color-accent-blue;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.2);
+  }
+}
+
+.view-settings-modal__subtitle {
+  font-size: 10px;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+// =============================================================================
+// QUICK ACTIONS BAR
+// =============================================================================
+
+.view-settings-modal__quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+}
+
+.view-settings-modal__quick-label {
+  font-size: 10px;
+  color: $color-text-muted;
+  margin-right: $spacing-sm;
+}
+
+.view-settings-modal__quick-divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-default;
+  margin: 0 4px;
+}
+
+.view-settings-modal__quick-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-primary;
+  }
+
+  &--active {
+    &.view-settings-modal__quick-toggle--purple {
+      background: rgba($color-accent-purple, 0.2);
+      border-color: rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+    }
+
+    &.view-settings-modal__quick-toggle--amber {
+      background: rgba($color-accent-amber, 0.2);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+
+    &.view-settings-modal__quick-toggle--pink {
+      background: rgba($color-accent-pink, 0.2);
+      border-color: rgba($color-accent-pink, 0.4);
+      color: $color-accent-pink;
+    }
+  }
+}
+
+// =============================================================================
+// SECTIONS CONTAINER
+// =============================================================================
+
+.view-settings-modal__sections {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  max-height: 400px;
+  overflow-y: auto;
+  @include glass-scrollable;
+}
+
+// =============================================================================
+// SECTION
+// =============================================================================
+
+.view-settings-modal__section {
+  // No margin needed, gap handles spacing
+}
+
+.view-settings-modal__section-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.view-settings-modal__section-icon {
+  color: $color-accent-blue;
+}
+
+.view-settings-modal__section-title {
+  font-size: 12px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.view-settings-modal__section-badge {
+  padding: 2px 6px;
+  background: rgba($color-accent-teal, 0.15);
+  border-radius: 10px;
+  font-size: 9px;
+  color: $color-accent-teal;
+  margin-left: auto;
+}
+
+.view-settings-modal__section-content {
+  padding: $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+}
+
+// =============================================================================
+// DATASET SECTION
+// =============================================================================
+
+.view-settings-modal__dataset {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.view-settings-modal__dataset-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: linear-gradient(
+    135deg,
+    rgba($color-accent-purple, 0.25),
+    rgba($color-accent-blue, 0.25)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-accent-purple;
+  flex-shrink: 0;
+}
+
+.view-settings-modal__dataset-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.view-settings-modal__dataset-name {
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view-settings-modal__dataset-meta {
+  font-size: 10px;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.view-settings-modal__dataset-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// SHARING SECTION
+// =============================================================================
+
+.view-settings-modal__sharing-private {
+  text-align: center;
+  padding: $spacing-md 0;
+
+  p {
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.view-settings-modal__share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: $spacing-sm $spacing-lg;
+  background: rgba($color-accent-pink, 0.15);
+  border: 1px solid rgba($color-accent-pink, 0.3);
+  border-radius: $radius-md;
+  color: $color-accent-pink;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-pink, 0.25);
+    border-color: rgba($color-accent-pink, 0.5);
+  }
+}
+
+.view-settings-modal__share-input-row {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+  padding: $spacing-sm;
+  background: $color-bg-tertiary;
+  border-radius: $radius-md;
+}
+
+.view-settings-modal__share-input {
+  flex: 1;
+  padding: 6px 10px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-primary;
+  font-size: 11px;
+  outline: none;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-accent-pink;
+  }
+}
+
+.view-settings-modal__share-add-btn {
+  padding: 6px $spacing-md;
+  background: $color-accent-pink;
+  border: none;
+  border-radius: $radius-sm;
+  color: white;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: color.adjust($color-accent-pink, $lightness: 5%);
+  }
+}
+
+.view-settings-modal__share-list {
+  max-height: 140px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.view-settings-modal__share-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: $spacing-sm 10px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-md;
+}
+
+.view-settings-modal__share-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba($color-accent-blue, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-blue;
+  flex-shrink: 0;
+
+  &--group {
+    border-radius: $radius-md;
+    background: rgba($color-accent-teal, 0.25);
+    color: $color-accent-teal;
+  }
+}
+
+.view-settings-modal__share-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.view-settings-modal__share-user-name {
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.view-settings-modal__share-user-email {
+  font-size: 9px;
+  color: $color-text-muted;
+}
+
+.view-settings-modal__share-role {
+  padding: 4px 6px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.view-settings-modal__share-remove {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-error, 0.15);
+    color: $color-error;
+  }
+}
+
+.view-settings-modal__stop-sharing {
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// SIZE GRID
+// =============================================================================
+
+.view-settings-modal__size-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.view-settings-modal__size-btn {
+  padding: $spacing-sm 0;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-primary;
+  }
+
+  &--active {
+    background: $color-accent-blue;
+    border-color: $color-accent-blue;
+    color: white;
+
+    &:hover {
+      background: color.adjust($color-accent-blue, $lightness: 5%);
+    }
+  }
+}
+
+// =============================================================================
+// LINK PROPERTIES
+// =============================================================================
+
+.view-settings-modal__link-info {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba($color-accent-teal, 0.1);
+  border-radius: $radius-sm;
+  margin-bottom: $spacing-md;
+
+  svg {
+    color: $color-accent-teal;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  span {
+    font-size: 10px;
+    color: $color-accent-teal;
+    line-height: 1.4;
+  }
+}
+
+.view-settings-modal__link-empty {
+  text-align: center;
+  padding: $spacing-md 0;
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.4;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    margin-bottom: 4px;
+  }
+
+  span {
+    font-size: 10px;
+  }
+}
+
+.view-settings-modal__links {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.view-settings-modal__link-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: $color-border-default;
+  }
+
+  &--linked {
+    background: rgba($color-accent-teal, 0.08);
+    border-color: rgba($color-accent-teal, 0.25);
+
+    &:hover {
+      background: rgba($color-accent-teal, 0.12);
+      border-color: rgba($color-accent-teal, 0.35);
+    }
+  }
+}
+
+.view-settings-modal__link-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+
+  &[data-color="teal"] {
+    color: $color-accent-teal;
+    background: rgba($color-accent-teal, 0.15);
+  }
+  &[data-color="purple"] {
+    color: $color-accent-purple;
+    background: rgba($color-accent-purple, 0.15);
+  }
+  &[data-color="pink"] {
+    color: $color-accent-pink;
+    background: rgba($color-accent-pink, 0.15);
+  }
+  &[data-color="amber"] {
+    color: $color-accent-amber;
+    background: rgba($color-accent-amber, 0.15);
+  }
+  &[data-color="blue"] {
+    color: $color-accent-blue;
+    background: rgba($color-accent-blue, 0.15);
+  }
+  &[data-color="green"] {
+    color: $color-accent-green;
+    background: rgba($color-accent-green, 0.15);
+  }
+}
+
+.view-settings-modal__link-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.view-settings-modal__link-label {
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.view-settings-modal__link-desc {
+  font-size: 9px;
+  color: $color-text-muted;
+}
+
+.view-settings-modal__link-source {
+  font-size: 9px;
+  color: $color-accent-teal;
+}
+
+.view-settings-modal__link-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-settings-modal__link-mode {
+  padding: 4px $spacing-sm;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 9px;
+  cursor: pointer;
+  min-width: 90px;
+
+  &:focus {
+    border-color: $color-accent-teal;
+    outline: none;
+  }
+}
+
+.view-settings-modal__link-unlink {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-error, 0.15);
+    border-color: rgba($color-error, 0.3);
+    color: $color-error;
+  }
+}
+
+.view-settings-modal__link-select {
+  padding: 4px $spacing-sm;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+  cursor: pointer;
+  min-width: 100px;
+
+  &:focus {
+    border-color: $color-accent-teal;
+    outline: none;
+  }
+}
+
+.view-settings-modal__unlink-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: 1px solid rgba($color-error, 0.25);
+  border-radius: $radius-sm;
+  color: $color-error;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-error, 0.1);
+    border-color: rgba($color-error, 0.4);
+  }
+}
+
+// =============================================================================
+// NOTES
+// =============================================================================
+
+.view-settings-modal__note {
+  margin-top: 10px;
+  padding: $spacing-sm;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  font-size: 10px;
+  color: $color-text-muted;
+  line-height: 1.5;
+
+  strong {
+    color: $color-text-secondary;
+  }
+
+  &--info {
+    background: rgba($color-accent-teal, 0.1);
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    strong {
+      color: $color-accent-teal;
+    }
+  }
+
+  &--warning {
+    background: rgba($color-accent-amber, 0.1);
+    color: $color-accent-amber;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.view-settings-modal__hint {
+  margin-top: 10px;
+  font-size: 10px;
+  color: $color-text-muted;
+  font-style: italic;
+}
+
+// =============================================================================
+// ANNOTATION FILTERS
+// =============================================================================
+
+.view-settings-modal__annotation-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.view-settings-modal__annotation-copy {
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+
+  > span {
+    display: block;
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.view-settings-modal__annotation-copy-row {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.view-settings-modal__annotation-select {
+  flex: 1;
+  padding: 6px $spacing-sm;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+}
+
+.view-settings-modal__annotation-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px $spacing-md;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+  }
+}
+
+// =============================================================================
+// DISPLAY OPTIONS
+// =============================================================================
+
+.view-settings-modal__display-options {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.view-settings-modal__color-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  span {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+}
+
+.view-settings-modal__color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border-default;
+  cursor: pointer;
+}
+
+// =============================================================================
+// TOGGLE ROW
+// =============================================================================
+
+.view-settings-modal__toggle-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  span {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+}
+
+.view-settings-modal__toggle {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  position: relative;
+  cursor: pointer;
+  transition: all $transition-fast;
+  padding: 0;
+
+  &--checked {
+    background: $color-accent-blue;
+    border-color: $color-accent-blue;
+
+    .view-settings-modal__toggle-knob {
+      left: 18px;
+    }
+  }
+}
+
+.view-settings-modal__toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  transition: left $transition-fast;
+}
+
+// =============================================================================
+// ADVANCED
+// =============================================================================
+
+.view-settings-modal__advanced {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  opacity: 0.6;
+}
+
+.view-settings-modal__advanced-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  svg {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  span {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+
+  select {
+    padding: 4px $spacing-sm;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: 10px;
+  }
+}
+
+// =============================================================================
+// DANGER ZONE
+// =============================================================================
+
+.view-settings-modal__delete-btn {
+  width: 100%;
+  padding: 10px $spacing-lg;
+  background: transparent;
+  border: 1px solid rgba($color-error, 0.3);
+  border-radius: $radius-md;
+  color: $color-error;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-error, 0.1);
+    border-color: rgba($color-error, 0.5);
+  }
+}
+
+.view-settings-modal__delete-hint {
+  margin-top: $spacing-sm;
+  text-align: center;
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// FOOTER BUTTON
+// =============================================================================
+
+.view-settings-modal__footer-btn {
+  padding: $spacing-sm $spacing-lg;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+}

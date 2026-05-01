@@ -1,0 +1,332 @@
+// InstanceCard.scss
+// Reusable instance/view card component styles
+// Location: src/ui/react/components/common/InstanceCard/InstanceCard.scss
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CSS VARIABLES
+// =============================================================================
+
+.instance-card {
+    --instance-color: #{$color-accent-primary};
+    --card-padding: #{$spacing-sm} #{$spacing-md};
+    --card-gap: #{$spacing-sm};
+    --name-font-size: 12px;
+    --dataset-font-size: 10px;
+    --type-font-size: 8px;
+    --icon-size: 14px;
+    --bar-width: 3px;
+}
+
+// =============================================================================
+// BASE STYLES
+// =============================================================================
+
+.instance-card {
+    display: flex;
+    align-items: center;
+    gap: var(--card-gap);
+    padding: var(--card-padding);
+    background: $color-glass-panel;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid $color-border-default;
+    transition: all $transition-fast;
+
+    &--clickable {
+        cursor: pointer;
+
+        &:hover {
+            background: $color-glass-medium;
+            border-color: $color-border-strong;
+        }
+    }
+
+    // Icon styling
+    > .icon {
+        color: $color-text-muted;
+        flex-shrink: 0;
+    }
+}
+
+// =============================================================================
+// COLOR BAR POSITIONING
+// =============================================================================
+
+// Left color bar (default)
+.instance-card--color-left {
+    border-left: var(--bar-width) solid var(--instance-color);
+    border-radius: 0 $radius-sm $radius-sm 0;
+
+    &.instance-card--gradient {
+        background: linear-gradient(
+            90deg,
+            color-mix(in srgb, var(--instance-color) 12%, transparent) 0%,
+            transparent 50%
+        ), $color-glass-panel;
+
+        &:hover {
+            background: linear-gradient(
+                90deg,
+                color-mix(in srgb, var(--instance-color) 18%, transparent) 0%,
+                transparent 50%
+            ), $color-glass-medium;
+        }
+    }
+}
+
+// Right color bar
+.instance-card--color-right {
+    border-right: var(--bar-width) solid var(--instance-color);
+    border-radius: $radius-sm 0 0 $radius-sm;
+
+    &.instance-card--gradient {
+        background: linear-gradient(
+            270deg,
+            color-mix(in srgb, var(--instance-color) 12%, transparent) 0%,
+            transparent 50%
+        ), $color-glass-panel;
+
+        &:hover {
+            background: linear-gradient(
+                270deg,
+                color-mix(in srgb, var(--instance-color) 18%, transparent) 0%,
+                transparent 50%
+            ), $color-glass-medium;
+        }
+    }
+}
+
+// =============================================================================
+// VARIANT: HEADER (Full header with all elements)
+// =============================================================================
+
+.instance-card--header {
+    --card-padding: #{$spacing-sm} #{$spacing-md};
+    --card-gap: #{$spacing-sm};
+    --name-font-size: 12px;
+    --dataset-font-size: 10px;
+    --icon-size: 14px;
+    --bar-width: 3px;
+}
+
+// =============================================================================
+// VARIANT: COMPACT (Smaller, for tight spaces)
+// =============================================================================
+
+.instance-card--compact {
+    --card-padding: #{$spacing-xs} #{$spacing-sm};
+    --card-gap: #{$spacing-xs};
+    --name-font-size: 11px;
+    --dataset-font-size: 9px;
+    --icon-size: 12px;
+    --bar-width: 2px;
+}
+
+// =============================================================================
+// VARIANT: INLINE (Single line with color dot)
+// =============================================================================
+
+.instance-card--inline {
+    --card-padding: #{$spacing-xs} #{$spacing-sm};
+    --card-gap: #{$spacing-xs};
+    --name-font-size: 11px;
+    --bar-width: 0;
+
+    border-left: none;
+    border-right: none;
+    border-radius: $radius-sm;
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+
+    &:hover {
+        background: $color-glass-panel;
+        backdrop-filter: blur(12px);
+    }
+
+    .instance-card__info {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .instance-card__dataset {
+        display: none;
+    }
+}
+
+// =============================================================================
+// VARIANT: MINIMAL (Just bar and name)
+// =============================================================================
+
+.instance-card--minimal {
+    --card-padding: #{$spacing-xs} #{$spacing-sm};
+    --card-gap: #{$spacing-xs};
+    --name-font-size: 10px;
+    --bar-width: 2px;
+
+    .instance-card__info {
+        flex-direction: row;
+    }
+
+    .instance-card__dataset {
+        display: none;
+    }
+}
+
+// =============================================================================
+// INFO SECTION
+// =============================================================================
+
+.instance-card__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+// =============================================================================
+// NAME
+// =============================================================================
+
+.instance-card__name {
+    font-size: var(--name-font-size);
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &--editable {
+        cursor: text;
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 2px;
+        }
+    }
+}
+
+.instance-card__name-input {
+    flex: 1;
+    min-width: 0;
+    padding: 2px $spacing-xs;
+    background: $color-bg-primary;
+    border: 1px solid $color-accent-primary;
+    border-radius: $radius-xs;
+    font-size: var(--name-font-size);
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    outline: none;
+
+    &:focus {
+        box-shadow: 0 0 0 2px $color-focus-glow;
+    }
+}
+
+// =============================================================================
+// DATASET
+// =============================================================================
+
+.instance-card__dataset {
+    font-size: var(--dataset-font-size);
+    color: $color-text-muted;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// =============================================================================
+// TYPE BADGE
+// =============================================================================
+
+.instance-card__type {
+    font-size: var(--type-font-size);
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    font-weight: $font-weight-medium;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// COLOR DOT (for inline variant)
+// =============================================================================
+
+.instance-card__color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px currentColor;
+}
+
+// =============================================================================
+// SETTINGS BUTTON
+// =============================================================================
+
+.instance-card__settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xs;
+    background: transparent;
+    border: none;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    opacity: 0;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    .instance-card:hover & {
+        opacity: 1;
+    }
+
+    &:hover {
+        background: $color-glass-subtle;
+        color: $color-text-primary;
+    }
+}
+
+// Always show settings in compact/inline when card doesn't have hover
+.instance-card--compact,
+.instance-card--inline {
+    .instance-card__settings-btn {
+        opacity: 0.5;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+// =============================================================================
+// HUB INDICATOR
+// =============================================================================
+
+.instance-card--hub {
+    &.instance-card--color-left {
+        border-left-color: $color-accent-amber;
+    }
+
+    &.instance-card--color-right {
+        border-right-color: $color-accent-amber;
+    }
+}
+
+// =============================================================================
+// LINK BADGES SECTION
+// =============================================================================
+
+.instance-card__badges {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    flex-shrink: 0;
+}

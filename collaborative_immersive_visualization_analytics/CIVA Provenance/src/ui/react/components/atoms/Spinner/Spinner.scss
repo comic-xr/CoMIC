@@ -1,0 +1,46 @@
+// src/ui/react/components/atoms/Spinner/Spinner.scss
+// Spinner atom styles
+
+@use "theme" as *;
+
+.spinner {
+    display: inline-block;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-top-color: $color-accent-blue;
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+
+    // Size variants with different border widths
+    &--sm {
+        border-width: 2px;
+    }
+
+    &--md {
+        border-width: 2px;
+    }
+
+    &--lg {
+        border-width: 3px;
+    }
+
+    // VR mode - thicker borders
+    &--vr {
+        &.spinner--sm {
+            border-width: 2px;
+        }
+
+        &.spinner--md {
+            border-width: 3px;
+        }
+
+        &.spinner--lg {
+            border-width: 4px;
+        }
+    }
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}

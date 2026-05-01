@@ -1,0 +1,162 @@
+// =============================================================================
+// ICON STYLES
+// =============================================================================
+//
+// Minimal styles for the Icon component.
+// Icons inherit color from parent via currentColor.
+//
+// =============================================================================
+
+.cia-icon {
+  // Core display
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  // Sizing (overridden by inline styles)
+  width: 1em;
+  height: 1em;
+
+  // Color inheritance
+  color: inherit;
+  fill: currentColor;
+
+  // Smooth transitions
+  transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+
+  // Prevent text selection
+  user-select: none;
+  pointer-events: none;
+
+  // Crisp rendering
+  shape-rendering: geometricPrecision;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INTERACTIVE STATE
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  &--clickable {
+    pointer-events: auto;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SIZE VARIANTS (utility classes)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  &--xs {
+    width: 12px;
+    height: 12px;
+  }
+
+  &--sm {
+    width: 16px;
+    height: 16px;
+  }
+
+  &--md {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--lg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &--xl {
+    width: 32px;
+    height: 32px;
+  }
+
+  &--2xl {
+    width: 48px;
+    height: 48px;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ANIMATION VARIANTS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  &--spin {
+    animation: cia-icon-spin 1s linear infinite;
+  }
+
+  &--pulse {
+    animation: cia-icon-pulse 1.5s ease-in-out infinite;
+  }
+
+  &--bounce {
+    animation: cia-icon-bounce 1s ease infinite;
+  }
+}
+
+// =============================================================================
+// KEYFRAME ANIMATIONS
+// =============================================================================
+
+@keyframes cia-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cia-icon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes cia-icon-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+// =============================================================================
+// CONTEXTUAL COLORS (when icons need semantic meaning)
+// =============================================================================
+
+.cia-icon {
+  &--success {
+    color: var(--color-success, #22c55e);
+  }
+  &--warning {
+    color: var(--color-warning, #f59e0b);
+  }
+  &--error {
+    color: var(--color-error, #ef4444);
+  }
+  &--info {
+    color: var(--color-info, #3b82f6);
+  }
+  &--muted {
+    color: var(--color-text-muted, rgba(255, 255, 255, 0.5));
+  }
+}

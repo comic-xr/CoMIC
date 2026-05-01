@@ -1,0 +1,151 @@
+// src/ui/react/components/common/ThumbnailPreview/ThumbnailPreview.scss
+// Styles for thumbnail preview and progressive loading components
+
+// @import "@UI/styles/variables";
+@use "theme" as *;
+
+// ============================================================================
+// THUMBNAIL PREVIEW
+// ============================================================================
+// Shows a cached thumbnail while real content loads
+
+.thumbnail-preview {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: $color-bg-secondary;
+  transition: opacity 0.3s ease-out;
+
+  // When content is ready, fade out
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+
+    // Fade in when loaded
+    .thumbnail-preview--loaded & {
+      opacity: 1;
+    }
+  }
+
+  &__skeleton {
+    position: absolute;
+    inset: 0;
+    background: $color-bg-tertiary;
+    overflow: hidden;
+
+    // Hide skeleton when image loads
+    .thumbnail-preview--loaded & {
+      display: none;
+    }
+  }
+
+  &__skeleton-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// ============================================================================
+// THUMBNAIL PLACEHOLDER
+// ============================================================================
+// Static placeholder when no thumbnail is available
+
+.thumbnail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  width: 100%;
+  height: 100%;
+  background: $color-bg-tertiary;
+  color: $color-text-secondary;
+
+  &__icon {
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    opacity: 0.7;
+  }
+}
+
+// ============================================================================
+// PROGRESSIVE LOADER
+// ============================================================================
+// Wrapper for progressive loading pattern
+
+.progressive-loader {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  // Inherit pointer-events from parent - allows clicks to pass through when loading
+  pointer-events: inherit;
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    // Inherit pointer-events from parent
+    pointer-events: inherit;
+    // NO opacity on the container - we apply opacity to content only
+
+    // ==========================================================================
+    // HEADER ALWAYS VISIBLE - Content fades in when ready
+    // ==========================================================================
+    // The ViewHeader should always be visible, showing loading state.
+    // Only the content area fades in when ready.
+
+    .instance-viewport {
+      width: 100%;
+      height: 100%;
+
+      // Header is always visible
+      > .view-header {
+        opacity: 1;
+        transition: none; // Header doesn't fade
+      }
+
+      // Content area fades in when ready
+      .instance-viewport__content {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+    }
+
+    // When ready, show the content
+    &--ready {
+      .instance-viewport .instance-viewport__content {
+        opacity: 1;
+      }
+    }
+  }
+}

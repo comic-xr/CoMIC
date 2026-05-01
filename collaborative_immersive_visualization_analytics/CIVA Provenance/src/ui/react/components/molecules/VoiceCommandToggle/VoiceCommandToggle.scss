@@ -1,0 +1,275 @@
+// src/ui/react/components/common/VoiceCommandToggle/VoiceCommandToggle.scss
+// Styles for voice command toggle button
+@use "theme" as *;
+
+// =============================================================================
+// GROUP CONTAINER (toggle + help button)
+// =============================================================================
+
+.voice-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+
+  &--sm {
+    .voice-toggle__help {
+      padding: 2px 4px;
+    }
+  }
+
+  &--md {
+    .voice-toggle__help {
+      padding: $spacing-xs;
+    }
+  }
+
+  &--lg {
+    .voice-toggle__help {
+      padding: $spacing-xs $spacing-sm;
+    }
+  }
+}
+
+// =============================================================================
+// MAIN TOGGLE BUTTON
+// =============================================================================
+
+.voice-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: 10px;
+  color: $color-text-muted;
+  transition: all $transition-fast;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  // ==========================================================================
+  // SIZES
+  // ==========================================================================
+
+  &--sm {
+    padding: 2px $spacing-xs;
+  }
+
+  &--md {
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  &--lg {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  // ==========================================================================
+  // STATE VARIANTS
+  // ==========================================================================
+
+  &--off {
+    color: $color-text-muted;
+
+    .voice-toggle__icon svg {
+      color: $color-text-muted;
+    }
+  }
+
+  &--listening {
+    color: $color-accent-blue;
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.2);
+
+    .voice-toggle__icon svg {
+      color: $color-accent-blue;
+    }
+
+    .voice-toggle__pulse {
+      animation: voice-pulse 2s ease-in-out infinite;
+      background: $color-accent-blue;
+    }
+
+    &:hover {
+      background: rgba($color-accent-blue, 0.15);
+    }
+  }
+
+  &--awake {
+    color: $color-accent-green;
+    background: rgba($color-accent-green, 0.15);
+    border-color: rgba($color-accent-green, 0.3);
+
+    .voice-toggle__icon svg {
+      color: $color-accent-green;
+    }
+
+    .voice-toggle__pulse {
+      animation: voice-pulse-strong 1s ease-in-out infinite;
+      background: $color-accent-green;
+    }
+
+    &:hover {
+      background: rgba($color-accent-green, 0.2);
+    }
+  }
+
+  &--processing {
+    color: $color-accent-amber;
+    background: rgba($color-accent-amber, 0.1);
+    border-color: rgba($color-accent-amber, 0.2);
+
+    .voice-toggle__icon svg {
+      color: $color-accent-amber;
+      animation: voice-spin 1s linear infinite;
+    }
+
+    &:hover {
+      background: rgba($color-accent-amber, 0.15);
+    }
+  }
+
+  // ==========================================================================
+  // INNER ELEMENTS
+  // ==========================================================================
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+
+    svg {
+      flex-shrink: 0;
+      transition: color $transition-fast;
+    }
+  }
+
+  &__label {
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  &__pulse {
+    position: absolute;
+    inset: -2px;
+    border-radius: $radius-sm;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  &__transcript {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($color-bg-secondary, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    font-size: 10px;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    z-index: $z-tooltip;
+    animation: voice-transcript-appear 0.15s ease-out;
+
+    // Arrow pointing down
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid $color-border-default;
+    }
+  }
+
+  // ==========================================================================
+  // HELP BUTTON
+  // ==========================================================================
+
+  &__help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+}
+
+// ==========================================================================
+// ANIMATIONS
+// ==========================================================================
+
+@keyframes voice-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes voice-pulse-strong {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes voice-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes voice-transcript-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

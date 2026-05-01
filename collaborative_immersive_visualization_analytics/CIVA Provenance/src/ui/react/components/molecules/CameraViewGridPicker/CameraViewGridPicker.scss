@@ -1,0 +1,87 @@
+// src/ui/react/components/molecules/CameraViewGridPicker/CameraViewGridPicker.scss
+// Camera view grid picker molecule styles
+
+@use "theme" as *;
+
+.camera-view-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+.camera-view-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: $spacing-xs;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+}
+
+.camera-view-row {
+    display: flex;
+    gap: 4px;
+}
+
+.camera-view-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: $spacing-sm;
+    min-width: 56px;
+    min-height: 44px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(.empty) {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: $color-border-default;
+    }
+
+    &.special {
+        background: rgba($color-accent-sky, 0.1);
+        border-color: rgba($color-accent-sky, 0.3);
+
+        .camera-view-icon {
+            color: $color-accent-sky;
+        }
+
+        &:hover {
+            background: rgba($color-accent-sky, 0.15);
+            border-color: rgba($color-accent-sky, 0.5);
+        }
+    }
+
+    &.hovered:not(.empty) {
+        transform: scale(1.02);
+    }
+
+    &.empty {
+        background: transparent;
+        border-color: transparent;
+        cursor: default;
+    }
+}
+
+.camera-view-icon {
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+}
+
+.camera-view-label {
+    font-size: 10px;
+    color: $color-text-tertiary;
+    white-space: nowrap;
+}
+
+.camera-view-hint {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    text-align: center;
+    text-transform: capitalize;
+}

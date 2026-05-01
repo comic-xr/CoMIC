@@ -1,0 +1,140 @@
+# Artillery Load Testing Configuration for Matrix Federation
+# Run with: artillery run matrix-load-test.yml
+
+config:
+  target: "http://localhost:3000"
+  phases:
+    # Warm-up phase
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm-up"
+    # Ramp-up phase
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 50
+      name: "Ramp-up"
+    # Sustained load phase
+    - duration: 300
+      arrivalRate: 50
+      name: "Sustained load"
+    # Peak load phase
+    - duration: 120
+      arrivalRate: 100
+      name: "Peak load"
+    # Cool-down phase
+    - duration: 60
+      arrivalRate: 10
+      name: "Cool-down"
+
+  # Environment variables
+  variables:
+    jwtToken: "{{ $processEnvironment.JWT_TOKEN }}"
+    projectId: "{{ $processEnvironment.TEST_PROJECT_ID }}"
+
+  # Plugins
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+
+  # Performance thresholds
+  ensure:
+    maxErrorRate: 1  # Max 1% error rate
+    p95: 500         # 95th percentile response time < 500ms
+    p99: 1000        # 99th percentile response time < 1000ms
+
+  # HTTP defaults
+  http:
+    timeout: 10
+  defaults:
+    headers:
+      Authorization: "Bearer {{ jwtToken }}"
+      Content-Type: "application/json"
+
+scenarios:
+  # Scenario 1: Matrix Status Checks (10% of traffic)
+  - name: "Check Matrix Status"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/matrix/status"
+          expect:
+            - statusCode: 200
+            - hasProperty: connected
+            - hasProperty: circuitBreaker
+
+  # Scenario 2: List Federated Users (15% of traffic)
+  - name: "List Federated Users"
+    weight: 15
+    flow:
+      - get:
+          url: "/api/matrix/users/room/{{ projectId }}"
+          expect:
+            - statusCode: [200, 404]  # 404 if room has no federated users
+
+  # Scenario 3: Search Room Directory (20% of traffic)
+  - name: "Search Room Directory"
+    weight: 20
+    flow:
+      - get:
+          url: "/api/matrix/directory/search"
+          qs:
+            query: "{{ $randomString() }}"
+            limit: 10
+          expect:
+            - statusCode: [200, 429]  # 429 if rate limited
+            - hasProperty: rooms
+
+  # Scenario 4: Get Room Info (15% of traffic)
+  - name: "Get Room Info"
+    weight: 15
+    flow:
+      - get:
+          url: "/api/matrix/rooms/{{ projectId }}/info"
+          expect:
+            - statusCode: [200, 404, 503]
+
+  # Scenario 5: Send Messages (30% of traffic)
+  - name: "Send Chat Messages"
+    weight: 30
+    flow:
+      # Create a test room first
+      - post:
+          url: "/api/projects/{{ projectId }}/rooms"
+          json:
+            name: "Load Test Room {{ $randomNumber(1, 10000) }}"
+            description: "Automated load test"
+          capture:
+            - json: "$.id"
+              as: "roomId"
+
+      # Send multiple messages to the room
+      - loop:
+          - post:
+              url: "/api/rooms/{{ roomId }}/messages"
+              json:
+                message: "Load test message {{ $randomNumber(1, 1000) }}"
+                type: "text"
+          count: 10
+          think: 100  # 100ms between messages
+
+  # Scenario 6: Room Join Operations (10% of traffic)
+  - name: "Join External Rooms"
+    weight: 10
+    flow:
+      - post:
+          url: "/api/matrix/rooms/join"
+          json:
+            roomIdOrAlias: "#test:matrix.org"
+            projectId: "{{ projectId }}"
+          expect:
+            - statusCode: [201, 403, 404, 429, 503]
+            # 201: Success
+            # 403: Not allowed
+            # 404: Room not found
+            # 429: Rate limited
+            # 503: Federation unavailable
+
+# Custom metrics
+after:
+  flow:
+    - log: "Load test completed"

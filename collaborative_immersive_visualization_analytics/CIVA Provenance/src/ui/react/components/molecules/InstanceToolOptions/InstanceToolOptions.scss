@@ -1,0 +1,330 @@
+// Shared option styles for instance tool menus (toolbar + panel)
+
+@use "theme" as *;
+
+// =============================================================================
+// TOOL OPTION ITEM
+// =============================================================================
+
+.tool-option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border-radius: $radius-sm;
+  color: $color-text-primary;
+
+  svg {
+    flex-shrink: 0;
+    color: $color-text-muted;
+  }
+
+  &:hover:not(&--disabled) {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &--active {
+    color: $color-accent-amber;
+    background: rgba($color-accent-amber, 0.1);
+
+    svg {
+      color: $color-accent-amber;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    display: block;
+    font-size: 11px;
+    color: $color-text-primary;
+  }
+
+  &__desc {
+    display: block;
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__active-dot {
+    width: 6px;
+    height: 6px;
+    background: $color-accent-amber;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__separator {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+
+  &__header {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  &--color-picker {
+    cursor: default;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &__color-input {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 2px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    background: transparent;
+    flex-shrink: 0;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+      border-radius: calc($radius-sm - 2px);
+    }
+
+    &::-moz-color-swatch {
+      border: none;
+      border-radius: calc($radius-sm - 2px);
+    }
+
+    &:hover {
+      border-color: $color-border-default;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-amber;
+    }
+  }
+}
+
+// =============================================================================
+// CAMERA GRID
+// =============================================================================
+
+.camera-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: $spacing-sm;
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: 8px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--empty):not(:disabled) {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--empty {
+      background: transparent;
+      border-color: transparent;
+      cursor: default;
+    }
+
+    &--special {
+      background: rgba($color-accent-amber, 0.1);
+      border-color: rgba($color-accent-amber, 0.3);
+      color: $color-accent-amber;
+
+      &:hover:not(:disabled) {
+        background: rgba($color-accent-amber, 0.2);
+        border-color: rgba($color-accent-amber, 0.5);
+      }
+    }
+
+    span {
+      font-size: 8px;
+    }
+  }
+}
+
+// =============================================================================
+// SLIDER CONTROL
+// =============================================================================
+
+.slider-control {
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: $radius-sm;
+  margin: $spacing-xs 0;
+
+  &--disabled {
+    opacity: 0.5;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+
+  &__label {
+    flex: 1;
+  }
+
+  &__value {
+    color: $color-accent-teal;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__slider {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: $spacing-sm;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: $color-accent-teal;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  &__presets {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  &__preset {
+    padding: 3px 8px;
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active):not(:disabled) {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &--active {
+      background: rgba($color-accent-teal, 0.2);
+      border-color: rgba($color-accent-teal, 0.4);
+      color: $color-accent-teal;
+    }
+  }
+
+  &__disabled-reason {
+    font-size: 9px;
+    color: $color-text-muted;
+    font-style: italic;
+    margin-top: $spacing-sm;
+  }
+}
+
+// =============================================================================
+// COLORMAP GRID
+// =============================================================================
+
+.colormap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: $spacing-xs;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active):not(:disabled) {
+      border-color: $color-border-default;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--active {
+      border-color: $color-accent-purple;
+      background: rgba($color-accent-purple, 0.1);
+    }
+  }
+
+  &__swatch {
+    height: 16px;
+    border-radius: $radius-xs;
+  }
+
+  &__name {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-align: center;
+  }
+}

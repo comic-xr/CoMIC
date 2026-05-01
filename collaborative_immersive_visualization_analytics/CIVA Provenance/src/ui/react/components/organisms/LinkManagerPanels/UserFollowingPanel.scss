@@ -1,0 +1,474 @@
+/**
+ * UserFollowingPanel Styles
+ * Frosted glassmorphism aesthetic with VR-friendly blue hues
+ */
+
+@use "theme" as *;
+
+.user-following-panel {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    max-height: 600px;
+    background: $color-glass-panel;
+    backdrop-filter: $backdrop-glass-medium;
+    -webkit-backdrop-filter: $backdrop-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-glass-lg;
+    overflow: hidden;
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.user-following-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: $color-glass-light;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.user-following-panel__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-text-primary;
+
+    svg {
+        color: $color-accent-purple;
+    }
+}
+
+.user-following-panel__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-glass-medium;
+        border-color: $color-border-subtle;
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// NOT FOLLOWING STATE
+// =============================================================================
+
+.user-following-panel__not-following {
+    padding: 16px;
+}
+
+.not-following-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 16px;
+    background: $color-glass-subtle;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-lg;
+    text-align: center;
+
+    svg {
+        color: $color-text-muted;
+        opacity: 0.5;
+    }
+
+    span {
+        font-size: 11px;
+        color: $color-text-muted;
+    }
+}
+
+// =============================================================================
+// CURRENTLY FOLLOWING
+// =============================================================================
+
+.currently-following {
+    padding: 16px;
+}
+
+.currently-following__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-accent-purple;
+
+    svg {
+        color: $color-accent-purple;
+    }
+}
+
+.currently-following__card {
+    padding: 16px;
+    background: linear-gradient(135deg, rgba($color-accent-purple, 0.08) 0%, transparent 100%);
+    border: 1px solid rgba($color-accent-purple, 0.3);
+    border-radius: $radius-lg;
+}
+
+.currently-following__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.currently-following__avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.currently-following__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.currently-following__name {
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-text-primary;
+}
+
+.currently-following__view {
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-top: 2px;
+}
+
+.currently-following__stop-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    background: $color-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba($color-error, 0.1);
+        border-color: $color-error;
+        color: $color-error;
+    }
+}
+
+// =============================================================================
+// FOLLOW OPTIONS
+// =============================================================================
+
+.follow-options {
+    padding: 10px;
+    background: $color-glass-medium;
+    border-radius: $radius-md;
+}
+
+.follow-options__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+        accent-color: $color-accent-purple;
+        cursor: pointer;
+    }
+
+    svg {
+        color: $color-text-muted;
+        flex-shrink: 0;
+    }
+
+    span {
+        font-size: 11px;
+        color: $color-text-secondary;
+    }
+
+    &:hover span {
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// SEPARATOR
+// =============================================================================
+
+.user-following-panel__separator {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: 0;
+}
+
+// =============================================================================
+// WORKSPACE MEMBERS
+// =============================================================================
+
+.user-following-panel__members {
+    padding: 12px 16px;
+}
+
+.user-following-panel__members-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.user-following-panel__members-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+}
+
+.user-following-panel__online-count {
+    font-size: 10px;
+    color: $color-success;
+}
+
+.user-following-panel__members-list {
+    background: $color-glass-subtle;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-lg;
+    max-height: 200px;
+    overflow-y: auto;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-border-default;
+        border-radius: $radius-full;
+
+        &:hover {
+            background: $color-border-medium;
+        }
+    }
+}
+
+.user-following-panel__empty {
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 11px;
+    color: $color-text-muted;
+}
+
+// =============================================================================
+// MEMBER ROW
+// =============================================================================
+
+.member-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid $color-border-subtle;
+    transition: background $transition-fast;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: $color-glass-medium;
+    }
+}
+
+.member-row__avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    background: var(--status-color, #{$color-success});
+    border: 2px solid $color-bg-secondary;
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--status-color, #{$color-success});
+}
+
+.member-row__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.member-row__name {
+    font-size: 11px;
+    font-weight: 500;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.member-row__view {
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-top: 2px;
+}
+
+.member-row__follow-btn {
+    padding: 6px 12px;
+    font-size: 10px;
+    font-weight: 500;
+    background: $color-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    &:hover:not(:disabled) {
+        background: $color-accent-purple;
+        border-color: $color-accent-purple;
+        color: white;
+        box-shadow: $glow-purple;
+    }
+
+    &--following {
+        background: rgba($color-accent-purple, 0.12);
+        border-color: rgba($color-accent-purple, 0.3);
+        color: $color-accent-purple;
+        cursor: default;
+        opacity: 0.7;
+
+        &:hover {
+            background: rgba($color-accent-purple, 0.12);
+            border-color: rgba($color-accent-purple, 0.3);
+            color: $color-accent-purple;
+            box-shadow: none;
+        }
+    }
+}
+
+// =============================================================================
+// FOLLOWERS SECTION
+// =============================================================================
+
+.followers-section {
+    padding: 0 16px 12px;
+}
+
+.followers-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.followers-section__label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+}
+
+.followers-section__count {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+.followers-section__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.followers-section__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: $color-glass-medium;
+    border-radius: $radius-md;
+
+    span {
+        font-size: 10px;
+        color: $color-text-secondary;
+    }
+}
+
+// =============================================================================
+// START PRESENTING
+// =============================================================================
+
+.user-following-panel__presenting {
+    padding: 12px 16px;
+    border-top: 1px solid $color-border-subtle;
+    background: $color-glass-subtle;
+}
+
+.user-following-panel__present-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    background: linear-gradient(135deg, $color-accent-purple 0%, $color-accent-pink 100%);
+    border: none;
+    border-radius: $radius-lg;
+    color: white;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        box-shadow: 0 4px 20px rgba($color-accent-purple, 0.4);
+        transform: translateY(-1px);
+    }
+}
+
+.user-following-panel__present-desc {
+    margin-top: 6px;
+    font-size: 10px;
+    color: $color-text-muted;
+    text-align: center;
+}

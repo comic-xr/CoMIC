@@ -1,0 +1,154 @@
+// src/ui/react/components/atoms/Toggle/Toggle.scss
+// Toggle atom styles
+
+@use "theme" as *;
+
+.toggle-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    &--left {
+        flex-direction: row;
+    }
+
+    &--right {
+        flex-direction: row;
+    }
+}
+
+.toggle {
+    --toggle-active-color: #{$color-accent-blue};
+    --toggle-inactive-color: rgba(255, 255, 255, 0.15);
+    --toggle-thumb-color: #ffffff;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+    &:focus-visible .toggle__track {
+        box-shadow: 0 0 0 2px var(--toggle-active-color);
+    }
+
+    &__track {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: var(--toggle-inactive-color);
+        border-radius: 999px;
+        transition: background-color 0.2s ease;
+    }
+
+    &__thumb {
+        position: absolute;
+        background: var(--toggle-thumb-color);
+        border-radius: 50%;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    // Size: sm
+    &--sm {
+        .toggle__track {
+            width: 28px;
+            height: 16px;
+        }
+
+        .toggle__thumb {
+            width: 12px;
+            height: 12px;
+            left: 2px;
+        }
+
+        &.toggle--checked .toggle__thumb {
+            transform: translateX(12px);
+        }
+    }
+
+    // Size: md
+    &--md {
+        .toggle__track {
+            width: 36px;
+            height: 20px;
+        }
+
+        .toggle__thumb {
+            width: 16px;
+            height: 16px;
+            left: 2px;
+        }
+
+        &.toggle--checked .toggle__thumb {
+            transform: translateX(16px);
+        }
+    }
+
+    // VR mode - larger for touch
+    &--vr {
+        &.toggle--sm {
+            .toggle__track {
+                width: 40px;
+                height: 24px;
+            }
+
+            .toggle__thumb {
+                width: 18px;
+                height: 18px;
+                left: 3px;
+            }
+
+            &.toggle--checked .toggle__thumb {
+                transform: translateX(16px);
+            }
+        }
+
+        &.toggle--md {
+            .toggle__track {
+                width: 52px;
+                height: 28px;
+            }
+
+            .toggle__thumb {
+                width: 22px;
+                height: 22px;
+                left: 3px;
+            }
+
+            &.toggle--checked .toggle__thumb {
+                transform: translateX(24px);
+            }
+        }
+    }
+
+    // Checked state
+    &--checked {
+        .toggle__track {
+            background: var(--toggle-active-color);
+        }
+    }
+
+    // Disabled state
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &__label {
+        color: $color-text-primary;
+        font-size: 13px;
+        cursor: pointer;
+        user-select: none;
+
+        .toggle--disabled + &,
+        .toggle--disabled ~ & {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+// src/ui/react/components/molecules/NavDotBar/NavDotBar.scss
+// NavDotBar molecule styles
+
+@use "theme" as *;
+
+.nav-dot-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+
+    // VR mode - larger gap
+    &--vr {
+        gap: $spacing-md;
+    }
+}

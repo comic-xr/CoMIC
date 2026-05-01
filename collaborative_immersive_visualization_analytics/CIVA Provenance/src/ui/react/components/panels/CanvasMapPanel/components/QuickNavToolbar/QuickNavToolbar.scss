@@ -1,0 +1,140 @@
+/**
+ * QuickNavToolbar Styles - V2 MapSidebar Design
+ *
+ * Glassmorphism sidebar matching V2Spec design:
+ * - Frosted glass background
+ * - Glowing active states
+ * - Show toggles section
+ */
+
+@use "theme" as *;
+
+.quick-nav-toolbar {
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  width: 56px;
+  flex-shrink: 0;
+
+  // Gradient fade based on position
+  &--left {
+    background: linear-gradient(90deg, rgba(6, 10, 18, 0.0), rgba(6, 10, 18, 0.55));
+  }
+
+  &--right {
+    background: linear-gradient(270deg, rgba(6, 10, 18, 0.0), rgba(6, 10, 18, 0.55));
+  }
+
+  // Inner container with glassmorphism
+  &__inner {
+    padding: 5px;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border-glow;
+    background: $color-glass-frosted;
+    backdrop-filter: $blur-strong;
+    -webkit-backdrop-filter: $blur-strong;
+    box-shadow: $shadow-glass, inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    z-index: 1;
+    min-height: 0;
+  }
+
+  // Section with label
+  &__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  // Section label (e.g., "Show")
+  &__label {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+
+  // Button group
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  // Divider line
+  &__divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $color-border-default, transparent);
+  }
+
+  // Spacer to push items to bottom
+  &__spacer {
+    flex: 1;
+    min-height: 8px;
+  }
+
+  // Glassmorphic button
+  &__btn {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-glass-light;
+    backdrop-filter: $blur-subtle;
+    -webkit-backdrop-filter: $blur-subtle;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    &:hover:not(:disabled) {
+      background: $color-glass-medium;
+      color: $color-text-primary;
+      border-color: $color-border-default;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    // Active state with glow
+    &--active {
+      border-color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.15);
+      color: $color-accent-blue;
+      box-shadow: 0 0 12px rgba($color-accent-blue, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    // Cyan accent variant
+    &--cyan.quick-nav-toolbar__btn--active {
+      border-color: $color-accent-cyan;
+      background: rgba($color-accent-cyan, 0.15);
+      color: $color-accent-cyan;
+      box-shadow: 0 0 12px rgba($color-accent-cyan, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    // Blue accent variant (default active)
+    &--blue.quick-nav-toolbar__btn--active {
+      border-color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.15);
+      color: $color-accent-blue;
+      box-shadow: 0 0 12px rgba($color-accent-blue, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    // VR mode - larger touch targets
+    &[data-vr="true"] {
+      width: 44px;
+      height: 44px;
+    }
+  }
+}

@@ -1,0 +1,308 @@
+/**
+ * @file TiledCanvasView.scss
+ * @description Styles for TiledCanvasView and related components
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// TILED CANVAS VIEW
+// =============================================================================
+
+.tiled-canvas-view {
+    --tile-canvas-min-width: 280px;
+    --tile-canvas-min-height: 200px;
+    --tile-canvas-divider-size: 6px;
+    display: flex;
+    flex: 1;
+    background: $color-bg-primary;
+    min-height: 0;
+
+    &--empty {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--single {
+        padding: $spacing-xs;
+        min-width: var(--tile-canvas-min-width);
+        min-height: var(--tile-canvas-min-height);
+    }
+
+    &--maximized {
+        padding: 0;
+        height: 100%;
+    }
+
+    &--horizontal {
+        flex-direction: row;
+        min-width: calc((var(--tile-canvas-min-width) * 2) + var(--tile-canvas-divider-size));
+        min-height: var(--tile-canvas-min-height);
+    }
+
+    &--grid {
+        flex-direction: column;
+        min-width: calc((var(--tile-canvas-min-width) * 2) + var(--tile-canvas-divider-size));
+        min-height: calc((var(--tile-canvas-min-height) * 2) + var(--tile-canvas-divider-size));
+    }
+}
+
+.tiled-canvas-view__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    color: $color-text-muted;
+}
+
+.tiled-canvas-view__empty-icon {
+    opacity: 0.3;
+}
+
+.tiled-canvas-view__empty-text {
+    font-size: $font-size-sm;
+}
+
+.tiled-canvas-view__row {
+    display: flex;
+    min-height: 0;
+
+    &--flex {
+        flex: 1;
+    }
+}
+
+.tiled-canvas-view__panel {
+    padding: $spacing-xs;
+    min-width: 0;
+    display: flex;
+
+    &--flex {
+        flex: 1;
+    }
+
+    &--maximized {
+        padding: 0;
+        flex: 1;
+        height: 100%;
+    }
+}
+
+.tiled-canvas-view__spacer {
+    width: var(--tile-canvas-divider-size);
+}
+
+// =============================================================================
+// CANVAS PANEL
+// =============================================================================
+
+.canvas-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: $color-bg-secondary;
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: $radius-md;
+    overflow: hidden;
+    min-width: var(--tile-canvas-min-width);
+    min-height: var(--tile-canvas-min-height);
+    transition: border-color 0.15s ease;
+
+    &--active {
+        border-color: color-mix(in srgb, $color-accent-cyan 50%, transparent);
+    }
+
+    &--maximized {
+        height: 100%;
+        min-height: 100%;
+        border-color: transparent;
+    }
+}
+
+.canvas-panel__content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg-primary;
+    min-height: 0;
+}
+
+.canvas-panel__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    text-align: center;
+    color: $color-text-muted;
+}
+
+.canvas-panel__placeholder-icon {
+    opacity: 0.3;
+}
+
+.canvas-panel__placeholder-name {
+    font-size: $font-size-xs;
+}
+
+// =============================================================================
+// MINI CANVAS HEADER
+// =============================================================================
+
+.mini-canvas-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: 6px 10px;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+    cursor: pointer;
+    min-height: 36px;
+    transition: background 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+    }
+
+    &--active {
+        background: $color-bg-tertiary;
+    }
+}
+
+.mini-canvas-header__type-icon {
+    flex-shrink: 0;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+}
+
+.mini-canvas-header__unsaved-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-accent-amber;
+    flex-shrink: 0;
+}
+
+.mini-canvas-header__name {
+    flex: 1;
+    font-size: $font-size-xs;
+    font-weight: 400;
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: text;
+
+    .mini-canvas-header--active & {
+        font-weight: 500;
+        color: $color-text-primary;
+    }
+}
+
+.mini-canvas-header__name-input {
+    flex: 1;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    color: $color-text-primary;
+    background: $color-bg-secondary;
+    border: 1px solid $color-accent-primary;
+    border-radius: $radius-sm;
+    padding: 2px 4px;
+    outline: none;
+    min-width: 60px;
+
+    &:focus {
+        box-shadow: 0 0 0 2px rgba($color-accent-primary, 0.3);
+    }
+}
+
+.mini-canvas-header__breakout {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-accent-green;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background 0.15s ease;
+
+    &:hover {
+        background: color-mix(in srgb, $color-accent-green 15%, transparent);
+    }
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-green 20%, transparent);
+    }
+}
+
+.mini-canvas-header__actions {
+    display: flex;
+    gap: 2px;
+}
+
+.mini-canvas-header__close {
+    &:hover {
+        color: $color-accent-red;
+    }
+}
+
+// =============================================================================
+// RESIZABLE DIVIDER
+// =============================================================================
+
+.resizable-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+
+    &--horizontal {
+        width: 6px;
+        cursor: col-resize;
+    }
+
+    &--vertical {
+        height: 6px;
+        cursor: row-resize;
+    }
+
+    &--dragging {
+        background: color-mix(in srgb, $color-accent-cyan 30%, transparent);
+    }
+}
+
+.resizable-divider__handle {
+    background: $color-border-default;
+    border-radius: 1px;
+    transition: background 0.15s ease;
+
+    .resizable-divider--horizontal & {
+        width: 2px;
+        height: 40px;
+    }
+
+    .resizable-divider--vertical & {
+        width: 40px;
+        height: 2px;
+    }
+
+    .resizable-divider:hover &,
+    .resizable-divider--dragging & {
+        background: $color-accent-cyan;
+    }
+}

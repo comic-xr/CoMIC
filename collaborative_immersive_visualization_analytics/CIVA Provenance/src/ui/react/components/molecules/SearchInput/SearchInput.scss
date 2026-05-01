@@ -1,0 +1,210 @@
+// src/ui/react/components/molecules/SearchInput/SearchInput.scss
+// SearchInput molecule styles
+
+.search-input {
+    --search-input-bg: rgba(255, 255, 255, 0.05);
+    --search-input-border: rgba(255, 255, 255, 0.1);
+    --search-input-focus-border: var(--color-accent, #4ecdc4);
+    --search-input-focus-shadow: 0 0 0 2px rgba(78, 205, 196, 0.15);
+    --search-input-color: var(--color-text-primary, #e0e0e0);
+    --search-input-placeholder: var(--color-text-muted, #888);
+    --search-input-icon: var(--color-text-secondary, #a0a0a0);
+    --search-input-icon-size: 16px;
+    --search-input-padding: 10px;
+    --search-input-icon-gap: 6px; // Gap between icon and input text
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    // Note: Don't use gap - icon container handles its own spacing to prevent overlay
+    background: var(--search-input-bg);
+    border: 1px solid var(--search-input-border);
+    border-radius: 6px;
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease,
+        box-shadow 0.15s ease;
+
+    &:hover:not(.search-input--disabled) {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    // Size variants - set CSS variables, base styles use them
+    &--sm {
+        height: 28px;
+        border-radius: 4px;
+        --search-input-icon-size: 14px;
+        --search-input-padding: 8px;
+
+        .search-input__field {
+            font-size: 12px;
+        }
+    }
+
+    &--md {
+        height: 36px;
+        border-radius: 6px;
+        --search-input-icon-size: 16px;
+        --search-input-padding: 10px;
+
+        .search-input__field {
+            font-size: 13px;
+        }
+    }
+
+    &--lg {
+        height: 44px;
+        border-radius: 8px;
+        --search-input-icon-size: 18px;
+        --search-input-padding: 12px;
+
+        .search-input__field {
+            font-size: 14px;
+        }
+    }
+
+    // Focused state
+    &--focused {
+        border-color: var(--search-input-focus-border);
+        box-shadow: var(--search-input-focus-shadow);
+    }
+
+    // Disabled state
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        .search-input__field {
+            cursor: not-allowed;
+        }
+    }
+
+    // Loading state
+    &--loading {
+        .search-input__icon {
+            opacity: 1;
+        }
+    }
+
+    // VR mode
+    &--vr {
+        &.search-input--sm {
+            height: 40px;
+            border-radius: 6px;
+            --search-input-icon-size: 18px;
+
+            .search-input__field {
+                font-size: 14px;
+            }
+        }
+
+        &.search-input--md {
+            height: 48px;
+            border-radius: 8px;
+            --search-input-icon-size: 20px;
+
+            .search-input__field {
+                font-size: 15px;
+            }
+        }
+
+        &.search-input--lg {
+            height: 56px;
+            border-radius: 10px;
+            --search-input-icon-size: 24px;
+
+            .search-input__field {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+// Search icon - uses fixed width container to prevent overlay
+.search-input__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Fixed width prevents icon from overlaying input text
+    // Left padding = edge spacing, Right padding = gap to input text
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 0 var(--search-input-icon-gap) 0 var(--search-input-padding);
+    color: var(--search-input-icon);
+    opacity: 0.7;
+
+    .search-input--focused & {
+        color: var(--search-input-focus-border);
+        opacity: 1;
+    }
+}
+
+// Input field
+.search-input__field {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    // No left padding - icon container handles left spacing
+    // Right padding handled by size variants
+    padding: 0;
+    padding-right: var(--search-input-padding);
+    margin: 0;
+    border: none;
+    background: transparent;
+    color: var(--search-input-color);
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1;
+    outline: none;
+
+    &::placeholder {
+        color: var(--search-input-placeholder);
+    }
+
+    &::-webkit-search-cancel-button {
+        display: none;
+    }
+}
+
+// Clear button
+.search-input__clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    margin-right: var(--search-input-padding);
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--search-input-icon);
+    cursor: pointer;
+    opacity: 0.6;
+    transition:
+        background-color 0.15s ease,
+        opacity 0.15s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        opacity: 1;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--search-input-focus-border);
+        outline-offset: 1px;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.3;
+    }
+
+    .search-input--vr & {
+        width: 28px;
+        height: 28px;
+    }
+}

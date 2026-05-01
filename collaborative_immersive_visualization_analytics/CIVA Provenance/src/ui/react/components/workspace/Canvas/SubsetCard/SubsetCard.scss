@@ -1,0 +1,300 @@
+// src/ui/react/components/workspace/Canvas/SubsetCard/SubsetCard.scss
+// Subset card styling for canvas placement
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.subset-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--subset-color-rgb, 251, 191, 36), 0.06);
+  border-radius: $radius-lg;
+  border: 2px dashed rgba(var(--subset-color-rgb, 251, 191, 36), 0.3);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  // Use CSS custom property for color
+  --subset-color-rgb: 251, 191, 36; // Default amber
+
+  &:hover {
+    border-color: var(--subset-color, $color-accent-amber);
+  }
+
+  &--active {
+    border-color: var(--subset-color, $color-accent-amber);
+    box-shadow: 0 0 0 1px var(--subset-color, $color-accent-amber),
+                0 0 16px rgba(var(--subset-color-rgb, 251, 191, 36), 0.2);
+  }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.subset-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(var(--subset-color-rgb, 251, 191, 36), 0.12);
+  border-bottom: 1px solid rgba(var(--subset-color-rgb, 251, 191, 36), 0.2);
+  flex-shrink: 0;
+}
+
+.subset-card__header-left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  min-width: 0;
+  flex: 1;
+}
+
+.subset-card__header-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+}
+
+.subset-card__type-icon {
+  color: var(--subset-color, $color-accent-amber);
+  flex-shrink: 0;
+}
+
+.subset-card__name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: var(--subset-color, $color-accent-amber);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subset-card__count {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// PREVIEW GRID
+// =============================================================================
+
+.subset-card__preview-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 2), 1fr);
+  grid-template-rows: repeat(var(--grid-rows, 2), 1fr);
+  gap: 4px;
+  padding: $spacing-sm;
+  min-height: 0;
+}
+
+.subset-card__preview-cell {
+  background: $color-bg-canvas;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-muted;
+  border: 1px solid $color-border-subtle;
+  overflow: hidden;
+
+  &--empty {
+    background: rgba($color-bg-canvas, 0.5);
+  }
+}
+
+.subset-card__preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.subset-card__preview-empty-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-border-subtle;
+}
+
+// =============================================================================
+// HOVER OVERLAY
+// =============================================================================
+
+.subset-card__hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-lg;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.subset-card__open-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: #000;
+  background: var(--subset-color, $color-accent-amber);
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// =============================================================================
+// SNAPSHOT MODE
+// =============================================================================
+
+.subset-card__snapshot-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: $spacing-xs;
+  background: linear-gradient(transparent 60%, rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  .subset-card:hover & {
+    opacity: 1;
+  }
+}
+
+.subset-card__snapshot-label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px $spacing-xs;
+  font-size: 9px;
+  font-weight: $font-weight-medium;
+  color: var(--subset-color, $color-accent-amber);
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: $radius-sm;
+}
+
+// =============================================================================
+// RENDER MODE VARIATIONS
+// =============================================================================
+
+.subset-card--compact {
+  .subset-card__header {
+    padding: $spacing-xs;
+  }
+
+  .subset-card__name {
+    font-size: $font-size-xs;
+  }
+
+  .subset-card__preview-grid {
+    padding: $spacing-xs;
+    gap: 2px;
+  }
+}
+
+.subset-card--thumbnail {
+  .subset-card__header {
+    padding: 2px $spacing-xs;
+  }
+
+  .subset-card__name {
+    font-size: 10px;
+  }
+
+  .subset-card__count {
+    display: none;
+  }
+
+  .subset-card__preview-grid {
+    padding: 3px;
+    gap: 2px;
+  }
+}
+
+.subset-card--snapshot {
+  .subset-card__preview-grid {
+    padding: 2px;
+    gap: 1px;
+  }
+
+  .subset-card__preview-cell {
+    border: none;
+  }
+}
+
+// =============================================================================
+// ERROR STATE
+// =============================================================================
+
+.subset-card--error {
+  background: rgba($color-accent-red, 0.08);
+  border: 2px dashed rgba($color-accent-red, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subset-card__error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $color-text-muted;
+  text-align: center;
+  padding: $spacing-md;
+
+  svg {
+    color: rgba($color-accent-red, 0.6);
+  }
+
+  span {
+    font-size: $font-size-sm;
+  }
+}
+
+.subset-card__close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba($color-accent-red, 0.15);
+  border: 1px solid rgba($color-accent-red, 0.3);
+  border-radius: $radius-sm;
+  color: $color-accent-red;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-red, 0.25);
+  }
+}

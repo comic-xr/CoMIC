@@ -1,0 +1,135 @@
+// src/ui/react/components/panels/LayoutPanel/components/SpawnSizePicker.scss
+// Spawn size picker styling
+// Uses design tokens - no hard-coded values
+
+@use "theme" as *;
+
+.spawn-size-picker {
+  position: relative;
+
+  // Presets Row
+  &__presets {
+    display: flex;
+    gap: $spacing-xs;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__btn {
+    padding: 6px $spacing-md;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-muted;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: $color-accent-purple;
+      color: $color-accent-purple;
+    }
+
+    &--custom {
+      &.spawn-size-picker__btn--active {
+        background: rgba($color-accent-amber, 0.15);
+        border-color: $color-accent-amber;
+        color: $color-accent-amber;
+      }
+    }
+  }
+
+  // Custom Panel
+  &__custom-panel {
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid $color-border-medium;
+    border-radius: $radius-md;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__custom-header {
+    font-size: 10px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+  }
+
+  &__custom-inputs {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__custom-input {
+    width: 48px;
+    padding: $spacing-sm 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    font-size: $font-size-base;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-primary;
+    }
+
+    // Hide spinners
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  &__custom-separator {
+    font-size: 16px;
+    color: $color-text-muted;
+  }
+
+  &__custom-actions {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__custom-btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--apply {
+      background: rgba($color-accent-green, 0.2);
+      border-color: $color-accent-green;
+      color: $color-accent-green;
+
+      &:hover {
+        background: rgba($color-accent-green, 0.3);
+      }
+    }
+  }
+}

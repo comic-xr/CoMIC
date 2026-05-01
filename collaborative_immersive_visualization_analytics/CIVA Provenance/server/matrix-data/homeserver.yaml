@@ -1,0 +1,236 @@
+# Synapse Configuration for CIA Web Matrix Federation
+# This is the main configuration file for the Synapse Matrix homeserver
+
+# =============================================================================
+# SERVER CONFIGURATION
+# =============================================================================
+
+server_name: "matrix.cia-web.local"
+public_baseurl: "http://matrix.cia-web.local:8008"
+serve_server_wellknown: true
+
+# PID file
+pid_file: /data/homeserver.pid
+
+# Listeners - HTTP and Federation
+listeners:
+  # Client-Server API
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    bind_addresses: ['::','0.0.0.0']
+
+    resources:
+      - names: [client, federation]
+        compress: false
+
+# =============================================================================
+# DATABASE - PostgreSQL
+# =============================================================================
+
+database:
+  name: psycopg2
+  args:
+    host: matrix_postgres
+    port: 5432
+    database: synapse
+    user: synapse_user
+    password: cia_matrix_postgres_secure_password_2026
+    cp_min: 5
+    cp_max: 10
+
+# =============================================================================
+# LOGGING
+# =============================================================================
+
+log_config: "/data/log.config"
+
+# =============================================================================
+# MEDIA STORE
+# =============================================================================
+
+media_store_path: /data/media_store
+
+# Max upload size
+max_upload_size: 50M
+
+# Max image pixels for thumbnailing
+max_image_pixels: 32M
+
+# =============================================================================
+# REGISTRATION
+# =============================================================================
+
+# Disable public registration (users created via application service)
+enable_registration: false
+enable_registration_without_verification: false
+
+# Registration shared secret (for creating initial users via CLI)
+# Generate with: cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 64
+registration_shared_secret: "I91ufMcvy6bOhB8xm6GO9KK6jY/irN/THZ3gRITSYAk="
+
+# =============================================================================
+# FEDERATION
+# =============================================================================
+
+# Federation settings
+federation_domain_whitelist: []  # Empty list = allow all domains
+
+# Disable federation for initial testing (enable later)
+federation_enabled: true
+
+# Federation certificate verification
+federation_verify_certificates: true
+
+# Federation metrics
+federation_metrics_domains: []
+
+# =============================================================================
+# APPLICATION SERVICES (Bridge Integration)
+# =============================================================================
+
+app_service_config_files:
+  - /data/cia-bridge-registration.yaml
+
+# =============================================================================
+# SECURITY & PRIVACY
+# =============================================================================
+
+# Require authentication for profile information
+require_auth_for_profile_requests: true
+
+# Limit profile lookup to local users
+limit_profile_requests_to_users_who_share_rooms: false
+
+# Prevent non-server-admin members from creating groups
+enable_group_creation: false
+
+# Server notices (system messages)
+# server_notices:
+#   system_mxid_localpart: server
+#   system_mxid_display_name: "CIA Web System"
+#   room_name: "CIA Web Notices"
+
+# =============================================================================
+# RATE LIMITING
+# =============================================================================
+
+rc_message:
+  per_second: 10
+  burst_count: 100
+
+rc_registration:
+  per_second: 0.17  # ~10 per minute
+  burst_count: 3
+
+rc_login:
+  address:
+    per_second: 0.17
+    burst_count: 3
+  account:
+    per_second: 0.17
+    burst_count: 3
+  failed_attempts:
+    per_second: 0.17
+    burst_count: 3
+
+rc_federation:
+  window_size: 1000
+  sleep_limit: 10
+  sleep_delay: 500
+  reject_limit: 50
+  concurrent: 3
+
+# =============================================================================
+# CACHING
+# =============================================================================
+
+caches:
+  global_factor: 1.0
+  per_cache_factors: {}
+
+# Event cache size
+event_cache_size: 10K
+
+# =============================================================================
+# ROOM SETTINGS
+# =============================================================================
+
+# Default room version
+default_room_version: "10"
+
+# Enable room list search
+enable_room_list_search: true
+
+# Allow guests to join rooms
+allow_guest_access: false
+
+# =============================================================================
+# PRESENCE
+# =============================================================================
+
+# Enable presence tracking
+presence:
+  enabled: true
+
+# =============================================================================
+# PUSH NOTIFICATIONS
+# =============================================================================
+
+# Push gateway (disabled for now)
+# push:
+#   enabled: false
+
+# =============================================================================
+# METRICS & REPORTING
+# =============================================================================
+
+# Enable metrics endpoint
+enable_metrics: true
+metrics_port: 9000
+
+# Report stats to matrix.org (disabled)
+report_stats: false
+
+# =============================================================================
+# TURN/STUN (For VoIP - optional for Phase 1)
+# =============================================================================
+
+# turn_uris: []
+# turn_shared_secret: ""
+# turn_user_lifetime: 86400000
+# turn_allow_guests: false
+
+# =============================================================================
+# EMAIL (Optional - for password reset)
+# =============================================================================
+
+# email:
+#   smtp_host: "localhost"
+#   smtp_port: 25
+#   notif_from: "CIA Web <noreply@cia-web.local>"
+#   enable_notifs: false
+
+# =============================================================================
+# ADVANCED SETTINGS
+# =============================================================================
+
+# Suppress key server warnings
+suppress_key_server_warning: true
+
+# Enable search
+enable_search: true
+
+# Trusted key servers
+trusted_key_servers:
+  - server_name: "matrix.org"
+
+# Signing key path
+signing_key_path: "/data/matrix.cia-web.local.signing.key"
+
+# Old signing keys (for key rotation)
+old_signing_keys: {}
+
+# Key refresh interval
+key_refresh_interval: 1d

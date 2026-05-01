@@ -1,0 +1,78 @@
+// src/ui/react/components/atoms/NavDot/NavDot.scss
+// NavDot atom styles
+
+@use "theme" as *;
+
+.nav-dot {
+    &__container {
+        position: relative;
+        display: inline-flex;
+    }
+
+    // The dot itself
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    outline: none;
+    background: transparent; // Will be set via inline style
+
+    // Default opacity
+    opacity: 0.4;
+
+    &:hover {
+        opacity: 0.9;
+    }
+
+    // Active state
+    &--active {
+        opacity: 1;
+        box-shadow:
+            0 0 0 2px $color-bg-primary,
+            0 0 0 4px color-mix(in srgb, var(--dot-color) 40%, transparent);
+    }
+
+    // Icon inside dot
+    &__icon {
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    // VR mode - slightly larger touch target
+    &--vr {
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    // Tooltip (portal)
+    &__tooltip {
+        position: fixed;
+        transform: translateX(-50%) translateY(-100%);
+        padding: $spacing-xs $spacing-sm;
+        background: $color-bg-elevated;
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-sm;
+        font-size: $font-size-xs;
+        color: $color-text-secondary;
+        white-space: nowrap;
+        z-index: 10000;
+        box-shadow: $shadow-md;
+        pointer-events: none;
+    }
+
+    &__tooltip-arrow {
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 8px;
+        height: 8px;
+        background: $color-bg-elevated;
+        border-right: 1px solid $color-border-subtle;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+}

@@ -1,0 +1,343 @@
+/**
+ * @file VRFloatingPanel.scss
+ * @description Styles for VR floating panel components.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// VR FLOATING PANEL
+// =============================================================================
+
+.vr-floating-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px);
+    border: 2px solid $color-border-default;
+    border-radius: $radius-xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all $transition-base;
+    z-index: 100;
+
+    &--grabbed {
+        border-color: $color-accent-teal;
+        box-shadow: 0 0 40px rgba(45, 212, 191, 0.4);
+        transition: none;
+    }
+
+    &--minimized {
+        .vr-floating-panel__content {
+            display: none;
+        }
+    }
+}
+
+.vr-floating-panel__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    padding: 0 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid $color-border-default;
+    cursor: grab;
+    user-select: none;
+    transition: background $transition-fast;
+
+    &--grabbed {
+        background: rgba(45, 212, 191, 0.2);
+        cursor: grabbing;
+    }
+}
+
+.vr-floating-panel__grab-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+}
+
+.vr-floating-panel__grab-dots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+
+    span {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #fff;
+    }
+}
+
+.vr-floating-panel__icon {
+    color: $color-text-muted;
+}
+
+.vr-floating-panel__title {
+    flex: 1;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vr-floating-panel__controls {
+    display: flex;
+    gap: 4px;
+}
+
+.vr-floating-panel__control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: $color-text-primary;
+    }
+
+    &--close {
+        background: rgba(248, 113, 113, 0.2);
+
+        &:hover {
+            background: rgba(248, 113, 113, 0.3);
+            color: #f87171;
+        }
+    }
+}
+
+.vr-floating-panel__content {
+    padding: $spacing-md;
+    overflow-y: auto;
+}
+
+.vr-floating-panel__grab-hint {
+    position: absolute;
+    top: 52px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: $radius-lg;
+    font-size: 10px;
+    color: $color-text-muted;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+// =============================================================================
+// VR PANEL MENUS
+// =============================================================================
+
+.vr-panel-menu__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+}
+
+.vr-panel-menu {
+    position: absolute;
+    top: 48px;
+    right: 80px;
+    width: 200px;
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.vr-panel-menu__header {
+    padding: 8px 12px;
+    border-bottom: 1px solid $color-border-default;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-muted;
+}
+
+.vr-panel-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--selected {
+        background: rgba(45, 212, 191, 0.1);
+        border-left-color: $color-accent-teal;
+
+        .vr-panel-menu__item-label {
+            color: $color-accent-teal;
+        }
+    }
+}
+
+.vr-panel-menu__item-info {
+    flex: 1;
+}
+
+.vr-panel-menu__item-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+}
+
+.vr-panel-menu__item-desc {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+}
+
+.vr-panel-menu__footer {
+    padding: 8px 12px;
+    border-top: 1px solid $color-border-default;
+    font-size: 9px;
+    color: $color-text-muted;
+    text-align: center;
+}
+
+// =============================================================================
+// VR PANEL SNAP MENU
+// =============================================================================
+
+.vr-panel-snap-menu {
+    right: 40px;
+    width: 220px;
+}
+
+.vr-panel-snap-menu__group {
+    border-bottom: 1px solid $color-border-default;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.vr-panel-snap-menu__group-label {
+    padding: 6px 12px;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.vr-panel-snap-menu__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 4px;
+    padding: 8px;
+}
+
+.vr-panel-snap-menu__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    min-height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    &--selected {
+        background: rgba(45, 212, 191, 0.2);
+        border-color: $color-accent-teal;
+
+        span {
+            color: $color-accent-teal;
+        }
+    }
+
+    span {
+        font-size: 8px;
+        color: $color-text-muted;
+        text-align: center;
+    }
+}
+
+// =============================================================================
+// VR PANEL ARRANGEMENT CONTROLS
+// =============================================================================
+
+.vr-panel-arrangement {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px);
+    border: 1px solid $color-border-default;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 50;
+}
+
+.vr-panel-arrangement__count {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin-right: 8px;
+}
+
+.vr-panel-arrangement__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    border-radius: 16px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    &--active {
+        background: rgba(45, 212, 191, 0.2);
+        border-color: $color-accent-teal;
+        color: $color-accent-teal;
+    }
+}

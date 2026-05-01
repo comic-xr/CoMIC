@@ -1,0 +1,27 @@
+{
+  "name": "cia-web-server",
+  "version": "1.0.0",
+  "description": "Backend API for CIA Web collaborative analytics platform",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.65.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "ioredis": "^5.8.2",
+    "jsonwebtoken": "^9.0.0",
+    "jwks-rsa": "^3.0.0",
+    "matrix-js-sdk": "^40.0.0-rc.0",
+    "minio": "^7.1.3",
+    "multer": "^2.0.2",
+    "pg": "^8.11.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,0 +1,47 @@
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// SEARCH BAR - Common search input component
+// =============================================================================
+
+.search-bar {
+    flex-shrink: 0;
+    --search-bar-icon-size: 12px;
+    --search-bar-icon-left: 10px;
+    --search-bar-icon-gap: 8px;
+
+    // Default variant - full width with padding and border
+    &--default {
+        padding: $spacing-sm;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    // Compact variant - less padding, for tight spaces
+    &--compact {
+        padding: $spacing-xs $spacing-sm;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    // Inline variant - same styling, for embedding in other containers
+    &--inline {
+        padding: $spacing-sm;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    &__input {
+        width: 100%;
+        --search-input-bg: rgba(0, 0, 0, 0.3);
+        --search-input-border: #{$color-border-default};
+        --search-input-focus-border: #{$color-accent-primary};
+        --search-input-focus-shadow: 0 0 0 2px #{rgba($color-accent-primary, 0.15)};
+        --search-input-color: #{$color-text-primary};
+        --search-input-placeholder: #{$color-text-muted};
+        --search-input-icon: #{$color-text-muted};
+        --search-input-gap: var(--search-bar-icon-gap);
+
+        .search-input__field {
+            font-size: $font-size-xs;
+        }
+    }
+}

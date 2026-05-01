@@ -1,0 +1,40 @@
+// src/ui/react/components/molecules/LabeledButton/LabeledButton.scss
+// LabeledButton molecule styles
+
+@use "theme" as *;
+
+.labeled-button {
+    --labeled-button-accent: var(--color-accent-blue, #{$color-accent-blue});
+
+    // Active state styling
+    &--active {
+        color: var(--labeled-button-accent);
+        background: rgba($color-accent-blue, 0.1);
+
+        &:hover:not(:disabled) {
+            background: rgba($color-accent-blue, 0.15);
+        }
+
+        .btn__icon {
+            color: var(--labeled-button-accent);
+        }
+    }
+
+    // Size adjustments for labeled context
+    &--sm {
+        gap: 4px;
+    }
+
+    &--md {
+        gap: 6px;
+    }
+
+    &--lg {
+        gap: 8px;
+    }
+
+    // VR mode adjustments
+    &--vr {
+        gap: 10px;
+    }
+}

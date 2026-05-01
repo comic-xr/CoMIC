@@ -1,0 +1,55 @@
+// src/ui/react/components/molecules/DirectionalButton/DirectionalButton.scss
+// DirectionalButton molecule styles
+
+.directional-button {
+    --directional-button-accent: var(--color-accent, #4ecdc4);
+
+    // Active state
+    &--active {
+        background: rgba(78, 205, 196, 0.15);
+        color: var(--directional-button-accent);
+
+        &:hover:not(:disabled) {
+            background: rgba(78, 205, 196, 0.2);
+        }
+    }
+
+    // Direction-specific styling (for visual cues if needed)
+    &--center {
+        // Center button might have different styling
+    }
+
+    // Size adjustments
+    &--sm {
+        min-width: 28px;
+        min-height: 28px;
+    }
+
+    &--md {
+        min-width: 32px;
+        min-height: 32px;
+    }
+
+    &--lg {
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    // VR mode
+    &--vr {
+        &.directional-button--sm {
+            min-width: 40px;
+            min-height: 40px;
+        }
+
+        &.directional-button--md {
+            min-width: 48px;
+            min-height: 48px;
+        }
+
+        &.directional-button--lg {
+            min-width: 56px;
+            min-height: 56px;
+        }
+    }
+}

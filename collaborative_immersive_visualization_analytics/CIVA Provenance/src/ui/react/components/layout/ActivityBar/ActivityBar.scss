@@ -1,0 +1,132 @@
+// =============================================================================
+// SCSS (in separate file: ActivityBar.scss)
+// =============================================================================
+
+@use "sass:color";
+@use "theme" as *;
+
+.activity-bar {
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-sm 0;
+  gap: $spacing-xs;
+  background: $color-bg-primary;
+
+  &--left {
+    border-right: 1px solid $color-border-default;
+  }
+
+  &--right {
+    border-left: 1px solid $color-border-default;
+  }
+
+  &__tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    width: 100%;
+  }
+
+  &__tab {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(.active) {
+      background: $color-glass-light;
+      color: $color-text-secondary;
+    }
+
+    &.active {
+      background: rgba(var(--tab-color-rgb, 96, 165, 250), 0.15);
+      border-color: rgba(var(--tab-color-rgb, 96, 165, 250), 0.3);
+      color: var(--tab-color, $color-accent-blue);
+    }
+
+    // Peeking state (hover preview for overlay panels)
+    &.peeking {
+      background: rgba(var(--tab-color-rgb, 96, 165, 250), 0.1);
+      color: var(--tab-color, $color-accent-blue);
+      border-color: rgba(var(--tab-color-rgb, 96, 165, 250), 0.2);
+
+      // Subtle pulsing animation to indicate temporary state
+      animation: peekPulse 2s ease-in-out infinite;
+    }
+  }
+
+  // Animation for peeking state
+  @keyframes peekPulse {
+    0%, 100% {
+      border-color: rgba(var(--tab-color-rgb, 96, 165, 250), 0.2);
+    }
+    50% {
+      border-color: rgba(var(--tab-color-rgb, 96, 165, 250), 0.4);
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: $color-accent-pink;
+    border-radius: $radius-full;
+    font-size: 9px;
+    font-weight: $font-weight-bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__divider {
+    width: 32px;
+    height: 1px;
+    background: $color-border-default;
+    margin: $spacing-xs 0;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__bottom-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    width: 100%;
+    padding-bottom: $spacing-xs;
+  }
+
+  &__toggle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+/**
+ * @file PopoutButtons.scss
+ * @description Styles for PopoutButtons component.
+ */
+
+@use "theme" as *;
+
+.popout-buttons {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: $color-text-secondary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+
+    &.active {
+      background: rgba($color-accent-blue, 0.15);
+      color: $color-accent-blue;
+    }
+  }
+}

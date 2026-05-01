@@ -1,0 +1,282 @@
+// src/ui/react/components/panels/BottomPanel/tabs/ComputeTab/ComputeTab.scss
+// Styles for the compute jobs tab
+
+@use "theme" as *;
+
+.compute-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  // =========================================================================
+  // TOOLBAR
+  // =========================================================================
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+    background: var(--color-bg-secondary, #1e1e1e);
+    border-bottom: 1px solid var(--color-border-subtle, #333);
+    min-height: 28px;
+  }
+
+  &__toolbar-left,
+  &__toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+  }
+
+  &__counts {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+    font-size: var(--font-size-xs, 11px);
+    color: var(--color-text-muted, #666);
+
+    &--running {
+      color: #2196f3;
+    }
+
+    &--pending {
+      color: #ffa726;
+    }
+
+    &--failed {
+      color: #f44336;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+    padding: 2px 6px;
+
+    background: transparent;
+    border: 1px solid var(--color-border-subtle, #333);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text-muted, #666);
+    font-size: var(--font-size-xs, 11px);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.05));
+      color: var(--color-text-primary, #fff);
+      border-color: var(--color-border-default, #444);
+    }
+  }
+
+  // =========================================================================
+  // JOB LIST
+  // =========================================================================
+  &__jobs {
+    flex: 1;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-border-subtle, #333);
+      border-radius: 4px;
+
+      &:hover {
+        background: var(--color-border-default, #444);
+      }
+    }
+  }
+
+  &__loading,
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: var(--spacing-sm, 8px);
+    color: var(--color-text-muted, #666);
+
+    p {
+      margin: 0;
+      font-size: var(--font-size-base, 14px);
+      color: var(--color-text-secondary, #999);
+    }
+
+    span {
+      font-size: var(--font-size-sm, 12px);
+    }
+  }
+
+  // =========================================================================
+  // SINGLE JOB ROW
+  // =========================================================================
+  &__job {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+    padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+    border-bottom: 1px solid var(--color-border-subtle, #2a2a2a);
+    font-size: var(--font-size-xs, 11px);
+
+    &:hover {
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    // Status-based backgrounds
+    &--running {
+      background: rgba(33, 150, 243, 0.05);
+    }
+
+    &--failed {
+      background: rgba(244, 67, 54, 0.05);
+    }
+  }
+
+  &__job-type {
+    flex-shrink: 0;
+    padding: 2px 6px;
+    border-radius: var(--radius-xs, 3px);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  &__job-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  &__job-name {
+    color: var(--color-text-primary, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__job-dataset {
+    color: var(--color-text-muted, #666);
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__job-progress {
+    position: relative;
+    width: 80px;
+    height: 14px;
+    background: var(--color-bg-tertiary, #252526);
+    border-radius: var(--radius-xs, 3px);
+    overflow: hidden;
+  }
+
+  &__job-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #2196f3, #4caf50);
+    transition: width 0.3s ease;
+  }
+
+  &__job-progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-text-primary, #fff);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  &__job-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 75px;
+
+    span {
+      font-size: 10px;
+    }
+  }
+
+  &__job-duration,
+  &__job-time {
+    min-width: 55px;
+    color: var(--color-text-muted, #666);
+    text-align: right;
+    font-family: var(--font-mono, monospace);
+  }
+
+  &__job-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 30px;
+  }
+
+  &__job-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text-muted, #666);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.1));
+    }
+
+    &--cancel:hover {
+      color: #f44336;
+      background: rgba(244, 67, 54, 0.15);
+    }
+
+    &--retry:hover {
+      color: #4caf50;
+      background: rgba(76, 175, 80, 0.15);
+    }
+  }
+}
+
+// Animation for spinning loader
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

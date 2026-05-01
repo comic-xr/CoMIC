@@ -1,0 +1,144 @@
+// src/ui/react/components/molecules/AnnotationToolButton/AnnotationToolButton.scss
+// Annotation tool button molecule styles
+
+@use "theme" as *;
+
+.annotation-tool-btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: $color-border-default;
+        color: $color-text-primary;
+    }
+
+    // ==========================================================================
+    // ACTIVE STATE
+    // ==========================================================================
+
+    &--active {
+        background: rgba(var(--tool-color-rgb, 96, 165, 250), 0.15);
+        border-color: var(--tool-color, $color-accent-sky);
+        color: var(--tool-color, $color-accent-sky);
+
+        &:hover:not(:disabled) {
+            background: rgba(var(--tool-color-rgb, 96, 165, 250), 0.2);
+        }
+
+        svg {
+            color: var(--tool-color, $color-accent-sky);
+        }
+    }
+
+    // ==========================================================================
+    // DISABLED STATE
+    // ==========================================================================
+
+    &--disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    // ==========================================================================
+    // LABEL
+    // ==========================================================================
+
+    &__label {
+        font-size: 11px;
+        font-weight: $font-weight-medium;
+        white-space: nowrap;
+    }
+
+    // ==========================================================================
+    // SIZE VARIANTS
+    // ==========================================================================
+
+    &--sm {
+        padding: $spacing-xs $spacing-sm;
+        gap: 4px;
+
+        .annotation-tool-btn__label {
+            font-size: 10px;
+        }
+    }
+
+    &--lg {
+        padding: $spacing-md $spacing-lg;
+        gap: $spacing-sm;
+
+        .annotation-tool-btn__label {
+            font-size: 12px;
+        }
+    }
+
+    // ==========================================================================
+    // ICON ONLY (when label hidden)
+    // ==========================================================================
+
+    &:not(:has(.annotation-tool-btn__label)) {
+        padding: $spacing-sm;
+        aspect-ratio: 1;
+        justify-content: center;
+    }
+}
+
+// =============================================================================
+// TOOL PALETTE LAYOUT
+// =============================================================================
+
+.annotation-tool-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    padding: $spacing-xs;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+}
+
+.annotation-tool-group {
+    display: flex;
+    gap: 2px;
+    padding-right: $spacing-sm;
+    margin-right: $spacing-xs;
+    border-right: 1px solid $color-border-subtle;
+
+    &:last-child {
+        border-right: none;
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
+// =============================================================================
+// VR MODE
+// =============================================================================
+
+.adaptive-vr {
+    .annotation-tool-btn {
+        padding: $spacing-md $spacing-lg;
+        gap: $spacing-sm;
+        border-radius: $radius-md;
+
+        &__label {
+            font-size: 13px;
+        }
+
+        &:not(:has(.annotation-tool-btn__label)) {
+            padding: $spacing-md;
+        }
+    }
+
+    .annotation-tool-palette {
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+    }
+}

@@ -1,0 +1,118 @@
+// src/ui/react/components/workspace/InstanceViewport/LiveIndicator.scss
+// Collaborator presence indicator with pulsing animation
+
+@use "theme" as *;
+
+// =============================================================================
+// KEYFRAMES
+// =============================================================================
+
+@keyframes live-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+// =============================================================================
+// LIVE INDICATOR
+// =============================================================================
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 3px $spacing-sm;
+  background: rgba($color-accent-green, 0.15);
+  border: 1px solid rgba($color-accent-green, 0.3);
+  border-radius: 12px;
+  z-index: 10;
+}
+
+// Position variants
+.live-indicator--top-left {
+  position: absolute;
+  top: $spacing-sm;
+  left: $spacing-sm;
+}
+
+.live-indicator--top-right {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+}
+
+.live-indicator--bottom-left {
+  position: absolute;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
+}
+
+.live-indicator--bottom-right {
+  position: absolute;
+  bottom: $spacing-sm;
+  right: $spacing-sm;
+}
+
+// Size variants
+.live-indicator--sm {
+  padding: 2px $spacing-xs;
+  font-size: 9px;
+}
+
+.live-indicator--md {
+  padding: 3px $spacing-sm;
+  font-size: $font-size-xs;
+}
+
+.live-indicator--lg {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+}
+
+// Compact variant (inline)
+.live-indicator--compact {
+  position: static;
+  padding: 2px $spacing-xs;
+  background: rgba($color-accent-green, 0.12);
+  border-radius: 10px;
+  margin-right: $spacing-xs;
+}
+
+// =============================================================================
+// PULSE DOT
+// =============================================================================
+
+.live-indicator__pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-accent-green;
+  animation: live-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.live-indicator__pulse--sm {
+  width: 5px;
+  height: 5px;
+}
+
+// =============================================================================
+// TEXT
+// =============================================================================
+
+.live-indicator__text {
+  color: $color-accent-green;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.live-indicator__count {
+  font-size: 9px;
+  color: $color-accent-green;
+  font-weight: $font-weight-bold;
+}

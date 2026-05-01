@@ -1,0 +1,240 @@
+// src/ui/react/components/molecules/QuickLinkPopup/QuickLinkPopup.scss
+// Styles for quick link popup
+
+@use "theme" as *;
+
+.quick-link-popup {
+    position: fixed;
+    width: 320px;
+    background: $color-bg-primary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    z-index: 9999;
+    overflow: hidden;
+    animation: popup-fade-in 0.15s ease;
+
+    // Header
+    &__header {
+        padding: $spacing-md $spacing-lg;
+        border-bottom: 1px solid $color-border-subtle;
+        background: $color-bg-secondary;
+    }
+
+    &__views {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        font-size: 12px;
+        font-weight: 600;
+        color: $color-text-primary;
+    }
+
+    &__view-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100px;
+    }
+
+    &__arrow {
+        color: $color-text-muted;
+    }
+
+    // Section
+    &__section {
+        padding: $spacing-md $spacing-lg;
+
+        &:not(:last-of-type) {
+            border-bottom: 1px solid $color-border-subtle;
+        }
+    }
+
+    &__section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $spacing-sm;
+    }
+
+    &__section-title {
+        font-size: 9px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $color-text-muted;
+    }
+
+    &__select-all {
+        padding: 2px $spacing-xs;
+        font-size: 9px;
+        color: $color-accent-teal;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // Properties
+    &__properties {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;
+    }
+
+    &__property {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-xs $spacing-sm;
+        font-size: 11px;
+        font-weight: 500;
+        background: $color-bg-tertiary;
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-sm;
+        color: $color-text-secondary;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &:hover {
+            background: $color-hover-bg;
+            border-color: $color-border-default;
+        }
+
+        &--selected {
+            background: rgba($color-accent-teal, 0.15);
+            border-color: $color-accent-teal;
+            color: $color-accent-teal;
+        }
+    }
+
+    // Modes
+    &__modes {
+        display: flex;
+        gap: $spacing-xs;
+    }
+
+    &__mode {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-sm $spacing-xs;
+        background: $color-bg-tertiary;
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &:hover {
+            background: $color-hover-bg;
+        }
+
+        &--selected {
+            background: rgba($color-accent-teal, 0.15);
+            border-color: $color-accent-teal;
+        }
+    }
+
+    &__mode-icon {
+        font-size: 16px;
+        font-weight: 600;
+        color: $color-text-muted;
+
+        .quick-link-popup__mode--selected & {
+            color: $color-accent-teal;
+        }
+    }
+
+    &__mode-label {
+        font-size: 10px;
+        font-weight: 600;
+        color: $color-text-secondary;
+
+        .quick-link-popup__mode--selected & {
+            color: $color-accent-teal;
+        }
+    }
+
+    &__mode-desc {
+        font-size: 9px;
+        color: $color-text-muted;
+        text-align: center;
+    }
+
+    // Actions
+    &__actions {
+        display: flex;
+        gap: $spacing-sm;
+        padding: $spacing-md $spacing-lg;
+        border-top: 1px solid $color-border-subtle;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    &__btn {
+        flex: 1;
+        padding: $spacing-sm;
+        font-size: 11px;
+        font-weight: 500;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &--cancel {
+            background: transparent;
+            border: 1px solid $color-border-default;
+            color: $color-text-secondary;
+
+            &:hover {
+                background: $color-hover-bg;
+            }
+        }
+
+        &--confirm {
+            background: $color-accent-teal;
+            border: none;
+            color: #000;
+            font-weight: 600;
+
+            &:hover {
+                filter: brightness(1.1);
+            }
+        }
+    }
+
+    // Keyboard hint
+    &__hint {
+        padding: $spacing-sm $spacing-lg;
+        font-size: 9px;
+        color: $color-text-muted;
+        text-align: center;
+        border-top: 1px solid $color-border-subtle;
+
+        kbd {
+            padding: 2px $spacing-xs;
+            background: $color-bg-tertiary;
+            border-radius: 2px;
+            font-size: 8px;
+            font-family: inherit;
+        }
+    }
+}
+
+@keyframes popup-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,19 @@
+// src/ui/react/components/workspace/Canvas/CanvasChrome/CanvasChrome.scss
+// Base layout for canvas chrome shell
+
+@use "theme" as *;
+
+.canvas-chrome {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: $color-bg-canvas;
+}
+
+.canvas-chrome__body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+}

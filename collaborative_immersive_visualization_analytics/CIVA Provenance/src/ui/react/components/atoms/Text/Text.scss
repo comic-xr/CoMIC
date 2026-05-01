@@ -1,0 +1,140 @@
+// src/ui/react/components/atoms/Text/Text.scss
+// Text atom styles
+
+@use "theme" as *;
+
+.text {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+
+    // Variant: label
+    &--label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+
+    // Variant: body
+    &--body {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    // Variant: caption
+    &--caption {
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+    }
+
+    // Variant: title
+    &--title {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    // Variant: mono
+    &--mono {
+        font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    // Colors
+    &--color-primary {
+        color: $color-text-primary;
+    }
+
+    &--color-secondary {
+        color: $color-text-secondary;
+    }
+
+    &--color-muted {
+        color: $color-text-muted;
+    }
+
+    &--color-accent {
+        color: $color-accent-blue;
+    }
+
+    // Weights
+    &--weight-normal {
+        font-weight: 400;
+    }
+
+    &--weight-medium {
+        font-weight: 500;
+    }
+
+    &--weight-semibold {
+        font-weight: 600;
+    }
+
+    &--weight-bold {
+        font-weight: 700;
+    }
+
+    // Size overrides
+    &--size-sm {
+        font-size: 11px;
+    }
+
+    &--size-md {
+        font-size: 13px;
+    }
+
+    &--size-lg {
+        font-size: 15px;
+    }
+
+    // Uppercase
+    &--uppercase {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    // Truncate
+    &--truncate {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+    // VR mode - larger text
+    &--vr {
+        &.text--label {
+            font-size: 13px;
+        }
+
+        &.text--body {
+            font-size: 15px;
+        }
+
+        &.text--caption {
+            font-size: 12px;
+        }
+
+        &.text--title {
+            font-size: 17px;
+        }
+
+        &.text--mono {
+            font-size: 14px;
+        }
+
+        &.text--size-sm {
+            font-size: 13px;
+        }
+
+        &.text--size-md {
+            font-size: 15px;
+        }
+
+        &.text--size-lg {
+            font-size: 18px;
+        }
+    }
+}

@@ -1,0 +1,86 @@
+// ScopeIndicator.scss
+// Styles for the scope level indicator atom
+
+.scope-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    color: var(--scope-color, var(--color-text-muted));
+
+    &__icon {
+        color: inherit;
+    }
+
+    &__label {
+        font-size: 10px;
+        font-weight: 500;
+        color: inherit;
+        white-space: nowrap;
+    }
+
+    // Dashed circle for ephemeral scope
+    &__dashed-circle {
+        display: inline-block;
+        border-radius: 50%;
+        border: 1.5px dashed currentColor;
+        flex-shrink: 0;
+    }
+
+    // Size variants
+    &--sm {
+        .scope-indicator__label {
+            font-size: 9px;
+        }
+    }
+
+    &--md {
+        .scope-indicator__label {
+            font-size: 10px;
+        }
+    }
+
+    &--lg {
+        .scope-indicator__label {
+            font-size: 11px;
+        }
+    }
+
+    // VR mode - larger sizes
+    &--vr {
+        gap: 6px;
+
+        .scope-indicator__label {
+            font-size: 13px;
+        }
+
+        &.scope-indicator--sm .scope-indicator__label {
+            font-size: 12px;
+        }
+
+        &.scope-indicator--lg .scope-indicator__label {
+            font-size: 14px;
+        }
+    }
+
+    // Scope-specific colors (fallback if CSS var not set)
+    &--ephemeral {
+        color: #6b7280;
+    }
+
+    &--personal {
+        color: #a855f7;
+    }
+
+    &--shared {
+        color: #3b82f6;
+    }
+
+    &--workspace {
+        color: #34d399;
+    }
+
+    &--project {
+        color: #fbbf24;
+    }
+}

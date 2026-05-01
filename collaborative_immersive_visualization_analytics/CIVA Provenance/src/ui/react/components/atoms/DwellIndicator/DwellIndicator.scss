@@ -1,0 +1,23 @@
+/**
+ * DwellIndicator styles
+ * Circular progress indicator for VR dwell hover
+ */
+
+.dwell-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10;
+
+    &__bg {
+        opacity: 0.5;
+    }
+
+    &__progress {
+        transform: rotate(-90deg);
+        transform-origin: center;
+        transition: stroke-dashoffset 16ms linear;
+    }
+}

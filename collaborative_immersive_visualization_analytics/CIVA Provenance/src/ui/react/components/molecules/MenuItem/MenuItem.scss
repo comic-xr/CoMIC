@@ -1,0 +1,162 @@
+// src/ui/react/components/molecules/MenuItem/MenuItem.scss
+// MenuItem molecule styles
+
+.menu-item {
+    --menu-item-color: var(--color-text-primary, #e0e0e0);
+    --menu-item-muted: var(--color-text-muted, #888);
+    --menu-item-hover-bg: rgba(255, 255, 255, 0.08);
+    --menu-item-danger: #ff6b6b;
+    --menu-item-accent: var(--color-accent, #4ecdc4);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 12px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--menu-item-color);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background-color 0.12s ease,
+        color 0.12s ease;
+
+    &:hover:not(:disabled) {
+        background: var(--menu-item-hover-bg);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--menu-item-accent);
+        outline-offset: -2px;
+    }
+
+    // Danger variant
+    &--danger {
+        color: var(--menu-item-danger);
+
+        .menu-item__icon {
+            color: var(--menu-item-danger);
+        }
+
+        &:hover:not(:disabled) {
+            background: rgba(255, 107, 107, 0.1);
+        }
+    }
+
+    // Disabled state
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    // Selected state
+    &--selected {
+        background: rgba(78, 205, 196, 0.08);
+
+        &:hover:not(:disabled) {
+            background: rgba(78, 205, 196, 0.12);
+        }
+    }
+
+    // VR mode
+    &--vr {
+        padding: 12px 16px;
+        font-size: 15px;
+        gap: 12px;
+        border-radius: 6px;
+    }
+}
+
+// Leading section (icon or spacer)
+.menu-item__leading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+
+    .menu-item--vr & {
+        width: 24px;
+    }
+}
+
+// Icon
+.menu-item__icon {
+    opacity: 0.7;
+
+    .menu-item:hover:not(:disabled) & {
+        opacity: 1;
+    }
+
+    .menu-item--danger & {
+        opacity: 1;
+    }
+}
+
+// Icon spacer for alignment when no icon
+.menu-item__icon-spacer {
+    width: 16px;
+
+    .menu-item--vr & {
+        width: 20px;
+    }
+}
+
+// Content section
+.menu-item__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+// Label
+.menu-item__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Description
+.menu-item__description {
+    font-size: 11px;
+    color: var(--menu-item-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .menu-item--vr & {
+        font-size: 13px;
+    }
+}
+
+// Keyboard shortcut
+.menu-item__shortcut {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding-left: 16px;
+    font-size: 11px;
+    font-family: var(--font-mono, monospace);
+    color: var(--menu-item-muted);
+    opacity: 0.7;
+
+    .menu-item--vr & {
+        font-size: 13px;
+    }
+}
+
+// Check mark for selected items
+.menu-item__check {
+    flex-shrink: 0;
+    color: var(--menu-item-accent);
+}

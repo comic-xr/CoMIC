@@ -1,0 +1,49 @@
+// src/ui/react/components/panels/LayoutPanel/FloatingCanvasNavigator.scss
+// Styles for the floating canvas navigator wrapper
+
+.floating-canvas-navigator {
+  // Smooth transitions when not actively dragging/resizing
+  &:not(.dragging):not(.resizing) {
+    transition: box-shadow 0.2s ease;
+  }
+
+  &:hover {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.15);
+  }
+
+  &.dragging {
+    cursor: grabbing !important;
+
+    .floating-canvas-navigator__drag-handle {
+      cursor: grabbing !important;
+    }
+  }
+
+  &.resizing {
+    // Disable transitions during resize
+    transition: none !important;
+  }
+}
+
+// Drag handle overlay
+.floating-canvas-navigator__drag-handle {
+  // Invisible but captures mouse events
+  background: transparent;
+
+  &:hover {
+    // Subtle highlight on hover
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+// Resize handles - invisible but functional
+.resize-handle {
+  background: transparent;
+  z-index: 10;
+
+  // Highlight on hover for visual feedback
+  &:hover {
+    background: rgba(251, 191, 36, 0.15); // amber tint
+  }
+}

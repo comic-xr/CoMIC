@@ -1,0 +1,285 @@
+/**
+ * @file KeyboardShortcutsModal.scss
+ * @description Styles for the KeyboardShortcutsModal component and subcomponents.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// MODAL LAYOUT
+// =============================================================================
+
+.shortcuts-modal {
+  display: flex;
+  height: 400px;
+  margin: -16px; // Offset modal content padding
+}
+
+// =============================================================================
+// CATEGORY TABS (LEFT SIDE)
+// =============================================================================
+
+.shortcuts-modal__categories {
+  width: 160px;
+  flex-shrink: 0;
+  border-right: 1px solid $color-border-subtle;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.shortcuts-modal__category-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    background: $color-glass-light;
+    box-shadow: inset 0 0 0 2px $color-accent-blue;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+    color: $color-accent-blue;
+
+    &:hover {
+      background: rgba($color-accent-blue, 0.2);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// =============================================================================
+// CONTENT AREA (RIGHT SIDE)
+// =============================================================================
+
+.shortcuts-modal__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+// =============================================================================
+// SEARCH INPUT
+// =============================================================================
+
+.shortcuts-modal__search {
+  margin: 12px 16px;
+  flex-shrink: 0;
+  --search-input-bg: $color-bg-secondary;
+  --search-input-border: $color-border-default;
+  --search-input-focus-border: $color-accent-blue;
+  --search-input-color: $color-text-primary;
+  --search-input-placeholder: $color-text-muted;
+  --search-input-icon: $color-text-muted;
+  --search-input-gap: 8px;
+}
+
+// =============================================================================
+// SHORTCUTS LIST
+// =============================================================================
+
+.shortcuts-modal__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.shortcuts-modal__section-title {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.shortcuts-modal__search-group {
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+.shortcuts-modal__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: $color-text-muted;
+  font-size: 14px;
+  text-align: center;
+}
+
+// =============================================================================
+// SHORTCUT ITEM
+// =============================================================================
+
+.shortcut-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px 0;
+  gap: 16px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+
+  &__action {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+  }
+
+  &__description {
+    display: block;
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__keys {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// KEYBOARD KEY BADGES
+// =============================================================================
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  font-family: $font-family-mono;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  white-space: nowrap;
+
+  // Symbol keys (single character symbols)
+  &--symbol {
+    font-size: 14px;
+    padding: 0 6px;
+  }
+}
+
+.key-combo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &__separator {
+    color: $color-text-muted;
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// =============================================================================
+// SCROLLBAR STYLING
+// =============================================================================
+
+.shortcuts-modal__categories,
+.shortcuts-modal__list {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border-default;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-border-medium;
+    }
+  }
+}
+
+// =============================================================================
+// RESPONSIVE ADJUSTMENTS
+// =============================================================================
+
+@media (max-width: 600px) {
+  .shortcuts-modal {
+    flex-direction: column;
+    height: auto;
+    max-height: 70vh;
+  }
+
+  .shortcuts-modal__categories {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: none;
+    border-bottom: 1px solid $color-border-subtle;
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .shortcuts-modal__category-btn {
+    flex: 1 1 auto;
+    min-width: 80px;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+}

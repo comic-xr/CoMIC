@@ -1,0 +1,261 @@
+/**
+ * @file RecordingConsentModal.scss
+ * @description Styles for the RecordingConsentModal component.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// RECORDING CONSENT MODAL
+// =============================================================================
+
+.recording-consent-modal {
+  &__icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    color: $color-error;
+  }
+
+  &__description {
+    font-size: 14px;
+    color: $color-text-primary;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+
+    strong {
+      color: $color-text-primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: 16px 0;
+  }
+
+  &__section-title {
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px 0;
+  }
+}
+
+// =============================================================================
+// RECORDING DOT (PULSE ANIMATION)
+// =============================================================================
+
+.recording-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $color-error;
+  animation: recording-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba($color-error, 0.5);
+}
+
+@keyframes recording-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+// =============================================================================
+// RECORDING ITEMS CHECKLIST
+// =============================================================================
+
+.recording-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recording-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: $color-bg-tertiary;
+  border-radius: 6px;
+  transition: opacity $transition-fast;
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  &__type-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: $color-text-secondary;
+  }
+
+  &__label {
+    font-size: 13px;
+    flex: 1;
+  }
+
+  &__status {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: $font-weight-medium;
+  }
+
+  // Active state - being recorded
+  &--active {
+    .recording-item__icon {
+      background: rgba($color-success, 0.15);
+      color: $color-success;
+    }
+
+    .recording-item__type-icon {
+      color: $color-text-primary;
+    }
+
+    .recording-item__label {
+      color: $color-text-primary;
+    }
+
+    .recording-item__status {
+      color: $color-success;
+    }
+  }
+
+  // Inactive state - not being recorded
+  &--inactive {
+    opacity: 0.6;
+
+    .recording-item__icon {
+      background: $color-bg-secondary;
+      color: $color-text-muted;
+    }
+
+    .recording-item__type-icon {
+      color: $color-text-muted;
+    }
+
+    .recording-item__label {
+      color: $color-text-muted;
+    }
+
+    .recording-item__status {
+      color: $color-text-muted;
+    }
+  }
+}
+
+// =============================================================================
+// FOOTER
+// =============================================================================
+
+.recording-consent-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+
+  // Leave room button - less prominent
+  &__leave {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid $color-border-default;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-error;
+      color: $color-error;
+      background: rgba($color-error, 0.05);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px $color-accent-blue;
+    }
+  }
+
+  // Continue button - primary
+  &__continue {
+    padding: 10px 24px;
+    background: $color-accent-blue;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: $font-weight-medium;
+    color: white;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px white, 0 0 0 4px $color-accent-blue;
+    }
+  }
+}
+
+// =============================================================================
+// RESPONSIVE ADJUSTMENTS
+// =============================================================================
+
+@media (max-width: 480px) {
+  .recording-consent-modal__footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+
+    &__leave,
+    &__continue {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .recording-item {
+    flex-wrap: wrap;
+    gap: 6px;
+
+    &__status {
+      width: 100%;
+      margin-left: 30px;
+      margin-top: -4px;
+    }
+  }
+}

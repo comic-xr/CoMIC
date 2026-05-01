@@ -1,0 +1,252 @@
+// src/ui/react/components/workspace/Canvas/CanvasHeader/CanvasHeader.scss
+// Canvas navigation header styling
+//
+// Height: 36px
+// Layout: Left (nav + breadcrumb) | Center (viewport nav) | Right (grid size)
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.canvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-default;
+  height: 36px;
+  min-height: 36px;
+  flex-shrink: 0;
+  gap: $spacing-md;
+}
+
+// =============================================================================
+// LEFT SECTION - Navigation + Breadcrumb
+// =============================================================================
+
+.canvas-header__left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex: 1;
+  min-width: 0;
+}
+
+// =============================================================================
+// BREADCRUMB
+// =============================================================================
+
+.canvas-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-left: $spacing-sm;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.canvas-header__breadcrumb-separator {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.canvas-header__breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: color $transition-fast, background $transition-fast;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+
+  &:hover:not(:disabled) {
+    color: $color-text-secondary;
+    background: rgba($color-accent-blue, 0.08);
+  }
+
+  &--active {
+    color: $color-accent-blue;
+    font-weight: $font-weight-medium;
+    cursor: default;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.canvas-header__breadcrumb-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.canvas-header__breadcrumb-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// =============================================================================
+// CENTER SECTION - Viewport Navigation
+// =============================================================================
+
+.canvas-header__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.canvas-header__viewport-nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.canvas-header__viewport-position {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  min-width: 50px;
+}
+
+.canvas-header__viewport-coord {
+  font-size: $font-size-xs;
+  font-family: $font-family-mono;
+  color: $color-text-secondary;
+  letter-spacing: 0.5px;
+}
+
+// =============================================================================
+// RIGHT SECTION - Grid Size
+// =============================================================================
+
+.canvas-header__right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+}
+
+.canvas-header__grid-size {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.canvas-header__grid-size-label {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.canvas-header__grid-size-select {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  font-family: $font-family-mono;
+  color: $color-text-primary;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:hover:not(:disabled) {
+    border-color: $color-border-medium;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-blue;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// ZOOM SELECTOR
+// =============================================================================
+
+.canvas-header__zoom {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-left: $spacing-md;
+}
+
+.canvas-header__zoom-select {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  font-family: $font-family-mono;
+  color: $color-text-primary;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+  min-width: 60px;
+  text-align: center;
+
+  &:hover:not(:disabled) {
+    border-color: $color-border-medium;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-blue;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 800px) {
+  .canvas-header {
+    padding: $spacing-xs;
+    gap: $spacing-sm;
+  }
+
+  .canvas-header__breadcrumb {
+    display: none;
+  }
+
+  .canvas-header__grid-size-label {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .canvas-header__center {
+    display: none;
+  }
+}

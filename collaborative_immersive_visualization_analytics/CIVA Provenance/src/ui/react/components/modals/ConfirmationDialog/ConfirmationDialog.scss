@@ -1,0 +1,302 @@
+/**
+ * @file ConfirmationDialog.scss
+ * @description Styles for the ConfirmationDialog component.
+ * Uses BEM naming convention and extends base Modal styles.
+ *
+ * Structure:
+ * - .confirmation-dialog - Main container
+ * - .confirmation-dialog__description - Description text
+ * - .confirmation-dialog__item-list - Scrollable item list container
+ * - .confirmation-dialog__input-wrapper - Type-to-confirm input container
+ * - .confirmation-dialog__checkbox-label - Don't ask again checkbox
+ */
+
+@use "theme" as *;
+
+// ============================================================================
+// MAIN CONTAINER
+// ============================================================================
+
+.confirmation-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.confirmation-dialog--vr {
+  gap: $spacing-xl;
+}
+
+.modal.confirmation-dialog--vr {
+  max-width: 520px;
+}
+
+// ============================================================================
+// DESCRIPTION TEXT
+// ============================================================================
+
+.confirmation-dialog__description {
+  margin: 0;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+}
+
+.confirmation-dialog--vr .confirmation-dialog__description {
+  font-size: $font-size-md;
+  line-height: 1.45;
+}
+
+// ============================================================================
+// ITEM LIST (for bulk operations)
+// ============================================================================
+
+.confirmation-dialog__item-list {
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+  padding: $spacing-md $spacing-lg;
+  max-height: 120px;
+  overflow-y: auto;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-glass-strong;
+    border-radius: $radius-sm;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.confirmation-dialog--vr .confirmation-dialog__item-list {
+  max-height: 160px;
+  padding: $spacing-lg;
+}
+
+.confirmation-dialog__items {
+  margin: 0;
+  padding: 0;
+  padding-left: $spacing-lg;
+  list-style-type: disc;
+}
+
+.confirmation-dialog__item {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+  padding: $spacing-xs 0;
+
+  // Style for the bullet
+  &::marker {
+    color: $color-text-muted;
+  }
+}
+
+.confirmation-dialog__more-items {
+  margin: $spacing-sm 0 0 0;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  font-style: italic;
+}
+
+// ============================================================================
+// TYPE-TO-CONFIRM INPUT
+// ============================================================================
+
+.confirmation-dialog__input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.confirmation-dialog__input {
+  width: 100%;
+  padding: $spacing-md;
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:hover {
+    border-color: $color-border-medium;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-primary;
+    box-shadow: 0 0 0 3px rgba($color-accent-primary, 0.15);
+  }
+
+  // Valid state (input matches expected value)
+  &--valid {
+    border-color: $color-success;
+
+    &:focus {
+      border-color: $color-success;
+      box-shadow: 0 0 0 3px rgba($color-success, 0.15);
+    }
+  }
+}
+
+.confirmation-dialog__input-hint {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  strong {
+    color: $color-text-secondary;
+    font-weight: $font-weight-semibold;
+    font-family: $font-family-mono;
+    background: $color-bg-secondary;
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ============================================================================
+// CHECKBOX ("Don't ask again")
+// ============================================================================
+
+.confirmation-dialog__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  user-select: none;
+}
+
+.confirmation-dialog__checkbox {
+  // Hide native checkbox
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  // Custom checkbox styling via adjacent span
+  & + .confirmation-dialog__checkbox-text::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: $spacing-sm;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    vertical-align: middle;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+  }
+
+  // Hover state
+  &:not(:disabled) + .confirmation-dialog__checkbox-text:hover::before {
+    border-color: $color-border-medium;
+    background: $color-bg-tertiary;
+  }
+
+  // Focus state
+  &:focus-visible + .confirmation-dialog__checkbox-text::before {
+    border-color: $color-accent-primary;
+    box-shadow: 0 0 0 3px rgba($color-accent-primary, 0.15);
+  }
+
+  // Checked state
+  &:checked + .confirmation-dialog__checkbox-text::before {
+    background: $color-accent-primary;
+    border-color: $color-accent-primary;
+    // Checkmark using CSS
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  // Disabled state
+  &:disabled + .confirmation-dialog__checkbox-text {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &::before {
+      background: $color-disabled-bg;
+      border-color: $color-disabled-border;
+    }
+  }
+}
+
+.confirmation-dialog__checkbox-text {
+  display: flex;
+  align-items: center;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1;
+}
+
+.confirmation-dialog--vr .confirmation-dialog__checkbox-text {
+  font-size: $font-size-base;
+}
+
+// ============================================================================
+// BUTTON OVERRIDES (extending base Modal button styles)
+// ============================================================================
+
+// Warning button style (for warning severity)
+.modal__footer .btn--warning {
+  color: $color-text-primary;
+  background: rgba($color-warning, 0.15);
+  border: 1px solid rgba($color-warning, 0.4);
+
+  &:hover:not(:disabled) {
+    background: rgba($color-warning, 0.25);
+    border-color: rgba($color-warning, 0.6);
+  }
+
+  &:active:not(:disabled) {
+    background: rgba($color-warning, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Ensure danger button disabled state
+.modal__footer .btn--danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+// Primary button disabled state
+.modal__footer .btn--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 480px) {
+  .confirmation-dialog__item-list {
+    max-height: 100px;
+  }
+
+  .confirmation-dialog__checkbox-label {
+    font-size: $font-size-xs;
+  }
+}

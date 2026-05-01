@@ -1,0 +1,54 @@
+/**
+ * OverlayPanelHeader styles
+ * Panel header with context-aware buttons
+ */
+
+@use "theme" as *;
+
+.overlay-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    padding: 0 8px;
+    border-bottom: 1px solid $color-border-default;
+    flex-shrink: 0;
+
+    &__title {
+        font-size: 13px;
+        font-weight: 600;
+        color: $color-text-primary;
+        margin: 0;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-left: auto;
+    }
+
+    &__pin {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: rgba($color-accent-blue, 0.15);
+        border: 1px solid rgba($color-accent-blue, 0.3);
+        border-radius: $radius-sm;
+        color: $color-accent-blue;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+            background: rgba($color-accent-blue, 0.25);
+            border-color: rgba($color-accent-blue, 0.5);
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+    }
+}

@@ -1,0 +1,1238 @@
+/**
+ * @file CanvasOperationsPanel.scss
+ * @description Styles for the Canvas Operations Panel and its sub-components
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN PANEL
+// =============================================================================
+
+.canvas-operations-panel {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background: rgba($color-bg-secondary, 0.95);
+  border: 1px solid $color-border-default;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+
+  // States
+  &--dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  &--resizing {
+    user-select: none;
+  }
+
+  // ===========================================================================
+  // RESIZE HANDLES
+  // ===========================================================================
+
+  &__resize-handle {
+    position: absolute;
+    z-index: 10;
+
+    // Edge handles
+    &--n {
+      top: 0;
+      left: 12px;
+      right: 12px;
+      height: 6px;
+      cursor: ns-resize;
+    }
+
+    &--s {
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 6px;
+      cursor: ns-resize;
+    }
+
+    &--w {
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 6px;
+      cursor: ew-resize;
+    }
+
+    &--e {
+      right: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 6px;
+      cursor: ew-resize;
+    }
+
+    // Corner handles
+    &--nw {
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      cursor: nwse-resize;
+    }
+
+    &--ne {
+      top: 0;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      cursor: nesw-resize;
+    }
+
+    &--sw {
+      bottom: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      cursor: nesw-resize;
+    }
+
+    &--se {
+      bottom: 0;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      cursor: nwse-resize;
+    }
+  }
+
+  // ==========================================================================
+  // HEADER
+  // ==========================================================================
+
+  &__header {
+    padding: 12px 16px;
+    border-bottom: 1px solid $color-border-subtle;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: grab;
+    flex-shrink: 0;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__header-icon {
+    color: $color-accent-purple;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &__pending-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba($color-accent-amber, 0.2);
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-accent-amber;
+  }
+
+  &__control-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+
+    &--close:hover {
+      background: rgba($color-accent-red, 0.15);
+      color: $color-accent-red;
+    }
+  }
+
+  // ==========================================================================
+  // TAB BAR
+  // ==========================================================================
+
+  &__tabs {
+    padding: 8px 12px;
+    border-bottom: 1px solid $color-border-subtle;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    flex-shrink: 0;
+
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+
+  // ==========================================================================
+  // CONTENT
+  // ==========================================================================
+
+  &__content {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; // Important for flex children to scroll
+  }
+}
+
+// =============================================================================
+// TAB BUTTON
+// =============================================================================
+
+.cop-tab-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  position: relative;
+  white-space: nowrap;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+  }
+
+  &__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background: $color-accent-red;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+}
+
+// =============================================================================
+// SHARED COMPONENTS
+// =============================================================================
+
+// Empty state
+.cop-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  padding: 24px;
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $color-bg-tertiary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-accent-green;
+  }
+
+  &__title {
+    font-size: 13px;
+    color: $color-text-primary;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__description {
+    font-size: 11px;
+    color: $color-text-muted;
+    text-align: center;
+  }
+}
+
+// Toolbar
+.cop-toolbar {
+  padding: 8px 12px;
+  border-bottom: 1px solid $color-border-subtle;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+}
+
+// Toggle button group
+.cop-toggle-group {
+  display: flex;
+  background: $color-bg-tertiary;
+  border-radius: 4px;
+  padding: 2px;
+
+  &__button {
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.1s ease;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: $color-bg-secondary;
+      color: $color-text-primary;
+    }
+  }
+}
+
+// Dropdown select
+.cop-select {
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  color: $color-text-primary;
+  font-size: 11px;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: $color-accent-blue;
+  }
+}
+
+// Multi-select dropdown
+.cop-multi-select {
+  position: relative;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    color: $color-text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+
+    &--filtered {
+      border-color: $color-accent-blue;
+    }
+  }
+
+  &__badge {
+    background: $color-accent-blue;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: 6px;
+    padding: 4px;
+    min-width: 150px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: $color-text-primary;
+    font-size: 11px;
+    cursor: pointer;
+    text-align: left;
+
+    &:hover {
+      background: $color-bg-tertiary;
+    }
+
+    &--selected {
+      background: rgba($color-accent-blue, 0.1);
+    }
+  }
+
+  &__checkbox {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 2px solid $color-border-medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--checked {
+      background: $color-accent-blue;
+      border-color: $color-accent-blue;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+  }
+}
+
+// Date range picker
+.cop-date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &__inputs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__input {
+    padding: 4px 6px;
+    border-radius: 4px;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    color: $color-text-primary;
+    font-size: 10px;
+    color-scheme: dark;
+    outline: none;
+
+    &:focus {
+      border-color: $color-accent-blue;
+    }
+  }
+
+  &__separator {
+    color: $color-text-muted;
+    font-size: 10px;
+  }
+}
+
+// Action buttons
+.cop-actions {
+  padding: 12px;
+  border-top: 1px solid $color-border-subtle;
+  display: flex;
+  gap: 8px;
+}
+
+.cop-button {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &--secondary {
+    background: transparent;
+    border: 1px solid $color-border-subtle;
+    color: $color-text-secondary;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+  }
+
+  &--primary {
+    background: $color-accent-green;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+
+    &:disabled {
+      background: $color-bg-tertiary;
+      color: $color-text-muted;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outline-blue {
+    background: rgba($color-accent-blue, 0.1);
+    border: 1px solid rgba($color-accent-blue, 0.4);
+    color: $color-accent-blue;
+
+    &:hover {
+      background: rgba($color-accent-blue, 0.15);
+    }
+  }
+
+  &--outline-red {
+    background: rgba($color-accent-red, 0.1);
+    border: 1px solid rgba($color-accent-red, 0.3);
+    color: $color-accent-red;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.15);
+    }
+  }
+
+  &--outline-amber {
+    background: rgba($color-accent-amber, 0.1);
+    border: 1px solid rgba($color-accent-amber, 0.3);
+    color: $color-accent-amber;
+
+    &:hover {
+      background: rgba($color-accent-amber, 0.15);
+    }
+  }
+
+  &--small {
+    flex: none;
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  &--icon {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--icon-small {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid $color-border-subtle;
+    color: $color-text-muted;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// Operation icon
+.cop-op-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &--green {
+    background: rgba($color-accent-green, 0.2);
+    color: $color-accent-green;
+  }
+
+  &--amber {
+    background: rgba($color-accent-amber, 0.2);
+    color: $color-accent-amber;
+  }
+
+  &--purple {
+    background: rgba($color-accent-purple, 0.2);
+    color: $color-accent-purple;
+  }
+
+  &--teal {
+    background: rgba($color-accent-teal, 0.2);
+    color: $color-accent-teal;
+  }
+
+  &--red {
+    background: rgba($color-accent-red, 0.2);
+    color: $color-accent-red;
+  }
+
+  &--blue {
+    background: rgba($color-accent-blue, 0.2);
+    color: $color-accent-blue;
+  }
+
+  &--large {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// User avatar
+.cop-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  flex-shrink: 0;
+
+  &--small {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  &--teal {
+    background: rgba($color-accent-teal, 0.3);
+    border: 2px solid $color-accent-teal;
+    color: $color-accent-teal;
+  }
+
+  &--pink {
+    background: rgba($color-accent-pink, 0.3);
+    border: 2px solid $color-accent-pink;
+    color: $color-accent-pink;
+  }
+
+  &--blue {
+    background: rgba($color-accent-blue, 0.3);
+    border: 2px solid $color-accent-blue;
+    color: $color-accent-blue;
+  }
+
+  &--purple {
+    background: rgba($color-accent-purple, 0.3);
+    border: 2px solid $color-accent-purple;
+    color: $color-accent-purple;
+  }
+
+  &--amber {
+    background: rgba($color-accent-amber, 0.3);
+    border: 2px solid $color-accent-amber;
+    color: $color-accent-amber;
+  }
+
+  &--green {
+    background: rgba($color-accent-green, 0.3);
+    border: 2px solid $color-accent-green;
+    color: $color-accent-green;
+  }
+
+  &--red {
+    background: rgba($color-accent-red, 0.3);
+    border: 2px solid $color-accent-red;
+    color: $color-accent-red;
+  }
+
+  &__online-dot {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid $color-bg-tertiary;
+
+    &--online {
+      background: $color-accent-green;
+    }
+
+    &--offline {
+      background: $color-text-muted;
+    }
+  }
+}
+
+// Status badges
+.cop-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &--green {
+    background: rgba($color-accent-green, 0.15);
+    color: $color-accent-green;
+  }
+
+  &--amber {
+    background: rgba($color-accent-amber, 0.15);
+    color: $color-accent-amber;
+  }
+
+  &--red {
+    background: rgba($color-accent-red, 0.15);
+    color: $color-accent-red;
+  }
+}
+
+// Scrollable list
+.cop-scroll-list {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border-medium;
+    border-radius: 3px;
+  }
+
+  &--no-padding {
+    padding: 0;
+  }
+}
+
+// List with gaps
+.cop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--gap-sm {
+    gap: 4px;
+  }
+
+  &--gap-md {
+    gap: 8px;
+  }
+}
+
+// =============================================================================
+// TRANSACTION TAB
+// =============================================================================
+
+.transaction-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__count {
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// OPERATION ITEM
+// =============================================================================
+
+.operation-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: $color-bg-tertiary;
+  border: 1px solid transparent;
+  transition: all 0.1s ease;
+
+  &--selected {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.3);
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 2px solid $color-border-medium;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    color: #fff;
+
+    &--checked {
+      background: $color-accent-blue;
+      border-color: $color-accent-blue;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__detail {
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 8px;
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__type {
+    &--green { color: $color-accent-green; }
+    &--amber { color: $color-accent-amber; }
+    &--purple { color: $color-accent-purple; }
+    &--teal { color: $color-accent-teal; }
+    &--red { color: $color-accent-red; }
+    &--blue { color: $color-accent-blue; }
+  }
+}
+
+// =============================================================================
+// OPERATION ROW (for audit log timeline)
+// =============================================================================
+
+.operation-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: $color-bg-tertiary;
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+
+  &--reverted {
+    background: rgba($color-bg-tertiary, 0.5);
+    opacity: 0.6;
+
+    .operation-row__detail {
+      text-decoration: line-through;
+      color: $color-text-muted;
+    }
+  }
+
+  // User color variants
+  &--teal { border-left-color: $color-accent-teal; }
+  &--pink { border-left-color: $color-accent-pink; }
+  &--blue { border-left-color: $color-accent-blue; }
+  &--purple { border-left-color: $color-accent-purple; }
+  &--amber { border-left-color: $color-accent-amber; }
+  &--green { border-left-color: $color-accent-green; }
+  &--red { border-left-color: $color-accent-red; }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__detail {
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__user {
+    font-size: 10px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  &__time {
+    font-size: 9px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+    min-width: 24px;
+    text-align: right;
+  }
+}
+
+// =============================================================================
+// TRANSACTION BOX (for grouped operations in timeline)
+// =============================================================================
+
+.transaction-box {
+  background: $color-bg-secondary;
+  border: 1px dashed $color-border-subtle;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &--reverted {
+    border-color: rgba($color-accent-green, 0.4);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-bottom: 1px solid $color-border-subtle;
+    background: $color-bg-tertiary;
+  }
+
+  &__info {
+    flex: 1;
+    font-size: 10px;
+    color: $color-text-secondary;
+  }
+
+  &__user {
+    font-weight: 500;
+  }
+
+  &__operations {
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+// =============================================================================
+// TRANSACTION GROUP (for grouped view)
+// =============================================================================
+
+.transaction-group {
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: 500;
+  }
+
+  &__timestamp {
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__operations {
+    padding: 0 8px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+// =============================================================================
+// TIME SEGMENT HEADER
+// =============================================================================
+
+.time-segment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: $color-bg-secondary;
+  border: none;
+  border-bottom: 1px solid $color-border-subtle;
+  cursor: pointer;
+
+  &--sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba($color-bg-secondary, 0.95);
+    backdrop-filter: blur(8px);
+  }
+
+  &__label {
+    flex: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: $color-text-secondary;
+    text-align: left;
+  }
+
+  &__count {
+    font-size: 10px;
+    color: $color-text-muted;
+    background: $color-bg-tertiary;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  &__chevron {
+    color: $color-text-muted;
+  }
+}
+
+.time-segment-content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// =============================================================================
+// USER ITEM
+// =============================================================================
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: $color-bg-tertiary;
+  border: 1px solid transparent;
+
+  &--following {
+    border-color: var(--user-color, $color-accent-teal);
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    font-size: 12px;
+    color: $color-text-primary;
+    font-weight: 500;
+  }
+
+  &__status {
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-top: 2px;
+
+    &--editing {
+      color: $color-accent-amber;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid $color-border-subtle;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: $color-bg-secondary;
+      color: $color-text-secondary;
+    }
+
+    &--following {
+      background: rgba(var(--user-color-rgb), 0.2);
+      border-color: var(--user-color);
+      color: var(--user-color);
+    }
+  }
+}
+
+// =============================================================================
+// SAVE POINT ITEM
+// =============================================================================
+
+.save-point-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: $color-bg-tertiary;
+  border: 1px solid transparent;
+
+  &--current {
+    background: rgba($color-accent-green, 0.1);
+    border-color: rgba($color-accent-green, 0.3);
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--current {
+      background: rgba($color-accent-green, 0.2);
+      color: $color-accent-green;
+    }
+
+    &--default {
+      background: rgba($color-accent-blue, 0.2);
+      color: $color-accent-blue;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 12px;
+    color: $color-text-primary;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__current-label {
+    color: $color-accent-green;
+  }
+
+  &__meta {
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 4px;
+  }
+}
+
+// =============================================================================
+// AUDIT LOG TAB
+// =============================================================================
+
+.audit-log-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// =============================================================================
+// SAVE POINTS TAB
+// =============================================================================
+
+.save-points-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    padding: 12px 12px 8px;
+  }
+}

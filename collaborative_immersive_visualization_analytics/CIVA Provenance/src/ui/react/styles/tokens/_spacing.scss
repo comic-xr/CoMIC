@@ -1,0 +1,20 @@
+// Design Tokens: Spacing
+// 4px base unit
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-2xl: 24px;
+$spacing-3xl: 32px;
+$spacing-4xl: 40px;
+
+// ============================================================================
+// PANEL DIMENSIONS
+// ============================================================================
+
+$panel-activity-bar-width: 48px; // Activity bar (icon strip)
+$panel-default-width: 400px; // Default panel content width (matches min for consistency)
+$panel-min-width: 400px; // Minimum resizable width (accommodates adaptive/VR controls)
+$panel-max-width: 600px; // Maximum resizable width

@@ -1,0 +1,339 @@
+// src/ui/react/components/workspace/ScratchPad/ScratchPad.scss
+// Styles for ScratchPad component
+// TODO: Refine styles to match design system
+
+@use "theme" as *;
+
+// =============================================================================
+// COLLAPSED TRIGGER
+// =============================================================================
+
+.scratchpad-trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 6px 10px;
+  background: $color-glass-light;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+    border-color: $color-border-accent;
+  }
+
+  svg:first-child {
+    color: $color-accent-amber;
+  }
+}
+
+// NOTE: Count badge styles now handled by Badge atom
+
+// =============================================================================
+// EXPANDED PANEL
+// =============================================================================
+
+.scratchpad-panel {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 8px;
+  width: 280px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-xl;
+  overflow: hidden;
+  z-index: 100;
+
+  &--detached {
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+    cursor: move;
+  }
+}
+
+// =============================================================================
+// PANEL HEADER
+// =============================================================================
+
+.scratchpad-panel__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: $color-glass-light;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.scratchpad-panel__title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: 12px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+
+  svg {
+    color: $color-accent-amber;
+  }
+}
+
+.scratchpad-panel__scope {
+  margin-left: auto;
+  padding: 4px 8px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-blue;
+  }
+}
+
+.scratchpad-panel__actions {
+  display: flex;
+  gap: 2px;
+}
+
+.scratchpad-panel__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.1);
+    color: $color-accent-blue;
+  }
+}
+
+// =============================================================================
+// CLIPBOARD SECTION
+// =============================================================================
+
+.scratchpad-clipboard {
+  padding: $spacing-sm;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.scratchpad-clipboard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-xs;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scratchpad-clipboard__clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+
+  &:hover {
+    color: $color-accent-red;
+  }
+}
+
+.scratchpad-clipboard__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  min-height: 60px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.scratchpad-clipboard__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  font-size: 10px;
+  color: $color-text-tertiary;
+  text-align: center;
+}
+
+.scratchpad-clipboard__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  background: $color-glass-light;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  font-size: 10px;
+  color: $color-text-secondary;
+  cursor: grab;
+  transition: all $transition-fast;
+  max-width: 100%;
+
+  &:hover {
+    background: $color-glass-medium;
+    border-color: $color-accent-blue;
+
+    .scratchpad-clipboard__item-remove {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.scratchpad-clipboard__item-icon {
+  color: $color-accent-blue;
+  flex-shrink: 0;
+}
+
+.scratchpad-clipboard__item-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+.scratchpad-clipboard__item-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  opacity: 0;
+  border-radius: $radius-xs;
+  flex-shrink: 0;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    color: $color-accent-red;
+  }
+}
+
+.scratchpad-clipboard__hint {
+  margin-top: $spacing-xs;
+  font-size: 9px;
+  color: $color-text-tertiary;
+  font-style: italic;
+}
+
+// =============================================================================
+// QUICK TOOLS SECTION
+// =============================================================================
+
+.scratchpad-tools {
+  padding: $spacing-sm;
+}
+
+.scratchpad-tools__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scratchpad-tools__customize {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+
+  &:hover {
+    color: $color-text-secondary;
+  }
+}
+
+.scratchpad-tools__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xs;
+}
+
+.scratchpad-tools__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  background: $color-glass-light;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 9px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+    border-color: $color-border-accent;
+  }
+
+  &--active {
+    background: rgba($color-accent-teal, 0.15);
+    border-color: $color-accent-teal;
+    color: $color-accent-teal;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// GLOBAL DRAG STATE
+// =============================================================================
+
+body.dragging-from-scratchpad {
+  cursor: grabbing !important;
+  user-select: none;
+
+  .canvas-cell--droppable {
+    outline: 2px dashed $color-accent-amber;
+    outline-offset: -2px;
+  }
+}

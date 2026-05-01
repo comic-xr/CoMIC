@@ -1,0 +1,225 @@
+// src/ui/react/components/common/ResizableSections/ResizableSections.scss
+// Resizable sections
+// Sections can expand/collapse and resize when multiple are open
+
+@use "theme" as *;
+
+// =============================================================================
+// CONTAINER
+// =============================================================================
+
+.resizable-sections-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+
+  // During resize, prevent text selection
+  &--resizing {
+    user-select: none;
+    cursor: ns-resize;
+
+    * {
+      cursor: ns-resize !important;
+    }
+  }
+}
+
+// =============================================================================
+// SECTION
+// =============================================================================
+
+.resizable-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  transition: flex-grow 0.15s ease;
+
+  &--expanded {
+    flex: 1 1 0; // Takes available space
+    min-height: 60px;
+    overflow: hidden;
+  }
+
+  &--collapsed {
+    flex: 0 0 auto; // Only header height
+  }
+}
+
+// =============================================================================
+// SECTION HEADER
+// =============================================================================
+
+.resizable-section__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+
+  // Etched bar effect
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-bottom: 1px solid $color-border-subtle;
+
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: $color-text-secondary;
+
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+  }
+}
+
+.resizable-section__chevron {
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+}
+
+.resizable-section__icon {
+  flex-shrink: 0;
+
+  // Color variants
+  &.icon-blue {
+    color: $color-accent-blue;
+  }
+  &.icon-teal {
+    color: $color-accent-teal;
+  }
+  &.icon-green {
+    color: $color-accent-green;
+  }
+  &.icon-amber {
+    color: $color-accent-amber;
+  }
+  &.icon-pink {
+    color: $color-accent-pink;
+  }
+  &.icon-purple {
+    color: $color-accent-purple;
+  }
+  &.icon-muted {
+    color: $color-text-muted;
+  }
+}
+
+.resizable-section__label {
+  flex: 1;
+}
+
+.resizable-section__badge {
+  background: $color-accent-pink;
+  color: $color-bg-base;
+  font-size: 8px;
+  font-weight: $font-weight-bold;
+  padding: 1px 5px;
+  border-radius: $radius-full;
+}
+
+.resizable-section__count {
+  color: $color-text-muted;
+  font-weight: $font-weight-normal;
+  font-size: 9px;
+}
+
+.resizable-section__header-actions {
+  margin-left: auto;
+}
+
+// =============================================================================
+// SECTION CONTENT
+// =============================================================================
+
+.resizable-section__content {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: $spacing-xs $spacing-sm; // ADD horizontal padding
+
+  // Add spacing between child items
+  > * + * {
+    margin-top: 2px;
+  }
+
+  // Custom scrollbar (unchanged)
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border-medium;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-border-strong;
+    }
+  }
+}
+
+// =============================================================================
+// RESIZE DIVIDER
+// =============================================================================
+
+.resizable-section__divider {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover,
+  &--active {
+    .resizable-section__divider-handle {
+      opacity: 1;
+      background: $color-accent-primary;
+    }
+  }
+}
+
+.resizable-section__divider-handle {
+  width: 40px;
+  height: 2px;
+  background: $color-border-medium;
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+// =============================================================================
+// EMPTY STATE
+// =============================================================================
+
+.resizable-section__empty {
+  padding: $spacing-lg;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+}

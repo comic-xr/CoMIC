@@ -1,0 +1,592 @@
+/**
+ * Minimap Styles for Canvas Map Panel V2
+ */
+
+@use "theme" as *;
+
+.minimap {
+  --accent-cyan: #{$color-accent-cyan};
+  --accent-purple: #{$color-accent-purple};
+  --accent-amber: #{$color-accent-amber};
+  --accent-green: #{$color-accent-green};
+  --accent-blue: #{$color-accent-blue};
+  --accent-red: #{$color-accent-red};
+  --grid-pitch: calc(var(--cell-size) + var(--grid-gap));
+  --label-bg: #060a12;
+  --label-border: rgba(96, 165, 250, 0.16);
+  --fade-color: rgba(6, 10, 18, 0.9);
+
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  // V2Spec: Solid canvas backdrop
+  background: #060a12;
+  border: 1px solid rgba(96, 165, 250, 0.10);
+  border-radius: $radius-lg;
+  // V2Spec: Subtle inset highlights
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &--pannable {
+    cursor: grab;
+  }
+
+  &--dragging {
+    cursor: grabbing;
+  }
+
+  &--drop-target {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow:
+      inset 0 0 0 1px rgba(56, 189, 248, 0.35),
+      0 0 0 2px rgba(56, 189, 248, 0.15);
+  }
+
+  &__scroll {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 100%;
+    transition: transform 0.05s ease-out;
+    position: relative;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  &__labels-corner {
+    position: absolute;
+    background: #060a12;
+    z-index: 10;
+  }
+
+  &__labels-top {
+    position: absolute;
+    display: flex;
+    height: var(--header-size);
+    background: var(--label-bg);
+    border-bottom: 1px solid var(--label-border);
+    overflow: visible;
+    z-index: 8;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -12px;
+      height: 12px;
+      background: linear-gradient(180deg, rgba(6, 10, 18, 1) 0%, rgba(6, 10, 18, 0) 100%);
+      pointer-events: none;
+    }
+  }
+
+  &__labels-top-inner {
+    display: flex;
+    height: 100%;
+  }
+
+  &__col-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(8px, calc(var(--cell-size) / 6), 10px);
+    font-weight: $font-weight-semibold;
+    font-family: $font-family-mono;
+    color: #f59e0b;
+
+    &:not(:last-child) {
+      margin-right: var(--grid-gap);
+    }
+  }
+
+  &__grid-area {
+    display: flex;
+    position: relative;
+  }
+
+  &__labels-left {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: var(--header-size);
+    background: var(--label-bg);
+    border-right: 1px solid var(--label-border);
+    overflow: visible;
+    z-index: 8;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -12px;
+      width: 12px;
+      background: linear-gradient(90deg, rgba(6, 10, 18, 1) 0%, rgba(6, 10, 18, 0) 100%);
+      pointer-events: none;
+    }
+  }
+
+  &__labels-left-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: $spacing-xs;
+    font-size: clamp(8px, calc(var(--cell-size) / 6), 10px);
+    font-weight: $font-weight-semibold;
+    font-family: $font-family-mono;
+    color: #f59e0b;
+    min-width: var(--header-size);
+
+    &:not(:last-child) {
+      margin-bottom: var(--grid-gap);
+    }
+  }
+
+  &__grid {
+    position: relative;
+    background: transparent;
+    border-radius: $radius-md;
+    overflow: hidden;
+  }
+
+  &__grid-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__grid-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
+
+  &__grid-paper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &__grid-paper--active {
+    opacity: 1;
+  }
+
+  &__cell {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__home-icon {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 10px;
+    color: var(--accent-amber);
+    opacity: 0.6;
+  }
+
+  &__bookmark-icon {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    color: var(--accent-amber);
+  }
+
+  &__cursors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 150;
+  }
+
+  &__pan-hint {
+    position: absolute;
+    bottom: $spacing-md;
+    right: $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    font-size: 9px;
+    letter-spacing: 0.2px;
+    color: $color-text-muted;
+    background: rgba(2, 6, 16, 0.65);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    pointer-events: none;
+    z-index: 15;
+  }
+
+  // Edge fade gradients when content is pannable
+  &__edge-fades {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 14;
+    border-radius: $radius-lg;
+    overflow: hidden;
+  }
+
+  &__fade-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 100%;
+    background: linear-gradient(90deg, var(--fade-color), transparent);
+  }
+
+  &__fade-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 100%;
+    background: linear-gradient(270deg, var(--fade-color), transparent);
+  }
+
+  &__fade-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 28px;
+    background: linear-gradient(180deg, var(--fade-color), transparent);
+  }
+
+  &__fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 36px;
+    background: linear-gradient(0deg, var(--fade-color), transparent);
+  }
+
+  // Companion panel offset support
+  &--companion-left {
+    margin-left: var(--companion-offset, 0);
+  }
+
+  &--companion-right {
+    margin-right: var(--companion-offset, 0);
+  }
+}
+
+// Link Lines
+.link-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+
+  &__link {
+    cursor: pointer;
+    pointer-events: stroke;
+
+    &--highlighted line {
+      filter: drop-shadow(0 0 6px currentColor);
+    }
+  }
+}
+
+// VG Block
+.vg-block {
+  position: absolute;
+  z-index: 2;
+  width: var(--vg-width);
+  height: var(--vg-height);
+  background: color-mix(in srgb, var(--vg-color) 25%, transparent);
+  border: 2px solid color-mix(in srgb, var(--vg-color) 80%, transparent);
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+
+  &:hover {
+    background: color-mix(in srgb, var(--vg-color) 35%, transparent);
+    border-color: var(--vg-color);
+  }
+
+  &--selected {
+    background: color-mix(in srgb, var(--vg-color) 40%, transparent);
+    border-color: var(--vg-color);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--vg-color) 50%, transparent);
+  }
+
+  &--ghosted {
+    opacity: 0.4;
+    background: color-mix(in srgb, var(--vg-color) 10%, transparent);
+    border-color: color-mix(in srgb, var(--vg-color) 30%, transparent);
+  }
+
+  &--implicit {
+    border-style: dashed;
+  }
+
+  // Subtle mode: thinner borders, no fill, click-through for dual display
+  &--subtle {
+    background: transparent;
+    border-width: 1px;
+    border-color: color-mix(in srgb, var(--vg-color) 40%, transparent);
+    pointer-events: none;
+    z-index: 0;
+
+    &:hover {
+      background: transparent;
+      border-color: color-mix(in srgb, var(--vg-color) 40%, transparent);
+    }
+
+    .vg-block__name {
+      opacity: 0.6;
+      font-size: 8px;
+    }
+  }
+
+  &__name {
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    color: var(--vg-color);
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  &__internals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__internal-cell {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+
+    &--filled {
+      background: color-mix(in srgb, var(--vg-color) 30%, rgba(0, 0, 0, 0.2));
+    }
+  }
+}
+
+// View Cell
+.view-cell {
+  position: absolute;
+  z-index: 2;
+  background: color-mix(in srgb, var(--view-color) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--view-color) 60%, transparent);
+  border-radius: $radius-xs;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+
+  &:hover {
+    background: color-mix(in srgb, var(--view-color) 35%, transparent);
+    border-color: var(--view-color);
+  }
+
+  &--selected {
+    background: color-mix(in srgb, var(--view-color) 40%, transparent);
+    border-color: var(--view-color);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--view-color) 40%, transparent);
+  }
+
+  &__icon {
+    color: var(--view-color);
+  }
+
+  &__name {
+    font-size: 8px;
+    color: $color-text-primary;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+}
+
+// Viewport Indicator
+.viewport-indicator {
+  position: absolute;
+  width: var(--vp-width);
+  height: var(--vp-height);
+  border: 2px solid var(--accent-cyan);
+  border-radius: $radius-md;
+  background: color-mix(in srgb, var(--accent-cyan) 8%, transparent);
+  pointer-events: none;
+  z-index: 50;
+
+  &--primary {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--accent-blue) 30%, transparent);
+  }
+
+  &--selected {
+    border-width: 3px;
+  }
+
+  &__label {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-size: 8px;
+    font-weight: $font-weight-semibold;
+    color: white;
+    background: var(--accent-cyan);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+}
+
+// Collaborator Indicator
+.collaborator-indicator {
+  position: absolute;
+  border: 2px dashed var(--collab-color);
+  border-radius: $radius-md;
+  background: color-mix(in srgb, var(--collab-color) 8%, transparent);
+  pointer-events: none;
+  z-index: 60;
+
+  &--broadcasting {
+    border-style: solid;
+    animation: pulse 2s infinite;
+  }
+
+  &__avatar {
+    position: absolute;
+    top: -8px;
+    right: 4px;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    color: var(--collab-color);
+  }
+
+  &__broadcast {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    color: var(--accent-red);
+    animation: pulse 1s infinite;
+  }
+
+  &__name {
+    position: absolute;
+    top: -8px;
+    right: 26px;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    color: var(--collab-color);
+    white-space: nowrap;
+  }
+}
+
+// Cursor Indicator
+.cursor-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 160;
+
+  &__pointer {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  }
+
+  &__name {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    color: white;
+    background: var(--cursor-color);
+    padding: 1px 4px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  &__avatar {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cursor-color);
+    border-radius: 50%;
+    font-size: 7px;
+    font-weight: $font-weight-bold;
+    color: white;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,175 @@
+/**
+ * ViewLinkManager Styles
+ * Frosted glassmorphism aesthetic with VR-friendly blue hues
+ */
+
+@use "theme" as *;
+
+.view-link-manager {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    max-height: 600px;
+    background: $color-glass-panel;
+    backdrop-filter: $backdrop-glass-medium;
+    -webkit-backdrop-filter: $backdrop-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-glass-lg;
+    overflow: hidden;
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.view-link-manager__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: $color-glass-light;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.view-link-manager__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.view-link-manager__view-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-text-primary;
+}
+
+.view-link-manager__subtitle {
+    font-size: 12px;
+    color: $color-text-muted;
+    padding-left: 8px;
+    border-left: 1px solid $color-border-subtle;
+}
+
+.view-link-manager__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-glass-medium;
+        border-color: $color-border-subtle;
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.view-link-manager__content {
+    flex: 1;
+    overflow-y: auto;
+
+    // Custom scrollbar for glass aesthetic
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-border-default;
+        border-radius: $radius-full;
+
+        &:hover {
+            background: $color-border-medium;
+        }
+    }
+}
+
+// =============================================================================
+// PROPERTY DETAIL
+// =============================================================================
+
+.view-link-manager__property-detail {
+    padding: 0 12px 12px;
+}
+
+.view-link-manager__property-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 4px;
+    border-bottom: 1px solid $color-border-subtle;
+    margin-bottom: 0;
+
+    svg {
+        color: $color-accent-blue;
+    }
+}
+
+.view-link-manager__property-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-text-primary;
+}
+
+.view-link-manager__property-desc {
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-left: auto;
+}
+
+// =============================================================================
+// MEMBERS SECTION
+// =============================================================================
+
+.view-link-manager__members-section {
+    margin-top: 4px;
+}
+
+.view-link-manager__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 4px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+}
+
+.view-link-manager__add-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: $color-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    font-size: 11px;
+    font-weight: 500;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-glass-strong;
+        border-color: $color-accent-blue;
+        color: $color-accent-blue;
+        box-shadow: $glow-blue;
+    }
+}

@@ -1,0 +1,140 @@
+// src/ui/react/components/molecules/PositionDisplay/PositionDisplay.scss
+// Position display molecule styles
+
+@use "theme" as *;
+
+.position-display {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+
+    // ==========================================================================
+    // ICON
+    // ==========================================================================
+
+    &__icon {
+        color: $color-text-muted;
+        flex-shrink: 0;
+    }
+
+    // ==========================================================================
+    // COORDINATES
+    // ==========================================================================
+
+    &__coords {
+        font-family: $font-family-mono;
+        font-size: 11px;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+        letter-spacing: 0.5px;
+    }
+
+    &__value {
+        color: $color-text-primary;
+    }
+
+    &__separator {
+        color: $color-text-muted;
+        margin: 0 1px;
+    }
+
+    // ==========================================================================
+    // HOME POSITION
+    // ==========================================================================
+
+    &__home {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: $spacing-xs;
+        padding-left: $spacing-xs;
+        border-left: 1px solid $color-border-subtle;
+        color: $color-text-muted;
+    }
+
+    &__home-coords {
+        font-family: $font-family-mono;
+        font-size: 10px;
+    }
+
+    &__home-badge {
+        font-size: 8px;
+        font-weight: $font-weight-bold;
+        color: $color-accent-sky;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-left: $spacing-xs;
+        padding: 2px 4px;
+        background: rgba($color-accent-sky, 0.15);
+        border-radius: $radius-xs;
+    }
+
+    // ==========================================================================
+    // AT HOME STATE
+    // ==========================================================================
+
+    &--at-home {
+        border-color: rgba($color-accent-sky, 0.3);
+        background: rgba($color-accent-sky, 0.05);
+
+        .position-display__icon {
+            color: $color-accent-sky;
+        }
+    }
+
+    // ==========================================================================
+    // SIZE VARIANTS
+    // ==========================================================================
+
+    &--sm {
+        padding: 2px $spacing-xs;
+        gap: 4px;
+
+        .position-display__coords {
+            font-size: 10px;
+        }
+
+        .position-display__home-coords {
+            font-size: 9px;
+        }
+    }
+
+    &--lg {
+        padding: $spacing-sm $spacing-md;
+        gap: $spacing-sm;
+
+        .position-display__coords {
+            font-size: 13px;
+        }
+
+        .position-display__home-badge {
+            font-size: 9px;
+            padding: 3px 6px;
+        }
+    }
+}
+
+// =============================================================================
+// VR MODE
+// =============================================================================
+
+.adaptive-vr {
+    .position-display {
+        padding: $spacing-sm $spacing-md;
+        gap: $spacing-sm;
+        border-radius: $radius-md;
+
+        &__coords {
+            font-size: 14px;
+        }
+
+        &__home-badge {
+            font-size: 10px;
+            padding: $spacing-xs $spacing-sm;
+        }
+    }
+}

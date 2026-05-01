@@ -1,0 +1,75 @@
+// src/ui/react/components/atoms/LinkBadges/ModeBadge.scss
+// ModeBadge atom styles
+
+@use "theme" as *;
+
+.mode-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: $radius-sm;
+    font-weight: 500;
+
+    // Size variants
+    &--small {
+        gap: 2px;
+        padding: 1px 4px;
+        font-size: 9px;
+    }
+
+    &--default {
+        gap: 3px;
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+
+    &--large {
+        gap: 4px;
+        padding: 3px 8px;
+        font-size: 11px;
+    }
+
+    // Color variants
+    &--color-cyan {
+        background: rgba($color-accent-teal, 0.2);
+        color: $color-accent-teal;
+    }
+
+    &--color-teal {
+        background: rgba($color-accent-teal, 0.2);
+        color: $color-accent-teal;
+    }
+
+    &--color-purple {
+        background: rgba($color-accent-purple, 0.2);
+        color: $color-accent-purple;
+    }
+
+    // VR mode - larger for visibility
+    &--vr {
+        &.mode-badge--small {
+            gap: 3px;
+            padding: 2px 6px;
+            font-size: 11px;
+        }
+
+        &.mode-badge--default {
+            gap: 4px;
+            padding: 3px 8px;
+            font-size: 12px;
+        }
+
+        &.mode-badge--large {
+            gap: 5px;
+            padding: 4px 10px;
+            font-size: 14px;
+        }
+    }
+
+    &__icon {
+        line-height: 1;
+    }
+
+    &__label {
+        line-height: 1;
+    }
+}

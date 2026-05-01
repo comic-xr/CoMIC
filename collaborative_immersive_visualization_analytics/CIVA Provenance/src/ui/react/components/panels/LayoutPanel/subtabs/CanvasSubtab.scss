@@ -1,0 +1,172 @@
+// subtabs/CanvasSubtab.scss
+@use "theme" as *;
+
+.canvas-subtab {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  overflow-y: auto;
+
+  // Card sections
+  &__card {
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+
+    &[data-color="blue"] { --card-color: #{$color-accent-blue}; }
+    &[data-color="green"] { --card-color: #{$color-accent-green}; }
+    &[data-color="amber"] { --card-color: #{$color-accent-amber}; }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    svg { color: var(--card-color, $color-text-muted); }
+  }
+
+  &__description {
+    margin-top: $spacing-sm;
+    font-size: 9px;
+    color: $color-text-tertiary;
+    line-height: 1.4;
+  }
+
+  // Flow direction row
+  &__flow-direction {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+  }
+
+  &__label {
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  // Tools section
+  &__tools {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__tool-group {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__edit-btn {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover { background: rgba(255, 255, 255, 0.08); color: $color-text-secondary; }
+
+    &--active {
+      background: rgba($color-accent-amber, 0.2);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+  }
+
+  &__drop-mode {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
+  }
+
+  // Quick layouts
+  &__quick-layouts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+}
+
+// NOTE: Etched toggle styles now handled by ToggleGroup molecule
+
+// Tool buttons
+.layout-tool-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled):not(&--active) { background: rgba(255,255,255,0.08); color: $color-text-secondary; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  &--active {
+    background: rgba(var(--tool-color-rgb), 0.15);
+    border-color: rgba(var(--tool-color-rgb), 0.3);
+    color: var(--tool-color);
+  }
+
+  &--blue { --tool-color: #{$color-accent-blue}; --tool-color-rgb: 96, 165, 250; }
+  &--teal { --tool-color: #{$color-accent-teal}; --tool-color-rgb: 45, 212, 191; }
+  &--purple { --tool-color: #{$color-accent-purple}; --tool-color-rgb: 167, 139, 250; }
+}
+
+// Quick layout button
+.quick-layout-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 40px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 8px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover { background: rgba(255,255,255,0.08); color: $color-text-secondary; border-color: $color-border-medium; }
+
+  &__icon {
+    display: grid;
+    gap: 1px;
+    margin-bottom: 2px;
+  }
+
+  &__cell {
+    width: 6px;
+    height: 5px;
+    background: currentColor;
+    opacity: 0.4;
+    border-radius: 1px;
+  }
+}
+
+.layout-divider {
+  width: 1px;
+  height: 24px;
+  background: $color-border-default;
+  margin: 0 $spacing-xs;
+}

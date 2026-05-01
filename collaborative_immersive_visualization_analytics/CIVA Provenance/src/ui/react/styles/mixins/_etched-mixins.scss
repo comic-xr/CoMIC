@@ -1,0 +1,581 @@
+// Mixins: Etched & Backlit UI Patterns
+// Creates the distinctive "carved" and "illuminated" look from the new design system
+// These complement the existing glassmorphism mixins with more tactile, hardware-inspired effects
+
+@use "sass:color";
+@use "../tokens/colors" as *;
+@use "../tokens/effects" as *;
+@use "../tokens/spacing" as *;
+@use "../tokens/typography" as *;
+
+// ============================================================================
+// ETCHED BAR - Sunken/carved header bar effect
+// ============================================================================
+
+/// Creates a sunken, etched bar effect like a carved control surface
+/// Used for panel headers, toolbar backgrounds, section dividers
+/// @param {String} $depth - 'subtle', 'medium', or 'deep'
+@mixin etched-bar($depth: "medium") {
+  @if $depth == "subtle" {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.15) 50%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  } @else if $depth == "deep" {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.25) 50%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.6),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  } @else {
+    // Default: medium
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+// ============================================================================
+// ETCHED TOGGLE - Inset button that glows when active
+// ============================================================================
+
+/// Creates an etched toggle button - sunken when inactive, glowing when active
+/// @param {Color} $accent-color - The color to use when active
+/// @param {Boolean} $active - Whether the toggle is currently active
+@mixin etched-toggle($accent-color: $color-accent-primary, $active: false) {
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  @if $active {
+    background: rgba($accent-color, 0.15);
+    border: 1px solid rgba($accent-color, 0.4);
+    color: $accent-color;
+    box-shadow: 0 0 10px rgba($accent-color, 0.2);
+  } @else {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: $color-text-tertiary;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover:not(:disabled) {
+    @if $active {
+      background: rgba($accent-color, 0.2);
+      box-shadow: 0 0 15px rgba($accent-color, 0.3);
+    } @else {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.25) 0%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+      color: $color-text-secondary;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/// Active state mixin - apply to .active class or [aria-pressed="true"]
+@mixin etched-toggle-active($accent-color: $color-accent-primary) {
+  background: rgba($accent-color, 0.15);
+  border: 1px solid rgba($accent-color, 0.4);
+  color: $accent-color;
+  box-shadow: 0 0 10px rgba($accent-color, 0.2);
+
+  &:hover {
+    background: rgba($accent-color, 0.2);
+    box-shadow: 0 0 15px rgba($accent-color, 0.3);
+  }
+}
+
+// ============================================================================
+// ETCHED BACKLIT BUTTON - Subtle illumination from behind
+// ============================================================================
+
+/// Creates an etched backlit button effect - subtle glow that intensifies on hover/active
+/// This is the etched variant - see glass-mixins for the glass variant
+/// @param {Color} $accent-color - The color for the backlight effect
+/// @param {Boolean} $active - Whether the button is currently active
+@mixin etched-backlit-button(
+  $accent-color: $color-accent-primary,
+  $active: false
+) {
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  @if $active {
+    background: rgba($accent-color, 0.15);
+    border: 1px solid rgba($accent-color, 0.4);
+    color: $accent-color;
+  } @else {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba($accent-color, 0.1);
+    border-color: rgba($accent-color, 0.3);
+    color: $accent-color;
+  }
+
+  &:active:not(:disabled) {
+    background: rgba($accent-color, 0.15);
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================================
+// ACTIVITY BAR BUTTON - Icon button for vertical navigation
+// ============================================================================
+
+/// Activity bar button - used in the vertical icon bar for panel navigation
+/// @param {Color} $accent-color - Color when this tab is active
+@mixin activity-bar-button($accent-color: $color-accent-primary) {
+  @include etched-toggle($accent-color, false);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active,
+  &[aria-selected="true"] {
+    @include etched-toggle-active($accent-color);
+  }
+}
+
+// ============================================================================
+// FILTER TOGGLE - Small inline toggle for filter controls
+// ============================================================================
+
+/// Small filter toggle button used in toolbars
+/// @param {Color} $accent-color - Color when active
+@mixin filter-toggle($accent-color: $color-accent-primary) {
+  padding: 3px 6px;
+  font-size: $font-size-xs;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  @include etched-toggle($accent-color, false);
+
+  &.active {
+    @include etched-toggle-active($accent-color);
+  }
+
+  // Count badge inside filter
+  .count {
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// ============================================================================
+// SECTION HEADER - Collapsible section header
+// ============================================================================
+
+/// Section header style for collapsible tree sections
+/// @param {Color} $icon-color - Color for the section icon
+@mixin section-header($icon-color: $color-text-secondary) {
+  padding: $spacing-sm $spacing-md;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+  user-select: none;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  // Chevron icon
+  .chevron {
+    color: $color-text-muted;
+    transition: transform $transition-fast;
+  }
+
+  // Section icon
+  .section-icon {
+    color: $icon-color;
+  }
+
+  // Count badge
+  .count {
+    margin-left: auto;
+    color: $color-text-muted;
+    font-weight: $font-weight-normal;
+    font-size: 9px;
+  }
+
+  // Notification badge
+  .badge {
+    background: $color-accent-pink;
+    color: $color-bg-base;
+    font-size: 8px;
+    font-weight: $font-weight-semibold;
+    padding: 1px 5px;
+    border-radius: $radius-full;
+    margin-left: $spacing-xs;
+  }
+}
+
+// ============================================================================
+// WORKSPACE SELECTOR - Dropdown trigger with workspace color accent
+// ============================================================================
+
+/// Workspace selector button with dynamic color accent
+/// Uses CSS custom property --workspace-color for dynamic theming
+@mixin workspace-selector-trigger {
+  width: 100%;
+  padding: $spacing-md $spacing-md;
+  background: rgba(var(--workspace-color-rgb, 96, 165, 250), 0.1);
+  border: 1px solid rgba(var(--workspace-color-rgb, 96, 165, 250), 0.3);
+  border-radius: $radius-md;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  color: $color-text-primary;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(var(--workspace-color-rgb, 96, 165, 250), 0.15);
+    border-color: rgba(var(--workspace-color-rgb, 96, 165, 250), 0.4);
+  }
+
+  // Icon colored by workspace
+  .workspace-icon {
+    color: var(--workspace-color, $color-accent-blue);
+  }
+
+  // Info container
+  .workspace-info {
+    flex: 1;
+    text-align: left;
+  }
+
+  // Label text
+  .workspace-label {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  // Workspace name
+  .workspace-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+  // Dropdown chevron
+  .workspace-chevron {
+    color: $color-text-muted;
+    transition: transform $transition-fast;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ============================================================================
+// TREE ITEM - File/dataset list item
+// ============================================================================
+
+/// Tree item style for file and dataset lists
+/// @param {Color} $active-color - Color for active/loaded state indicator
+@mixin tree-item($active-color: $color-accent-green) {
+  padding: $spacing-sm $spacing-sm;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  transition: background $transition-fast;
+  border-left: 2px solid transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  &.selected {
+    background: rgba($color-accent-blue, 0.1);
+    border-left-color: $color-accent-blue;
+  }
+
+  &.active,
+  &.loaded {
+    border-left-color: $active-color;
+  }
+
+  // Drag handle
+  .drag-handle {
+    color: $color-text-muted;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &:hover .drag-handle {
+    opacity: 0.6;
+  }
+
+  // File/type icon
+  .item-icon {
+    flex-shrink: 0;
+  }
+
+  // Item name
+  .item-name {
+    flex: 1;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Size/metadata
+  .item-meta {
+    font-size: 8px;
+    color: $color-text-muted;
+  }
+
+  // Status indicator dot
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $active-color;
+  }
+}
+
+// ============================================================================
+// PANEL FOOTER - Action buttons at bottom of panel
+// ============================================================================
+
+/// Panel footer with action buttons
+@mixin panel-footer {
+  padding: $spacing-sm;
+  border-top: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+  display: flex;
+  gap: $spacing-xs;
+}
+
+/// Footer action button
+@mixin footer-action-button($accent-color: $color-accent-blue) {
+  @include etched-toggle($accent-color, false);
+  flex: 1;
+  padding: 7px 0;
+  font-size: $font-size-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+
+  // Icon-only variant
+  &.icon-only {
+    flex: none;
+    padding: 7px $spacing-md;
+  }
+}
+
+// ============================================================================
+// SEARCH INPUT - Panel search bar
+// ============================================================================
+
+/// Search input field with icon
+@mixin panel-search-input {
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: $spacing-sm $spacing-sm $spacing-sm 28px;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    outline: none;
+    transition: all $transition-fast;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      border-color: $color-accent-primary;
+      box-shadow: 0 0 0 2px rgba($color-accent-primary, 0.15);
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: $spacing-sm;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-text-muted;
+    pointer-events: none;
+  }
+
+  .clear-button {
+    position: absolute;
+    right: $spacing-sm;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    padding: 2px;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// ============================================================================
+// VIEW MODE TOGGLES - List/Grid view switches
+// ============================================================================
+
+/// Container for view mode toggle group
+@mixin view-mode-group {
+  display: flex;
+  gap: 1px;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-sm;
+}
+
+/// Individual view mode toggle button
+@mixin view-mode-button($accent-color: $color-accent-blue) {
+  @include etched-toggle($accent-color, false);
+  padding: 3px;
+  border-radius: $radius-xs;
+
+  &.active {
+    @include etched-toggle-active($accent-color);
+  }
+}
+
+// ============================================================================
+// GRID THUMBNAIL - Grid view file card with thumbnail
+// ============================================================================
+
+/// Grid thumbnail card for file display
+@mixin grid-thumbnail-card {
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+  cursor: grab;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-medium;
+    transform: translateY(-1px);
+  }
+
+  &.selected {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.4);
+  }
+
+  // Thumbnail container
+  .thumbnail {
+    aspect-ratio: 4/3;
+    background: $color-bg-base;
+    border-radius: $radius-sm;
+    margin-bottom: $spacing-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  // Thumbnail overlay actions
+  .thumbnail-actions {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &:hover .thumbnail-actions {
+    opacity: 1;
+  }
+
+  // Small action button on thumbnail
+  .thumbnail-action {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: $radius-xs;
+    padding: 3px;
+    cursor: pointer;
+    color: $color-text-secondary;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
+
+  // File name
+  .file-name {
+    font-size: 9px;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // File size
+  .file-size {
+    font-size: 8px;
+    color: $color-text-muted;
+  }
+}

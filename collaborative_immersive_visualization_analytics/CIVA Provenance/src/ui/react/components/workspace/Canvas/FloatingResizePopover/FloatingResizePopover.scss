@@ -1,0 +1,216 @@
+// FloatingResizePopover.scss
+// Glassmorphism-styled popover for resize controls
+
+@use "theme" as *;
+
+// ============================================================================
+// MAIN CONTAINER
+// ============================================================================
+
+.floating-resize-popover {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  z-index: 50;
+
+  // Glassmorphism effect
+  background: rgba($color-bg-secondary, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  min-width: 180px;
+  overflow: hidden;
+
+  // Animation
+  animation: popover-fade-in 0.15s ease-out;
+
+  @keyframes popover-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// ============================================================================
+// HEADER
+// ============================================================================
+
+.floating-resize-popover__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.floating-resize-popover__color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--instance-color, $color-accent-blue);
+  box-shadow: 0 0 6px var(--instance-color, $color-accent-blue);
+  flex-shrink: 0;
+}
+
+.floating-resize-popover__title {
+  flex: 1;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.floating-resize-popover__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-xs;
+  background: transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+}
+
+// ============================================================================
+// SIZE DISPLAY
+// ============================================================================
+
+.floating-resize-popover__size-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  font-family: $font-family-mono;
+  color: $color-text-primary;
+  border-bottom: 1px solid $color-border-subtle;
+
+  svg {
+    color: $color-text-muted;
+  }
+}
+
+// ============================================================================
+// CONTROLS
+// ============================================================================
+
+.floating-resize-popover__controls {
+  padding: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.floating-resize-popover__control-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.floating-resize-popover__control-label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+
+  svg {
+    color: $color-text-muted;
+  }
+}
+
+.floating-resize-popover__control-buttons {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-md;
+  padding: 2px;
+}
+
+.floating-resize-popover__control-value {
+  min-width: 20px;
+  text-align: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  font-family: $font-family-mono;
+  color: $color-text-primary;
+}
+
+.floating-resize-popover__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-sm;
+  background: rgba(255, 255, 255, 0.06);
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    color: $color-text-primary;
+  }
+
+  &:active:not(:disabled) {
+    background: rgba($color-accent-blue, 0.2);
+    color: $color-accent-blue;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================================
+// REMOVE BUTTON
+// ============================================================================
+
+.floating-resize-popover__remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  width: 100%;
+  padding: $spacing-sm;
+  border: none;
+  border-top: 1px solid $color-border-subtle;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-error, 0.1);
+    color: $color-error;
+  }
+}

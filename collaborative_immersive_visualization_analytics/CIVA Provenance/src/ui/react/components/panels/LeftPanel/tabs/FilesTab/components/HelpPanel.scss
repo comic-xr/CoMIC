@@ -1,0 +1,308 @@
+// HelpPanel.scss
+// Contextual help floating panel for Files Tab
+
+.help-panel {
+    position: absolute;
+    bottom: 48px;
+    left: 8px;
+    right: 8px;
+    z-index: 100;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-elevated, #1e1e2a);
+    border: 1px solid var(--color-border-default, rgba(255, 255, 255, 0.1));
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+
+    &__backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    // Header
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+    }
+
+    &__header-icon {
+        color: var(--color-accent-cyan, #22d3ee);
+    }
+
+    &__title {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-text-primary, #e5e7eb);
+    }
+
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        background: none;
+        border: none;
+        color: var(--color-text-muted, #6b7280);
+        cursor: pointer;
+        border-radius: 4px;
+        transition: color 0.15s ease, background 0.15s ease;
+
+        &:hover {
+            color: var(--color-text-primary, #e5e7eb);
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    // Tab bar
+    &__tabs {
+        display: flex;
+        border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+    }
+
+    &__tab {
+        flex: 1;
+        padding: 8px 12px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        font-size: 11px;
+        font-weight: 500;
+        font-family: inherit;
+        color: var(--color-text-muted, #6b7280);
+        cursor: pointer;
+        transition: color 0.15s ease, border-color 0.15s ease;
+
+        &:hover {
+            color: var(--color-text-secondary, #9ca3af);
+        }
+
+        &--active {
+            color: var(--color-accent-cyan, #22d3ee);
+            border-bottom-color: var(--color-accent-cyan, #22d3ee);
+        }
+    }
+
+    // Content area
+    &__content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px;
+
+        // Scrollbar styling
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+
+    // VR mode
+    &--vr {
+        max-height: 500px;
+
+        .help-panel__header {
+            padding: 14px 16px;
+        }
+
+        .help-panel__title {
+            font-size: 15px;
+        }
+
+        .help-panel__close {
+            padding: 8px;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .help-panel__tab {
+            padding: 12px 16px;
+            font-size: 13px;
+            min-height: 44px;
+        }
+
+        .help-panel__content {
+            padding: 16px;
+        }
+    }
+}
+
+// Help content styles
+.help-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__heading {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--color-text-primary, #e5e7eb);
+        margin: 0;
+    }
+
+    &__text {
+        font-size: 11px;
+        color: var(--color-text-muted, #6b7280);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    &__list {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 11px;
+        color: var(--color-text-muted, #6b7280);
+        line-height: 1.6;
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        strong {
+            color: var(--color-text-secondary, #9ca3af);
+        }
+    }
+
+    // File states
+    &__states {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    &__state {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        color: var(--color-text-muted, #6b7280);
+    }
+
+    &__state-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+
+        &--stored {
+            background: transparent;
+            border: 1px solid var(--color-text-muted, #6b7280);
+        }
+
+        &--loading {
+            background: var(--color-accent-blue, #3b82f6);
+        }
+
+        &--loaded {
+            background: var(--color-accent-green, #34d399);
+        }
+
+        &--processing {
+            background: var(--color-accent-amber, #fbbf24);
+        }
+    }
+
+    // Category chips preview
+    &__chips {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    &__chip {
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 500;
+
+        &--teal {
+            background: rgba(45, 212, 191, 0.15);
+            color: #2dd4bf;
+        }
+
+        &--green {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
+        &--blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        &--purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #a855f7;
+        }
+    }
+
+    // Example box
+    &__example {
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+        border-radius: 6px;
+        font-size: 11px;
+        color: var(--color-text-muted, #6b7280);
+        line-height: 1.5;
+    }
+
+    &__example-result {
+        color: var(--color-accent-cyan, #22d3ee);
+    }
+
+    // Keyboard shortcuts
+    &__shortcuts {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__shortcut {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__shortcut-label {
+        font-size: 11px;
+        color: var(--color-text-muted, #6b7280);
+    }
+
+    &__kbd {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+        padding: 2px 6px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.1));
+        border-radius: 4px;
+        font-size: 10px;
+        font-family: inherit;
+        color: var(--color-text-secondary, #9ca3af);
+    }
+}

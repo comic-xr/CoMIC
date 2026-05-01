@@ -1,0 +1,301 @@
+// src/ui/react/components/workspace/Canvas/CanvasHeaderBar/CanvasHeaderBar.scss
+// Canvas header bar styling
+//
+// Uses ToolbarZone components for layout, this file contains zone content styles
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER OVERRIDES
+// =============================================================================
+
+.canvas-header-bar {
+    // Allow responsive shrinking, content will adapt via container queries
+    overflow: visible; // Don't clip dropdowns
+    width: 100%;
+}
+
+// =============================================================================
+// ROOM ZONE OVERRIDES
+// =============================================================================
+
+.canvas-header-bar .toolbar-zone:first-child {
+    // Compact the RoomPresenceIndicator for header bar
+    .room-presence {
+        width: 100%;
+    }
+
+    .room-presence__trigger {
+        padding: $spacing-xs $spacing-sm;
+        min-height: 32px;
+        width: 100%;
+        min-width: 0;
+        gap: $spacing-xs;
+    }
+
+    .room-presence__info {
+        gap: 2px;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .room-presence__room {
+        min-width: 0;
+    }
+
+    .room-presence__name {
+        font-size: $font-size-xs;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .room-presence__avatars {
+        flex-shrink: 0;
+    }
+
+    .room-presence__avatar {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+// =============================================================================
+// WORKSPACE ZONE OVERRIDES
+// =============================================================================
+
+.canvas-header-bar .toolbar-zone:nth-child(3) {
+    // Compact the WorkspaceSelector for header bar
+    .workspace-selector {
+        width: 100%;
+    }
+
+    .workspace-selector__trigger {
+        padding: $spacing-xs $spacing-sm;
+        min-height: 32px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .workspace-selector__info {
+        gap: 2px;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .workspace-selector__name {
+        font-size: $font-size-xs;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+// =============================================================================
+// EDIT TOOLS ZONE
+// =============================================================================
+
+.canvas-header-bar__edit-zone {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.canvas-header-bar__tool-group {
+    display: flex;
+    align-items: center;
+    background: $color-bg-canvas;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    padding: 2px;
+}
+
+.canvas-header-bar__tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    height: 24px;
+    padding: 0 $spacing-sm;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    font-size: $font-size-xs;
+    transition: all $transition-fast;
+
+    &:hover:not(.canvas-header-bar__tool-btn--active) {
+        color: $color-accent-blue;
+        background: rgba($color-accent-blue, 0.08);
+    }
+
+    &--active {
+        color: $color-accent-blue;
+        background: rgba($color-accent-blue, 0.15);
+        border-color: $color-accent-blue;
+    }
+
+    &--merge {
+        &:hover:not(.canvas-header-bar__tool-btn--active) {
+            color: $color-accent-purple;
+            background: rgba($color-accent-purple, 0.08);
+        }
+
+        &.canvas-header-bar__tool-btn--active {
+            color: $color-accent-purple;
+            background: rgba($color-accent-purple, 0.15);
+            border-color: $color-accent-purple;
+        }
+    }
+
+    &--edit {
+        &:hover:not(.canvas-header-bar__tool-btn--active) {
+            color: $color-accent-amber;
+            background: rgba($color-accent-amber, 0.08);
+        }
+
+        &.canvas-header-bar__tool-btn--active {
+            color: $color-accent-amber;
+            background: rgba($color-accent-amber, 0.15);
+            border-color: $color-accent-amber;
+        }
+    }
+}
+
+.canvas-header-bar__tool-label {
+    font-weight: $font-weight-medium;
+}
+
+.canvas-header-bar__tool-separator {
+    width: 1px;
+    height: 16px;
+    background: $color-border-subtle;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// SIZE ZONE
+// =============================================================================
+
+.canvas-header-bar__size-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    // Compact the size display components
+    .canvas-size-display,
+    .viewport-size-display {
+        .labeled-button {
+            padding: $spacing-xs $spacing-sm;
+            min-height: 28px;
+            font-size: $font-size-xs;
+        }
+    }
+}
+
+// =============================================================================
+// CANVAS MODE ZONE
+// =============================================================================
+
+.canvas-header-bar__canvas-mode {
+    display: flex;
+    align-items: center;
+    background: $color-bg-canvas;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    padding: 2px;
+}
+
+.canvas-header-bar__mode-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    height: 24px;
+    padding: 0 $spacing-sm;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    font-size: $font-size-xs;
+    transition: all $transition-fast;
+
+    &:hover:not(.canvas-header-bar__mode-btn--active) {
+        color: $color-accent-blue;
+        background: rgba($color-accent-blue, 0.08);
+    }
+
+    &--active {
+        color: $color-accent-blue;
+        background: rgba($color-accent-blue, 0.15);
+        border-color: $color-accent-blue;
+    }
+}
+
+.canvas-header-bar__mode-label {
+    font-weight: $font-weight-medium;
+}
+
+// =============================================================================
+// RESPONSIVE - Progressive collapse using container queries
+// =============================================================================
+
+// MEDIUM: < 900px - Hide button labels
+@container canvas-workspace (max-width: 900px) {
+    .canvas-header-bar__tool-label,
+    .canvas-header-bar__mode-label {
+        display: none;
+    }
+
+    .canvas-header-bar__tool-btn,
+    .canvas-header-bar__mode-btn {
+        padding: 0 $spacing-xs;
+        min-width: 28px;
+    }
+}
+
+// SMALL: < 700px - Compact everything
+@container canvas-workspace (max-width: 700px) {
+    .canvas-header-bar__tool-group {
+        padding: 1px;
+    }
+
+    .canvas-header-bar__tool-btn,
+    .canvas-header-bar__mode-btn {
+        height: 22px;
+        min-width: 24px;
+    }
+
+    .canvas-header-bar__size-content {
+        display: none;
+    }
+}
+
+// EXTRA SMALL: < 500px - Hide non-essential zones
+@container canvas-workspace (max-width: 500px) {
+    .canvas-header-bar__canvas-mode {
+        display: none;
+    }
+
+    .canvas-header-bar__edit-zone .canvas-header-bar__tool-separator {
+        display: none;
+    }
+}
+
+// Fallback for browsers without container queries
+@supports not (container-type: inline-size) {
+    @media (max-width: 1100px) {
+        .canvas-header-bar__tool-label,
+        .canvas-header-bar__mode-label {
+            display: none;
+        }
+
+        .canvas-header-bar__tool-btn,
+        .canvas-header-bar__mode-btn {
+            padding: 0 $spacing-xs;
+            min-width: 28px;
+        }
+    }
+}

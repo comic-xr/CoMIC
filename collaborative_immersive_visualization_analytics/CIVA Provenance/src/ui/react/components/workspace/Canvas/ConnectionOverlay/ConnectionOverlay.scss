@@ -1,0 +1,124 @@
+// ConnectionOverlay.scss
+// Overlay for disconnected state
+
+@use "sass:color";
+@use "theme" as *;
+
+.connection-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Semi-transparent backdrop
+  background: rgba($color-bg-primary, 0.85);
+  backdrop-filter: blur(8px);
+
+  // Prevent interactions with canvas beneath
+  pointer-events: all;
+}
+
+.connection-overlay__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  max-width: 320px;
+  text-align: center;
+
+  // Glassmorphism card
+  background: rgba($color-bg-secondary, 0.6);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.connection-overlay__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba($color-warning, 0.1);
+  color: $color-warning;
+
+  &--reconnecting {
+    animation: spin 1.5s linear infinite;
+    color: $color-accent-blue;
+    background: rgba($color-accent-blue, 0.1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.connection-overlay__title {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.connection-overlay__message {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
+.connection-overlay__error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-error, 0.1);
+  border: 1px solid rgba($color-error, 0.2);
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  color: $color-error;
+}
+
+.connection-overlay__retry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-lg;
+  margin-top: $spacing-sm;
+
+  background: $color-accent-blue;
+  border: none;
+  border-radius: $radius-md;
+  color: white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: color.adjust($color-accent-blue, $lightness: 8%);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.connection-overlay__hint {
+  margin-top: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  font-style: italic;
+}

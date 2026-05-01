@@ -1,0 +1,358 @@
+/**
+ * CombinedFiltersDropdown styles
+ *
+ * Tabbed Types + Tags dropdown for minimal mode.
+ */
+
+@use "theme" as *;
+
+.combined-filters-dropdown {
+  &__container {
+    width: 300px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+    overflow: hidden;
+  }
+
+  // =========================================================================
+  // TABS
+  // =========================================================================
+
+  &__tabs {
+    display: flex;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+
+    font-size: $font-size-sm;
+    font-family: inherit;
+    color: $color-text-secondary;
+
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover:not(&--active) {
+      background: $color-hover-bg;
+    }
+
+    &--active {
+      color: $color-accent-blue;
+      border-bottom-color: $color-accent-blue;
+    }
+  }
+
+  &__tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    padding: 0 4px;
+
+    background: $color-accent-blue;
+    border-radius: 8px;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: #fff;
+    line-height: 16px;
+  }
+
+  // =========================================================================
+  // SEARCH
+  // =========================================================================
+
+  &__search {
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+
+    &:focus-within {
+      border-color: $color-accent-blue;
+    }
+  }
+
+  &__search-icon {
+    flex-shrink: 0;
+    color: $color-text-tertiary;
+  }
+
+  &__search-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+
+    &::placeholder {
+      color: $color-text-tertiary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__search-clear {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: none;
+    background: $color-bg-tertiary;
+    border-radius: $radius-sm;
+    color: $color-text-tertiary;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-hover-bg;
+      color: $color-text-secondary;
+    }
+  }
+
+  // =========================================================================
+  // CONTENT
+  // =========================================================================
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+
+    button {
+      padding: $spacing-xs $spacing-sm;
+      border: none;
+      background: transparent;
+      font-size: $font-size-xs;
+      font-family: inherit;
+      color: $color-accent-blue;
+      cursor: pointer;
+
+      &:hover:not(:disabled) {
+        text-decoration: underline;
+      }
+
+      &:disabled {
+        color: $color-text-tertiary;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__separator {
+    color: $color-border-subtle;
+    font-size: $font-size-xs;
+  }
+
+  // =========================================================================
+  // OPTIONS (Types)
+  // =========================================================================
+
+  &__options {
+    padding: $spacing-xs 0;
+  }
+
+  &__category {
+    &:not(:last-child) {
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  &__category-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    margin: 0 $spacing-xs;
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    input[type='checkbox'] {
+      width: 14px;
+      height: 14px;
+      accent-color: $color-accent-blue;
+      cursor: inherit;
+    }
+
+    &:hover:not(&--empty) {
+      background: $color-hover-bg;
+    }
+
+    &--empty {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--selected {
+      background: color-mix(
+        in srgb,
+        $color-accent-blue 10%,
+        transparent
+      );
+
+      .combined-filters-dropdown__option-label {
+        color: $color-accent-blue;
+      }
+    }
+  }
+
+  &__option-label {
+    flex: 1;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+
+  &__option-count {
+    flex-shrink: 0;
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+  }
+
+  // =========================================================================
+  // TAG CHIPS
+  // =========================================================================
+
+  &__tag-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+  }
+
+  &__tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: $spacing-xs $spacing-sm;
+
+    background: transparent;
+    border: 1px solid var(--tag-color, $color-border-subtle);
+    border-radius: $radius-full;
+
+    font-size: $font-size-xs;
+    font-family: inherit;
+    color: var(--tag-color, $color-text-secondary);
+
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover:not(&--selected) {
+      background: color-mix(in srgb, var(--tag-color) 10%, transparent);
+    }
+
+    &--selected {
+      background: var(--tag-color, $color-accent-blue);
+      border-color: var(--tag-color, $color-accent-blue);
+      color: #fff;
+    }
+  }
+
+  &__tag-count {
+    opacity: 0.7;
+    font-size: 10px;
+  }
+
+  // =========================================================================
+  // EMPTY STATE
+  // =========================================================================
+
+  &__empty {
+    padding: $spacing-lg;
+    text-align: center;
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+  }
+
+  // =========================================================================
+  // VR MODE
+  // =========================================================================
+
+  &--vr {
+    .combined-filters-dropdown__container {
+      width: 340px;
+    }
+
+    .combined-filters-dropdown__tab {
+      min-height: 44px;
+      font-size: $font-size-md;
+    }
+
+    .combined-filters-dropdown__search-input {
+      font-size: $font-size-md;
+      padding: $spacing-sm 0;
+    }
+
+    .combined-filters-dropdown__option {
+      padding: $spacing-sm $spacing-md;
+      min-height: 44px;
+
+      input[type='checkbox'] {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .combined-filters-dropdown__option-label {
+      font-size: $font-size-md;
+    }
+
+    .combined-filters-dropdown__tag-chip {
+      min-height: 44px;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+}

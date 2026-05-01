@@ -1,0 +1,236 @@
+// src/ui/react/components/panels/LayoutPanel/LayoutPanel.scss
+// Layout Panel styling
+
+@use "theme" as *;
+
+// =============================================================================
+// PANEL HEADER (shared style - can also be in _tabs.scss)
+// =============================================================================
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-default;
+  flex-shrink: 0;
+
+  &__icon {
+    color: var(--header-color, $color-text-muted);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 11px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__count {
+    margin-left: auto;
+    font-size: 10px;
+    color: $color-text-muted;
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-full;
+  }
+
+  // Color variants
+  &--amber {
+    --header-color: #{$color-accent-amber};
+  }
+
+  &--pink {
+    --header-color: #{$color-accent-pink};
+  }
+
+  &--teal {
+    --header-color: #{$color-accent-teal};
+  }
+
+  &--purple {
+    --header-color: #{$color-accent-purple};
+  }
+
+  &--blue {
+    --header-color: #{$color-accent-blue};
+  }
+
+  &--green {
+    --header-color: #{$color-accent-green};
+  }
+}
+
+// =============================================================================
+// LAYOUT PANEL CONTAINER
+// =============================================================================
+
+.layout-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  // State modifiers
+  &--loading,
+  &--error,
+  &--disconnected {
+    .layout-panel__loading,
+    .layout-panel__error,
+    .layout-panel__disconnected {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      color: $color-text-muted;
+      font-size: 12px;
+    }
+  }
+
+  &__spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  // Subtabs
+  &__tabs {
+    display: flex;
+    border-bottom: 1px solid $color-border-subtle;
+    flex-shrink: 0;
+  }
+
+  &__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: $color-text-muted;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+      background: $color-glass-light;
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba(var(--tab-color-rgb), 0.04);
+      border-bottom-color: var(--tab-color);
+      color: var(--tab-color);
+
+      &[data-color="amber"] {
+        --tab-color: #{$color-accent-amber};
+        --tab-color-rgb: 251, 191, 36;
+      }
+
+      &[data-color="purple"] {
+        --tab-color: #{$color-accent-purple};
+        --tab-color-rgb: 192, 132, 252;
+      }
+    }
+  }
+
+  &__tab-badge {
+    font-size: 9px;
+    padding: 1px 5px;
+    background: rgba(var(--tab-color-rgb, 255, 255, 255), 0.15);
+    border-radius: $radius-full;
+  }
+
+  // Content area
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  // Navigator (docked)
+  &__navigator {
+    flex-shrink: 0;
+    border-top: 1px solid $color-border-default;
+  }
+}
+
+// =============================================================================
+// FLOATING NAVIGATOR
+// =============================================================================
+
+.floating-canvas-navigator {
+  position: absolute;
+  bottom: $spacing-md;
+  left: $spacing-md;
+  width: 400px;
+  max-width: calc(100% - #{$spacing-md * 2});
+  z-index: 50;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+// =============================================================================
+// FLOATING CANVAS NAVIGATOR (Draggable)
+// =============================================================================
+
+.floating-canvas-navigator {
+  position: absolute;
+  bottom: $spacing-md;
+  left: $spacing-md;
+  width: 420px;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: $z-popover;
+  overflow: hidden;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  transition: box-shadow 0.15s ease;
+
+  // Dragging state
+  &--dragging {
+    cursor: grabbing;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4);
+    opacity: 0.95;
+    user-select: none;
+  }
+
+  // Accent line at top
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $color-accent-amber;
+  }
+
+  // Make header draggable
+  .canvas-navigator__header {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,509 @@
+/**
+ * @file CursorsTab.scss
+ * @description Cursors tab styling with CIEDE2000 color differentiation.
+ */
+
+@use "theme" as *;
+
+.cursors-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  // Quick toggle section
+  &__quick-toggle {
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+    display: flex;
+    justify-content: center;
+  }
+
+  // Users section
+  &__users {
+    flex-shrink: 0;
+    border-bottom: 1px solid $color-border-default;
+  }
+
+  &__users-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  &__users-count {
+    margin-left: auto;
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-full;
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+
+  &__users-list {
+    padding: $spacing-xs;
+  }
+
+  // Settings section
+  &__settings {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-xs;
+  }
+}
+
+// Quick toggle button
+.quick-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-sky, 0.15);
+    border-color: rgba($color-accent-sky, 0.3);
+    color: $color-accent-sky;
+  }
+}
+
+// =============================================================================
+// CAMERA SYNC SECTION
+// =============================================================================
+
+.cursors-tab__camera-content {
+  padding: $spacing-xs;
+}
+
+.camera-sync-selector {
+  display: flex;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-sm;
+}
+
+.camera-sync-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: $spacing-sm;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+  }
+}
+
+.following-indicator {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($color-accent-green, 0.15);
+  border: 1px solid rgba($color-accent-green, 0.3);
+  border-radius: $radius-sm;
+  font-size: 11px;
+  color: $color-accent-green;
+
+  button {
+    margin-left: auto;
+    background: none;
+    border: none;
+    padding: 2px;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// =============================================================================
+// TRACKING MODE SELECTOR
+// =============================================================================
+
+.tracking-mode-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-xs 0;
+  margin-bottom: $spacing-xs;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.tracking-mode-label {
+  font-size: 11px;
+  color: $color-text-secondary;
+}
+
+.tracking-mode-options {
+  display: flex;
+  gap: 2px;
+}
+
+.tracking-mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-sky, 0.15);
+    border-color: rgba($color-accent-sky, 0.3);
+    color: $color-accent-sky;
+  }
+}
+
+// =============================================================================
+// CURSOR ROW (user item)
+// =============================================================================
+
+.cursor-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  position: relative;
+  transition: all $transition-fast;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: $color-border-default;
+  }
+
+  &--self {
+    background: rgba($color-accent-sky, 0.08);
+    border-color: rgba($color-accent-sky, 0.2);
+  }
+
+  &--following {
+    background: rgba($color-accent-green, 0.08);
+    border-color: rgba($color-accent-green, 0.3);
+  }
+
+  // Presence indicator (small dot)
+  &__presence {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform $transition-fast;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name {
+    font-size: 12px;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__you {
+    margin-left: 4px;
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__following-badge {
+    font-size: 9px;
+    color: $color-accent-green;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  // Action buttons
+  &__actions {
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity $transition-fast;
+
+    &--visible {
+      opacity: 1;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid transparent;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: $color-border-default;
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.3);
+      color: $color-accent-green;
+    }
+  }
+
+  &__visibility {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+  }
+
+  // Color picker dropdown
+  &__color-picker {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    display: flex;
+    gap: 4px;
+    padding: 6px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  &__color-option {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      transform: scale(1.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    &--active {
+      border-color: $color-text-primary;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+// Settings section
+.settings-section {
+  margin-bottom: $spacing-sm;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    width: 100%;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+  }
+
+  &--expanded .settings-section__header {
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__content {
+    padding: $spacing-sm;
+  }
+}
+
+// Setting row
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-xs 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  span {
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+}
+
+.setting-select {
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xs;
+  color: $color-text-primary;
+  font-size: 11px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-sky;
+  }
+}
+
+.setting-toggle {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &--on {
+    background: rgba($color-accent-sky, 0.15);
+    border-color: rgba($color-accent-sky, 0.3);
+    color: $color-accent-sky;
+  }
+}
+
+// Color swatches
+.color-swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &--active {
+    border-color: $color-text-primary;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  }
+}
+
+// =============================================================================
+// SETTINGS CONTENT (for ResizableSection)
+// =============================================================================
+
+.cursors-tab__settings-content {
+  padding: $spacing-xs;
+}
+
+// =============================================================================
+// ICON HELPERS
+// =============================================================================
+
+.icon-teal {
+  color: $color-accent-teal;
+}
+
+.icon-cyan {
+  color: $color-accent-sky;
+}
+
+.icon-amber {
+  color: $color-accent-amber;
+}

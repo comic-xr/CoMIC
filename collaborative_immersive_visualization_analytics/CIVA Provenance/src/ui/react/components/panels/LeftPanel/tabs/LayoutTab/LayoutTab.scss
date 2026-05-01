@@ -1,0 +1,2929 @@
+// src/ui/react/components/panels/LeftPanel/tabs/LayoutTab/LayoutTab.scss
+@use "theme" as *;
+
+// =============================================================================
+// LAYOUT TAB CONTAINER
+// =============================================================================
+
+.layout-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &--loading {
+    .layout-tab__loading {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      color: $color-text-muted;
+      font-size: $font-size-sm;
+
+      .spin {
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// SCROLLABLE CONTENT AREA
+// =============================================================================
+
+.layout-tab__content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; // Important for nested flex scroll
+
+  // SectionNavGroup fills the content area
+  .section-nav-group {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+// =============================================================================
+// CARD SECTIONS
+// =============================================================================
+
+.layout-tab__card {
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  border-left: 2px solid var(--card-color, $color-border-default);
+
+  &[data-color="purple"] {
+    --card-color: #{$color-accent-purple};
+  }
+  &[data-color="blue"] {
+    --card-color: #{$color-accent-blue};
+  }
+  &[data-color="green"] {
+    --card-color: #{$color-accent-green};
+  }
+  &[data-color="amber"] {
+    --card-color: #{$color-accent-amber};
+  }
+  &[data-color="teal"] {
+    --card-color: #{$color-accent-teal};
+  }
+}
+
+.layout-tab__card-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-sm;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  svg {
+    color: var(--card-color, $color-text-muted);
+  }
+}
+
+.layout-tab__card-description {
+  margin-top: $spacing-sm;
+  font-size: 10px;
+  color: $color-text-tertiary;
+  line-height: 1.4;
+}
+
+// =============================================================================
+// LAYOUT MODE TOGGLE (Grid vs Flow per spec)
+// =============================================================================
+
+.layout-tab__mode-toggle {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.layout-tab__mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+    border-color: $color-border-default;
+  }
+
+  &--active {
+    background: rgba($color-accent-purple, 0.15);
+    border-color: rgba($color-accent-purple, 0.4);
+    color: $color-accent-purple;
+  }
+}
+
+.layout-tab__mode-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.layout-tab__mode-label {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+}
+
+.layout-tab__mode-desc {
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+// =============================================================================
+// FLOW OPTIONS
+// =============================================================================
+
+.layout-tab__flow-options {
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.layout-tab__flow-label {
+  display: block;
+  font-size: 10px;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+}
+
+// =============================================================================
+// FLOW DIRECTION TOGGLE
+// =============================================================================
+
+.layout-tab__direction-toggle {
+  display: flex;
+  gap: 4px;
+  background: $color-bg-tertiary;
+  padding: 3px;
+  border-radius: $radius-sm;
+}
+
+.layout-tab__direction-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-green, 0.15);
+    border-color: rgba($color-accent-green, 0.3);
+    color: $color-accent-green;
+  }
+}
+
+// =============================================================================
+// CANVAS SIZE CONTROL
+// =============================================================================
+
+.layout-tab__canvas-size {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.layout-tab__size-controls {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.layout-tab__size-control {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.layout-tab__size-warning {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($color-accent-amber, 0.1);
+  border: 1px solid rgba($color-accent-amber, 0.3);
+  border-radius: $radius-sm;
+  font-size: 10px;
+  color: $color-accent-amber;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  span {
+    flex: 1;
+  }
+
+  button {
+    padding: 3px 8px;
+    background: rgba($color-accent-amber, 0.2);
+    border: 1px solid rgba($color-accent-amber, 0.4);
+    border-radius: $radius-xs;
+    color: $color-accent-amber;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-amber, 0.3);
+    }
+  }
+}
+
+.layout-tab__size-label {
+  font-size: 10px;
+  color: $color-text-muted;
+  text-transform: uppercase;
+}
+
+.layout-tab__size-stepper {
+  display: flex;
+  align-items: center;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-primary;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.layout-tab__size-value {
+  min-width: 32px;
+  text-align: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-green;
+  font-family: $font-family-mono;
+}
+
+// =============================================================================
+// SPAWN SIZE PICKER
+// =============================================================================
+
+.layout-tab__spawn-sizes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.layout-tab__spawn-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: $spacing-xs;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-width: 52px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-green, 0.15);
+    border-color: rgba($color-accent-green, 0.4);
+    color: $color-accent-green;
+
+    .layout-tab__spawn-preview {
+      border-color: rgba($color-accent-green, 0.6);
+
+      .layout-tab__spawn-cell {
+        background: $color-accent-green;
+      }
+    }
+  }
+}
+
+.layout-tab__spawn-preview {
+  display: grid;
+  gap: 2px;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  border: 1px solid $color-border-default;
+  border-radius: 2px;
+}
+
+.layout-tab__spawn-cell {
+  background: $color-text-muted;
+  border-radius: 1px;
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.layout-tab__spawn-btn--custom {
+  svg {
+    opacity: 0.7;
+  }
+}
+
+.layout-tab__custom-size {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  margin-top: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+}
+
+.layout-tab__custom-inputs {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex: 1;
+
+  input {
+    width: 40px;
+    padding: 4px 6px;
+    background: $color-bg-primary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-primary;
+    font-size: 11px;
+    text-align: center;
+    font-family: $font-family-mono;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-green;
+    }
+  }
+
+  span {
+    color: $color-text-muted;
+    font-size: 11px;
+  }
+}
+
+.layout-tab__custom-apply {
+  padding: 4px 10px;
+  background: $color-accent-green;
+  border: none;
+  border-radius: $radius-xs;
+  color: white;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+.layout-tab__hint {
+  margin-top: $spacing-sm;
+  font-size: 10px;
+  color: $color-text-tertiary;
+  line-height: 1.4;
+}
+
+// =============================================================================
+// QUICK LAYOUTS
+// =============================================================================
+
+.layout-tab__quick-layouts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.layout-tab__quick-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-amber, 0.1);
+    border-color: rgba($color-accent-amber, 0.3);
+    color: $color-accent-amber;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// CANVAS TOOLS
+// =============================================================================
+
+.layout-tab__tools {
+  display: flex;
+  gap: 6px;
+}
+
+.layout-tab__tool-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    &[data-color="blue"] {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+    &[data-color="teal"] {
+      background: rgba($color-accent-teal, 0.15);
+      border-color: rgba($color-accent-teal, 0.4);
+      color: $color-accent-teal;
+    }
+    &[data-color="purple"] {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+    }
+    &[data-color="amber"] {
+      background: rgba($color-accent-amber, 0.15);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+  }
+}
+
+// =============================================================================
+// DOCKED CANVAS NAVIGATOR
+// =============================================================================
+
+.layout-tab__navigator {
+  flex-shrink: 0;
+  border-top: 1px solid $color-border-subtle;
+  background: $color-bg-secondary;
+  padding: $spacing-sm;
+  max-height: 280px;
+  overflow-y: auto;
+
+  // Make navigator fit better in the panel
+  .canvas-navigator {
+    min-width: unset;
+    width: 100%;
+
+    &--compact {
+      padding: $spacing-xs;
+    }
+  }
+}
+
+// =============================================================================
+// LAYOUT TEMPLATES
+// =============================================================================
+
+.layout-tab__card[data-color="pink"] {
+  --card-color: #{$color-accent-pink};
+}
+
+.layout-tab__card-count {
+  margin-left: auto;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+.layout-tab__templates {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.layout-tab__save-template-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  background: rgba($color-accent-pink, 0.1);
+  border: 1px dashed rgba($color-accent-pink, 0.4);
+  border-radius: $radius-sm;
+  color: $color-accent-pink;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-pink, 0.2);
+    border-style: solid;
+  }
+}
+
+.layout-tab__save-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+}
+
+.layout-tab__template-input {
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  color: $color-text-primary;
+  font-size: 12px;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-pink;
+  }
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+}
+
+.layout-tab__scope-picker {
+  display: flex;
+  gap: 4px;
+}
+
+.layout-tab__scope-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-pink, 0.15);
+    border-color: rgba($color-accent-pink, 0.4);
+    color: $color-accent-pink;
+  }
+}
+
+.layout-tab__save-actions {
+  display: flex;
+  gap: $spacing-xs;
+  justify-content: flex-end;
+}
+
+.layout-tab__save-btn {
+  padding: $spacing-xs $spacing-sm;
+  background: $color-accent-pink;
+  border: none;
+  border-radius: $radius-xs;
+  color: white;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.layout-tab__cancel-btn {
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+}
+
+.layout-tab__template-group {
+  margin-top: $spacing-xs;
+}
+
+.layout-tab__template-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  font-size: 10px;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.layout-tab__template-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid transparent;
+  border-radius: $radius-xs;
+  margin-bottom: 4px;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: $color-border-subtle;
+  }
+}
+
+.layout-tab__template-apply {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: $color-text-secondary;
+  font-size: 11px;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    color: $color-accent-pink;
+  }
+}
+
+.layout-tab__template-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layout-tab__template-size {
+  font-size: 10px;
+  color: $color-text-muted;
+  font-family: $font-family-mono;
+}
+
+.layout-tab__template-actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  .layout-tab__template-item:hover & {
+    opacity: 1;
+  }
+}
+
+.layout-tab__template-action {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-secondary;
+  }
+
+  &--delete:hover {
+    background: rgba($color-accent-red, 0.15);
+    color: $color-accent-red;
+  }
+}
+
+.layout-tab__import-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  margin-top: $spacing-xs;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+}
+
+.layout-tab__templates-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-md;
+  color: $color-text-muted;
+  font-size: 11px;
+  text-align: center;
+
+  svg {
+    opacity: 0.5;
+  }
+}
+
+.layout-tab__templates-hint {
+  font-size: 10px;
+  color: $color-text-tertiary;
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================================================
+// LAYOUT TAB V2 (V4.6 Specification)
+// =============================================================================
+
+.layout-tab-v2 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: $color-bg-primary;
+}
+
+// =============================================================================
+// V2: TAB SELECTOR (uses TabButton molecule)
+// =============================================================================
+
+.layout-tab-v2__tabs {
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid $color-border-subtle;
+
+  // TabButton children fill equally
+  > * {
+    flex: 1;
+  }
+}
+
+// =============================================================================
+// V2: CANVAS MAP CONTAINER
+// =============================================================================
+
+.layout-tab-v2__map-container {
+  flex-shrink: 0;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.layout-tab-v2__map-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  min-height: 44px;
+}
+
+.layout-tab-v2__map-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  min-height: 32px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.layout-tab-v2__map-size {
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+.layout-tab-v2__map-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.layout-tab-v2__layer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 28px;
+
+  span {
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    &[data-layer="viewgroups"] {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: rgba($color-accent-purple, 0.5);
+      color: $color-accent-purple;
+    }
+    &[data-layer="viewports"] {
+      background: rgba($color-accent-cyan, 0.15);
+      border-color: rgba($color-accent-cyan, 0.5);
+      color: $color-accent-cyan;
+    }
+  }
+}
+
+.layout-tab-v2__divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-default;
+  margin: 0 4px;
+}
+
+.layout-tab-v2__zoom-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+}
+
+.layout-tab-v2__zoom-value {
+  font-size: 10px;
+  color: $color-text-muted;
+  min-width: 32px;
+  text-align: center;
+}
+
+// =============================================================================
+// V2: SIZE CONTROLS
+// =============================================================================
+
+.layout-tab-v2__size-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.layout-tab-v2__size-label {
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+.layout-tab-v2__size-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  svg {
+    color: $color-text-muted;
+  }
+
+  button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-primary;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    min-width: 20px;
+    text-align: center;
+    font-size: 13px;
+    font-family: $font-family-mono;
+    color: $color-text-primary;
+  }
+}
+
+.layout-tab-v2__size-x {
+  font-size: 13px;
+  color: $color-text-muted;
+}
+
+.layout-tab-v2__fit-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 32px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// V2: MAP CONTENT & RESIZE
+// =============================================================================
+
+.layout-tab-v2__map-content {
+  overflow: hidden;
+  background: $color-bg-tertiary;
+}
+
+.layout-tab-v2__resize-handle {
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ns-resize;
+  transition: background $transition-fast;
+
+  &:hover,
+  &--dragging {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+.layout-tab-v2__resize-bar {
+  width: 40px;
+  height: 4px;
+  background: $color-border-default;
+  border-radius: 2px;
+  transition: background $transition-fast;
+
+  .layout-tab-v2__resize-handle:hover &,
+  .layout-tab-v2__resize-handle--dragging & {
+    background: $color-accent-purple;
+  }
+}
+
+// =============================================================================
+// V2: TOOLBAR
+// =============================================================================
+
+.layout-tab-v2__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.layout-tab-v2__toolbar-spacer {
+  flex: 1;
+}
+
+.layout-tab-v2__multiselect-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 28px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-default;
+  }
+
+  &--active {
+    background: rgba($color-accent-purple, 0.15);
+    border-color: rgba($color-accent-purple, 0.4);
+    color: $color-accent-purple;
+  }
+}
+
+.layout-tab-v2__add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: rgba($color-accent-green, 0.15);
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-accent-green;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 28px;
+
+  &:hover {
+    background: rgba($color-accent-green, 0.25);
+  }
+}
+
+// =============================================================================
+// V2: MULTI-SELECT BAR
+// =============================================================================
+
+.layout-tab-v2__multiselect-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 8px;
+  background: rgba($color-accent-purple, 0.1);
+  border: 1px solid rgba($color-accent-purple, 0.3);
+  border-radius: $radius-md;
+}
+
+.layout-tab-v2__multiselect-count {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-purple;
+}
+
+.layout-tab-v2__multiselect-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.layout-tab-v2__multiselect-action {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 26px;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.2);
+    color: $color-accent-blue;
+  }
+
+  &--delete {
+    background: rgba($color-accent-red, 0.15);
+    color: $color-accent-red;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.25);
+    }
+  }
+}
+
+.layout-tab-v2__multiselect-done {
+  padding: 4px 10px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 26px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+}
+
+// =============================================================================
+// V2: DRILL-IN HEADER
+// =============================================================================
+
+.layout-tab-v2__drillin-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 15%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 40%, transparent);
+}
+
+.layout-tab-v2__back-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+}
+
+.layout-tab-v2__drillin-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.layout-tab-v2__drillin-name {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.layout-tab-v2__drillin-meta {
+  font-size: 10px;
+  color: $color-text-muted;
+  margin-left: auto;
+}
+
+// =============================================================================
+// V2: LIST CONTENT
+// =============================================================================
+
+.layout-tab-v2__content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.layout-tab-v2__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.layout-tab-v2__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-size: 13px;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.layout-tab-v2__add-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: transparent;
+  border: 1px dashed $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-muted;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 48px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: $color-border-strong;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// V2: TEMPLATES TAB
+// =============================================================================
+
+.layout-tab-v2__templates {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.layout-tab-v2__templates-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px;
+  color: $color-text-muted;
+  font-size: 13px;
+  text-align: center;
+
+  svg {
+    opacity: 0.5;
+  }
+}
+
+.layout-tab-v2__templates-hint {
+  font-size: 12px;
+  color: $color-text-tertiary;
+}
+
+// =============================================================================
+// V2: FOOTER
+// =============================================================================
+
+.layout-tab-v2__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-top: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+.layout-tab-v2__help-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+}
+
+.layout-tab-v2__save-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba($color-accent-green, 0.15);
+  border: none;
+  border-radius: $radius-md;
+  color: $color-accent-green;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 28px;
+
+  &:hover {
+    background: rgba($color-accent-green, 0.25);
+  }
+}
+
+// =============================================================================
+// V2: VIEWGROUP ITEM (Card Style - matches DatasetsTab)
+// =============================================================================
+
+.viewgroup-item {
+  margin-bottom: $spacing-xs;
+
+  &--hovered {
+    .viewgroup-item__card {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+.viewgroup-item__card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &--selected {
+    border-color: var(--vg-color, $color-accent-purple);
+    background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 10%, transparent);
+  }
+}
+
+.viewgroup-item__header {
+  display: flex;
+}
+
+.viewgroup-item__header-content {
+  flex: 1;
+  padding: $spacing-sm;
+  cursor: pointer;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.viewgroup-item__chevron {
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  transition: transform 0.15s ease;
+  transform: rotate(-90deg);
+
+  &--expanded {
+    transform: rotate(0deg);
+  }
+}
+
+.viewgroup-item__checkbox {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid $color-border-default;
+  border-radius: $radius-xs;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+
+  &--checked {
+    background: var(--vg-color, $color-accent-purple);
+    border-color: var(--vg-color, $color-accent-purple);
+    color: white;
+  }
+}
+
+.viewgroup-item__type-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 20%, transparent);
+}
+
+.viewgroup-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.viewgroup-item__name {
+  display: block;
+  font-size: 11px;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+  cursor: text;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.viewgroup-item__name-input {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--vg-color, $color-accent-purple);
+  outline: none;
+  min-width: 60px;
+  width: 100%;
+}
+
+.viewgroup-item__meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: 9px;
+  color: $color-text-muted;
+}
+
+.viewgroup-item__layout-badge {
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  font-weight: $font-weight-medium;
+  background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 20%, transparent);
+  color: var(--vg-color, $color-text-muted);
+}
+
+.viewgroup-item__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  svg {
+    opacity: 0.7;
+  }
+}
+
+.viewgroup-item__empty-badge {
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  font-weight: $font-weight-medium;
+  background: rgba($color-accent-amber, 0.2);
+  color: $color-accent-amber;
+}
+
+.viewgroup-item__view-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.05);
+
+  &--has-views {
+    background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 15%, transparent);
+  }
+}
+
+.viewgroup-item__view-count-number {
+  font-size: 12px;
+  font-weight: $font-weight-bold;
+  color: $color-text-tertiary;
+  line-height: 1;
+
+  .viewgroup-item__view-count--has-views & {
+    color: var(--vg-color, $color-accent-purple);
+  }
+}
+
+.viewgroup-item__view-count-label {
+  font-size: 8px;
+  color: $color-text-muted;
+}
+
+// Vertical stacked action buttons (right edge)
+.viewgroup-item__actions {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+  width: 24px;
+}
+
+.viewgroup-item__action {
+  flex: 1;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  // Edit button - highlight on card hover
+  &--edit {
+    .viewgroup-item--hovered & {
+      background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 20%, transparent);
+      color: var(--vg-color, $color-accent-purple);
+    }
+  }
+
+  &--delete:hover {
+    background: rgba($color-accent-red, 0.15);
+    color: $color-accent-red;
+  }
+}
+
+// =============================================================================
+// V2: VIEWPORT ITEM (Card Style - matches DatasetsTab)
+// =============================================================================
+
+.viewport-item {
+  margin-bottom: $spacing-xs;
+
+  &--hovered {
+    .viewport-item__card {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+.viewport-item__card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &--selected {
+    border-color: $color-accent-cyan;
+    background: rgba($color-accent-cyan, 0.1);
+  }
+}
+
+.viewport-item__header {
+  display: flex;
+}
+
+.viewport-item__header-content {
+  flex: 1;
+  padding: $spacing-sm;
+  cursor: pointer;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.viewport-item__mode-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &--snap {
+    background: rgba($color-accent-cyan, 0.2);
+    color: $color-accent-cyan;
+  }
+
+  &--free {
+    background: rgba($color-accent-green, 0.2);
+    color: $color-accent-green;
+  }
+}
+
+.viewport-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.viewport-item__name-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.viewport-item__name {
+  font-size: 11px;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: text;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.viewport-item__name-input {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $color-accent-cyan;
+  outline: none;
+  min-width: 60px;
+  width: 100%;
+}
+
+.viewport-item__badge {
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  font-weight: $font-weight-medium;
+  flex-shrink: 0;
+
+  &--primary {
+    background: rgba($color-accent-amber, 0.2);
+    color: $color-accent-amber;
+  }
+}
+
+.viewport-item__meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: 9px;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.viewport-item__mode-badge {
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  font-weight: $font-weight-medium;
+  background: rgba($color-accent-cyan, 0.2);
+  color: $color-accent-cyan;
+}
+
+.viewport-item__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  &--shared {
+    color: $color-accent-green;
+  }
+
+  svg {
+    opacity: 0.7;
+  }
+}
+
+.viewport-item__size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.viewport-item__size-value {
+  font-size: 12px;
+  font-weight: $font-weight-bold;
+  color: $color-accent-cyan;
+  line-height: 1;
+}
+
+.viewport-item__size-label {
+  font-size: 8px;
+  color: $color-text-muted;
+}
+
+// Vertical stacked action buttons (right edge)
+.viewport-item__actions {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+  width: 24px;
+}
+
+.viewport-item__action {
+  flex: 1;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  // Share button - highlight on card hover
+  &--share {
+    .viewport-item--hovered & {
+      background: rgba($color-accent-cyan, 0.15);
+      color: $color-accent-cyan;
+    }
+  }
+
+  &--active {
+    background: rgba($color-accent-green, 0.15);
+    color: $color-accent-green;
+  }
+
+  &--delete:hover {
+    background: rgba($color-accent-red, 0.15);
+    color: $color-accent-red;
+  }
+}
+
+// =============================================================================
+// V2: VIEW LIST ITEM
+// =============================================================================
+
+.view-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: $color-border-default;
+  }
+
+  &--selected {
+    background: color-mix(in srgb, var(--view-color, #{$color-accent-purple}) 15%, transparent);
+    border-color: var(--view-color, #{$color-accent-purple});
+  }
+}
+
+.view-list-item__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--view-color, #{$color-accent-purple}) 20%, transparent);
+  border-radius: $radius-sm;
+  color: var(--view-color, #{$color-accent-purple});
+}
+
+.view-list-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.view-list-item__name {
+  font-size: 14px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.view-list-item__type {
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// V2: CANVAS MAP
+// =============================================================================
+
+.canvas-map {
+  height: 100%;
+  overflow: auto;
+  background: $color-bg-tertiary;
+
+  &--drag-over {
+    background: rgba($color-accent-green, 0.05);
+  }
+}
+
+// =============================================================================
+// V2: VIEWGROUP EDITOR
+// =============================================================================
+
+.viewgroup-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: $color-bg-tertiary;
+}
+
+.viewgroup-editor__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 15%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 40%, transparent);
+  flex-shrink: 0;
+}
+
+.viewgroup-editor__back {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+}
+
+.viewgroup-editor__color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.viewgroup-editor__name {
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  cursor: text;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.viewgroup-editor__name-input {
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--vg-color, #{$color-accent-purple});
+  outline: none;
+  min-width: 80px;
+}
+
+.viewgroup-editor__linked-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+  background: rgba($color-accent-blue, 0.2);
+  color: $color-accent-blue;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+}
+
+.viewgroup-editor__header-spacer {
+  flex: 1;
+}
+
+.viewgroup-editor__meta {
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+// Layout bar
+.viewgroup-editor__layout-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+.viewgroup-editor__layout-label {
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+.viewgroup-editor__quick-layouts {
+  display: flex;
+  gap: 6px;
+}
+
+.viewgroup-editor__quick-layout {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &--active {
+    background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 20%, transparent);
+  }
+}
+
+.viewgroup-editor__more-wrapper {
+  position: relative;
+}
+
+.viewgroup-editor__more {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 36px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-default;
+  }
+
+  &--active {
+    background: color-mix(in srgb, var(--vg-color, #{$color-accent-purple}) 20%, transparent);
+    border-color: var(--vg-color, #{$color-accent-purple});
+    color: var(--vg-color, #{$color-accent-purple});
+  }
+}
+
+// Grid content
+.viewgroup-editor__content {
+  flex: 1;
+  padding: 16px;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewgroup-editor__grid {
+  flex: 1;
+  display: grid;
+  gap: 12px;
+  min-height: 0;
+
+  &--merged-top {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  &--merged-right {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+.viewgroup-editor__grid-merged-top {
+  grid-column: 1 / -1;
+}
+
+.viewgroup-editor__grid-merged-right {
+  grid-row: 1 / -1;
+}
+
+// Cells
+.viewgroup-editor__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid $color-border-subtle;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  position: relative;
+  min-height: 70px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: $color-border-default;
+  }
+
+  &--empty {
+    border-style: dashed;
+  }
+
+  &--selected {
+    background: color-mix(in srgb, $color-accent-amber 15%, transparent);
+    border-color: $color-accent-amber;
+    box-shadow: 0 0 0 3px color-mix(in srgb, $color-accent-amber 40%, transparent);
+  }
+
+  // View cell (has content)
+  &:not(.viewgroup-editor__cell--empty) {
+    background: color-mix(in srgb, var(--view-color, #{$color-accent-purple}) 15%, transparent);
+    border-color: color-mix(in srgb, var(--view-color, #{$color-accent-purple}) 40%, transparent);
+    border-style: solid;
+  }
+}
+
+.viewgroup-editor__cell-icon {
+  color: var(--view-color, #{$color-accent-purple});
+}
+
+.viewgroup-editor__cell-name {
+  font-size: 12px;
+  color: $color-text-secondary;
+  text-align: center;
+}
+
+.viewgroup-editor__cell-plus {
+  color: $color-text-muted;
+  opacity: 0.4;
+}
+
+.viewgroup-editor__cell-label {
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+.viewgroup-editor__cell-check {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-accent-amber;
+  border-radius: $radius-sm;
+  color: white;
+}
+
+// =============================================================================
+// V2: FLOATING ACTION BAR
+// =============================================================================
+
+.floating-action-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, #{$color-bg-secondary} 95%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid $color-border-strong;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 30;
+}
+
+.floating-action-bar__count {
+  font-size: 13px;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-amber;
+}
+
+.floating-action-bar__divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-default;
+}
+
+.floating-action-bar__action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 36px;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  &--add {
+    background: rgba($color-accent-green, 0.2);
+    color: $color-accent-green;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-accent-green, 0.3);
+    }
+  }
+
+  &--remove {
+    background: rgba($color-accent-red, 0.2);
+    color: $color-accent-red;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-accent-red, 0.3);
+    }
+  }
+}
+
+// =============================================================================
+// V2: LAYOUT PICKER PANEL
+// =============================================================================
+
+.layout-picker-panel__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.layout-picker-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  width: 320px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-strong;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 50;
+  overflow: hidden;
+}
+
+.layout-picker-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.layout-picker-panel__title {
+  font-size: 14px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.layout-picker-panel__close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-secondary;
+  }
+}
+
+.layout-picker-panel__section {
+  padding: 12px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-border-subtle;
+  }
+}
+
+.layout-picker-panel__section-label {
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.layout-picker-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.layout-picker-panel__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 60px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--active {
+    background: color-mix(in srgb, var(--active-color, #{$color-accent-purple}) 20%, transparent);
+    border-color: var(--active-color, #{$color-accent-purple});
+  }
+}
+
+.layout-picker-panel__item-name {
+  font-size: 11px;
+  color: $color-text-secondary;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+
+  &--custom {
+    color: $color-accent-purple;
+  }
+}
+
+.layout-picker-panel__footer {
+  padding: 12px;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.layout-picker-panel__save {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px dashed $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 44px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-style: solid;
+  }
+}
+
+// =============================================================================
+// V2: VIEW REMOVAL CONFIRMATION
+// =============================================================================
+
+.view-removal-confirmation__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+
+.view-removal-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-strong;
+  border-radius: $radius-lg;
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
+  z-index: 51;
+  overflow: hidden;
+}
+
+.view-removal-confirmation__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba($color-accent-amber, 0.15);
+  border-bottom: 1px solid $color-border-subtle;
+
+  svg {
+    color: $color-accent-amber;
+  }
+
+  span {
+    font-size: 15px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+}
+
+.view-removal-confirmation__content {
+  padding: 16px;
+}
+
+.view-removal-confirmation__message {
+  font-size: 13px;
+  color: $color-text-secondary;
+  line-height: 1.5;
+  margin-bottom: 16px;
+
+  strong {
+    color: $color-text-primary;
+  }
+}
+
+.view-removal-confirmation__count {
+  color: $color-accent-red;
+  font-weight: $font-weight-semibold;
+}
+
+.view-removal-confirmation__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.view-removal-confirmation__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 48px;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: $color-border-default;
+  }
+
+  &--selected {
+    background: rgba($color-accent-red, 0.15);
+    border-color: $color-accent-red;
+  }
+}
+
+.view-removal-confirmation__checkbox {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid $color-border-default;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+
+  &--checked {
+    background: $color-accent-red;
+    border-color: $color-accent-red;
+    color: white;
+  }
+}
+
+.view-removal-confirmation__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--view-color, #{$color-accent-purple}) 20%, transparent);
+  border-radius: $radius-sm;
+  color: var(--view-color, #{$color-accent-purple});
+  flex-shrink: 0;
+}
+
+.view-removal-confirmation__name {
+  flex: 1;
+  font-size: 13px;
+  color: $color-text-primary;
+}
+
+.view-removal-confirmation__type {
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+.view-removal-confirmation__badge {
+  padding: 2px 8px;
+  background: rgba($color-accent-red, 0.3);
+  border-radius: $radius-sm;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-accent-red;
+}
+
+.view-removal-confirmation__status {
+  font-size: 12px;
+  color: $color-accent-amber;
+
+  &--ready {
+    color: $color-accent-green;
+  }
+}
+
+.view-removal-confirmation__footer {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.view-removal-confirmation__cancel {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 44px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-primary;
+  }
+}
+
+.view-removal-confirmation__confirm {
+  flex: 1;
+  padding: 10px 16px;
+  background: $color-accent-red;
+  border: none;
+  border-radius: $radius-md;
+  color: white;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 44px;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-muted;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// TEMPLATES TAB CONTENT
+// =============================================================================
+
+.templates-tab {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-sm;
+  overflow-y: auto;
+}
+
+// Save action button
+.templates-tab__save-action {
+  padding-bottom: $spacing-sm;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.templates-tab__save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  width: 100%;
+  padding: 12px $spacing-md;
+  background: rgba($color-accent-amber, 0.1);
+  border: 1px dashed rgba($color-accent-amber, 0.4);
+  border-radius: $radius-md;
+  color: $color-accent-amber;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 48px;
+
+  &:hover {
+    background: rgba($color-accent-amber, 0.15);
+    border-color: rgba($color-accent-amber, 0.6);
+  }
+
+  svg {
+    opacity: 0.8;
+  }
+}
+
+// Section styling
+.templates-tab__section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.templates-tab__section-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 0 $spacing-xs;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  svg {
+    color: $color-accent-amber;
+  }
+}
+
+.templates-tab__section-count {
+  margin-left: auto;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: $radius-sm;
+  font-size: 10px;
+  color: $color-text-tertiary;
+}
+
+// Templates grid
+.templates-tab__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+}
+
+// Template card
+.templates-tab__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  cursor: grab;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-default;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &--active {
+    border-color: $color-accent-amber;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.templates-tab__card-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: $spacing-xs;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.templates-tab__card-layouts {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.templates-tab__card-icon {
+  color: $color-text-muted;
+  opacity: 0.5;
+}
+
+.templates-tab__card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: $spacing-xs $spacing-sm;
+}
+
+.templates-tab__card-name {
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.templates-tab__card-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  svg {
+    color: $color-text-tertiary;
+  }
+}
+
+.templates-tab__card-type {
+  font-size: 10px;
+  color: $color-text-tertiary;
+
+  &--full {
+    color: $color-accent-amber;
+  }
+
+  &--structure {
+    color: $color-accent-teal;
+  }
+}
+
+// Card actions overlay
+.templates-tab__card-actions {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  background: rgba(0, 0, 0, 0.85);
+  padding: $spacing-sm;
+}
+
+.templates-tab__card-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-height: 36px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: $color-text-primary;
+  }
+
+  &--primary {
+    background: rgba($color-accent-amber, 0.2);
+    border-color: rgba($color-accent-amber, 0.4);
+    color: $color-accent-amber;
+
+    &:hover {
+      background: rgba($color-accent-amber, 0.3);
+      border-color: rgba($color-accent-amber, 0.6);
+    }
+  }
+}
+
+// Empty state
+.templates-tab__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-xl $spacing-md;
+  text-align: center;
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.4;
+    color: $color-accent-amber;
+  }
+}
+
+.templates-tab__empty-title {
+  font-size: 14px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+}
+
+.templates-tab__empty-hint {
+  font-size: 12px;
+  color: $color-text-tertiary;
+  max-width: 200px;
+  line-height: 1.4;
+}
+
+// Drag hint
+.templates-tab__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  margin-top: auto;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-sm;
+  font-size: 11px;
+  color: $color-text-tertiary;
+
+  svg {
+    opacity: 0.6;
+  }
+}

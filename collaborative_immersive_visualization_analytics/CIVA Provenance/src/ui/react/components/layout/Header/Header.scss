@@ -1,0 +1,466 @@
+/**
+ * @file Header.scss
+ * @description Styles for primary Header bar.
+ * Uses BEM naming convention and design tokens.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// HEADER CONTAINER
+// =============================================================================
+
+.header {
+  height: 48px;
+  background: $color-bg-secondary;
+  border-bottom: 1px solid $color-border-default;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-lg;
+  z-index: 100;
+  position: relative;
+  flex-shrink: 0;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  // Shared button styles for header icons
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: $color-text-secondary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.1);
+    }
+  }
+}
+
+// =============================================================================
+// LOGO
+// =============================================================================
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: $color-accent-blue;
+  cursor: pointer;
+  transition: transform $transition-fast;
+  border-radius: $radius-sm;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: 2px;
+  }
+}
+
+// =============================================================================
+// PROJECT SELECTOR
+// =============================================================================
+
+.project-selector {
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    color: $color-text-primary;
+    cursor: pointer;
+    min-width: 160px;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-border-default;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+  }
+
+  &__name {
+    flex: 1;
+    text-align: left;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__dropdown {
+    width: 280px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  &__search {
+    margin: $spacing-sm;
+    --search-input-bg: $color-bg-secondary;
+    --search-input-border: $color-border-subtle;
+    --search-input-focus-border: $color-accent-blue;
+    --search-input-color: $color-text-primary;
+    --search-input-placeholder: $color-text-muted;
+    --search-input-icon: $color-text-muted;
+    --search-input-gap: 6px;
+  }
+
+  &__section {
+    padding: $spacing-xs 0;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__item {
+    display: block;
+    width: 100%;
+    padding: $spacing-sm $spacing-lg;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: $color-text-primary;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+    }
+
+    &.active {
+      background: rgba($color-accent-blue, 0.1);
+      color: $color-accent-blue;
+    }
+  }
+
+  &__empty {
+    padding: $spacing-lg;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: 14px;
+  }
+
+  &__footer {
+    border-top: 1px solid $color-border-subtle;
+    padding: $spacing-xs;
+  }
+
+  &__create {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    color: $color-accent-blue;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: $radius-sm;
+
+    &:hover {
+      background: rgba($color-accent-blue, 0.1);
+    }
+  }
+}
+
+// =============================================================================
+// NOTIFICATION BELL
+// =============================================================================
+
+.notification-bell {
+  position: relative;
+
+  &__badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: $color-accent-red;
+    border-radius: $radius-full;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  &__dropdown {
+    width: 320px;
+    max-height: 400px;
+  }
+
+  &__header {
+    padding: $spacing-sm $spacing-lg;
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-text-primary;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__empty {
+    padding: $spacing-xl $spacing-lg;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: 14px;
+  }
+
+  &__list {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    width: 100%;
+    padding: $spacing-sm $spacing-lg;
+    text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+    }
+
+    &.unread {
+      background: rgba($color-accent-blue, 0.05);
+
+      .notification-bell__title {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    color: $color-text-primary;
+  }
+
+  &__time {
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+}
+
+// =============================================================================
+// USER MENU
+// =============================================================================
+
+.user-menu {
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: $radius-sm;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+  }
+
+  &__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $color-accent-teal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__dropdown {
+    width: 240px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: $spacing-sm $spacing-lg;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &__email {
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+
+  &__status {
+    padding: $spacing-xs;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__status-options {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__status-option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-align: left;
+
+    &:hover {
+      background: $color-glass-light;
+      color: $color-text-primary;
+    }
+
+    &--active {
+      background: $color-glass-light;
+      color: $color-text-primary;
+    }
+  }
+
+  &__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    [data-color="green"] & {
+      background: $color-success;
+      box-shadow: 0 0 6px $color-success;
+    }
+
+    [data-color="amber"] & {
+      background: $color-warning;
+      box-shadow: 0 0 6px $color-warning;
+    }
+
+    [data-color="red"] & {
+      background: $color-error;
+      box-shadow: 0 0 6px $color-error;
+    }
+
+    [data-color="gray"] & {
+      background: $color-text-muted;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-lg;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: $color-text-primary;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+    }
+
+    &--danger {
+      color: $color-accent-red;
+
+      &:hover {
+        background: rgba($color-accent-red, 0.1);
+      }
+    }
+  }
+}

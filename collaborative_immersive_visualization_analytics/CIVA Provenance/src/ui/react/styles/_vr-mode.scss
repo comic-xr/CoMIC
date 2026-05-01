@@ -1,0 +1,20 @@
+/* VR Mode Specific Styles */
+body.vr-mode {
+  /* Hide all 2D UI elements when in VR */
+}
+
+body.vr-mode table,
+body.vr-mode #fileInput,
+body.vr-mode #logPanel {
+  display: none !important;
+}
+
+/* Desktop Mode Specific Styles */
+body.desktop-mode {
+  /* Normal desktop styles */
+}
+
+/* Crosshair for annotation mode */
+.annotation-crosshair {
+  cursor: crosshair !important;
+}

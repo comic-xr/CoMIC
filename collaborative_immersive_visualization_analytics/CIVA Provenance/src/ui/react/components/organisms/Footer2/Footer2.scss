@@ -1,0 +1,1360 @@
+/**
+ * Footer2 Styles
+ * Shared canvas toolbar footer with ToolbarZone-style sections
+ * Uses InstanceToolsNotch gradient + accent line aesthetic
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// FOOTER2 MAIN CONTAINER
+// =============================================================================
+
+.footer2 {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: relative;
+    z-index: 10; // Below overlay panels (z-index: 40) but above canvas viewports
+    flex-shrink: 0;
+    overflow: visible; // Don't clip dropdowns
+
+    // Gradient background - color fades from left to transparent, over secondary bg
+    // Accent line is on the InstanceToolsNotch above, not duplicated here
+    background: linear-gradient(
+        90deg,
+        rgba(var(--footer-color-rgb, 96, 165, 250), 0.08) 0%,
+        transparent 50%
+    ),
+    $color-bg-secondary;
+
+    transition: background 0.15s ease;
+
+    // Active state - brighter gradient when a view is active
+    &--active {
+        background: linear-gradient(
+            90deg,
+            rgba(var(--footer-color-rgb, 96, 165, 250), 0.15) 0%,
+            transparent 50%
+        ),
+        $color-bg-secondary;
+    }
+
+    // Inactive state - neutral when no view selected
+    &--inactive {
+        background: $color-bg-secondary;
+    }
+}
+
+// =============================================================================
+// FOOTER ZONE (like ToolbarZone)
+// =============================================================================
+
+.footer2-zone {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-width: 0;
+
+    &--center {
+        // Center zone doesn't need to be centered - it just sits in the middle
+    }
+}
+
+.footer2-zone__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 14px;
+    padding: 0 $spacing-sm;
+    background: $color-bg-canvas; // Match CanvasHeaderBar label darkness
+    border-bottom: 1px solid $color-border-subtle;
+    font-size: 8px;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-muted;
+    white-space: nowrap;
+
+    // Color variants
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--teal {
+        color: $color-accent-teal;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+
+    &--pink {
+        color: $color-accent-pink;
+    }
+
+    &--cyan {
+        color: $color-accent-cyan;
+    }
+}
+
+.footer2-zone__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding: 0 $spacing-xs;
+}
+
+// =============================================================================
+// FOOTER DIVIDER
+// =============================================================================
+
+.footer2-divider {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 1px;
+}
+
+.footer2-divider__label {
+    height: 14px;
+    background: $color-border-subtle;
+}
+
+.footer2-divider__content {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+// =============================================================================
+// FOOTER SPACER
+// =============================================================================
+
+.footer2-spacer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: $spacing-sm;
+}
+
+.footer2-spacer__label {
+    height: 14px;
+    background: $color-bg-canvas;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.footer2-spacer__content {
+    height: 32px;
+}
+
+// =============================================================================
+// BUTTON GROUP
+// =============================================================================
+
+.footer2__button-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+// =============================================================================
+// VR BUTTON
+// =============================================================================
+
+.footer2__vr-button {
+    background: linear-gradient(135deg, $color-accent-teal, $color-accent-cyan) !important;
+    border: none !important;
+    color: #1a1a2e !important; // Dark text for contrast on light bg
+
+    svg {
+        color: #1a1a2e !important; // Dark icon for contrast
+    }
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+}
+
+// =============================================================================
+// LINK REMINDER TOAST
+// =============================================================================
+
+.footer2__link-reminder {
+    position: absolute;
+    bottom: calc(100% + $spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+    z-index: 10000;
+    animation: slideUp 0.2s ease-out;
+
+    &-content {
+        flex: 1;
+    }
+
+    &-title {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+    }
+
+    &-subtitle {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+    }
+
+    &-actions {
+        display: flex;
+        gap: $spacing-xs;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+// =============================================================================
+// FOOTER TOOL MENU (portal-based dropdown for menu-type tools)
+// =============================================================================
+
+.footer2-tool-menu {
+    position: fixed;
+    z-index: 10000;
+    min-width: 180px;
+    max-width: 260px;
+    padding: $spacing-xs;
+
+    // Glass panel matching notch aesthetic
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 1px rgba(0, 0, 0, 0.5);
+
+    &__divider {
+        height: 1px;
+        background: $color-border-subtle;
+        margin: $spacing-xs 0;
+    }
+
+    &__header {
+        padding: $spacing-xs $spacing-sm;
+        font-size: 10px;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $color-text-muted;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 6px 10px;
+        border: none;
+        border-radius: $radius-sm;
+        background: transparent;
+        color: $color-text-secondary;
+        font-size: 12px;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08);
+            color: $color-text-primary;
+        }
+
+        &.active {
+            background: rgba($color-accent-blue, 0.15);
+            color: $color-accent-blue;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        svg {
+            flex-shrink: 0;
+        }
+    }
+
+    &__item-label {
+        flex: 1;
+    }
+
+    &__item-check {
+        color: $color-accent-green;
+        flex-shrink: 0;
+    }
+
+    // Slider inside menu
+    &__slider {
+        padding: $spacing-xs $spacing-sm;
+    }
+
+    &__slider-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+        font-size: 11px;
+        color: $color-text-secondary;
+
+        span:first-of-type {
+            flex: 1;
+        }
+    }
+
+    &__slider-value {
+        font-family: $font-family-mono;
+        font-size: 10px;
+        color: $color-text-muted;
+    }
+
+    &__slider-input {
+        width: 100%;
+        height: 4px;
+        appearance: none;
+        background: $color-bg-tertiary;
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: $color-accent-blue;
+            border: 2px solid $color-bg-secondary;
+            cursor: pointer;
+        }
+
+        &::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: $color-accent-blue;
+            border: 2px solid $color-bg-secondary;
+            cursor: pointer;
+        }
+    }
+
+    &__slider-presets {
+        display: flex;
+        gap: 4px;
+        margin-top: 6px;
+    }
+
+    &__slider-preset {
+        flex: 1;
+        padding: 2px 4px;
+        background: $color-bg-tertiary;
+        border: 1px solid transparent;
+        border-radius: $radius-sm;
+        color: $color-text-muted;
+        font-size: 10px;
+        cursor: pointer;
+        transition: all 0.15s;
+        text-align: center;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: $color-text-primary;
+        }
+
+        &.active {
+            border-color: $color-accent-blue;
+            color: $color-accent-blue;
+        }
+    }
+
+    // Position grid (2x2 corner picker)
+    &__position-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        padding: $spacing-xs $spacing-sm;
+    }
+
+    &__position-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        background: $color-bg-tertiary;
+        border: 1px solid transparent;
+        border-radius: $radius-sm;
+        color: $color-text-muted;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: $color-text-primary;
+        }
+
+        &.active {
+            border-color: $color-accent-blue;
+            color: $color-accent-blue;
+            background: rgba($color-accent-blue, 0.15);
+        }
+    }
+}
+
+// =============================================================================
+// RESPONSIVE MODES
+// =============================================================================
+// All zones always visible - minimum width (650px) ensures everything fits
+// No responsive hiding - just maintain consistent layout
+
+// =============================================================================
+// VIEWGROUP SELECTOR
+// =============================================================================
+
+.viewgroup-selector {
+    position: relative;
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-xs $spacing-sm;
+        background: rgba(var(--vg-color-rgb, 168, 85, 247), 0.15);
+        border: 1px solid rgba(var(--vg-color-rgb, 168, 85, 247), 0.4);
+        border-radius: $radius-md;
+        cursor: pointer;
+        transition: all 0.15s;
+        min-width: 44px;
+
+        &:hover {
+            background: rgba(var(--vg-color-rgb, 168, 85, 247), 0.25);
+        }
+
+        &--minimal {
+            padding: $spacing-xs;
+            justify-content: center;
+        }
+    }
+
+    &__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    &__name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        text-align: left;
+    }
+
+    &__chevron {
+        color: $color-text-muted;
+        transition: transform 0.2s;
+        flex-shrink: 0;
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__dropdown {
+        position: absolute;
+        bottom: calc(100% + $spacing-xs);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 280px;
+        background: $color-bg-secondary;
+        border: 1px solid $color-border-default;
+        border-radius: $radius-lg;
+        box-shadow: $shadow-xl;
+        z-index: 10000;
+        overflow: hidden;
+    }
+
+    &__search {
+        padding: $spacing-sm;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    &__list {
+        max-height: 280px;
+        overflow-y: auto;
+    }
+
+    &__empty {
+        padding: $spacing-lg;
+        text-align: center;
+        color: $color-text-muted;
+        font-size: $font-size-sm;
+    }
+
+    &__create {
+        padding: $spacing-sm;
+        border-top: 1px solid $color-border-subtle;
+
+        button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: $spacing-xs;
+            padding: $spacing-sm;
+            background: transparent;
+            border: 1px dashed $color-border-default;
+            border-radius: $radius-md;
+            color: $color-text-secondary;
+            font-size: $font-size-sm;
+            cursor: pointer;
+            transition: all 0.15s;
+
+            &:hover {
+                background: rgba($color-accent-purple, 0.1);
+                border-color: $color-accent-purple;
+                color: $color-accent-purple;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// VIEWGROUP ROW
+// =============================================================================
+
+.viewgroup-row {
+    display: flex;
+    align-items: center;
+    padding: 0 $spacing-sm;
+    transition: background 0.15s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    &--active {
+        background: rgba(var(--vg-color-rgb, 168, 85, 247), 0.15);
+    }
+
+    &__main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        min-width: 0;
+    }
+
+    &__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    &__name {
+        flex: 1;
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__count {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        flex-shrink: 0;
+    }
+
+    &__link-icon {
+        color: $color-accent-teal;
+        flex-shrink: 0;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $spacing-xs;
+        opacity: 0;
+        transition: opacity 0.15s;
+
+        &--visible {
+            opacity: 1;
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        border-radius: $radius-sm;
+        color: $color-text-muted;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: $color-text-primary;
+        }
+    }
+
+    &__check {
+        color: $color-accent-green;
+        flex-shrink: 0;
+        margin-left: $spacing-xs;
+    }
+}
+
+// =============================================================================
+// POPOVERS
+// =============================================================================
+
+.popover-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+.create-viewgroup-popover,
+.viewgroup-settings-popover {
+    position: absolute;
+    bottom: calc(100% + $spacing-xs);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.create-viewgroup-popover {
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $color-border-subtle;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+    }
+
+    &__back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        border-radius: $radius-sm;
+        color: $color-text-muted;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    &__section {
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    &__label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        color: $color-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: $spacing-sm;
+    }
+
+    &__templates {
+        display: flex;
+        gap: $spacing-xs;
+        flex-wrap: wrap;
+    }
+
+    &__template {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-sm;
+        background: $color-bg-tertiary;
+        border: 1px solid transparent;
+        border-radius: $radius-md;
+        color: $color-text-secondary;
+        font-size: $font-size-xs;
+        cursor: pointer;
+        transition: all 0.15s;
+        min-width: 48px;
+
+        &:hover {
+            background: rgba($color-accent-purple, 0.15);
+            border-color: $color-accent-purple;
+            color: $color-text-primary;
+        }
+    }
+
+    &__empty {
+        padding: $spacing-md;
+        text-align: center;
+        color: $color-text-muted;
+        font-size: $font-size-sm;
+    }
+
+    &__saved-list {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+    }
+
+    &__saved-item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+        background: transparent;
+        border: none;
+        border-radius: $radius-md;
+        color: $color-text-primary;
+        font-size: $font-size-sm;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.15s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+    }
+
+    &__saved-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    &__saved-layout {
+        color: $color-text-muted;
+        font-size: $font-size-xs;
+    }
+
+    &__footer {
+        padding: $spacing-sm $spacing-md;
+    }
+
+    &__advanced {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+        background: transparent;
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-md;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        span {
+            flex: 1;
+            text-align: left;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: $color-border-default;
+        }
+    }
+}
+
+.viewgroup-settings-popover {
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $color-border-subtle;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            border-radius: $radius-sm;
+            color: $color-text-muted;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
+    }
+
+    &__content {
+        padding: $spacing-md;
+    }
+
+    &__field {
+        margin-bottom: $spacing-md;
+
+        label {
+            display: block;
+            font-size: $font-size-xs;
+            color: $color-text-muted;
+            margin-bottom: $spacing-xs;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        padding: $spacing-sm;
+        background: $color-bg-tertiary;
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-md;
+        color: $color-text-primary;
+        font-size: $font-size-sm;
+
+        &:focus {
+            outline: none;
+            border-color: $color-accent-blue;
+        }
+    }
+
+    &__colors {
+        display: flex;
+        gap: $spacing-xs;
+    }
+
+    &__color {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &--active {
+            border-color: white;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    &__linked {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+        background: rgba($color-accent-teal, 0.1);
+        border: 1px solid rgba($color-accent-teal, 0.3);
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+
+        span {
+            flex: 1;
+        }
+
+        button {
+            padding: $spacing-xs $spacing-sm;
+            background: transparent;
+            border: 1px solid $color-accent-red;
+            border-radius: $radius-sm;
+            color: $color-accent-red;
+            font-size: $font-size-xs;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba($color-accent-red, 0.1);
+            }
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        border-top: 1px solid $color-border-subtle;
+        border-bottom: 1px solid $color-border-subtle;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: $color-bg-tertiary;
+            border: none;
+            border-radius: $radius-md;
+            color: $color-text-muted;
+            cursor: pointer;
+            transition: all 0.15s;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+                color: $color-text-primary;
+            }
+
+            &:last-child:hover {
+                color: $color-accent-red;
+            }
+        }
+    }
+
+    &__edit-link {
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $color-border-subtle;
+
+        button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+            padding: $spacing-sm;
+            background: transparent;
+            border: none;
+            color: $color-text-secondary;
+            font-size: $font-size-sm;
+            cursor: pointer;
+            transition: all 0.15s;
+
+            span {
+                flex: 1;
+                text-align: left;
+            }
+
+            &:hover {
+                color: $color-accent-purple;
+            }
+        }
+    }
+
+    &__save {
+        padding: $spacing-md;
+
+        button {
+            width: 100%;
+        }
+    }
+}
+
+// =============================================================================
+// LINKS SECTION
+// =============================================================================
+
+.links-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.expanded-links {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.link-property-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--active {
+        background: rgba(var(--link-color-rgb, 20, 184, 166), 0.2);
+        color: var(--link-color, $color-accent-teal);
+    }
+
+    &__count {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+    }
+}
+
+.collapsed-links {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: transparent;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: $color-border-default;
+    }
+
+    &__dots {
+        display: flex;
+        gap: 3px;
+    }
+
+    &__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: $color-bg-tertiary;
+        border: 1px solid $color-border-subtle;
+
+        &--active {
+            background: var(--dot-color, $color-accent-teal);
+            border-color: var(--dot-color, $color-accent-teal);
+        }
+    }
+
+    &__count {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+    }
+
+    &--minimal {
+        padding: $spacing-xs;
+    }
+}
+
+// =============================================================================
+// LINKS POPOVER
+// =============================================================================
+
+.links-popover {
+    position: absolute;
+    bottom: calc(100% + $spacing-xs);
+    right: 0;
+    width: 260px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: 10000;
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $color-border-subtle;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+    }
+
+    &__total {
+        color: $color-text-muted;
+        font-weight: normal;
+    }
+
+    &__list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    &__row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        background: transparent;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        transition: background 0.15s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        &--active {
+            background: rgba(var(--link-color-rgb, 20, 184, 166), 0.1);
+        }
+    }
+
+    &__row-icon {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        color: var(--link-color, $color-text-muted);
+    }
+
+    &__row-count {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        min-width: 16px;
+    }
+
+    &__row-label {
+        flex: 1;
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+    }
+
+    &__row-status {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+    }
+
+    &__footer {
+        padding: $spacing-sm $spacing-md;
+        border-top: 1px solid $color-border-subtle;
+
+        button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: $spacing-sm;
+            padding: $spacing-sm;
+            background: transparent;
+            border: none;
+            color: $color-text-secondary;
+            font-size: $font-size-sm;
+            cursor: pointer;
+            transition: color 0.15s;
+
+            &:hover {
+                color: $color-accent-blue;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// LINK PROPERTY POPOVER
+// =============================================================================
+
+.link-property-popover {
+    position: absolute;
+    bottom: calc(100% + $spacing-xs);
+    right: 0;
+    width: 280px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: 10000;
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $color-border-subtle;
+        color: var(--link-color, $color-text-primary);
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+
+        span {
+            flex: 1;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            border-radius: $radius-sm;
+            color: $color-text-muted;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
+    }
+
+    &__description {
+        padding: $spacing-xs $spacing-md;
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    &__content {
+        padding: $spacing-md;
+    }
+
+    &__mode {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+        background: rgba(var(--link-color-rgb, 20, 184, 166), 0.1);
+        border: 1px solid rgba(var(--link-color-rgb, 20, 184, 166), 0.3);
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+        margin-bottom: $spacing-md;
+    }
+
+    &__linked {
+        margin-bottom: $spacing-md;
+    }
+
+    &__linked-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        color: $color-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: $spacing-xs;
+    }
+
+    &__linked-list {
+        background: $color-bg-tertiary;
+        border-radius: $radius-md;
+        padding: $spacing-xs;
+    }
+
+    &__linked-item {
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+    }
+
+    &__unlink {
+        width: 100%;
+        padding: $spacing-sm;
+        background: transparent;
+        border: 1px solid $color-accent-red;
+        border-radius: $radius-md;
+        color: $color-accent-red;
+        font-size: $font-size-sm;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        &:hover {
+            background: rgba($color-accent-red, 0.1);
+        }
+    }
+
+    &__empty {
+        padding: $spacing-lg;
+        text-align: center;
+    }
+
+    &__empty-icon {
+        color: $color-text-muted;
+        margin-bottom: $spacing-sm;
+    }
+
+    &__empty-text {
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+        margin-bottom: $spacing-xs;
+    }
+
+    &__empty-hint {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        margin-bottom: $spacing-md;
+    }
+
+    &__footer {
+        padding: $spacing-sm $spacing-md;
+        border-top: 1px solid $color-border-subtle;
+
+        button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+            padding: $spacing-sm;
+            background: transparent;
+            border: none;
+            color: $color-text-secondary;
+            font-size: $font-size-sm;
+            cursor: pointer;
+            transition: color 0.15s;
+
+            span {
+                flex: 1;
+                text-align: left;
+            }
+
+            &:hover {
+                color: $color-accent-blue;
+            }
+        }
+    }
+}

@@ -1,0 +1,190 @@
+// DMUserList.scss
+// Styling for the DM user list component
+
+@use "sass:color";
+@use "theme" as *;
+
+.dm-user-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Header
+.dm-user-list__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid $color-border-subtle;
+
+  svg {
+    color: $color-accent-blue;
+  }
+}
+
+// Loading/Error/Empty states
+.dm-user-list__loading,
+.dm-user-list__error,
+.dm-user-list__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  text-align: center;
+
+  svg {
+    opacity: 0.4;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+  }
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+.dm-user-list__error {
+  svg {
+    color: $color-accent-red;
+    opacity: 0.8;
+  }
+}
+
+.dm-user-list__hint {
+  font-size: $font-size-xs !important;
+  color: $color-text-muted !important;
+  font-style: italic;
+}
+
+// Users list container
+.dm-user-list__users {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+// Individual user item
+.dm-user-list__user {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+  width: 100%;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: $color-accent-blue;
+    transform: translateX(2px);
+
+    .dm-user-list__action-icon {
+      color: $color-accent-blue;
+      transform: translateX(2px);
+    }
+  }
+
+  &:active {
+    transform: translateX(4px);
+  }
+
+  &--existing {
+    border-color: rgba($color-accent-green, 0.3);
+    background: rgba($color-accent-green, 0.05);
+
+    &:hover {
+      border-color: $color-accent-green;
+      background: rgba($color-accent-green, 0.1);
+    }
+  }
+}
+
+// User avatar
+.dm-user-list__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: var(--avatar-color, $color-accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: white;
+  flex-shrink: 0;
+}
+
+// User info container
+.dm-user-list__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dm-user-list__name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dm-user-list__email {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dm-user-list__status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: $color-accent-green;
+  margin-top: 2px;
+
+  svg {
+    color: $color-accent-green;
+  }
+}
+
+// Action icon
+.dm-user-list__action-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+}
+
+// Spin animation
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

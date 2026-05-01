@@ -1,0 +1,372 @@
+// panels.scss - Complete styles for all panels with glassmorphism
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// TOP BAR
+// ============================================================================
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  @include glass-panel;
+  border-radius: 0; // Top bar spans full width
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0 $spacing-xl;
+
+  // Subtle bottom glow for separation
+  box-shadow: 0 1px 0 $color-border-subtle, 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .logo-text {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-accent-primary;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px $color-accent-primary-glow;
+  }
+
+  .logo-subtitle {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .room-indicator {
+    padding: $spacing-sm $spacing-md;
+    @include glass-card;
+    border-radius: $radius-full;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+
+    strong {
+      color: $color-accent-primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  .user-indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    @include glass-card;
+    border-radius: $radius-full;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    transition: all $transition-fast;
+
+    &:hover {
+      @include glass-hover;
+    }
+  }
+}
+
+// ============================================================================
+// STATUS BAR
+// ============================================================================
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  @include glass-panel;
+  border-radius: 0; // Status bar spans full width
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  padding: 0 $spacing-lg;
+  font-size: $font-size-xs;
+
+  // Subtle top glow for separation
+  box-shadow: 0 -1px 0 $color-border-subtle, 0 -4px 12px rgba(0, 0, 0, 0.4);
+
+  &__left,
+  &__center,
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  .status-item {
+    color: $color-text-tertiary;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  .sync-indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 2px $spacing-sm;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    transition: all $transition-fast;
+
+    &.syncing {
+      background: $color-warning-bg;
+      color: $color-warning;
+      border: 1px solid $color-warning-border;
+
+      // Pulse animation for syncing
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    &.synced {
+      background: $color-success-bg;
+      color: $color-success;
+      border: 1px solid $color-success-border;
+    }
+  }
+}
+
+// ============================================================================
+// CONTROL PANEL (Right side collaboration panel)
+// ============================================================================
+
+.control-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-primary;
+  border-left: 1px solid $color-border-subtle;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $color-border-subtle;
+    @include glass-subtle;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-md;
+    @include glass-scrollable;
+  }
+
+  // Control sections
+  &__section {
+    margin-bottom: $spacing-xl;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: $spacing-md;
+  }
+
+  // Form controls
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+      padding: $spacing-sm 0;
+      vertical-align: middle;
+    }
+  }
+
+  button,
+  select,
+  input[type="file"],
+  input[type="number"],
+  input[type="text"] {
+    @include glass-input;
+    width: 100%;
+  }
+
+  button {
+    @include glass-button;
+    background: color.adjust($color-accent-primary, $alpha: -0.85);
+    color: $color-accent-primary;
+    font-weight: $font-weight-semibold;
+
+    &:hover:not(:disabled) {
+      background: color.adjust($color-accent-primary, $alpha: -0.7);
+      @include accent-glow;
+    }
+
+    &:active:not(:disabled) {
+      background: color.adjust($color-accent-primary, $alpha: -0.6);
+    }
+
+    &.secondary {
+      background: color.adjust($color-accent-blue, $alpha: -0.85);
+      color: $color-accent-blue;
+
+      &:hover:not(:disabled) {
+        background: color.adjust($color-accent-blue, $alpha: -0.7);
+        box-shadow: $shadow-glass, 0 0 20px $color-accent-blue-glow;
+      }
+    }
+
+    &.danger {
+      background: color.adjust($color-error, $alpha: -0.85);
+      color: $color-error;
+
+      &:hover:not(:disabled) {
+        background: color.adjust($color-error, $alpha: -0.7);
+        @include error-glow;
+      }
+    }
+  }
+
+  select,
+  input {
+    background: $color-glass-light;
+  }
+}
+
+// ============================================================================
+// INSTANCE CONTAINER (viewport for 3D content)
+// ============================================================================
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $color-border-medium;
+  border-top-color: $color-accent-primary;
+  border-radius: $radius-full;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tool-indicator {
+  position: absolute;
+  bottom: $spacing-md;
+  left: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  @include glass-tooltip;
+  color: $color-accent-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// ============================================================================
+// MAIN APP LAYOUT
+// ============================================================================
+
+.cia-web-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: $color-bg-base;
+  overflow: hidden;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.left-panel {
+  width: 280px;
+  background: $color-bg-primary;
+  border-right: 1px solid $color-border-subtle;
+  overflow-y: auto;
+  @include glass-scrollable;
+}
+
+.center-panel {
+  flex: 1;
+  background: $color-bg-primary;
+  overflow: hidden;
+}
+
+.right-panel {
+  width: 320px;
+  background: $color-bg-primary;
+  border-left: 1px solid $color-border-subtle;
+  overflow-y: auto;
+  @include glass-scrollable;
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

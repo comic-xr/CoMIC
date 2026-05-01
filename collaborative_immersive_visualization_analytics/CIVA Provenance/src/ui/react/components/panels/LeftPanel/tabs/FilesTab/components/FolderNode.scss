@@ -1,0 +1,69 @@
+// FolderNode.scss
+// Expandable folder component styles
+
+.folder-node {
+    // Folder header
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.1s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+
+    &__chevron {
+        flex-shrink: 0;
+        color: var(--color-text-muted);
+        opacity: 0.5;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        color: var(--color-accent-amber, #fbbf24);
+    }
+
+    &__name {
+        flex: 1;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__count {
+        flex-shrink: 0;
+        font-size: 9px;
+        color: var(--color-text-muted);
+    }
+
+    // Children container
+    &__children {
+        // Nested items inherit depth-based padding from parent
+    }
+
+    // VR mode
+    &--vr {
+        .folder-node__header {
+            padding: 10px 16px;
+            gap: 12px;
+            min-height: 44px;
+        }
+
+        .folder-node__name {
+            font-size: 13px;
+        }
+
+        .folder-node__count {
+            font-size: 11px;
+        }
+    }
+}

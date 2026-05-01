@@ -1,0 +1,242 @@
+@use "theme" as *;
+
+// =============================================================================
+// ACTIVITY PANEL CONTAINER
+// =============================================================================
+
+.activity-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &__header {
+    flex-shrink: 0;
+    padding: $spacing-sm;
+  }
+
+  &__list {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  &__caught-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    margin: $spacing-sm;
+    background: rgba($color-accent-green, 0.06);
+    border: 1px solid rgba($color-accent-green, 0.15);
+    border-radius: $radius-lg;
+    color: $color-accent-green;
+    font-size: 12px;
+  }
+
+  &__caught-up-text {
+    font-size: 12px;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// CATCH-UP CARD CONTENT
+// =============================================================================
+
+.catch-up {
+  &__content {
+    font-size: 12px;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: $spacing-xs 0 0 0;
+
+    li {
+      padding: $spacing-xs 0;
+      color: $color-text-primary;
+
+      strong {
+        color: $color-accent-amber;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding-top: $spacing-sm;
+    border-top: 1px solid rgba($color-accent-amber, 0.15);
+    margin-top: $spacing-sm;
+  }
+
+  &__mark-read {
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    font-size: 11px;
+    cursor: pointer;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+// =============================================================================
+// ACTIVITY FEED
+// =============================================================================
+
+.activity-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-sm;
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-2xl;
+    text-align: center;
+    color: $color-text-tertiary;
+
+    svg {
+      opacity: 0.4;
+    }
+
+    span {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// =============================================================================
+// ACTIVITY FILTER
+// =============================================================================
+
+.activity-filter {
+  position: relative;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+      color: $color-text-secondary;
+    }
+
+    svg.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: $spacing-xs;
+    min-width: 120px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  &__option {
+    display: block;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: none;
+    text-align: left;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: $color-text-primary;
+    }
+
+    &.active {
+      background: rgba($color-accent-amber, 0.15);
+      color: $color-accent-amber;
+    }
+  }
+}
+
+// =============================================================================
+// ACTIVITY STATS (Session Summary) - kept for backwards compatibility
+// =============================================================================
+
+.activity-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-sm $spacing-xs;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: $color-border-default;
+    }
+  }
+
+  &__value {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    line-height: 1.2;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+}

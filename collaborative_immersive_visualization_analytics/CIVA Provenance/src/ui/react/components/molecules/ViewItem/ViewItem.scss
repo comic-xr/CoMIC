@@ -1,0 +1,734 @@
+// ViewItem.scss
+// Adaptive ViewItem component styles - Desktop & VR modes
+// Location: src/ui/react/components/common/ViewItem/ViewItem.scss
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CSS VARIABLES
+// =============================================================================
+
+.view-item {
+  --view-color: #{$color-accent-primary};
+  --item-height: 36px;
+  --item-padding: #{$spacing-sm} #{$spacing-sm};
+  --icon-size: 14px;
+  --font-size: 11px;
+  --meta-font-size: 9px;
+  --gap: #{$spacing-sm};
+  --action-size: 24px;
+}
+
+// =============================================================================
+// BASE VIEW ITEM
+// =============================================================================
+
+.view-item {
+  position: relative;
+  margin-left: $spacing-md;
+  margin-bottom: 2px;
+  border-radius: $radius-sm;
+  overflow: visible;
+  transition: all $transition-base;
+  cursor: pointer;
+
+  &--dragging {
+    opacity: 0.5;
+    transform: scale(1.02);
+    box-shadow: $shadow-lg, 0 0 20px $color-accent-indigo-glow;
+  }
+}
+
+// =============================================================================
+// DROP INDICATORS
+// =============================================================================
+
+.view-item__drop-before,
+.view-item__drop-after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: $color-accent-indigo;
+  border-radius: $radius-xs;
+  box-shadow: 0 0 8px $color-accent-indigo-glow;
+  opacity: 0;
+  transition: opacity $transition-fast;
+  z-index: $z-floating;
+  pointer-events: none;
+
+  &--visible {
+    opacity: 1;
+  }
+}
+
+.view-item__drop-before {
+  top: -2px;
+}
+
+.view-item__drop-after {
+  bottom: -2px;
+}
+
+// =============================================================================
+// MAIN ROW
+// =============================================================================
+
+.view-item__row {
+  display: flex;
+  align-items: stretch;
+  min-height: var(--item-height);
+  overflow: hidden;
+  transition: all $transition-fast;
+}
+
+// =============================================================================
+// COLOR ELEMENTS
+// =============================================================================
+
+// Desktop: Left border color indicator
+.view-item:not(.view-item--vr) {
+  .view-item__content {
+    border-left: 3px solid transparent;
+    border-radius: 0 $radius-sm $radius-sm 0;
+    transition: all $transition-fast;
+  }
+
+  &.view-item--active .view-item__content {
+    border-left-color: var(--view-color);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--view-color) 10%, transparent) 0%, transparent 100%);
+  }
+
+  &.view-item--trashed .view-item__content {
+    border-left-color: $color-text-muted;
+  }
+
+  &.view-item--expanded .view-item__content,
+  &.view-item--hovered .view-item__content {
+    border-left-color: $color-border-medium;
+  }
+
+  &.view-item--active.view-item--hovered .view-item__content,
+  &.view-item--active.view-item--expanded .view-item__content {
+    border-left-color: var(--view-color);
+  }
+}
+
+// VR: Color strip
+.view-item__color-strip {
+  width: 6px;
+  background: var(--view-color);
+  flex-shrink: 0;
+
+  .view-item--active & {
+    box-shadow: 0 0 12px color-mix(in srgb, var(--view-color) 60%, transparent);
+  }
+
+  .view-item--trashed & {
+    background: $color-text-muted;
+    opacity: 0.5;
+  }
+}
+
+// =============================================================================
+// CONTENT AREA
+// =============================================================================
+
+.view-item__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  padding: var(--item-padding);
+  position: relative;
+  overflow: hidden;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-left: none;
+
+  .view-item:hover &,
+  .view-item--hovered & {
+    background: $color-glass-medium;
+    border-color: $color-border-default;
+  }
+
+  .view-item--expanded & {
+    border-radius: $radius-sm $radius-sm 0 0;
+    border-bottom-color: transparent;
+  }
+
+  .view-item--selected & {
+    background: $color-active-bg;
+    border-color: $color-accent-primary;
+  }
+}
+
+// =============================================================================
+// DRAG HANDLE
+// =============================================================================
+
+.view-item__drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-muted;
+  cursor: grab;
+  opacity: 0;
+  transition: all $transition-fast;
+  flex-shrink: 0;
+  margin-right: $spacing-xs;
+
+  .view-item:hover &,
+  .view-item--hovered & {
+    opacity: 0.3;
+  }
+
+  &:hover {
+    opacity: 0.8 !important;
+    color: $color-text-primary;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+// =============================================================================
+// THUMBNAIL
+// =============================================================================
+
+.view-item__thumbnail {
+  width: 32px;
+  height: 24px;
+  border-radius: $radius-xs;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--view-color) 30%, transparent) 0%, color-mix(in srgb, var(--view-color) 10%, transparent) 100%);
+  border: 2px solid var(--view-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .view-item--active & {
+    box-shadow: 0 0 8px color-mix(in srgb, var(--view-color) 60%, transparent);
+  }
+
+  .view-item--trashed & {
+    border-color: $color-text-muted;
+    opacity: 0.5;
+    filter: grayscale(0.5);
+  }
+
+  // VR mode: larger thumbnail
+  .view-item--vr & {
+    width: 56px;
+    height: 40px;
+  }
+}
+
+// =============================================================================
+// VIEW INFO
+// =============================================================================
+
+.view-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.view-item__name {
+  font-size: var(--font-size);
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .view-item--active & {
+    font-weight: $font-weight-semibold;
+  }
+
+  .view-item--trashed & {
+    color: $color-text-muted;
+    text-decoration: line-through;
+  }
+}
+
+.view-item__name-input {
+  flex: 1;
+  min-width: 0;
+  padding: 2px $spacing-xs;
+  background: $color-bg-primary;
+  border: 1px solid $color-accent-primary;
+  border-radius: $radius-xs;
+  font-size: var(--font-size);
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 2px $color-focus-glow;
+  }
+}
+
+.view-item__meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: var(--meta-font-size);
+  color: $color-text-muted;
+}
+
+.view-item__handler-badge {
+  padding: 1px $spacing-sm;
+  background: color-mix(in srgb, var(--view-color) 25%, transparent);
+  color: var(--view-color);
+  border-radius: $radius-xs;
+  font-weight: $font-weight-medium;
+}
+
+.view-item__meta-dot {
+  color: $color-text-disabled;
+}
+
+.view-item__dataset-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// RIGHT CONTENT (Status + Position) - Fades on desktop hover
+// =============================================================================
+
+.view-item__right-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-left: auto;
+  padding-right: $spacing-xs;
+  transition: all $transition-base;
+
+  .view-item:not(.view-item--vr).view-item--hovered &,
+  .view-item:not(.view-item--vr).view-item--expanded & {
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+  }
+}
+
+.view-item__position-badge {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px $spacing-sm;
+  background: $color-accent-primary-glow;
+  border-radius: $radius-xs;
+  font-size: var(--meta-font-size);
+  color: $color-accent-primary;
+  font-weight: $font-weight-medium;
+  font-family: $font-family-mono;
+}
+
+.view-item__status {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px $spacing-sm;
+  border-radius: $radius-xs;
+  font-size: var(--meta-font-size);
+  font-weight: $font-weight-semibold;
+}
+
+.view-item__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: $radius-full;
+}
+
+// =============================================================================
+// QUICK ACTIONS (Desktop slide-over)
+// =============================================================================
+
+.view-item__quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  position: absolute;
+  right: $spacing-xs;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(100% + 8px));
+  opacity: 0;
+  transition: all $transition-base;
+  background: linear-gradient(90deg, transparent 0%, $color-glass-panel 30%);
+  padding-left: $spacing-xl;
+  padding-right: $spacing-xs;
+  height: calc(100% - 4px);
+  pointer-events: none;
+  z-index: $z-dropdown;
+
+  .view-item--hovered &,
+  .view-item--expanded & {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.view-item__tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--action-size);
+  height: var(--action-size);
+  padding: 0;
+  background: $color-glass-subtle;
+  border: none;
+  border-radius: $radius-xs;
+  color: var(--tool-color, $color-text-secondary);
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+    color: $color-text-primary;
+  }
+}
+
+.view-item__tool-label {
+  font-size: 9px;
+  font-weight: $font-weight-medium;
+}
+
+.view-item__expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--action-size);
+  height: var(--action-size);
+  border: none;
+  border-radius: $radius-xs;
+  background: $color-glass-light;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  .view-item--expanded & {
+    background: $color-accent-indigo-glow;
+    color: $color-accent-indigo;
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    background: $color-glass-medium;
+    color: $color-text-primary;
+  }
+}
+
+// =============================================================================
+// EXPANDED TOOLBAR (Desktop)
+// =============================================================================
+
+.view-item__toolbar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  padding-left: 23px; // Align with content after border
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-top: none;
+  border-radius: 0 0 $radius-sm $radius-sm;
+}
+
+.view-item__toolbar-label {
+  font-size: 9px;
+  color: $color-text-muted;
+  margin-right: $spacing-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// =============================================================================
+// VR MODE
+// =============================================================================
+
+.view-item--vr {
+  --item-height: 64px;
+  --item-padding: #{$spacing-lg} #{$spacing-xl};
+  --icon-size: 24px;
+  --font-size: 16px;
+  --meta-font-size: 12px;
+  --gap: #{$spacing-lg};
+  --action-size: 48px;
+
+  margin-left: 0;
+  margin-bottom: $spacing-sm;
+  border-radius: $radius-md;
+  background: linear-gradient(145deg, $color-glass-light 0%, $color-glass-subtle 100%);
+  border: 1px solid $color-border-default;
+  overflow: hidden;
+
+  &:hover,
+  &.view-item--hovered {
+    box-shadow: $shadow-lg;
+  }
+
+  &.view-item--trashed {
+    background: linear-gradient(145deg, $color-error-bg 0%, rgba($color-error, 0.02) 100%);
+    border-color: $color-error-border;
+  }
+
+  .view-item__content {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .view-item__status-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .view-item__position-badge {
+    padding: $spacing-xs $spacing-md;
+  }
+
+  .view-item__status {
+    padding: $spacing-sm $spacing-md;
+  }
+}
+
+// VR Action Bar
+.view-item__vr-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+  background: $color-bg-primary;
+}
+
+.view-item__vr-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  height: 48px;
+  min-width: 48px;
+  padding: 0 $spacing-lg;
+  border: none;
+  border-radius: $radius-lg;
+  background: $color-glass-light;
+  color: var(--tool-color, $color-text-secondary);
+  font-size: 14px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-strong;
+    transform: scale(1.02);
+  }
+}
+
+.view-item__vr-more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  height: 48px;
+  padding: 0 $spacing-md;
+  margin-left: auto;
+  border: none;
+  border-radius: $radius-lg;
+  background: $color-glass-subtle;
+  color: $color-text-muted;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &--active {
+    background: $color-accent-indigo-glow;
+    color: $color-accent-indigo;
+  }
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+// VR Expanded Toolbar
+.view-item__vr-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+  background: $color-bg-secondary;
+}
+
+// =============================================================================
+// STATE MODIFIERS
+// =============================================================================
+
+.view-item--active {
+  // Active state styling handled by color elements
+}
+
+.view-item--inactive {
+  .view-item__color-dot {
+    opacity: 0.6;
+  }
+
+  .view-item__content {
+    background: color-mix(in srgb, $color-bg-tertiary 70%, transparent);
+  }
+}
+
+.view-item--trashed {
+  opacity: 0.7;
+}
+
+.view-item--selected {
+  .view-item__content {
+    background: $color-active-bg;
+    border-color: $color-accent-primary;
+  }
+}
+
+// =============================================================================
+// TRASHED VIEW ITEM (Standalone for trash section)
+// =============================================================================
+
+.trashed-view-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  margin-bottom: 2px;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    border-color: $color-border-default;
+  }
+
+  &--expiring {
+    border-color: rgba($color-accent-amber, 0.3);
+  }
+
+  &--confirm-delete {
+    border-color: $color-error-border;
+    background: $color-error-bg;
+  }
+}
+
+.trashed-view-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.trashed-view-item__name {
+  font-size: 11px;
+  color: $color-text-muted;
+  text-decoration: line-through;
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trashed-view-item__expires {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: 9px;
+  color: $color-text-tertiary;
+
+  &--warning {
+    color: $color-accent-amber;
+  }
+}
+
+.trashed-view-item__actions {
+  display: flex;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+}
+
+.trashed-view-item__restore,
+.trashed-view-item__delete {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  font-size: 10px;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-subtle;
+  }
+
+  span {
+    display: none;
+  }
+
+  .trashed-view-item:hover & span {
+    display: inline;
+  }
+}
+
+.trashed-view-item__restore:hover {
+  color: $color-accent-green;
+  background: $color-success-bg;
+}
+
+.trashed-view-item__delete:hover {
+  color: $color-accent-red;
+  background: $color-error-bg;
+}
+
+.trashed-view-item__delete--confirm {
+  color: $color-accent-red;
+  background: $color-error-bg;
+  font-weight: $font-weight-semibold;
+
+  span {
+    display: inline;
+  }
+}
+
+// =============================================================================
+// ICON HELPER CLASSES
+// =============================================================================
+
+.icon-purple { color: $color-accent-purple; }
+.icon-amber { color: $color-accent-amber; }
+.icon-pink { color: $color-accent-pink; }
+.icon-teal { color: $color-accent-teal; }
+.icon-green { color: $color-accent-green; }
+.icon-blue { color: $color-accent-blue; }
+.icon-red { color: $color-accent-red; }
+.icon-muted { color: $color-text-muted; }

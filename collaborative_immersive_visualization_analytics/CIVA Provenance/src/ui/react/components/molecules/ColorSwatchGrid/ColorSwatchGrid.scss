@@ -1,0 +1,82 @@
+// src/ui/react/components/molecules/ColorSwatchGrid/ColorSwatchGrid.scss
+// Color swatch grid molecule styles
+
+@use "theme" as *;
+
+.color-swatch-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+.color-swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: $spacing-xs;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+}
+
+.color-swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    position: relative;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: $color-border-default;
+        transform: scale(1.02);
+    }
+
+    &.active {
+        border-color: $color-accent-sky;
+        box-shadow: 0 0 0 2px rgba($color-accent-sky, 0.2);
+
+        .swatch-label {
+            color: $color-accent-sky;
+        }
+    }
+}
+
+.swatch-gradient {
+    width: 100%;
+    height: 20px;
+    border-radius: $radius-xs;
+}
+
+.swatch-label {
+    font-size: 10px;
+    color: $color-text-tertiary;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color $transition-fast;
+}
+
+.swatch-check {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: $color-accent-sky;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: $radius-full;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-swatch-hint {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    text-align: center;
+}

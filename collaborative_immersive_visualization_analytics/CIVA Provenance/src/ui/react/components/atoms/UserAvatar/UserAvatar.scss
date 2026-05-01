@@ -1,0 +1,172 @@
+/**
+ * @file UserAvatar.scss
+ * @description Styles for the UserAvatar and UserAvatarGroup components.
+ * Uses BEM naming convention and design tokens.
+ *
+ * Size variants: xs (20px), sm (28px), md (36px), lg (48px)
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// SIZE VARIABLES
+// =============================================================================
+
+$avatar-size-xs: 20px;
+$avatar-size-sm: 28px;
+$avatar-size-md: 36px;
+$avatar-size-lg: 48px;
+
+$avatar-font-xs: 9px;
+$avatar-font-sm: 11px;
+$avatar-font-md: 14px;
+$avatar-font-lg: 18px;
+
+// =============================================================================
+// BASE AVATAR
+// =============================================================================
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+
+  // Default size (sm)
+  width: $avatar-size-sm;
+  height: $avatar-size-sm;
+  font-size: $avatar-font-sm;
+}
+
+// =============================================================================
+// SIZE VARIANTS
+// =============================================================================
+
+.user-avatar--xs {
+  width: $avatar-size-xs;
+  height: $avatar-size-xs;
+  font-size: $avatar-font-xs;
+}
+
+.user-avatar--sm {
+  width: $avatar-size-sm;
+  height: $avatar-size-sm;
+  font-size: $avatar-font-sm;
+}
+
+.user-avatar--md {
+  width: $avatar-size-md;
+  height: $avatar-size-md;
+  font-size: $avatar-font-md;
+}
+
+.user-avatar--lg {
+  width: $avatar-size-lg;
+  height: $avatar-size-lg;
+  font-size: $avatar-font-lg;
+}
+
+// =============================================================================
+// BORDER VARIANT
+// =============================================================================
+
+.user-avatar--border {
+  border: 2px solid;
+  background: transparent !important;
+}
+
+// =============================================================================
+// IMAGE AVATAR
+// =============================================================================
+
+.user-avatar--image {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.user-avatar__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+// =============================================================================
+// INITIALS
+// =============================================================================
+
+.user-avatar__initials {
+  line-height: 1;
+}
+
+// =============================================================================
+// AVATAR GROUP (Overlapping avatars)
+// =============================================================================
+
+.user-avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar-group__item {
+  margin-left: -8px;
+  border: 2px solid $color-bg-primary;
+  box-sizing: content-box;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.user-avatar-group__overflow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -8px;
+  background: $color-bg-tertiary;
+  border: 2px solid $color-bg-primary;
+  border-radius: $radius-full;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+  box-sizing: content-box;
+
+  // Size-specific dimensions (matches avatar sizes)
+  &.user-avatar--xs {
+    width: $avatar-size-xs;
+    height: $avatar-size-xs;
+    font-size: $avatar-font-xs;
+  }
+
+  &.user-avatar--sm {
+    width: $avatar-size-sm;
+    height: $avatar-size-sm;
+    font-size: $avatar-font-sm;
+  }
+
+  &.user-avatar--md {
+    width: $avatar-size-md;
+    height: $avatar-size-md;
+    font-size: $avatar-font-md;
+  }
+
+  &.user-avatar--lg {
+    width: $avatar-size-lg;
+    height: $avatar-size-lg;
+    font-size: $avatar-font-lg;
+  }
+}

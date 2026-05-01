@@ -1,0 +1,387 @@
+// CanvasWorkspace.scss
+// Styles for CanvasWorkspace integration component - matches WorkspaceGrid styling
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// CANVAS WORKSPACE - Main container
+// ============================================================================
+// Layout:
+// - CanvasHeader (36px)
+// - Content area (flex: 1, with edge triggers)
+// - CanvasToolbar (54px or auto when wrapped)
+// - CanvasStatusBar (24px)
+//
+// RESPONSIVE BEHAVIOR:
+// - Uses container queries to detect width and adapt layout
+// - Toolbar collapses labels first, then button text, then wraps
+
+.canvas-workspace {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-width: 650px; // Enforced minimum for footer toolbar with all zones
+  min-height: 300px;
+  background: $color-bg-primary;
+  overflow: hidden;
+  position: relative;
+
+  // Enable container queries
+  container-type: inline-size;
+  container-name: canvas-workspace;
+}
+
+// ============================================================================
+// CONTENT AREA
+// ============================================================================
+
+.canvas-workspace__content {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.canvas-workspace__canvas {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  min-height: 0;
+}
+
+.canvas-workspace--free-layout {
+  background: $color-bg-primary;
+}
+
+.canvas-workspace__canvas--free-layout {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-md;
+}
+
+.canvas-workspace__free-surface {
+  position: relative;
+  flex: 1;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.canvas-workspace__empty-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: $color-bg-canvas;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+}
+
+// ============================================================================
+// LOADING / ERROR / EMPTY STATES
+// ============================================================================
+
+.canvas-workspace__loading,
+.canvas-workspace__error,
+.canvas-workspace__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-secondary;
+}
+
+.canvas-workspace__error {
+  color: $color-error;
+}
+
+.canvas-workspace__empty {
+  p {
+    margin-bottom: $spacing-md;
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+  }
+
+  .canvas-workspace__empty-hint {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin-bottom: $spacing-md;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    background: $color-accent-primary-glow;
+    border: 1px solid $color-accent-primary;
+    border-radius: $radius-md;
+    color: $color-accent-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba($color-accent-primary, 0.2);
+      box-shadow: 0 0 20px rgba($color-accent-primary, 0.3);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.canvas-workspace__empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  justify-content: center;
+}
+
+.canvas-workspace__empty-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-top: $spacing-lg;
+  width: min(520px, 100%);
+}
+
+.canvas-workspace__empty-label {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.canvas-workspace__empty-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  justify-content: center;
+
+  button {
+    background: rgba($color-bg-canvas, 0.8);
+    border: 1px solid $color-border-subtle;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      background: rgba($color-bg-canvas, 0.95);
+      border-color: $color-border-strong;
+    }
+  }
+}
+
+
+.canvas-workspace__loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba($color-bg-primary, 0.65);
+  backdrop-filter: blur(6px);
+}
+
+.canvas-workspace__loading-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg $spacing-xl;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border-subtle;
+  background: rgba($color-bg-canvas, 0.9);
+  box-shadow: 0 16px 40px rgba($color-bg-primary, 0.4);
+}
+
+.canvas-workspace__loading-overlay--vr {
+  backdrop-filter: blur(10px);
+}
+
+.canvas-workspace__loading-card--vr {
+  padding: $spacing-xl $spacing-2xl;
+  gap: $spacing-md;
+  border-color: rgba($color-accent-primary, 0.35);
+  box-shadow:
+    0 20px 50px rgba($color-bg-primary, 0.55),
+    0 0 24px rgba($color-accent-primary, 0.25);
+  background: rgba($color-bg-canvas, 0.95);
+  animation: canvas-loading-glow 2.6s ease-in-out infinite;
+
+  .canvas-workspace__spinner {
+    width: 36px;
+    height: 36px;
+    border-width: 3px;
+  }
+
+  .canvas-workspace__loading-title {
+    font-size: $font-size-lg;
+    color: $color-text-primary;
+  }
+
+  .canvas-workspace__loading-subtitle {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+  }
+}
+
+@keyframes canvas-loading-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 20px 50px rgba($color-bg-primary, 0.55),
+      0 0 18px rgba($color-accent-primary, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 24px 60px rgba($color-bg-primary, 0.6),
+      0 0 30px rgba($color-accent-primary, 0.35);
+  }
+}
+
+.canvas-workspace__spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba($color-accent-primary, 0.2);
+  border-top-color: $color-accent-primary;
+  animation: canvas-spinner 0.9s linear infinite;
+}
+
+.canvas-workspace__loading-title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.canvas-workspace__loading-subtitle {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+@keyframes canvas-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================================================
+// MINI MAP OVERLAY
+// ============================================================================
+
+.canvas-workspace__minimap {
+  position: absolute;
+  bottom: $spacing-md;
+  right: $spacing-md;
+  width: 200px;
+  height: 150px;
+  background: rgba($color-bg-secondary, 0.95);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+// ============================================================================
+// SUBSET PANEL (Right sidebar)
+// ============================================================================
+
+.canvas-workspace__subset-panel {
+  width: 280px;
+  background: $color-bg-secondary;
+  border-left: 1px solid $color-border-subtle;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+// ============================================================================
+// HEADER (Optional - only shown when needed)
+// ============================================================================
+
+.canvas-workspace__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  @include glass-subtle;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+  background: rgba($color-bg-secondary, 0.6);
+}
+
+.canvas-workspace__tools {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.canvas-workspace__tool-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include glass-button;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    @include glass-hover;
+  }
+
+  &.active {
+    background: rgba($color-accent-primary, 0.15);
+    border-color: $color-accent-primary;
+    color: $color-accent-primary;
+  }
+}
+
+// ============================================================================
+// IMMERSIVE VR MODE
+// ============================================================================
+
+.canvas-workspace--immersive {
+  min-width: 0;
+
+  .canvas-chrome-header,
+  .canvas-chrome-edit-bar,
+  .footer1-instance-tools,
+  .canvas-footer2,
+  .canvas-info-footer,
+  .edge-trigger,
+  .floating-panel {
+    display: none !important;
+  }
+
+  .canvas-workspace__content,
+  .canvas-workspace__canvas {
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE
+// ============================================================================
+
+@media (max-width: 768px) {
+  .canvas-workspace__minimap {
+    width: 150px;
+    height: 100px;
+    bottom: $spacing-sm;
+    right: $spacing-sm;
+  }
+
+  .canvas-workspace__subset-panel {
+    width: 240px;
+  }
+}

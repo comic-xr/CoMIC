@@ -1,0 +1,534 @@
+/**
+ * @file VRCanvasNavigator.scss
+ * @description Styles for VR canvas navigator components.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// VR CANVAS NAVIGATOR
+// =============================================================================
+
+.vr-canvas-navigator {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    padding: $spacing-md;
+}
+
+.vr-canvas-navigator__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vr-canvas-navigator__title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+}
+
+.vr-canvas-navigator__size {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+}
+
+.vr-canvas-navigator__instructions {
+    padding: $spacing-sm $spacing-md;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: $radius-md;
+    font-size: 10px;
+    color: $color-text-muted;
+    line-height: 1.5;
+
+    strong {
+        color: $color-text-secondary;
+    }
+
+    ul {
+        margin: $spacing-xs 0 0;
+        padding-left: $spacing-md;
+
+        li {
+            margin-bottom: 2px;
+        }
+    }
+}
+
+// =============================================================================
+// VR MINIMAP GRID
+// =============================================================================
+
+.vr-minimap-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols, 3), 48px);
+    grid-template-rows: repeat(var(--grid-rows, 3), 48px);
+    gap: 4px;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: $radius-lg;
+    border: 1px solid $color-border-default;
+}
+
+.vr-minimap-grid__instruction {
+    position: absolute;
+    bottom: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $spacing-xs $spacing-md;
+    background: $color-glass-panel;
+    border: 1px solid $color-accent-teal;
+    border-radius: 20px;
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    white-space: nowrap;
+}
+
+// =============================================================================
+// VR MINIMAP CELL
+// =============================================================================
+
+.vr-minimap-cell {
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--empty {
+        background: rgba(255, 255, 255, 0.02);
+        border-style: dashed;
+    }
+
+    &--source {
+        background: rgba($color-accent-teal, 0.4);
+        border: 2px solid $color-accent-teal;
+        box-shadow: 0 0 15px rgba($color-accent-teal, 0.5);
+    }
+
+    &--selected {
+        background: rgba($color-accent-teal, 0.2);
+        border: 2px solid $color-accent-teal;
+    }
+
+    &--valid-target {
+        background: rgba(74, 222, 128, 0.2);
+        border: 2px dashed #4ade80;
+
+        &:hover {
+            background: rgba(74, 222, 128, 0.3);
+            border-style: solid;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+    }
+
+    &--target-hover {
+        background: rgba(74, 222, 128, 0.3);
+        border: 2px solid #4ade80;
+        box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+    }
+
+    &--in-viewport {
+        border-color: $color-accent-blue;
+        border-width: 2px;
+    }
+}
+
+.vr-minimap-cell__color {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 4px var(--cell-color, #60a5fa);
+}
+
+.vr-minimap-cell__label {
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 90%;
+    text-align: center;
+}
+
+.vr-minimap-cell__home {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: $color-accent-amber;
+}
+
+.vr-minimap-cell__collaborators {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    display: flex;
+    gap: 2px;
+}
+
+.vr-minimap-cell__collab-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.vr-minimap-cell__collab-more {
+    font-size: 8px;
+    color: $color-text-muted;
+}
+
+.vr-minimap-cell__moving-badge {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 6px;
+    background: $color-accent-teal;
+    border-radius: 4px;
+    font-size: 8px;
+    font-weight: $font-weight-semibold;
+    color: #000;
+    white-space: nowrap;
+}
+
+// =============================================================================
+// VR CELL CONTEXT MENU
+// =============================================================================
+
+.vr-cell-context-menu__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.vr-cell-context-menu {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.vr-cell-context-menu__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: $color-glass-panel;
+    border: 2px solid $color-border-default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.vr-cell-context-menu__center-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.vr-cell-context-menu__center-coords {
+    font-size: 8px;
+    color: $color-text-muted;
+    margin-top: 2px;
+}
+
+.vr-cell-context-menu__action {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    background: $color-glass-panel;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all $transition-fast;
+    color: $color-text-secondary;
+
+    &:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    &--teal {
+        border-color: rgba($color-accent-teal, 0.4);
+
+        &:hover {
+            background: rgba($color-accent-teal, 0.2);
+        }
+
+        .vr-cell-context-menu__action-label {
+            color: $color-accent-teal;
+        }
+    }
+
+    &--blue {
+        border-color: rgba($color-accent-blue, 0.4);
+
+        &:hover {
+            background: rgba($color-accent-blue, 0.2);
+        }
+
+        .vr-cell-context-menu__action-label {
+            color: $color-accent-blue;
+        }
+    }
+
+    &--red {
+        border-color: rgba(248, 113, 113, 0.4);
+
+        &:hover {
+            background: rgba(248, 113, 113, 0.2);
+        }
+
+        .vr-cell-context-menu__action-label {
+            color: #f87171;
+        }
+    }
+
+    &--amber {
+        border-color: rgba($color-accent-amber, 0.4);
+
+        &:hover {
+            background: rgba($color-accent-amber, 0.2);
+        }
+
+        .vr-cell-context-menu__action-label {
+            color: $color-accent-amber;
+        }
+    }
+
+    &--green {
+        border-color: rgba(74, 222, 128, 0.4);
+
+        &:hover {
+            background: rgba(74, 222, 128, 0.2);
+        }
+
+        .vr-cell-context-menu__action-label {
+            color: #4ade80;
+        }
+    }
+
+    &--purple {
+        border-color: rgba(167, 139, 250, 0.4);
+
+        &:hover {
+            background: rgba(167, 139, 250, 0.2);
+        }
+
+        .vr-cell-context-menu__action-label {
+            color: #a78bfa;
+        }
+    }
+}
+
+.vr-cell-context-menu__action-label {
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+}
+
+.vr-cell-context-menu__hint {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 180px);
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: $radius-lg;
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+// =============================================================================
+// VR NAVIGATION CONTROLS
+// =============================================================================
+
+.vr-navigation-controls {
+    display: flex;
+    gap: $spacing-md;
+    align-items: center;
+}
+
+.vr-navigation-controls__dpad {
+    position: relative;
+    width: 130px;
+    height: 130px;
+}
+
+.vr-navigation-controls__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid $color-border-default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: $color-text-secondary;
+}
+
+.vr-navigation-controls__dir {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.15);
+        color: $color-text-primary;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        background: rgba(255, 255, 255, 0.03);
+        border-color: transparent;
+    }
+
+    &--top {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--bottom {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--left {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--right {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.vr-navigation-controls__zoom {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+}
+
+.vr-navigation-controls__zoom-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// VR MULTI-SELECT TOOLBAR
+// =============================================================================
+
+.vr-multi-select-toolbar {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: $color-glass-panel;
+    border: 1px solid rgba($color-accent-teal, 0.4);
+    border-radius: 24px;
+}
+
+.vr-multi-select-toolbar__count {
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+}
+
+.vr-multi-select-toolbar__divider {
+    width: 1px;
+    height: 20px;
+    background: $color-border-default;
+}
+
+.vr-multi-select-toolbar__btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    min-height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color-text-primary;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &--primary {
+        background: rgba($color-accent-teal, 0.2);
+        border-color: $color-accent-teal;
+        color: $color-accent-teal;
+
+        &:hover:not(:disabled) {
+            background: rgba($color-accent-teal, 0.3);
+        }
+    }
+}

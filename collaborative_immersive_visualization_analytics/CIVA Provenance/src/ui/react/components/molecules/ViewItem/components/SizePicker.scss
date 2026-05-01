@@ -1,0 +1,199 @@
+// SizePicker.scss
+// Size picker dropdown for selecting view canvas size
+
+@use "theme" as *;
+
+.size-picker {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 160px;
+  padding: $spacing-sm;
+  background: rgba(18, 18, 24, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: $z-dropdown + 1;
+
+  // Animation
+  animation: size-picker-in 0.15s ease-out;
+
+  @keyframes size-picker-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  // Presets grid
+  &__presets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+  }
+
+  // Individual preset button
+  &__preset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: $color-border-default;
+    }
+
+    &--selected {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+
+      .size-picker__preset-cell {
+        background: $color-accent-blue;
+      }
+
+      .size-picker__preset-label {
+        color: $color-accent-blue;
+      }
+    }
+  }
+
+  // Visual grid representation
+  &__preset-grid {
+    display: grid;
+    grid-template-rows: repeat(var(--rows, 1), 8px);
+    grid-template-columns: repeat(var(--cols, 1), 12px);
+    gap: 2px;
+  }
+
+  &__preset-cell {
+    background: $color-text-muted;
+    border-radius: 2px;
+    transition: background $transition-fast;
+  }
+
+  &__preset-label {
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+  }
+
+  // Custom toggle button
+  &__custom-toggle {
+    display: block;
+    width: 100%;
+    padding: $spacing-xs $spacing-sm;
+    background: transparent;
+    border: 1px dashed $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: $color-border-default;
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-purple, 0.1);
+      border-style: solid;
+      border-color: rgba($color-accent-purple, 0.3);
+      color: $color-accent-purple;
+    }
+  }
+
+  // Custom size inputs
+  &__custom {
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $color-border-subtle;
+  }
+
+  &__custom-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__custom-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    span {
+      font-size: 9px;
+      color: $color-text-muted;
+      text-align: center;
+    }
+
+    input {
+      width: 40px;
+      padding: 4px $spacing-xs;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid $color-border-subtle;
+      border-radius: $radius-xs;
+      color: $color-text-primary;
+      font-size: 11px;
+      text-align: center;
+
+      &:focus {
+        outline: none;
+        border-color: $color-accent-blue;
+      }
+
+      // Hide spinner buttons
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      -moz-appearance: textfield;
+    }
+  }
+
+  &__custom-x {
+    font-size: 12px;
+    color: $color-text-muted;
+    margin-top: 12px; // Align with inputs
+  }
+
+  // Apply button
+  &__apply {
+    display: block;
+    width: 100%;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($color-accent-blue, 0.15);
+    border: 1px solid rgba($color-accent-blue, 0.3);
+    border-radius: $radius-sm;
+    color: $color-accent-blue;
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-blue, 0.25);
+      border-color: rgba($color-accent-blue, 0.5);
+    }
+  }
+}

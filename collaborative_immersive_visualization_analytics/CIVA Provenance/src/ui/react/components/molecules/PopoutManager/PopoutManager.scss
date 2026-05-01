@@ -1,0 +1,208 @@
+/**
+ * @file PopoutManager.scss
+ * @description Styles for PopoutManager component
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// POPOUT MANAGER
+// =============================================================================
+
+.popout-manager {
+    position: relative;
+}
+
+// =============================================================================
+// TRIGGER
+// =============================================================================
+
+.popout-manager__trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    height: 32px;
+    background: $color-bg-secondary;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+        color: $color-text-primary;
+    }
+
+    &--active {
+        background: $color-bg-tertiary;
+        border-color: $color-border-default;
+    }
+}
+
+.popout-manager__chevron {
+    transition: transform 0.15s ease;
+
+    &--open {
+        transform: rotate(180deg);
+    }
+}
+
+// =============================================================================
+// DROPDOWN
+// =============================================================================
+
+.popout-manager__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    width: 280px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-dropdown;
+    overflow: hidden;
+}
+
+.popout-manager__header {
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: $spacing-sm $spacing-md;
+    padding-bottom: $spacing-xs;
+}
+
+// =============================================================================
+// SNAP SETTINGS
+// =============================================================================
+
+.popout-manager__snap-settings {
+    display: flex;
+    gap: $spacing-md;
+    padding: 0 $spacing-md $spacing-sm;
+}
+
+.popout-manager__snap-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: $color-text-muted;
+    cursor: pointer;
+
+    input {
+        accent-color: $color-accent-cyan;
+    }
+}
+
+.popout-manager__hint {
+    font-size: 10px;
+    color: $color-text-muted;
+    font-style: italic;
+    padding: 4px $spacing-md $spacing-sm;
+}
+
+// =============================================================================
+// LIST
+// =============================================================================
+
+.popout-manager__list {
+    padding: 0 $spacing-sm;
+}
+
+.popout-manager__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-radius: $radius-md;
+    background: $color-hover-bg;
+    margin-bottom: 4px;
+}
+
+.popout-manager__item-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.popout-manager__item-name {
+    flex: 1;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.popout-manager__item-action {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+        color: $color-text-secondary;
+    }
+
+    &--close:hover {
+        color: $color-accent-red;
+    }
+}
+
+// =============================================================================
+// BULK ACTIONS
+// =============================================================================
+
+.popout-manager__actions {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+    border-top: 1px solid $color-border-subtle;
+}
+
+.popout-manager__action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: $spacing-sm;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    cursor: pointer;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+        color: $color-text-primary;
+    }
+
+    &--danger {
+        color: $color-accent-red;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-red 15%, transparent);
+        }
+    }
+}

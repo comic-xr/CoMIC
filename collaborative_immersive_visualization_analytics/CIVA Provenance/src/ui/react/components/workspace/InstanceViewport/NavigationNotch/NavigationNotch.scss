@@ -1,0 +1,506 @@
+// NavigationNotch.scss
+// Carved-edge navigation control for instance viewports
+//
+// Design:
+// - Darker background than viewport content
+// - Inset shadow creates "carved" appearance
+// - Instance color accent on exposed edge
+// - 3 positions: left, bottom, right
+// - 4 modes: full, compact, mini, icon
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// VARIABLES
+// =============================================================================
+
+$notch-bg: rgba(0, 0, 0, 0.6);
+$notch-bg-solid: #0a0c10;
+$notch-border: rgba(255, 255, 255, 0.08);
+$notch-inset-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+$notch-accent-glow: 0 0 8px var(--notch-accent-color, #{$color-accent-primary});
+
+$notch-height: 36px;
+$notch-height-compact: 32px;
+$notch-height-mini: 28px;
+$notch-height-icon: 24px;
+
+$notch-radius: 8px;
+$notch-padding: $spacing-sm $spacing-md;
+
+// =============================================================================
+// BASE STYLES
+// =============================================================================
+
+.navigation-notch {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    background: $notch-bg-solid; // Use solid background instead of blur (WebGL compatibility)
+    // backdrop-filter: blur(8px); // DISABLED - causes WebGL glitching
+    box-shadow: $notch-inset-shadow;
+    transition: all $transition-base;
+    // No z-index - rely on DOM order
+
+    // Accent border on exposed edge
+    &::before {
+        content: '';
+        position: absolute;
+        background: var(--notch-accent-color, #{$color-accent-primary});
+        opacity: 0.6;
+        transition: opacity $transition-fast;
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+}
+
+// =============================================================================
+// POSITION VARIANTS
+// =============================================================================
+
+// Bottom position (most common)
+.navigation-notch--bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $notch-padding;
+    border-radius: $notch-radius $notch-radius 0 0;
+    border: 1px solid $notch-border;
+    border-bottom: none;
+
+    // Accent on top edge
+    &::before {
+        top: 0;
+        left: $notch-radius;
+        right: $notch-radius;
+        height: 2px;
+        border-radius: 1px;
+    }
+}
+
+// Left position
+.navigation-notch--left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    padding: $spacing-md $spacing-sm;
+    border-radius: 0 $notch-radius $notch-radius 0;
+    border: 1px solid $notch-border;
+    border-left: none;
+
+    // Accent on right edge
+    &::before {
+        right: 0;
+        top: $notch-radius;
+        bottom: $notch-radius;
+        width: 2px;
+        border-radius: 1px;
+    }
+
+    .navigation-notch__content {
+        flex-direction: column;
+    }
+
+    .navigation-notch__zoom-section {
+        flex-direction: column;
+    }
+
+    .navigation-notch__actions {
+        flex-direction: column;
+    }
+
+    .navigation-notch__divider {
+        width: 100%;
+        height: 1px;
+        margin: $spacing-xs 0;
+    }
+}
+
+// Right position
+.navigation-notch--right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    padding: $spacing-md $spacing-sm;
+    border-radius: $notch-radius 0 0 $notch-radius;
+    border: 1px solid $notch-border;
+    border-right: none;
+
+    // Accent on left edge
+    &::before {
+        left: 0;
+        top: $notch-radius;
+        bottom: $notch-radius;
+        width: 2px;
+        border-radius: 1px;
+    }
+
+    .navigation-notch__content {
+        flex-direction: column;
+    }
+
+    .navigation-notch__zoom-section {
+        flex-direction: column;
+    }
+
+    .navigation-notch__actions {
+        flex-direction: column;
+    }
+
+    .navigation-notch__divider {
+        width: 100%;
+        height: 1px;
+        margin: $spacing-xs 0;
+    }
+}
+
+// =============================================================================
+// MODE VARIANTS
+// =============================================================================
+
+.navigation-notch--full {
+    height: auto;
+    min-height: $notch-height;
+}
+
+.navigation-notch--compact {
+    height: auto;
+    min-height: $notch-height-compact;
+
+    .navigation-notch__action-label {
+        display: none;
+    }
+}
+
+.navigation-notch--mini {
+    height: $notch-height-mini;
+    padding: $spacing-xs $spacing-sm;
+
+    .navigation-notch__action-label {
+        display: none;
+    }
+}
+
+.navigation-notch--icon {
+    height: $notch-height-icon;
+    width: $notch-height-icon;
+    padding: 0;
+    justify-content: center;
+
+    &.navigation-notch--bottom {
+        border-radius: $spacing-xs $spacing-xs 0 0;
+    }
+
+    &.navigation-notch--left {
+        border-radius: 0 $spacing-xs $spacing-xs 0;
+    }
+
+    &.navigation-notch--right {
+        border-radius: $spacing-xs 0 0 $spacing-xs;
+    }
+}
+
+// =============================================================================
+// CONTENT LAYOUT
+// =============================================================================
+
+.navigation-notch__content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+}
+
+.navigation-notch__zoom-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.navigation-notch__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.navigation-notch__divider {
+    width: 1px;
+    height: 16px;
+    background: $notch-border;
+    margin: 0 $spacing-xs;
+}
+
+// =============================================================================
+// ACTION BUTTONS
+// =============================================================================
+
+.navigation-notch__action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color-text-primary;
+    }
+
+    &:active:not(:disabled) {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(0.95);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    &--with-label {
+        width: auto;
+        padding: 0 $spacing-sm;
+    }
+}
+
+.navigation-notch__action-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+}
+
+// =============================================================================
+// EXPAND/COLLAPSE BUTTON
+// =============================================================================
+
+.navigation-notch__expand-button,
+.navigation-notch__collapse-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $color-text-primary;
+    }
+}
+
+.navigation-notch__collapse-button {
+    width: 20px;
+    height: 20px;
+    margin-left: $spacing-xs;
+    opacity: 0.5;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+// =============================================================================
+// ZOOM INPUT & DROPDOWN
+// =============================================================================
+
+.navigation-notch__zoom-wrapper {
+    position: relative;
+}
+
+.navigation-notch__zoom-display {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    min-width: 56px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    font-family: $font-family-mono;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.navigation-notch__zoom-value {
+    min-width: 32px;
+    text-align: right;
+}
+
+.navigation-notch__zoom-chevron {
+    opacity: 0.6;
+    transition: transform $transition-fast;
+
+    .navigation-notch__zoom-display:hover & {
+        opacity: 1;
+    }
+}
+
+.navigation-notch__zoom-input {
+    width: 56px;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--notch-accent-color, #{$color-accent-primary});
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    font-family: $font-family-mono;
+    text-align: center;
+    outline: none;
+
+    &--editing {
+        box-shadow: 0 0 0 2px rgba(var(--notch-accent-color, #{$color-accent-primary}), 0.3);
+    }
+}
+
+// =============================================================================
+// ZOOM DROPDOWN
+// =============================================================================
+
+.navigation-notch__zoom-dropdown {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 140px;
+    padding: $spacing-sm;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    z-index: 100;
+
+    // Arrow pointer
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 10px;
+        height: 10px;
+        background: $color-bg-elevated;
+        border-right: 1px solid $color-border-subtle;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+}
+
+.navigation-notch__zoom-presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-xs;
+}
+
+.navigation-notch__zoom-preset {
+    padding: $spacing-xs;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color-text-primary;
+    }
+
+    &--active {
+        background: rgba(var(--notch-accent-color, #{$color-accent-primary}), 0.2);
+        border-color: var(--notch-accent-color, #{$color-accent-primary});
+        color: var(--notch-accent-color, #{$color-accent-primary});
+    }
+}
+
+.navigation-notch__zoom-divider {
+    height: 1px;
+    margin: $spacing-sm 0;
+    background: $color-border-subtle;
+}
+
+.navigation-notch__zoom-fit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    width: 100%;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// RESPONSIVE ADJUSTMENTS
+// =============================================================================
+
+@media (max-width: 768px) {
+    .navigation-notch {
+        // Slightly smaller on mobile
+        .navigation-notch__action-button {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+// =============================================================================
+// VR MODE ADJUSTMENTS
+// =============================================================================
+
+.navigation-notch[data-mode="vr"] {
+    // Larger touch targets for VR
+    .navigation-notch__action-button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .navigation-notch__zoom-display {
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-sm;
+    }
+
+    .navigation-notch__action-label {
+        font-size: $font-size-sm;
+    }
+}

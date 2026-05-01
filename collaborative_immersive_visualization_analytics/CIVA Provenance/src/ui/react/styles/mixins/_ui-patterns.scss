@@ -1,0 +1,361 @@
+// src/ui/react/styles/mixins/_ui-patterns.scss
+// Common UI patterns extracted from repeated component styles
+//
+// COMPLEMENTS: _glass-mixins.scss (materials), _etched-mixins.scss (effects)
+// USE FOR: Structural patterns, interactive states, common layouts
+
+@use "sass:color";
+@use "../tokens/colors" as *;
+@use "../tokens/effects" as *;
+@use "../tokens/spacing" as *;
+@use "../tokens/typography" as *;
+
+// ============================================================================
+// COLLAPSIBLE SECTION
+// ============================================================================
+
+/// Wrapper for collapsible sections (folders, groups)
+/// @param {Boolean} $animate - Enable height animation
+@mixin collapsible-section($animate: true) {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-xs;
+
+  &--expanded {
+    flex: 1;
+    min-height: 0;
+  }
+
+  &--collapsed {
+    flex: none;
+  }
+
+  @if $animate {
+    &__content {
+      transition: max-height $transition-base ease-out;
+      overflow: hidden;
+    }
+  }
+}
+
+/// Collapsible section header (clickable toggle)
+/// @param {Color} $hover-bg - Background on hover
+@mixin collapsible-header($hover-bg: rgba(255, 255, 255, 0.02)) {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+  user-select: none;
+
+  &:hover {
+    background: $hover-bg;
+  }
+
+  // Chevron rotates on expand
+  .chevron {
+    color: $color-text-muted;
+    transition: transform $transition-fast;
+    flex-shrink: 0;
+  }
+
+  &--expanded .chevron {
+    transform: rotate(90deg);
+  }
+}
+
+// ============================================================================
+// LIST ITEM BASE
+// ============================================================================
+
+/// Generic interactive list item (files, bookmarks, filters, etc)
+/// @param {Number} $padding-y - Vertical padding
+/// @param {Number} $padding-x - Horizontal padding
+@mixin list-item($padding-y: $spacing-sm, $padding-x: $spacing-sm) {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $padding-y $padding-x;
+  margin: 2px 0;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: $color-border-subtle;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-primary;
+    outline-offset: -2px;
+  }
+
+  // Disabled state
+  &--disabled,
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Selected state
+  &--selected {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.3);
+  }
+
+  // Active/loaded indicator
+  &--active {
+    border-left: 2px solid $color-accent-green;
+    padding-left: calc($padding-x - 2px);
+  }
+}
+
+/// List item thumbnail/icon container
+@mixin list-item-thumbnail($size: 36px) {
+  width: $size;
+  height: $size;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  svg {
+    color: $color-text-muted;
+  }
+}
+
+/// List item content (name + metadata)
+@mixin list-item-content {
+  flex: 1;
+  min-width: 0; // Enable text truncation
+
+  .name {
+    font-size: 11px;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+}
+
+/// Hover-revealed actions for list items
+@mixin list-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  .list-item:hover &,
+  .bookmark-item:hover &,
+  .filter-item:hover & {
+    opacity: 1;
+  }
+}
+
+// ============================================================================
+// ICON BUTTONS (action buttons within items)
+// ============================================================================
+
+/// Small icon button (for item actions)
+/// @param {Number} $size - Button size
+@mixin icon-button-sm($size: 20px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $size;
+  height: $size;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &.active,
+  &--active {
+    color: $color-accent-primary;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================================
+// BADGES & COUNTS
+// ============================================================================
+
+/// Count badge (number indicator)
+@mixin count-badge {
+  font-size: 9px;
+  color: $color-text-muted;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: $radius-full;
+}
+
+/// Notification badge (alerts/unread)
+@mixin notification-badge($color: $color-accent-pink) {
+  background: $color;
+  color: $color-bg-base;
+  font-size: 8px;
+  font-weight: $font-weight-semibold;
+  padding: 1px 5px;
+  border-radius: $radius-full;
+  min-width: 14px;
+  text-align: center;
+}
+
+/// Status dot indicator
+/// @param {Color} $color - Dot color
+/// @param {Number} $size - Dot diameter
+@mixin status-dot($color: $color-accent-green, $size: 6px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: $color;
+  flex-shrink: 0;
+}
+
+// ============================================================================
+// CHIP/TAG
+// ============================================================================
+
+/// Filter chip / scope tag
+/// @param {Color} $color - Accent color
+@mixin chip($color: $color-accent-blue) {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: rgba($color, 0.1);
+  border: 1px solid rgba($color, 0.3);
+  border-radius: $radius-full;
+  font-size: 10px;
+  color: $color;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color, 0.15);
+    border-color: rgba($color, 0.4);
+  }
+
+  &--active,
+  &.active {
+    background: rgba($color, 0.2);
+    border-color: rgba($color, 0.5);
+  }
+}
+
+// ============================================================================
+// EMPTY STATE
+// ============================================================================
+
+/// Empty state placeholder
+@mixin empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-muted;
+
+  svg {
+    margin-bottom: $spacing-md;
+    opacity: 0.5;
+  }
+
+  p {
+    margin: 0 0 $spacing-sm;
+    font-size: $font-size-sm;
+  }
+
+  small {
+    font-size: $font-size-xs;
+    max-width: 200px;
+  }
+}
+
+// ============================================================================
+// SCROLLABLE CONTAINER
+// ============================================================================
+
+/// Scrollable list container with styled scrollbar
+@mixin scrollable-list {
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-glass-subtle;
+    border-radius: $radius-sm;
+
+    &:hover {
+      background: $color-glass-light;
+    }
+  }
+}
+
+// ============================================================================
+// TEXT TRUNCATION
+// ============================================================================
+
+/// Single line truncation with ellipsis
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// Multi-line truncation (requires -webkit)
+/// @param {Number} $lines - Number of lines before truncation
+@mixin truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

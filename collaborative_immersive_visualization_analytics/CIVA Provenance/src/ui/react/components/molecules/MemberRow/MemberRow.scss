@@ -1,0 +1,286 @@
+/**
+ * @file MemberRow.scss
+ * @description Styles for MemberRow component.
+ */
+
+@use "theme" as *;
+
+.member-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-radius: 4px;
+  margin: 0 4px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &--selected {
+    background: rgba(96, 165, 250, 0.1);
+    border-left: 2px solid #60a5fa;
+    margin-left: 2px;
+  }
+
+  &--you {
+    // Subtle highlight for current user
+  }
+
+  &--compact {
+    padding: 4px 8px;
+    gap: 6px;
+
+    .member-row__info {
+      gap: 2px;
+    }
+  }
+
+  // Avatar wrapper with presence overlay
+  &__avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__presence {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: var(--color-bg-secondary, #252526);
+    border-radius: 50%;
+    padding: 1px;
+  }
+
+  // Info section
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__name {
+    font-size: 12px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__you-badge {
+    font-size: 9px;
+    color: #60a5fa;
+    opacity: 0.8;
+  }
+
+  &__crown {
+    color: #fbbf24;
+  }
+
+  &__voice-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #4ade80;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__viewing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--color-text-muted, #666);
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__activity {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 1px 6px;
+    border-radius: 10px;
+    width: fit-content;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__device {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.12);
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    padding: 1px 6px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+
+  &__sync-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.12);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    padding: 1px 6px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+
+  &__status-message {
+    font-size: 10px;
+    color: var(--color-text-muted, #666);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // VR Session Card
+  &__vr-session {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 6px 8px;
+    background: rgba(192, 132, 252, 0.08);
+    border: 1px solid rgba(192, 132, 252, 0.2);
+    border-radius: 4px;
+  }
+
+  &__vr-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  &__vr-icon {
+    flex-shrink: 0;
+    color: #c084fc;
+  }
+
+  &__vr-dataset {
+    font-size: 10px;
+    color: #c084fc;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__vr-participants {
+    font-size: 9px;
+    color: var(--color-text-muted, #666);
+    padding: 1px 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  &__vr-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  &__vr-btn {
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &--join {
+      background: rgba(192, 132, 252, 0.2);
+      color: #c084fc;
+
+      &:hover {
+        background: rgba(192, 132, 252, 0.3);
+      }
+    }
+
+    &--request {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+
+      &:hover {
+        background: rgba(251, 191, 36, 0.3);
+      }
+    }
+  }
+
+  &__vr-private {
+    font-size: 9px;
+    color: var(--color-text-muted, #666);
+    font-style: italic;
+  }
+
+  // Hover actions
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+
+    .member-row:hover & {
+      opacity: 1;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--color-text-muted, #666);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-text-secondary, #999);
+    }
+
+    &--more {
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

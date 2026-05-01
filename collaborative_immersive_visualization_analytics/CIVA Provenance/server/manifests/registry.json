@@ -1,0 +1,587 @@
+{
+  "generatedAt": "2026-04-17T04:23:25.447Z",
+  "contractVersion": "1.0.0",
+  "buildInfo": {
+    "nodeVersion": "v24.14.0",
+    "platform": "darwin"
+  },
+  "handlers": {
+    "vtk": {
+      "contractVersion": "1.0.0",
+      "type": "vtk",
+      "displayName": "VTK 3D Visualization",
+      "version": "1.0.0",
+      "description": "High-performance 3D visualization using VTK.js for scientific data, medical imaging, and engineering applications.",
+      "fileTypes": [
+        {
+          "extension": "vtp",
+          "mimeType": "application/vnd.vtk.polydata+xml",
+          "displayName": "VTK PolyData (XML)",
+          "icon": "hexagon",
+          "color": "#c084fc",
+          "priority": 10,
+          "magicBytes": "3c3f786d6c",
+          "altMagicBytes": [
+            "3c56544b46696c65"
+          ],
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": true,
+            "canExport": false,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "vti",
+          "mimeType": "application/vnd.vtk.imagedata+xml",
+          "displayName": "VTK Image Data (XML)",
+          "icon": "grid3x3",
+          "color": "#60a5fa",
+          "priority": 10,
+          "magicBytes": "3c3f786d6c",
+          "altMagicBytes": [
+            "3c56544b46696c65"
+          ],
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": true,
+            "canExport": false,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "vtu",
+          "mimeType": "application/vnd.vtk.unstructuredgrid+xml",
+          "displayName": "VTK Unstructured Grid (XML)",
+          "icon": "share2",
+          "color": "#34d399",
+          "priority": 10,
+          "magicBytes": "3c3f786d6c",
+          "altMagicBytes": [
+            "3c56544b46696c65"
+          ],
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": true,
+            "canExport": false,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "vtk",
+          "mimeType": "application/vnd.vtk",
+          "displayName": "VTK Legacy Format",
+          "icon": "box",
+          "color": "#a78bfa",
+          "priority": 8,
+          "magicBytes": "232076746b2044617461",
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": false,
+            "canExport": false,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "vtkjs",
+          "mimeType": "application/vnd.vtkjs+zip",
+          "displayName": "VTK.js Dataset",
+          "icon": "package",
+          "color": "#38bdf8",
+          "priority": 9,
+          "magicBytes": "504b0304",
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": false,
+            "canExport": false,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "stl",
+          "mimeType": "model/stl",
+          "displayName": "STL Model",
+          "icon": "triangle",
+          "color": "#f472b6",
+          "priority": 5,
+          "magicBytes": "736f6c6964",
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": false,
+            "canExport": true,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "obj",
+          "mimeType": "model/obj",
+          "displayName": "Wavefront OBJ",
+          "icon": "cube",
+          "color": "#fbbf24",
+          "priority": 5,
+          "magicBytes": "23",
+          "altMagicBytes": [
+            "76202d"
+          ],
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": false,
+            "canExport": false,
+            "canStream": false
+          }
+        },
+        {
+          "extension": "ply",
+          "mimeType": "application/x-ply",
+          "displayName": "PLY Point Cloud",
+          "icon": "scatter-chart",
+          "color": "#22d3ee",
+          "priority": 5,
+          "magicBytes": "706c79",
+          "capabilities": {
+            "canRender": true,
+            "canExtractMetadata": true,
+            "canExport": false,
+            "canStream": false
+          }
+        }
+      ],
+      "runtime": {
+        "requires": [
+          "webgl",
+          "webgl2"
+        ],
+        "optional": [
+          "webxr",
+          "offscreencanvas"
+        ]
+      },
+      "vr": {
+        "supportsInstanceVR": true,
+        "supportsApplicationVR": false,
+        "requirements": {
+          "controllers": true,
+          "handTracking": false,
+          "roomScale": true,
+          "minFPS": 90
+        }
+      },
+      "collaboration": {
+        "supportsCursors": true,
+        "supportsAnnotations": true,
+        "supportsSharedState": true,
+        "supportsCameraSync": true
+      },
+      "compute": {
+        "clientSide": {
+          "operations": [
+            "pca",
+            "tsne",
+            "umap",
+            "clipping",
+            "slicing",
+            "contouring",
+            "point-picking",
+            "measurement"
+          ],
+          "maxDatasetSize": "100MB",
+          "maxPointCount": 5000000
+        },
+        "serverSide": {
+          "operations": [
+            {
+              "id": "dr-pca",
+              "name": "PCA (Server)",
+              "description": "Principal Component Analysis offloaded to server with caching",
+              "inputFormats": [
+                "vtp",
+                "ply",
+                "obj",
+                "stl"
+              ],
+              "outputFormat": "json",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 3,
+              "estimatedDuration": "seconds",
+              "parameters": [
+                {
+                  "name": "components",
+                  "type": "number",
+                  "label": "Components",
+                  "default": 3,
+                  "min": 2,
+                  "max": 3
+                }
+              ],
+              "workerType": "general"
+            },
+            {
+              "id": "dr-tsne",
+              "name": "t-SNE (Server)",
+              "description": "t-SNE dimensionality reduction offloaded to server with caching",
+              "inputFormats": [
+                "vtp",
+                "ply",
+                "obj",
+                "stl"
+              ],
+              "outputFormat": "json",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 7,
+              "estimatedDuration": "minutes",
+              "parameters": [
+                {
+                  "name": "components",
+                  "type": "number",
+                  "label": "Components",
+                  "default": 2,
+                  "min": 2,
+                  "max": 3
+                },
+                {
+                  "name": "perplexity",
+                  "type": "number",
+                  "label": "Perplexity",
+                  "default": 10,
+                  "min": 5,
+                  "max": 50
+                },
+                {
+                  "name": "maxIterations",
+                  "type": "number",
+                  "label": "Max Iterations",
+                  "default": 300,
+                  "min": 50,
+                  "max": 1000
+                }
+              ],
+              "workerType": "general"
+            },
+            {
+              "id": "dr-umap",
+              "name": "UMAP (Server)",
+              "description": "UMAP dimensionality reduction offloaded to server with caching",
+              "inputFormats": [
+                "vtp",
+                "ply",
+                "obj",
+                "stl"
+              ],
+              "outputFormat": "json",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 6,
+              "estimatedDuration": "seconds",
+              "parameters": [
+                {
+                  "name": "components",
+                  "type": "number",
+                  "label": "Components",
+                  "default": 2,
+                  "min": 2,
+                  "max": 3
+                },
+                {
+                  "name": "nNeighbors",
+                  "type": "number",
+                  "label": "Neighbors",
+                  "default": 8,
+                  "min": 2,
+                  "max": 100
+                },
+                {
+                  "name": "minDist",
+                  "type": "number",
+                  "label": "Min Dist",
+                  "default": 0.1,
+                  "min": 0.01,
+                  "max": 0.99
+                }
+              ],
+              "workerType": "general"
+            },
+            {
+              "id": "mesh-decimation",
+              "name": "Mesh Decimation",
+              "description": "Reduce polygon count while preserving shape quality. Uses quadric error metrics for optimal vertex placement.",
+              "inputFormats": [
+                "vtp",
+                "stl",
+                "obj",
+                "ply"
+              ],
+              "outputFormat": "vtp",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 5,
+              "estimatedDuration": "seconds",
+              "parameters": [
+                {
+                  "name": "targetReduction",
+                  "type": "number",
+                  "label": "Target Reduction %",
+                  "default": 50,
+                  "min": 10,
+                  "max": 95,
+                  "description": "Percentage of polygons to remove (50 = reduce to half)"
+                },
+                {
+                  "name": "preserveBoundary",
+                  "type": "boolean",
+                  "label": "Preserve Boundary",
+                  "default": true,
+                  "description": "Prevent boundary edges from being modified"
+                }
+              ],
+              "workerType": "vtk-python"
+            },
+            {
+              "id": "mesh-smoothing",
+              "name": "Mesh Smoothing",
+              "description": "Apply Laplacian smoothing to reduce surface noise while preserving features.",
+              "inputFormats": [
+                "vtp",
+                "stl",
+                "obj",
+                "ply"
+              ],
+              "outputFormat": "vtp",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 3,
+              "estimatedDuration": "seconds",
+              "parameters": [
+                {
+                  "name": "iterations",
+                  "type": "number",
+                  "label": "Iterations",
+                  "default": 20,
+                  "min": 1,
+                  "max": 100,
+                  "description": "Number of smoothing passes"
+                },
+                {
+                  "name": "relaxationFactor",
+                  "type": "number",
+                  "label": "Relaxation Factor",
+                  "default": 0.1,
+                  "min": 0.01,
+                  "max": 1,
+                  "description": "Strength of smoothing per iteration"
+                }
+              ],
+              "workerType": "vtk-python"
+            },
+            {
+              "id": "lod-generation",
+              "name": "LOD Generation",
+              "description": "Generate Level-of-Detail hierarchy for progressive rendering. Creates multiple resolution levels for efficient VR streaming.",
+              "inputFormats": [
+                "vtp",
+                "stl",
+                "obj",
+                "ply"
+              ],
+              "outputFormat": "lod-hierarchy",
+              "requiredForVR": true,
+              "cacheable": true,
+              "computeCost": 7,
+              "estimatedDuration": "minutes",
+              "parameters": [
+                {
+                  "name": "levels",
+                  "type": "number",
+                  "label": "LOD Levels",
+                  "default": 4,
+                  "min": 2,
+                  "max": 8,
+                  "description": "Number of detail levels to generate"
+                },
+                {
+                  "name": "reductionRatio",
+                  "type": "number",
+                  "label": "Reduction Ratio",
+                  "default": 0.5,
+                  "min": 0.25,
+                  "max": 0.75,
+                  "description": "Polygon reduction between each level"
+                }
+              ],
+              "workerType": "vtk-python"
+            },
+            {
+              "id": "volume-chunking",
+              "name": "Volume Chunking",
+              "description": "Split volumetric data into streamable octree chunks for progressive VR loading.",
+              "inputFormats": [
+                "vti"
+              ],
+              "outputFormat": "chunked-volume",
+              "requiredForVR": true,
+              "cacheable": true,
+              "computeCost": 8,
+              "estimatedDuration": "minutes",
+              "parameters": [
+                {
+                  "name": "chunkSize",
+                  "type": "number",
+                  "label": "Chunk Size",
+                  "default": 64,
+                  "min": 16,
+                  "max": 256,
+                  "description": "Size of each chunk in voxels (per dimension)"
+                },
+                {
+                  "name": "overlap",
+                  "type": "number",
+                  "label": "Overlap",
+                  "default": 2,
+                  "min": 0,
+                  "max": 8,
+                  "description": "Overlap between chunks for seamless rendering"
+                }
+              ],
+              "workerType": "vtk-python"
+            },
+            {
+              "id": "isosurface-extraction",
+              "name": "Isosurface Extraction",
+              "description": "Extract surface mesh from volumetric data at specified threshold value.",
+              "inputFormats": [
+                "vti"
+              ],
+              "outputFormat": "vtp",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 6,
+              "estimatedDuration": "seconds",
+              "parameters": [
+                {
+                  "name": "isoValue",
+                  "type": "number",
+                  "label": "Iso Value",
+                  "default": 0.5,
+                  "min": 0,
+                  "max": 1,
+                  "description": "Threshold value for surface extraction"
+                },
+                {
+                  "name": "computeNormals",
+                  "type": "boolean",
+                  "label": "Compute Normals",
+                  "default": true,
+                  "description": "Calculate surface normals for smooth shading"
+                }
+              ],
+              "workerType": "vtk-python"
+            },
+            {
+              "id": "compute-statistics",
+              "name": "Compute Statistics",
+              "description": "Calculate statistical properties of the dataset (bounds, point count, data ranges).",
+              "inputFormats": [
+                "vtp",
+                "vti",
+                "vtu",
+                "vtk",
+                "stl",
+                "obj",
+                "ply"
+              ],
+              "outputFormat": "json",
+              "requiredForVR": false,
+              "cacheable": true,
+              "computeCost": 2,
+              "estimatedDuration": "instant",
+              "parameters": [],
+              "workerType": "vtk-python"
+            }
+          ],
+          "workerType": "vtk-python",
+          "preferredRuntime": "python",
+          "autoPreprocess": [
+            "compute-statistics"
+          ]
+        },
+        "caching": {
+          "preprocessResults": true,
+          "cacheKey": [
+            "datasetId",
+            "operation",
+            "parameters",
+            "fileVersion"
+          ],
+          "ttl": "7d",
+          "invalidateOn": [
+            "dataset-update",
+            "dataset-delete"
+          ]
+        }
+      },
+      "tools": [],
+      "entry": {
+        "client": "./VTKInstanceHandler.js"
+      }
+    }
+  },
+  "fileTypeIndex": {
+    "vtp": {
+      "handlerType": "vtk",
+      "priority": 10,
+      "displayName": "VTK PolyData (XML)",
+      "icon": "hexagon",
+      "color": "#c084fc"
+    },
+    "vti": {
+      "handlerType": "vtk",
+      "priority": 10,
+      "displayName": "VTK Image Data (XML)",
+      "icon": "grid3x3",
+      "color": "#60a5fa"
+    },
+    "vtu": {
+      "handlerType": "vtk",
+      "priority": 10,
+      "displayName": "VTK Unstructured Grid (XML)",
+      "icon": "share2",
+      "color": "#34d399"
+    },
+    "vtk": {
+      "handlerType": "vtk",
+      "priority": 8,
+      "displayName": "VTK Legacy Format",
+      "icon": "box",
+      "color": "#a78bfa"
+    },
+    "vtkjs": {
+      "handlerType": "vtk",
+      "priority": 9,
+      "displayName": "VTK.js Dataset",
+      "icon": "package",
+      "color": "#38bdf8"
+    },
+    "stl": {
+      "handlerType": "vtk",
+      "priority": 5,
+      "displayName": "STL Model",
+      "icon": "triangle",
+      "color": "#f472b6"
+    },
+    "obj": {
+      "handlerType": "vtk",
+      "priority": 5,
+      "displayName": "Wavefront OBJ",
+      "icon": "cube",
+      "color": "#fbbf24"
+    },
+    "ply": {
+      "handlerType": "vtk",
+      "priority": 5,
+      "displayName": "PLY Point Cloud",
+      "icon": "scatter-chart",
+      "color": "#22d3ee"
+    }
+  }
+}

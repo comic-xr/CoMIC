@@ -1,0 +1,55 @@
+/**
+ * InfoRow Styles
+ */
+@use "theme" as *;
+
+.info-row {
+  display: flex;
+  align-items: center;
+
+  &--desktop {
+    gap: $spacing-sm;
+    padding: $spacing-xs 0;
+
+    .info-row__label {
+      font-size: 11px;
+      min-width: 60px;
+    }
+
+    .info-row__value {
+      font-size: 13px;
+    }
+  }
+
+  &--vr {
+    gap: $spacing-md;
+    padding: $spacing-sm 0;
+
+    .info-row__label {
+      font-size: 14px;
+      min-width: 80px;
+    }
+
+    .info-row__value {
+      font-size: 16px;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &__label {
+    color: $color-text-muted;
+  }
+
+  &__value {
+    color: $color-text-primary;
+    font-weight: 500;
+
+    &--subtle {
+      color: $color-text-secondary;
+      font-weight: 400;
+    }
+  }
+}

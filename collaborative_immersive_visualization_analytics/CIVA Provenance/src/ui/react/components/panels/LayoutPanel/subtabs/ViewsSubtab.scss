@@ -1,0 +1,363 @@
+// src/ui/react/components/panels/LayoutPanel/subtabs/ViewsSubtab.scss
+// ViewsSubtab styling - container, search, filters, grouping
+// Individual view items are styled by the ViewItem component
+//
+// REFACTORED: Removed duplicate item styles since we now use ViewItem component
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// VIEWS SUBTAB CONTAINER
+// =============================================================================
+
+.views-subtab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &--empty {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// =============================================================================
+// SEARCH BAR
+// =============================================================================
+
+.views-subtab__search {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: $color-glass-light;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+.views-subtab__search-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.views-subtab__search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 11px;
+  color: $color-text-primary;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+}
+
+.views-subtab__search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// FILTER BAR
+// =============================================================================
+
+.views-subtab__filters {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.views-subtab__filter-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.views-subtab__group-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  font-size: 9px;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+  margin-left: auto;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: $color-accent-blue;
+    color: $color-accent-blue;
+  }
+}
+
+.views-subtab__clear-btn {
+  padding: 3px 6px;
+  background: transparent;
+  border: none;
+  font-size: 9px;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-accent-red;
+  }
+}
+
+// =============================================================================
+// VIEW COUNT
+// =============================================================================
+
+.views-subtab__count {
+  padding: $spacing-xs $spacing-md;
+  font-size: 9px;
+  color: $color-text-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// VIEW LIST
+// =============================================================================
+
+.views-subtab__list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border-medium;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-text-muted;
+    }
+  }
+}
+
+// =============================================================================
+// GROUP
+// =============================================================================
+
+.views-subtab__group {
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-border-subtle;
+  }
+}
+
+.views-subtab__group-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+  }
+}
+
+.views-subtab__group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+.views-subtab__group-icon {
+  color: $color-accent-purple;
+  flex-shrink: 0;
+}
+
+.views-subtab__group-name {
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.views-subtab__group-count {
+  font-size: 9px;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// GROUP ITEMS - Container for ViewItem components
+// =============================================================================
+
+.views-subtab__group-items {
+  display: flex;
+  flex-direction: column;
+}
+
+// ViewItem adjustments when used in ViewsSubtab
+.views-subtab__view-item {
+  // Slightly indent items under groups
+  &.view-item {
+    margin: 0;
+  }
+
+  // Tighter spacing in this context
+  .view-item__row {
+    padding: $spacing-xs $spacing-sm;
+  }
+}
+
+// =============================================================================
+// EMPTY STATE
+// =============================================================================
+
+.views-subtab__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-muted;
+
+  p {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  svg {
+    opacity: 0.5;
+  }
+}
+
+.views-subtab__empty-hint {
+  font-size: 10px;
+  color: $color-text-tertiary;
+  font-style: italic;
+}
+
+// =============================================================================
+// NO RESULTS STATE
+// =============================================================================
+
+.views-subtab__no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 11px;
+    color: $color-text-muted;
+  }
+}
+
+.views-subtab__clear-filters-btn {
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  font-size: 10px;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-accent-blue;
+    color: $color-accent-blue;
+  }
+}
+
+// =============================================================================
+// GLOBAL DRAG STATES (applied to body during drag)
+// =============================================================================
+
+body.dragging-view-item {
+  cursor: grabbing !important;
+  user-select: none;
+
+  // Highlight potential drop zones on minimap
+  .canvas-navigator__minimap-cell--droppable {
+    outline: 2px dashed $color-accent-green;
+    outline-offset: -2px;
+  }
+
+  .canvas-navigator__minimap-cell--droppable:hover {
+    background: rgba($color-accent-green, 0.2);
+  }
+}
+
+// =============================================================================
+// TOUCH/VR OPTIMIZATIONS
+// =============================================================================
+
+@media (pointer: coarse) {
+  .views-subtab__group-btn,
+  .views-subtab__clear-btn {
+    min-height: 32px;
+    padding: 6px 10px;
+  }
+
+  .views-subtab__view-item .view-item__row {
+    min-height: 44px;
+  }
+}

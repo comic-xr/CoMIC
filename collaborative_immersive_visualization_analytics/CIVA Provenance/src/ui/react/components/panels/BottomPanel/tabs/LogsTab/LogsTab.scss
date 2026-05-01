@@ -1,0 +1,244 @@
+// src/ui/react/components/panels/BottomPanel/tabs/LogsTab/LogsTab.scss
+// Styles for the log viewer tab
+
+@use "theme" as *;
+
+.logs-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  // =========================================================================
+  // TOOLBAR
+  // =========================================================================
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+    background: var(--color-bg-secondary, #1e1e1e);
+    border-bottom: 1px solid var(--color-border-subtle, #333);
+    min-height: 28px;
+  }
+
+  &__toolbar-left,
+  &__toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+  }
+
+  &__count {
+    font-size: var(--font-size-xs, 11px);
+    color: var(--color-text-muted, #666);
+  }
+
+  // Filter dropdown
+  &__filter-wrapper {
+    position: relative;
+  }
+
+  &__filter-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+    padding: 2px 6px;
+
+    background: var(--color-bg-tertiary, #252526);
+    border: 1px solid var(--color-border-subtle, #333);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text-secondary, #999);
+    font-size: var(--font-size-xs, 11px);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.05));
+      color: var(--color-text-primary, #fff);
+    }
+  }
+
+  &__filter-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    min-width: 180px;
+
+    background: var(--color-bg-elevated, #2d2d2d);
+    border: 1px solid var(--color-border-subtle, #444);
+    border-radius: var(--radius-sm, 4px);
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.4));
+    z-index: 100;
+    overflow: hidden;
+
+    button {
+      display: block;
+      width: 100%;
+      padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+
+      background: transparent;
+      border: none;
+      color: var(--color-text-secondary, #999);
+      font-size: var(--font-size-xs, 11px);
+      text-align: left;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--color-bg-hover, rgba(255, 255, 255, 0.05));
+        color: var(--color-text-primary, #fff);
+      }
+
+      &.active {
+        background: var(--color-accent-primary, #0078d4);
+        color: white;
+      }
+    }
+  }
+
+  // Action buttons
+  &__scroll-btn,
+  &__clear-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+    padding: 2px 6px;
+
+    background: transparent;
+    border: 1px solid var(--color-border-subtle, #333);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text-muted, #666);
+    font-size: var(--font-size-xs, 11px);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.05));
+      color: var(--color-text-primary, #fff);
+      border-color: var(--color-border-default, #444);
+    }
+  }
+
+  &__scroll-btn {
+    color: var(--color-accent-primary, #0078d4);
+    border-color: var(--color-accent-primary, #0078d4);
+  }
+
+  // =========================================================================
+  // LOG ENTRIES
+  // =========================================================================
+  &__entries {
+    flex: 1;
+    overflow-y: auto;
+    font-family: var(--font-mono, "SF Mono", "Consolas", monospace);
+    font-size: var(--font-size-xs, 11px);
+    line-height: 1.6;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-border-subtle, #333);
+      border-radius: 4px;
+
+      &:hover {
+        background: var(--color-border-default, #444);
+      }
+    }
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-text-muted, #666);
+    font-family: var(--font-sans, system-ui);
+  }
+
+  &__entry {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm, 8px);
+    padding: 2px var(--spacing-sm, 8px);
+
+    &:hover {
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    // Alternating background for readability
+    &:nth-child(even) {
+      background: rgba(255, 255, 255, 0.01);
+    }
+  }
+
+  &__entry-time {
+    flex-shrink: 0;
+    color: var(--color-text-muted, #666);
+    min-width: 65px;
+  }
+
+  &__entry-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__entry-message {
+    flex: 1;
+    word-break: break-word;
+    color: var(--color-text-secondary, #ccc);
+  }
+
+  // =========================================================================
+  // LOG TYPE COLORS
+  // =========================================================================
+  &__entry--info {
+    .logs-tab__entry-icon {
+      color: #2196f3;
+    }
+  }
+
+  &__entry--success {
+    .logs-tab__entry-icon {
+      color: #4caf50;
+    }
+    .logs-tab__entry-message {
+      color: #81c784;
+    }
+  }
+
+  &__entry--warning {
+    .logs-tab__entry-icon {
+      color: #ffa726;
+    }
+    .logs-tab__entry-message {
+      color: #ffb74d;
+    }
+  }
+
+  &__entry--error {
+    background: rgba(244, 67, 54, 0.08) !important;
+    .logs-tab__entry-icon {
+      color: #f44336;
+    }
+    .logs-tab__entry-message {
+      color: #ef5350;
+    }
+  }
+
+  &__entry--progress {
+    .logs-tab__entry-icon {
+      color: #9c27b0;
+    }
+    .logs-tab__entry-message {
+      color: #ba68c8;
+    }
+  }
+}

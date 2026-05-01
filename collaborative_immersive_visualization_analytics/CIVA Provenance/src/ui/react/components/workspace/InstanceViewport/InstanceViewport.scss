@@ -1,0 +1,1429 @@
+// src/ui/react/components/workspace/InstanceViewport/InstanceViewport.scss
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+$toolbar-height: 36px;
+$animation-duration: 200ms;
+$animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// ============================================================================
+// ROOT VIEWPORT WRAPPER
+// ============================================================================
+
+.instance-viewport {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-height: 100px; // Prevent collapsing when empty or errored
+  overflow: hidden;
+  // CRITICAL: position: relative is needed for absolutely positioned header
+  position: relative !important;
+  outline: none; // Remove focus outline, we handle focus visually
+
+  // Inherit pointer-events from parent container
+  // When parent has pointer-events: none (during thumbnail loading), this ensures
+  // the viewport doesn't capture clicks, allowing selection of the canvas cell
+  pointer-events: inherit;
+
+  background: $color-bg-secondary;
+  border-radius: $radius-lg; // Increased for softer appearance (8px)
+
+  // No border here - CanvasCell handles the border
+  border: none;
+
+  // Inset shadow for depth only
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+
+  // Note: We intentionally don't use :focus, :focus-visible, or :focus-within
+  // pseudo-classes because they cause flickering when focus moves between
+  // child elements (header buttons, toolbar buttons, etc.)
+  // The --active class is controlled by React state which properly tracks
+  // whether ANY element within the viewport is focused.
+
+  // Note: Header always renders in all UI modes so users can always close the instance
+}
+
+// ============================================================================
+// HEADER - Now uses unified ViewHeader component
+// ============================================================================
+// Header styles moved to ViewHeader/ViewHeader.scss
+// The ViewHeader component handles all header rendering with consistent styling
+
+// Future: Orientation cube in viewport (rendered by VTK handler)
+.instance-viewport__orientation-cube {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 60px;
+  height: 60px;
+  z-index: 10;
+  pointer-events: auto;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+// ============================================================================
+// MORE MENU - Now uses unified ViewHeader menu
+// ============================================================================
+// Menu styles moved to ViewHeader/ViewHeader.scss
+
+// ============================================================================
+// TOP TOOLBAR OVERLAY - Slides down from behind header
+// ============================================================================
+
+.instance-viewport__toolbar-overlay {
+  position: absolute;
+  top: 0; // Start behind header
+  left: $spacing-sm;
+  right: $spacing-sm;
+  z-index: 5; // Above header but below WebGL threshold of 10
+  // Visibility controlled by inline styles, but transitions handled here
+  transition: opacity $animation-duration $animation-easing,
+    transform $animation-duration $animation-easing,
+    visibility $animation-duration;
+
+  // Visible state - visibility controlled by inline styles
+  // Transform removed to prevent conflicts
+  &--visible {
+    // opacity, transform, pointer-events set via inline styles
+  }
+
+  // Pinned state - just add a subtle indicator, no box-shadow change
+  &--pinned {
+    .instance-toolbar {
+      border-color: rgba($color-accent-primary, 0.3);
+    }
+  }
+}
+
+.instance-toolbar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  height: $toolbar-height;
+  border-radius: $radius-lg;
+  flex-wrap: nowrap; // Keep a single line; rely on overflow handling below
+  min-width: 0;    // Allow inner groups to shrink/scroll instead of disappearing
+  overflow-x: auto; // Allow scroll instead of collapsing when cramped
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Dark etched style - sunken/carved appearance
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+
+  // Inset shadow for sunken look + outer shadow for depth
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-top-color: rgba(0, 0, 0, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+
+  // backdrop-filter: blur(12px); // DISABLED - causes WebGL glitching
+}
+
+.instance-toolbar__groups {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.instance-toolbar__history {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.instance-toolbar__global-tools {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+}
+
+.instance-toolbar__more-wrapper {
+  position: relative;
+}
+
+.instance-toolbar__separator {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 $spacing-xs;
+  flex-shrink: 0;
+}
+
+.instance-toolbar__tool-button {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  // Dark etched toggle - inactive/sunken state
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: $color-text-tertiary;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+
+  // Backlit glow effect on hover
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(var(--instance-color-rgb), 0.2) 0%,
+      rgba(var(--instance-color-rgb), 0.08) 40%,
+      transparent 70%
+    );
+    filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &:hover:not(:disabled) {
+    color: $color-text-primary;
+    border-color: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+
+    &::before {
+      opacity: 1;
+    }
+
+    svg {
+      filter: drop-shadow(0 0 3px rgba(var(--instance-color-rgb), 0.5));
+    }
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  // Active state - glowing with instance accent color
+  &.active {
+    background: rgba(var(--instance-color-rgb), 0.15);
+    border: 1px solid rgba(var(--instance-color-rgb), 0.4);
+    color: var(--instance-color);
+    box-shadow: 0 0 12px rgba(var(--instance-color-rgb), 0.3),
+      inset 0 0 8px rgba(var(--instance-color-rgb), 0.1);
+
+    &::before {
+      opacity: 1;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(var(--instance-color-rgb), 0.35) 0%,
+        rgba(var(--instance-color-rgb), 0.15) 40%,
+        transparent 70%
+      );
+    }
+
+    svg {
+      filter: drop-shadow(0 0 4px rgba(var(--instance-color-rgb), 0.6));
+    }
+  }
+
+  &--primary {
+    background: rgba($color-accent-primary, 0.1);
+    border-color: rgba($color-accent-primary, 0.3);
+    color: $color-accent-primary;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-accent-primary, 0.15);
+      border-color: rgba($color-accent-primary, 0.5);
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: filter 0.2s ease;
+  }
+}
+
+.instance-toolbar__menu-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.instance-toolbar__pin-button {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  padding: 0;
+  margin-left: $spacing-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &.active {
+    background: rgba($color-accent-primary, 0.15);
+    border-color: rgba($color-accent-primary, 0.3);
+    color: $color-accent-primary;
+  }
+}
+
+// ============================================================================
+// TOOLBAR TOOLTIPS
+// ============================================================================
+
+.instance-toolbar__tooltip {
+  @include frosted-glass;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-fast, visibility $transition-fast;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  .instance-toolbar__tool-button:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.tooltip-title {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 2px;
+}
+
+.tooltip-desc {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.tooltip-shortcut {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4px;
+  font-family: "Monaco", "Courier New", monospace;
+}
+
+// ============================================================================
+// BOTTOM NAVIGATION BAR OVERLAY - Slides up on focus
+// ============================================================================
+
+.instance-viewport__navbar-overlay {
+  position: absolute;
+  bottom: $spacing-sm;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  // No z-index - rely on DOM order
+
+  // Ensure it only takes the width of its content
+  display: inline-flex;
+  width: auto;
+
+  // Hidden state
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $animation-duration $animation-easing,
+    transform $animation-duration $animation-easing;
+
+  // Visible state
+  &--visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.instance-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding: $spacing-xs $spacing-md;
+  height: $toolbar-height;
+  border-radius: $radius-lg;
+
+  // Dark etched style - matching toolbar
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+
+  // Inset shadow for sunken look + outer shadow for depth
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-top-color: rgba(0, 0, 0, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+
+  // backdrop-filter: blur(12px); // DISABLED - causes WebGL glitching
+}
+
+.instance-navbar__nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-sm;
+}
+
+.instance-navbar__nav-button {
+  height: 28px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-xs;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &.active {
+    background: rgba($color-accent-primary, 0.15);
+    border-color: rgba($color-accent-primary, 0.3);
+    color: $color-accent-primary;
+    box-shadow: 0 0 8px rgba($color-accent-primary, 0.2);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
+.instance-navbar__button-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.instance-navbar__zoom-display {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-sm;
+}
+
+.instance-navbar__zoom-button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: $radius-xs;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-primary;
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(0.95);
+  }
+}
+
+.instance-navbar__zoom-value {
+  min-width: 44px;
+  text-align: center;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  font-variant-numeric: tabular-nums;
+}
+
+.instance-navbar__quick-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.instance-navbar__action-button {
+  height: 28px;
+  padding: 0 $spacing-sm;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include etched-toggle($color-accent-primary, false);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// ============================================================================
+// CORNER CONTROLS - Fallback for small viewports
+// ============================================================================
+
+.instance-viewport__corner-controls {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  // No z-index - rely on DOM order
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.instance-viewport__corner-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include glass-button;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $color-text-primary;
+    transform: scale(1.05);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// ============================================================================
+// GEAR ONLY DROPDOWN - For super tiny viewports
+// ============================================================================
+
+.instance-viewport__gear-dropdown {
+  position: absolute;
+  top: $spacing-xs;
+  right: $spacing-xs;
+  // No z-index - rely on DOM order
+  // Override inherited pointer-events: none from parent during loading
+  // The gear button must remain clickable even when viewport is loading
+  pointer-events: auto;
+}
+
+.instance-viewport__gear-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Explicit styling (no mixin) for reliable visibility
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: $radius-sm;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover,
+  &.active {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.instance-viewport__gear-menu {
+  // Positioned via inline styles (portal)
+  z-index: 10000;
+  min-width: 180px;
+  padding: $spacing-xs;
+  pointer-events: auto; // Ensure menu receives clicks
+
+  @include frosted-glass;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: dropdown-appear $transition-fast ease-out;
+}
+
+.instance-viewport__gear-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-primary;
+  }
+
+  &--primary {
+    background: rgba($color-accent-primary, 0.1);
+    color: $color-accent-primary;
+
+    &:hover {
+      background: rgba($color-accent-primary, 0.15);
+    }
+  }
+
+  &--danger {
+    color: $color-text-tertiary;
+
+    &:hover {
+      background: rgba($color-error, 0.1);
+      color: $color-error;
+    }
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+}
+
+.instance-viewport__gear-separator {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs 0;
+}
+
+// ============================================================================
+// SIZE NOTICE - Banner for undersized viewports
+// ============================================================================
+
+.instance-viewport__size-notice {
+  position: absolute;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
+  right: $spacing-sm;
+  // No z-index - rely on DOM order
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  .instance-viewport:hover & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.instance-viewport__size-notice-text {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.instance-viewport__size-notice-button {
+  padding: 2px $spacing-xs;
+  background: rgba($color-accent-primary, 0.15);
+  border: 1px solid rgba($color-accent-primary, 0.3);
+  border-radius: $radius-xs;
+  color: $color-accent-primary;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($color-accent-primary, 0.25);
+    border-color: rgba($color-accent-primary, 0.5);
+  }
+}
+
+// ============================================================================
+// CONTENT AREA - The "hole punched through"
+// ============================================================================
+
+.instance-viewport__content {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  // No z-index - WebGL canvases have issues with stacking contexts
+  background-color: $color-bg-canvas-cell;
+  box-shadow: inset 4px 4px 12px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 8px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.9);
+  border: 1px solid $color-border-canvas;
+  border-radius: $radius-sm;
+}
+
+// ============================================================================
+// LOADING & ERROR STATES
+// ============================================================================
+
+.instance-viewport__loading,
+.instance-viewport__error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  z-index: 10;
+}
+
+.instance-viewport__loading {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.instance-viewport__error {
+  color: $color-error;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .error-message {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    text-align: center;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// DROPDOWN MENUS - Portal Style (existing styles)
+// ============================================================================
+
+.toolbar-menu {
+  position: relative;
+}
+
+.toolbar-menu-dropdown {
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  padding-bottom: $spacing-xl;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  animation: dropdown-appear $transition-fast $ease-out-back;
+
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  max-width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 200;
+
+  background: rgba(25, 25, 30, 0.92);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.005)
+    );
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  &--portal {
+    z-index: 99999;
+    position: fixed;
+  }
+}
+
+.menu-separator {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs 0;
+}
+
+.menu-header {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.menu-option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm;
+  padding-left: calc($spacing-sm + 4px);
+  @include glass-button;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: $color-accent-primary;
+    border-radius: $radius-full;
+    box-shadow: 0 0 8px rgba($color-accent-primary, 0.6);
+    transition: height 0.15s ease;
+  }
+
+  &:hover {
+    @include glass-hover;
+    padding-left: calc($spacing-sm + 8px);
+
+    &::before {
+      height: 60%;
+    }
+
+    .option-icon {
+      color: $color-accent-primary;
+      filter: drop-shadow(0 0 3px rgba($color-accent-primary, 0.5));
+    }
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &.active {
+    background: rgba($color-accent-pink, 0.15);
+    border-color: rgba($color-accent-pink, 0.3);
+    color: $color-accent-pink;
+    padding-left: calc($spacing-sm + 8px);
+
+    &::before {
+      height: 70%;
+      background: $color-accent-pink;
+      box-shadow: 0 0 10px rgba($color-accent-pink, 0.7);
+    }
+
+    .option-icon {
+      color: $color-accent-pink;
+      filter: drop-shadow(0 0 4px rgba($color-accent-pink, 0.6));
+    }
+  }
+
+  .option-icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: $color-text-secondary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+
+  .option-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .option-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .option-description {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// ============================================================================
+// SPAN SIZE PICKER
+// ============================================================================
+
+.span-picker-wrapper {
+  position: relative;
+}
+
+.span-picker-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1000;
+  padding: $spacing-sm;
+  background: rgba(25, 25, 30, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-md;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: dropdown-appear $transition-fast ease-out;
+}
+
+.span-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-xs;
+}
+
+.span-picker-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: $spacing-sm;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  &.active {
+    background: rgba(100, 150, 255, 0.15);
+    border-color: rgba(100, 150, 255, 0.4);
+
+    .span-cell.active {
+      background: rgba(100, 150, 255, 0.8);
+    }
+  }
+}
+
+.span-preview {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  gap: 2px;
+}
+
+.span-cell {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+
+  &.active {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.span-label {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+// ============================================================================
+// CAMERA VIEW GRID PICKER
+// ============================================================================
+
+.camera-view-grid-container {
+  padding: $spacing-sm;
+  position: relative;
+  padding-bottom: calc($spacing-sm + 28px);
+}
+
+.camera-view-grid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.camera-view-row {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.camera-view-cell {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  position: relative;
+
+  &.empty {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.special {
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    background: rgba(100, 150, 255, 0.08);
+  }
+
+  &:hover:not(.empty) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  &.hovered {
+    background: rgba(100, 150, 255, 0.12);
+    border-color: rgba(100, 150, 255, 0.4);
+  }
+
+  .camera-view-icon {
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+  }
+
+  .camera-view-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    text-transform: capitalize;
+  }
+
+  &:hover .camera-view-icon {
+    color: rgba(100, 150, 255, 1);
+  }
+}
+
+.camera-view-hint {
+  position: absolute;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
+  right: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(100, 150, 255, 0.08);
+  border: 1px solid rgba(100, 150, 255, 0.15);
+  border-radius: $radius-sm;
+  text-align: center;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  animation: hint-fade-in 0.15s ease-out;
+}
+
+@keyframes hint-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// RESPONSIVE
+// ============================================================================
+
+@media (max-width: 768px) {
+  // Header responsive styles now in ViewHeader/ViewHeader.scss
+
+  .instance-toolbar {
+    padding: $spacing-xs;
+    gap: 4px;
+  }
+
+  .instance-toolbar__tool-button {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .toolbar-menu-dropdown {
+    min-width: 180px;
+  }
+}
+
+// ============================================================================
+// EMBEDDED INSTANCE TOOLS PANEL - For fullscreen mode
+// ============================================================================
+
+.instance-viewport__embedded-tools {
+  position: absolute;
+  top: 40px; // Below header
+  bottom: 40px; // Above footer
+  width: 320px;
+  max-width: 40vw;
+  z-index: 500; // High z-index to ensure visibility in fullscreen
+
+  display: flex;
+  flex-direction: column;
+
+  background: $color-bg-secondary; // Solid background for visibility
+  backdrop-filter: blur(20px);
+  border: 1px solid $color-border-default;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+
+  // Right side (default)
+  &--right {
+    right: 0;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%);
+  }
+
+  // Left side
+  &--left {
+    left: 0;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    transform: translateX(-100%);
+  }
+
+  // Open state - slide in and become visible
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+}
+
+.instance-viewport__embedded-tools-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border-bottom: 1px solid $color-border-default;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.instance-viewport__embedded-tools-toggle-side,
+.instance-viewport__embedded-tools-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: $color-text-secondary;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+}
+
+.instance-viewport__embedded-tools-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // Scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+// ============================================================================
+// VR MODE STATE
+// ============================================================================
+
+.instance-viewport--vr-mode {
+  // Green VR glow effect
+  border-color: rgba($color-accent-green, 0.5);
+
+  box-shadow: 0 0 30px rgba($color-accent-green, 0.25),
+    0 0 15px rgba($color-accent-green, 0.2), inset 0 0 60px rgba(0, 0, 0, 0.5);
+
+  // Pulsing animation for VR mode
+  animation: vr-mode-pulse 3s ease-in-out infinite;
+}
+
+@keyframes vr-mode-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 30px rgba($color-accent-green, 0.25),
+      0 0 15px rgba($color-accent-green, 0.2), inset 0 0 60px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba($color-accent-green, 0.35),
+      0 0 20px rgba($color-accent-green, 0.3), inset 0 0 60px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// VR Mode Indicator - positioned at top center
+.vr-mode-indicator {
+  position: absolute;
+  top: 40px; // Below the header
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($color-accent-green, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: white;
+  z-index: $z-dropdown;
+  animation: vr-indicator-slide-down 0.3s ease-out;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__exit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px;
+    margin-left: $spacing-xs;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: $radius-xs;
+    color: white;
+    font-size: 9px;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+@keyframes vr-indicator-slide-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// ============================================================================
+// FULLSCREEN MODE STYLES
+// ============================================================================
+// When in native browser fullscreen, ensure proper styling and z-index
+
+.instance-viewport:fullscreen {
+  // Fill the entire screen
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0;
+  border: none;
+
+  // Ensure proper background
+  background: $color-bg-primary;
+
+  // Content should fill available space
+  .instance-viewport__content {
+    border-radius: 0;
+  }
+
+  // Ensure embedded tools panel is visible and properly styled in fullscreen
+  .instance-viewport__embedded-tools {
+    top: 32px; // Below header
+    bottom: 0;
+    border-radius: 0;
+    max-width: 50vw; // Allow more width in fullscreen
+  }
+
+  // Make sure toolbar is visible
+  .instance-viewport__toolbar-overlay {
+    z-index: 150;
+  }
+}
+
+// Webkit fullscreen support
+.instance-viewport:-webkit-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0;
+  border: none;
+  background: $color-bg-primary;
+}

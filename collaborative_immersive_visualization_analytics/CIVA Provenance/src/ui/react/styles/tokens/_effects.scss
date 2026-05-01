@@ -1,0 +1,111 @@
+// Design Tokens: Effects - Glassmorphism & Visual Effects
+// COMPLETE REPLACEMENT for old _effects.scss
+
+// ============================================================================
+// BORDER RADIUS
+// ============================================================================
+
+$radius-xs: 2px;
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+$radius-2xl: 16px;
+$radius-full: 9999px;
+
+// ============================================================================
+// BLUR EFFECTS (for glassmorphism)
+// ============================================================================
+
+$blur-subtle: blur(8px); // Subtle background blur
+$blur-medium: blur(12px); // Medium blur for panels
+$blur-strong: blur(16px); // Strong blur for modals
+$blur-extreme: blur(24px); // Heavy blur for overlays
+
+// ============================================================================
+// SHADOWS
+// ============================================================================
+
+// Subtle shadows for dark theme
+$shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.6);
+$shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.7);
+$shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.8);
+
+// Inner shadows for depth
+$shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+$shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.4);
+
+// Glow effects (for accent elements)
+$glow-accent: 0 0 20px rgba(76, 175, 80, 0.3);
+$glow-accent-strong: 0 0 30px rgba(76, 175, 80, 0.5);
+$glow-error: 0 0 20px rgba(244, 67, 54, 0.3);
+$glow-info: 0 0 20px rgba(33, 150, 243, 0.3);
+
+// Multi-layer glows for enhanced depth
+$glow-primary: 0 0 20px rgba(110, 182, 255, 0.3),
+  0 0 40px rgba(110, 182, 255, 0.15);
+
+$glow-blue: 0 0 20px rgba(96, 165, 250, 0.3), 0 0 40px rgba(96, 165, 250, 0.15);
+
+$glow-purple: 0 0 20px rgba(192, 132, 252, 0.3),
+  0 0 40px rgba(192, 132, 252, 0.15);
+
+$glow-pink: 0 0 20px rgba(251, 113, 133, 0.3),
+  0 0 40px rgba(251, 113, 133, 0.15);
+
+$glow-green: 0 0 20px rgba(52, 211, 153, 0.3), 0 0 40px rgba(52, 211, 153, 0.15);
+
+$glow-amber: 0 0 20px rgba(251, 191, 36, 0.3), 0 0 40px rgba(251, 191, 36, 0.15);
+
+// Glassmorphism shadows (combination of shadow + border light)
+$shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
+  inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+
+$shadow-glass-lg: 0 12px 48px 0 rgba(0, 0, 0, 0.5),
+  inset 0 1px 2px 0 rgba(255, 255, 255, 0.12);
+
+// ============================================================================
+// TRANSITIONS
+// ============================================================================
+
+$transition-instant: 0.1s ease;
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-medium: 0.25s ease;
+$transition-slow: 0.3s ease;
+$transition-slower: 0.4s ease;
+
+// Specific easing functions
+$ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+
+// ============================================================================
+// BACKDROP FILTERS (for glassmorphism)
+// ============================================================================
+
+// Note: These are CSS values, not Sass variables
+// Use in components: backdrop-filter: $backdrop-glass-light;
+$backdrop-glass-subtle: blur(8px) saturate(150%);
+$backdrop-glass-light: blur(12px) saturate(180%);
+$backdrop-glass-medium: blur(16px) saturate(180%);
+$backdrop-glass-strong: blur(20px) saturate(200%);
+
+// ============================================================================
+// Z-INDEX LAYERS
+// ============================================================================
+
+$z-base: 0;
+$z-dropdown: 1000;
+$z-floating: 1010;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+$z-notification: 1080;
+$z-maximum: 9999;

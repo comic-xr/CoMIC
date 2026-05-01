@@ -1,0 +1,1256 @@
+// tabs/InstanceToolsTab/InstanceToolsTab.scss
+// Instance Tools tab styling - darker theme matching LayoutPanel
+
+@use "theme" as *;
+
+// =============================================================================
+// FLOATING PANEL WRAPPER
+// When Instance Tools is rendered in a FloatingPanel, this ensures proper sizing
+// =============================================================================
+
+.instance-tools-floating {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// =============================================================================
+// INSTANCE TOOLS TAB CONTAINER
+// =============================================================================
+
+.instance-tools-tab {
+  display: flex;
+  flex: 1 1 0; // Fill available space in flex parent
+  flex-direction: column;
+  min-height: 0; // Allow shrinking below content size
+  width: 100%;
+  overflow: hidden;
+
+  // Instance header
+  &__instance-header {
+    padding: $spacing-sm $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    border-bottom: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.15);
+    border-left: 2px solid var(--instance-color);
+  }
+
+  &__instance-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__instance-name {
+    display: block;
+    font-size: 12px;
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__instance-dataset {
+    display: block;
+    font-size: 10px;
+    color: $color-text-muted;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__instance-type {
+    font-size: 8px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    font-weight: $font-weight-semibold;
+    flex-shrink: 0;
+  }
+
+  // Subtabs - Matches DatasetsTab styling pattern
+  &__tabs {
+    display: flex;
+    border-bottom: 1px solid $color-border-subtle;
+    flex-shrink: 0;
+  }
+
+  &__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: $color-text-muted;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+      background: $color-glass-light;
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba(var(--tab-color-rgb), 0.04);
+      border-bottom-color: var(--tab-color);
+      color: var(--tab-color);
+
+      &[data-color="amber"] {
+        --tab-color: #{$color-accent-amber};
+        --tab-color-rgb: 251, 191, 36;
+      }
+
+      &[data-color="purple"] {
+        --tab-color: #{$color-accent-purple};
+        --tab-color-rgb: 168, 85, 247;
+      }
+
+      &[data-color="pink"] {
+        --tab-color: #{$color-accent-pink};
+        --tab-color-rgb: 244, 114, 182;
+      }
+
+      &[data-color="teal"] {
+        --tab-color: #{$color-accent-teal};
+        --tab-color-rgb: 45, 212, 191;
+      }
+    }
+  }
+
+  // Content area - needs to flex grow to push subtab footer to bottom
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    padding: $spacing-sm;
+
+    // Allow subtabs to fill the content area
+    > * {
+      flex: 1;
+      min-height: 0;
+    }
+  }
+
+  // No instance placeholder
+  &__no-instance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    text-align: center;
+    color: $color-text-muted;
+    flex: 1;
+
+    svg {
+      opacity: 0.5;
+      margin-bottom: $spacing-md;
+    }
+
+    h3 {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  &__no-instance-hint {
+    font-size: 10px;
+    color: $color-text-tertiary;
+    font-style: italic;
+  }
+
+  // Footer
+  &__footer {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-top: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+  }
+
+  &__footer-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-primary;
+    }
+  }
+}
+
+// =============================================================================
+// TOOLS LIST
+// =============================================================================
+
+.tools-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+
+  // Override SectionNavGroup section content padding for tools
+  .section-nav-group__section-content {
+    padding: $spacing-sm;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    color: $color-text-muted;
+    font-size: 11px;
+    text-align: center;
+    flex: 1;
+
+    svg {
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    p {
+      font-size: 10px;
+      color: $color-text-tertiary;
+    }
+  }
+
+  &__separator {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-xs;
+    width: 100%;
+  }
+
+  &__item-label {
+    font-size: 11px;
+    color: $color-text-secondary;
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+// =============================================================================
+// TOOL CATEGORY
+// =============================================================================
+
+.tool-category__list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+// =============================================================================
+// TOOL BUTTON (Enhanced with label)
+// =============================================================================
+
+.tool-button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  width: 100%;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-primary;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+
+  svg {
+    flex-shrink: 0;
+    color: $color-text-muted;
+  }
+
+  &:hover:not(&--active):not(&--disabled) {
+    background: $color-bg-elevated;
+    color: $color-text-primary;
+    border-color: $color-border-default;
+
+    svg {
+      color: $color-text-secondary;
+    }
+  }
+
+  &--active {
+    background: rgba($color-accent-amber, 0.2);
+    border-color: rgba($color-accent-amber, 0.4);
+    color: $color-accent-amber;
+
+    svg {
+      color: $color-accent-amber;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  span {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// =============================================================================
+// TOOL MENU (Expandable)
+// =============================================================================
+
+.tool-menu {
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  width: 100%;
+  flex-shrink: 0;
+
+  &--expanded {
+    border-color: $color-border-medium;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-fast;
+    color: $color-text-primary;
+
+    svg {
+      flex-shrink: 0;
+      color: $color-text-muted;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--has-active {
+      color: $color-accent-amber;
+
+      svg {
+        color: $color-accent-amber;
+      }
+    }
+  }
+
+  &__header-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__title {
+    font-size: 11px;
+    font-weight: $font-weight-medium;
+  }
+
+  &__hint {
+    font-size: 9px;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  &__options {
+    border-top: 1px solid $color-border-subtle;
+    padding: $spacing-sm;
+    background: $color-bg-secondary;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  &__separator {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+
+  &__header-label {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-fast;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+
+    &:hover:not(&--disabled) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--active {
+      color: $color-accent-amber;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__item-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__item-label {
+    display: block;
+    font-size: 11px;
+  }
+
+  &__item-desc {
+    display: block;
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__item-active-dot {
+    width: 6px;
+    height: 6px;
+    background: $color-accent-amber;
+    border-radius: 50%;
+  }
+}
+
+// =============================================================================
+// SLIDER WITH PRESETS
+// =============================================================================
+
+.slider-with-presets {
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: $radius-sm;
+  margin: $spacing-xs 0;
+
+  &--disabled {
+    opacity: 0.5;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+
+  &__label {
+    flex: 1;
+  }
+
+  &__value {
+    color: $color-accent-teal;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__slider-row {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__slider {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: $color-accent-teal;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  &__presets {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  &__preset {
+    padding: 3px 8px;
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &--active {
+      background: rgba($color-accent-teal, 0.2);
+      border-color: rgba($color-accent-teal, 0.4);
+      color: $color-accent-teal;
+    }
+  }
+
+  &__disabled-reason {
+    font-size: 9px;
+    color: $color-text-muted;
+    font-style: italic;
+    margin-top: $spacing-sm;
+  }
+}
+
+// =============================================================================
+// LAYERS SUBTAB
+// =============================================================================
+
+.layers-subtab {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  height: 100%;
+  min-height: 0;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: 10px;
+    color: $color-text-secondary;
+    padding: $spacing-sm;
+    background: $color-bg-tertiary;
+    border-radius: $radius-sm;
+    flex-shrink: 0;
+
+    svg {
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+  }
+
+  &__sections {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+
+    // Override SectionNavGroup section content padding for layers
+    .section-nav-group__section-content {
+      padding: $spacing-sm;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+// =============================================================================
+// QUICK VISIBILITY ROW
+// =============================================================================
+
+.quick-visibility {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+
+  &__label {
+    font-size: 10px;
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-secondary;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-elevated;
+      color: $color-text-primary;
+    }
+
+    &--active {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+    }
+  }
+}
+
+// =============================================================================
+// LAYER ITEM (Enhanced with opacity controls)
+// =============================================================================
+
+.layer-item {
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: all $transition-fast;
+
+  &--disabled {
+    opacity: 0.6;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__label {
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+
+  // Opacity controls panel
+  &__opacity {
+    padding: $spacing-sm;
+    padding-top: 0;
+    border-top: 1px solid $color-border-subtle;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &__opacity-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    font-size: 10px;
+    color: $color-text-muted;
+
+    svg {
+      opacity: 0.5;
+    }
+
+    span:first-of-type {
+      flex: 1;
+    }
+  }
+
+  &__opacity-value {
+    color: $color-accent-teal;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__opacity-slider {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: $spacing-sm;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: $color-accent-teal;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  &__opacity-presets {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__preset {
+    flex: 1;
+    padding: 4px;
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-align: center;
+
+    &:hover:not(&--active):not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &--active {
+      background: rgba($color-accent-teal, 0.2);
+      border-color: rgba($color-accent-teal, 0.4);
+      color: $color-accent-teal;
+    }
+  }
+}
+
+// Legacy layer-toggle support
+.layer-toggle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &__btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: $color-text-primary;
+  }
+
+  &__count {
+    display: block;
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__opacity {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 9px;
+    color: $color-text-muted;
+
+    input[type="range"] {
+      width: 60px;
+      height: 4px;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+  }
+
+  &__manage {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// =============================================================================
+// ANNOTATIONS SUBTAB
+// =============================================================================
+
+.annotations-subtab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+
+  &__info {
+    font-size: 10px;
+    color: $color-text-muted;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: $radius-sm;
+    margin-bottom: $spacing-sm;
+    flex-shrink: 0;
+  }
+
+  &__loading,
+  &__error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    font-size: 11px;
+    color: $color-text-muted;
+  }
+
+  &__error {
+    color: $color-error;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    text-align: center;
+    color: $color-text-muted;
+    flex: 1;
+
+    svg {
+      opacity: 0.5;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+
+    span {
+      font-size: 10px;
+      color: $color-text-tertiary;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  // Footer - fixed to bottom of subtab
+  &__footer {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    margin-top: auto;
+    border-top: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+  }
+
+  &__footer-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-primary;
+    }
+
+    &--add {
+      background: rgba($color-accent-pink, 0.1);
+      border-color: rgba($color-accent-pink, 0.3);
+      color: $color-accent-pink;
+
+      &:hover {
+        background: rgba($color-accent-pink, 0.2);
+        border-color: rgba($color-accent-pink, 0.5);
+      }
+    }
+
+    &--click {
+      background: rgba($color-accent-green, 0.1);
+      border-color: rgba($color-accent-green, 0.3);
+      color: $color-accent-green;
+
+      &:hover {
+        background: rgba($color-accent-green, 0.2);
+        border-color: rgba($color-accent-green, 0.5);
+      }
+
+      &.active {
+        background: rgba($color-accent-green, 0.25);
+        border-color: $color-accent-green;
+        animation: pulse-border 1.5s ease-in-out infinite;
+      }
+    }
+
+    &--open {
+      &:hover {
+        background: rgba($color-accent-pink, 0.1);
+        border-color: rgba($color-accent-pink, 0.3);
+        color: $color-accent-pink;
+      }
+    }
+  }
+
+  // Annotation mode indicator
+  &__mode-indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+    background: rgba($color-accent-green, 0.15);
+    border: 1px solid rgba($color-accent-green, 0.4);
+    border-radius: $radius-sm;
+    font-size: 10px;
+    color: $color-accent-green;
+
+    svg {
+      flex-shrink: 0;
+
+      &.pulse {
+        animation: pulse-scale 1s ease-in-out infinite;
+      }
+    }
+
+    span {
+      flex: 1;
+    }
+
+    button {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba($color-accent-green, 0.4);
+      border-radius: $radius-xs;
+      padding: 3px 8px;
+      font-size: 9px;
+      color: $color-accent-green;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
+// Pulse animation for annotation mode
+@keyframes pulse-border {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba($color-accent-green, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgba($color-accent-green, 0.2);
+  }
+}
+
+@keyframes pulse-scale {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+.annotation-list-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__text {
+    display: block;
+    font-size: 11px;
+    color: $color-text-primary;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__meta {
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+
+  &__visibility,
+  &__more {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+    flex-shrink: 0;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+// =============================================================================
+// LINKS SUBTAB
+// =============================================================================
+
+.links-subtab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  gap: $spacing-sm;
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    text-align: center;
+    color: $color-text-muted;
+    flex: 1;
+
+    svg {
+      opacity: 0.5;
+      margin-bottom: $spacing-sm;
+    }
+
+    span {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+
+    p {
+      font-size: 10px;
+      color: $color-text-tertiary;
+    }
+  }
+
+  &__property-detail {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: $spacing-xs;
+  }
+
+  &__property-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+    margin-bottom: $spacing-sm;
+
+    svg {
+      color: $color-accent-teal;
+      flex-shrink: 0;
+    }
+  }
+
+  &__property-name {
+    font-size: 12px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__property-desc {
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-left: auto;
+  }
+
+  &__members-section {
+    margin-top: $spacing-sm;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-xs;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__add-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-elevated;
+      border-color: $color-accent-teal;
+      color: $color-accent-teal;
+    }
+  }
+}

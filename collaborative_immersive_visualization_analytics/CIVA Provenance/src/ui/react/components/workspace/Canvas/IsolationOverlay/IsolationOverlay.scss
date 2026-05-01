@@ -1,0 +1,303 @@
+// src/ui/react/components/workspace/Canvas/IsolationOverlay/IsolationOverlay.scss
+// Styles for the isolation overlay component
+//
+// Uses glassmorphism design with frosted backdrop and floating content card
+//
+// ARCHITECTURE NOTE (Dec 2025):
+// Changed from `position: fixed` to `position: absolute` so the overlay
+// only covers the canvas area, leaving side panels accessible.
+// This requires the parent canvas container to have `position: relative`.
+
+@use "theme" as *;
+
+// =============================================================================
+// ISOLATION OVERLAY - Scoped to canvas container (not full screen)
+// =============================================================================
+
+.isolation-overlay {
+  // KEY FIX: Use absolute instead of fixed to scope to canvas container
+  // The parent .canvas-grid__container must have position: relative
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+
+  // Animation
+  animation: isolation-fade-in 0.2s ease-out;
+}
+
+@keyframes isolation-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// BACKDROP - Frosted glass effect over canvas
+// =============================================================================
+
+.isolation-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+// =============================================================================
+// CONTENT CONTAINER - The isolated cell card
+// =============================================================================
+
+.isolation-overlay__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+
+  // Animation
+  animation: isolation-content-in 0.25s ease-out;
+
+  // Size variants - adjusted for canvas-scoped overlay
+  &--medium {
+    width: min(600px, 80%);
+    height: min(450px, 70%);
+  }
+
+  &--large {
+    width: min(900px, 85%);
+    height: min(675px, 80%);
+  }
+
+  &--fullscreen {
+    width: calc(100% - #{$spacing-xl * 2});
+    height: calc(100% - #{$spacing-xl * 2});
+    max-width: 1600px;
+    max-height: 1000px;
+  }
+}
+
+@keyframes isolation-content-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// =============================================================================
+// HEADER - Title bar with actions
+// =============================================================================
+
+.isolation-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-bottom: 1px solid $color-border-default;
+  flex-shrink: 0;
+}
+
+.isolation-overlay__title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.isolation-overlay__icon {
+  color: $color-accent-primary;
+  flex-shrink: 0;
+}
+
+.isolation-overlay__name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.isolation-overlay__coords {
+  font-size: $font-size-xs;
+  font-family: $font-family-mono;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.isolation-overlay__actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+}
+
+.isolation-overlay__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-subtle;
+    color: $color-text-secondary;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.isolation-overlay__close-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($color-accent-red, 0.1);
+  border: 1px solid rgba($color-accent-red, 0.2);
+  border-radius: $radius-sm;
+  color: $color-accent-red;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($color-accent-red, 0.2);
+    border-color: rgba($color-accent-red, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  span {
+    // Hide text on smaller screens
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+}
+
+// =============================================================================
+// BODY - Cell content area
+// =============================================================================
+
+.isolation-overlay__body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%);
+
+  // The isolated cell renders here at full size
+  > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// =============================================================================
+// FOOTER - Hint text
+// =============================================================================
+
+.isolation-overlay__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs $spacing-md;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+.isolation-overlay__hint {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+
+  kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    margin: 0 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid $color-border-subtle;
+    border-radius: 3px;
+    font-family: $font-family-mono;
+    font-size: 10px;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 768px) {
+  .isolation-overlay {
+    padding: $spacing-md;
+  }
+
+  .isolation-overlay__content {
+    &--medium,
+    &--large {
+      width: calc(100% - #{$spacing-md * 2});
+      height: calc(100% - #{$spacing-md * 2});
+    }
+  }
+
+  .isolation-overlay__header {
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  .isolation-overlay__name {
+    font-size: $font-size-xs;
+  }
+}
+
+// =============================================================================
+// DARK MODE ENHANCEMENTS
+// =============================================================================
+
+// Already dark by default, but ensure consistency
+.isolation-overlay {
+  // Add subtle noise texture for depth
+  &__content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    z-index: 0;
+  }
+}

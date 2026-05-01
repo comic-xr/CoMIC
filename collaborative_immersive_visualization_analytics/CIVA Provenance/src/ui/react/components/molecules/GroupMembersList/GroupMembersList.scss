@@ -1,0 +1,195 @@
+/**
+ * GroupMembersList Styles
+ * Frosted glassmorphism aesthetic with VR-friendly blue hues
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// GROUP MEMBERS LIST
+// =============================================================================
+
+.group-members-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.group-members-list--empty {
+    padding: 16px;
+}
+
+.group-members-list__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 28px 16px;
+    color: $color-text-muted;
+    text-align: center;
+    font-size: 12px;
+
+    svg {
+        opacity: 0.3;
+        color: $color-accent-blue;
+    }
+}
+
+// =============================================================================
+// GROUP MEMBER ROW
+// =============================================================================
+
+.group-member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-lg;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-glass-medium;
+        border-color: $color-border-subtle;
+
+        .group-member__remove {
+            opacity: 1;
+        }
+    }
+
+    &--current {
+        background: rgba($color-accent-blue, 0.08);
+        border-left: 2px solid $color-accent-blue;
+        padding-left: 10px;
+    }
+}
+
+.group-member__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.group-member__name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group-member__you {
+    font-size: 10px;
+    font-weight: 400;
+    color: $color-accent-blue;
+}
+
+.group-member__view {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-top: 2px;
+}
+
+.group-member__mode {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: rgba(var(--mode-color-rgb, 96, 165, 250), 0.1);
+    border: 1px solid rgba(var(--mode-color-rgb, 96, 165, 250), 0.2);
+    border-radius: $radius-md;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--mode-color, $color-accent-blue);
+
+    svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+.group-member__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    cursor: pointer;
+    opacity: 0;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba($color-error, 0.1);
+        border-color: $color-error;
+        color: $color-error;
+    }
+}
+
+// =============================================================================
+// COMPACT VARIANT
+// =============================================================================
+
+.group-members-compact {
+    display: flex;
+    align-items: center;
+
+    .group-members-compact__avatar {
+        margin-left: -8px;
+        border: 2px solid $color-bg-secondary;
+        box-shadow: $shadow-sm;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+.group-members-compact__overflow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -8px;
+    background: $color-glass-strong;
+    border: 2px solid $color-bg-secondary;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-secondary;
+    box-shadow: $shadow-sm;
+
+    &.user-avatar--xs {
+        width: 20px;
+        height: 20px;
+        font-size: 8px;
+    }
+
+    &.user-avatar--sm {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+    }
+
+    &.user-avatar--md {
+        width: 36px;
+        height: 36px;
+        font-size: 11px;
+    }
+
+    &.user-avatar--lg {
+        width: 48px;
+        height: 48px;
+        font-size: 13px;
+    }
+}

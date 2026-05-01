@@ -1,0 +1,120 @@
+/**
+ * @file SubtabBar.scss
+ * @description Styles for SubtabBar component.
+ * Matches InstanceToolsTab styling with colored bottom border indicators.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// SUBTAB BAR CONTAINER
+// =============================================================================
+
+.subtab-bar {
+  display: flex;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// INDIVIDUAL TABS
+// =============================================================================
+
+.subtab-bar__tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: $color-text-muted;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(&--active) {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+
+  // Active state with color theming
+  &--active {
+    background: rgba(var(--tab-color-rgb), 0.04);
+    border-bottom-color: var(--tab-color);
+    color: var(--tab-color);
+
+    svg {
+      color: var(--tab-color);
+    }
+  }
+
+  // Color variants
+  &[data-color="blue"] {
+    --tab-color: #{$color-accent-blue};
+    --tab-color-rgb: 59, 130, 246;
+  }
+
+  &[data-color="green"] {
+    --tab-color: #{$color-accent-green};
+    --tab-color-rgb: 52, 211, 153;
+  }
+
+  &[data-color="amber"] {
+    --tab-color: #{$color-accent-amber};
+    --tab-color-rgb: 251, 191, 36;
+  }
+
+  &[data-color="purple"] {
+    --tab-color: #{$color-accent-purple};
+    --tab-color-rgb: 168, 85, 247;
+  }
+
+  &[data-color="pink"] {
+    --tab-color: #{$color-accent-pink};
+    --tab-color-rgb: 244, 114, 182;
+  }
+
+  &[data-color="teal"] {
+    --tab-color: #{$color-accent-teal};
+    --tab-color-rgb: 45, 212, 191;
+  }
+
+  &[data-color="red"] {
+    --tab-color: #{$color-accent-red};
+    --tab-color-rgb: 239, 68, 68;
+  }
+
+  // Focus state
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.3) inset;
+  }
+}
+
+// =============================================================================
+// LABEL AND COUNT
+// =============================================================================
+
+.subtab-bar__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtab-bar__count {
+  font-size: 9px;
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  font-weight: $font-weight-semibold;
+
+  .subtab-bar__tab--active & {
+    background: rgba(var(--tab-color-rgb), 0.15);
+    color: var(--tab-color);
+  }
+}

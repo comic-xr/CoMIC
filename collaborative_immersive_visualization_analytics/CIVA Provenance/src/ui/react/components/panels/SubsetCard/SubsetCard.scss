@@ -1,0 +1,233 @@
+// src/ui/react/components/panels/SubsetCard.scss
+// Styles for SubsetCard component
+
+.subset-card {
+  background: var(--card-bg, #252538);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--border-hover, #444);
+  }
+
+  &--active {
+    border-color: var(--focus-border, #4a7a5e);
+    background: var(--focus-card-bg, #252a35);
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &--expanded {
+    border-color: var(--border-active, #555);
+  }
+
+  // Header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background: var(--header-hover, rgba(255, 255, 255, 0.03));
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__name-input {
+    width: 100%;
+    padding: 4px 8px;
+    background: var(--input-bg, #1a1a2e);
+    border: 1px solid var(--accent-color, #6366f1);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-primary, #fff);
+    outline: none;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  &__count {
+    font-size: 0.75rem;
+    color: var(--text-muted, #888);
+  }
+
+  &__visibility {
+    font-size: 0.75rem;
+  }
+
+  &__toggle {
+    font-size: 0.625rem;
+    color: var(--text-muted, #888);
+    transition: transform 0.15s ease;
+  }
+
+  // Content
+  &__content {
+    padding: 0 12px 12px;
+    border-top: 1px solid var(--border-color, #333);
+  }
+
+  &__description {
+    margin: 12px 0;
+    font-size: 0.8125rem;
+    color: var(--text-secondary, #ccc);
+    line-height: 1.4;
+  }
+
+  // Attached content
+  &__attached {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  &__attached-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: var(--tag-bg, #3b3b5c);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--text-secondary, #ccc);
+  }
+
+  // Actions
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  &__more-actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &--focus {
+      background: var(--primary-color, #6366f1);
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background: var(--primary-hover, #5558e3);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &--exit {
+      background: var(--focus-btn-bg, #4a7a5e);
+      color: #fff;
+
+      &:hover {
+        background: var(--focus-btn-hover, #5a8a6e);
+      }
+    }
+
+    &--icon {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--icon-btn-bg, #3b3b5c);
+      font-size: 0.875rem;
+
+      &:hover {
+        background: var(--icon-btn-hover, #4b4b6c);
+      }
+    }
+
+    &--danger {
+      &:hover {
+        background: var(--danger-bg, #8b3a3a);
+      }
+    }
+  }
+
+  // Share menu
+  &__share-menu {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+    padding: 8px;
+    background: var(--menu-bg, #1a1a2e);
+    border-radius: 4px;
+
+    button {
+      flex: 1;
+      padding: 6px 8px;
+      background: transparent;
+      border: 1px solid var(--border-color, #333);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--text-secondary, #ccc);
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: var(--menu-hover, #252538);
+        border-color: var(--border-hover, #444);
+      }
+
+      &.active {
+        background: var(--accent-bg, #3b3b5c);
+        border-color: var(--accent-color, #6366f1);
+        color: var(--text-primary, #fff);
+      }
+    }
+  }
+
+  // Metadata
+  &__metadata {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color, #333);
+    font-size: 0.6875rem;
+    color: var(--text-muted, #666);
+  }
+}

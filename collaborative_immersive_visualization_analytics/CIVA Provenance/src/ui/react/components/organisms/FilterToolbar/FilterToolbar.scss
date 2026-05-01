@@ -1,0 +1,560 @@
+/**
+ * FilterToolbar styles
+ *
+ * Main filter UI component with responsive layouts.
+ * CRITICAL: Single-line enforcement - no wrapping allowed.
+ */
+
+@use "theme" as *;
+
+.filter-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  // Align SearchInput visuals with app tokens
+  --search-input-bg: #{$color-bg-secondary};
+  --search-input-border: #{$color-border-subtle};
+  --search-input-focus-border: #{$color-accent-blue};
+  --search-input-focus-shadow: 0 0 0 2px #{rgba($color-accent-blue, 0.2)};
+  --search-input-color: #{$color-text-primary};
+  --search-input-placeholder: #{$color-text-tertiary};
+  --search-input-icon: #{$color-text-tertiary};
+
+  // =========================================================================
+  // FULL MODE - Two rows
+  // =========================================================================
+
+  &--full {
+    // Nothing special needed
+  }
+
+  &__search-row {
+    width: 100%;
+  }
+
+  &__dropdowns-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    flex-wrap: nowrap; // CRITICAL: Never wrap
+    overflow: hidden;
+  }
+
+  &__controls-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  // =========================================================================
+  // COMPACT/MINIMAL MODE - Single row
+  // =========================================================================
+
+  &__single-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    flex-wrap: nowrap; // CRITICAL: Never wrap
+    overflow: hidden;
+  }
+
+  &__search-compact {
+    flex: 1;
+    min-width: 100px;
+    max-width: 200px;
+  }
+
+  // =========================================================================
+  // DROPDOWN TRIGGER
+  // =========================================================================
+
+  &__dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+
+    font-size: $font-size-sm;
+    font-family: inherit;
+    color: $color-text-secondary;
+
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: $color-hover-bg;
+      border-color: $color-border-default;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 1px;
+    }
+
+    &--active {
+      background: color-mix(
+        in srgb,
+        $color-accent-blue 10%,
+        transparent
+      );
+      border-color: $color-accent-blue;
+      color: $color-accent-blue;
+    }
+
+    &--open {
+      background: $color-hover-bg;
+      border-color: $color-border-default;
+
+      .filter-toolbar__dropdown-chevron {
+        transform: rotate(180deg);
+      }
+    }
+
+    &--icon-only {
+      padding: $spacing-xs;
+      min-width: $spacing-xl + $spacing-sm;
+      min-height: $spacing-xl + $spacing-sm;
+      justify-content: center;
+    }
+  }
+
+  &__dropdown-label {
+    font-weight: 500;
+  }
+
+  &__dropdown-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $spacing-lg;
+    height: $spacing-lg;
+    padding: 0 $spacing-xs;
+
+    background: $color-accent-blue;
+    border-radius: $radius-full;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-text-primary;
+    line-height: 1;
+  }
+
+  &__dropdown-chevron {
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+
+  // =========================================================================
+  // SORT WRAPPER
+  // =========================================================================
+
+  &__sort-wrapper {
+    flex-shrink: 0;
+
+    &--compact {
+      // Ensure compact sort takes minimal space
+    }
+  }
+
+  // =========================================================================
+  // SPACER
+  // =========================================================================
+
+  &__spacer {
+    flex: 1;
+    min-width: 0;
+  }
+
+  // =========================================================================
+  // CLEAR BUTTON
+  // =========================================================================
+
+  &__clear-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+
+    font-size: $font-size-xs;
+    font-family: inherit;
+    color: $color-text-tertiary;
+
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: $color-hover-bg;
+      border-color: $color-border-subtle;
+      color: $color-text-secondary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 1px;
+    }
+
+    &--icon-only {
+      padding: $spacing-xs;
+    }
+  }
+
+  &__clear-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $spacing-lg;
+    height: $spacing-lg;
+    padding: 0 $spacing-xs;
+
+    background: $color-bg-tertiary;
+    border-radius: $radius-full;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  // =========================================================================
+  // FILTER SUMMARY (minimal mode)
+  // =========================================================================
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+
+    background: color-mix(
+      in srgb,
+      $color-accent-blue 10%,
+      transparent
+    );
+    border-radius: $radius-sm;
+
+    font-size: $font-size-xs;
+    color: $color-accent-blue;
+  }
+
+  &__summary-clear {
+    margin-left: auto;
+    padding: $spacing-xs $spacing-sm;
+
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+
+    font-size: $font-size-xs;
+    font-family: inherit;
+    font-weight: 500;
+    color: inherit;
+
+    cursor: pointer;
+
+    &:hover {
+      background: color-mix(
+        in srgb,
+        $color-accent-blue 20%,
+        transparent
+      );
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 1px;
+    }
+  }
+
+  // =========================================================================
+  // EMBEDDED VARIANT - For contextual panels
+  // =========================================================================
+
+  &--embedded {
+    gap: $spacing-sm;
+  }
+
+  &__embedded-bar {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-xs;
+    background: $color-glass-subtle;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    flex-wrap: nowrap;
+
+    &:focus-within {
+      border-color: $color-border-default;
+      background: $color-glass-light;
+      box-shadow: 0 0 0 2px color-mix(in srgb, $color-accent-blue 15%, transparent);
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      // Remove border/background since the embedded-bar provides it
+      background: transparent;
+      border: none;
+
+      &:hover {
+        border-color: transparent;
+      }
+
+      &--focused {
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      .search-input__icon {
+        color: $color-text-muted;
+      }
+
+      .search-input__field {
+        font-size: $font-size-xs;
+      }
+
+      .search-input__clear {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  &__embedded-controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    flex-shrink: 0;
+  }
+
+  &__filter-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-medium;
+      color: $color-text-primary;
+      border-color: $color-border-subtle;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: $color-accent-blue;
+      background: color-mix(in srgb, $color-accent-blue 15%, transparent);
+      border-color: color-mix(in srgb, $color-accent-blue 40%, transparent);
+
+      &:hover {
+        background: color-mix(in srgb, $color-accent-blue 25%, transparent);
+      }
+    }
+  }
+
+  &__filter-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: $radius-full;
+    background: $color-accent-blue;
+    color: #fff;
+    font-size: 9px;
+    font-weight: $font-weight-bold;
+    line-height: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+
+    // Pulse animation for attention
+    animation: filter-badge-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes filter-badge-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  &__embedded-filters {
+    // Slide in animation when opened
+    animation: embedded-filters-slide-in 0.2s ease-out;
+  }
+
+  // =========================================================================
+  // STACKED VARIANT - Controls wrap to second line (embedded only)
+  // =========================================================================
+
+  &--stacked {
+    .filter-toolbar__embedded-bar {
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+
+      .search-input {
+        flex: 1 1 100%; // Full width on first row
+        min-width: 0;
+      }
+    }
+
+    .filter-toolbar__embedded-controls {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      flex: 1;
+      justify-content: flex-end;
+    }
+  }
+
+  @keyframes embedded-filters-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // =========================================================================
+  // VR MODE
+  // =========================================================================
+
+  &--vr {
+    gap: $spacing-md;
+
+    .filter-toolbar__dropdown-trigger {
+      min-height: 44px;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-md;
+    }
+
+    .filter-toolbar__clear-btn {
+      min-height: 44px;
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
+  &--ultra {
+    gap: $spacing-xs;
+  }
+}
+
+// =============================================================================
+// QUICK FILTERS ROW
+// =============================================================================
+
+.quick-filters-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs 0;
+  flex-wrap: nowrap; // CRITICAL: Never wrap
+  overflow: hidden;
+
+  &--collapsed {
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-hover-bg;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+  }
+
+  &__label {
+    flex-shrink: 0;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    color: $color-text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $spacing-lg;
+    height: $spacing-lg;
+    padding: 0 $spacing-xs;
+
+    background: $color-accent-blue;
+    border-radius: $radius-full;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-text-primary;
+    line-height: 1;
+  }
+
+  &__collapse-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $spacing-xl;
+    height: $spacing-xl;
+    padding: 0;
+    margin-left: auto;
+
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+
+    color: $color-text-tertiary;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-hover-bg;
+      color: $color-text-secondary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+  }
+}

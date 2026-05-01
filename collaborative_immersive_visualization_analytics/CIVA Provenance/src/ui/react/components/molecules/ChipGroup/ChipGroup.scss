@@ -1,0 +1,285 @@
+// src/ui/react/components/common/ChipGroup/ChipGroup.scss
+// Multi-select chip group styles
+// Uses design tokens - no hard-coded values
+
+@use "theme" as *;
+
+// =============================================================================
+// CHIP GROUP CONTAINER
+// =============================================================================
+
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    align-items: center;
+}
+
+// =============================================================================
+// INDIVIDUAL CHIP
+// =============================================================================
+
+.chip-group__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-full;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+    user-select: none;
+
+    &:hover:not(&--disabled):not(&--active) {
+        background: rgba(255, 255, 255, 0.08);
+        color: $color-text-secondary;
+        border-color: $color-border-medium;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-accent-blue;
+        outline-offset: 2px;
+    }
+
+    // =========================================================================
+    // ACTIVE STATE - Color Variants
+    // =========================================================================
+
+    &--active {
+        background: rgba(255, 255, 255, 0.08);
+        color: $color-text-primary;
+        border-color: $color-border-medium;
+
+        // Blue
+        &[data-color="blue"] {
+            background: rgba($color-accent-blue, 0.15);
+            border-color: rgba($color-accent-blue, 0.4);
+            color: $color-accent-blue;
+        }
+
+        // Green
+        &[data-color="green"] {
+            background: rgba($color-accent-green, 0.15);
+            border-color: rgba($color-accent-green, 0.4);
+            color: $color-accent-green;
+        }
+
+        // Pink
+        &[data-color="pink"] {
+            background: rgba($color-accent-pink, 0.15);
+            border-color: rgba($color-accent-pink, 0.4);
+            color: $color-accent-pink;
+        }
+
+        // Amber
+        &[data-color="amber"] {
+            background: rgba($color-accent-amber, 0.15);
+            border-color: rgba($color-accent-amber, 0.4);
+            color: $color-accent-amber;
+        }
+
+        // Teal
+        &[data-color="teal"] {
+            background: rgba($color-accent-teal, 0.15);
+            border-color: rgba($color-accent-teal, 0.4);
+            color: $color-accent-teal;
+        }
+
+        // Purple
+        &[data-color="purple"] {
+            background: rgba($color-accent-purple, 0.15);
+            border-color: rgba($color-accent-purple, 0.4);
+            color: $color-accent-purple;
+        }
+
+        // Red (for destructive/warning filters)
+        &[data-color="red"] {
+            background: rgba($color-accent-red, 0.15);
+            border-color: rgba($color-accent-red, 0.4);
+            color: $color-accent-red;
+        }
+    }
+
+    // =========================================================================
+    // DISABLED STATE
+    // =========================================================================
+
+    &--disabled {
+        color: $color-text-muted;
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+// =============================================================================
+// CHIP ICON
+// =============================================================================
+
+.chip-group__chip-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// CHIP LABEL
+// =============================================================================
+
+.chip-group__chip-label {
+    flex-shrink: 0;
+}
+
+// =============================================================================
+// CHIP COUNT BADGE
+// =============================================================================
+
+.chip-group__chip-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 $spacing-xs;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-full;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    color: inherit;
+    opacity: 0.8;
+
+    // Active state - slightly more prominent
+    .chip-group__chip--active & {
+        background: rgba(255, 255, 255, 0.15);
+        opacity: 1;
+    }
+}
+
+// =============================================================================
+// SIZE VARIANTS
+// =============================================================================
+
+.chip-group--sm {
+    gap: 4px;
+
+    .chip-group__chip {
+        padding: 2px $spacing-xs;
+        font-size: 10px;
+        border-radius: $radius-md;
+    }
+
+    .chip-group__chip-count {
+        min-width: 14px;
+        height: 14px;
+        font-size: 8px;
+    }
+}
+
+.chip-group--lg {
+    gap: $spacing-sm;
+
+    .chip-group__chip {
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-sm;
+    }
+
+    .chip-group__chip-count {
+        min-width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+}
+
+// =============================================================================
+// LAYOUT VARIANTS (via additional classes)
+// =============================================================================
+
+// Compact - tighter spacing, good for toolbars
+.chip-group--compact {
+    gap: 2px;
+}
+
+// Vertical stack
+.chip-group--vertical {
+    flex-direction: column;
+    align-items: stretch;
+
+    .chip-group__chip {
+        justify-content: flex-start;
+    }
+}
+
+// Full width chips
+.chip-group--full-width {
+    .chip-group__chip {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+// =============================================================================
+// VR MODE - Larger touch targets for VR interaction
+// =============================================================================
+
+.chip-group--vr {
+    gap: $spacing-sm;
+
+    .chip-group__chip {
+        min-height: 44px;
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-base;
+        border-radius: $radius-lg;
+        gap: $spacing-sm;
+
+        // Touch feedback instead of hover
+        &:active:not(&--disabled) {
+            transform: scale(0.98);
+        }
+    }
+
+    .chip-group__chip-count {
+        min-width: 24px;
+        height: 24px;
+        font-size: $font-size-sm;
+        padding: 0 $spacing-sm;
+    }
+
+    // VR size variants
+    &.chip-group--sm {
+        gap: $spacing-xs;
+
+        .chip-group__chip {
+            min-height: 40px;
+            padding: $spacing-xs $spacing-sm;
+            font-size: $font-size-sm;
+        }
+
+        .chip-group__chip-count {
+            min-width: 20px;
+            height: 20px;
+            font-size: $font-size-xs;
+        }
+    }
+
+    &.chip-group--lg {
+        gap: $spacing-md;
+
+        .chip-group__chip {
+            min-height: 52px;
+            padding: $spacing-md $spacing-lg;
+            font-size: 16px;
+        }
+
+        .chip-group__chip-count {
+            min-width: 28px;
+            height: 28px;
+            font-size: $font-size-base;
+        }
+    }
+}

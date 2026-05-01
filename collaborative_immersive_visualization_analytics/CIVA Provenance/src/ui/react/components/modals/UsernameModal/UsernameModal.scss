@@ -1,0 +1,146 @@
+/**
+ * @file UsernameModal.scss
+ * @description Styles for the UsernameModal entry-point component.
+ * Features branded glassmorphism styling with accent glows.
+ * Uses BEM naming convention.
+ */
+
+@use "theme" as *;
+
+.username-modal {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $color-overlay-heavy;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    @include glass-backdrop;
+  }
+
+  // Main modal container
+  @include glass-panel-enhanced($color-accent-primary);
+  padding: $spacing-2xl;
+  width: 90%;
+  max-width: 420px;
+  animation: slideUp $transition-base;
+
+  // Header section
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto $spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-accent-primary-glow;
+    border: 1px solid rgba($color-accent-primary, 0.3);
+    border-radius: $radius-full;
+    color: $color-accent-primary;
+    @include accent-glow($color-accent-primary);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+    margin: $spacing-xs 0 0 0;
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+  }
+
+  // Form styles
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__input {
+    @include glass-input;
+    width: 100%;
+    padding: $spacing-md;
+    font-size: $font-size-base;
+    border-radius: $radius-md;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      @include glass-focus($color-accent-primary);
+    }
+
+    &--error {
+      border-color: $color-error-border;
+
+      &:focus {
+        @include glass-focus($color-error);
+      }
+    }
+  }
+
+  &__error {
+    font-size: $font-size-sm;
+    color: $color-error;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__submit {
+    @include glass-button-accent($color-success);
+    width: 100%;
+    padding: $spacing-md;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    border-radius: $radius-md;
+    color: $color-text-primary;
+    background: rgba($color-success, 0.15);
+    border-color: rgba($color-success, 0.4);
+
+    &:hover:not(:disabled) {
+      background: rgba($color-success, 0.25);
+      border-color: rgba($color-success, 0.6);
+      transform: translateY(-2px);
+      @include success-glow;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &__hint {
+    margin-top: $spacing-lg;
+    text-align: center;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+}

@@ -1,0 +1,240 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: cia-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cia_analytics}
+      POSTGRES_USER: ${POSTGRES_USER:-ciauser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ciadevpassword}
+      # Creates additional database for Keycloak
+      POSTGRES_MULTIPLE_DATABASES: cia_analytics,keycloak
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/database/create-multiple-dbs.sh:/docker-entrypoint-initdb.d/00-create-dbs.sh
+      - ./server/database/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ciauser} -d ${POSTGRES_DB:-cia_analytics}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  minio:
+    image: minio/minio:latest
+    container_name: cia-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    ports:
+      - "9000:9000"
+      - "9002:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  redis:
+    image: redis:7-alpine
+    container_name: cia-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  api:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: cia-api
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      PORT: ${PORT:-3001}
+      # Database
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-cia_analytics}
+      DB_USER: ${POSTGRES_USER:-ciauser}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-ciadevpassword}
+      # MinIO
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_BUCKET: cia-files
+      MINIO_USE_SSL: "false"
+      # Keycloak Auth
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM:-cia-web}
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      # API URL for worker callbacks
+      API_URL: http://api:3001
+      # Development bypass
+      DEV_BYPASS_AUTH: ${DEV_BYPASS_AUTH:-false}
+      # LiveKit voice token signing
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY:-devkey}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET:-secret}
+      # Internal auth for worker callbacks
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:-dev-internal-token}
+      # Matrix Federation
+      MATRIX_FEDERATION_ENABLED: ${MATRIX_FEDERATION_ENABLED:-true}
+      MATRIX_BASE_URL: ${MATRIX_BASE_URL:-http://synapse:8008}
+      MATRIX_SERVER_NAME: ${MATRIX_SERVER_NAME:-matrix.cia-web.local}
+      MATRIX_AS_TOKEN: ${MATRIX_AS_TOKEN:-d20e1866d22403e4cef2486e9f24c594c52afd519dae909cee4d3e82393237b1}
+      MATRIX_HS_TOKEN: ${MATRIX_HS_TOKEN:-524effc36cba16203cc75d6270d6ed796639e45f0afa10eaa72b841f1c382cd6}
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - default
+      - cia_matrix_network
+
+
+  yjs:
+    build:
+      context: .
+      dockerfile: server/yjs/Dockerfile
+    container_name: cia-yjs
+    environment:
+      HOST: 0.0.0.0
+      PORT: 9001
+      NODE_ENV: ${NODE_ENV:-development}
+      # Database connection for Y.js persistence (Phase 2E)
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-cia_analytics}
+      DB_USER: ${POSTGRES_USER:-ciauser}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-ciadevpassword}
+      # Keycloak Auth (for WebSocket JWT validation)
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM:-cia-web}
+      DEV_BYPASS_AUTH: ${DEV_BYPASS_AUTH:-false}
+    ports:
+      - "9001:9001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9001"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    container_name: cia-keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin123}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: ${POSTGRES_USER:-ciauser}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD:-ciadevpassword}
+      KC_HEALTH_ENABLED: "true"
+    command: start-dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/8080;echo -e 'GET /health/ready HTTP/1.1\r\nhost: localhost\r\nConnection: close\r\n\r\n' >&3;if [ $? -eq 0 ]; then echo 'Healthcheck Successful';exit 0;else echo 'Healthcheck Failed';exit 1;fi;"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+
+  vtk-worker:
+    build:
+      context: ./workers/vtk-python
+      dockerfile: Dockerfile
+    container_name: cia-vtk-worker
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      QUEUE_NAME: general
+      WORKER_ID: vtk-worker-1
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_BUCKET: cia-files
+      MINIO_SECURE: "false"
+      API_CALLBACK_URL: http://api:3001/api/compute/internal
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:-dev-internal-token}
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      api:
+        condition: service_started
+    restart: unless-stopped
+
+
+  thumbnail-worker:
+    build:
+      context: ./workers/thumbnail-node
+      dockerfile: Dockerfile
+    container_name: cia-thumbnail-worker
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_BUCKET: cia-files
+      MINIO_SECURE: "false"
+      # The URL the headless browser will navigate to for rendering
+      # In Docker, this should point to the frontend service or host
+      APP_BASE_URL: ${APP_BASE_URL:-https://host.docker.internal:8081}
+      # API URL for worker callbacks (internal Docker network)
+      API_URL: http://api:3001
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:-dev-internal-token}
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      api:
+        condition: service_started
+    restart: unless-stopped
+    # Chromium needs more shared memory
+    shm_size: '2gb'
+
+
+volumes:
+  postgres_data:
+  minio_data:
+  redis_data:
+  yjs_data:  # Uncomment when adding persistence
+
+networks:
+  cia_matrix_network:
+    external: true
+    name: cia_matrix_network

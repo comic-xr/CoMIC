@@ -1,0 +1,266 @@
+// src/ui/react/components/panels/RightPanel/RightActivityBar.scss
+// Styling for the right activity bar icons
+// Mirrors LeftPanel.scss activity bar styling exactly
+
+@use "theme" as *;
+
+// =============================================================================
+// ACTIVITY BAR - Fixed width, always visible (mirrors left-panel__activity-bar)
+// =============================================================================
+
+.right-panel__activity-bar {
+  width: $panel-activity-bar-width;
+  min-width: $panel-activity-bar-width; // NEVER shrink - always visible
+  height: 100%;
+  flex-shrink: 0; // Prevent any shrinking
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-sm 0;
+  gap: $spacing-xs;
+  background: $color-bg-primary;
+  overflow: hidden; // Prevent content overflow
+
+  // Colored indicator line on LEFT edge (mirrors left activity bar which has it on the RIGHT edge)
+  // Both indicators face TOWARD the workspace/content in the center
+  &[data-color="blue"] {
+    border-left: 1px solid rgba($color-accent-blue, 0.4);
+  }
+
+  &[data-color="teal"] {
+    border-left: 1px solid rgba($color-accent-teal, 0.4);
+  }
+
+  &[data-color="green"] {
+    border-left: 1px solid rgba($color-accent-green, 0.4);
+  }
+
+  &[data-color="pink"] {
+    border-left: 1px solid rgba($color-accent-pink, 0.4);
+  }
+
+  &[data-color="amber"] {
+    border-left: 1px solid rgba($color-accent-amber, 0.4);
+  }
+
+  &[data-color="indigo"] {
+    border-left: 1px solid rgba($color-accent-indigo, 0.4);
+  }
+
+  &[data-color="purple"] {
+    border-left: 1px solid rgba($color-accent-purple, 0.4);
+  }
+
+  &[data-color="red"] {
+    border-left: 1px solid rgba($color-accent-red, 0.4);
+  }
+
+  &[data-color="cyan"] {
+    border-left: 1px solid rgba($color-accent-cyan, 0.4);
+  }
+
+  &[data-color="gray"] {
+    border-left: 1px solid rgba(150, 160, 180, 0.5);
+  }
+}
+
+// =============================================================================
+// TAB BUTTONS
+// =============================================================================
+
+.right-panel__activity-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+// Wrapper for tab button + badge
+.right-panel__activity-btn-wrapper {
+  position: relative;
+}
+
+// "Soon" badge for unimplemented tabs
+.right-panel__activity-badge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  font-size: 7px;
+  font-weight: $font-weight-bold;
+  padding: 1px 3px;
+  background: $color-accent-pink;
+  color: $color-bg-base;
+  border-radius: $radius-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// =============================================================================
+// SPACER AND DIVIDER
+// =============================================================================
+
+.right-panel__activity-spacer {
+  flex: 1;
+}
+
+.right-panel__activity-divider {
+  width: 24px;
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs auto;
+}
+
+// =============================================================================
+// VOICE CONTROLS (Compact version for activity bar)
+// =============================================================================
+
+.right-panel__voice-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs;
+
+  // Connected state has slightly different styling
+  &--connected {
+    background: rgba($color-accent-green, 0.05);
+    border-radius: $radius-md;
+    margin: 0 $spacing-xs;
+  }
+}
+
+.right-panel__voice-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  // Default etched state
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: $color-text-tertiary;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+    color: $color-text-secondary;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Join button - green accent
+  &--join {
+    background: rgba($color-accent-green, 0.15);
+    border: 1px solid rgba($color-accent-green, 0.4);
+    color: $color-accent-green;
+    box-shadow: 0 0 8px rgba($color-accent-green, 0.15);
+
+    &:hover {
+      background: rgba($color-accent-green, 0.25);
+      box-shadow: 0 0 12px rgba($color-accent-green, 0.25);
+    }
+  }
+
+  // Joining state - animated
+  &--joining {
+    animation: pulse-green 1.5s ease-in-out infinite;
+  }
+
+  // Muted state - red accent
+  &--muted {
+    background: rgba($color-accent-red, 0.15);
+    border: 1px solid rgba($color-accent-red, 0.4);
+    color: $color-accent-red;
+    box-shadow: 0 0 8px rgba($color-accent-red, 0.15);
+
+    &:hover {
+      background: rgba($color-accent-red, 0.25);
+    }
+  }
+
+  // Leave button - always red
+  &--leave {
+    background: rgba($color-accent-red, 0.1);
+    border: 1px solid rgba($color-accent-red, 0.3);
+    color: $color-accent-red;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.2);
+      box-shadow: 0 0 8px rgba($color-accent-red, 0.2);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// Pulse animation for joining state
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba($color-accent-green, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba($color-accent-green, 0.4);
+  }
+}
+
+// Spin animation for loader icon
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Status text (e.g., "Joining...")
+.right-panel__voice-status {
+  font-size: 9px;
+  font-weight: $font-weight-medium;
+  color: $color-accent-green;
+  text-align: center;
+  letter-spacing: 0.3px;
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+// Make loader icon spin when joining
+.right-panel__voice-btn--joining {
+  svg {
+    animation: spin 1s linear infinite;
+  }
+}
+
+// =============================================================================
+// TOGGLE BUTTON
+// =============================================================================
+
+.right-panel__toggle-btn {
+  margin-top: $spacing-xs;
+}

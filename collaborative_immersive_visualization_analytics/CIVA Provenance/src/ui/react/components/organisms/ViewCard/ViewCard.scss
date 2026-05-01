@@ -1,0 +1,487 @@
+/**
+ * ViewCard Component Styles
+ * Unified styling for all view card variants
+ *
+ * Note: Uses atoms for ColorDot, StatusDot, Badge from atoms folder
+ */
+
+@use "theme" as *;
+
+.view-card__link-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  background: rgba($color-accent-teal, 0.15);
+  border: 1px solid rgba($color-accent-teal, 0.3);
+  border-radius: $radius-sm;
+  color: $color-accent-teal;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-teal, 0.25);
+    border-color: rgba($color-accent-teal, 0.5);
+  }
+}
+
+.view-card__viewer-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  background: rgba($color-accent-blue, 0.15);
+  border-radius: $radius-sm;
+  color: $color-accent-blue;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.view-card__hub-badge {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  background: rgba($color-accent-amber, 0.15);
+  border-radius: $radius-sm;
+  color: $color-accent-amber;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.view-card__mode-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  background: rgba(var(--mode-color-rgb, 45, 212, 191), 0.1);
+  border-radius: $radius-sm;
+  color: var(--mode-color, $color-accent-teal);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.view-card__hub-star {
+  color: $color-accent-amber;
+}
+
+// =============================================================================
+// DOT VARIANT
+// =============================================================================
+
+.view-card--dot {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+
+  &:hover .view-card__color-dot {
+    box-shadow: 0 0 6px var(--dot-color);
+  }
+}
+
+// =============================================================================
+// CHIP VARIANT
+// =============================================================================
+
+.view-card--chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  transition: background $transition-fast;
+
+  &.view-card--interactive {
+    cursor: pointer;
+  }
+
+  &.view-card--hovered {
+    background: $color-hover-bg;
+  }
+}
+
+.view-card__chip-name {
+  font-size: 10px;
+  color: $color-text-secondary;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view-card__chip-remove {
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  display: flex;
+  margin-left: 2px;
+
+  &:hover {
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// MINI VARIANT
+// =============================================================================
+
+.view-card--mini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  min-width: 120px;
+
+  &.view-card--hub {
+    border-color: $color-accent-amber;
+    border-left: 3px solid $color-accent-amber;
+  }
+
+  &.view-card--current-user {
+    background: rgba(var(--view-color-rgb, 96, 165, 250), 0.08);
+  }
+
+  &.view-card--hovered {
+    background: $color-hover-bg;
+  }
+}
+
+.view-card__mini-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.view-card__mini-name {
+  font-size: 10px;
+  font-weight: 500;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view-card__you-label {
+  font-weight: 400;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+.view-card__mini-owner {
+  font-size: 9px;
+  color: $color-text-muted;
+}
+
+.view-card__mini-remove {
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  display: flex;
+
+  &:hover {
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// COMPACT VARIANT
+// =============================================================================
+
+.view-card--compact {
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &.view-card--active {
+    background: rgba(var(--view-color-rgb, 96, 165, 250), 0.08);
+    border-color: var(--view-color);
+  }
+
+  &.view-card--hovered {
+    background: $color-hover-bg;
+  }
+}
+
+.view-card__compact-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.view-card__drag-handle {
+  color: $color-text-muted;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  &--visible {
+    opacity: 1;
+  }
+}
+
+.view-card__compact-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.view-card__compact-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-card__compact-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view-card__compact-meta {
+  font-size: 10px;
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-card__meta-sep {
+  opacity: 0.5;
+}
+
+.view-card__compact-badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.view-card__compact-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  &--visible {
+    opacity: 1;
+  }
+}
+
+.view-card__action-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-hover-bg;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-amber, 0.15);
+    border-color: $color-accent-amber;
+    color: $color-accent-amber;
+  }
+}
+
+.view-card__expand-btn {
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  display: flex;
+  transition: transform $transition-fast;
+
+  &--expanded {
+    transform: rotate(180deg);
+  }
+}
+
+.view-card__compact-expanded {
+  padding: 0 12px 12px;
+  border-top: 1px solid $color-border-subtle;
+  margin-top: -4px;
+  padding-top: 12px;
+}
+
+.view-card__expanded-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.view-card__expanded-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: $color-bg-base;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-hover-bg;
+    border-color: $color-border-default;
+  }
+
+  &--danger {
+    color: $color-accent-red;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.1);
+      border-color: $color-accent-red;
+    }
+  }
+}
+
+// =============================================================================
+// FULL VARIANT
+// =============================================================================
+
+.view-card--full {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: all $transition-fast;
+
+  &.view-card--active {
+    border-color: var(--view-color);
+    box-shadow: 0 0 0 1px var(--view-color), 0 0 20px rgba(var(--view-color-rgb, 96, 165, 250), 0.2);
+  }
+}
+
+.view-card__full-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: $color-bg-secondary;
+  border-bottom: 1px solid $color-border-subtle;
+
+  .view-card--active & {
+    background: rgba(var(--view-color-rgb, 96, 165, 250), 0.1);
+    border-bottom-color: var(--view-color);
+  }
+
+  .view-card--compact-mode & {
+    gap: 4px;
+    padding: 4px 6px;
+  }
+}
+
+.view-card__full-name {
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .view-card--compact-mode & {
+    font-size: 10px;
+  }
+}
+
+.view-card__full-badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.view-card__full-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: opacity $transition-fast;
+
+  &--hidden {
+    opacity: 0;
+  }
+}
+
+.view-card__full-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(var(--view-color-rgb, 96, 165, 250), 0.05) 0%, transparent 100%);
+  position: relative;
+}
+
+.view-card__placeholder-icon {
+  color: rgba(var(--view-color-rgb, 96, 165, 250), 0.2);
+}
+
+.view-card__full-hub-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+
+.view-card__sync-status {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: $color-bg-secondary;
+  border-radius: $radius-sm;
+  font-size: 9px;
+
+  &--synced {
+    color: $color-accent-green;
+  }
+
+  &--syncing {
+    color: $color-accent-teal;
+  }
+}
+
+// =============================================================================
+// FOCUS ICON (for full variant)
+// =============================================================================
+
+// We'll use the existing focus icon from the Icon component

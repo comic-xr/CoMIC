@@ -1,0 +1,461 @@
+/**
+ * @file VoiceControlsPanel.scss
+ * @description Styles for Discord-style voice controls panel.
+ * Features compact join state and full controls when connected.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// PANEL CONTAINER
+// =============================================================================
+
+.voice-controls-panel {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-lg $spacing-xs $spacing-md;
+
+  // Subtle tinted background
+  background: rgba($color-accent-green, 0.04);
+
+  // Left accent border for visual separation
+  border-left: 2px solid rgba($color-accent-green, 0.3);
+  border-radius: 0 $radius-md $radius-md 0;
+
+  // Extra right padding for activity bar clearance
+  padding-right: 24px;
+
+  // Compact state (not in voice)
+  &--compact {
+    background: rgba($color-accent-blue, 0.04);
+    border-left-color: rgba($color-accent-blue, 0.3);
+    padding: $spacing-xs $spacing-lg $spacing-xs $spacing-md;
+    padding-right: 24px;
+  }
+}
+
+// =============================================================================
+// JOIN BUTTON CONTAINER
+// =============================================================================
+
+.voice-join-container {
+  position: relative;
+}
+
+// =============================================================================
+// JOIN BUTTON (shown when not in voice)
+// =============================================================================
+
+.voice-controls-panel__join-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-md;
+  background: rgba($color-accent-green, 0.15);
+  border: 1px solid rgba($color-accent-green, 0.3);
+  border-radius: $radius-md;
+  color: $color-accent-green;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba($color-accent-green, 0.25);
+    border-color: rgba($color-accent-green, 0.5);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-green, 0.4);
+  }
+
+  svg {
+    color: $color-accent-green;
+  }
+
+  // Joining/connecting state
+  &--joining {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+    cursor: wait;
+
+    svg {
+      color: $color-accent-blue;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.85;
+    cursor: wait;
+  }
+}
+
+// Spinner animation for the loader icon
+.voice-controls-panel__join-spinner {
+  animation: voice-spinner 1s linear infinite;
+}
+
+@keyframes voice-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.voice-controls-panel__join-chevron {
+  margin-left: $spacing-xs;
+  opacity: 0.7;
+}
+
+// =============================================================================
+// CHANNEL DISPLAY (when connected)
+// =============================================================================
+
+.voice-channel-display-wrapper {
+  position: relative;
+}
+
+.voice-controls-panel__channel-display {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-border-subtle;
+  }
+}
+
+.voice-controls-panel__channel-icon {
+  color: $color-accent-green;
+}
+
+.voice-controls-panel__channel-name {
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voice-controls-panel__channel-chevron {
+  color: $color-text-muted;
+  opacity: 0.6;
+  transition: opacity $transition-fast;
+
+  .voice-controls-panel__channel-display:hover & {
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// CONTROL GROUP (button + device selector)
+// =============================================================================
+
+.voice-controls-panel__control-group {
+  position: relative; // For popup positioning
+  display: flex;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  // Note: no overflow:hidden so popups can appear above
+}
+
+// =============================================================================
+// CONTROL BUTTONS (mute, deafen)
+// =============================================================================
+
+.voice-controls-panel__ctrl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  // Active state (not muted)
+  &--active {
+    color: $color-accent-green;
+
+    &:hover {
+      background: rgba($color-accent-green, 0.1);
+    }
+  }
+
+  // Muted state
+  &--muted {
+    color: $color-accent-red;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.1);
+    }
+  }
+
+  // Small size variant
+  &[data-size="small"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.4) inset;
+  }
+}
+
+// =============================================================================
+// DEVICE BUTTON (dropdown arrow next to control)
+// =============================================================================
+
+.voice-controls-panel__device-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.4) inset;
+  }
+}
+
+// =============================================================================
+// LEAVE BUTTON
+// =============================================================================
+
+.voice-controls-panel__leave-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  height: 28px;
+  padding: 0 $spacing-sm;
+  margin-left: $spacing-xs;
+  border-radius: $radius-sm;
+  border: 1px solid rgba($color-accent-red, 0.3);
+  background: rgba($color-accent-red, 0.15);
+  color: $color-accent-red;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-red, 0.3);
+    border-color: rgba($color-accent-red, 0.5);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-red, 0.4);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// DIVIDER
+// =============================================================================
+
+.voice-controls-panel__divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-subtle;
+  margin: 0 $spacing-xs;
+}
+
+// =============================================================================
+// POPUP BASE STYLES (shared between device and room popups)
+// =============================================================================
+
+%popup-base {
+  // Position is set via inline styles (fixed positioning with JS-calculated coords)
+  z-index: 1000; // High z-index to appear above everything
+
+  min-width: 180px;
+  max-width: 280px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(30, 32, 38, 0.98) 0%,
+    rgba(20, 22, 28, 0.99) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  overflow: hidden;
+}
+
+%popup-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  svg {
+    color: $color-text-muted;
+  }
+}
+
+%popup-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: $spacing-xs 0;
+}
+
+%popup-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &--selected {
+    background: rgba($color-accent-blue, 0.12);
+  }
+}
+
+// =============================================================================
+// DEVICE POPUP
+// =============================================================================
+
+.voice-device-popup {
+  @extend %popup-base;
+
+  &__header {
+    @extend %popup-header;
+  }
+
+  &__list {
+    @extend %popup-list;
+  }
+
+  &__empty {
+    padding: $spacing-md;
+    text-align: center;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  &__item {
+    @extend %popup-item;
+
+    &-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-check {
+      color: $color-accent-blue;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// =============================================================================
+// ROOM POPUP
+// =============================================================================
+
+.voice-room-popup {
+  @extend %popup-base;
+  min-width: 160px;
+
+  &__header {
+    @extend %popup-header;
+  }
+
+  &__list {
+    @extend %popup-list;
+  }
+
+  &__item {
+    @extend %popup-item;
+
+    &-icon {
+      color: $color-text-muted;
+      flex-shrink: 0;
+    }
+
+    &-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-check {
+      color: $color-accent-green;
+      flex-shrink: 0;
+    }
+
+    &:hover &-icon {
+      color: $color-text-secondary;
+    }
+
+    &--selected &-icon {
+      color: $color-accent-green;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+// TagCheckbox.scss
+// Checkbox item for tag selection in dropdowns
+
+.tag-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--color-text-secondary, #9ca3af);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    text-align: left;
+
+    &:hover:not(.tag-checkbox--disabled) {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-accent-blue, #3b82f6);
+        outline-offset: -2px;
+    }
+
+    // Checked state
+    &--checked {
+        color: var(--color-text-primary, #e5e7eb);
+    }
+
+    // Disabled state
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    // VR mode - larger touch targets
+    &--vr {
+        padding: 10px 16px;
+        gap: 12px;
+        font-size: 14px;
+        min-height: 44px;
+
+        .tag-checkbox__box {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        .tag-checkbox__count {
+            font-size: 12px;
+        }
+    }
+
+    // Checkbox indicator
+    &__box {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid;
+        border-radius: 4px;
+        transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    // Checkmark
+    &__check {
+        color: white;
+    }
+
+    // Label
+    &__label {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // File count
+    &__count {
+        flex-shrink: 0;
+        font-size: 10px;
+        color: var(--color-text-muted, #6b7280);
+        opacity: 0.7;
+    }
+}

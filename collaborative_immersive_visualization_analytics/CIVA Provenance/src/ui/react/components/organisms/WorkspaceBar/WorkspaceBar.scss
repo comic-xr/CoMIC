@@ -1,0 +1,789 @@
+/**
+ * @file WorkspaceBar.scss
+ * @description Styles for the WorkspaceBar (Canvas Tabs Bar) component.
+ *
+ * Layout: WORKSPACE | MODE | POPOUTS | BREAKOUTS
+ * Height: 58px total (18px section labels + 40px content)
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// WORKSPACE BAR CONTAINER
+// =============================================================================
+
+.workspace-bar {
+    display: flex;
+    flex-direction: column;
+    background: $color-bg-tertiary;
+    border-bottom: 1px solid $color-border-subtle;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+}
+
+// =============================================================================
+// SECTION LABELS ROW (18px)
+// =============================================================================
+
+.workspace-bar__labels {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    padding: 0 16px;
+    background: $color-bg-canvas;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.workspace-bar__label {
+    font-size: 9px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    padding: 0 8px;
+
+    &--workspace {
+        text-align: left;
+    }
+
+    &--mode {
+        width: 70px;
+        text-align: center;
+    }
+
+    &--popouts {
+        width: 60px;
+        text-align: center;
+    }
+
+    &--breakouts {
+        width: 80px;
+        text-align: center;
+    }
+}
+
+.workspace-bar__label-divider {
+    width: 1px;
+    height: 100%;
+    background: $color-border-subtle;
+}
+
+.workspace-bar__label-spacer {
+    flex: 1;
+}
+
+// =============================================================================
+// CONTENT ROW (40px)
+// =============================================================================
+
+.workspace-bar__content {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 16px;
+    gap: 4px;
+}
+
+.workspace-bar__mode-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.workspace-bar__tab-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.workspace-bar__divider {
+    width: 1px;
+    align-self: stretch;
+    background: $color-border-subtle;
+    flex-shrink: 0;
+}
+
+.workspace-bar__spacer {
+    flex: 1;
+}
+
+// =============================================================================
+// WORKSPACE TABS
+// =============================================================================
+
+.workspace-bar__tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+
+.workspace-bar__tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: $radius-md;
+    border: 1px solid transparent;
+    background: transparent;
+    color: $color-text-secondary;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    transition: all 0.15s ease;
+    position: relative;
+    user-select: none;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.04);
+        color: $color-text-primary;
+    }
+
+    &--active {
+        border-color: $color-border-default;
+        background: $color-bg-secondary;
+        color: $color-text-primary;
+        font-weight: 500;
+    }
+}
+
+.workspace-bar__tab--drag-target {
+    border-color: color-mix(in srgb, $color-accent-cyan 40%, transparent);
+    background: color-mix(in srgb, $color-accent-cyan 10%, transparent);
+}
+
+.workspace-bar__tab-icon {
+    opacity: 0.5;
+}
+
+.workspace-bar__drag-handle {
+    opacity: 0.4;
+}
+
+.workspace-bar__tab-name {
+    white-space: nowrap;
+}
+
+.workspace-bar__tab-input {
+    background: transparent;
+    border: none;
+    color: $color-text-primary;
+    font-size: 12px;
+    outline: none;
+    min-width: 80px;
+}
+
+.workspace-bar__tab-close {
+    width: 20px;
+    height: 20px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: $color-text-secondary;
+        background: rgba(255, 255, 255, 0.06);
+    }
+}
+
+// =============================================================================
+// TAB BADGES
+// =============================================================================
+
+.workspace-bar__badge {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    border-radius: 8px;
+    font-size: 9px;
+
+    &--changes {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: $color-accent-amber;
+    }
+
+    &--breakout {
+        padding: 2px 5px;
+        background: color-mix(in srgb, $color-accent-purple 15%, transparent);
+        color: $color-accent-purple;
+    }
+
+    &--presence {
+        padding: 2px 5px;
+        background: color-mix(in srgb, $color-accent-cyan 10%, transparent);
+        color: $color-accent-cyan;
+    }
+}
+
+// =============================================================================
+// NEW WORKSPACE BUTTON
+// =============================================================================
+
+.workspace-bar__new-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 1px solid $color-border-default;
+    background: $color-glass-light;
+    backdrop-filter: $backdrop-glass-subtle;
+    -webkit-backdrop-filter: $backdrop-glass-subtle;
+    color: $color-text-secondary;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    margin-left: 4px;
+    transition: all 0.15s ease;
+    box-shadow: $shadow-glass;
+
+    svg {
+        display: block;
+    }
+
+    &:hover {
+        background: $color-glass-medium;
+        color: $color-text-primary;
+    }
+}
+
+.workspace-bar__new-btn--active {
+    border-color: $color-border-strong;
+    color: $color-text-primary;
+    background: $color-glass-strong;
+}
+
+.workspace-bar__create {
+    position: relative;
+}
+
+.workspace-bar__overflow {
+    position: relative;
+}
+
+.workspace-bar__overflow-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-bg-secondary;
+    color: $color-text-secondary;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+    }
+}
+
+.workspace-bar__overflow-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 140px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-dropdown;
+    padding: 6px;
+}
+
+.workspace-bar__overflow-item {
+    width: 100%;
+    padding: 6px 8px;
+    border: none;
+    border-radius: $radius-md;
+    background: transparent;
+    color: $color-text-secondary;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// MODE TOGGLE
+// =============================================================================
+
+.workspace-bar__mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background: $color-bg-secondary;
+    border-radius: $radius-md;
+    width: 70px;
+    justify-content: center;
+}
+
+.workspace-bar__mode-btn {
+    width: 26px;
+    height: 24px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-cyan 15%, transparent);
+        color: $color-accent-cyan;
+    }
+
+    &:hover:not(&--active) {
+        color: $color-text-secondary;
+    }
+}
+
+// =============================================================================
+// MANAGER BUTTONS (Popout + Breakout)
+// =============================================================================
+
+.workspace-bar__popout-manager,
+.workspace-bar__breakout-manager {
+    position: relative;
+}
+
+.workspace-bar__manager-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: $radius-md;
+    border: none;
+    background: $color-bg-secondary;
+    color: $color-text-secondary;
+    cursor: pointer;
+    font-size: 11px;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--breakout {
+        background: color-mix(in srgb, $color-accent-purple 12%, transparent);
+        color: $color-accent-purple;
+        width: 80px;
+    }
+}
+
+// =============================================================================
+// MANAGER DROPDOWNS
+// =============================================================================
+
+.workspace-bar__manager-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-dropdown;
+    max-height: 360px;
+    overflow-y: auto;
+
+    &--popout {
+        width: 200px;
+    }
+
+    &--breakout {
+        width: 220px;
+    }
+}
+
+.workspace-bar__manager-dropdown-content {
+    padding: 8px;
+}
+
+.workspace-bar__manager-dropdown-header {
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-muted;
+    padding: 4px 8px;
+    text-transform: uppercase;
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+}
+
+.workspace-bar__manager-dropdown-divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: 8px 0;
+}
+
+.workspace-bar__manager-dropdown-action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 6px 8px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-muted;
+    font-size: 11px;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+    }
+
+    &--danger {
+        color: $color-accent-red;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-red 10%, transparent);
+        }
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-purple 10%, transparent);
+        }
+    }
+}
+
+// =============================================================================
+// CREATE/OPEN POPOVER (shared with CanvasTabsBar)
+// =============================================================================
+
+.create-open-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: $spacing-xs;
+    width: 300px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-popover;
+    overflow: hidden;
+}
+
+.create-open-popover__section {
+    padding: $spacing-sm;
+}
+
+.create-open-popover__header {
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 $spacing-xs;
+    margin-bottom: $spacing-sm;
+}
+
+.create-open-popover__header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+    padding: 0 $spacing-xs;
+}
+
+.create-open-popover__count {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+.create-open-popover__divider {
+    height: 1px;
+    background: $color-border-subtle;
+}
+
+.create-open-popover__create-option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    width: 100%;
+    padding: $spacing-sm;
+    border: none;
+    border-radius: $radius-md;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+    }
+}
+
+.create-open-popover__option-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: $radius-md;
+    background: $color-bg-tertiary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-secondary;
+}
+
+.create-open-popover__option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.create-open-popover__option-label {
+    font-size: 12px;
+    color: $color-text-primary;
+}
+
+.create-open-popover__option-desc {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+.create-open-popover__search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-bg-tertiary;
+    margin-bottom: $spacing-sm;
+
+    input {
+        border: none;
+        background: transparent;
+        color: $color-text-secondary;
+        font-size: 11px;
+        outline: none;
+        flex: 1;
+    }
+}
+
+.create-open-popover__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.create-open-popover__workspace {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 6px 8px;
+    border: none;
+    border-radius: $radius-md;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+    }
+}
+
+.create-open-popover__workspace-icon {
+    color: $color-text-muted;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+}
+
+.create-open-popover__workspace-name {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-secondary;
+}
+
+.create-open-popover__workspace-action {
+    font-size: 10px;
+    color: $color-accent-cyan;
+}
+
+.create-open-popover__empty {
+    padding: 8px;
+    font-size: 11px;
+    color: $color-text-muted;
+}
+
+.create-open-popover__more {
+    padding: 6px 8px;
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+// =============================================================================
+// CLOSE CONFIRMATION
+// =============================================================================
+
+.workspace-bar__confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: $color-overlay-medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: $z-modal;
+}
+
+.workspace-bar__confirm-dialog {
+    width: 320px;
+    padding: $spacing-lg;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-xl;
+}
+
+.workspace-bar__confirm-title {
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin-bottom: $spacing-sm;
+}
+
+.workspace-bar__confirm-message {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-lg;
+}
+
+.workspace-bar__confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+}
+
+// =============================================================================
+// POPOUT ITEMS
+// =============================================================================
+
+.workspace-bar__popout-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: $radius-md;
+}
+
+.workspace-bar__popout-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.workspace-bar__popout-name {
+    flex: 1;
+    font-size: 12px;
+    color: $color-text-secondary;
+}
+
+.workspace-bar__popout-action {
+    width: 20px;
+    height: 20px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: $color-text-secondary;
+        background: rgba(255, 255, 255, 0.06);
+    }
+}
+
+// =============================================================================
+// BREAKOUT ITEMS
+// =============================================================================
+
+.workspace-bar__breakout-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: $radius-md;
+    background: rgba(255, 255, 255, 0.02);
+    margin-bottom: 4px;
+}
+
+.workspace-bar__breakout-item-icon {
+    color: $color-accent-purple;
+    flex-shrink: 0;
+}
+
+.workspace-bar__breakout-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace-bar__breakout-item-name {
+    font-size: 12px;
+    color: $color-text-secondary;
+}
+
+.workspace-bar__breakout-item-count {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+.workspace-bar__breakout-join {
+    padding: 4px 8px;
+    border-radius: $radius-sm;
+    border: none;
+    background: color-mix(in srgb, $color-accent-purple 15%, transparent);
+    color: $color-accent-purple;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: color-mix(in srgb, $color-accent-purple 25%, transparent);
+    }
+}
