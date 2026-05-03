@@ -1,0 +1,262 @@
+// src/ui/react/components/common/Thumbnail/Thumbnail.scss
+// Thumbnail component styles
+//
+// Uses design tokens from theme.scss for consistency
+
+@use "theme" as *;
+
+.thumbnail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  background: $color-bg-tertiary;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  // Prevent layout shift during image load
+  contain: strict;
+
+  // Ensure all children are constrained to thumbnail bounds
+  > * {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  // Interactive states (when clickable)
+  &[role="button"] {
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-primary;
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // SIZE VARIANTS
+  // ══════════════════════════════════════════════════════════════════════════
+
+  &--xs {
+    width: 32px;
+    height: 24px;
+
+    .thumbnail__icon {
+      width: 12px;
+      height: 12px;
+    }
+    .thumbnail__spinner {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  &--sm {
+    width: 48px;
+    height: 36px;
+
+    .thumbnail__icon {
+      width: 16px;
+      height: 16px;
+    }
+    .thumbnail__spinner {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &--md {
+    width: 80px;
+    height: 60px;
+
+    .thumbnail__icon {
+      width: 24px;
+      height: 24px;
+    }
+    .thumbnail__spinner {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &--lg {
+    width: 160px;
+    height: 120px;
+
+    .thumbnail__icon {
+      width: 32px;
+      height: 32px;
+    }
+    .thumbnail__spinner {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &--fill {
+    width: 100%;
+    height: 100%;
+    // No aspect-ratio - let the container define dimensions
+    // This ensures thumbnails match the final viewport size
+    // Force size containment to prevent layout shift
+    contain: size layout;
+
+    .thumbnail__icon {
+      width: 32px;
+      height: 32px;
+    }
+    .thumbnail__spinner {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // STATE VARIANTS
+  // ══════════════════════════════════════════════════════════════════════════
+
+  &--loading {
+    .thumbnail__loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        $color-bg-tertiary 0%,
+        $color-bg-secondary 100%
+      );
+    }
+
+    .thumbnail__spinner {
+      color: $color-text-muted;
+      animation: thumbnail-spin 1s linear infinite;
+    }
+  }
+
+  &--placeholder,
+  &--idle {
+    .thumbnail__fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        $color-bg-tertiary 0%,
+        $color-bg-secondary 100%
+      );
+    }
+
+    .thumbnail__icon {
+      color: $color-text-muted;
+      opacity: 0.5;
+    }
+  }
+
+  &--error {
+    .thumbnail__fallback--error {
+      background: linear-gradient(
+        135deg,
+        rgba($color-accent-red, 0.1) 0%,
+        $color-bg-tertiary 100%
+      );
+    }
+
+    .thumbnail__icon {
+      color: $color-accent-red;
+      opacity: 0.6;
+    }
+  }
+
+  &--loaded {
+    background: transparent;
+
+    .thumbnail__image {
+      // Force image to fill container - prevent intrinsic size flash
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover .thumbnail__image {
+      opacity: 0.9;
+    }
+  }
+
+  &--skeleton {
+    .thumbnail__skeleton-pulse {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        $color-bg-tertiary 25%,
+        $color-bg-secondary 50%,
+        $color-bg-tertiary 75%
+      );
+      background-size: 200% 100%;
+      animation: thumbnail-shimmer 1.5s infinite;
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ANIMATIONS
+// ══════════════════════════════════════════════════════════════════════════════
+
+@keyframes thumbnail-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes thumbnail-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// THUMBNAIL GRID
+// ══════════════════════════════════════════════════════════════════════════════
+
+.thumbnail-grid {
+  display: grid;
+  gap: $spacing-sm;
+
+  &--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  &--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  &--auto {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}

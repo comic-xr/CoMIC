@@ -1,0 +1,103 @@
+// src/ui/react/components/atoms/Divider/Divider.scss
+// Divider atom styles
+
+@use "theme" as *;
+
+.divider {
+    display: flex;
+    align-items: center;
+
+    &__line {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    &__label {
+        color: $color-text-muted;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        padding: 0 $spacing-sm;
+    }
+
+    // Horizontal orientation
+    &--horizontal {
+        width: 100%;
+        flex-direction: row;
+
+        .divider__line {
+            flex: 1;
+            height: 1px;
+        }
+    }
+
+    // Vertical orientation
+    &--vertical {
+        height: 100%;
+        flex-direction: column;
+
+        .divider__line {
+            flex: 1;
+            width: 1px;
+        }
+
+        .divider__label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: $spacing-sm 0;
+        }
+    }
+
+    // Spacing variants - horizontal
+    &--horizontal.divider--spacing-none {
+        margin: 0;
+    }
+
+    &--horizontal.divider--spacing-sm {
+        margin: $spacing-xs 0;
+    }
+
+    &--horizontal.divider--spacing-md {
+        margin: $spacing-sm 0;
+    }
+
+    &--horizontal.divider--spacing-lg {
+        margin: $spacing-md 0;
+    }
+
+    // Spacing variants - vertical
+    &--vertical.divider--spacing-none {
+        margin: 0;
+    }
+
+    &--vertical.divider--spacing-sm {
+        margin: 0 $spacing-xs;
+    }
+
+    &--vertical.divider--spacing-md {
+        margin: 0 $spacing-sm;
+    }
+
+    &--vertical.divider--spacing-lg {
+        margin: 0 $spacing-md;
+    }
+
+    // VR mode - more spacing
+    &--vr {
+        &.divider--horizontal.divider--spacing-sm {
+            margin: $spacing-sm 0;
+        }
+
+        &.divider--horizontal.divider--spacing-md {
+            margin: $spacing-md 0;
+        }
+
+        &.divider--horizontal.divider--spacing-lg {
+            margin: $spacing-lg 0;
+        }
+
+        .divider__label {
+            font-size: 11px;
+        }
+    }
+}

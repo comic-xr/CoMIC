@@ -1,0 +1,1288 @@
+/**
+ * @file NavigatorTab.scss
+ * @description Styles for Navigator Tab V5
+ *
+ * Design tokens imported from theme.
+ * VR-friendly with larger touch targets when [data-vr="true"]
+ */
+
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// MAIN CONTAINER
+// ============================================================================
+
+.navigator-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-bg-primary;
+  color: $color-text-primary;
+  font-family: $font-family-base;
+  overflow: hidden;
+
+  // VR mode adjustments
+  &[data-vr="true"] {
+    --btn-size: 44px;
+    --font-size-sm: 14px;
+    --font-size-xs: 12px;
+  }
+
+  &:not([data-vr="true"]) {
+    --btn-size: 28px;
+    --font-size-sm: 11px;
+    --font-size-xs: 9px;
+  }
+}
+
+// ============================================================================
+// HEADER
+// ============================================================================
+
+.navigator-tab__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(135deg, rgba($color-accent-blue, 0.15), transparent);
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-text-primary;
+
+  svg {
+    color: $color-accent-blue;
+  }
+}
+
+.navigator-tab__focus-toggle {
+  display: flex;
+  background: $color-bg-tertiary;
+  border-radius: $radius-md;
+  padding: 2px;
+}
+
+.navigator-tab__focus-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: $color-bg-secondary;
+    color: $color-text-primary;
+  }
+}
+
+// ============================================================================
+// TAB BAR
+// ============================================================================
+
+.navigator-tab__tabs {
+  display: flex;
+  background: $color-bg-secondary;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(&--active) {
+    color: $color-text-secondary;
+    background: $color-glass-light;
+  }
+
+  &--active {
+    background: rgba(var(--tab-color-rgb), 0.04);
+    border-bottom-color: var(--tab-color);
+    color: var(--tab-color);
+
+    &[data-color="teal"] {
+      --tab-color: #{$color-accent-teal};
+      --tab-color-rgb: 20, 184, 166;
+    }
+
+    &[data-color="purple"] {
+      --tab-color: #{$color-accent-purple};
+      --tab-color-rgb: 168, 85, 247;
+    }
+
+    &[data-color="amber"] {
+      --tab-color: #{$color-accent-amber};
+      --tab-color-rgb: 251, 191, 36;
+    }
+  }
+}
+
+// ============================================================================
+// CONTENT AREA
+// ============================================================================
+
+.navigator-tab__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// ============================================================================
+// MINIMAP
+// ============================================================================
+
+.navigator-tab__minimap {
+  padding: $spacing-md;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  margin: $spacing-sm $spacing-md;
+  position: relative;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  &--setting-home {
+    background: color-mix(in srgb, $color-accent-amber 8%, $color-bg-primary);
+    border-color: color-mix(in srgb, $color-accent-amber 40%, transparent);
+
+    .navigator-tab__minimap-grid {
+      cursor: crosshair;
+    }
+
+    .navigator-tab__minimap-cell {
+      outline: 2px dashed color-mix(in srgb, $color-accent-amber 30%, transparent);
+      outline-offset: -2px;
+    }
+  }
+}
+
+// Display Mode Toggles
+.navigator-tab__display-toggles {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-bottom: $spacing-sm;
+  padding: 2px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.navigator-tab__display-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(&--active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: color-mix(in srgb, $color-accent-teal 20%, transparent);
+    color: $color-accent-teal;
+  }
+
+  [data-vr="true"] & {
+    width: 32px;
+    height: 28px;
+    font-size: 12px;
+  }
+}
+
+.navigator-tab__minimap-hint {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: $spacing-sm;
+  background: rgba($color-accent-amber, 0.15);
+  border: 1px solid rgba($color-accent-amber, 0.3);
+  border-radius: $radius-sm;
+  font-size: var(--font-size-xs);
+  color: $color-accent-amber;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.navigator-tab__minimap-grid {
+  display: grid;
+  position: relative;
+  min-height: 160px;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: $radius-sm;
+  // Grid gap creates visible gridlines
+  gap: 2px;
+}
+
+// Minimap Cell (Groups mode) - styled like CanvasNavigator
+.navigator-tab__minimap-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, $color-bg-tertiary 80%, transparent);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: $radius-xs;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  // Inner glow for depth
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: $color-bg-tertiary;
+  }
+
+  // Occupied cell - use color-mix for proper color blending
+  &--occupied {
+    background: color-mix(in srgb, var(--cell-color, #{$color-accent-blue}) 30%, $color-bg-secondary);
+    border-color: var(--cell-color, #{$color-accent-blue});
+    border-width: 2px;
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.2),
+      0 0 4px color-mix(in srgb, var(--cell-color, #{$color-accent-blue}) 30%, transparent);
+
+    &:hover {
+      background: color-mix(in srgb, var(--cell-color, #{$color-accent-blue}) 40%, $color-bg-secondary);
+    }
+  }
+
+  // Selected cell
+  &--selected {
+    border-color: var(--cell-color, #{$color-accent-blue});
+    border-width: 2px;
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.2),
+      0 0 10px color-mix(in srgb, var(--cell-color, #{$color-accent-blue}) 60%, transparent);
+  }
+
+  // In viewport - brighter
+  &--in-viewport {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.25);
+
+    &.navigator-tab__minimap-cell--occupied {
+      box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.2),
+        0 0 8px color-mix(in srgb, var(--cell-color, #{$color-accent-blue}) 50%, transparent);
+    }
+  }
+
+  // Not in viewport - dimmed
+  &:not(.navigator-tab__minimap-cell--in-viewport) {
+    opacity: 0.6;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  // Home cell (empty)
+  &--home:not(&--occupied) {
+    background: color-mix(in srgb, $color-accent-amber 20%, $color-bg-secondary);
+    border-color: color-mix(in srgb, $color-accent-amber 60%, transparent);
+    border-width: 2px;
+
+    svg {
+      color: $color-accent-amber;
+    }
+  }
+}
+
+.navigator-tab__minimap-cell-name {
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--cell-color, $color-text-primary);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0 2px;
+}
+
+.navigator-tab__minimap-cell-count {
+  font-size: 7px;
+  color: $color-text-muted;
+}
+
+.navigator-tab__minimap-cell-text {
+  font-size: 8px;
+  font-weight: 600;
+  color: $color-text-primary;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0 2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.navigator-tab__minimap-cell-home-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-accent-amber;
+  box-shadow: 0 0 4px $color-accent-amber;
+}
+
+// Minimap Group (Views mode)
+.navigator-tab__minimap-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+  gap: 2px;
+  padding: 3px;
+  background: rgba(var(--group-color), 0.1);
+  border: 1px solid rgba(var(--group-color), 0.3);
+  border-radius: $radius-sm;
+  position: relative;
+
+  &--views-mode {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+.navigator-tab__minimap-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: rgba(var(--view-color), 0.2);
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover {
+    background: rgba(var(--view-color), 0.35);
+  }
+
+  &--selected {
+    background: rgba(var(--view-color), 0.5);
+    border-color: var(--view-color);
+  }
+}
+
+.navigator-tab__minimap-view-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--view-color);
+}
+
+.navigator-tab__minimap-view-name {
+  font-size: 5px;
+  color: $color-text-muted;
+  margin-top: 1px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Collaborators on minimap
+.navigator-tab__minimap-collabs {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  gap: 1px;
+}
+
+.navigator-tab__minimap-collab {
+  font-size: 8px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-tertiary;
+  border-radius: 50%;
+  border: 1px solid $color-border-subtle;
+}
+
+// Viewport Indicator
+.navigator-tab__viewport-indicator {
+  position: absolute;
+  border: 2px solid $color-accent-amber;
+  border-radius: $radius-sm;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba($color-accent-amber, 0.4);
+  z-index: 10;
+}
+
+// ============================================================================
+// NAVIGATION BLOCK (D-Pad + Info)
+// ============================================================================
+
+.navigator-tab__nav-block {
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__nav-columns {
+  display: flex;
+  gap: $spacing-lg;
+  align-items: flex-start;
+}
+
+.navigator-tab__dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.navigator-tab__dpad-row {
+  display: flex;
+  gap: 2px;
+}
+
+// D-pad buttons inherit from DirectionalButton component
+
+.navigator-tab__nav-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.navigator-tab__info-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.navigator-tab__info-label {
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+  width: 50px;
+}
+
+.navigator-tab__info-value {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: $font-family-mono;
+  color: $color-text-secondary;
+
+  &--teal {
+    color: $color-accent-teal;
+  }
+
+  &--amber {
+    color: $color-accent-amber;
+  }
+}
+
+.navigator-tab__set-home-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  margin-top: $spacing-xs;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-amber, 0.15);
+    border-color: rgba($color-accent-amber, 0.4);
+    color: $color-accent-amber;
+  }
+}
+
+// ============================================================================
+// SIZE CONTROLS
+// ============================================================================
+
+.navigator-tab__size-controls {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+}
+
+.navigator-tab__size-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.navigator-tab__size-value-group {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.navigator-tab__size-label {
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+
+  &[data-color="green"] {
+    color: $color-accent-green;
+  }
+
+  &[data-color="purple"] {
+    color: $color-accent-purple;
+  }
+}
+
+.navigator-tab__size-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  background: $color-bg-tertiary;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover:not(:disabled) {
+    background: $color-bg-secondary;
+    color: $color-text-secondary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  [data-vr="true"] & {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.navigator-tab__size-value {
+  min-width: 36px;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-family: $font-family-mono;
+  color: $color-text-secondary;
+}
+
+.navigator-tab__size-x {
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+}
+
+// Number Spinner
+.navigator-tab__spinner {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navigator-tab__spinner-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  background: $color-bg-tertiary;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover:not(:disabled) {
+    background: $color-bg-secondary;
+    color: $color-text-secondary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  [data-vr="true"] & {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.navigator-tab__spinner-value {
+  min-width: 16px;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-family: $font-family-mono;
+
+  &[data-color="green"] {
+    color: $color-accent-green;
+  }
+
+  &[data-color="purple"] {
+    color: $color-accent-purple;
+  }
+}
+
+// ============================================================================
+// FILTER CHIPS (Views Tab)
+// ============================================================================
+
+.navigator-tab__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__filter-chip {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-bg-tertiary;
+  }
+
+  &--active {
+    &[data-color="purple"] {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: $color-accent-purple;
+      color: $color-accent-purple;
+    }
+
+    &[data-color="green"] {
+      background: rgba($color-accent-green, 0.15);
+      border-color: $color-accent-green;
+      color: $color-accent-green;
+    }
+
+    &[data-color="amber"] {
+      background: rgba($color-accent-amber, 0.15);
+      border-color: $color-accent-amber;
+      color: $color-accent-amber;
+    }
+
+    &[data-color="teal"] {
+      background: rgba($color-accent-teal, 0.15);
+      border-color: $color-accent-teal;
+      color: $color-accent-teal;
+    }
+
+    &[data-color="gray"] {
+      background: rgba($color-text-muted, 0.1);
+      border-color: $color-text-muted;
+      color: $color-text-secondary;
+    }
+  }
+}
+
+.navigator-tab__filter-count {
+  font-size: 8px;
+  opacity: 0.7;
+}
+
+// ============================================================================
+// VIEWS PANEL
+// ============================================================================
+
+.navigator-tab__views-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.navigator-tab__search-wrapper {
+  padding: $spacing-sm $spacing-md;
+}
+
+.navigator-tab__view-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.navigator-tab__section-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &[data-color="green"] {
+    color: $color-accent-green;
+  }
+
+  &[data-color="muted"] {
+    color: $color-text-muted;
+  }
+
+  &[data-color="amber"] {
+    color: $color-accent-amber;
+  }
+
+  &[data-color="red"] {
+    color: $color-accent-red;
+  }
+}
+
+.navigator-tab__section-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.navigator-tab__section-badge {
+  padding: 1px 5px;
+  background: currentColor;
+  border-radius: $radius-md;
+  font-size: 8px;
+  color: $color-bg-primary;
+}
+
+// ============================================================================
+// VIEWS PANEL FOOTER
+// ============================================================================
+
+.navigator-tab__views-footer {
+  flex-shrink: 0;
+  padding: $spacing-md;
+  display: flex;
+  justify-content: center;
+  background: $color-bg-secondary;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__new-view-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $radius-md;
+  background: $color-accent-purple;
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: color.adjust($color-accent-purple, $lightness: -5%);
+  }
+}
+
+// ============================================================================
+// BOOKMARKS PANEL
+// ============================================================================
+
+.navigator-tab__bookmarks-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.navigator-tab__bookmarks-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-sm 0;
+}
+
+.navigator-tab__bookmark-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: $color-bg-tertiary;
+  }
+}
+
+.navigator-tab__bookmark-star {
+  color: $color-accent-amber;
+  flex-shrink: 0;
+}
+
+.navigator-tab__bookmark-pin {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.navigator-tab__bookmark-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.navigator-tab__bookmark-name {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navigator-tab__bookmark-group {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.navigator-tab__bookmark-group-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+}
+
+.navigator-tab__bookmark-load {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  background: $color-bg-tertiary;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-bg-secondary;
+    color: $color-text-secondary;
+  }
+
+  [data-vr="true"] & {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.navigator-tab__bookmark-create {
+  flex-shrink: 0;
+  padding: $spacing-md;
+  display: flex;
+  justify-content: center;
+  background: $color-bg-secondary;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__bookmark-create-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $radius-md;
+  background: $color-accent-teal;
+  color: $color-bg-primary;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: color.adjust($color-accent-teal, $lightness: -5%);
+  }
+}
+
+// ============================================================================
+// EMPTY STATE
+// ============================================================================
+
+.navigator-tab__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-3xl;
+  color: $color-text-muted;
+  text-align: center;
+
+  svg {
+    margin-bottom: $spacing-sm;
+    opacity: 0.5;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
+
+// ============================================================================
+// FOOTER (Contextual)
+// ============================================================================
+
+.navigator-tab__group-footer,
+.navigator-tab__view-footer {
+  padding: $spacing-md;
+  background: $color-bg-secondary;
+  border-top: 1px solid $color-border-subtle;
+}
+
+// Group Footer
+.navigator-tab__group-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.navigator-tab__group-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.navigator-tab__group-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.navigator-tab__group-count {
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+}
+
+.navigator-tab__group-views {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-sm;
+}
+
+.navigator-tab__group-view-chip {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-bg-primary;
+    color: $color-text-secondary;
+  }
+}
+
+.navigator-tab__group-view-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.navigator-tab__focus-group-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $radius-md;
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+// View Footer
+.navigator-tab__view-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.navigator-tab__view-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.navigator-tab__view-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.navigator-tab__view-type {
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+}
+
+.navigator-tab__view-position {
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+  font-size: var(--font-size-xs);
+  font-family: $font-family-mono;
+}
+
+.navigator-tab__view-hint {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-sm;
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.6;
+  }
+}
+
+// ============================================================================
+// SEARCH BAR (Views Tab)
+// ============================================================================
+
+.navigator-tab__search-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+
+  .navigator-tab__search-input {
+    flex: 1;
+  }
+}
+
+// ============================================================================
+// GROUP TOGGLE (Views Tab)
+// ============================================================================
+
+.navigator-tab__group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-xs $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+  background: $color-bg-secondary;
+}
+
+.navigator-tab__group-toggle-label {
+  font-size: var(--font-size-xs);
+  color: $color-text-muted;
+  font-weight: 500;
+}
+
+.navigator-tab__group-toggle-btns {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+}
+
+.navigator-tab__group-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(.navigator-tab__group-toggle-btn--active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: color-mix(in srgb, $color-accent-teal 20%, transparent);
+    color: $color-accent-teal;
+  }
+}
+
+// ============================================================================
+// DATASET GROUP (Views Tab - Dataset grouping mode)
+// ============================================================================
+
+.navigator-tab__dataset-group {
+  &:not(:first-child) {
+    margin-top: $spacing-sm;
+  }
+}
+
+// ============================================================================
+// SECTION NAVIGATION BAR (Views Tab)
+// ============================================================================
+
+.navigator-tab__section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.navigator-tab__section-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  background: $color-bg-secondary;
+  color: $color-text-muted;
+  font-size: 9px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-bg-primary;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+
+  // Color variants
+  &[data-color="green"] {
+    .navigator-tab__section-nav-dot {
+      background: $color-accent-green;
+    }
+
+    &:hover {
+      border-color: color-mix(in srgb, $color-accent-green 50%, transparent);
+      color: $color-accent-green;
+    }
+  }
+
+  &[data-color="gray"] {
+    .navigator-tab__section-nav-dot {
+      background: $color-text-muted;
+    }
+  }
+
+  &[data-color="red"] {
+    .navigator-tab__section-nav-dot {
+      background: $color-accent-red;
+    }
+
+    &:hover {
+      border-color: color-mix(in srgb, $color-accent-red 50%, transparent);
+      color: $color-accent-red;
+    }
+  }
+
+  &[data-color="teal"] {
+    .navigator-tab__section-nav-dot {
+      background: $color-accent-teal;
+    }
+
+    &:hover {
+      border-color: color-mix(in srgb, $color-accent-teal 50%, transparent);
+      color: $color-accent-teal;
+    }
+  }
+}
+
+.navigator-tab__section-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.navigator-tab__section-nav-count {
+  padding: 0 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  font-size: 8px;
+  font-weight: 600;
+}

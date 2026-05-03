@@ -1,0 +1,17 @@
+.
+./vtk-python
+./vtk-python/worker.py
+./vtk-python/requirements.txt
+./vtk-python/Dockerfile
+./workers.txt
+./server.txt
+./thumbnail-node
+./thumbnail-node/Dockerfile
+./thumbnail-node/worker.js
+./thumbnail-node/package-lock.json
+./thumbnail-node/package.json
+./vr-preprocessing
+./vr-preprocessing/worker.py
+./vr-preprocessing/requirements.txt
+./vr-preprocessing/Dockerfile
+./vr-preprocessing/README.md

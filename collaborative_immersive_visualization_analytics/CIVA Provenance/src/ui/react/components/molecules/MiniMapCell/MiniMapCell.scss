@@ -1,0 +1,149 @@
+// src/ui/react/components/molecules/MiniMapCell/MiniMapCell.scss
+// MiniMap cell molecule styles
+
+@use "theme" as *;
+
+.minimap-cell {
+    position: absolute;
+    border: 1px solid $color-border-subtle;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    overflow: hidden;
+
+    // ==========================================================================
+    // STATES
+    // ==========================================================================
+
+    &--empty {
+        background: rgba(255, 255, 255, 0.02);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: $color-border-default;
+        }
+    }
+
+    &--has-view {
+        &:hover {
+            transform: scale(1.05);
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &--selected {
+        border-color: $color-accent-sky;
+        box-shadow: 0 0 0 2px rgba($color-accent-sky, 0.3);
+        z-index: 2;
+
+        &:hover {
+            transform: none;
+        }
+    }
+
+    &--in-viewport {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    &--locked {
+        cursor: not-allowed;
+
+        .minimap-cell__fill {
+            opacity: 0.5;
+        }
+    }
+
+    // ==========================================================================
+    // FILL (view color)
+    // ==========================================================================
+
+    &__fill {
+        position: absolute;
+        inset: 0;
+        opacity: 0.7;
+        transition: opacity 0.1s ease;
+    }
+
+    &:hover &__fill {
+        opacity: 0.9;
+    }
+
+    // ==========================================================================
+    // LOCK INDICATOR
+    // ==========================================================================
+
+    &__lock {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 12px;
+        height: 12px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 2px;
+        color: $color-text-muted;
+    }
+
+    // ==========================================================================
+    // LABEL
+    // ==========================================================================
+
+    &__label {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8px;
+        font-weight: $font-weight-bold;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+    }
+
+    // ==========================================================================
+    // SELECTION INDICATOR
+    // ==========================================================================
+
+    &__selection {
+        position: absolute;
+        inset: -2px;
+        border: 2px solid $color-accent-sky;
+        border-radius: 4px;
+        pointer-events: none;
+        animation: pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+}
+
+// =============================================================================
+// VR MODE
+// =============================================================================
+
+.adaptive-vr {
+    .minimap-cell {
+        border-radius: 4px;
+
+        &__lock {
+            width: 16px;
+            height: 16px;
+            top: 4px;
+            right: 4px;
+        }
+
+        &__label {
+            font-size: 10px;
+        }
+    }
+}

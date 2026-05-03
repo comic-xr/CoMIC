@@ -1,0 +1,201 @@
+// src/ui/react/components/panels/FocusModeOverlay.scss
+// Styles for FocusModeOverlay component
+
+.focus-mode-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+
+  // Top bar
+  &__top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: auto;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__badge {
+    padding: 4px 10px;
+    background: var(--focus-badge-bg, #2d4a3e);
+    border: 1px solid var(--focus-badge-border, #4a7a5e);
+    border-radius: 4px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--focus-badge-text, #7cb899);
+  }
+
+  &__name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary, #fff);
+  }
+
+  &__count {
+    font-size: 0.875rem;
+    color: var(--text-muted, #888);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &--icon {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+      font-size: 1rem;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    &--exit {
+      background: var(--focus-btn-bg, #4a7a5e);
+      color: #fff;
+
+      &:hover {
+        background: var(--focus-btn-hover, #5a8a6e);
+      }
+    }
+  }
+
+  // Sidebar for attached content
+  &__sidebar {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 280px;
+    max-height: calc(100vh - 140px);
+    background: var(--sidebar-bg, rgba(30, 30, 46, 0.95));
+    border: 1px solid var(--border-color, #333);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    pointer-events: auto;
+  }
+
+  &__sidebar-header {
+    padding: 12px 16px;
+    background: var(--sidebar-header-bg, #252538);
+    border-bottom: 1px solid var(--border-color, #333);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary, #fff);
+  }
+
+  &__sidebar-content {
+    padding: 12px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+
+  &__attached-section {
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h4 {
+      margin: 0 0 8px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-secondary, #ccc);
+    }
+  }
+
+  &__attached-item {
+    padding: 8px 12px;
+    background: var(--item-bg, #2a2a3c);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-size: 0.8125rem;
+    color: var(--text-secondary, #ccc);
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: var(--item-hover, #3a3a4c);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Keyboard hint
+  &__hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    color: var(--text-muted, #888);
+    pointer-events: auto;
+
+    kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      margin: 0 2px;
+      background: var(--kbd-bg, #3b3b5c);
+      border: 1px solid var(--border-color, #444);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.75rem;
+      color: var(--text-primary, #fff);
+    }
+  }
+}
+
+// Fade in animation
+.focus-mode-overlay {
+  animation: focusFadeIn 0.3s ease-out;
+}
+
+@keyframes focusFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

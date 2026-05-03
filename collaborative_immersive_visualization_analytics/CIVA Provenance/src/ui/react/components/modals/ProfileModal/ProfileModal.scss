@@ -1,0 +1,256 @@
+/**
+ * @file ProfileModal.scss
+ * @description Styles for the ProfileModal component.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// PROFILE MODAL CONTAINER
+// =============================================================================
+
+.profile-modal {
+  margin: -16px; // Offset modal content padding
+}
+
+// =============================================================================
+// HEADER WITH AVATAR
+// =============================================================================
+
+.profile-modal__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(
+    180deg,
+    rgba($color-accent-blue, 0.1) 0%,
+    transparent 100%
+  );
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.profile-modal__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: $color-bg-tertiary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border: 3px solid $color-border-default;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__initials {
+    font-size: 26px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    user-select: none;
+  }
+}
+
+.profile-modal__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.profile-modal__status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &--online {
+    background: $color-success;
+    box-shadow: 0 0 0 2px rgba($color-success, 0.2);
+  }
+
+  &--away {
+    background: $color-warning;
+    box-shadow: 0 0 0 2px rgba($color-warning, 0.2);
+  }
+
+  &--busy {
+    background: $color-error;
+    box-shadow: 0 0 0 2px rgba($color-error, 0.2);
+  }
+
+  &--offline {
+    background: $color-text-muted;
+  }
+}
+
+.profile-modal__role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+
+  &--owner {
+    background: rgba($color-accent-amber, 0.15);
+    color: $color-accent-amber;
+  }
+
+  &--admin {
+    background: rgba($color-accent-purple, 0.15);
+    color: $color-accent-purple;
+  }
+
+  &--member {
+    background: rgba($color-accent-blue, 0.15);
+    color: $color-accent-blue;
+  }
+
+  &--viewer {
+    background: rgba($color-text-muted, 0.15);
+    color: $color-text-muted;
+  }
+}
+
+// =============================================================================
+// INFO SECTION
+// =============================================================================
+
+.profile-modal__info {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-modal__info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    color: $color-text-secondary;
+    flex-shrink: 0;
+  }
+
+  &__value {
+    color: $color-text-primary;
+    word-break: break-word;
+  }
+
+  &__action {
+    margin-left: auto;
+    padding: 6px 8px;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    &:hover {
+      background: $color-glass-light;
+      color: $color-text-primary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px $color-accent-blue;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// =============================================================================
+// QUICK ACTIONS
+// =============================================================================
+
+.profile-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 20px;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.profile-modal__action-btn {
+  flex: 1 1 auto;
+  min-width: 100px;
+}
+
+// =============================================================================
+// FOOTER
+// =============================================================================
+
+.profile-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  border-top: 1px solid $color-border-subtle;
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px rgba($color-success, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba($color-success, 0.1);
+  }
+}
+
+.profile-modal__status-dot--online {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+// =============================================================================
+// COPIED FEEDBACK
+// =============================================================================
+
+.profile-modal__info-row__action {
+  // Success state when copied
+  &[aria-label="Copied to clipboard"] {
+    color: $color-success;
+
+    &:hover {
+      color: $color-success;
+    }
+  }
+}

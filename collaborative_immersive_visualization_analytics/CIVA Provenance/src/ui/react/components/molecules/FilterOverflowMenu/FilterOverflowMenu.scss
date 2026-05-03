@@ -1,0 +1,116 @@
+/**
+ * FilterOverflowMenu styles
+ *
+ * Overflow menu for quick filters.
+ */
+
+@use "theme" as *;
+
+.filter-overflow-menu {
+  // =========================================================================
+  // TRIGGER BUTTON
+  // =========================================================================
+
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    font-family: inherit;
+    font-weight: 500;
+
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: $color-hover-bg;
+      border-color: $color-border-default;
+    }
+
+    &--open {
+      background: $color-hover-bg;
+      border-color: $color-border-default;
+    }
+
+    &--has-active {
+      border-color: $color-accent-blue;
+      color: $color-accent-blue;
+    }
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 14px;
+    padding: 0 4px;
+
+    background: $color-accent-blue;
+    border-radius: 8px;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: #fff;
+    line-height: 14px;
+  }
+
+  // =========================================================================
+  // PANEL
+  // =========================================================================
+
+  &__panel {
+    min-width: 200px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+    overflow: hidden;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid $color-border-subtle;
+
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+  }
+
+  // =========================================================================
+  // VR MODE
+  // =========================================================================
+
+  &--vr {
+    .filter-overflow-menu__trigger {
+      min-height: 44px;
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+    }
+
+    .filter-overflow-menu__panel {
+      min-width: 240px;
+    }
+  }
+}

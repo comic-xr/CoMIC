@@ -1,0 +1,204 @@
+/**
+ * @file TabbedCanvasView.scss
+ * @description Styles for TabbedCanvasView and related components
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// TABBED CANVAS VIEW
+// =============================================================================
+
+.tabbed-canvas-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: $color-bg-primary;
+    min-height: 0;
+
+    &--empty {
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.tabbed-canvas-view__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    color: $color-text-muted;
+}
+
+.tabbed-canvas-view__empty-icon {
+    opacity: 0.3;
+}
+
+.tabbed-canvas-view__empty-text {
+    font-size: $font-size-sm;
+}
+
+.tabbed-canvas-view__content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+}
+
+.tabbed-canvas-view__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-lg;
+    text-align: center;
+    color: $color-text-muted;
+}
+
+.tabbed-canvas-view__placeholder-icon {
+    opacity: 0.2;
+}
+
+.tabbed-canvas-view__placeholder-name {
+    font-size: $font-size-md;
+}
+
+// =============================================================================
+// FULL CANVAS HEADER
+// =============================================================================
+
+.full-canvas-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-sm $spacing-lg;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+    min-height: 48px;
+}
+
+.full-canvas-header__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex: 1;
+    min-width: 0;
+}
+
+.full-canvas-header__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.full-canvas-header__type-icon {
+    flex-shrink: 0;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+}
+
+.full-canvas-header__unsaved-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-accent-amber;
+    flex-shrink: 0;
+}
+
+.full-canvas-header__name {
+    font-size: $font-size-md;
+    font-weight: 500;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// =============================================================================
+// BREAKOUT CONTROLS
+// =============================================================================
+
+.full-canvas-header__breakout {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-left: $spacing-sm;
+    padding: 4px 10px;
+    border-radius: $radius-md;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    transition: all 0.15s ease;
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-green 15%, transparent);
+        border-color: color-mix(in srgb, $color-accent-green 40%, transparent);
+    }
+}
+
+.full-canvas-header__breakout-icon {
+    color: $color-accent-green;
+}
+
+.full-canvas-header__breakout-label {
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+
+    .full-canvas-header__breakout--active & {
+        color: $color-accent-green;
+    }
+}
+
+.full-canvas-header__breakout-btn {
+    padding: 2px 8px;
+    border-radius: $radius-sm;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+
+    &--join {
+        background: color-mix(in srgb, $color-accent-green 20%, transparent);
+        color: $color-accent-green;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-green 30%, transparent);
+        }
+    }
+
+    &--leave {
+        background: color-mix(in srgb, $color-accent-red 20%, transparent);
+        color: $color-accent-red;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-red 30%, transparent);
+        }
+    }
+}
+
+// =============================================================================
+// HEADER ACTIONS
+// =============================================================================
+
+.full-canvas-header__separator {
+    width: 1px;
+    height: 20px;
+    background: $color-border-subtle;
+    margin: 0 $spacing-sm;
+}
+
+.full-canvas-header__close {
+    &:hover {
+        color: $color-accent-red;
+    }
+}

@@ -1,0 +1,1242 @@
+// DatasetsTab.scss
+// Styles for the simplified Datasets tab (tree view only)
+// Location: src/ui/react/components/panels/LeftPanel/tabs/DatasetsTab/DatasetsTab.scss
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.datasets-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// =============================================================================
+// SEARCH
+// =============================================================================
+
+.datasets-tab__search-row {
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.datasets-tab__search {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &:focus-within {
+    border-color: $color-accent-primary;
+  }
+}
+
+.datasets-tab__search-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.datasets-tab__search-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 11px;
+  color: $color-text-primary;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+}
+
+.datasets-tab__search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  border-radius: $radius-xs;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// FILTERS
+// =============================================================================
+
+.datasets-tab__filters {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-xs $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.datasets-tab__content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: $spacing-sm;
+}
+
+.datasets-tab__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+// =============================================================================
+// EMPTY STATE
+// =============================================================================
+
+.datasets-tab__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.4;
+    margin-bottom: $spacing-md;
+  }
+
+  h3 {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    font-size: $font-size-xs;
+  }
+}
+
+// =============================================================================
+// DATASET PARENT - Hybrid 2 Design (Compact)
+// =============================================================================
+
+.dataset-parent {
+  margin-bottom: $spacing-xs;
+
+  &--hovered {
+    .dataset-parent__card {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+.dataset-parent__card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+// -----------------------------------------------------------------------------
+// Header Row
+// -----------------------------------------------------------------------------
+
+.dataset-parent__header {
+  display: flex;
+}
+
+.dataset-parent__header-content {
+  flex: 1;
+  padding: $spacing-sm;
+  cursor: pointer;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+// Chevron (centered vertically, rotates on collapse)
+.dataset-parent__chevron {
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  transition: transform 0.15s ease;
+  transform: rotate(-90deg);
+
+  &--expanded {
+    transform: rotate(0deg);
+  }
+}
+
+// Type icon with colored background
+.dataset-parent__type-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--type-color);
+
+  // Fallback for browsers that don't support color-mix with CSS variables
+  background: rgba(255, 255, 255, 0.1);
+
+  @supports (
+    background: color-mix(in srgb, var(--type-color) 20%, transparent)
+  ) {
+    background: color-mix(in srgb, var(--type-color) 20%, transparent);
+  }
+}
+
+// Content area (name + meta)
+.dataset-parent__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dataset-parent__info-name {
+  display: block;
+  font-size: 11px;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.dataset-parent__info-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: 9px;
+  color: $color-text-muted;
+}
+
+// Handler badge
+.dataset-parent__handler-badge {
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  font-weight: $font-weight-medium;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--type-color, $color-text-muted);
+
+  @supports (
+    background: color-mix(in srgb, var(--type-color) 20%, transparent)
+  ) {
+    background: color-mix(in srgb, var(--type-color) 20%, transparent);
+  }
+}
+
+.dataset-parent__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  svg {
+    opacity: 0.7;
+  }
+}
+
+// Stacked stats container (view count + memory)
+.dataset-parent__stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 44px;
+}
+
+// View count badge (now horizontal with icon)
+.dataset-parent__view-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.05);
+  width: 100%;
+
+  &--has-active {
+    background: rgba($color-accent-green, 0.1);
+
+    .dataset-parent__view-count-icon {
+      color: $color-accent-green;
+    }
+
+    .dataset-parent__view-count-number {
+      color: $color-accent-green;
+    }
+  }
+}
+
+.dataset-parent__view-count-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+// Memory indicator (below view count)
+.dataset-parent__memory-indicator {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.dataset-parent__memory-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--type-color, #{$color-accent-blue});
+  transition: width 0.3s ease;
+}
+
+.dataset-parent__view-count-number {
+  font-size: 11px;
+  font-weight: $font-weight-bold;
+  color: $color-text-tertiary;
+  line-height: 1;
+}
+
+.dataset-parent__view-count-total {
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+// -----------------------------------------------------------------------------
+// Vertical Action Buttons (Right Edge)
+// -----------------------------------------------------------------------------
+
+.dataset-parent__actions {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+  width: 24px;
+}
+
+.dataset-parent__actions-btn {
+  flex: 1;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  // Create button - highlight green on card hover
+  &--create {
+    .dataset-parent--hovered & {
+      background: rgba($color-accent-green, 0.15);
+      color: $color-accent-green;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Expanded Content / Children
+// -----------------------------------------------------------------------------
+
+.dataset-parent__expanded,
+.dataset-parent__children {
+  padding: $spacing-xs $spacing-sm $spacing-sm;
+  background: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-left: 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.08);
+  margin-left: $spacing-md;
+}
+
+// -----------------------------------------------------------------------------
+// Views Container (uses ViewItem component)
+// -----------------------------------------------------------------------------
+
+.dataset-parent__views {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+// -----------------------------------------------------------------------------
+// Empty State
+// -----------------------------------------------------------------------------
+
+.dataset-parent__empty {
+  padding: $spacing-md;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+
+  svg {
+    opacity: 0.3;
+  }
+}
+
+.dataset-parent__empty-action {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: $radius-xs;
+  background: transparent;
+  color: $color-accent-teal;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($color-accent-teal, 0.1);
+    border-color: $color-accent-teal;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Footer Actions
+// -----------------------------------------------------------------------------
+
+.dataset-parent__footer {
+  display: flex;
+  gap: $spacing-xs;
+  margin-top: $spacing-xs;
+  padding-top: $spacing-xs;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dataset-parent__footer-btn {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-xs;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+
+  &--primary {
+    flex: 1;
+    background: rgba($color-accent-green, 0.1);
+    border: 1px solid rgba($color-accent-green, 0.3);
+    color: $color-accent-green;
+
+    &:hover {
+      background: rgba($color-accent-green, 0.2);
+      border-color: rgba($color-accent-green, 0.5);
+    }
+  }
+
+  &--secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: $color-text-secondary;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Context Menu
+// -----------------------------------------------------------------------------
+
+.dataset-parent__menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+}
+
+.dataset-parent__menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 100;
+  min-width: 160px;
+  padding: $spacing-xs;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  margin-top: 2px;
+}
+
+.dataset-parent__menu-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  border-radius: $radius-xs;
+  font-size: 11px;
+  color: $color-text-secondary;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-primary;
+  }
+
+  &--danger {
+    color: $color-accent-red;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.15);
+      color: $color-accent-red;
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.dataset-parent__menu-divider {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs 0;
+}
+
+// -----------------------------------------------------------------------------
+// Dragging State
+// -----------------------------------------------------------------------------
+
+.dataset-parent--dragging {
+  opacity: 0.6;
+
+  .dataset-parent__card {
+    border-color: $color-accent-primary;
+    box-shadow: 0 0 0 2px rgba($color-accent-primary, 0.3);
+  }
+}
+
+// Make the card position relative for menu positioning
+.dataset-parent__card {
+  position: relative;
+}
+
+// =============================================================================
+// FILE ICON COLORS
+// =============================================================================
+
+.file-icon--vtk {
+  color: $color-accent-blue;
+}
+.file-icon--nifti {
+  color: $color-accent-purple;
+}
+.file-icon--dicom {
+  color: $color-accent-green;
+}
+.file-icon--csv {
+  color: $color-accent-amber;
+}
+.file-icon--default {
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// DATASETS TAB V2 STYLES
+// =============================================================================
+
+.datasets-tab--v2 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// -----------------------------------------------------------------------------
+// Memory Badge (in header)
+// -----------------------------------------------------------------------------
+
+.datasets-tab__memory-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: $radius-sm;
+  background: color-mix(in srgb, var(--color, #{$color-accent-green}) 15%, transparent);
+  color: var(--color, #{$color-accent-green});
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+}
+
+// -----------------------------------------------------------------------------
+// Tab Bar - Matches InstanceToolsTab pattern
+// -----------------------------------------------------------------------------
+
+.datasets-tab__tabs {
+  display: flex;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+}
+
+.datasets-tab__tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: $color-text-muted;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(&--active) {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba(var(--tab-color-rgb), 0.04);
+    border-bottom-color: var(--tab-color);
+    color: var(--tab-color);
+
+    &[data-color="teal"] {
+      --tab-color: #{$color-accent-teal};
+      --tab-color-rgb: 20, 184, 166;
+    }
+
+    &[data-color="purple"] {
+      --tab-color: #{$color-accent-purple};
+      --tab-color-rgb: 168, 85, 247;
+    }
+
+    &[data-color="amber"] {
+      --tab-color: #{$color-accent-amber};
+      --tab-color-rgb: 251, 191, 36;
+    }
+  }
+}
+
+.datasets-tab__tab-badge {
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: $color-accent-purple;
+  color: white;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+}
+
+// -----------------------------------------------------------------------------
+// Subtab Container
+// -----------------------------------------------------------------------------
+
+.datasets-tab__subtab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// -----------------------------------------------------------------------------
+// Toolbar (Search + Sort/Filters)
+// -----------------------------------------------------------------------------
+
+.datasets-tab__toolbar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+
+  .search-input {
+    flex: 1;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// List Container
+// -----------------------------------------------------------------------------
+
+.datasets-tab__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-sm;
+
+  &--templates {
+    padding: $spacing-md;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Dataset Item (V2)
+// -----------------------------------------------------------------------------
+
+.datasets-tab__item {
+  margin-bottom: 2px;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  &--expanded {
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-subtle;
+  }
+}
+
+.datasets-tab__item-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: $color-glass-light;
+  }
+}
+
+.datasets-tab__item-chevron {
+  color: $color-text-muted;
+  transition: transform 0.15s ease;
+
+  &--expanded {
+    transform: rotate(90deg);
+  }
+}
+
+.datasets-tab__item-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--type-color, #{$color-text-muted});
+  background: color-mix(in srgb, var(--type-color, #{$color-bg-tertiary}) 20%, transparent);
+}
+
+.datasets-tab__item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.datasets-tab__item-name {
+  display: block;
+  font-size: 12px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.datasets-tab__item-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: 10px;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.datasets-tab__item-meta-dot {
+  opacity: 0.5;
+}
+
+.datasets-tab__item-type {
+  font-weight: $font-weight-medium;
+}
+
+.datasets-tab__item-views {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: $radius-xs;
+  background: $color-bg-tertiary;
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+.datasets-tab__item-memory {
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  background: $color-bg-tertiary;
+  overflow: hidden;
+}
+
+.datasets-tab__item-memory-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.datasets-tab__item-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.datasets-tab__item-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: $radius-xs;
+  background: transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+.datasets-tab__item-children {
+  padding: $spacing-xs $spacing-sm $spacing-sm;
+  border-top: 1px solid $color-border-subtle;
+  margin-left: 28px;
+}
+
+.datasets-tab__item-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  color: $color-text-muted;
+  font-size: 11px;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px dashed $color-border-subtle;
+    border-radius: $radius-xs;
+    background: transparent;
+    color: $color-accent-teal;
+    font-size: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: color-mix(in srgb, $color-accent-teal 10%, transparent);
+      border-color: $color-accent-teal;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Empty State
+// -----------------------------------------------------------------------------
+
+.datasets-tab__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.3;
+    margin-bottom: $spacing-md;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  p {
+    font-size: $font-size-xs;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Memory Section
+// -----------------------------------------------------------------------------
+
+.datasets-tab__memory {
+  padding: $spacing-md;
+  background: $color-bg-secondary;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.datasets-tab__memory-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.datasets-tab__memory-label {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.datasets-tab__memory-value {
+  margin-left: auto;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+.datasets-tab__memory-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: $color-bg-tertiary;
+  overflow: hidden;
+}
+
+.datasets-tab__memory-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.datasets-tab__memory-warning {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-sm;
+  font-size: $font-size-xs;
+}
+
+// -----------------------------------------------------------------------------
+// Derived Item
+// -----------------------------------------------------------------------------
+
+.datasets-tab__derived-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  border-radius: $radius-sm;
+  margin-bottom: 2px;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: $color-glass-light;
+  }
+
+  &--failed {
+    background: color-mix(in srgb, $color-accent-red 8%, transparent);
+  }
+}
+
+.datasets-tab__derived-status {
+  flex-shrink: 0;
+  margin-top: 2px;
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+.datasets-tab__derived-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.datasets-tab__derived-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.datasets-tab__derived-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.datasets-tab__derived-meta-dot {
+  opacity: 0.5;
+}
+
+.datasets-tab__derived-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: $color-bg-tertiary;
+  margin-top: $spacing-sm;
+  overflow: hidden;
+}
+
+.datasets-tab__derived-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: $color-accent-purple;
+  transition: width 0.3s ease;
+}
+
+.datasets-tab__derived-error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-xs;
+  padding: $spacing-xs;
+  border-radius: $radius-xs;
+  background: color-mix(in srgb, $color-accent-red 10%, transparent);
+  font-size: $font-size-xs;
+  color: $color-accent-red;
+}
+
+.datasets-tab__derived-size {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.datasets-tab__derived-retry {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, $color-accent-red 50%, transparent);
+  border-radius: $radius-xs;
+  background: transparent;
+  color: $color-accent-red;
+  font-size: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: color-mix(in srgb, $color-accent-red 10%, transparent);
+  }
+}
+
+.datasets-tab__derived-cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: $radius-xs;
+  background: transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+// Processing banner
+.datasets-tab__processing-banner {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: color-mix(in srgb, $color-accent-purple 10%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, $color-accent-purple 30%, transparent);
+  color: $color-accent-purple;
+  font-size: $font-size-sm;
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Template Item
+// -----------------------------------------------------------------------------
+
+.datasets-tab__template-item {
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-subtle;
+  background: $color-bg-secondary;
+  margin-bottom: $spacing-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: $color-border-default;
+  }
+
+  &--selected {
+    border-color: $color-accent-teal;
+    background: color-mix(in srgb, $color-accent-teal 10%, transparent);
+  }
+}
+
+.datasets-tab__template-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.datasets-tab__template-star {
+  color: $color-accent-amber;
+}
+
+.datasets-tab__template-name {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.datasets-tab__template-badge {
+  padding: 2px 6px;
+  border-radius: $radius-xs;
+  background: color-mix(in srgb, $color-accent-cyan 20%, transparent);
+  color: $color-accent-cyan;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.datasets-tab__template-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  margin-top: $spacing-xs;
+}
+
+.datasets-tab__template-meta-dot {
+  opacity: 0.5;
+}
+
+.datasets-tab__template-actions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.datasets-tab__template-apply {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  border: none;
+  border-radius: $radius-sm;
+  background: $color-accent-teal;
+  color: white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  min-height: 36px;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+.datasets-tab__template-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+.datasets-tab__template-footer {
+  padding: $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+  background: $color-bg-secondary;
+}
+
+.datasets-tab__save-template {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  width: 100%;
+  padding: $spacing-sm;
+  border: 1px dashed $color-border-default;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  min-height: 40px;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-accent-teal;
+    color: $color-accent-teal;
+  }
+}
+
+// Animation
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

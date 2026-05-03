@@ -1,0 +1,235 @@
+/**
+ * CollapsibleHeaderSection Styles
+ *
+ * Adaptive styling for collapsible sections with color variants.
+ */
+@use "theme" as *;
+
+.collapsible-header-section {
+  border-radius: $radius-lg;
+  border: 1px solid transparent;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  // ==========================================================================
+  // MODE: DESKTOP
+  // ==========================================================================
+  &--desktop {
+    .collapsible-header-section__header {
+      min-height: 32px;
+      padding: $spacing-sm $spacing-md;
+      gap: $spacing-sm;
+    }
+
+    .collapsible-header-section__title {
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
+
+    .collapsible-header-section__content {
+      padding: $spacing-md;
+    }
+  }
+
+  // ==========================================================================
+  // MODE: VR - Larger touch targets, more spacing
+  // ==========================================================================
+  &--vr {
+    border-radius: $radius-xl;
+
+    .collapsible-header-section__header {
+      min-height: 56px;
+      padding: $spacing-lg $spacing-xl;
+      gap: $spacing-md;
+    }
+
+    .collapsible-header-section__title {
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .collapsible-header-section__content {
+      padding: $spacing-lg;
+    }
+  }
+
+  // ==========================================================================
+  // COLOR VARIANTS (apply to both modes)
+  // ==========================================================================
+  &[data-color="green"][data-expanded="true"] {
+    background: rgba($color-accent-green, 0.06);
+    border-color: rgba($color-accent-green, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-green, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-green;
+    }
+  }
+
+  &[data-color="purple"][data-expanded="true"] {
+    background: rgba($color-accent-purple, 0.06);
+    border-color: rgba($color-accent-purple, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-purple, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-purple;
+    }
+  }
+
+  &[data-color="amber"][data-expanded="true"] {
+    background: rgba($color-accent-amber, 0.06);
+    border-color: rgba($color-accent-amber, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-amber, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-amber;
+    }
+  }
+
+  &[data-color="red"][data-expanded="true"] {
+    background: rgba($color-accent-red, 0.06);
+    border-color: rgba($color-accent-red, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-red, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-red;
+    }
+  }
+
+  &[data-color="blue"][data-expanded="true"] {
+    background: rgba($color-accent-blue, 0.06);
+    border-color: rgba($color-accent-blue, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-blue, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-blue;
+    }
+  }
+
+  &[data-color="pink"][data-expanded="true"] {
+    background: rgba($color-accent-pink, 0.06);
+    border-color: rgba($color-accent-pink, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-pink, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-pink;
+    }
+  }
+
+  &[data-color="teal"][data-expanded="true"] {
+    background: rgba($color-accent-teal, 0.06);
+    border-color: rgba($color-accent-teal, 0.15);
+
+    .collapsible-header-section__header {
+      border-bottom-color: rgba($color-accent-teal, 0.15);
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-accent-teal;
+    }
+  }
+
+  &[data-color="default"][data-expanded="true"] {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: $color-border-subtle;
+
+    .collapsible-header-section__header {
+      border-bottom-color: $color-border-subtle;
+    }
+
+    .collapsible-header-section__icon {
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// Header button
+.collapsible-header-section__header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-bottom: 1px solid $color-border-subtle;
+  cursor: pointer;
+  user-select: none;
+  color: inherit;
+  transition: background 0.15s ease;
+
+  [data-expanded="true"] & {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      transparent 100%
+    );
+  }
+
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: -2px;
+  }
+}
+
+.collapsible-header-section__chevron {
+  display: flex;
+  color: $color-text-muted;
+  transition: transform 0.15s ease;
+
+  [data-expanded="false"] & {
+    transform: rotate(-90deg);
+  }
+}
+
+.collapsible-header-section__icon {
+  color: $color-text-secondary;
+  flex-shrink: 0;
+}
+
+.collapsible-header-section__title {
+  flex: 1;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+  text-align: left;
+}
+
+.collapsible-header-section__actions {
+  display: flex;
+  gap: var(--gap, 8px);
+}
+
+.collapsible-header-section__content {
+  // Padding set by mode variant
+}

@@ -1,0 +1,129 @@
+// src/ui/react/components/atoms/Badge/Badge.scss
+// Badge atom styles
+
+@use "theme" as *;
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 999px;
+    line-height: 1;
+
+    // Default color uses custom property or fallback
+    --badge-color: #{$color-text-muted};
+    background: var(--badge-color);
+    color: white;
+
+    // Size variants
+    &--sm {
+        min-width: 16px;
+        height: 16px;
+        font-size: 10px;
+        padding: 0 4px;
+    }
+
+    &--md {
+        min-width: 20px;
+        height: 20px;
+        font-size: 11px;
+        padding: 0 6px;
+    }
+
+    // VR mode - larger for visibility
+    &--vr {
+        &.badge--sm {
+            min-width: 20px;
+            height: 20px;
+            font-size: 11px;
+            padding: 0 6px;
+        }
+
+        &.badge--md {
+            min-width: 24px;
+            height: 24px;
+            font-size: 12px;
+            padding: 0 8px;
+        }
+    }
+
+    // Variant styles
+    &--filled {
+        // Default - uses background color
+    }
+
+    &--outline {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px var(--badge-color);
+        color: var(--badge-color);
+    }
+
+    // Preset colors
+    &--color-default {
+        --badge-color: #{$color-text-muted};
+    }
+
+    &--color-primary {
+        --badge-color: #{$color-accent-blue};
+    }
+
+    &--color-danger {
+        --badge-color: #{$color-accent-red};
+    }
+
+    &--color-success {
+        --badge-color: #{$color-accent-green};
+    }
+
+    &--color-warning {
+        --badge-color: #{$color-accent-amber};
+    }
+
+    // Dot mode - no content, just a small circle
+    &--dot {
+        min-width: 0;
+        padding: 0;
+
+        &.badge--sm {
+            width: 8px;
+            height: 8px;
+        }
+
+        &.badge--md {
+            width: 10px;
+            height: 10px;
+        }
+
+        &.badge--vr {
+            &.badge--sm {
+                width: 10px;
+                height: 10px;
+            }
+
+            &.badge--md {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
+
+    // Pulse animation
+    &--pulse {
+        animation: badge-pulse 2s ease-in-out infinite;
+    }
+}
+
+@keyframes badge-pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}

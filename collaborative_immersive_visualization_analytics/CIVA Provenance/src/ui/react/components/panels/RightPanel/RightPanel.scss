@@ -1,0 +1,2177 @@
+// src/ui/react/components/panels/RightPanel/RightPanel.scss
+// Styles for the unified right panel with activity bar
+// Mirrors LeftPanel styling with activity bar on the right side
+
+@use "theme" as *;
+
+// =============================================================================
+// PANEL CONTAINER
+// =============================================================================
+
+.right-panel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: $color-bg-base;
+  overflow: hidden;
+}
+
+// =============================================================================
+// ACTIVITY BAR - Styles are in RightActivityBar.scss (mirrors LeftPanel pattern)
+// =============================================================================
+
+// =============================================================================
+// CONTENT PANEL - Fills remaining space
+// =============================================================================
+
+.right-panel__content {
+  position: relative; // For absolute positioned action buttons
+  flex: 1;
+  min-width: 0;
+  min-height: 0; // Critical for flex children to shrink properly
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-glass-panel;
+  backdrop-filter: $blur-strong saturate(200%);
+  overflow: hidden;
+  order: 1; // Places it before activity bar
+  // Colored indicator moved to activity bar
+
+  // Ensure ResizableSections container fills available space
+  > .resizable-sections-container,
+  > * > .resizable-sections-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// =============================================================================
+// PLACEHOLDER CONTENT
+// =============================================================================
+
+.right-panel__placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-muted;
+}
+
+.right-panel__placeholder-icon {
+  margin-bottom: $spacing-md;
+  opacity: 0.5;
+}
+
+.right-panel__placeholder-title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.right-panel__placeholder-text {
+  font-size: $font-size-xs;
+  line-height: $line-height-normal;
+  max-width: 200px;
+}
+
+// Placeholder icon color variants
+.right-panel__placeholder-icon {
+  &[data-color="blue"] {
+    color: $color-accent-blue;
+  }
+  &[data-color="teal"] {
+    color: $color-accent-teal;
+  }
+  &[data-color="green"] {
+    color: $color-accent-green;
+  }
+  &[data-color="pink"] {
+    color: $color-accent-pink;
+  }
+  &[data-color="amber"] {
+    color: $color-accent-amber;
+  }
+  &[data-color="indigo"] {
+    color: $color-accent-indigo;
+  }
+  &[data-color="purple"] {
+    color: $color-accent-purple;
+  }
+  &[data-color="red"] {
+    color: $color-accent-red;
+  }
+  &[data-color="cyan"] {
+    color: $color-accent-cyan;
+  }
+  &[data-color="gray"] {
+    color: rgba(150, 160, 180, 0.8);
+  }
+}
+
+// =============================================================================
+// SHARED PANEL HEADER (mirrors LeftPanel.scss panel-header)
+// =============================================================================
+
+.panel-header {
+  @include etched-bar;
+  padding: $spacing-xs $spacing-sm;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+  min-height: 28px;
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-secondary;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__count {
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: $radius-xs;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  // Color modifiers for icon coloring
+  &--blue .panel-header__icon {
+    color: $color-accent-blue;
+  }
+  &--teal .panel-header__icon {
+    color: $color-accent-teal;
+  }
+  &--green .panel-header__icon {
+    color: $color-accent-green;
+  }
+  &--purple .panel-header__icon {
+    color: $color-accent-purple;
+  }
+  &--pink .panel-header__icon {
+    color: $color-accent-pink;
+  }
+  &--amber .panel-header__icon {
+    color: $color-accent-amber;
+  }
+  &--indigo .panel-header__icon {
+    color: $color-accent-indigo;
+  }
+  &--cyan .panel-header__icon {
+    color: $color-accent-cyan;
+  }
+  &--red .panel-header__icon {
+    color: $color-accent-red;
+  }
+  &--gray .panel-header__icon {
+    color: rgba(150, 160, 180, 0.8);
+  }
+}
+
+// =============================================================================
+// PEOPLE TAB STYLES
+// =============================================================================
+
+.people-tab {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+// Voice Status Bar
+.voice-status-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid $color-border-default;
+
+  &--connected {
+    background: rgba($color-accent-green, 0.08);
+  }
+
+  &__icon {
+    color: $color-text-muted;
+
+    .voice-status-bar--connected & {
+      color: $color-accent-green;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-secondary;
+  }
+
+  &__btn {
+    padding: 4px 8px;
+    border-radius: $radius-xs;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    transition: all $transition-fast;
+
+    &--active {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+    }
+
+    &--disconnect {
+      &:hover {
+        background: rgba($color-accent-red, 0.15);
+        border-color: rgba($color-accent-red, 0.4);
+        color: $color-accent-red;
+      }
+    }
+  }
+}
+
+// Member Avatar
+.member-avatar {
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--member-color-rgb), 0.4) 0%,
+    rgba(var(--member-color-rgb), 0.2) 100%
+  );
+  border: 2px solid var(--member-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--member-color);
+  position: relative;
+  flex-shrink: 0;
+
+  &__status {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    border-radius: 50%;
+    border: 2px solid $color-bg-primary;
+
+    &--green {
+      background: $color-accent-green;
+      box-shadow: 0 0 6px $color-accent-green;
+    }
+
+    &--amber {
+      background: $color-accent-amber;
+    }
+
+    &--purple {
+      background: $color-accent-purple;
+      box-shadow: 0 0 6px $color-accent-purple;
+    }
+
+    &--red {
+      background: $color-accent-red;
+      box-shadow: 0 0 6px $color-accent-red;
+    }
+
+    &--muted {
+      background: $color-text-muted;
+    }
+  }
+}
+
+// Member Row
+.member-row {
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: 4px;
+  border-radius: $radius-md;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &--selected {
+    background: rgba(var(--member-color-rgb), 0.1);
+    border-color: rgba(var(--member-color-rgb), 0.3);
+    flex-wrap: wrap;
+  }
+
+  &--me {
+    background: rgba($color-accent-green, 0.05);
+    border-color: rgba($color-accent-green, 0.15);
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__name {
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+
+    .member-row--me & {
+      color: $color-accent-green;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__you-badge {
+    font-size: 8px;
+    background: rgba($color-accent-green, 0.2);
+    color: $color-accent-green;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__indicators {
+    display: flex;
+    gap: 4px;
+    color: $color-text-muted;
+  }
+
+  &__actions {
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $color-border-default;
+  }
+
+  &__action-btn {
+    flex: 1;
+    padding: 6px;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all $transition-fast;
+
+    &[data-color="blue"]:hover {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+
+    &[data-color="purple"]:hover {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+    }
+
+    &[data-color="teal"]:hover {
+      background: rgba($color-accent-teal, 0.15);
+      border-color: rgba($color-accent-teal, 0.4);
+      color: $color-accent-teal;
+    }
+  }
+}
+
+// Workspace Group
+.workspace-group {
+  margin-bottom: $spacing-md;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-sm;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    color: $color-text-secondary;
+
+    &--expanded {
+      background: rgba(var(--workspace-color-rgb), 0.08);
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    svg:first-child {
+      color: $color-text-muted;
+    }
+
+    svg:nth-child(2) {
+      color: var(--workspace-color);
+    }
+  }
+
+  &__label {
+    flex: 1;
+    font-size: 11px;
+    font-weight: $font-weight-medium;
+  }
+
+  &__count {
+    font-size: 10px;
+    color: $color-text-muted;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: $radius-xs;
+  }
+
+  &__members {
+    padding-left: $spacing-sm;
+    margin-top: 4px;
+  }
+}
+
+// Online badge in header
+.panel-header__online-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 10px;
+  color: $color-accent-green;
+}
+
+.panel-header__online-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-accent-green;
+  box-shadow: 0 0 6px $color-accent-green;
+}
+
+// =============================================================================
+// NOTES TAB STYLES
+// =============================================================================
+
+.notes-tab {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+// Note Card
+.note-card {
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+  border-radius: $radius-md;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid $color-border-default;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &--selected {
+    background: rgba($color-accent-teal, 0.1);
+    border-color: rgba($color-accent-teal, 0.3);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  &__title {
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__badges {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+  }
+
+  &__content {
+    font-size: 11px;
+    color: $color-text-tertiary;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: pre-wrap;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 6px;
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $color-border-default;
+  }
+
+  &__action-btn {
+    flex: 1;
+    padding: 6px;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all $transition-fast;
+
+    &--active {
+      background: rgba($color-accent-amber, 0.15);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+
+    &[data-color="blue"]:hover {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+
+    &[data-color="amber"]:hover {
+      background: rgba($color-accent-amber, 0.15);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+
+    &[data-color="pink"]:hover {
+      background: rgba($color-accent-pink, 0.15);
+      border-color: rgba($color-accent-pink, 0.4);
+      color: $color-accent-pink;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+// Note Edit View
+.note-edit-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-md;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: $font-size-base;
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-text-muted;
+    padding: 4px;
+  }
+
+  &__toolbar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: $spacing-sm;
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: $radius-sm;
+  }
+
+  &__toolbar-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: $color-text-muted;
+    border-radius: $radius-xs;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: $color-text-secondary;
+    }
+  }
+
+  &__title-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    padding: $spacing-sm $spacing-md;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    outline: none;
+    margin-bottom: $spacing-sm;
+
+    &:focus {
+      border-color: $color-accent-teal;
+    }
+  }
+
+  &__textarea {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    padding: $spacing-md;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+
+    &:focus {
+      border-color: $color-accent-teal;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+  }
+
+  &__btn {
+    flex: 1;
+    padding: $spacing-sm;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--save {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+
+      &:hover {
+        background: rgba($color-accent-green, 0.25);
+      }
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// =============================================================================
+// CHAT TAB STYLES
+// =============================================================================
+
+.chat-tab {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  &__tabs-container {
+    padding: 0 $spacing-md $spacing-sm;
+    border-bottom: 1px solid $color-border-default;
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Chat Tabs
+.chat-tabs {
+  display: flex;
+  gap: 4px;
+
+  &__btn {
+    flex: 1;
+    padding: $spacing-sm;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-tertiary;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--active {
+      &[data-color="blue"] {
+        background: rgba($color-accent-blue, 0.15);
+        border-color: rgba($color-accent-blue, 0.4);
+        color: $color-accent-blue;
+      }
+
+      &[data-color="purple"] {
+        background: rgba($color-accent-purple, 0.15);
+        border-color: rgba($color-accent-purple, 0.4);
+        color: $color-accent-purple;
+      }
+
+      &[data-color="pink"] {
+        background: rgba($color-accent-pink, 0.15);
+        border-color: rgba($color-accent-pink, 0.4);
+        color: $color-accent-pink;
+      }
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    color: white;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+  }
+}
+
+// DM Selector
+.dm-selector {
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-default;
+  position: relative;
+
+  &__trigger {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    svg:last-child {
+      color: $color-text-muted;
+      margin-left: auto;
+    }
+  }
+
+  &__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--avatar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: white;
+  }
+
+  &__name {
+    flex: 1;
+    text-align: left;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: $spacing-md;
+    right: $spacing-md;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    margin-top: 4px;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    padding: $spacing-sm;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &--selected {
+      background: rgba($color-accent-pink, 0.1);
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__user {
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__preview {
+    font-size: 10px;
+    color: $color-text-muted;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__meta {
+    text-align: right;
+  }
+
+  &__time {
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+
+  &__unread {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $color-accent-pink;
+    color: white;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+  }
+
+  &__new {
+    width: 100%;
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+// Message
+.message {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-sm 0;
+
+  &--me {
+    flex-direction: row-reverse;
+
+    .message__content {
+      align-items: flex-end;
+    }
+
+    .message__bubble {
+      border-radius: 14px 14px 4px 14px;
+      background: rgba($color-accent-blue, 0.2);
+      border-color: $color-border-medium;
+    }
+  }
+
+  &--system {
+    padding: $spacing-sm $spacing-md;
+    margin: $spacing-sm 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: $radius-sm;
+    font-size: 11px;
+    color: $color-text-muted;
+    text-align: center;
+    font-style: italic;
+  }
+
+  &__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--avatar-color-rgb), 0.4) 0%,
+      rgba(var(--avatar-color-rgb), 0.2) 100%
+    );
+    border: 2px solid var(--avatar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--avatar-color);
+    flex-shrink: 0;
+  }
+
+  &__content {
+    max-width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__user {
+    font-size: 10px;
+    margin-bottom: 4px;
+    font-weight: $font-weight-medium;
+  }
+
+  &__bubble {
+    padding: $spacing-sm $spacing-md;
+    border-radius: 14px 14px 14px 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid $color-border-default;
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    line-height: 1.4;
+
+    &--mention {
+      border-color: $color-accent-amber;
+    }
+  }
+
+  &__time {
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 4px;
+  }
+}
+
+// Chat Input
+.chat-input {
+  padding: $spacing-md;
+  border-top: 1px solid $color-border-default;
+
+  &__wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-lg;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+  }
+
+  &__btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: $color-text-muted;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+  }
+
+  &__textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    resize: none;
+    line-height: 1.4;
+    max-height: 80px;
+  }
+
+  &__send {
+    padding: 6px $spacing-md;
+    border-radius: $radius-md;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-muted;
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &--active {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
+
+// =============================================================================
+// PANEL FOOTER - Shared footer styling for right panel tabs
+// =============================================================================
+
+.panel-footer {
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: $spacing-sm $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: $spacing-xs;
+  min-height: 42px;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: 7px $spacing-md;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $color-border-medium;
+      color: $color-text-primary;
+    }
+
+    &--primary {
+      flex: 1;
+    }
+
+    &--icon {
+      padding: 7px $spacing-sm;
+      flex: none;
+    }
+  }
+
+  &__info {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+}
+
+// =============================================================================
+// ICON COLORS
+// =============================================================================
+
+.icon-green {
+  color: $color-accent-green;
+}
+
+.icon-amber {
+  color: $color-accent-amber;
+}
+
+.icon-pink {
+  color: $color-accent-pink;
+}
+
+.icon-purple {
+  color: $color-accent-purple;
+}
+
+.icon-teal {
+  color: $color-accent-teal;
+}
+
+.icon-blue {
+  color: $color-accent-blue;
+}
+
+.icon-red {
+  color: $color-accent-red;
+}
+
+.icon-muted {
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// ROOMS TAB STYLES
+// =============================================================================
+
+.rooms-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Current Room Indicator
+.current-room-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md;
+  background: rgba($color-accent-purple, 0.08);
+  border: 1px solid rgba($color-accent-purple, 0.2);
+  border-radius: $radius-md;
+  margin: $spacing-sm;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__label {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-purple;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__leave {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px $spacing-sm;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-muted;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.15);
+      border-color: rgba($color-accent-red, 0.4);
+      color: $color-accent-red;
+    }
+  }
+}
+
+// Rooms List
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: 0 $spacing-sm $spacing-sm;
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: 6px $spacing-sm;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    margin-bottom: $spacing-sm;
+
+    svg {
+      color: $color-text-muted;
+      flex-shrink: 0;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $color-text-primary;
+      font-size: 11px;
+
+      &::placeholder {
+        color: $color-text-muted;
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: $color-text-muted;
+      padding: 2px;
+
+      &:hover {
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  &__group {
+    margin-bottom: $spacing-md;
+  }
+
+  &__group-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: 10px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    margin-bottom: $spacing-sm;
+    padding: 0 $spacing-xs;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+    text-align: center;
+    gap: $spacing-md;
+
+    svg {
+      opacity: 0.5;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px $spacing-md;
+      border-radius: $radius-md;
+      background: rgba($color-accent-purple, 0.15);
+      border: 1px solid rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+      font-size: 11px;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba($color-accent-purple, 0.2);
+      }
+    }
+  }
+}
+
+// Section create button
+.rooms-section__create-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $color-text-muted;
+  padding: 2px;
+
+  &:hover {
+    color: $color-accent-purple;
+  }
+}
+
+// Room Card
+.room-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+  transition: all $transition-fast;
+
+  &--current {
+    border-color: rgba($color-accent-purple, 0.4);
+    background: rgba($color-accent-purple, 0.05);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+
+  &__type-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &[data-type="project"] {
+      background: rgba($color-accent-blue, 0.15);
+      color: $color-accent-blue;
+    }
+
+    &[data-type="breakout"] {
+      background: rgba($color-accent-purple, 0.15);
+      color: $color-accent-purple;
+    }
+
+    &[data-type="personal"] {
+      background: rgba($color-accent-green, 0.15);
+      color: $color-accent-green;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__access-icon {
+    flex-shrink: 0;
+    color: $color-text-muted;
+  }
+
+  &__badge {
+    font-size: 8px;
+    padding: 1px 4px;
+    border-radius: $radius-xs;
+    background: rgba($color-accent-green, 0.15);
+    color: $color-accent-green;
+    text-transform: uppercase;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: 2px;
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__member-count {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__current-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: $radius-xs;
+    background: rgba($color-accent-purple, 0.15);
+    color: $color-accent-purple;
+  }
+
+  &__join-btn {
+    padding: 4px $spacing-sm;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-purple, 0.15);
+      border-color: rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+    }
+  }
+
+  &__chevron {
+    color: $color-text-muted;
+  }
+
+  &__expanded {
+    padding: $spacing-sm $spacing-md $spacing-md;
+    border-top: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &__members {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__members-label {
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  &__members-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__member {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: $color-text-secondary;
+  }
+
+  &__member-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    background: var(--member-color, #60a5fa);
+    border: 1px solid var(--member-color, #60a5fa);
+    color: #fff;
+  }
+
+  &__member-name {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+
+    svg {
+      color: $color-accent-amber;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $color-border-default;
+  }
+
+  &__footer-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    color: $color-text-muted;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-secondary;
+    }
+
+    &--leave:hover {
+      background: rgba($color-accent-red, 0.15);
+      border-color: rgba($color-accent-red, 0.4);
+      color: $color-accent-red;
+    }
+
+    &--delete {
+      flex: 0 0 auto;
+
+      &:hover {
+        background: rgba($color-accent-red, 0.15);
+        border-color: rgba($color-accent-red, 0.4);
+        color: $color-accent-red;
+      }
+    }
+  }
+}
+
+// Create Room Form
+.create-room-form {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba($color-accent-purple, 0.3);
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-purple;
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: $color-text-muted;
+      padding: 2px;
+
+      &:hover {
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  &__field {
+    margin-bottom: $spacing-md;
+
+    label {
+      display: block;
+      font-size: 10px;
+      color: $color-text-muted;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: $spacing-sm $spacing-md;
+      border-radius: $radius-sm;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid $color-border-default;
+      color: $color-text-primary;
+      font-size: $font-size-xs;
+      outline: none;
+
+      &:focus {
+        border-color: rgba($color-accent-purple, 0.4);
+      }
+    }
+  }
+
+  &__access-options {
+    display: flex;
+    gap: $spacing-xs;
+
+    button {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px;
+      border-radius: $radius-sm;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid $color-border-default;
+      color: $color-text-muted;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      &.active {
+        background: rgba($color-accent-purple, 0.15);
+        border-color: rgba($color-accent-purple, 0.4);
+        color: $color-accent-purple;
+      }
+    }
+  }
+
+  &__features {
+    display: flex;
+    gap: $spacing-md;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: $color-text-secondary;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      accent-color: $color-accent-purple;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border-default;
+
+    button {
+      flex: 1;
+      padding: $spacing-sm;
+      border-radius: $radius-sm;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &[type="button"] {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid $color-border-default;
+        color: $color-text-muted;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          color: $color-text-secondary;
+        }
+      }
+
+      &[type="submit"] {
+        background: rgba($color-accent-purple, 0.15);
+        border: 1px solid rgba($color-accent-purple, 0.4);
+        color: $color-accent-purple;
+
+        &:hover:not(:disabled) {
+          background: rgba($color-accent-purple, 0.25);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+// =============================================================================
+// VOICE TAB STYLES
+// =============================================================================
+
+.voice-tab {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Channel selector dropdown
+.channel-selector {
+  position: relative;
+  margin: $spacing-sm;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__icon {
+    color: $color-accent-purple;
+  }
+
+  &__name {
+    flex: 1;
+    text-align: left;
+  }
+
+  &__count {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: rgba($color-accent-purple, 0.15);
+    color: $color-accent-purple;
+    border-radius: $radius-xs;
+  }
+
+  &__chevron {
+    color: $color-text-muted;
+    transition: transform $transition-fast;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.active {
+      background: rgba($color-accent-purple, 0.1);
+      color: $color-accent-purple;
+    }
+  }
+
+  &__option-name {
+    flex: 1;
+    text-align: left;
+  }
+
+  &__option-count {
+    font-size: 9px;
+    padding: 1px 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-xs;
+  }
+}
+
+// Voice controls
+.voice-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border-top: 1px solid $color-border-default;
+
+  &--disconnected {
+    padding: $spacing-lg;
+  }
+
+  &__join-btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    background: rgba($color-accent-purple, 0.15);
+    border: 1px solid rgba($color-accent-purple, 0.4);
+    border-radius: $radius-md;
+    color: $color-accent-purple;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-accent-purple, 0.25);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__status {
+    font-size: 10px;
+    color: $color-accent-amber;
+    margin-right: $spacing-sm;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-text-primary;
+    }
+
+    &--active {
+      background: rgba($color-accent-red, 0.15);
+      border-color: rgba($color-accent-red, 0.4);
+      color: $color-accent-red;
+    }
+
+    &--leave {
+      &:hover {
+        background: rgba($color-accent-red, 0.15);
+        border-color: rgba($color-accent-red, 0.4);
+        color: $color-accent-red;
+      }
+    }
+  }
+}
+
+// Participant card
+.participant-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &--speaking {
+    background: rgba($color-accent-green, 0.08);
+  }
+
+  &__avatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--user-color, $color-accent-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  &__speaking-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    color: $color-accent-green;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__you {
+    color: $color-text-muted;
+    font-weight: normal;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__status-text {
+    color: $color-accent-green;
+  }
+
+  &__actions {
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &:hover &__actions {
+    opacity: 1;
+  }
+
+  &__volume-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-text-primary;
+    }
+  }
+}
+
+// =============================================================================
+// PANEL ACTION BUTTONS (Pop-out, Close)
+// =============================================================================
+
+// Action buttons container - overlays on top-right of panel header
+.right-panel__actions {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity $transition-fast;
+}
+
+// Show action buttons on panel hover
+.right-panel__content:hover .right-panel__actions {
+  opacity: 1;
+}
+
+// Individual action button
+.right-panel__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-xs;
+  background: rgba(0, 0, 0, 0.4);
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+    color: $color-text-primary;
+  }
+}
+
+// Popped-out state placeholder
+.right-panel__content--popped-out {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-panel__popped-out-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  color: $color-text-muted;
+  text-align: center;
+
+  svg {
+    opacity: 0.4;
+  }
+
+  span {
+    font-size: $font-size-xs;
+    opacity: 0.6;
+  }
+}
+
+.right-panel__dock-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  background: $color-bg-secondary;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    color: $color-text-primary;
+    border-color: $color-border-subtle;
+  }
+}
+
+// Tab is floating state (when current tab is already popped out)
+.right-panel__content--tab-floating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+}
+
+.right-panel__floating-notice {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  background: $color-bg-secondary;
+  border: 1px dashed $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+
+  svg {
+    opacity: 0.5;
+  }
+}

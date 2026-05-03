@@ -1,0 +1,151 @@
+// ViewItemContextMenu.scss
+// Right-click context menu for ViewItem
+// Location: src/ui/react/components/common/ViewItem/components/ViewItemContextMenu.scss
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.view-context-menu {
+  min-width: 200px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow: $shadow-glass-lg;
+  padding: 4px 0;
+  backdrop-filter: $blur-medium;
+  z-index: $z-popover;
+  animation: context-menu-in 0.15s ease-out;
+  transform-origin: top left;
+}
+
+@keyframes context-menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.view-context-menu__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+}
+
+.view-context-menu__color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.view-context-menu__title {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// DIVIDER
+// =============================================================================
+
+.view-context-menu__divider {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: 4px 0;
+}
+
+// =============================================================================
+// MENU ITEMS
+// =============================================================================
+
+.view-context-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  color: $color-text-secondary;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+
+  svg {
+    color: $color-text-muted;
+    flex-shrink: 0;
+    transition: color $transition-fast;
+  }
+
+  &:hover svg {
+    color: $color-text-secondary;
+  }
+
+  span:first-of-type {
+    flex: 1;
+  }
+
+  // Primary action (e.g., Place on Canvas)
+  &--primary {
+    color: $color-accent-green;
+
+    svg {
+      color: $color-accent-green;
+    }
+
+    &:hover {
+      background: rgba($color-accent-green, 0.15);
+      color: $color-accent-green;
+    }
+  }
+
+  // Danger action (e.g., Move to Trash)
+  &--danger {
+    color: $color-accent-red;
+
+    svg {
+      color: $color-accent-red;
+    }
+
+    &:hover {
+      background: rgba($color-accent-red, 0.15);
+      color: $color-accent-red;
+    }
+  }
+}
+
+// =============================================================================
+// SHORTCUT
+// =============================================================================
+
+.view-context-menu__shortcut {
+  font-size: 10px;
+  font-family: $font-family-mono;
+  color: $color-text-muted;
+  background: $color-bg-primary;
+  padding: 2px 6px;
+  border-radius: $radius-xs;
+  flex-shrink: 0;
+}

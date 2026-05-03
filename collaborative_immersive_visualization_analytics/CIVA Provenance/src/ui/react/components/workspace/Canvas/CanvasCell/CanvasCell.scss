@@ -1,0 +1,1044 @@
+// src/ui/react/components/workspace/Canvas/CanvasCell/CanvasCell.scss
+// Canvas cell styles - Updated December 10, 2025
+//
+// FIXES:
+// - Removed double border on empty cells (only __empty-container has border)
+// - Radial menu positioned relative to cell (no portal needed)
+// - Color-coded radial options with smooth animations
+// - Position badge in bottom-right corner
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CANVAS CELL - Base container
+// =============================================================================
+
+.canvas-cell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+  border-radius: $radius-md;
+  overflow: hidden;
+  transition: all 0.15s ease;
+  cursor: pointer;
+
+  // ==========================================================================
+  // VIEW CELLS - Dark background with gradient header
+  // ==========================================================================
+
+  &--view {
+    background: transparent; // Let content fill entirely
+    border: 2px solid rgba(var(--instance-color-rgb), 0.2);
+    border-radius: $radius-lg;
+    overflow: hidden; // Ensure content is clipped to border-radius
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-color: rgba(var(--instance-color-rgb), 0.3);
+    }
+
+    // Active/selected state - bright border for visual impact
+    &.canvas-cell--selected {
+      border-color: var(--instance-color);
+    }
+  }
+
+  // ==========================================================================
+  // EMPTY STATE - No border on .canvas-cell, only on child container
+  // ==========================================================================
+
+  &--empty {
+    background: transparent;
+    border: none; // KEY FIX: No border here
+    box-shadow: none;
+
+    &:hover {
+      // Hover state handled by child
+    }
+
+    &.canvas-cell--edit-mode {
+      cursor: pointer;
+    }
+
+    &.canvas-cell--selected {
+      .canvas-cell__empty-container {
+        background: rgba($color-accent-teal, 0.15);
+        border-color: $color-accent-teal;
+      }
+    }
+  }
+
+  &--drag-over {
+    .canvas-cell__empty-container {
+      background: rgba($color-accent-primary, 0.1) !important;
+      border-color: $color-accent-primary !important;
+      border-style: solid !important;
+    }
+  }
+
+  // ==========================================================================
+  // EDIT MODE DRAGGING
+  // ==========================================================================
+
+  &--edit-mode:not(&--empty) {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &--dragging {
+    opacity: 0.5;
+    cursor: grabbing !important;
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  // ==========================================================================
+  // RENDER MODE MODIFIERS
+  // ==========================================================================
+
+  &--mode-full {
+    // Full render mode - default styles
+  }
+
+  &--mode-compact {
+    // Compact mode - reduced UI
+    .canvas-cell__coords {
+      display: none;
+    }
+  }
+
+  &--mode-thumbnail,
+  &--mode-snapshot {
+    // Default cursor - first click selects/focuses
+    cursor: default;
+
+    // When focused/selected, show zoom-in to indicate double-click to isolate
+    &.canvas-cell--selected {
+      cursor: zoom-in;
+    }
+
+    // Gear button always shows pointer
+    .instance-viewport__gear-dropdown {
+      cursor: pointer;
+    }
+  }
+
+  // ==========================================================================
+  // SELECTION & HIGHLIGHT
+  // ==========================================================================
+
+  &--highlighted {
+    border-color: rgba($color-accent-primary, 0.5);
+  }
+
+  &--selectable {
+    cursor: pointer;
+
+    &:hover {
+      outline: 2px solid rgba($color-accent-teal, 0.5);
+      outline-offset: -2px;
+    }
+  }
+
+  // ==========================================================================
+  // ISOLATION HINT (for small cells)
+  // ==========================================================================
+
+  &__isolation-hint {
+    position: absolute;
+    bottom: $spacing-xs;
+    right: $spacing-xs;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+
+    .canvas-cell:hover & {
+      opacity: 1;
+    }
+  }
+
+  // ==========================================================================
+  // FOCUS INDICATOR (remote user attribution)
+  // ==========================================================================
+
+  &__focus-indicator {
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 70%;
+    pointer-events: none;
+  }
+
+  &__focus-badge {
+    font-size: 9px;
+    color: #f8fafc;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--focus-color, #60a5fa);
+    padding: 1px 6px;
+    border-radius: 10px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__focus-badge--more {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  // ==========================================================================
+  // SELECTION OVERLAY
+  // ==========================================================================
+
+  &__selection-overlay {
+    position: absolute;
+    top: $spacing-sm;
+    left: $spacing-sm;
+    z-index: 10;
+
+    // Hide native checkbox, use custom styling
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      transition: all 0.15s ease;
+
+      &:hover {
+        border-color: $color-accent-teal;
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      &:checked {
+        background: $color-accent-teal;
+        border-color: $color-accent-teal;
+
+        // Checkmark
+        &::after {
+          content: '';
+          display: block;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg) translate(-1px, -1px);
+          margin: 2px 0 0 5px;
+        }
+      }
+    }
+  }
+
+  // ==========================================================================
+  // COORDINATES BADGE
+  // ==========================================================================
+
+  &__coords {
+    position: absolute;
+    bottom: $spacing-xs;
+    right: $spacing-xs;
+    font-size: 9px;
+    font-family: $font-family-mono;
+    color: $color-text-tertiary;
+    padding: 2px 5px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    z-index: 5;
+  }
+
+  // ==========================================================================
+  // TOOLTIP
+  // ==========================================================================
+
+  &__tooltip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// =============================================================================
+// EMPTY CONTAINER - The dashed border placeholder
+// =============================================================================
+
+.canvas-cell__empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  // Normal Mode: subtle appearance (per spec)
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  // Edit Mode: more visible (per spec)
+  .canvas-cell--edit-mode & {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      // Blue tint on hover in edit mode
+      background: rgba(96, 165, 250, 0.08);
+      border-color: rgba(96, 165, 250, 0.4);
+    }
+  }
+}
+
+// =============================================================================
+// ADD BUTTON (Center)
+// =============================================================================
+
+.canvas-cell__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid $color-border-subtle;
+  background: $color-bg-secondary;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+
+  &:hover {
+    border-color: $color-accent-primary;
+    background: rgba($color-accent-primary, 0.15);
+    color: $color-accent-primary;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba($color-accent-primary, 0.3);
+  }
+
+  &--active {
+    background: rgba($color-accent-primary, 0.2);
+    border-color: $color-accent-primary;
+    color: $color-accent-primary;
+    box-shadow: 0 0 24px rgba($color-accent-primary, 0.4);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// =============================================================================
+// RADIAL OPTIONS (Positioned around center)
+// =============================================================================
+
+.canvas-cell__radial-options {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.canvas-cell__radial-option {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid $color-border-default;
+  background: $color-bg-secondary;
+  color: $color-text-secondary;
+  cursor: pointer;
+  pointer-events: auto;
+
+  // Position using CSS variables (set by JS inline style)
+  // This allows hover to reference the same position while adding scale
+  transform: translate(
+    calc(-50% + var(--radial-x, 0px)),
+    calc(-50% + var(--radial-y, 0px))
+  );
+
+  // Animate in
+  opacity: 0;
+  animation: radial-pop-in 0.2s ease-out forwards;
+
+  // Smooth transitions for visual effects (NOT transform - that's handled by hover)
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    // Preserve position from CSS variables, add scale
+    transform: translate(
+        calc(-50% + var(--radial-x, 0px)),
+        calc(-50% + var(--radial-y, 0px))
+      )
+      scale(1.15);
+    box-shadow: 0 0 20px var(--option-glow);
+  }
+
+  // ==========================================================================
+  // Color Variants
+  // ==========================================================================
+
+  &--blue {
+    border-color: rgba($color-accent-blue, 0.5);
+    --option-glow: rgba($color-accent-blue, 0.4);
+
+    &:hover {
+      border-color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.15);
+      color: $color-accent-blue;
+    }
+  }
+
+  &--amber {
+    border-color: rgba($color-accent-amber, 0.5);
+    --option-glow: rgba($color-accent-amber, 0.4);
+
+    &:hover {
+      border-color: $color-accent-amber;
+      background: rgba($color-accent-amber, 0.15);
+      color: $color-accent-amber;
+    }
+  }
+
+  &--teal {
+    border-color: rgba($color-accent-teal, 0.5);
+    --option-glow: rgba($color-accent-teal, 0.4);
+
+    &:hover {
+      border-color: $color-accent-teal;
+      background: rgba($color-accent-teal, 0.15);
+      color: $color-accent-teal;
+    }
+  }
+
+  &--purple {
+    border-color: rgba($color-accent-purple, 0.5);
+    --option-glow: rgba($color-accent-purple, 0.4);
+
+    &:hover {
+      border-color: $color-accent-purple;
+      background: rgba($color-accent-purple, 0.15);
+      color: $color-accent-purple;
+    }
+  }
+}
+
+// =============================================================================
+// FIXED KEYFRAMES - Uses CSS variables for consistent positioning
+// =============================================================================
+
+@keyframes radial-pop-in {
+  0% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--radial-x, 0px)),
+        calc(-50% + var(--radial-y, 0px))
+      )
+      scale(0.3);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(
+        calc(-50% + var(--radial-x, 0px)),
+        calc(-50% + var(--radial-y, 0px))
+      )
+      scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(
+        calc(-50% + var(--radial-x, 0px)),
+        calc(-50% + var(--radial-y, 0px))
+      )
+      scale(1);
+  }
+}
+
+// =============================================================================
+// POSITION BADGE (Bottom-right corner)
+// =============================================================================
+
+.canvas-cell__position-badge {
+  position: absolute;
+  bottom: $spacing-sm;
+  right: $spacing-sm;
+  font-size: 9px;
+  font-family: $font-family-mono;
+  color: $color-text-muted;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+
+  .canvas-cell__empty-container:hover & {
+    opacity: 0.8;
+  }
+}
+
+// =============================================================================
+// MINIMAL EMPTY STATES (for tiny cells)
+// =============================================================================
+
+.canvas-cell__empty-minimal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-cell__empty-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-border-subtle;
+}
+
+.canvas-cell__empty-thumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: $color-text-muted;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// VIEW CONTENT
+// =============================================================================
+
+.canvas-cell__view-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  position: relative; // Create stacking context for z-index to work
+}
+
+.canvas-cell__thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  top: 32px; // Offset below header (header min-height is 32px)
+  z-index: 2;
+  overflow: hidden;
+  background: $color-bg-canvas; // Match canvas background for seamless loading
+  pointer-events: none; // Allow clicks to pass through to cell for selection
+
+  // Crossfade transition - fades out when viewport becomes ready
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  // Compact mode has smaller header
+  .canvas-cell--mode-compact & {
+    top: 28px;
+  }
+
+  // Thumbnail mode has even smaller header
+  .canvas-cell--mode-thumbnail & {
+    top: 24px;
+  }
+
+  // Snapshot mode - minimal header
+  .canvas-cell--mode-snapshot & {
+    top: 24px;
+  }
+
+  // Thumbnail fills entire cell - override component defaults
+  .thumbnail {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    flex-shrink: 1 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+
+  // All internal containers fill the thumbnail
+  .thumbnail__loader,
+  .thumbnail__fallback {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+  }
+
+  // Image fills with cover mode (crops to fit, no letterboxing)
+  .thumbnail__image,
+  img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+// Cell should not have internal padding that creates borders
+.canvas-cell--view {
+  .canvas-cell__view-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.canvas-cell__instance-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+
+  // Crossfade transition - fades in when becoming active
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
+
+  &--activating {
+    // Smooth fade-in when viewport mounts for active thumbnail
+    animation: viewport-fade-in 0.3s ease-out;
+  }
+}
+
+// =============================================================================
+// LOADING STATE - Thumbnail visible, header floats above
+// =============================================================================
+// During loading:
+// - Thumbnail overlay (z-index: 2) is visible and fills the cell
+// - Instance container (z-index: 3) is above but transparent
+// - Header floats above everything
+// - Content area is hidden (opacity: 0) until ready
+
+.canvas-cell__view-content--loading {
+  // Instance container above thumbnail so header is visible
+  .canvas-cell__instance-container {
+    z-index: 3;
+  }
+
+  // Make the instance-viewport completely transparent
+  .instance-viewport {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  // Hide the content area during loading (will fade in when ready)
+  .instance-viewport__content {
+    opacity: 0;
+  }
+
+  // Also hide the progressive-loader's internal thumbnail
+  // (we use the canvas-cell thumbnail overlay instead)
+  .progressive-loader .thumbnail-preview {
+    display: none;
+  }
+}
+
+// Content area fades in smoothly when loading completes
+.instance-viewport__content {
+  transition: opacity 0.3s ease-out;
+}
+
+// Viewport activation animation
+@keyframes viewport-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// THUMBNAIL & SNAPSHOT CONTENT
+// =============================================================================
+
+.canvas-cell__thumbnail-content,
+.canvas-cell__snapshot-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    $color-bg-canvas 0%,
+    $color-bg-canvas-cell 100%
+  );
+  overflow: hidden;
+  position: relative;
+
+  // The Thumbnail component with size="fill" needs this
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+
+  .thumbnail__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.canvas-cell__thumbnail-placeholder,
+.canvas-cell__snapshot-placeholder {
+  color: $color-text-muted;
+  opacity: 0.5;
+}
+
+// =============================================================================
+// NOTES & IMAGE PLACEHOLDERS
+// =============================================================================
+
+.canvas-cell__notes-placeholder,
+.canvas-cell__image-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-canvas;
+  border: 1px solid $color-border-canvas-default;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-cell__notes-header,
+.canvas-cell__image-header {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 0 $spacing-sm;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-bottom: 1px solid $color-border-default;
+}
+
+.canvas-cell__close-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  opacity: 0.6;
+
+  &:hover {
+    background: rgba($color-error, 0.15);
+    color: $color-error;
+    opacity: 1;
+  }
+}
+
+.canvas-cell__notes-icon,
+.canvas-cell__image-icon {
+  font-size: $font-size-base;
+}
+
+.canvas-cell__notes-title,
+.canvas-cell__image-title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.canvas-cell__notes-body,
+.canvas-cell__image-body {
+  flex: 1;
+  overflow: hidden;
+  padding: $spacing-sm;
+  background: linear-gradient(
+    180deg,
+    $color-bg-canvas 0%,
+    $color-bg-canvas-cell 100%
+  );
+}
+
+.canvas-cell__notes-preview {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+}
+
+.canvas-cell__image-preview {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  font-family: $font-family-mono;
+}
+
+// Mini versions for small cells
+.canvas-cell__notes-mini,
+.canvas-cell__image-mini {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-muted;
+  opacity: 0.6;
+}
+
+// =============================================================================
+// UNKNOWN CONTENT
+// =============================================================================
+
+.canvas-cell__unknown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  color: $color-accent-red;
+  font-size: 12px;
+}
+
+.canvas-cell__remove-invalid-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: rgba($color-accent-red, 0.15);
+  border: 1px solid rgba($color-accent-red, 0.3);
+  border-radius: $radius-sm;
+  color: $color-accent-red;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($color-accent-red, 0.25);
+    border-color: $color-accent-red;
+  }
+}
+
+// =============================================================================
+// MINI HEADER - Now uses unified ViewHeader component
+// =============================================================================
+// Mini header styles moved to ViewHeader/ViewHeader.scss
+
+// =============================================================================
+// DROP ZONE OVERLAY - Visual feedback during drag (per spec)
+// =============================================================================
+
+.canvas-cell__drop-zone {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: $radius-md;
+  transition: all 0.15s ease;
+}
+
+.drop-zone__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: $radius-sm;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.drop-zone__label {
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Place zone - Green (per spec)
+.drop-zone--place {
+  background: rgba(74, 222, 128, 0.15);
+  border: 2px solid rgba(74, 222, 128, 0.5);
+
+  .drop-zone__content {
+    color: #4ade80;
+  }
+}
+
+// Swap zone - Blue (per spec)
+.drop-zone--swap {
+  background: rgba(96, 165, 250, 0.2);
+  border: 2px solid rgba(96, 165, 250, 0.5);
+
+  .drop-zone__content {
+    color: #60a5fa;
+  }
+}
+
+// Push zones - Amber (per spec)
+.drop-zone--push {
+  background: rgba(251, 191, 36, 0.1);
+  border: 2px dashed rgba(251, 191, 36, 0.5);
+
+  .drop-zone__content {
+    color: #fbbf24;
+  }
+}
+
+// Push direction indicators - show half-cell preview
+.drop-zone--push-up {
+  background: linear-gradient(
+    to bottom,
+    rgba(251, 191, 36, 0.2) 0%,
+    rgba(251, 191, 36, 0.2) 50%,
+    transparent 50%
+  );
+  border-top-width: 3px;
+  border-top-style: solid;
+}
+
+.drop-zone--push-down {
+  background: linear-gradient(
+    to top,
+    rgba(251, 191, 36, 0.2) 0%,
+    rgba(251, 191, 36, 0.2) 50%,
+    transparent 50%
+  );
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+}
+
+.drop-zone--push-left {
+  background: linear-gradient(
+    to right,
+    rgba(251, 191, 36, 0.2) 0%,
+    rgba(251, 191, 36, 0.2) 50%,
+    transparent 50%
+  );
+  border-left-width: 3px;
+  border-left-style: solid;
+}
+
+.drop-zone--push-right {
+  background: linear-gradient(
+    to left,
+    rgba(251, 191, 36, 0.2) 0%,
+    rgba(251, 191, 36, 0.2) 50%,
+    transparent 50%
+  );
+  border-right-width: 3px;
+  border-right-style: solid;
+}
+
+// Drop zone active states on the cell
+.canvas-cell--drop-zone-place {
+  .canvas-cell__empty-container {
+    border-color: rgba(74, 222, 128, 0.5) !important;
+    background: rgba(74, 222, 128, 0.1) !important;
+  }
+}
+
+.canvas-cell--drop-zone-swap {
+  border-color: rgba(96, 165, 250, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3) !important;
+}
+
+// =============================================================================
+// CANVAS CELL HEADER - Now uses unified ViewHeader component
+// =============================================================================
+// Header styles moved to ViewHeader/ViewHeader.scss
+// The ViewHeader component handles all header rendering with consistent styling
+
+// =============================================================================
+// COLD VIEW THUMBNAIL POSITIONING
+// =============================================================================
+// Thumbnail fills the entire cell with header floating on top
+
+.canvas-cell__thumbnail-overlay--cold {
+  // No offset - thumbnail fills entire cell
+  top: 0;
+}
+
+// =============================================================================
+// FLOATING HEADER - Header floats on top of thumbnail for seamless transition
+// =============================================================================
+// In thumbnail/snapshot modes, the header should overlay on top of the thumbnail
+// so the thumbnail fills the entire cell for a smooth loading-to-active transition
+
+.canvas-cell__view-content {
+  // ViewHeader inside view-content should float on top
+  > .view-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5; // Above thumbnail (z-index: 2) but below drop zones (z-index: 50)
+
+    // Slight shadow to separate from thumbnail below
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}

@@ -1,0 +1,155 @@
+/**
+ * @file LabeledIconButton.scss
+ * @description Styles for responsive LabeledIconButton component.
+ * Collapses to icon-only when container is narrow (via container queries).
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// BUTTON
+// =============================================================================
+
+.labeled-icon-button {
+  // Vertical stacked layout like v3 PopoutBtn
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px;
+  min-width: 48px;
+
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  // Icon
+  &__icon {
+    flex-shrink: 0;
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+
+    svg {
+      display: block;
+    }
+  }
+
+  // Label (below icon)
+  &__label {
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+    user-select: none;
+  }
+
+  // Hover state
+  &[data-hovered="true"]:not(&--disabled) {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+
+    .labeled-icon-button__icon {
+      color: $color-text-secondary;
+    }
+
+    .labeled-icon-button__label {
+      color: $color-text-primary;
+    }
+  }
+
+  // Active state
+  &--active {
+    background: rgba(var(--btn-accent-rgb, 96, 165, 250), 0.15);
+    border-color: var(--btn-accent, $color-accent-blue);
+
+    .labeled-icon-button__icon {
+      color: var(--btn-accent, $color-accent-blue);
+    }
+
+    .labeled-icon-button__label {
+      color: var(--btn-accent, $color-accent-blue);
+    }
+
+    &[data-hovered="true"] {
+      background: rgba(var(--btn-accent-rgb, 96, 165, 250), 0.2);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Focus visible
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.4);
+  }
+
+  // ==========================================================================
+  // COMPACT MODE (icon only)
+  // ==========================================================================
+
+  &--compact {
+    padding: 6px;
+
+    .labeled-icon-button__label {
+      display: none;
+    }
+  }
+}
+
+// =============================================================================
+// CSS CUSTOM PROPERTIES FOR ACCENT COLORS
+// =============================================================================
+
+.labeled-icon-button {
+  --btn-accent-rgb: 96, 165, 250; // Default blue
+
+  &[style*="--btn-accent: var(--color-accent-teal)"] {
+    --btn-accent-rgb: 45, 212, 191;
+  }
+
+  &[style*="--btn-accent: var(--color-accent-amber)"] {
+    --btn-accent-rgb: 251, 191, 36;
+  }
+
+  &[style*="--btn-accent: var(--color-accent-green)"] {
+    --btn-accent-rgb: 52, 211, 153;
+  }
+
+  &[style*="--btn-accent: var(--color-accent-purple)"] {
+    --btn-accent-rgb: 192, 132, 252;
+  }
+
+  &[style*="--btn-accent: var(--color-accent-pink)"] {
+    --btn-accent-rgb: 251, 113, 133;
+  }
+
+  &[style*="--btn-accent: var(--color-accent-red)"] {
+    --btn-accent-rgb: 248, 113, 113;
+  }
+}
+
+// =============================================================================
+// RESPONSIVE - Labels collapse only at very narrow viewport widths
+// =============================================================================
+
+// Don't collapse labels until viewport is quite narrow
+// Parent containers handle their own responsive behavior via media queries
+@media (max-width: 900px) {
+  .secondary-footer__zone--left .labeled-icon-button {
+    padding: 6px;
+
+    .labeled-icon-button__label {
+      display: none;
+    }
+  }
+}

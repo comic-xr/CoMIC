@@ -1,0 +1,184 @@
+/**
+ * DismissibleCard Styles
+ *
+ * Adaptive styling for dismissible cards with color variants.
+ */
+@use "theme" as *;
+
+.dismissible-card {
+  border-radius: $radius-lg;
+
+  // ==========================================================================
+  // MODE: DESKTOP
+  // ==========================================================================
+  &--desktop {
+    padding: $spacing-md;
+
+    .dismissible-card__header {
+      gap: $spacing-sm;
+      margin-bottom: $spacing-sm;
+    }
+
+    .dismissible-card__title {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    .dismissible-card__dismiss {
+      width: 24px;
+      height: 24px;
+    }
+
+    .dismissible-card__content {
+      font-size: 13px;
+    }
+  }
+
+  // ==========================================================================
+  // MODE: VR
+  // ==========================================================================
+  &--vr {
+    padding: $spacing-lg;
+    border-radius: $radius-xl;
+
+    .dismissible-card__header {
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+    }
+
+    .dismissible-card__title {
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .dismissible-card__dismiss {
+      width: 44px;
+      height: 44px;
+    }
+
+    .dismissible-card__content {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+
+  // ==========================================================================
+  // COLOR VARIANTS
+  // ==========================================================================
+  &[data-color="green"] {
+    background: rgba($color-accent-green, 0.08);
+    border: 1px solid rgba($color-accent-green, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-green;
+    }
+  }
+
+  &[data-color="amber"] {
+    background: rgba($color-accent-amber, 0.08);
+    border: 1px solid rgba($color-accent-amber, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-amber;
+    }
+  }
+
+  &[data-color="purple"] {
+    background: rgba($color-accent-purple, 0.08);
+    border: 1px solid rgba($color-accent-purple, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-purple;
+    }
+  }
+
+  &[data-color="pink"] {
+    background: rgba($color-accent-pink, 0.08);
+    border: 1px solid rgba($color-accent-pink, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-pink;
+    }
+  }
+
+  &[data-color="red"] {
+    background: rgba($color-accent-red, 0.08);
+    border: 1px solid rgba($color-accent-red, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-red;
+    }
+  }
+
+  &[data-color="blue"] {
+    background: rgba($color-accent-blue, 0.08);
+    border: 1px solid rgba($color-accent-blue, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-blue;
+    }
+  }
+
+  &[data-color="teal"] {
+    background: rgba($color-accent-teal, 0.08);
+    border: 1px solid rgba($color-accent-teal, 0.25);
+
+    .dismissible-card__icon,
+    .dismissible-card__title {
+      color: $color-accent-teal;
+    }
+  }
+}
+
+.dismissible-card__header {
+  display: flex;
+  align-items: center;
+}
+
+.dismissible-card__icon {
+  flex-shrink: 0;
+}
+
+.dismissible-card__title {
+  flex: 1;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+}
+
+.dismissible-card__dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: $color-text-primary;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: 2px;
+  }
+}
+
+.dismissible-card__content {
+  color: $color-text-primary;
+}

@@ -1,0 +1,60 @@
+/**
+ * DotNavigation styles
+ */
+
+@use "theme" as *;
+
+.dot-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-shrink: 0;
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+    background: $color-bg-tertiary;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+
+    &:hover:not(&--active) {
+      background: $color-bg-elevated;
+      transform: scale(1.1);
+    }
+
+    &--active {
+      width: 20px;
+
+      // Color variants
+      &[data-color="cyan"] {
+        background: $color-accent-teal;
+      }
+
+      &[data-color="pink"] {
+        background: $color-accent-pink;
+      }
+
+      &[data-color="blue"] {
+        background: $color-accent-blue;
+      }
+
+      &[data-color="orange"] {
+        background: $color-accent-amber;
+      }
+
+      &[data-color="green"] {
+        background: $color-accent-green;
+      }
+
+      &[data-color="purple"] {
+        background: $color-accent-purple;
+      }
+    }
+  }
+}

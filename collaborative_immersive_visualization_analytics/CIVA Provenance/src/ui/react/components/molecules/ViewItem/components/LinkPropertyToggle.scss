@@ -1,0 +1,53 @@
+@use "theme" as *;
+
+.link-property-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: $color-glass-subtle;
+  color: $color-text-muted;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  opacity: 0.5;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    opacity: 1;
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-tertiary;
+  }
+
+  &--active {
+    opacity: 1;
+    background: rgba($color-accent-teal, 0.1);
+    border-color: rgba($color-accent-teal, 0.3);
+    color: $color-accent-teal;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-accent-teal, 0.2);
+      border-color: rgba($color-accent-teal, 0.4);
+    }
+  }
+
+  &--broken {
+    opacity: 1;
+    background: rgba($color-accent-amber, 0.1);
+    border-color: rgba($color-accent-amber, 0.3);
+    color: $color-accent-amber;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-accent-amber, 0.2);
+      border-color: rgba($color-accent-amber, 0.4);
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

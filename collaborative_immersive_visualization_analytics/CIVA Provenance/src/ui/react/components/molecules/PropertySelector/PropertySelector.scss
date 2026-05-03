@@ -1,0 +1,121 @@
+/**
+ * PropertySelector Styles
+ * Frosted glassmorphism aesthetic with VR-friendly blue hues
+ */
+
+@use "theme" as *;
+
+.property-selector {
+    padding: 12px;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.property-selector__label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+}
+
+.property-selector__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.property-selector__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-lg;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+        background: $color-glass-medium;
+        border-color: $color-border-subtle;
+    }
+
+    &--active {
+        background: rgba(var(--property-color-rgb, 96, 165, 250), 0.12);
+        border-color: var(--property-color, $color-accent-blue);
+        box-shadow: 0 0 12px rgba(var(--property-color-rgb, 96, 165, 250), 0.15);
+
+        .property-selector__icon {
+            color: var(--property-color);
+        }
+
+        .property-selector__name {
+            color: var(--property-color);
+        }
+    }
+}
+
+.property-selector__icon {
+    width: 20px;
+    height: 20px;
+    color: $color-text-muted;
+    transition: color $transition-fast;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.property-selector__name {
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+}
+
+.property-selector__indicators {
+    display: flex;
+    gap: 2px;
+    height: 8px;
+    align-items: center;
+}
+
+.property-selector__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: $color-glass-strong;
+
+    .property-selector__item--active & {
+        background: var(--property-color);
+        box-shadow: 0 0 6px var(--property-color);
+    }
+}
+
+.property-selector__empty {
+    font-size: 8px;
+    color: $color-text-muted;
+}
+
+.property-selector__count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: $color-glass-medium;
+    border-radius: $radius-full;
+    font-size: 9px;
+    font-weight: 600;
+    color: $color-text-muted;
+
+    .property-selector__item--active & {
+        background: rgba(var(--property-color-rgb, 96, 165, 250), 0.2);
+        color: var(--property-color);
+    }
+}

@@ -1,0 +1,256 @@
+// SlidingPanel.scss
+// Sliding panel that appears below ViewItem on hover
+// Location: src/ui/react/components/common/ViewItem/components/SlidingPanel.scss
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.sliding-panel {
+  background: rgba($color-bg-secondary, 0.95);
+  backdrop-filter: $blur-medium;
+  border: 1px solid $color-border-default;
+  border-top: none;
+  border-radius: 0 0 $radius-sm $radius-sm;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  z-index: 1;
+
+  &--open {
+    padding: $spacing-xs;
+    max-height: 80px;
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// TOOLTIP AREA
+// =============================================================================
+
+.sliding-panel__tooltip {
+  padding: 2px $spacing-xs;
+  margin-bottom: 2px;
+  background: $color-bg-primary;
+  border-radius: $radius-xs;
+  font-size: 9px;
+  color: $color-text-muted;
+  min-height: 14px;
+  display: flex;
+  align-items: center;
+  transition: color $transition-fast;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &--active {
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// ACTIONS
+// =============================================================================
+
+.sliding-panel__actions {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  // Hide scrollbar but allow scrolling
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.sliding-panel__group {
+  display: flex;
+  background: $color-bg-primary;
+  border-radius: $radius-xs;
+  padding: 1px;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.sliding-panel__spacer {
+  flex: 1;
+  min-width: 4px;
+  max-width: 20px;
+}
+
+// =============================================================================
+// PANEL BUTTONS
+// =============================================================================
+
+.sliding-panel__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+  position: relative;
+  flex-shrink: 0;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+
+  // Active color states
+  &--active {
+    &.sliding-panel__btn--purple {
+      background: rgba($color-accent-purple, 0.2);
+      color: $color-accent-purple;
+    }
+
+    &.sliding-panel__btn--amber {
+      background: rgba($color-accent-amber, 0.2);
+      color: $color-accent-amber;
+    }
+
+    &.sliding-panel__btn--pink {
+      background: rgba($color-accent-pink, 0.2);
+      color: $color-accent-pink;
+    }
+
+    &.sliding-panel__btn--teal {
+      background: rgba($color-accent-teal, 0.2);
+      color: $color-accent-teal;
+    }
+
+    &.sliding-panel__btn--green {
+      background: rgba($color-accent-green, 0.2);
+      color: $color-accent-green;
+    }
+
+    &.sliding-panel__btn--blue {
+      background: rgba($color-accent-blue, 0.2);
+      color: $color-accent-blue;
+    }
+  }
+}
+
+.sliding-panel__btn-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 7px;
+  font-weight: $font-weight-bold;
+  background: currentColor;
+  color: $color-bg-primary;
+  padding: 0 3px;
+  border-radius: 4px;
+  min-width: 10px;
+  text-align: center;
+  transform: translate(25%, -25%);
+}
+
+// =============================================================================
+// SIZE BUTTON
+// =============================================================================
+
+.sliding-panel__size-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  font-size: 9px;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: $color-border-default;
+    background: $color-glass-light;
+  }
+}
+
+// =============================================================================
+// SIZE MENU POPOVER
+// =============================================================================
+
+.sliding-panel__size-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-popover - 1;
+}
+
+.sliding-panel__size-menu {
+  position: fixed;
+  z-index: $z-popover;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+  box-shadow: $shadow-glass-lg;
+  backdrop-filter: $blur-medium;
+  animation: size-menu-in 0.15s ease-out;
+}
+
+@keyframes size-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sliding-panel__size-menu-title {
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: $spacing-xs;
+  text-align: center;
+}
+
+.sliding-panel__size-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.sliding-panel__size-option {
+  padding: 6px 10px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: center;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+  }
+
+  &--active {
+    background: $color-accent-blue;
+    border-color: $color-accent-blue;
+    color: white;
+  }
+}

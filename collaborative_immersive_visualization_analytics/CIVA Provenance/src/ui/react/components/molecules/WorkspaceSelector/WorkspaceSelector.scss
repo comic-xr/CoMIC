@@ -1,0 +1,248 @@
+/**
+ * @file WorkspaceSelector.scss
+ * @description Styles for WorkspaceSelector component.
+ * 
+ * ENHANCED VERSION - Tall dropdown with:
+ * - "Workspace" label above name
+ * - Colored border based on workspace type (via CSS custom properties)
+ * - Glassmorphism styling
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// WORKSPACE SELECTOR CONTAINER
+// =============================================================================
+
+.workspace-selector {
+  position: relative;
+}
+
+// =============================================================================
+// TRIGGER BUTTON - Tall style with label
+// =============================================================================
+
+.workspace-selector__trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+  padding: 6px 12px;
+
+  // Glassmorphism with workspace color tint
+  background: rgba(var(--ws-color-rgb, 96, 165, 250), 0.08);
+  border: 1px solid rgba(var(--ws-color-rgb, 96, 165, 250), 0.25);
+  border-radius: $radius-md;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: $color-text-primary;
+
+  &:hover {
+    background: rgba(var(--ws-color-rgb, 96, 165, 250), 0.12);
+    border-color: rgba(var(--ws-color-rgb, 96, 165, 250), 0.4);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ws-color, $color-accent-blue);
+    outline-offset: 2px;
+  }
+}
+
+// =============================================================================
+// TRIGGER CONTENTS
+// =============================================================================
+
+.workspace-selector__icon {
+  color: var(--ws-color, $color-accent-blue);
+  flex-shrink: 0;
+}
+
+.workspace-selector__info {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.workspace-selector__label {
+  display: block;
+  font-size: 8px;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1px;
+}
+
+.workspace-selector__name {
+  display: block;
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $color-text-primary;
+}
+
+.workspace-selector__chevron {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+// =============================================================================
+// DROPDOWN MENU
+// =============================================================================
+
+.workspace-selector__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  max-height: 400px;
+  overflow-y: auto;
+
+  // Glassmorphism
+  background: rgba(25, 25, 30, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid $color-border-medium;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  z-index: $z-dropdown;
+  padding: $spacing-xs;
+}
+
+// =============================================================================
+// DROPDOWN SECTIONS
+// =============================================================================
+
+.workspace-selector__section {
+  &:not(:first-child) {
+    border-top: 1px solid $color-border-subtle;
+    margin-top: $spacing-xs;
+    padding-top: $spacing-xs;
+  }
+}
+
+.workspace-selector__section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  svg {
+    opacity: 0.7;
+  }
+
+  // Color variants
+  &[data-color="blue"] {
+    color: $color-accent-blue;
+    svg {
+      color: $color-accent-blue;
+    }
+  }
+  &[data-color="purple"] {
+    color: $color-accent-purple;
+    svg {
+      color: $color-accent-purple;
+    }
+  }
+  &[data-color="green"] {
+    color: $color-accent-green;
+    svg {
+      color: $color-accent-green;
+    }
+  }
+}
+
+// =============================================================================
+// DROPDOWN ITEMS
+// =============================================================================
+
+.workspace-selector__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: 12px;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--active {
+    background: rgba(var(--ws-color-rgb, 96, 165, 250), 0.15);
+  }
+}
+
+.workspace-selector__item-icon {
+  color: var(--ws-color, $color-accent-blue);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.workspace-selector__item-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.workspace-selector__item-check {
+  color: var(--ws-color, $color-accent-blue);
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// EMPTY STATE & ACTIONS
+// =============================================================================
+
+.workspace-selector__empty {
+  padding: $spacing-lg;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}
+
+.workspace-selector__actions {
+  border-top: 1px solid $color-border-subtle;
+  margin-top: $spacing-xs;
+  padding-top: $spacing-xs;
+}
+
+.workspace-selector__create-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: 12px;
+  color: $color-accent-blue;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.1);
+  }
+}

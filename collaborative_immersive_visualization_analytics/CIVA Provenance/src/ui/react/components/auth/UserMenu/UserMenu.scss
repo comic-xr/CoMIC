@@ -1,0 +1,293 @@
+// src/ui/react/components/auth/UserMenu.scss
+// User menu dropdown styling
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// USER MENU CONTAINER
+// =============================================================================
+
+.user-menu {
+  position: relative;
+  display: inline-flex;
+}
+
+// =============================================================================
+// TRIGGER BUTTON (Avatar + Chevron)
+// =============================================================================
+
+.user-menu__trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: $radius-full;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+  }
+
+  &.in-voice .user-menu__avatar {
+    border-color: $color-success;
+  }
+}
+
+.user-menu__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--user-color, $color-accent-teal);
+  border: 2px solid $color-bg-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: white;
+  transition: border-color $transition-fast;
+}
+
+.user-menu__chevron {
+  color: $color-text-muted;
+  transition: transform $transition-fast;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+// =============================================================================
+// DROPDOWN MENU
+// =============================================================================
+
+.user-menu__dropdown {
+  position: absolute;
+  top: calc(100% + $spacing-sm);
+  right: 0;
+  min-width: 220px;
+
+  // Frosted glass effect with subtle gradient
+  background: linear-gradient(
+    145deg,
+    rgba(30, 32, 38, 0.85) 0%,
+    rgba(20, 22, 28, 0.92) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  z-index: 1000;
+  animation: slideDown $transition-fast $ease-out-expo;
+  overflow: hidden;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// =============================================================================
+// HEADER (User info)
+// =============================================================================
+
+.user-menu__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: $color-glass-subtle;
+}
+
+.user-menu__header-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--user-color, $color-accent-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: white;
+  flex-shrink: 0;
+}
+
+.user-menu__header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.user-menu__header-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-menu__header-email {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-menu__header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: $spacing-xs;
+  width: fit-content;
+
+  &--dev {
+    background: color.adjust($color-warning, $alpha: -0.85);
+    color: $color-warning;
+    border: 1px solid color.adjust($color-warning, $alpha: -0.7);
+  }
+
+  &--admin {
+    background: color.adjust($color-accent-purple, $alpha: -0.85);
+    color: $color-accent-purple;
+    border: 1px solid color.adjust($color-accent-purple, $alpha: -0.7);
+  }
+}
+
+// =============================================================================
+// STATUS OPTIONS
+// =============================================================================
+
+.user-menu__status {
+  padding: $spacing-sm;
+}
+
+.user-menu__status-options {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-menu__status-option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+
+  &--active {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+}
+
+.user-menu__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  // Status colors
+  [data-color="green"] & {
+    background: $color-success;
+    box-shadow: 0 0 6px $color-success;
+  }
+
+  [data-color="amber"] & {
+    background: $color-warning;
+    box-shadow: 0 0 6px $color-warning;
+  }
+
+  [data-color="red"] & {
+    background: $color-error;
+    box-shadow: 0 0 6px $color-error;
+  }
+
+  [data-color="gray"] & {
+    background: $color-text-muted;
+  }
+}
+
+// =============================================================================
+// DIVIDER
+// =============================================================================
+
+.user-menu__divider {
+  height: 1px;
+  background: $color-border-default;
+  margin: 0;
+}
+
+// =============================================================================
+// MENU ITEMS
+// =============================================================================
+
+.user-menu__items {
+  padding: $spacing-sm;
+}
+
+.user-menu__item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+
+  &--danger {
+    color: $color-error;
+
+    &:hover {
+      background: color.adjust($color-error, $alpha: -0.9);
+      color: $color-error;
+    }
+  }
+}

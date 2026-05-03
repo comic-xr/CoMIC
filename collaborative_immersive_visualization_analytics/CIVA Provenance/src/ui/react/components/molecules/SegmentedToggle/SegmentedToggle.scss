@@ -1,0 +1,222 @@
+/**
+ * @file SegmentedToggle.scss
+ * @description Adaptive styles for the SegmentedToggle component.
+ * Supports both desktop (compact) and VR (larger touch targets) modes.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// CONTAINER
+// =============================================================================
+
+.segmented-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: $color-glass-subtle;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-subtle;
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// SIZE VARIANTS (Desktop)
+// =============================================================================
+
+.segmented-toggle--sm {
+  gap: 1px;
+  padding: 2px;
+
+  .segmented-toggle__option {
+    width: 20px;
+    height: 18px;
+  }
+}
+
+.segmented-toggle--md {
+  // Default sizing
+}
+
+.segmented-toggle--lg {
+  gap: 3px;
+  padding: 4px;
+
+  .segmented-toggle__option {
+    width: 28px;
+    height: 26px;
+  }
+}
+
+// =============================================================================
+// OPTION BUTTON
+// =============================================================================
+
+.segmented-toggle__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  border-radius: $radius-sm;
+  border: none;
+  background: transparent;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  svg {
+    transition: color $transition-fast;
+  }
+
+  // Hover state (non-active)
+  &[data-hovered="true"]:not(.segmented-toggle__option--active) {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+
+  // Active state
+  &--active {
+    background: rgba(var(--option-accent-rgb, 96, 165, 250), 0.2);
+    color: var(--option-accent, $color-accent-blue);
+
+    svg {
+      color: var(--option-accent, $color-accent-blue);
+    }
+
+    &[data-hovered="true"] {
+      background: rgba(var(--option-accent-rgb, 96, 165, 250), 0.25);
+    }
+  }
+
+  // Focus visible
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.4);
+  }
+
+  // Disabled
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// LABEL (for VR mode with showLabels)
+// =============================================================================
+
+.segmented-toggle__label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// VR MODE - Larger touch targets
+// =============================================================================
+
+.segmented-toggle--vr {
+  gap: $spacing-xs;
+  padding: $spacing-xs;
+  border-radius: $radius-lg;
+
+  .segmented-toggle__option {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 $spacing-sm;
+    border-radius: $radius-md;
+
+    // Touch feedback instead of hover
+    &:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+  }
+
+  // VR size variants
+  &.segmented-toggle--sm {
+    gap: 2px;
+    padding: 3px;
+
+    .segmented-toggle__option {
+      min-width: 40px;
+      min-height: 40px;
+    }
+  }
+
+  &.segmented-toggle--lg {
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+
+    .segmented-toggle__option {
+      min-width: 52px;
+      min-height: 52px;
+      padding: 0 $spacing-md;
+    }
+
+    .segmented-toggle__label {
+      font-size: $font-size-base;
+    }
+  }
+
+  // With labels - wider buttons
+  &.segmented-toggle--with-labels {
+    .segmented-toggle__option {
+      padding: 0 $spacing-md;
+    }
+
+    .segmented-toggle__label {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+// =============================================================================
+// CSS CUSTOM PROPERTIES FOR ACCENT COLORS
+// =============================================================================
+
+// Map common CSS variable names to RGB values for rgba() usage
+.segmented-toggle__option {
+  --option-accent-rgb: 96, 165, 250; // Default blue
+
+  // Blue accent
+  &[style*="--option-accent: var(--color-accent-blue)"] {
+    --option-accent-rgb: 96, 165, 250;
+  }
+
+  // Green accent
+  &[style*="--option-accent: var(--color-accent-green)"] {
+    --option-accent-rgb: 52, 211, 153;
+  }
+
+  // Teal accent
+  &[style*="--option-accent: var(--color-accent-teal)"] {
+    --option-accent-rgb: 45, 212, 191;
+  }
+
+  // Amber accent
+  &[style*="--option-accent: var(--color-accent-amber)"] {
+    --option-accent-rgb: 251, 191, 36;
+  }
+
+  // Purple accent
+  &[style*="--option-accent: var(--color-accent-purple)"] {
+    --option-accent-rgb: 192, 132, 252;
+  }
+
+  // Pink accent
+  &[style*="--option-accent: var(--color-accent-pink)"] {
+    --option-accent-rgb: 251, 113, 133;
+  }
+
+  // Red accent
+  &[style*="--option-accent: var(--color-accent-red)"] {
+    --option-accent-rgb: 248, 113, 113;
+  }
+}

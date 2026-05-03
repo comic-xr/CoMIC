@@ -1,0 +1,348 @@
+/**
+ * @file RoomPresenceIndicator.scss
+ * @description Styles for RoomPresenceIndicator component.
+ * 
+ * ENHANCED VERSION - Matches "Current Location" styling with:
+ * - "Currently In" label
+ * - Room dropdown capability
+ * - Member avatars
+ * - Glassmorphism styling
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// ROOM PRESENCE CONTAINER
+// =============================================================================
+
+.room-presence {
+  position: relative;
+}
+
+// =============================================================================
+// TRIGGER BUTTON
+// =============================================================================
+
+.room-presence__trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 6px 12px;
+  min-width: 140px;
+
+  // Glassmorphism
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: $color-text-primary;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: $color-border-default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: 2px;
+  }
+
+  // Color variants based on room type
+  &[data-color="blue"] {
+    .room-presence__icon {
+      color: $color-accent-blue;
+    }
+  }
+  &[data-color="purple"] {
+    .room-presence__icon {
+      color: $color-accent-purple;
+    }
+  }
+  &[data-color="green"] {
+    .room-presence__icon {
+      color: $color-accent-green;
+    }
+  }
+}
+
+// =============================================================================
+// TRIGGER INFO SECTION
+// =============================================================================
+
+.room-presence__info {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.room-presence__label {
+  display: block;
+  font-size: 8px;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1px;
+}
+
+.room-presence__room {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.room-presence__icon {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.room-presence__name {
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.room-presence__lock {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// MEMBER AVATARS
+// =============================================================================
+
+.room-presence__avatars {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.room-presence__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid $color-bg-secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  color: white;
+  overflow: hidden;
+  margin-left: -6px;
+  position: relative;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &--overflow {
+    background: $color-bg-tertiary;
+    color: $color-text-muted;
+    font-size: 8px;
+  }
+}
+
+// =============================================================================
+// CHEVRON
+// =============================================================================
+
+.room-presence__chevron {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+// =============================================================================
+// DROPDOWN MENU
+// =============================================================================
+
+.room-presence__dropdown {
+  // Position is set via inline styles when using portal
+  min-width: 240px;
+  max-height: 400px;
+  overflow-y: auto;
+
+  // Glassmorphism
+  background: rgba(25, 25, 30, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid $color-border-medium;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  padding: $spacing-xs;
+}
+
+// =============================================================================
+// DROPDOWN SECTIONS
+// =============================================================================
+
+.room-presence__section {
+  &:not(:first-child) {
+    border-top: 1px solid $color-border-subtle;
+    margin-top: $spacing-xs;
+    padding-top: $spacing-xs;
+  }
+}
+
+.room-presence__section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  svg {
+    opacity: 0.7;
+  }
+
+  // Color variants
+  &[data-color="blue"] {
+    color: $color-accent-blue;
+    svg {
+      color: $color-accent-blue;
+    }
+  }
+  &[data-color="purple"] {
+    color: $color-accent-purple;
+    svg {
+      color: $color-accent-purple;
+    }
+  }
+  &[data-color="green"] {
+    color: $color-accent-green;
+    svg {
+      color: $color-accent-green;
+    }
+  }
+}
+
+// =============================================================================
+// DROPDOWN ITEMS
+// =============================================================================
+
+.room-presence__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: 12px;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+  }
+}
+
+.room-presence__item-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.room-presence__item-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.room-presence__item-lock {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.room-presence__item-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.6;
+  }
+}
+
+.room-presence__item-check {
+  color: $color-accent-blue;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// EMPTY STATE & ACTIONS
+// =============================================================================
+
+.room-presence__empty {
+  padding: $spacing-lg;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}
+
+.room-presence__actions {
+  border-top: 1px solid $color-border-subtle;
+  margin-top: $spacing-xs;
+  padding-top: $spacing-xs;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.room-presence__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: 12px;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-primary;
+  }
+
+  &--primary {
+    color: $color-accent-blue;
+
+    &:hover {
+      background: rgba($color-accent-blue, 0.1);
+      color: $color-accent-blue;
+    }
+  }
+}

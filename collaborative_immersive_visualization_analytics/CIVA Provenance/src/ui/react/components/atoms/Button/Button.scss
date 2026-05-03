@@ -1,0 +1,674 @@
+/**
+ * @file Button.scss
+ * @description Comprehensive styles for Button, IconButton, and ButtonGroup components.
+ * Uses BEM naming convention and theme tokens.
+ *
+ * Structure:
+ * - .btn - Regular button with variants and sizes
+ * - .icon-btn - Square icon button
+ * - .btn-group - Container for grouped buttons
+ */
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// ANIMATION KEYFRAMES
+// ============================================================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================================================
+// BASE BUTTON
+// ============================================================================
+
+.btn {
+  // Base styles
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: all $transition-fast;
+
+  // ============================================================================
+  // SIZES
+  // ============================================================================
+
+  &--sm {
+    height: 28px;
+    padding: 0 10px;
+    font-size: $font-size-sm;
+    border-radius: $radius-md;
+    gap: 6px;
+  }
+
+  &--md {
+    height: 36px;
+    padding: 0 14px;
+    font-size: $font-size-md;
+    border-radius: $radius-lg;
+    gap: 8px;
+  }
+
+  &--lg {
+    height: 44px;
+    padding: 0 20px;
+    font-size: $font-size-base;
+    border-radius: $radius-xl;
+    gap: 10px;
+  }
+
+  // ============================================================================
+  // VARIANTS
+  // ============================================================================
+
+  &--primary {
+    background: $color-accent-blue;
+    border-color: $color-accent-blue;
+    color: white;
+
+    &:hover:not(:disabled):not(.btn--disabled) {
+      background: color.adjust($color-accent-blue, $lightness: 8%);
+      border-color: color.adjust($color-accent-blue, $lightness: 8%);
+    }
+
+    &:active:not(:disabled):not(.btn--disabled) {
+      background: color.adjust($color-accent-blue, $lightness: -5%);
+      border-color: color.adjust($color-accent-blue, $lightness: -5%);
+    }
+  }
+
+  &--secondary {
+    background: transparent;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+
+    &:hover:not(:disabled):not(.btn--disabled) {
+      background: $color-bg-tertiary;
+      border-color: $color-border-medium;
+      color: $color-text-primary;
+    }
+
+    &:active:not(:disabled):not(.btn--disabled) {
+      background: $color-bg-elevated;
+    }
+  }
+
+  &--danger {
+    background: $color-error;
+    border-color: $color-error;
+    color: white;
+
+    &:hover:not(:disabled):not(.btn--disabled) {
+      background: color.adjust($color-error, $lightness: 8%);
+      border-color: color.adjust($color-error, $lightness: 8%);
+    }
+
+    &:active:not(:disabled):not(.btn--disabled) {
+      background: color.adjust($color-error, $lightness: -5%);
+      border-color: color.adjust($color-error, $lightness: -5%);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    border-color: transparent;
+    color: $color-text-secondary;
+
+    &:hover:not(:disabled):not(.btn--disabled) {
+      background: $color-glass-light;
+      color: $color-text-primary;
+    }
+
+    &:active:not(:disabled):not(.btn--disabled) {
+      background: $color-glass-medium;
+    }
+  }
+
+  &--link {
+    background: transparent;
+    border-color: transparent;
+    color: $color-accent-blue;
+    padding: 0;
+    height: auto;
+
+    &:hover:not(:disabled):not(.btn--disabled) {
+      text-decoration: underline;
+    }
+
+    &:active:not(:disabled):not(.btn--disabled) {
+      color: color.adjust($color-accent-blue, $lightness: -10%);
+    }
+  }
+
+  // ============================================================================
+  // STATES
+  // ============================================================================
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--loading {
+    pointer-events: none;
+  }
+
+  &--disabled,
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--icon-only {
+    // Square button when icon-only
+    &.btn--sm {
+      width: 28px;
+      padding: 0;
+    }
+
+    &.btn--md {
+      width: 36px;
+      padding: 0;
+    }
+
+    &.btn--lg {
+      width: 44px;
+      padding: 0;
+    }
+  }
+
+  // ============================================================================
+  // VR MODE - Larger touch targets, always visible labels
+  // ============================================================================
+
+  &--vr {
+    // VR sizes are larger for touch interaction (minimum 44px touch target)
+    &.btn--sm {
+      height: 44px;
+      padding: 0 16px;
+      font-size: $font-size-base;
+      border-radius: $radius-lg;
+      gap: 10px;
+    }
+
+    &.btn--md {
+      height: 52px;
+      padding: 0 20px;
+      font-size: 16px;
+      border-radius: $radius-xl;
+      gap: 12px;
+    }
+
+    &.btn--lg {
+      height: 60px;
+      padding: 0 24px;
+      font-size: 18px;
+      border-radius: 14px;
+      gap: 14px;
+    }
+
+    // Icon-only in VR still needs minimum touch target
+    &.btn--icon-only {
+      &.btn--sm { width: 44px; }
+      &.btn--md { width: 52px; }
+      &.btn--lg { width: 60px; }
+    }
+
+    // Disable hover state transforms in VR (touch-only)
+    // Use active state for tactile feedback
+    &:active:not(:disabled):not(.btn--disabled) {
+      transform: scale(0.98);
+    }
+  }
+
+  // ============================================================================
+  // FOCUS RING
+  // ============================================================================
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: 2px;
+  }
+
+  // ============================================================================
+  // ICON SLOTS
+  // ============================================================================
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    flex-shrink: 0;
+  }
+
+  &__spinner {
+    animation: spin 1s linear infinite;
+    flex-shrink: 0;
+  }
+
+  // ============================================================================
+  // TOOLTIP
+  // ============================================================================
+
+  &__tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    color: $color-text-primary;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition-fast;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: $shadow-lg;
+
+    // Arrow
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: $color-bg-elevated;
+    }
+  }
+
+  &:hover &__tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ============================================================================
+// ICON BUTTON (Square toolbar buttons)
+// ============================================================================
+
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all $transition-fast;
+  user-select: none;
+
+  // ============================================================================
+  // SIZES
+  // ============================================================================
+
+  &--xs {
+    width: 20px;
+    height: 20px;
+    border-radius: $radius-xs;
+  }
+
+  &--sm {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
+  }
+
+  &--md {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-md;
+  }
+
+  &--lg {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-lg;
+  }
+
+  &--xl {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-xl;
+  }
+
+  // ============================================================================
+  // VARIANTS
+  // ============================================================================
+
+  &--primary {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+
+    &:hover:not(:disabled):not(.icon-btn--disabled) {
+      background: rgba($color-accent-blue, 0.25);
+      border-color: rgba($color-accent-blue, 0.5);
+    }
+
+    &:active:not(:disabled):not(.icon-btn--disabled) {
+      background: rgba($color-accent-blue, 0.3);
+    }
+  }
+
+  &--secondary {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+
+    &:hover:not(:disabled):not(.icon-btn--disabled) {
+      background: $color-glass-medium;
+      border-color: $color-border-medium;
+      color: $color-text-primary;
+    }
+
+    &:active:not(:disabled):not(.icon-btn--disabled) {
+      background: $color-glass-strong;
+    }
+  }
+
+  &--danger {
+    background: rgba($color-error, 0.1);
+    border-color: rgba($color-error, 0.3);
+    color: $color-error;
+
+    &:hover:not(:disabled):not(.icon-btn--disabled) {
+      background: rgba($color-error, 0.2);
+      border-color: rgba($color-error, 0.5);
+    }
+
+    &:active:not(:disabled):not(.icon-btn--disabled) {
+      background: rgba($color-error, 0.25);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    border-color: transparent;
+    color: $color-text-tertiary;
+
+    &:hover:not(:disabled):not(.icon-btn--disabled) {
+      background: $color-glass-light;
+      color: $color-text-primary;
+    }
+
+    &:active:not(:disabled):not(.icon-btn--disabled) {
+      background: $color-glass-medium;
+    }
+  }
+
+  // Toolbar variant - for use in toolbars/bars with subtle background
+  &--toolbar {
+    background: $color-bg-tertiary;
+    border-color: $color-border-subtle;
+    color: $color-text-secondary;
+
+    &:hover:not(:disabled):not(.icon-btn--disabled) {
+      background: $color-bg-elevated;
+      border-color: $color-border-default;
+      color: $color-text-primary;
+    }
+
+    &:active:not(:disabled):not(.icon-btn--disabled) {
+      background: $color-bg-elevated;
+      border-color: $color-border-medium;
+    }
+  }
+
+  // ============================================================================
+  // ACTIVE STATE
+  // ============================================================================
+
+  &--active {
+    background: rgba($color-accent-blue, 0.2) !important;
+    border-color: rgba($color-accent-blue, 0.4) !important;
+    color: $color-accent-blue !important;
+  }
+
+  // ============================================================================
+  // LOADING STATE
+  // ============================================================================
+
+  &--loading {
+    pointer-events: none;
+  }
+
+  &__spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  // ============================================================================
+  // DISABLED STATE
+  // ============================================================================
+
+  &--disabled,
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // ============================================================================
+  // FOCUS RING
+  // ============================================================================
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: 2px;
+  }
+
+  // ============================================================================
+  // TOOLTIP
+  // ============================================================================
+
+  &__tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    color: $color-text-primary;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition-fast;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: $shadow-lg;
+
+    // Arrow
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: $color-bg-elevated;
+    }
+  }
+
+  &:hover &__tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ============================================================================
+// BUTTON GROUP
+// ============================================================================
+
+.btn-group {
+  display: inline-flex;
+
+  // ============================================================================
+  // ORIENTATION
+  // ============================================================================
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  // ============================================================================
+  // ALIGNMENT
+  // ============================================================================
+
+  &--align-start {
+    justify-content: flex-start;
+  }
+
+  &--align-center {
+    justify-content: center;
+  }
+
+  &--align-end {
+    justify-content: flex-end;
+  }
+
+  &--align-space-between {
+    justify-content: space-between;
+  }
+
+  // ============================================================================
+  // GAP SIZES
+  // ============================================================================
+
+  &--gap-sm {
+    gap: $spacing-xs;
+  }
+
+  &--gap-md {
+    gap: $spacing-sm;
+  }
+
+  &--gap-lg {
+    gap: $spacing-md;
+  }
+
+  // ============================================================================
+  // FULL WIDTH
+  // ============================================================================
+
+  &--full-width {
+    width: 100%;
+
+    > .btn,
+    > .icon-btn {
+      flex: 1;
+    }
+  }
+
+  // ============================================================================
+  // CONNECTED MODE (segmented control)
+  // ============================================================================
+
+  &--connected {
+    gap: 0;
+
+    // Horizontal connected buttons
+    &.btn-group--horizontal {
+      > .btn,
+      > .icon-btn {
+        border-radius: 0;
+
+        &:first-child {
+          border-top-left-radius: $radius-lg;
+          border-bottom-left-radius: $radius-lg;
+        }
+
+        &:last-child {
+          border-top-right-radius: $radius-lg;
+          border-bottom-right-radius: $radius-lg;
+        }
+
+        // Remove double borders
+        &:not(:first-child) {
+          margin-left: -1px;
+        }
+      }
+    }
+
+    // Vertical connected buttons
+    &.btn-group--vertical {
+      > .btn,
+      > .icon-btn {
+        border-radius: 0;
+
+        &:first-child {
+          border-top-left-radius: $radius-lg;
+          border-top-right-radius: $radius-lg;
+        }
+
+        &:last-child {
+          border-bottom-left-radius: $radius-lg;
+          border-bottom-right-radius: $radius-lg;
+        }
+
+        // Remove double borders
+        &:not(:first-child) {
+          margin-top: -1px;
+        }
+      }
+    }
+
+    // Hover state raises z-index to show full border
+    > .btn:hover,
+    > .icon-btn:hover,
+    > .btn:focus-visible,
+    > .icon-btn:focus-visible,
+    > .btn.btn--active,
+    > .icon-btn.icon-btn--active {
+      z-index: 1;
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 480px) {
+  .btn-group {
+    &--responsive {
+      flex-direction: column;
+      width: 100%;
+
+      > .btn,
+      > .icon-btn {
+        width: 100%;
+      }
+    }
+  }
+}

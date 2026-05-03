@@ -1,0 +1,534 @@
+/**
+ * @file VRCanvasInteractions.scss
+ * @description Styles for VR canvas interaction components.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// CSS VARIABLES
+// =============================================================================
+
+:root {
+    --vr-zone-place: #4ade80;
+    --vr-zone-swap: #60a5fa;
+    --vr-zone-push: #fbbf24;
+    --vr-zone-expand: #a78bfa;
+}
+
+// =============================================================================
+// VR TRANSFERABLE SOURCE
+// =============================================================================
+
+.vr-transferable-source {
+    position: relative;
+    cursor: pointer;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+
+    &--active {
+        outline: 2px solid $color-accent-teal;
+        outline-offset: 2px;
+    }
+
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &--dimmed {
+        opacity: 0.6;
+    }
+}
+
+.vr-transferable-source__active-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-accent-teal;
+    border-radius: 50%;
+    color: #000;
+    font-weight: $font-weight-bold;
+    box-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
+    z-index: 10;
+}
+
+.vr-transferable-source__hint {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    padding: 6px 12px;
+    background: $color-glass-panel;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+// =============================================================================
+// VR CANVAS CELL TARGET
+// =============================================================================
+
+.vr-canvas-cell-target {
+    position: relative;
+    border-radius: $radius-lg;
+    transition: all $transition-fast;
+
+    &--hovered {
+        outline: 2px solid color-mix(in srgb, var(--zone-color) 60%, transparent);
+        outline-offset: -2px;
+    }
+
+    &--selected {
+        outline: 3px solid var(--zone-color);
+        outline-offset: -2px;
+        box-shadow: 0 0 20px color-mix(in srgb, var(--zone-color) 40%, transparent);
+    }
+}
+
+.vr-canvas-cell-target__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--zone-color) 20%, transparent);
+    border-radius: $radius-lg;
+    pointer-events: none;
+
+    &--selected {
+        background: color-mix(in srgb, var(--zone-color) 15%, transparent);
+    }
+}
+
+.vr-canvas-cell-target__prompt {
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: var(--zone-color);
+}
+
+.vr-canvas-cell-target__confirm-prompt {
+    padding: 10px 20px;
+    background: var(--zone-color);
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: #000;
+}
+
+// =============================================================================
+// VR ZONE PICKER
+// =============================================================================
+
+.vr-zone-picker__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+}
+
+.vr-zone-picker {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-width: 95vw;
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px);
+    border: 2px solid $color-border-default;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    z-index: 9999;
+    animation: zonePanelIn 0.2s ease-out;
+}
+
+@keyframes zonePanelIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.vr-zone-picker__header {
+    padding: $spacing-md;
+    border-bottom: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.vr-zone-picker__title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: 8px;
+}
+
+.vr-zone-picker__existing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+}
+
+.vr-zone-picker__existing-view {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-sm;
+}
+
+.vr-zone-picker__existing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.vr-zone-picker__zones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: $spacing-md;
+}
+
+.vr-zone-picker__zone-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    min-height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-align: left;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--swap {
+        --btn-color: var(--vr-zone-swap);
+    }
+
+    &--push {
+        --btn-color: var(--vr-zone-push);
+    }
+
+    &--selected {
+        background: color-mix(in srgb, var(--btn-color) 20%, transparent);
+        border-color: var(--btn-color);
+
+        .vr-zone-picker__zone-label {
+            color: var(--btn-color);
+        }
+    }
+}
+
+.vr-zone-picker__zone-info {
+    flex: 1;
+}
+
+.vr-zone-picker__zone-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+}
+
+.vr-zone-picker__zone-desc {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+}
+
+.vr-zone-picker__modifiers {
+    padding: 0 $spacing-md $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vr-zone-picker__modifiers-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-muted;
+    margin-bottom: 4px;
+}
+
+.vr-zone-picker__actions {
+    display: flex;
+    gap: 10px;
+    padding: $spacing-md;
+    border-top: 1px solid $color-border-default;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.vr-zone-picker__btn {
+    flex: 1;
+    padding: 14px;
+    min-height: 44px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &--cancel {
+        background: transparent;
+        border: 2px solid $color-border-default;
+        color: $color-text-secondary;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+
+    &--confirm {
+        background: $color-accent-teal;
+        border: none;
+        color: #000;
+        font-weight: $font-weight-semibold;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-teal 90%, white);
+        }
+    }
+}
+
+// =============================================================================
+// VR MODIFIER TOGGLE
+// =============================================================================
+
+.vr-modifier-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--active {
+        background: rgba(45, 212, 191, 0.1);
+        border-color: $color-accent-teal;
+    }
+}
+
+.vr-modifier-toggle__info {
+    text-align: left;
+}
+
+.vr-modifier-toggle__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+
+    .vr-modifier-toggle--active & {
+        color: $color-accent-teal;
+    }
+}
+
+.vr-modifier-toggle__hint {
+    font-size: 9px;
+    color: $color-text-muted;
+}
+
+.vr-modifier-toggle__switch {
+    width: 40px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 11px;
+    position: relative;
+    transition: background $transition-fast;
+
+    .vr-modifier-toggle--active & {
+        background: $color-accent-teal;
+    }
+}
+
+.vr-modifier-toggle__knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    transition: left $transition-fast;
+
+    .vr-modifier-toggle--active & {
+        left: 20px;
+    }
+}
+
+// =============================================================================
+// VR CANVAS EDGE TARGET
+// =============================================================================
+
+.vr-canvas-edge-target {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: $radius-md;
+    cursor: default;
+    opacity: 0.3;
+    transition: all $transition-base;
+    color: $color-text-muted;
+    z-index: 5;
+
+    &--top {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--bottom {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--left {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--right {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--vertical {
+        padding: 20px 12px;
+        flex-direction: column;
+
+        .vr-canvas-edge-target__label {
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+        }
+    }
+
+    &--active {
+        cursor: pointer;
+        opacity: 1;
+        background: rgba(167, 139, 250, 0.2);
+        border-color: var(--vr-zone-expand);
+        color: var(--vr-zone-expand);
+    }
+
+    &--hovered {
+        background: rgba(167, 139, 250, 0.4);
+    }
+}
+
+.vr-canvas-edge-target__label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+}
+
+// =============================================================================
+// VR TRANSFER INSTRUCTIONS
+// =============================================================================
+
+.vr-transfer-instructions {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(45, 212, 191, 0.3);
+    border-radius: $radius-lg;
+    z-index: 9990;
+    animation: instructionsSlideUp 0.2s ease-out;
+}
+
+@keyframes instructionsSlideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.vr-transfer-instructions__source {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $color-accent-teal;
+}
+
+.vr-transfer-instructions__source-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+}
+
+.vr-transfer-instructions__text {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+}
+
+.vr-transfer-instructions__cancel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.vr-transfer-instructions__cancel-key {
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-sm;
+    font-weight: $font-weight-semibold;
+}

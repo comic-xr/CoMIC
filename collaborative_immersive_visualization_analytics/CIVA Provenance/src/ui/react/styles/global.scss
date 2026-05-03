@@ -1,0 +1,668 @@
+// global.scss - Base styles and resets with dark glassmorphism theme
+@use "theme" as *;
+
+// Export CSS custom properties for inline styles and JavaScript access
+@include export-css-variables;
+
+// ============================================================================
+// GLOBAL RESET
+// ============================================================================
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// ============================================================================
+// BASE ELEMENTS
+// ============================================================================
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Enhanced body styles for global.scss
+// This replaces the body section in your global.scss file
+
+body {
+  font-family: $font-family-base;
+
+  // Multi-layer gradient mesh - MORE VISIBLE for glass effect
+  background: 
+    // Blue glow (top-left) - cool scientific feel
+    radial-gradient(
+      ellipse 900px 700px at 15% 20%,
+      rgba(96, 165, 250, 0.12) 0%,
+      rgba(96, 165, 250, 0.05) 30%,
+      transparent 60%
+    ),
+    // Purple glow (top-right) - analytical
+    radial-gradient(
+        ellipse 800px 600px at 85% 15%,
+        rgba(192, 132, 252, 0.1) 0%,
+        rgba(192, 132, 252, 0.04) 30%,
+        transparent 60%
+      ),
+    // Pink accent (bottom-right) - warmth
+    radial-gradient(
+        ellipse 700px 700px at 80% 75%,
+        rgba(251, 113, 133, 0.09) 0%,
+        rgba(251, 113, 133, 0.03) 30%,
+        transparent 60%
+      ),
+    // Emerald glow (bottom-left) - vitality
+    radial-gradient(
+        ellipse 650px 550px at 20% 80%,
+        rgba(52, 211, 153, 0.09) 0%,
+        rgba(52, 211, 153, 0.03) 30%,
+        transparent 60%
+      ),
+    // Subtle amber center - warmth
+    radial-gradient(
+        ellipse 500px 500px at 50% 50%,
+        rgba(251, 191, 36, 0.05) 0%,
+        transparent 60%
+      ),
+    // Violet wash overall
+    radial-gradient(
+        ellipse 1200px 1200px at 50% 50%,
+        rgba(167, 139, 250, 0.03) 0%,
+        transparent 70%
+      ),
+    // True black base
+    #000000;
+
+  color: $color-text-primary;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  line-height: $line-height-normal;
+  position: relative;
+
+  // SUBTLE noise texture (much lighter, less crosshatch)
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(245, 248, 255, 0.005) 0px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+  }
+
+  // Ultra-slow rotating gradient (3 minutes per cycle)
+  &::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        ellipse 800px 400px at center,
+        rgba(110, 182, 255, 0.04) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse 600px 600px at 60% 40%,
+        rgba(192, 132, 252, 0.03) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+    z-index: 0;
+    animation: ultra-slow-rotate 180s linear infinite;
+    opacity: 0.7;
+  }
+}
+
+// Add this keyframes at the end of global.scss if not already present
+@keyframes ultra-slow-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+// Optional: Add this if you want the frosted glass to show even MORE
+// This enhances the blur saturation on glass elements
+.glass-panel,
+.glass-card,
+[class*="glass-"] {
+  // Increase the saturation to make colors behind glass more vibrant
+  backdrop-filter: var(--blur, blur(12px)) saturate(150%);
+  -webkit-backdrop-filter: var(--blur, blur(12px)) saturate(150%);
+}
+
+@keyframes ultra-slow-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Optional: Add this if you want the frosted glass to show even MORE
+// This enhances the blur saturation on glass elements
+.glass-panel,
+.glass-card,
+[class*="glass-"] {
+  // Increase the saturation to make colors behind glass more vibrant
+  backdrop-filter: var(--blur, blur(12px)) saturate(150%);
+  -webkit-backdrop-filter: var(--blur, blur(12px)) saturate(150%);
+}
+
+// ============================================================================
+// FORM ELEMENTS
+// ============================================================================
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// ============================================================================
+// CUSTOM SCROLLBAR (Dark Theme)
+// ============================================================================
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-glass-subtle;
+  border-radius: $radius-sm;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-glass-medium;
+  border-radius: $radius-sm;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+
+  &:hover {
+    background: $color-glass-strong;
+    background-clip: padding-box;
+  }
+
+  &:active {
+    background: $color-border-medium;
+    background-clip: padding-box;
+  }
+}
+
+// Firefox scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $color-glass-medium $color-glass-subtle;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Panel base
+.panel {
+  @include glass-panel;
+}
+
+// Button variants
+.button-primary {
+  @include glass-button;
+  background: $color-accent-primary-glow;
+  color: $color-accent-primary;
+  border-color: $color-accent-primary;
+
+  &:hover:not(:disabled) {
+    background: rgba(110, 182, 255, 0.25);
+    box-shadow: 0 0 20px rgba(110, 182, 255, 0.3),
+      0 0 40px rgba(110, 182, 255, 0.15);
+    transform: translateY(-1px);
+  }
+}
+
+.button-secondary {
+  @include glass-button;
+
+  &:hover:not(:disabled) {
+    @include glass-hover;
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+.fade-in {
+  animation: fadeIn $transition-base;
+}
+
+.slide-up {
+  animation: slideUp $transition-base;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// FILES PANEL ENHANCEMENTS
+// ============================================================================
+
+.files-panel {
+  &__spawn-toggle {
+    padding: $spacing-md;
+    @include glass-card;
+    margin-bottom: $spacing-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      @include glass-hover;
+    }
+  }
+
+  &__spawn-toggle .toggle-label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-base;
+    color: $color-text-primary;
+    cursor: pointer;
+  }
+
+  &__spawn-toggle .toggle-hint {
+    display: block;
+    margin-top: $spacing-xs;
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    font-style: italic;
+  }
+
+  &__dataset-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__spawn-btn {
+    padding: $spacing-xs;
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid $color-accent-primary;
+    border-radius: $radius-sm;
+    color: $color-accent-primary;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(76, 175, 80, 0.25);
+      @include accent-glow;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ============================================================================
+// INSTANCE ENHANCEMENTS
+// ============================================================================
+
+.instance-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include glass-backdrop;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.instance-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $color-border-medium;
+  border-top-color: $color-accent-primary;
+  border-radius: $radius-full;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px $color-accent-primary-glow;
+}
+
+// ============================================================================
+// VTK WIDGET STYLES
+// ============================================================================
+
+.vtk-widget-handle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+// ============================================================================
+// COLOR SWATCH GRID
+// ============================================================================
+
+.color-swatch-grid-container {
+  padding: $spacing-sm;
+  min-width: 200px;
+  position: relative;
+  // Reserve space for hint to prevent layout shift
+  padding-bottom: calc($spacing-sm + 28px);
+}
+
+.color-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-sm;
+}
+
+.color-swatch {
+  position: relative;
+  @include glass-card;
+  cursor: pointer;
+  overflow: hidden;
+  aspect-ratio: 1.5;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: $color-accent-primary;
+    transform: scale(1.05);
+    @include accent-glow;
+  }
+
+  &.active {
+    border-color: $color-accent-primary;
+    @include accent-glow-strong;
+  }
+}
+
+.swatch-gradient {
+  flex: 1;
+  border-radius: $radius-sm $radius-sm 0 0;
+}
+
+.swatch-label {
+  padding: $spacing-xs $spacing-sm;
+  background: $color-glass-medium;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  text-align: center;
+  line-height: 1.2;
+  backdrop-filter: $blur-subtle;
+}
+
+.color-swatch:hover .swatch-label {
+  background: $color-glass-strong;
+  color: $color-text-primary;
+}
+
+.swatch-check {
+  position: absolute;
+  top: $spacing-xs;
+  right: $spacing-xs;
+  width: 20px;
+  height: 20px;
+  background: $color-accent-primary;
+  border-radius: $radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: $glow-accent;
+  animation: pop-in $transition-fast $ease-out-back;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.color-swatch-hint {
+  // Absolute position to prevent layout shift
+  position: absolute;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
+  right: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-success-bg;
+  border: 1px solid $color-success-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  text-align: center;
+  color: $color-success;
+  // Fade in animation
+  animation: hint-fade-in 0.15s ease-out;
+}
+
+@keyframes hint-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .color-swatch-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// ============================================================================
+// POSITION GRID (for widget placement)
+// ============================================================================
+
+.position-grid-container {
+  padding: $spacing-sm;
+  min-width: 156px; // 2 * 72px + gap + padding
+  position: relative;
+  // Reserve space for hint to prevent layout shift
+  padding-bottom: calc($spacing-sm + 28px);
+}
+
+.position-grid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.position-grid-row {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.position-grid-cell {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+
+  // Subtle glass button matching camera picker style
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &.empty {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover:not(.empty) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  &.hovered {
+    background: rgba(100, 150, 255, 0.12);
+    border-color: rgba(100, 150, 255, 0.4);
+  }
+
+  &.active {
+    border: 1px solid rgba(100, 150, 255, 0.5);
+    background: rgba(100, 150, 255, 0.15);
+    box-shadow: 0 0 12px rgba(100, 150, 255, 0.3);
+  }
+
+  .position-grid-icon {
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+  }
+
+  .position-grid-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    text-transform: capitalize;
+  }
+
+  &:hover .position-grid-icon {
+    color: rgba(100, 150, 255, 1);
+  }
+
+  &.active .position-grid-icon {
+    color: rgba(100, 150, 255, 1);
+  }
+}
+
+.position-grid-check {
+  position: absolute;
+  top: $spacing-xs;
+  right: $spacing-xs;
+  width: 18px;
+  height: 18px;
+  background: rgba(100, 150, 255, 0.9);
+  border-radius: $radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 0 8px rgba(100, 150, 255, 0.5);
+  animation: pop-in $transition-fast $ease-out-back;
+}
+
+.position-grid-hint {
+  // Absolute position to prevent layout shift
+  position: absolute;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
+  right: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(100, 150, 255, 0.08);
+  border: 1px solid rgba(100, 150, 255, 0.15);
+  border-radius: $radius-sm;
+  text-align: center;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  // Fade in animation
+  animation: hint-fade-in 0.15s ease-out;
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 768px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .instance-controls {
+    flex-wrap: wrap;
+  }
+
+  .instance-header h3 {
+    font-size: $font-size-sm;
+  }
+
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+}

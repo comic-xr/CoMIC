@@ -1,0 +1,224 @@
+// NewFolderDialog.scss
+// Modal dialog for creating new folders
+
+.new-folder-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 280px;
+    background: var(--color-bg-elevated, #1e1e2a);
+    border: 1px solid var(--color-border-default, rgba(255, 255, 255, 0.1));
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+
+    &__backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    // Header
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+    }
+
+    &__header-icon {
+        color: var(--color-accent-amber, #fbbf24);
+    }
+
+    &__title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-primary, #e5e7eb);
+    }
+
+    // Form fields
+    &__field {
+        padding: 0 16px;
+        margin-bottom: 12px;
+
+        &:first-of-type {
+            margin-top: 12px;
+        }
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-text-muted, #6b7280);
+    }
+
+    &__input,
+    &__select {
+        width: 100%;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--color-border-default, rgba(255, 255, 255, 0.1));
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: inherit;
+        color: var(--color-text-primary, #e5e7eb);
+        outline: none;
+        transition: border-color 0.15s ease;
+
+        &:focus {
+            border-color: var(--color-accent-blue, #3b82f6);
+        }
+
+        &::placeholder {
+            color: var(--color-text-muted, #6b7280);
+        }
+
+        &--error {
+            border-color: var(--color-accent-red, #ef4444);
+        }
+    }
+
+    &__select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        padding-right: 32px;
+
+        option {
+            background: var(--color-bg-elevated, #1e1e2a);
+            color: var(--color-text-primary, #e5e7eb);
+        }
+    }
+
+    &__error {
+        display: block;
+        margin-top: 4px;
+        font-size: 11px;
+        color: var(--color-accent-red, #ef4444);
+    }
+
+    // Color picker
+    &__colors {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    &__color {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.15s ease, border-color 0.15s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &--selected {
+            border-color: white;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    // Actions
+    &__actions {
+        display: flex;
+        gap: 8px;
+        padding: 12px 16px;
+        border-top: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+    }
+
+    &__button {
+        flex: 1;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        transition: background 0.15s ease, opacity 0.15s ease;
+
+        &--cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-text-muted, #6b7280);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        &--submit {
+            background: var(--color-accent-blue, #3b82f6);
+            color: white;
+
+            &:hover:not(:disabled) {
+                filter: brightness(1.1);
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    // VR mode
+    &--vr {
+        width: 320px;
+
+        .new-folder-dialog__header {
+            padding: 16px 20px;
+        }
+
+        .new-folder-dialog__title {
+            font-size: 16px;
+        }
+
+        .new-folder-dialog__field {
+            padding: 0 20px;
+            margin-bottom: 16px;
+        }
+
+        .new-folder-dialog__label {
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .new-folder-dialog__input,
+        .new-folder-dialog__select {
+            padding: 12px 16px;
+            font-size: 15px;
+            min-height: 44px;
+        }
+
+        .new-folder-dialog__color {
+            width: 32px;
+            height: 32px;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .new-folder-dialog__actions {
+            padding: 16px 20px;
+            gap: 12px;
+        }
+
+        .new-folder-dialog__button {
+            padding: 12px 16px;
+            font-size: 15px;
+            min-height: 44px;
+        }
+    }
+}

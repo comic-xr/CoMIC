@@ -1,0 +1,759 @@
+// src/ui/react/components/workspace/InstanceToolsNotch/InstanceToolsNotch.scss
+// Full-width toolbar bar for instance tools
+//
+// Glass aesthetic with color-coded accent on the left based on active view
+// Layout: [View Indicator] | [Tools...] | [More]
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER - Full width bar
+// =============================================================================
+
+.instance-tools-notch {
+  display: flex;
+  width: 100%;
+  pointer-events: none; // Allow clicks through gaps
+
+  // Transition for appearing/disappearing
+  transition: opacity 0.2s ease;
+}
+
+// =============================================================================
+// BAR CONTAINER - ViewHeader gradient style
+// =============================================================================
+
+.instance-tools-notch__container {
+  display: flex;
+  align-items: stretch; // Stretch so all zones fill full height
+  width: 100%;
+  pointer-events: auto;
+  position: relative;
+
+  // Gradient background matching ViewHeader style (dimmed by default)
+  background: linear-gradient(
+      90deg,
+      rgba(var(--notch-color-rgb), 0.08) 0%,
+      transparent 50%
+    ),
+    $color-bg-secondary;
+
+  // Accent bar (default: bottom)
+  border-bottom: 2px solid rgba(var(--notch-color-rgb), 0.35);
+  border-top: 2px solid transparent;
+
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+// =============================================================================
+// ACCENT POSITION VARIANTS
+// =============================================================================
+
+.instance-tools-notch--accent-top {
+  .instance-tools-notch__container {
+    border-top-color: rgba(var(--notch-color-rgb), 0.35);
+    border-bottom-color: transparent;
+  }
+
+  &.instance-tools-notch--active .instance-tools-notch__container {
+    border-top-color: var(--notch-color);
+    border-bottom-color: transparent;
+  }
+}
+
+.instance-tools-notch--accent-bottom {
+  .instance-tools-notch__container {
+    border-bottom-color: rgba(var(--notch-color-rgb), 0.35);
+    border-top-color: transparent;
+  }
+
+  &.instance-tools-notch--active .instance-tools-notch__container {
+    border-bottom-color: var(--notch-color);
+    border-top-color: transparent;
+  }
+}
+
+// =============================================================================
+// STATE VARIATIONS
+// =============================================================================
+
+.instance-tools-notch--active {
+  .instance-tools-notch__container {
+    // Bright gradient when active (like ViewHeader--active)
+    background: linear-gradient(
+        90deg,
+        rgba(var(--notch-color-rgb), 0.15) 0%,
+        transparent 50%
+      ),
+      $color-bg-secondary;
+    // Note: border color is set by accent position variants
+  }
+
+  .instance-tools-notch__view-name {
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.instance-tools-notch--inactive {
+  .instance-tools-notch__container {
+    background: $color-bg-secondary;
+    border-top-color: $color-border-subtle;
+    border-bottom-color: $color-border-subtle;
+  }
+
+  .instance-tools-notch__view-dot {
+    background: $color-text-muted !important;
+    box-shadow: none !important;
+  }
+}
+
+// =============================================================================
+// VIEW INDICATOR - Left section
+// =============================================================================
+
+.instance-tools-notch__view-indicator {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative; // For dropdown positioning
+}
+
+// View Selector Button (replaces static indicator)
+.instance-tools-notch__view-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.open {
+    background: rgba(var(--notch-color-rgb), 0.12);
+    border-color: rgba(var(--notch-color-rgb), 0.3);
+  }
+}
+
+.instance-tools-notch__view-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(var(--notch-color-rgb), 0.5);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.instance-tools-notch__view-name {
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .instance-tools-notch--inactive & {
+    color: $color-text-muted;
+  }
+
+  .instance-tools-notch--active & {
+    color: $color-text-primary;
+  }
+}
+
+.instance-tools-notch__view-chevron {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+// =============================================================================
+// VIEW TYPE ICON (in selector button)
+// =============================================================================
+
+.instance-tools-notch__view-type-icon {
+  color: $color-text-muted;
+  flex-shrink: 0;
+
+  .instance-tools-notch--active & {
+    color: $color-text-tertiary;
+  }
+}
+
+// =============================================================================
+// VIEW HUB FLYOUT (full view browser)
+// =============================================================================
+
+.instance-tools-notch__view-hub {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10000;
+
+  // The ViewHubFlyout component brings its own styling from ViewContextBlock.scss.
+  // Override positioning and accent colors for the notch context.
+  .view-hub-flyout {
+    min-width: 340px;
+    max-width: calc(100vw - 32px);
+    max-height: min(420px, 60vh);
+
+    // Glass panel matching notch aesthetic
+    background: $color-glass-panel;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 1px rgba(0, 0, 0, 0.5);
+
+    // Gradient accent at top matching notch color
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        rgba(var(--notch-color-rgb), 0.6),
+        rgba(var(--notch-color-rgb), 0.2),
+        transparent
+      );
+      border-radius: $radius-lg $radius-lg 0 0;
+      z-index: 1;
+    }
+  }
+}
+
+// =============================================================================
+// NAVIGATION CONTROLS - Zoom, Fit, Reset
+// =============================================================================
+
+.instance-tools-notch__nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.instance-tools-notch__zoom-display {
+  min-width: 48px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+// =============================================================================
+// NOTCH ZONE - Two-row section (mirrors Footer2 FooterZone)
+// =============================================================================
+
+.notch-zone {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.notch-zone__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 14px;
+  padding: 0 $spacing-sm;
+  background: $color-bg-canvas; // Match CanvasHeaderBar label darkness
+  border-bottom: 1px solid $color-border-subtle;
+  font-size: 8px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $color-text-muted;
+  white-space: nowrap;
+
+  // Color variants (matching Footer2)
+  &--blue { color: $color-accent-blue; }
+  &--purple { color: $color-accent-purple; }
+  &--amber { color: $color-accent-amber; }
+  &--teal { color: $color-accent-teal; }
+  &--green { color: $color-accent-green; }
+  &--pink { color: $color-accent-pink; }
+  &--cyan { color: $color-accent-cyan; }
+}
+
+.notch-zone__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 $spacing-xs;
+}
+
+// =============================================================================
+// NOTCH DIVIDER - Two-row vertical divider (mirrors Footer2 FooterDivider)
+// =============================================================================
+
+.notch-divider {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 1px;
+}
+
+.notch-divider__label {
+  height: 14px;
+  background: $color-border-subtle;
+}
+
+.notch-divider__content {
+  height: 28px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+// =============================================================================
+// NOTCH SPACER - Flexible spacer (mirrors Footer2 FooterSpacer)
+// =============================================================================
+
+.notch-spacer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: $spacing-sm;
+}
+
+.notch-spacer__label {
+  height: 14px;
+  background: $color-bg-canvas;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.notch-spacer__content {
+  height: 28px;
+}
+
+// =============================================================================
+// TOOL GROUP
+// =============================================================================
+
+.instance-tools-notch__group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.instance-tools-notch__separator {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 2px;
+}
+
+// =============================================================================
+// TOOL BUTTONS
+// =============================================================================
+
+.instance-tools-notch__tool {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; // For chevron overlay positioning
+
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-tertiary;
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &.active {
+    background: rgba(var(--notch-color-rgb), 0.2);
+    border-color: rgba(var(--notch-color-rgb), 0.3);
+    color: var(--notch-color);
+  }
+
+  &.menu-open {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  // Main icon stays centered
+  > svg:first-child {
+    flex-shrink: 0;
+  }
+}
+
+// Chevron overlays in bottom-right corner, doesn't affect icon centering
+.instance-tools-notch__tool-chevron {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  opacity: 0.7;
+  pointer-events: none; // Click passes through to button
+
+  // Small background pill for visibility
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  padding: 1px;
+}
+
+// =============================================================================
+// MORE BUTTON
+// =============================================================================
+
+.instance-tools-notch__more-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-tertiary;
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// DROPDOWN MENU (portaled to body)
+// =============================================================================
+
+.instance-tools-notch__menu {
+  position: fixed;
+  z-index: 10000;
+  min-width: 160px;
+  padding: $spacing-xs;
+
+  // Glass panel
+  background: $color-glass-panel;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(0, 0, 0, 0.5);
+
+  // Gradient accent at top
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      rgba(var(--notch-color-rgb), 0.6),
+      rgba(var(--notch-color-rgb), 0.2),
+      transparent
+    );
+    border-radius: $radius-lg $radius-lg 0 0;
+  }
+}
+
+.instance-tools-notch__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-primary;
+  }
+
+  &.active {
+    background: rgba(var(--notch-color-rgb), 0.15);
+    color: var(--notch-color);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: $color-text-tertiary;
+  }
+
+  &.active svg,
+  &:hover svg {
+    color: inherit;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.instance-tools-notch__menu-shortcut {
+  font-size: 11px;
+  color: $color-text-muted;
+  font-family: $font-family-mono;
+}
+
+.instance-tools-notch__menu-divider {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs 0;
+}
+
+// =============================================================================
+// CAMERA GRID (in menu)
+// =============================================================================
+
+.instance-tools-notch__camera-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: $spacing-xs;
+}
+
+.instance-tools-notch__camera-btn {
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+  }
+
+  &.special {
+    background: rgba(var(--notch-color-rgb), 0.1);
+    border-color: rgba(var(--notch-color-rgb), 0.2);
+    color: var(--notch-color);
+
+    &:hover:not(:disabled) {
+      background: rgba(var(--notch-color-rgb), 0.2);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// POPOVER PANEL (slider popovers for transform/camera tools)
+// =============================================================================
+
+.instance-tools-notch__popover {
+  position: fixed;
+  z-index: 10000;
+  min-width: 240px;
+  max-width: 300px;
+  padding: $spacing-sm;
+
+  // Glass panel (matches menu)
+  background: $color-glass-panel;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(0, 0, 0, 0.5);
+
+  // Gradient accent at top
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      rgba(var(--notch-color-rgb), 0.6),
+      rgba(var(--notch-color-rgb), 0.2),
+      transparent
+    );
+    border-radius: $radius-lg $radius-lg 0 0;
+  }
+}
+
+.instance-tools-notch__popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: $spacing-xs;
+  margin-bottom: $spacing-xs;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.instance-tools-notch__popover-title {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.instance-tools-notch__popover-reset {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-secondary;
+  }
+}
+
+.instance-tools-notch__popover-group {
+  & + & {
+    margin-top: $spacing-xs;
+    padding-top: $spacing-xs;
+    border-top: 1px solid $color-border-subtle;
+  }
+}
+
+.instance-tools-notch__popover-group-label {
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: $spacing-xs;
+}
+
+.instance-tools-notch__popover-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.instance-tools-notch__popover-slider-label {
+  width: 14px;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.instance-tools-notch__popover-slider-input {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--notch-color, $color-text-secondary);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--notch-color, $color-text-secondary);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+}
+
+.instance-tools-notch__popover-slider-value {
+  min-width: 42px;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  font-variant-numeric: tabular-nums;
+  color: $color-text-muted;
+  text-align: right;
+  flex-shrink: 0;
+  font-family: $font-family-mono;
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 600px) {
+  .instance-tools-notch__view-name {
+    max-width: 100px;
+  }
+
+  .instance-tools-notch__hint {
+    display: none;
+  }
+}

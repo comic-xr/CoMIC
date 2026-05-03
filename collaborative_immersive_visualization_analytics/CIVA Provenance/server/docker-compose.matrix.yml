@@ -1,0 +1,162 @@
+version: '3.8'
+
+# Matrix Federation Infrastructure for CIA Web
+#
+# This compose file sets up:
+# - Synapse Matrix homeserver
+# - PostgreSQL database for Synapse
+# - Redis for Synapse worker support (optional, for scaling)
+#
+# Usage:
+#   docker-compose -f docker-compose.matrix.yml up -d
+#
+# Note: This requires the main docker-compose.yml to be running for the shared network
+
+services:
+  # ==========================================================================
+  # SYNAPSE - Matrix Homeserver
+  # ==========================================================================
+  synapse:
+    image: matrixdotorg/synapse:v1.97.0
+    container_name: cia_matrix_synapse
+    restart: unless-stopped
+
+    # Ports
+    ports:
+      - "8008:8008"   # Matrix client-server API (HTTP)
+      - "8448:8448"   # Matrix federation API (HTTPS)
+
+    # Volumes
+    volumes:
+      - ./matrix-data:/data
+
+    # Environment variables
+    environment:
+      # Server configuration
+      - SYNAPSE_SERVER_NAME=${MATRIX_SERVER_NAME:-matrix.cia-web.local}
+      - SYNAPSE_REPORT_STATS=no
+
+      # PostgreSQL connection
+      - POSTGRES_HOST=matrix_postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=synapse
+      - POSTGRES_USER=synapse_user
+      - POSTGRES_PASSWORD=${MATRIX_POSTGRES_PASSWORD:-change-me-in-production}
+
+      # Redis (optional, for workers)
+      - REDIS_HOST=matrix_redis
+      - REDIS_PORT=6379
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8008/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+    # Dependencies
+    depends_on:
+      matrix_postgres:
+        condition: service_healthy
+      matrix_redis:
+        condition: service_started
+
+    # Networks
+    networks:
+      - cia_matrix_network
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ==========================================================================
+  # POSTGRESQL - Matrix Database
+  # ==========================================================================
+  matrix_postgres:
+    image: postgres:15-alpine
+    container_name: cia_matrix_postgres
+    restart: unless-stopped
+
+    # Ports (expose for debugging only, not required)
+    ports:
+      - "5433:5432"  # Use different port to avoid conflict with main DB
+
+    # Volumes
+    volumes:
+      - matrix_postgres_data:/var/lib/postgresql/data
+      - ./matrix-config/init-synapse-db.sql:/docker-entrypoint-initdb.d/init-synapse-db.sql:ro
+
+    # Environment
+    environment:
+      - POSTGRES_DB=synapse
+      - POSTGRES_USER=synapse_user
+      - POSTGRES_PASSWORD=${MATRIX_POSTGRES_PASSWORD:-change-me-in-production}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8 --lc-collate=C --lc-ctype=C
+
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U synapse_user -d synapse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    # Networks
+    networks:
+      - cia_matrix_network
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ==========================================================================
+  # REDIS - Cache and Worker Support
+  # ==========================================================================
+  matrix_redis:
+    image: redis:7-alpine
+    container_name: cia_matrix_redis
+    restart: unless-stopped
+
+    # Command
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+    # Volumes
+    volumes:
+      - matrix_redis_data:/data
+
+    # Networks
+    networks:
+      - cia_matrix_network
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+# =============================================================================
+# NETWORKS
+# =============================================================================
+networks:
+  cia_matrix_network:
+    name: cia_matrix_network
+    driver: bridge
+
+# =============================================================================
+# VOLUMES
+# =============================================================================
+volumes:
+  matrix_postgres_data:
+    name: cia_matrix_postgres_data
+    driver: local
+
+  matrix_redis_data:
+    name: cia_matrix_redis_data
+    driver: local

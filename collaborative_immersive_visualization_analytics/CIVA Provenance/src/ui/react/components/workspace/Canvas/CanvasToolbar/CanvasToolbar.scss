@@ -1,0 +1,439 @@
+// src/ui/react/components/workspace/Canvas/CanvasToolbar/CanvasToolbar.scss
+// Canvas toolbar footer styling
+//
+// Based on canvas-chrome-v12.jsx spec
+// Height: 90px (18px label bar + 72px content bar)
+// Layout: Navigation | History | ViewContextBlock (mode + view + links + actions)
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER - Uses ToolbarContainer with taller content for footer
+// =============================================================================
+
+.canvas-toolbar {
+  // Override border direction for footer (top instead of bottom)
+  border-top: 1px solid $color-border-default;
+  border-bottom: none;
+
+  // Make content zones taller for the footer toolbar (72px vs 44px)
+  .toolbar-zone__content {
+    height: 72px;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  // Match taller dividers
+  .toolbar-divider__content {
+    height: 72px;
+  }
+
+  // Match taller spacers
+  .toolbar-spacer__content {
+    height: 72px;
+  }
+}
+
+// =============================================================================
+// VIEW MODE TOGGLE
+// =============================================================================
+
+.canvas-toolbar__mode-toggle {
+  display: flex;
+  background: $color-bg-canvas;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  padding: 2px;
+}
+
+.canvas-toolbar__mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    color: $color-text-secondary;
+    background: rgba($color-accent-blue, 0.08);
+  }
+
+  &--active {
+    color: $color-accent-blue;
+    background: rgba($color-accent-blue, 0.15);
+    border-color: $color-accent-blue;
+    cursor: default;
+  }
+
+  &:disabled:not(.canvas-toolbar__mode-btn--active) {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// NAVIGATION ZONE
+// =============================================================================
+
+.canvas-toolbar__nav-controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.canvas-toolbar__nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.canvas-toolbar__nav-arrows-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.canvas-toolbar__position {
+  font-size: 9px;
+  font-family: $font-family-mono;
+  color: $color-text-muted;
+  padding: 2px $spacing-xs;
+  background: $color-bg-canvas;
+  border-radius: $radius-sm;
+  letter-spacing: 0.5px;
+}
+
+// =============================================================================
+// HISTORY ZONE
+// =============================================================================
+
+.canvas-toolbar__history-controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+// =============================================================================
+// SUBSET ZONE
+// =============================================================================
+
+.canvas-toolbar__subset-picker {
+  position: relative;
+}
+
+.canvas-toolbar__subset-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  color: $color-accent-purple;
+  cursor: pointer;
+  font-size: $font-size-xs;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-elevated;
+    border-color: $color-border-default;
+  }
+
+  &--open {
+    background: $color-bg-elevated;
+    border-color: $color-accent-purple;
+  }
+}
+
+.canvas-toolbar__subset-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: $spacing-sm;
+  width: 220px;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  z-index: $z-dropdown;
+}
+
+.canvas-toolbar__subset-header {
+  padding: $spacing-sm $spacing-md;
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $color-text-muted;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.canvas-toolbar__subset-list {
+  padding: $spacing-sm;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.canvas-toolbar__subset-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.08);
+  }
+}
+
+.canvas-toolbar__subset-check {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: transparent;
+  border: 1.5px solid $color-border-medium;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #000;
+
+  &--checked {
+    background: $color-accent-purple;
+    border-color: $color-accent-purple;
+  }
+}
+
+.canvas-toolbar__subset-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.canvas-toolbar__subset-name {
+  font-size: $font-size-xs;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.canvas-toolbar__subset-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  border-top: 1px solid $color-border-subtle;
+
+  button {
+    font-size: 10px;
+    color: $color-accent-blue;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:last-child {
+      color: $color-text-muted;
+    }
+  }
+}
+
+// =============================================================================
+// VIEW CONTEXT ZONE (uses ViewContextBlock component)
+// =============================================================================
+
+// The ViewContextBlock component has its own styling.
+// This zone just wraps it with proper flex layout.
+
+.canvas-toolbar__zone--view-context {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+// Label for view context zone
+.canvas-toolbar__label--view-context {
+  flex: 1;
+  min-width: 0;
+}
+
+// =============================================================================
+// ACTIONS ZONE
+// =============================================================================
+
+.canvas-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.canvas-toolbar__links-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-elevated;
+    border-color: $color-border-default;
+    color: $color-accent-teal;
+  }
+
+  &--active {
+    color: $color-accent-teal;
+    border-color: $color-accent-teal;
+  }
+}
+
+.canvas-toolbar__links-badge {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 $spacing-xs;
+  background: $color-accent-teal;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-toolbar__actions-divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-default;
+  margin: 0 $spacing-xs;
+}
+
+// =============================================================================
+// RESPONSIVE - Progressive collapse as container gets narrower
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// CONTAINER QUERIES - Respond to canvas-workspace width
+// -----------------------------------------------------------------------------
+
+// MEDIUM: < 1000px - Hide some labels, compact spacing
+@container canvas-workspace (max-width: 1000px) {
+  .canvas-toolbar {
+    .canvas-toolbar__links-btn span:not(.canvas-toolbar__links-badge) {
+      display: none;
+    }
+  }
+}
+
+// SMALL: < 800px - Icon-only buttons, hide label bar
+@container canvas-workspace (max-width: 800px) {
+  .canvas-toolbar {
+    .toolbar-zone__label {
+      display: none;
+    }
+
+    .toolbar-zone__content {
+      height: auto;
+      min-height: 54px;
+    }
+
+    .toolbar-divider {
+      display: none;
+    }
+
+    .canvas-toolbar__mode-btn {
+      width: 28px;
+      height: 26px;
+    }
+
+    .canvas-toolbar__nav-controls {
+      gap: 2px;
+    }
+
+    .canvas-toolbar__position {
+      display: none;
+    }
+  }
+}
+
+// EXTRA SMALL: < 600px - Minimal mode, essentials only
+@container canvas-workspace (max-width: 600px) {
+  .canvas-toolbar {
+    // Hide history zone
+    .toolbar-zone:has(.canvas-toolbar__history-controls) {
+      display: none;
+    }
+
+    // Compact nav controls
+    .canvas-toolbar__nav-arrows-vertical {
+      display: none;
+    }
+
+    .canvas-toolbar__mode-toggle {
+      padding: 1px;
+    }
+
+    .canvas-toolbar__mode-btn {
+      width: 24px;
+      height: 22px;
+    }
+
+    .canvas-toolbar__subset-btn span:not(svg) {
+      display: none;
+    }
+  }
+}
+
+// TINY: < 450px - Absolute essentials
+@container canvas-workspace (max-width: 450px) {
+  .canvas-toolbar {
+    .canvas-toolbar__actions {
+      display: none;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// FALLBACK MEDIA QUERIES - For browsers without container query support
+// -----------------------------------------------------------------------------
+
+@supports not (container-type: inline-size) {
+  @media (max-width: 1000px) {
+    .canvas-toolbar .canvas-toolbar__links-btn span:not(.canvas-toolbar__links-badge) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .canvas-toolbar .toolbar-zone__label {
+      display: none;
+    }
+
+    .canvas-toolbar .toolbar-divider {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .canvas-toolbar .canvas-toolbar__position {
+      display: none;
+    }
+  }
+}

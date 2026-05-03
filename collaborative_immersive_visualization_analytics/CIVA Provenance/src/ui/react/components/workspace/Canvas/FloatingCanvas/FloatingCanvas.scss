@@ -1,0 +1,382 @@
+// src/ui/react/components/workspace/Canvas/FloatingCanvas/FloatingCanvas.scss
+// Styles for FloatingCanvasWrapper and CanvasControlsBar
+//
+// Supports three modes: docked, floating, fullscreen
+
+@use "theme" as *;
+
+// =============================================================================
+// CANVAS CONTROLS BAR
+// =============================================================================
+// Responsive design: labels collapse at medium, icons-only at small
+
+.canvas-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: $spacing-xs $spacing-md;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-default;
+  min-height: 28px;
+  flex-shrink: 0;
+  gap: $spacing-md;
+}
+
+// Compact mode for embedding in toolbar info bar
+.canvas-controls-bar--compact {
+  min-height: 18px;
+  padding: 0 $spacing-md;
+  background: $color-bg-canvas;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.canvas-controls-bar__section {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+}
+
+.canvas-controls-bar__section--center {
+  justify-content: center;
+}
+
+.canvas-controls-bar__label {
+  font-size: 9px;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.canvas-controls-bar__modes {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: $color-bg-canvas;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  padding: 2px;
+}
+
+.canvas-controls-bar__mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: 3px $spacing-sm;
+  font-size: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-xs;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba($color-accent-blue, 0.08);
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+  }
+}
+
+.canvas-controls-bar__mode-label {
+  // Visible by default, hidden on smaller screens
+}
+
+.canvas-controls-bar__select {
+  padding: 2px $spacing-sm;
+  font-size: 10px;
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-xs;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+  min-width: 50px;
+
+  &:hover:not(:disabled) {
+    border-color: $color-border-default;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent-blue;
+  }
+}
+
+.canvas-controls-bar__lock-icon {
+  color: $color-accent-amber;
+}
+
+.canvas-controls-bar__grid-icon {
+  color: $color-text-muted;
+}
+
+.canvas-controls-bar__spacer {
+  flex: 1;
+}
+
+.canvas-controls-bar__status {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// RESPONSIVE - MEDIUM (hide labels, keep button text)
+// =============================================================================
+
+@media (max-width: 900px) {
+  .canvas-controls-bar__label {
+    display: none;
+  }
+}
+
+// =============================================================================
+// RESPONSIVE - SMALL (icon-only mode buttons)
+// =============================================================================
+
+@media (max-width: 700px) {
+  .canvas-controls-bar__mode-label {
+    display: none;
+  }
+
+  .canvas-controls-bar__mode-btn {
+    padding: 3px 6px;
+  }
+
+  .canvas-controls-bar__section--center {
+    display: none;
+  }
+}
+
+// =============================================================================
+// RESPONSIVE - EXTRA SMALL (minimal controls)
+// =============================================================================
+
+@media (max-width: 500px) {
+  .canvas-controls-bar {
+    padding: $spacing-xs $spacing-sm;
+    gap: $spacing-sm;
+  }
+
+  .canvas-controls-bar__status {
+    display: none;
+  }
+}
+
+// =============================================================================
+// FLOATING CANVAS WRAPPER
+// =============================================================================
+
+.floating-canvas {
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-canvas;
+}
+
+// Docked mode - fills available space
+.floating-canvas--docked {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+}
+
+// Fullscreen mode - fixed positioning
+.floating-canvas--fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: $z-fixed;
+  background: $color-bg-canvas;
+}
+
+.floating-canvas__exit-fullscreen {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  z-index: 10;
+  opacity: 0.3;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// Floating mode - absolute positioning
+.floating-canvas--floating {
+  position: absolute;
+  z-index: $z-fixed;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid $color-border-medium;
+
+  // Minimum size constraints (matches footer toolbar requirements)
+  min-width: 650px;
+  min-height: 400px;
+
+  // Enable container queries for responsive child behavior
+  container-type: inline-size;
+  container-name: canvas-workspace;
+}
+
+.floating-canvas--dragging {
+  cursor: move;
+  user-select: none;
+}
+
+// Drag handle
+.floating-canvas__drag-handle {
+  height: 24px;
+  background: $color-bg-tertiary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: move;
+  border-bottom: 1px solid $color-border-default;
+  flex-shrink: 0;
+}
+
+.floating-canvas__grip-icon {
+  color: $color-text-muted;
+}
+
+// Content area
+.floating-canvas__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// Resize handles - edges + corners
+.floating-canvas__resize-handle {
+  position: absolute;
+  z-index: 100;
+  background: transparent;
+}
+
+.floating-canvas__resize-handle--top {
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.floating-canvas__resize-handle--bottom {
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.floating-canvas__resize-handle--left {
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.floating-canvas__resize-handle--right {
+  top: 12px;
+  bottom: 12px;
+  right: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.floating-canvas__resize-handle--top-left {
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  cursor: nwse-resize;
+}
+
+.floating-canvas__resize-handle--top-right {
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  cursor: nesw-resize;
+}
+
+.floating-canvas__resize-handle--bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  cursor: nesw-resize;
+}
+
+.floating-canvas__resize-handle--bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid $color-text-muted;
+    border-bottom: 2px solid $color-text-muted;
+    opacity: 0.5;
+  }
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 800px) {
+  .canvas-controls-bar {
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  .canvas-controls-bar__section--center {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .canvas-controls-bar__modes {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .canvas-controls-bar__label {
+    display: none;
+  }
+
+  // Compact floating mode on mobile (but don't force docked)
+  .floating-canvas--floating {
+    border-radius: $radius-md;
+
+    .floating-canvas__drag-handle {
+      height: 20px;
+    }
+  }
+}

@@ -1,0 +1,232 @@
+// src/ui/react/components/molecules/SliderMenuOption/SliderMenuOption.scss
+// Slider menu option molecule styles
+
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// SLIDER MENU OPTION
+// ============================================================================
+
+.slider-option {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm !important;
+
+    // Override menu-option hover for sliders
+    &:hover {
+        background: transparent !important;
+    }
+
+    // Don't inherit pointer styles
+    cursor: default !important;
+}
+
+// ============================================================================
+// HEADER
+// ============================================================================
+
+.slider-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+}
+
+.slider-label-group {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.slider-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-tertiary;
+
+    svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.slider-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+}
+
+.slider-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-pink;
+    font-family: "Monaco", "Courier New", monospace;
+    min-width: 48px;
+    text-align: right;
+}
+
+// ============================================================================
+// SLIDER INPUT CONTAINER
+// ============================================================================
+
+.slider-input-container {
+    position: relative;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+
+    // Track background
+    &::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        height: 6px;
+        background: $color-bg-tertiary;
+        border-radius: $radius-full;
+        border: 1px solid $color-border-subtle;
+    }
+}
+
+.dropdown-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+
+    // Progress fill (using CSS custom property)
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 6px;
+        width: var(--slider-progress, 0%);
+        background: linear-gradient(
+            90deg,
+            $color-accent-pink,
+            color.adjust($color-accent-pink, $lightness: 10%)
+        );
+        border-radius: $radius-full 0 0 $radius-full;
+        pointer-events: none;
+
+        // Glow effect
+        box-shadow: 0 0 8px rgba($color-accent-pink, 0.4);
+    }
+
+    // Thumb - Webkit
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: $color-accent-pink;
+        border-radius: $radius-full;
+        cursor: grab;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3),
+            0 0 0 2px rgba($color-accent-pink, 0.2);
+        transition: transform $transition-fast, box-shadow $transition-fast;
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+                0 0 0 4px rgba($color-accent-pink, 0.3);
+        }
+
+        &:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+    }
+
+    // Thumb - Firefox
+    &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: $color-accent-pink;
+        border-radius: $radius-full;
+        cursor: grab;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3),
+            0 0 0 2px rgba($color-accent-pink, 0.2);
+        transition: transform $transition-fast, box-shadow $transition-fast;
+    }
+
+    // Track - Firefox
+    &::-moz-range-track {
+        height: 6px;
+        background: transparent;
+        border-radius: $radius-full;
+    }
+
+    // Progress - Firefox
+    &::-moz-range-progress {
+        height: 6px;
+        background: linear-gradient(
+            90deg,
+            $color-accent-pink,
+            color.adjust($color-accent-pink, $lightness: 10%)
+        );
+        border-radius: $radius-full 0 0 $radius-full;
+    }
+
+    &:focus {
+        outline: none;
+
+        &::-webkit-slider-thumb {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+                0 0 0 4px rgba($color-accent-pink, 0.4);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+
+        &::-webkit-slider-thumb {
+            cursor: not-allowed;
+        }
+
+        &::-moz-range-thumb {
+            cursor: not-allowed;
+        }
+    }
+}
+
+// ============================================================================
+// PRESET MARKS
+// ============================================================================
+
+.slider-presets {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+    margin-top: -2px;
+}
+
+.slider-preset-mark {
+    width: 4px;
+    height: 4px;
+    background: $color-accent-pink;
+    border-radius: $radius-full;
+    transition: opacity $transition-fast;
+}
+
+// ============================================================================
+// DESCRIPTION
+// ============================================================================
+
+.slider-description {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    margin-top: $spacing-xs;
+}

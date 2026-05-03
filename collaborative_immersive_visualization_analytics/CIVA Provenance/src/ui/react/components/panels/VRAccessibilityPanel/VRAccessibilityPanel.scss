@@ -1,0 +1,372 @@
+/**
+ * VRAccessibilityPanel styles
+ * Modal panel for VR accessibility settings
+ */
+
+@use "theme" as *;
+
+.vr-accessibility-panel {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    min-height: 400px;
+
+    // =========================================================================
+    // TAB NAVIGATION
+    // =========================================================================
+
+    &__tabs {
+        display: flex;
+        gap: $spacing-xs;
+        padding-bottom: $spacing-sm;
+        border-bottom: 1px solid $color-border-subtle;
+    }
+
+    &__tab {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-sm $spacing-md;
+        background: transparent;
+        border: none;
+        border-radius: $radius-md;
+        color: $color-text-secondary;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 150ms ease, color 150ms ease;
+
+        &:hover {
+            background: $color-hover-bg;
+            color: $color-text-primary;
+        }
+
+        &--active {
+            background: $color-active-bg;
+            color: $color-accent-primary;
+
+            &:hover {
+                background: $color-active-bg;
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-accent-blue;
+            outline-offset: 2px;
+        }
+    }
+
+    // =========================================================================
+    // TAB CONTENT
+    // =========================================================================
+
+    &__content {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: $spacing-xs;
+
+        // Scrollbar styling
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $color-border-medium;
+            border-radius: 3px;
+
+            &:hover {
+                background: $color-border-strong;
+            }
+        }
+    }
+
+    // =========================================================================
+    // FOOTER
+    // =========================================================================
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &__footer-actions {
+        display: flex;
+        gap: $spacing-sm;
+    }
+}
+
+// =============================================================================
+// SHARED SETTING COMPONENTS
+// =============================================================================
+
+.vr-setting-group {
+    margin-bottom: $spacing-lg;
+
+    &__title {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: $color-text-primary;
+        margin-bottom: $spacing-sm;
+    }
+
+    &__description {
+        font-size: 0.8125rem;
+        color: $color-text-tertiary;
+        margin-bottom: $spacing-md;
+    }
+}
+
+.vr-setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm 0;
+
+    &--stacked {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-sm;
+    }
+
+    &__label {
+        font-size: 0.875rem;
+        color: $color-text-primary;
+    }
+
+    &__hint {
+        font-size: 0.75rem;
+        color: $color-text-tertiary;
+        margin-top: 2px;
+    }
+}
+
+.vr-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    background: $color-glass-subtle;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    padding: $spacing-sm;
+
+    &__option {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-sm;
+        padding: $spacing-xs;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: background-color 150ms ease;
+
+        &:hover {
+            background: $color-hover-bg;
+        }
+
+        input[type="radio"] {
+            margin-top: 3px;
+            accent-color: $color-accent-primary;
+        }
+
+        &-content {
+            flex: 1;
+        }
+
+        &-label {
+            font-size: 0.875rem;
+            color: $color-text-primary;
+            font-weight: 500;
+        }
+
+        &-description {
+            font-size: 0.75rem;
+            color: $color-text-tertiary;
+            margin-top: 2px;
+        }
+    }
+}
+
+.vr-slider {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    width: 100%;
+
+    &__track {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+    }
+
+    &__label-min,
+    &__label-max {
+        font-size: 0.75rem;
+        color: $color-text-tertiary;
+        min-width: 50px;
+    }
+
+    &__label-max {
+        text-align: right;
+    }
+
+    input[type="range"] {
+        flex: 1;
+        height: 4px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: $color-border-medium;
+        border-radius: 2px;
+        outline: none;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: $color-accent-primary;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 150ms ease;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        &::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: $color-accent-primary;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+
+    &__value {
+        font-size: 0.8125rem;
+        color: $color-text-secondary;
+        text-align: center;
+    }
+}
+
+.vr-toggle {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    &__switch {
+        position: relative;
+        width: 44px;
+        height: 24px;
+        background: $color-border-medium;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 150ms ease;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 150ms ease;
+        }
+
+        &--on {
+            background: $color-accent-primary;
+
+            &::after {
+                transform: translateX(20px);
+            }
+        }
+    }
+}
+
+.vr-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-xs 0;
+
+        input[type="checkbox"] {
+            accent-color: $color-accent-primary;
+        }
+
+        label {
+            font-size: 0.875rem;
+            color: $color-text-primary;
+            cursor: pointer;
+        }
+    }
+}
+
+.vr-info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: $color-info-bg;
+    border: 1px solid $color-info-border;
+    border-radius: $radius-md;
+    font-size: 0.8125rem;
+    color: $color-text-secondary;
+
+    svg {
+        flex-shrink: 0;
+        color: $color-info;
+    }
+}
+
+.vr-warning-box {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: $color-warning-bg;
+    border: 1px solid $color-warning-border;
+    border-radius: $radius-md;
+    font-size: 0.8125rem;
+    color: $color-text-secondary;
+
+    svg {
+        flex-shrink: 0;
+        color: $color-warning;
+    }
+}
+
+.vr-preview-button {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: $color-glass-subtle;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        border-color: $color-border-default;
+    }
+
+    svg {
+        color: $color-accent-primary;
+    }
+}

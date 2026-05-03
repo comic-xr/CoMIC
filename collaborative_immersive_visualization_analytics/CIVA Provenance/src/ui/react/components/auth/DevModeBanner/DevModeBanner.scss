@@ -1,0 +1,103 @@
+// src/ui/react/components/auth/DevModeBanner.scss
+// Development mode warning banner styling
+// FIXED: Position as fixed overlay (not in flex flow) per design spec
+
+@use "sass:color";
+@use "theme" as *;
+
+.dev-mode-banner {
+  // FIXED: Position as fixed overlay at top of screen
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 95; // Per design spec: "Overlay, not push layout"
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  padding: 0 $spacing-md;
+
+  background: linear-gradient(
+    90deg,
+    color.adjust($color-warning, $alpha: -0.75),
+    color.adjust($color-warning, $alpha: -0.85)
+  );
+  border-bottom: 1px solid color.adjust($color-warning, $alpha: -0.5);
+  backdrop-filter: blur(8px);
+
+  // Subtle animation on load
+  animation: dev-banner-slide-in 0.3s ease-out;
+
+  @keyframes dev-banner-slide-in {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__icon {
+    color: $color-warning;
+    flex-shrink: 0;
+  }
+
+  &__message {
+    font-size: 11px;
+    font-weight: $font-weight-semibold;
+    color: $color-warning;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  &__dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: color.adjust($color-warning, $alpha: -0.3);
+    cursor: pointer;
+    border-radius: $radius-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: color.adjust($color-warning, $alpha: -0.6);
+      color: $color-warning;
+    }
+  }
+}
+
+// =============================================================================
+// ADJUST HEADER WHEN BANNER IS VISIBLE
+// =============================================================================
+// Since the banner overlays the top 28px, we need to push the header down
+// when the banner is visible. This is done via a body class or CSS variable.
+
+// Option 1: Use a spacer element (add to app)
+.dev-mode-spacer {
+  height: 28px;
+  flex-shrink: 0;
+}
+
+// Option 2: Adjust the main app container when banner is present
+// Add class "dev-mode-active" to body or app container
+.dev-mode-active {
+  .cia-web-app,
+  .three-edge-layout {
+    padding-top: 28px;
+  }
+}

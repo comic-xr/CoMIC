@@ -1,0 +1,437 @@
+/**
+ * @file Modal.scss
+ * @description Styles for the base Modal component.
+ * Uses BEM naming convention and design tokens from the theme.
+ *
+ * Structure:
+ * - .modal__backdrop - Full-screen overlay with blur
+ * - .modal - Modal container with size and severity modifiers
+ * - .modal__header - Header with icon, title, and close button
+ * - .modal__content - Scrollable content area
+ * - .modal__footer - Action buttons container
+ *
+ * Size modifiers: .modal--sm, .modal--md, .modal--lg
+ * Severity modifiers: .modal--info, .modal--warning, .modal--danger, .modal--success
+ */
+
+@use "theme" as *;
+
+// ============================================================================
+// ANIMATION KEYFRAMES
+// ============================================================================
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ============================================================================
+// BACKDROP
+// ============================================================================
+
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-modal-backdrop;
+
+  // Background with blur
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  // Center the modal
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+
+  // Animation
+  animation: backdrop-enter 150ms ease-out;
+}
+
+// ============================================================================
+// MODAL CONTAINER
+// ============================================================================
+
+.modal {
+  position: relative;
+  z-index: $z-modal;
+
+  // Appearance
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-2xl;
+
+  // Layout
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  width: 100%;
+
+  // Animation
+  animation: modal-enter 150ms ease-out;
+
+  // ============================================================================
+  // SIZE MODIFIERS
+  // ============================================================================
+
+  &--sm {
+    max-width: 400px;
+  }
+
+  &--md {
+    max-width: 520px;
+  }
+
+  &--lg {
+    max-width: 640px;
+  }
+
+  // ============================================================================
+  // SEVERITY MODIFIERS (for icon colors)
+  // ============================================================================
+
+  &--info {
+    .modal__icon {
+      color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.1);
+      border-color: rgba($color-accent-blue, 0.2);
+    }
+  }
+
+  &--warning {
+    .modal__icon {
+      color: $color-warning;
+      background: rgba($color-warning, 0.1);
+      border-color: rgba($color-warning, 0.2);
+    }
+  }
+
+  &--danger {
+    .modal__icon {
+      color: $color-error;
+      background: rgba($color-error, 0.1);
+      border-color: rgba($color-error, 0.2);
+    }
+  }
+
+  &--success {
+    .modal__icon {
+      color: $color-success;
+      background: rgba($color-success, 0.1);
+      border-color: rgba($color-success, 0.2);
+    }
+  }
+}
+
+// ============================================================================
+// HEADER
+// ============================================================================
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  padding: $spacing-lg $spacing-xl;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-default;
+  border-radius: $radius-xl $radius-xl 0 0;
+
+  // Prevent shrinking when content overflows
+  flex-shrink: 0;
+}
+
+.modal__header-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  min-width: 0; // Allow text truncation
+}
+
+.modal__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  border: 1px solid;
+
+  // Default info style (overridden by severity modifiers)
+  color: $color-accent-blue;
+  background: rgba($color-accent-blue, 0.1);
+  border-color: rgba($color-accent-blue, 0.2);
+}
+
+.modal__title {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  line-height: $line-height-tight;
+
+  // Truncate long titles
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal__close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  // 32px hit area
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-md;
+
+  // Appearance
+  color: $color-text-tertiary;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  // Transition
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+    background: $color-hover-bg;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px $color-focus-ring;
+  }
+
+  &:active {
+    background: $color-active-bg;
+  }
+}
+
+// ============================================================================
+// CONTENT
+// ============================================================================
+
+.modal__content {
+  padding: $spacing-xl;
+
+  // Scrollable
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0; // Allow content to shrink
+
+  // Text styles
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-glass-subtle;
+    border-radius: $radius-sm;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-glass-strong;
+    border-radius: $radius-sm;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      background-clip: padding-box;
+    }
+
+    &:active {
+      background: $color-border-medium;
+      background-clip: padding-box;
+    }
+  }
+
+  // Paragraph spacing
+  p {
+    margin: 0;
+
+    & + p {
+      margin-top: $spacing-md;
+    }
+  }
+}
+
+// ============================================================================
+// FOOTER
+// ============================================================================
+
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-md;
+
+  padding: $spacing-lg $spacing-xl;
+  background: $color-bg-tertiary;
+  border-top: 1px solid $color-border-default;
+  border-radius: 0 0 $radius-xl $radius-xl;
+
+  // Prevent shrinking
+  flex-shrink: 0;
+
+  // Basic button styles (to be enhanced with Button component later)
+  button {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px $color-focus-ring;
+    }
+  }
+
+  // Secondary button style
+  .btn--secondary {
+    color: $color-text-secondary;
+    background: $color-glass-light;
+    border: 1px solid $color-border-default;
+
+    &:hover {
+      color: $color-text-primary;
+      background: $color-glass-medium;
+      border-color: $color-border-medium;
+    }
+
+    &:active {
+      background: $color-glass-strong;
+    }
+  }
+
+  // Primary button style
+  .btn--primary {
+    color: $color-text-primary;
+    background: rgba($color-accent-primary, 0.15);
+    border: 1px solid rgba($color-accent-primary, 0.4);
+
+    &:hover {
+      background: rgba($color-accent-primary, 0.25);
+      border-color: rgba($color-accent-primary, 0.6);
+    }
+
+    &:active {
+      background: rgba($color-accent-primary, 0.3);
+    }
+  }
+
+  // Danger button style
+  .btn--danger {
+    color: $color-error;
+    background: rgba($color-error, 0.1);
+    border: 1px solid rgba($color-error, 0.3);
+
+    &:hover {
+      color: $color-text-primary;
+      background: rgba($color-error, 0.2);
+      border-color: rgba($color-error, 0.5);
+    }
+
+    &:active {
+      background: rgba($color-error, 0.25);
+    }
+  }
+
+  // Success button style
+  .btn--success {
+    color: $color-success;
+    background: rgba($color-success, 0.1);
+    border: 1px solid rgba($color-success, 0.3);
+
+    &:hover {
+      color: $color-text-primary;
+      background: rgba($color-success, 0.2);
+      border-color: rgba($color-success, 0.5);
+    }
+
+    &:active {
+      background: rgba($color-success, 0.25);
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 480px) {
+  .modal__backdrop {
+    padding: $spacing-md;
+  }
+
+  .modal {
+    max-height: 90vh;
+
+    &--sm,
+    &--md,
+    &--lg {
+      max-width: 100%;
+    }
+  }
+
+  .modal__header,
+  .modal__content,
+  .modal__footer {
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+  }
+
+  .modal__footer {
+    flex-direction: column-reverse;
+    gap: $spacing-sm;
+
+    button {
+      width: 100%;
+    }
+  }
+}

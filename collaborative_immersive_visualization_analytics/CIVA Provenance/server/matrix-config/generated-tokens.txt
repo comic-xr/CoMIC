@@ -1,0 +1,19 @@
+CIA Web Matrix Federation - Generated Tokens
+Generated: 2026-01-13T03:06:13.888Z
+
+IMPORTANT: Keep these tokens secure! Do not commit to version control.
+
+1. MATRIX_REGISTRATION_SECRET (for homeserver.yaml line 71):
+I91ufMcvy6bOhB8xm6GO9KK6jY/irN/THZ3gRITSYAk=
+
+2. MATRIX_AS_TOKEN (for cia-bridge-registration.yaml line 16):
+d20e1866d22403e4cef2486e9f24c594c52afd519dae909cee4d3e82393237b1
+
+3. MATRIX_HS_TOKEN (for cia-bridge-registration.yaml line 20):
+524effc36cba16203cc75d6270d6ed796639e45f0afa10eaa72b841f1c382cd6
+
+.env format:
+MATRIX_REGISTRATION_SECRET="I91ufMcvy6bOhB8xm6GO9KK6jY/irN/THZ3gRITSYAk="
+MATRIX_AS_TOKEN="d20e1866d22403e4cef2486e9f24c594c52afd519dae909cee4d3e82393237b1"
+MATRIX_HS_TOKEN="524effc36cba16203cc75d6270d6ed796639e45f0afa10eaa72b841f1c382cd6"
+MATRIX_POSTGRES_PASSWORD="your-secure-password-here"

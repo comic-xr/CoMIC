@@ -1,0 +1,179 @@
+// src/ui/react/components/workspace/Canvas/EdgePanels/EdgePanels.scss
+// Styles for EdgeTrigger and FloatingPanel components
+
+@use "theme" as *;
+
+// =============================================================================
+// EDGE TRIGGER
+// =============================================================================
+
+.edge-trigger {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 80px;
+  cursor: pointer;
+  z-index: $z-dropdown;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width $transition-fast, background $transition-fast;
+
+  &--left {
+    left: 0;
+    border-radius: 0 $radius-md $radius-md 0;
+  }
+
+  &--right {
+    right: 0;
+    border-radius: $radius-md 0 0 $radius-md;
+  }
+
+  &--hovering {
+    width: 32px;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-default;
+
+    &.edge-trigger--left {
+      border-left: none;
+    }
+
+    &.edge-trigger--right {
+      border-right: none;
+    }
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.3);
+  }
+}
+
+.edge-trigger__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edge-trigger__icon {
+  color: $color-text-secondary;
+}
+
+// =============================================================================
+// FLOATING PANEL
+// =============================================================================
+
+.floating-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--panel-width, 280px);
+  background: $color-bg-secondary;
+  z-index: $z-modal;
+  display: flex;
+  flex-direction: column;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+
+  &--left {
+    left: 0;
+    border-right: 1px solid $color-border-default;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    animation-name: slideInLeft;
+  }
+
+  &--right {
+    right: 0;
+    border-left: 1px solid $color-border-default;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    animation-name: slideInRight;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// FLOATING PANEL HEADER
+// =============================================================================
+
+.floating-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border-default;
+  flex-shrink: 0;
+}
+
+.floating-panel__title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.floating-panel__header-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-left: auto;
+}
+
+// =============================================================================
+// FLOATING PANEL CONTENT
+// =============================================================================
+
+.floating-panel__content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.floating-panel__content .panel-header__actions,
+.floating-panel__content .panel-header__controls,
+.floating-panel__content .right-panel__actions {
+  display: none;
+}
+
+.floating-panel__placeholder {
+  padding: $spacing-md;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 600px) {
+  .floating-panel {
+    width: 100% !important;
+    max-width: 100vw;
+  }
+
+  .edge-trigger {
+    display: none;
+  }
+}

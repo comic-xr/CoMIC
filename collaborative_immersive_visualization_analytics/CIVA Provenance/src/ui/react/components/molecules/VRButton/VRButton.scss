@@ -1,0 +1,215 @@
+// src/ui/react/components/common/VRButton/VRButton.scss
+// Styles for VR mode toggle button
+@use "theme" as *;
+
+// =============================================================================
+// MAIN VR BUTTON
+// =============================================================================
+
+.vr-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: 10px;
+  color: $color-text-muted;
+  transition: all $transition-fast;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-secondary;
+  }
+
+  // ==========================================================================
+  // SIZES
+  // ==========================================================================
+
+  &--sm {
+    padding: 2px $spacing-xs;
+  }
+
+  &--md {
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  &--lg {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  // ==========================================================================
+  // STATE VARIANTS
+  // ==========================================================================
+
+  &--loading {
+    color: $color-text-muted;
+
+    .vr-button__icon svg {
+      animation: vr-spin 1s linear infinite;
+    }
+  }
+
+  &--entering {
+    color: $color-accent-amber;
+    background: rgba($color-accent-amber, 0.1);
+    border-color: rgba($color-accent-amber, 0.2);
+
+    .vr-button__icon svg {
+      color: $color-accent-amber;
+    }
+
+    &:hover {
+      background: rgba($color-accent-amber, 0.15);
+    }
+  }
+
+  &--active {
+    color: $color-accent-green;
+    background: rgba($color-accent-green, 0.15);
+    border-color: rgba($color-accent-green, 0.3);
+
+    .vr-button__icon svg {
+      color: $color-accent-green;
+    }
+
+    .vr-button__pulse {
+      animation: vr-pulse 2s ease-in-out infinite;
+      background: $color-accent-green;
+    }
+
+    &:hover {
+      background: rgba($color-accent-green, 0.2);
+    }
+  }
+
+  // ==========================================================================
+  // INNER ELEMENTS
+  // ==========================================================================
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+
+    svg {
+      flex-shrink: 0;
+      transition: color $transition-fast;
+    }
+  }
+
+  &__spinner {
+    animation: vr-spin 1s linear infinite;
+  }
+
+  &__label {
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  &__pulse {
+    position: absolute;
+    inset: -2px;
+    border-radius: $radius-sm;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes vr-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vr-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+// =============================================================================
+// VR MODE VIEWPORT INDICATOR
+// =============================================================================
+
+.vr-mode-indicator {
+  position: absolute;
+  top: $spacing-sm;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($color-accent-green, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  color: white;
+  z-index: $z-dropdown;
+  animation: vr-indicator-appear 0.3s ease-out;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__exit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px;
+    margin-left: $spacing-xs;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: $radius-xs;
+    color: white;
+    font-size: 9px;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+@keyframes vr-indicator-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

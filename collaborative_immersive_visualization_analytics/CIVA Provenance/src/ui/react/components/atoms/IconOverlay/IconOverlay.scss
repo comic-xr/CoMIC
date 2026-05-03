@@ -1,0 +1,40 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+.icon-overlay {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  > svg {
+    &:first-child {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  .overlay-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .overlay-icon.slash {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+.icon-overlay.animating {
+  .overlay-icon {
+    animation: fade-in 0.2s ease;
+  }
+}

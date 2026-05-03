@@ -1,0 +1,114 @@
+.dataset-selector-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &__hint {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    &__search {
+        flex-shrink: 0;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        max-height: 320px;
+        overflow-y: auto;
+        padding: 4px 0;
+    }
+
+    &__empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        color: var(--text-tertiary);
+        gap: 8px;
+
+        p {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+
+    &__empty-hint {
+        font-size: 12px !important;
+        opacity: 0.7;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        background: var(--surface-2);
+        border: 1px solid var(--border-subtle);
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.15s ease;
+
+        &:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-default);
+        }
+
+        &:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px var(--accent-primary-alpha);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &__item-icon {
+        color: var(--accent-purple);
+        flex-shrink: 0;
+    }
+
+    &__item-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__item-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__item-meta {
+        font-size: 12px;
+        color: var(--text-tertiary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__item-arrow {
+        color: var(--text-tertiary);
+        flex-shrink: 0;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+    }
+
+    &__item:hover &__item-arrow {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,280 @@
+// src/ui/react/components/workspace/Canvas/CanvasGrid/CanvasEdgeDropZone.scss
+// Canvas Edge Drop Zone styles
+//
+// Per spec: Drop zones at canvas edges to expand the canvas
+// Shows '+' indicator during drag operations
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// CANVAS EDGE DROP ZONES CONTAINER
+// =============================================================================
+
+.canvas-edge-drop-zones {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+
+    // Only enable pointer events when drag is active
+    &--active {
+        .canvas-edge-drop-zone {
+            pointer-events: auto;
+        }
+    }
+}
+
+// =============================================================================
+// INDIVIDUAL EDGE DROP ZONE
+// =============================================================================
+
+.canvas-edge-drop-zone {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($color-accent-teal, 0.08);
+    border: 2px dashed rgba($color-accent-teal, 0.3);
+    transition: all 0.15s ease;
+    opacity: 0;
+    animation: fadeIn 0.15s ease forwards;
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    // Positioning for each edge
+    &--top {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        border-radius: 0 0 $radius-lg $radius-lg;
+        border-top: none;
+    }
+
+    &--bottom {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        border-radius: $radius-lg $radius-lg 0 0;
+        border-bottom: none;
+    }
+
+    &--left {
+        top: 48px;
+        bottom: 48px;
+        left: 0;
+        width: 48px;
+        border-radius: 0 $radius-lg $radius-lg 0;
+        border-left: none;
+        flex-direction: column;
+    }
+
+    &--right {
+        top: 48px;
+        bottom: 48px;
+        right: 0;
+        width: 48px;
+        border-radius: $radius-lg 0 0 $radius-lg;
+        border-right: none;
+        flex-direction: column;
+    }
+
+    // Hover/active state
+    &--active {
+        background: rgba($color-accent-teal, 0.2);
+        border-color: $color-accent-teal;
+        box-shadow: 0 0 16px rgba($color-accent-teal, 0.3);
+
+        .canvas-edge-drop-zone__indicator {
+            background: rgba($color-accent-teal, 0.9);
+            transform: scale(1.1);
+        }
+    }
+}
+
+// =============================================================================
+// DROP ZONE INDICATOR (Plus icon with label)
+// =============================================================================
+
+.canvas-edge-drop-zone__indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($color-accent-teal, 0.7);
+    border-radius: $radius-full;
+    color: white;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+
+    // Vertical orientation for left/right edges
+    .canvas-edge-drop-zone--left &,
+    .canvas-edge-drop-zone--right & {
+        flex-direction: column;
+        padding: $spacing-sm $spacing-xs;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+
+        // Keep icon horizontal
+        svg {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+.canvas-edge-drop-zone__label {
+    letter-spacing: 0.02em;
+}
+
+// =============================================================================
+// MODIFIER KEY HINTS
+// =============================================================================
+
+.canvas-drop-hints {
+    position: absolute;
+    bottom: $spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 60;
+    animation: slideUp 0.2s ease forwards;
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+}
+
+.canvas-drop-hints__content {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($color-bg-primary, 0.95);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+    backdrop-filter: blur(8px);
+}
+
+.canvas-drop-hints__hint {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    transition: color 0.15s ease;
+
+    kbd {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        padding: 2px $spacing-xs;
+        background: $color-bg-tertiary;
+        border: 1px solid $color-border-default;
+        border-radius: $radius-sm;
+        font-family: $font-family-mono;
+        font-size: 10px;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        transition: all 0.15s ease;
+    }
+
+    span {
+        white-space: nowrap;
+    }
+
+    // Active state when modifier is pressed
+    &--active {
+        color: $color-text-primary;
+
+        kbd {
+            background: $color-accent-primary;
+            border-color: $color-accent-primary;
+            color: white;
+        }
+    }
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 768px) {
+    .canvas-edge-drop-zone {
+        &--top,
+        &--bottom {
+            height: 40px;
+        }
+
+        &--left,
+        &--right {
+            width: 40px;
+            top: 40px;
+            bottom: 40px;
+        }
+    }
+
+    .canvas-drop-hints__content {
+        flex-direction: column;
+        gap: $spacing-xs;
+        padding: $spacing-xs $spacing-sm;
+    }
+
+    .canvas-drop-hints__hint {
+        font-size: 10px;
+    }
+}
+
+// =============================================================================
+// VR MODE ADJUSTMENTS
+// =============================================================================
+
+.adaptive-vr {
+    .canvas-edge-drop-zone {
+        &--top,
+        &--bottom {
+            height: 64px;
+        }
+
+        &--left,
+        &--right {
+            width: 64px;
+            top: 64px;
+            bottom: 64px;
+        }
+    }
+
+    .canvas-edge-drop-zone__indicator {
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-sm;
+    }
+
+    .canvas-drop-hints__content {
+        padding: $spacing-md $spacing-lg;
+        gap: $spacing-lg;
+    }
+
+    .canvas-drop-hints__hint {
+        font-size: $font-size-sm;
+
+        kbd {
+            min-width: 28px;
+            padding: $spacing-xs $spacing-sm;
+            font-size: $font-size-xs;
+        }
+    }
+}

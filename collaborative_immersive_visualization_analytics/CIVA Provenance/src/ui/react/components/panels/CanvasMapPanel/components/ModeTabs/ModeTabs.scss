@@ -1,0 +1,74 @@
+/**
+ * ModeTabs Styles
+ */
+
+@use "theme" as *;
+
+.mode-tabs {
+  display: flex;
+  background: $color-glass-light;
+  border-bottom: 1px solid $color-border-subtle;
+  height: 40px;
+
+  &__tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 9px 6px 10px;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    line-height: 1;
+    cursor: pointer;
+    transition: all $transition-fast;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 2px;
+      background: transparent;
+    }
+
+    &:hover:not(&--active) {
+      color: $color-text-secondary;
+      background: $color-glass-light;
+    }
+
+    &--active {
+      background: $color-bg-secondary;
+      color: var(--mode-color);
+
+      &::after {
+        background: var(--mode-color);
+      }
+    }
+  }
+
+  &__label {
+    font-size: inherit;
+    line-height: 1;
+  }
+
+  // Compact mode - icon only
+  &[data-size-mode="compact"] {
+    .mode-tabs__tab {
+      padding: 7px 4px 8px;
+    }
+  }
+
+  // VR mode adjustments
+  &[data-vr="true"] {
+    .mode-tabs__tab {
+      padding: $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+}

@@ -1,0 +1,104 @@
+/**
+ * @file CanvasNavigation.scss
+ * @description Styles for CanvasNavigation component.
+ */
+
+@use "theme" as *;
+
+.canvas-navigation {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+
+    &.at-origin {
+      color: $color-accent-amber;
+    }
+  }
+
+  &__dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+
+  &__dpad-row {
+    display: flex;
+    gap: 1px;
+  }
+
+  &__dpad-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: $color-bg-tertiary;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-elevated;
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: -2px;
+    }
+
+    &--up {
+      border-radius: $radius-sm $radius-sm 0 0;
+    }
+
+    &--down {
+      border-radius: 0 0 $radius-sm $radius-sm;
+    }
+
+    // Left button (first in row)
+    .canvas-navigation__dpad-row &:first-child {
+      border-radius: 0 0 0 $radius-sm;
+    }
+
+    // Right button (last in row)
+    .canvas-navigation__dpad-row &:last-child {
+      border-radius: 0 0 $radius-sm 0;
+    }
+  }
+
+  &__position {
+    font-size: 12px;
+    font-family: monospace;
+    color: $color-text-muted;
+    min-width: 48px;
+    text-align: center;
+    padding: $spacing-xs;
+    background: $color-bg-tertiary;
+    border-radius: $radius-sm;
+  }
+}

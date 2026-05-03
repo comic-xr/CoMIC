@@ -1,0 +1,141 @@
+/**
+ * @file PeopleTab.scss
+ * @description Styles for PeopleTab and its sub-components.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.people-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  // ---------------------------------------------------------------------------
+  // SUBTAB CONTENT
+  // ---------------------------------------------------------------------------
+
+  &__subtab-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &--scrollable {
+      overflow: auto;
+    }
+  }
+
+  &__user-list {
+    flex: 1;
+    overflow: auto;
+  }
+
+  // ---------------------------------------------------------------------------
+  // SECTION HEADERS
+  // ---------------------------------------------------------------------------
+
+  &__section-header {
+    padding: 8px 12px;
+    font-size: 10px;
+    color: var(--color-text-muted, #666);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  // ---------------------------------------------------------------------------
+  // ROOM GROUPS (Project subtab)
+  // ---------------------------------------------------------------------------
+
+  &__room-group {
+    // Container for room grouping
+  }
+
+  &__room-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-muted, #666);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  &__room-count {
+    opacity: 0.6;
+  }
+
+  // ---------------------------------------------------------------------------
+  // SETTINGS PANEL (Breakout subtab)
+  // ---------------------------------------------------------------------------
+
+  &__settings-panel {
+    padding: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &__settings-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-muted, #666);
+    margin-bottom: 8px;
+  }
+
+  &__checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--color-text-secondary, #999);
+    cursor: pointer;
+    margin-bottom: 6px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--color-accent-blue);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // CONNECTION STATUS
+  // ---------------------------------------------------------------------------
+
+  &__connection-status {
+    padding: 12px;
+    background: rgba(251, 191, 36, 0.1);
+    border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+    font-size: 11px;
+    color: #fbbf24;
+    text-align: center;
+  }
+
+  // ---------------------------------------------------------------------------
+  // CONTENT AREA
+  // ---------------------------------------------------------------------------
+
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  // ---------------------------------------------------------------------------
+  // SECTIONS (for ResizableSections)
+  // ---------------------------------------------------------------------------
+
+  &__sections {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}

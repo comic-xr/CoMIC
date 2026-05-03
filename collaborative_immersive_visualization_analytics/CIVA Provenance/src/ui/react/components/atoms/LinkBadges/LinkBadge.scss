@@ -1,0 +1,117 @@
+// src/ui/react/components/atoms/LinkBadges/LinkBadge.scss
+// LinkBadge atom styles
+
+@use "theme" as *;
+
+.link-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba($color-accent-teal, 0.15);
+    border: 1px solid rgba($color-accent-teal, 0.3);
+    border-radius: $radius-sm;
+    color: $color-accent-teal;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+        background: rgba($color-accent-teal, 0.25);
+        box-shadow: 0 0 8px rgba($color-accent-teal, 0.3);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    // Size variants
+    &--small {
+        gap: 2px;
+        padding: 1px 4px;
+        font-size: 8px;
+
+        .link-badge__icon {
+            width: 8px;
+            height: 8px;
+        }
+    }
+
+    &--default {
+        gap: 3px;
+        padding: 2px 6px;
+        font-size: 10px;
+
+        .link-badge__icon {
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    &--large {
+        gap: 4px;
+        padding: 3px 8px;
+        font-size: 11px;
+
+        .link-badge__icon {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    // Draggable state
+    &--draggable {
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    // VR mode - larger for visibility
+    &--vr {
+        &.link-badge--small {
+            gap: 3px;
+            padding: 2px 6px;
+            font-size: 10px;
+
+            .link-badge__icon {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        &.link-badge--default {
+            gap: 4px;
+            padding: 3px 8px;
+            font-size: 12px;
+
+            .link-badge__icon {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        &.link-badge--large {
+            gap: 5px;
+            padding: 4px 10px;
+            font-size: 14px;
+
+            .link-badge__icon {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    &__icon {
+        flex-shrink: 0;
+    }
+
+    &__count {
+        line-height: 1;
+    }
+
+    &__label {
+        font-weight: 400;
+        opacity: 0.8;
+    }
+}

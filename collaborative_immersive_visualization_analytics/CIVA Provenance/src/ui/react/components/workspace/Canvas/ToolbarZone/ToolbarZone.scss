@@ -1,0 +1,128 @@
+// src/ui/react/components/workspace/Canvas/ToolbarZone/ToolbarZone.scss
+// Generic toolbar zone styling
+//
+// Each zone is a self-contained column with label (18px) + content (44px)
+// Zones are arranged horizontally to create the bar appearance
+
+@use "theme" as *;
+
+// =============================================================================
+// TOOLBAR CONTAINER
+// =============================================================================
+
+.toolbar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-default;
+    flex-shrink: 0;
+    overflow: visible; // Don't clip dropdowns
+}
+
+// =============================================================================
+// TOOLBAR ZONE
+// =============================================================================
+
+.toolbar-zone {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-width: 0;
+
+    &--flex {
+        flex: 1;
+        flex-shrink: 1;
+    }
+}
+
+.toolbar-zone__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+    padding: 0 $spacing-sm;
+    background: $color-bg-canvas;
+    border-bottom: 1px solid $color-border-subtle;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-text-muted;
+    white-space: nowrap;
+
+    // Color variants for better readability
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+
+    &--amber {
+        color: $color-accent-amber;
+    }
+
+    &--teal {
+        color: $color-accent-teal;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+
+    &--pink {
+        color: $color-accent-pink;
+    }
+}
+
+.toolbar-zone__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 $spacing-sm;
+}
+
+// =============================================================================
+// TOOLBAR DIVIDER
+// =============================================================================
+
+.toolbar-divider {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 1px;
+}
+
+.toolbar-divider__label {
+    height: 18px;
+    background: $color-border-subtle;
+}
+
+.toolbar-divider__content {
+    height: 44px;
+    background: $color-border-default;
+}
+
+// =============================================================================
+// TOOLBAR SPACER
+// =============================================================================
+
+.toolbar-spacer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: $spacing-md;
+}
+
+.toolbar-spacer__label {
+    height: 18px;
+    background: $color-bg-canvas;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.toolbar-spacer__content {
+    height: 44px;
+}

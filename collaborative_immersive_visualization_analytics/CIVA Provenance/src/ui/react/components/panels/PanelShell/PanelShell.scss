@@ -1,0 +1,132 @@
+@use "theme" as *;
+
+// =============================================================================
+// PANEL SHELL BASE
+// =============================================================================
+
+.panel-shell {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-secondary;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  user-select: none;
+
+  // Panel accent color (set via CSS variable)
+  --panel-color: #{$color-accent-blue};
+
+  // ===========================================================================
+  // STATES
+  // ===========================================================================
+
+  &--dragging {
+    cursor: grabbing;
+    opacity: 0.95;
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.5),
+      0 0 0 2px var(--panel-color);
+  }
+
+  &--resizing {
+    cursor: se-resize;
+  }
+
+  &--minimized {
+    height: auto !important;
+    min-width: 200px;
+  }
+
+  &--below-minimum {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(239, 68, 68, 0.5);
+  }
+
+  // ===========================================================================
+  // CHROME LEVELS
+  // ===========================================================================
+
+  // FULL chrome - complex panels
+  &--chrome-full {
+    .panel-shell__content {
+      padding: $spacing-sm;
+    }
+  }
+
+  // COMPACT chrome - simple panels
+  &--chrome-compact {
+    .panel-shell__content {
+      padding: $spacing-sm;
+    }
+
+    // No resize handle
+    .panel-resize-handle {
+      display: none;
+    }
+  }
+
+  // MINIMAL chrome - toolbars
+  &--chrome-minimal {
+    background: $color-bg-tertiary;
+    border-radius: 8px;
+    cursor: grab;
+
+    &.panel-shell--dragging {
+      cursor: grabbing;
+    }
+
+    .panel-shell__content {
+      padding: $spacing-xs;
+      cursor: inherit;
+    }
+  }
+
+  // ===========================================================================
+  // SIZE MODES
+  // ===========================================================================
+
+  &--size-compact {
+    // Compact mode styling hooks for content
+    // Content can use [data-size-mode="compact"] to adapt
+  }
+
+  &--size-standard {
+    // Standard mode styling hooks
+  }
+
+  &--size-expanded {
+    // Expanded mode styling hooks
+  }
+
+  // ===========================================================================
+  // CONTENT
+  // ===========================================================================
+
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  // ===========================================================================
+  // MINIMUM WARNING
+  // ===========================================================================
+
+  &__min-warning {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $spacing-xs $spacing-sm;
+    background: rgba(239, 68, 68, 0.2);
+    border-top: 1px solid rgba(239, 68, 68, 0.4);
+    font-size: 9px;
+    color: #ef4444;
+    text-align: center;
+  }
+}

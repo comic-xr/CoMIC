@@ -1,0 +1,201 @@
+// src/ui/react/components/workspace/Canvas/CanvasStatusBar/CanvasStatusBar.scss
+// Canvas status bar styling
+//
+// Height: 24px
+// Layout: Left (canvas info) | Center (render mode) | Right (sync status)
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.canvas-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-sm;
+  background: $color-bg-tertiary;
+  border-top: 1px solid $color-border-default;
+  height: 24px;
+  min-height: 24px;
+  flex-shrink: 0;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// SECTIONS
+// =============================================================================
+
+.canvas-status-bar__section {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &--left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &--center {
+    flex-shrink: 0;
+    padding: 0 $spacing-md;
+  }
+
+  &--right {
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-end;
+  }
+}
+
+// =============================================================================
+// ITEMS
+// =============================================================================
+
+.canvas-status-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+
+  &--muted {
+    color: $color-text-muted;
+  }
+
+  &--collab {
+    color: $color-accent-green;
+  }
+}
+
+.canvas-status-bar__separator {
+  color: $color-border-default;
+  margin: 0 $spacing-xs;
+}
+
+.canvas-status-bar__icon {
+  opacity: 0.7;
+
+  &--spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// =============================================================================
+// RENDER MODE
+// =============================================================================
+
+.canvas-status-bar__render-mode {
+  padding: 2px $spacing-xs;
+  border-radius: $radius-xs;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 9px;
+
+  &--full {
+    color: $color-accent-green;
+    background: rgba($color-accent-green, 0.1);
+  }
+
+  &--compact {
+    color: $color-accent-blue;
+    background: rgba($color-accent-blue, 0.1);
+  }
+
+  &--thumbnail {
+    color: $color-accent-amber;
+    background: rgba($color-accent-amber, 0.1);
+  }
+
+  &--snapshot {
+    color: $color-accent-pink;
+    background: rgba($color-accent-pink, 0.1);
+  }
+}
+
+// =============================================================================
+// SYNC STATUS
+// =============================================================================
+
+.canvas-status-bar__sync {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: $color-accent-green;
+
+  &--disconnected {
+    color: $color-accent-red;
+  }
+}
+
+// =============================================================================
+// WARNING STATES
+// =============================================================================
+
+.canvas-status-bar__item--warning {
+  color: $color-accent-amber;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .canvas-status-bar__icon {
+    color: $color-accent-amber;
+  }
+}
+
+.canvas-status-bar__vr-btn {
+  margin-left: $spacing-xs;
+  padding: 1px $spacing-xs;
+  font-size: 9px;
+  font-weight: $font-weight-medium;
+  background: rgba($color-accent-blue, 0.15);
+  border: 1px solid rgba($color-accent-blue, 0.3);
+  border-radius: $radius-xs;
+  color: $color-accent-blue;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.25);
+    border-color: rgba($color-accent-blue, 0.5);
+  }
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 700px) {
+  .canvas-status-bar__section--center {
+    display: none;
+  }
+
+  .canvas-status-bar__separator {
+    display: none;
+  }
+
+  .canvas-status-bar__section--left {
+    overflow: hidden;
+  }
+
+  .canvas-status-bar__item:not(:first-child) {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .canvas-status-bar {
+    justify-content: flex-end;
+  }
+
+  .canvas-status-bar__section--left {
+    display: none;
+  }
+}

@@ -1,0 +1,165 @@
+/**
+ * @file DuplicationDialog.scss
+ * @description Styles for DuplicationDialog component
+ */
+
+@use "theme" as *;
+
+.duplication-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    // Introduction text
+    &__intro {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+    }
+
+    &__question {
+        margin: $spacing-sm 0 0 0;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: $color-text-primary;
+    }
+
+    // Link badges
+    &__link-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;
+    }
+
+    &__link-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-xs $spacing-xs;
+        background: color-mix(in srgb, var(--badge-color, #{$color-accent-blue}) 15%, transparent);
+        border: 1px solid color-mix(in srgb, var(--badge-color, #{$color-accent-blue}) 30%, transparent);
+        border-radius: $radius-sm;
+        font-size: $font-size-xs;
+        color: var(--badge-color, #{$color-accent-blue});
+
+        svg {
+            flex-shrink: 0;
+        }
+    }
+
+    &__link-badge-count {
+        opacity: 0.8;
+    }
+
+    // Options list
+    &__options {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+    }
+
+    // Individual option
+    &__option {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        background: $color-bg-secondary;
+        border: 1px solid $color-border-default;
+        border-radius: $radius-md;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            background: $color-bg-tertiary;
+            border-color: $color-border-medium;
+        }
+
+        &--selected {
+            background: color-mix(in srgb, $color-accent-blue 8%, transparent);
+            border-color: $color-accent-blue;
+
+            &:hover {
+                background: color-mix(in srgb, $color-accent-blue 12%, transparent);
+            }
+        }
+    }
+
+    // Radio input
+    &__radio {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+        accent-color: $color-accent-blue;
+        cursor: pointer;
+    }
+
+    // Option content
+    &__option-content {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+        min-width: 0;
+    }
+
+    &__option-header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+    }
+
+    &__option-label {
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: $color-text-primary;
+    }
+
+    &__option-description {
+        font-size: $font-size-xs;
+        color: $color-text-tertiary;
+        line-height: 1.4;
+    }
+
+    // Recommended badge
+    &__recommended-badge {
+        padding: 2px $spacing-xs;
+        background: $color-accent-green;
+        border-radius: $radius-sm;
+        font-size: 10px;
+        font-weight: 600;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    // Warning message
+    &__warning {
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-xs;
+        padding: $spacing-sm;
+        background: color-mix(in srgb, $color-accent-amber 10%, transparent);
+        border: 1px solid color-mix(in srgb, $color-accent-amber 30%, transparent);
+        border-radius: $radius-md;
+        font-size: $font-size-xs;
+        color: $color-accent-amber;
+        line-height: 1.4;
+
+        svg {
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+    }
+
+    // No links state
+    &__no-links {
+        margin: 0;
+        padding: $spacing-md;
+        background: $color-bg-secondary;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        text-align: center;
+    }
+}

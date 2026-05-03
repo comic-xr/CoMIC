@@ -1,0 +1,79 @@
+// src/ui/react/components/workspace/Canvas/CanvasChrome/CanvasChromeEditBar.scss
+
+@use "theme" as *;
+
+.canvas-chrome-edit-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 40px;
+  padding: 0 $spacing-md;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+  color: $color-text-secondary;
+}
+
+.canvas-chrome-edit-bar__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: $color-accent-blue;
+}
+
+.canvas-chrome-edit-bar__group {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.canvas-chrome-edit-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border-subtle;
+  background: rgba(255, 255, 255, 0.04);
+  color: $color-text-secondary;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-border-default;
+  }
+
+  &.is-active {
+    color: $color-accent-teal;
+    border-color: rgba($color-accent-teal, 0.5);
+    background: rgba($color-accent-teal, 0.15);
+  }
+}
+
+.canvas-chrome-edit-bar__divider {
+  width: 1px;
+  height: 20px;
+  background: $color-border-subtle;
+}
+
+.canvas-chrome-edit-bar__spacer {
+  flex: 1;
+}
+
+.canvas-chrome-edit-bar__done {
+  padding: 6px 12px;
+  border-radius: $radius-sm;
+  border: 1px solid rgba($color-accent-green, 0.5);
+  background: rgba($color-accent-green, 0.15);
+  color: $color-accent-green;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-accent-green, 0.25);
+  }
+}

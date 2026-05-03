@@ -1,0 +1,839 @@
+// src/ui/react/components/panels/LayoutPanel/components/CanvasNavigator/CanvasNavigator.scss
+// Redesigned Canvas Navigator Styles
+//
+// Features:
+// - D-pad with home center
+// - Two-column navigation layout
+// - Collapsible size controls footer
+// - Mode-aware sizing (desktop/VR)
+// - Set Home mode with visual feedback
+
+@use "theme" as *;
+
+// =============================================================================
+// VARIABLES
+// =============================================================================
+
+$nav-bg: $color-bg-secondary;
+$nav-border: $color-border-subtle;
+$nav-radius: 8px;
+$cell-radius: 4px;
+$button-radius: 4px;
+
+// Context/accent colors
+$color-blue: $color-accent-blue;
+$color-purple: $color-accent-purple;
+$color-amber: $color-accent-amber;
+$color-green: $color-accent-green;
+$color-teal: $color-accent-teal;
+$color-pink: $color-accent-pink;
+$color-red: $color-accent-red;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.canvas-navigator {
+  display: flex;
+  flex-direction: column;
+  background: $nav-bg;
+  border: 1px solid $nav-border;
+  border-radius: $nav-radius;
+  font-size: 11px;
+  color: $color-text-secondary;
+  min-width: 240px;
+  min-height: 280px; // Base min-height for collapsed footer
+  overflow: hidden;
+
+  // When size controls are expanded, increase min-height
+  &:has(.canvas-navigator__size-footer[data-expanded="true"]) {
+    min-height: 380px; // Extra space for expanded controls
+  }
+
+  // Desktop mode
+  &--desktop {
+    --btn-size-xs: 18px;
+    --btn-size-sm: 24px;
+    --btn-size-md: 28px;
+    --dpad-gap: 2px;
+    --font-size-xs: 9px;
+    --font-size-sm: 10px;
+    --font-size-md: 11px;
+  }
+
+  // VR mode - larger touch targets
+  &--vr {
+    --btn-size-xs: 32px;
+    --btn-size-sm: 44px;
+    --btn-size-md: 52px;
+    --dpad-gap: 4px;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+  }
+
+  // Docked state
+  &[data-docked="true"] {
+    border: none;
+    border-radius: 0;
+    min-width: 100%;
+  }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.canvas-navigator__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid $nav-border;
+}
+
+.canvas-navigator__tab-title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: var(--font-size-sm, 10px);
+  font-weight: 600;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  svg {
+    color: $color-amber;
+  }
+}
+
+.canvas-navigator__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+// =============================================================================
+// MODE TOGGLES
+// =============================================================================
+
+.canvas-navigator__mode-toggles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  gap: $spacing-sm;
+  border-bottom: 1px solid $nav-border;
+}
+
+.canvas-navigator__segmented-control {
+  display: flex;
+  gap: 1px;
+  padding: 2px;
+  background: $color-bg-tertiary;
+  border-radius: $button-radius;
+}
+
+.canvas-navigator__segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs, 9px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-width: 24px;
+
+  &:hover:not(.canvas-navigator__segment--active) {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: color-mix(in srgb, $color-blue 20%, transparent);
+    color: $color-blue;
+
+    &[data-color="purple"] {
+      background: color-mix(in srgb, $color-purple 20%, transparent);
+      color: $color-purple;
+    }
+  }
+}
+
+// =============================================================================
+// MINIMAP
+// =============================================================================
+
+.canvas-navigator__minimap {
+  position: relative;
+  flex: 1 1 auto; // Allow both grow and shrink
+  padding: $spacing-sm;
+  background: $color-bg-primary;
+  border-bottom: 1px solid $nav-border;
+  overflow: auto;
+  min-height: 80px; // Reduced to allow footer expansion
+  max-height: 300px;
+
+  &--setting-home {
+    background: color-mix(in srgb, $color-amber 8%, $color-bg-primary);
+    border-color: color-mix(in srgb, $color-amber 40%, transparent);
+
+    .canvas-navigator__cell {
+      outline: 2px dashed color-mix(in srgb, $color-amber 30%, transparent);
+      outline-offset: -2px;
+      cursor: crosshair;
+    }
+  }
+}
+
+.canvas-navigator__setting-home-hint {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs, 9px);
+  font-weight: 600;
+  color: $color-amber;
+  background: $color-bg-secondary;
+  padding: 2px 8px;
+  border-radius: 4px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.canvas-navigator__grid {
+  display: grid;
+  user-select: none;
+}
+
+// =============================================================================
+// CELL
+// =============================================================================
+
+.canvas-navigator__cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $cell-radius;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  overflow: hidden;
+  background: $color-bg-secondary;
+  border: 1px solid $nav-border;
+
+  &:hover {
+    border-color: $color-border-default;
+  }
+
+  // Occupied cell
+  &--occupied {
+    background: color-mix(
+      in srgb,
+      var(--cell-color, $color-blue) 20%,
+      transparent
+    );
+    border-color: var(--cell-color, $color-blue);
+  }
+
+  // In viewport
+  &--in-viewport {
+    opacity: 1;
+    box-shadow: 0 0 0 1px color-mix(in srgb, $color-blue 30%, transparent);
+
+    &.canvas-navigator__cell--occupied {
+      box-shadow: 0 0 8px
+        color-mix(in srgb, var(--cell-color, $color-blue) 40%, transparent);
+    }
+  }
+
+  // Not in viewport
+  &:not(.canvas-navigator__cell--in-viewport) {
+    opacity: 0.6;
+  }
+
+  // Home cell
+  &--home:not(.canvas-navigator__cell--occupied) {
+    background: color-mix(in srgb, $color-amber 15%, transparent);
+    border-color: color-mix(in srgb, $color-amber 50%, transparent);
+  }
+}
+
+.canvas-navigator__cell-text {
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--cell-color, $color-text-primary);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 2px;
+  max-width: 100%;
+}
+
+.canvas-navigator__cell-home-icon {
+  color: $color-amber;
+}
+
+.canvas-navigator__cell-home-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background: $color-amber;
+  border-radius: 50%;
+  box-shadow: 0 0 4px $color-amber;
+}
+
+// =============================================================================
+// VIEWPORT INDICATOR
+// =============================================================================
+
+.canvas-navigator__viewport-indicator {
+  position: absolute;
+  border: 2px solid $color-amber;
+  border-radius: 6px;
+  pointer-events: none;
+  box-shadow: 0 0 12px color-mix(in srgb, $color-amber 50%, transparent),
+    inset 0 0 30px color-mix(in srgb, $color-amber 10%, transparent);
+  transition: all 0.2s ease;
+}
+
+// =============================================================================
+// NAVIGATION BLOCK
+// =============================================================================
+
+.canvas-navigator__nav-block {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $nav-border;
+}
+
+.canvas-navigator__nav-columns {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.canvas-navigator__nav-col {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--info {
+    flex-direction: column;
+    gap: $spacing-xs;
+    align-items: stretch;
+  }
+}
+
+// =============================================================================
+// D-PAD
+// =============================================================================
+
+.canvas-navigator__dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--dpad-gap, 2px);
+}
+
+.canvas-navigator__dpad-row {
+  display: flex;
+  gap: var(--dpad-gap, 2px);
+}
+
+.canvas-navigator__dpad-home {
+  width: var(--btn-size-sm, 24px);
+  height: var(--btn-size-sm, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-tertiary;
+  border: 1px solid $nav-border;
+  border-radius: $button-radius;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: color-mix(in srgb, $color-amber 15%, transparent);
+    border-color: color-mix(in srgb, $color-amber 40%, transparent);
+    color: $color-amber;
+  }
+
+  &--at-home {
+    background: color-mix(in srgb, $color-amber 20%, transparent);
+    border-color: color-mix(in srgb, $color-amber 50%, transparent);
+    color: $color-amber;
+    box-shadow: 0 0 8px color-mix(in srgb, $color-amber 30%, transparent);
+  }
+}
+
+// =============================================================================
+// INFO COLUMN
+// =============================================================================
+
+.canvas-navigator__info-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  height: var(--btn-size-sm, 24px);
+}
+
+.canvas-navigator__info-icon {
+  flex-shrink: 0;
+
+  &--teal {
+    color: $color-teal;
+  }
+
+  &--amber {
+    color: $color-amber;
+  }
+}
+
+.canvas-navigator__position-value {
+  font-family: monospace;
+  font-size: var(--font-size-md, 11px);
+  font-weight: 600;
+  color: $color-teal;
+}
+
+.canvas-navigator__home-value {
+  font-family: monospace;
+  font-size: var(--font-size-sm, 10px);
+  color: $color-text-muted;
+
+  &--at-home {
+    color: $color-amber;
+  }
+}
+
+.canvas-navigator__set-home-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: var(--btn-size-sm, 24px);
+  padding: 0 $spacing-sm;
+  background: transparent;
+  border: 1px solid $nav-border;
+  border-radius: $button-radius;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs, 9px);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+
+  &--active {
+    background: color-mix(in srgb, $color-amber 20%, transparent);
+    border-color: color-mix(in srgb, $color-amber 50%, transparent);
+    color: $color-amber;
+  }
+}
+
+// =============================================================================
+// ZOOM ROW
+// =============================================================================
+
+.canvas-navigator__zoom-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: 1px solid $nav-border;
+}
+
+.canvas-navigator__zoom-label {
+  font-size: var(--font-size-xs, 9px);
+  color: $color-text-muted;
+}
+
+.canvas-navigator__zoom-value {
+  font-family: monospace;
+  font-size: var(--font-size-sm, 10px);
+  color: $color-text-secondary;
+  min-width: 36px;
+  text-align: center;
+}
+
+// =============================================================================
+// SIZE CONTROLS FOOTER
+// =============================================================================
+
+.canvas-navigator__size-footer {
+  border-top: 1px solid $nav-border;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0; // Prevent footer from being cut off
+
+  // When expanded, ensure controls are visible
+  &[data-expanded="true"] {
+    min-height: 120px; // Space for toggle + controls
+  }
+}
+
+.canvas-navigator__size-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $color-text-muted;
+  font-size: var(--font-size-xs, 9px);
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+.canvas-navigator__size-summary {
+  font-family: monospace;
+  color: $color-text-secondary;
+  margin-left: $spacing-xs;
+}
+
+.canvas-navigator__size-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+  padding: 0 $spacing-md $spacing-md;
+}
+
+.canvas-navigator__size-col {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  border-radius: $button-radius;
+
+  &--viewport {
+    background: color-mix(in srgb, $color-green 5%, transparent);
+    border: 1px solid color-mix(in srgb, $color-green 15%, transparent);
+  }
+
+  &--canvas {
+    background: color-mix(in srgb, $color-purple 5%, transparent);
+    border: 1px solid color-mix(in srgb, $color-purple 15%, transparent);
+  }
+}
+
+.canvas-navigator__size-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+}
+
+.canvas-navigator__size-label {
+  font-size: var(--font-size-xs, 9px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+
+  .canvas-navigator__size-col--viewport & {
+    color: $color-green;
+  }
+
+  .canvas-navigator__size-col--canvas & {
+    color: $color-purple;
+  }
+}
+
+.canvas-navigator__quick-pick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid $nav-border;
+  border-radius: 3px;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    border-color: $color-border-default;
+    color: $color-text-primary;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .canvas-navigator__size-col--viewport & {
+    &:hover {
+      border-color: $color-green;
+      color: $color-green;
+    }
+  }
+
+  .canvas-navigator__size-col--canvas & {
+    &:hover {
+      border-color: $color-purple;
+      color: $color-purple;
+    }
+  }
+}
+
+.canvas-navigator__preset-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  padding: $spacing-xs;
+  background: $color-bg-primary;
+  border: 1px solid $nav-border;
+  border-radius: $button-radius;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-navigator__preset-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: $color-text-primary;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover:not(:disabled) {
+    background: $color-bg-tertiary;
+  }
+
+  &:disabled {
+    color: $color-text-muted;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+// =============================================================================
+// BUTTON
+// =============================================================================
+
+.canvas-navigator__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid $nav-border;
+  border-radius: $button-radius;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    background: $color-glass-light;
+    border-color: $color-border-default;
+    color: $color-text-secondary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &--active {
+    background: color-mix(in srgb, $color-blue 20%, transparent);
+    border-color: $color-blue;
+    color: $color-blue;
+  }
+
+  // Sizes
+  &--xs {
+    width: var(--btn-size-xs, 18px);
+    height: var(--btn-size-xs, 18px);
+    font-size: 8px;
+  }
+
+  &--sm {
+    width: var(--btn-size-sm, 24px);
+    height: var(--btn-size-sm, 24px);
+    font-size: 9px;
+  }
+
+  &--md {
+    width: var(--btn-size-md, 28px);
+    height: var(--btn-size-md, 28px);
+    font-size: 10px;
+  }
+
+  // Color variants
+  &[data-color="blue"]:hover:not(:disabled),
+  &[data-color="blue"].canvas-navigator__btn--active {
+    background: color-mix(in srgb, $color-blue 20%, transparent);
+    border-color: $color-blue;
+    color: $color-blue;
+  }
+
+  &[data-color="purple"]:hover:not(:disabled),
+  &[data-color="purple"].canvas-navigator__btn--active {
+    background: color-mix(in srgb, $color-purple 20%, transparent);
+    border-color: $color-purple;
+    color: $color-purple;
+  }
+
+  &[data-color="green"]:hover:not(:disabled),
+  &[data-color="green"].canvas-navigator__btn--active {
+    background: color-mix(in srgb, $color-green 20%, transparent);
+    border-color: $color-green;
+    color: $color-green;
+  }
+
+  &[data-color="amber"]:hover:not(:disabled),
+  &[data-color="amber"].canvas-navigator__btn--active {
+    background: color-mix(in srgb, $color-amber 20%, transparent);
+    border-color: $color-amber;
+    color: $color-amber;
+  }
+
+  &[data-color="red"]:hover:not(:disabled),
+  &[data-color="red"].canvas-navigator__btn--active {
+    background: color-mix(in srgb, $color-red 20%, transparent);
+    border-color: $color-red;
+    color: $color-red;
+  }
+
+  &[data-color="teal"]:hover:not(:disabled),
+  &[data-color="teal"].canvas-navigator__btn--active {
+    background: color-mix(in srgb, $color-teal 20%, transparent);
+    border-color: $color-teal;
+    color: $color-teal;
+  }
+}
+
+// =============================================================================
+// SPINNER
+// =============================================================================
+
+.canvas-navigator__spinner {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &--vertical {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+
+    .canvas-navigator__spinner-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+  }
+}
+
+.canvas-navigator__spinner-label {
+  font-size: var(--font-size-xs, 9px);
+  color: $color-text-muted;
+  min-width: 28px;
+  text-align: center;
+}
+
+.canvas-navigator__spinner-value {
+  min-width: 22px;
+  padding: 2px 4px;
+  background: $color-bg-tertiary;
+  border: 1px solid $nav-border;
+  border-radius: 3px;
+  color: $color-text-secondary;
+  font-size: var(--font-size-sm, 10px);
+  text-align: center;
+  font-family: monospace;
+  font-weight: 600;
+
+  &[data-color="green"] {
+    background: color-mix(in srgb, $color-green 10%, transparent);
+    border-color: color-mix(in srgb, $color-green 25%, transparent);
+    color: $color-green;
+  }
+
+  &[data-color="purple"] {
+    background: color-mix(in srgb, $color-purple 10%, transparent);
+    border-color: color-mix(in srgb, $color-purple 25%, transparent);
+    color: $color-purple;
+  }
+}
+
+// =============================================================================
+// TOOLTIP
+// =============================================================================
+
+.canvas-navigator__tooltip {
+  position: fixed;
+  z-index: 10000;
+  padding: $spacing-sm $spacing-md;
+
+  // Frosted glass effect with subtle gradient (semi-transparent for blur)
+  background: linear-gradient(
+    145deg,
+    rgba(30, 32, 38, 0.85) 0%,
+    rgba(20, 22, 28, 0.9) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 2px solid;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  min-width: 140px;
+  max-width: 280px;
+  pointer-events: none;
+}
+
+.canvas-navigator__tooltip-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: $color-text-primary;
+  margin-bottom: 4px;
+}
+
+.canvas-navigator__tooltip-dataset {
+  font-size: 11px;
+  color: $color-text-secondary;
+  margin-bottom: 2px;
+}
+
+.canvas-navigator__tooltip-position {
+  font-size: 11px;
+  font-family: monospace;
+}
+
+.canvas-navigator__tooltip-span {
+  color: $color-text-muted;
+}

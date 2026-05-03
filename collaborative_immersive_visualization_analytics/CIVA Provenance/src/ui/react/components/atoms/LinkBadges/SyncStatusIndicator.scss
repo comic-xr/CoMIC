@@ -1,0 +1,133 @@
+// src/ui/react/components/atoms/LinkBadges/SyncStatusIndicator.scss
+// SyncStatusIndicator atom styles
+
+@use "theme" as *;
+
+.sync-status {
+    display: inline-flex;
+    align-items: center;
+
+    // Size variants
+    &--small {
+        gap: 3px;
+        font-size: 9px;
+
+        .sync-status__dot {
+            width: 4px;
+            height: 4px;
+        }
+    }
+
+    &--default {
+        gap: 4px;
+        font-size: 10px;
+
+        .sync-status__dot {
+            width: 6px;
+            height: 6px;
+        }
+    }
+
+    &--large {
+        gap: 5px;
+        font-size: 11px;
+
+        .sync-status__dot {
+            width: 8px;
+            height: 8px;
+        }
+    }
+
+    // Color variants
+    &--color-green {
+        color: $color-accent-green;
+
+        .sync-status__dot {
+            background: $color-accent-green;
+        }
+    }
+
+    &--color-cyan {
+        color: $color-accent-teal;
+
+        .sync-status__dot {
+            background: $color-accent-teal;
+        }
+    }
+
+    &--color-red {
+        color: $color-accent-red;
+
+        .sync-status__dot {
+            background: $color-accent-red;
+        }
+    }
+
+    &--color-amber {
+        color: $color-accent-amber;
+
+        .sync-status__dot {
+            background: $color-accent-amber;
+        }
+    }
+
+    // Pulse animation
+    &--pulse .sync-status__dot {
+        animation: sync-pulse 1.5s ease-in-out infinite;
+    }
+
+    // VR mode - larger for visibility
+    &--vr {
+        &.sync-status--small {
+            gap: 4px;
+            font-size: 11px;
+
+            .sync-status__dot {
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+        &.sync-status--default {
+            gap: 5px;
+            font-size: 12px;
+
+            .sync-status__dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        &.sync-status--large {
+            gap: 6px;
+            font-size: 14px;
+
+            .sync-status__dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+
+    &__dot {
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    &__label {
+        line-height: 1;
+    }
+}
+
+@keyframes sync-pulse {
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 currentColor;
+    }
+
+    50% {
+        opacity: 0.6;
+        box-shadow: 0 0 6px currentColor;
+    }
+}

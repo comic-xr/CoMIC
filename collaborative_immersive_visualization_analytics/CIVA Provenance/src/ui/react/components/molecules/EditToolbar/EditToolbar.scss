@@ -1,0 +1,101 @@
+/**
+ * @file EditToolbar.scss
+ * @description Styles for EditToolbar component.
+ */
+
+@use "theme" as *;
+
+.edit-toolbar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background: $color-bg-tertiary;
+      color: $color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      color: $color-text-disabled;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      background: rgba($color-accent-blue, 0.15);
+    }
+
+    // Color variants for active state
+    &.active[data-color="blue"] {
+      color: $color-accent-blue;
+    }
+
+    &.active[data-color="teal"] {
+      color: $color-accent-teal;
+      background: rgba($color-accent-teal, 0.15);
+    }
+
+    &.active[data-color="purple"] {
+      color: $color-accent-purple;
+      background: rgba($color-accent-purple, 0.15);
+    }
+
+    // Exit button always shows active state
+    &--exit {
+      background: rgba($color-accent-amber, 0.15);
+      color: $color-accent-amber;
+
+      &:hover {
+        background: rgba($color-accent-amber, 0.25);
+      }
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 20px;
+    background: $color-border-subtle;
+    margin: 0 $spacing-xs;
+  }
+}

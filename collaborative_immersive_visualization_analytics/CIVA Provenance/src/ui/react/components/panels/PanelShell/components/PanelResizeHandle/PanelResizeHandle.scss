@@ -1,0 +1,42 @@
+@use "theme" as *;
+
+// =============================================================================
+// PANEL RESIZE HANDLE
+// =============================================================================
+
+.panel-resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: se-resize;
+  z-index: 1;
+
+  // Larger touch target
+  &::before {
+    content: '';
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__indicator {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid $color-border-default;
+    border-bottom: 2px solid $color-border-default;
+    opacity: 0.5;
+    transition: opacity $transition-fast, border-color $transition-fast;
+  }
+
+  &:hover .panel-resize-handle__indicator {
+    opacity: 1;
+    border-color: var(--panel-color, $color-accent-blue);
+  }
+}

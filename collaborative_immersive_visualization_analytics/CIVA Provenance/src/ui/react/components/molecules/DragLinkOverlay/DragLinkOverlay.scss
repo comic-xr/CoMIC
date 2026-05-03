@@ -1,0 +1,48 @@
+// src/ui/react/components/molecules/DragLinkOverlay/DragLinkOverlay.scss
+// Styles for drag-to-link overlay
+
+@use "theme" as *;
+
+.drag-link-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+
+    &__line {
+        animation: dash-move 0.5s linear infinite;
+    }
+
+    &__source {
+        // Static style
+    }
+
+    &__target-ring {
+        animation: pulse-ring 1s ease infinite;
+    }
+}
+
+@keyframes dash-move {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -12;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        r: 8;
+        opacity: 1;
+    }
+
+    100% {
+        r: 20;
+        opacity: 0;
+    }
+}

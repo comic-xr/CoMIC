@@ -1,0 +1,420 @@
+/**
+ * @file Tooltip.scss
+ * @description Styles for Tooltip component including animations and keyboard badges.
+ * Uses BEM naming convention and theme tokens.
+ *
+ * Structure:
+ * - .tooltip - Main tooltip container
+ * - .tooltip__arrow - Arrow pointer
+ * - .tooltip__content - Content wrapper
+ * - .tooltip__rich - Rich tooltip layout
+ * - .kbd - Keyboard shortcut badge
+ */
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// ANIMATION KEYFRAMES
+// ============================================================================
+
+@keyframes tooltip-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tooltip-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+// ============================================================================
+// BASE TOOLTIP
+// ============================================================================
+
+.tooltip {
+  position: fixed;
+  z-index: 10001; // Above dropdowns and modals
+  max-width: 250px;
+  padding: 6px 10px;
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-default;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  line-height: 1.4;
+  color: $color-text-primary;
+  pointer-events: none;
+  user-select: none;
+
+  // Enter animation
+  animation: tooltip-enter 0.1s ease-out;
+
+  // Exit animation
+  &--exiting {
+    animation: tooltip-exit 0.075s ease-in forwards;
+  }
+
+  // Interactive tooltips can receive pointer events
+  &--interactive {
+    pointer-events: auto;
+    user-select: text;
+  }
+
+  // ============================================================================
+  // PLACEMENT MODIFIERS
+  // ============================================================================
+
+  &--top {
+    transform-origin: bottom center;
+  }
+
+  &--bottom {
+    transform-origin: top center;
+  }
+
+  &--left {
+    transform-origin: right center;
+  }
+
+  &--right {
+    transform-origin: left center;
+  }
+}
+
+// ============================================================================
+// TOOLTIP ARROW
+// ============================================================================
+
+.tooltip__arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-default;
+  transform: rotate(45deg);
+  pointer-events: none;
+
+  // Position arrow for top placement
+  .tooltip--top & {
+    bottom: -5px;
+    transform: translateX(-50%) rotate(45deg);
+    border-top: none;
+    border-left: none;
+  }
+
+  // Position arrow for bottom placement
+  .tooltip--bottom & {
+    top: -5px;
+    transform: translateX(-50%) rotate(45deg);
+    border-bottom: none;
+    border-right: none;
+  }
+
+  // Position arrow for left placement
+  .tooltip--left & {
+    right: -5px;
+    transform: translateY(-50%) rotate(45deg);
+    border-left: none;
+    border-bottom: none;
+  }
+
+  // Position arrow for right placement
+  .tooltip--right & {
+    left: -5px;
+    transform: translateY(-50%) rotate(45deg);
+    border-right: none;
+    border-top: none;
+  }
+}
+
+// ============================================================================
+// TOOLTIP CONTENT
+// ============================================================================
+
+.tooltip__content {
+  position: relative;
+  z-index: 1;
+  word-wrap: break-word;
+}
+
+// ============================================================================
+// RICH TOOLTIP
+// ============================================================================
+
+.tooltip__rich {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tooltip__rich-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tooltip__rich-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: $color-text-secondary;
+}
+
+.tooltip__title {
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.tooltip__description {
+  font-size: 11px;
+  color: $color-text-secondary;
+  line-height: 1.4;
+}
+
+.tooltip__shortcut {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid $color-border-subtle;
+}
+
+// ============================================================================
+// KEYBOARD BADGE
+// ============================================================================
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: 4px;
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  line-height: 1;
+  white-space: nowrap;
+
+  // Single character keys (like letters)
+  &:empty {
+    display: none;
+  }
+
+  // Symbol keys (⌘, ⇧, etc.) need less padding
+  &:first-child:last-child {
+    // Single key, no extra styling needed
+  }
+
+  // Modifier keys styling
+  &--modifier {
+    background: rgba($color-accent-blue, 0.1);
+    color: $color-accent-blue;
+    border-color: rgba($color-accent-blue, 0.2);
+  }
+}
+
+// ============================================================================
+// VR MODE - Larger text and spacing
+// ============================================================================
+
+.tooltip--vr {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-lg;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+
+  .tooltip__arrow {
+    width: 10px;
+    height: 10px;
+  }
+
+  .tooltip__rich {
+    gap: $spacing-sm;
+  }
+
+  .tooltip__rich-header {
+    gap: $spacing-sm;
+  }
+
+  .tooltip__title {
+    font-size: 16px;
+  }
+
+  .tooltip__description {
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+  }
+
+  .tooltip__shortcut {
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    gap: $spacing-xs;
+  }
+
+  .kbd {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 $spacing-sm;
+    font-size: $font-size-sm;
+    border-radius: $radius-md;
+  }
+
+  // Interactive tooltips in VR need larger touch targets
+  &.tooltip--interactive {
+    padding: $spacing-md;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 480px) {
+  .tooltip {
+    max-width: 200px;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .tooltip__shortcut {
+    display: none;
+  }
+
+  .kbd {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 9px;
+  }
+}
+
+// ============================================================================
+// REDUCED MOTION
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip {
+    animation: none;
+
+    &--exiting {
+      animation: none;
+      opacity: 0;
+    }
+  }
+}
+
+// ============================================================================
+// HIGH CONTRAST
+// ============================================================================
+
+@media (prefers-contrast: high) {
+  .tooltip {
+    border-width: 2px;
+  }
+
+  .kbd {
+    border-width: 2px;
+  }
+}
+
+// ============================================================================
+// DARK MODE ENHANCEMENTS
+// ============================================================================
+
+// Already designed for dark mode, but add any necessary adjustments
+.tooltip {
+  // Subtle gradient for depth
+  background: linear-gradient(
+    180deg,
+    color.adjust($color-bg-elevated, $lightness: 2%) 0%,
+    $color-bg-elevated 100%
+  );
+}
+
+// ============================================================================
+// INLINE SHORTCUT DISPLAY (for use outside tooltips)
+// ============================================================================
+
+.shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 8px;
+
+  .kbd {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+  }
+}
+
+// ============================================================================
+// TOOLTIP VARIANTS
+// ============================================================================
+
+// Error tooltip (for validation messages)
+.tooltip--error {
+  background: rgba($color-error, 0.1);
+  border-color: rgba($color-error, 0.3);
+  color: $color-error;
+
+  .tooltip__arrow {
+    background: rgba($color-error, 0.1);
+    border-color: rgba($color-error, 0.3);
+  }
+}
+
+// Warning tooltip
+.tooltip--warning {
+  background: rgba($color-warning, 0.1);
+  border-color: rgba($color-warning, 0.3);
+  color: $color-warning;
+
+  .tooltip__arrow {
+    background: rgba($color-warning, 0.1);
+    border-color: rgba($color-warning, 0.3);
+  }
+}
+
+// Success tooltip
+.tooltip--success {
+  background: rgba($color-success, 0.1);
+  border-color: rgba($color-success, 0.3);
+  color: $color-success;
+
+  .tooltip__arrow {
+    background: rgba($color-success, 0.1);
+    border-color: rgba($color-success, 0.3);
+  }
+}
+
+// Info tooltip
+.tooltip--info {
+  background: rgba($color-accent-blue, 0.1);
+  border-color: rgba($color-accent-blue, 0.3);
+  color: $color-accent-blue;
+
+  .tooltip__arrow {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: rgba($color-accent-blue, 0.3);
+  }
+}

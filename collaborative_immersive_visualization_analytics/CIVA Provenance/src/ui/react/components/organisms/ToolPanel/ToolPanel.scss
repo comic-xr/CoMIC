@@ -1,0 +1,109 @@
+// src/ui/react/components/common/ToolPanel.scss
+@use "theme" as *;
+
+.tool-panel {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--panel-width, 350px));
+  bottom: 0;
+  width: var(--panel-width, 350px);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: left $transition-base;
+
+  // Glass background
+  @include glass($color-glass-panel, $blur-strong, $color-border-default);
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+
+  // Shadow when open
+  box-shadow: none;
+
+  &--open {
+    left: 60px; // Account for left toolbar
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4), 1px 0 0 $color-border-medium;
+  }
+
+  // -------------------------------------------------------------------------
+  // HEADER
+  // -------------------------------------------------------------------------
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid $color-border-default;
+    background: $color-glass-subtle;
+    flex-shrink: 0;
+  }
+
+  &__title-group {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__close {
+    @include glass-button;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-sm;
+    color: $color-text-tertiary;
+
+    &:hover:not(:disabled) {
+      color: $color-text-primary;
+      background: $color-glass-medium;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // CONTENT
+  // -------------------------------------------------------------------------
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: $spacing-lg;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color-glass-medium;
+      border-radius: $radius-full;
+
+      &:hover {
+        background: $color-glass-strong;
+      }
+    }
+  }
+}

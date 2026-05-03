@@ -1,0 +1,81 @@
+// src/ui/react/components/molecules/InfoRow/InfoRow.scss
+// InfoRow molecule styles
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    // Size variants
+    &--sm {
+        gap: 2px;
+    }
+
+    &--md {
+        gap: 4px;
+    }
+
+    &--lg {
+        gap: 6px;
+    }
+
+    // Inline layout
+    &--inline {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+
+        .info-row__label {
+            flex-shrink: 0;
+        }
+
+        .info-row__value {
+            text-align: right;
+            min-width: 0; // Allow truncation
+        }
+    }
+
+    // VR mode
+    &--vr {
+        gap: 8px;
+
+        &.info-row--inline {
+            gap: 16px;
+        }
+
+        &.info-row--sm {
+            gap: 6px;
+        }
+
+        &.info-row--lg {
+            gap: 10px;
+        }
+    }
+}
+
+// Label section
+.info-row__label {
+    display: flex;
+    align-items: center;
+}
+
+// Value section
+.info-row__value {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+
+    // Allow text truncation
+    > * {
+        min-width: 0;
+    }
+
+    // In stacked (non-inline) mode, allow text to wrap
+    .info-row:not(.info-row--inline) & {
+        > .text {
+            white-space: normal;
+            word-wrap: break-word;
+        }
+    }
+}

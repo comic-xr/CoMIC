@@ -1,0 +1,109 @@
+/**
+ * VR Wrist Menu Styles
+ */
+
+@use "theme" as *;
+
+.vr-wrist-menu {
+    position: fixed;
+    z-index: 9999;
+
+    // In actual VR, position would be calculated from wrist tracking
+    // For desktop testing, center in viewport
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    // VR positioning (when tracking is available)
+    // transform: translate3d(var(--wrist-x), var(--wrist-y), var(--wrist-z));
+
+    &--activating {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--open {
+        animation: menu-appear 0.2s ease-out;
+    }
+
+    &__radial {
+        display: block;
+        filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+    }
+
+    &__label {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 12px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+}
+
+// Radial segment styles
+.radial-segment {
+    &--active {
+        path {
+            filter: drop-shadow(0 0 8px var(--color-accent-teal));
+        }
+    }
+
+    &--hovered {
+        path {
+            filter: brightness(1.2);
+        }
+    }
+}
+
+// Radial center styles
+.radial-center {
+    &--hovered {
+        circle {
+            filter: brightness(1.3);
+        }
+    }
+}
+
+// Gaze indicator styles
+.gaze-indicator {
+    animation: indicator-pulse 2s ease-in-out infinite;
+}
+
+// Animations
+@keyframes menu-appear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes indicator-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 4px var(--color-accent-teal));
+    }
+    50% {
+        filter: drop-shadow(0 0 12px var(--color-accent-teal));
+    }
+}
+
+// VR-specific styles (when in actual VR)
+.vr-mode {
+    .vr-wrist-menu {
+        // In VR, menu should be positioned in 3D space
+        // These styles would be applied by the VR rendering system
+        position: absolute;
+        transform-style: preserve-3d;
+    }
+}

@@ -1,0 +1,759 @@
+/**
+ * @file RoomHeader.scss
+ * @description Styles for the section-based RoomHeader component.
+ *
+ * Layout: ROOM | PINNED | VOICE | CHAT
+ * Height: 62px total (18px section labels + 44px content)
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// ROOM HEADER CONTAINER
+// =============================================================================
+
+.room-header {
+    display: flex;
+    flex-direction: column;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-default;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+}
+
+// =============================================================================
+// SECTION LABELS ROW (18px)
+// =============================================================================
+
+.room-header__labels {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    padding: 0 16px;
+    background: $color-bg-canvas;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.room-header__label {
+    font-size: 9px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    padding: 0 8px;
+
+    &--room {
+        width: 180px;
+        text-align: left;
+    }
+
+    &--pinned {
+        width: 160px;
+        text-align: left;
+    }
+
+    &--voice {
+        width: 260px;
+        text-align: center;
+    }
+
+    &--chat {
+        width: 40px;
+        text-align: center;
+    }
+}
+
+.room-header__label-divider {
+    width: 1px;
+    height: 100%;
+    background: $color-border-subtle;
+}
+
+.room-header__label-spacer {
+    flex: 1;
+}
+
+// =============================================================================
+// CONTENT ROW (44px)
+// =============================================================================
+
+.room-header__content {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 16px;
+}
+
+.room-header__divider {
+    width: 1px;
+    align-self: stretch;
+    background: $color-border-subtle;
+    flex-shrink: 0;
+}
+
+.room-header__spacer {
+    flex: 1;
+}
+
+// =============================================================================
+// SECTION BASE
+// =============================================================================
+
+.room-header__section {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+// =============================================================================
+// ROOM SECTION (Viewing Dropdown + Presence)
+// =============================================================================
+
+.room-header__room-section {
+    gap: 8px;
+    width: 180px;
+}
+
+.room-header__viewing-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: $color-text-primary;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: $color-border-default;
+    }
+}
+
+.room-header__viewing-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: $radius-sm;
+    background: color-mix(in srgb, var(--room-color, #{$color-accent-cyan}) 20%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--room-color, #{$color-accent-cyan});
+}
+
+.room-header__viewing-name {
+    font-size: 12px;
+    font-weight: 500;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.room-header__viewing-chevron {
+    color: $color-text-muted;
+}
+
+.room-header__presence {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.03);
+    color: $color-text-muted;
+    font-size: 11px;
+    font-weight: 500;
+
+    span {
+        color: $color-text-secondary;
+    }
+}
+
+// =============================================================================
+// ROOM DROPDOWN
+// =============================================================================
+
+.room-header__room-dropdown,
+.room-header__voice-dropdown,
+.room-header__join-dropdown {
+    position: absolute;
+    top: 100%;
+    margin-top: 4px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-dropdown;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.room-header__room-dropdown {
+    left: 0;
+    width: 240px;
+}
+
+.room-header__voice-dropdown {
+    right: 0;
+    width: 260px;
+}
+
+.room-header__join-dropdown {
+    right: 0;
+    width: 240px;
+}
+
+.room-header__dropdown-content {
+    padding: 8px;
+}
+
+.room-header__dropdown-search {
+    width: 100%;
+    --search-input-bg: rgba(255, 255, 255, 0.04);
+    --search-input-border: #{$color-border-subtle};
+    --search-input-focus-border: #{$color-accent-primary};
+    --search-input-color: #{$color-text-primary};
+    --search-input-placeholder: #{$color-text-muted};
+    --search-input-icon: #{$color-text-muted};
+
+    .search-input__field {
+        font-size: $font-size-xs;
+    }
+}
+
+.room-header__dropdown-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 2px 2px 6px;
+}
+
+.room-header__filter-row,
+.room-header__tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.room-header__filter-chip,
+.room-header__tag-chip {
+    border: 1px solid $color-border-subtle;
+    background: rgba(255, 255, 255, 0.04);
+    color: $color-text-muted;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+
+    &.is-active {
+        color: $color-accent-cyan;
+        border-color: rgba($color-accent-cyan, 0.5);
+        background: rgba($color-accent-cyan, 0.12);
+    }
+}
+
+.room-header__sort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-xs;
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+
+    select {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-sm;
+        color: $color-text-secondary;
+        font-size: 9px;
+        padding: 2px 6px;
+    }
+}
+
+.room-header__dropdown-group-label {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    color: $color-text-muted;
+
+    &--blue {
+        color: $color-accent-blue;
+    }
+
+    &--green {
+        color: $color-accent-green;
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+
+    &--small {
+        font-size: 9px;
+        margin-top: 8px;
+    }
+}
+
+.room-header__dropdown-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px;
+    border-radius: $radius-md;
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-cyan 10%, transparent);
+    }
+}
+
+.room-header__dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    padding: 6px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-secondary;
+    font-size: 12px;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-primary;
+    }
+
+    &--full {
+        width: 100%;
+        padding: 8px;
+    }
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-green 10%, transparent);
+    }
+
+    &--active-green {
+        background: color-mix(in srgb, $color-accent-green 10%, transparent);
+    }
+
+    &--active-purple {
+        background: color-mix(in srgb, $color-accent-purple 10%, transparent);
+    }
+
+    &--current {
+        background: color-mix(in srgb, $color-accent-cyan 8%, transparent);
+        border: 1px solid color-mix(in srgb, $color-accent-cyan 20%, transparent);
+        color: $color-text-primary;
+        margin-bottom: 4px;
+    }
+
+    &--muted {
+        color: $color-text-muted;
+    }
+}
+
+.room-header__dropdown-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.room-header__dropdown-name {
+    flex: 1;
+    text-align: left;
+}
+
+.room-header__dropdown-check {
+    color: $color-accent-cyan;
+
+    &--green {
+        color: $color-accent-green;
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+}
+
+.room-header__dropdown-voice {
+    color: $color-accent-green;
+}
+
+.room-header__dropdown-count {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+.room-header__dropdown-voice-count {
+    font-size: 10px;
+    color: $color-accent-green;
+}
+
+.room-header__dropdown-breakout-icon {
+    color: $color-accent-purple;
+}
+
+.room-header__dropdown-breakout-count {
+    font-size: 10px;
+    color: $color-accent-purple;
+}
+
+.room-header__dropdown-current-badge {
+    font-size: 9px;
+    color: $color-accent-cyan;
+    background: color-mix(in srgb, $color-accent-cyan 15%, transparent);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.room-header__dropdown-pin {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    transition: all 0.15s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &--active {
+        color: $color-accent-amber;
+        opacity: 1;
+
+        .material-symbols-rounded {
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+.room-header__dropdown-divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: 8px 0;
+}
+
+.room-header__dropdown-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-muted;
+    font-size: 12px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-secondary;
+    }
+}
+
+.room-header__dropdown-leave {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-accent-red;
+    font-size: 12px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: color-mix(in srgb, $color-accent-red 12%, transparent);
+    }
+}
+
+// =============================================================================
+// PINNED SECTION
+// =============================================================================
+
+.room-header__pinned-section {
+    gap: 4px;
+    min-width: 160px;
+    padding-left: 8px;
+}
+
+.room-header__pinned-empty {
+    font-size: 10px;
+    color: $color-text-muted;
+    font-style: italic;
+}
+
+.room-header__pinned-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: $radius-sm;
+    border: none;
+    background: rgba(255, 255, 255, 0.04);
+    color: $color-text-muted;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: $color-text-secondary;
+    }
+}
+
+.room-header__pinned-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.room-header__pinned-name {
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.room-header__pinned-voice {
+    color: $color-accent-green;
+}
+
+// =============================================================================
+// VOICE SECTION
+// =============================================================================
+
+.room-header__voice-section {
+    width: 260px;
+    justify-content: center;
+}
+
+// --- Voice Active State ---
+
+.room-header__voice-active {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    border-radius: $radius-lg;
+
+    &--green {
+        background: color-mix(in srgb, $color-accent-green 8%, transparent);
+        border: 1px solid color-mix(in srgb, $color-accent-green 20%, transparent);
+    }
+
+    &--purple {
+        background: color-mix(in srgb, $color-accent-purple 8%, transparent);
+        border: 1px solid color-mix(in srgb, $color-accent-purple 20%, transparent);
+    }
+}
+
+.room-header__voice-channel {
+    position: relative;
+}
+
+.room-header__voice-channel-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: $radius-md;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &--green {
+        color: $color-accent-green;
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.room-header__voice-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.room-header__voice-label {
+    font-size: 8px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.room-header__voice-name {
+    font-size: 11px;
+    font-weight: 500;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.room-header__voice-users {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+.room-header__voice-divider {
+    width: 1px;
+    height: 20px;
+    background: $color-border-subtle;
+    margin: 0 4px;
+}
+
+.room-header__voice-control {
+    width: 28px;
+    height: 28px;
+    border-radius: $radius-md;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+
+    &--green {
+        color: $color-accent-green;
+    }
+
+    &--purple {
+        color: $color-accent-purple;
+    }
+
+    &--danger {
+        color: $color-accent-red;
+        background: color-mix(in srgb, $color-accent-red 12%, transparent);
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+
+// --- Join Voice Split Button ---
+
+.room-header__join-split {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.room-header__join-main {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: $radius-md 0 0 $radius-md;
+    border: 1px solid $color-border-subtle;
+    border-right: none;
+    background: transparent;
+    color: $color-text-secondary;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-hover-bg;
+        color: $color-text-primary;
+    }
+}
+
+.room-header__join-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 32px;
+    border-radius: 0 $radius-md $radius-md 0;
+    border: 1px solid $color-border-subtle;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover,
+    &--open {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+// =============================================================================
+// CHAT SECTION
+// =============================================================================
+
+.room-header__chat-section {
+    width: 40px;
+    justify-content: center;
+}
+
+.room-header__chat-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-md;
+    border: none;
+    background: transparent;
+    color: $color-text-secondary;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.15s ease;
+
+    &:hover {
+        color: $color-text-primary;
+        background: $color-hover-bg;
+    }
+}
+
+.room-header__chat-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-accent-pink;
+    border: 2px solid $color-bg-secondary;
+    pointer-events: none;
+}

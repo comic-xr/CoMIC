@@ -1,0 +1,274 @@
+/**
+ * @file CreateRoomModal.scss
+ * @description Styles for CreateRoomModal content.
+ * Modal container, header, and footer are handled by FormModal.
+ */
+@use "theme" as *;
+
+// =============================================================================
+// CONTENT CONTAINER
+// =============================================================================
+
+.create-room-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// =============================================================================
+// SUBMIT ERROR
+// =============================================================================
+
+.create-room-modal__submit-error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-error, 0.1);
+  border: 1px solid rgba($color-error, 0.3);
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-error;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// SECTIONS
+// =============================================================================
+
+.create-room-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.create-room-modal__section-label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+}
+
+.create-room-modal__error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $color-error;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// FEATURE TOGGLES
+// =============================================================================
+
+.create-room-modal__toggles {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.create-room-modal__toggle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  span {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+  }
+
+  &:hover {
+    background: $color-bg-tertiary;
+    border-color: $color-border-medium;
+    color: $color-text-secondary;
+  }
+
+  &.active {
+    background: rgba($color-accent-blue, 0.1);
+    border-color: $color-accent-blue;
+    color: $color-accent-blue;
+  }
+}
+
+// =============================================================================
+// OPTIONS (Access, Persistence)
+// =============================================================================
+
+.create-room-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.create-room-modal__option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-fast;
+
+  > svg:first-child {
+    color: $color-text-tertiary;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: $color-bg-tertiary;
+    border-color: $color-border-medium;
+  }
+
+  &.active {
+    background: rgba($color-accent-blue, 0.08);
+    border-color: $color-accent-blue;
+
+    > svg:first-child {
+      color: $color-accent-blue;
+    }
+  }
+}
+
+.create-room-modal__option-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.create-room-modal__option-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.create-room-modal__option-desc {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.create-room-modal__check {
+  color: $color-accent-blue;
+  flex-shrink: 0;
+}
+
+// =============================================================================
+// USER SELECTION
+// =============================================================================
+
+.create-room-modal__user-search {
+  --search-input-bg: $color-bg-secondary;
+  --search-input-border: $color-border-subtle;
+  --search-input-focus-border: $color-accent-blue;
+  --search-input-color: $color-text-primary;
+  --search-input-placeholder: $color-text-tertiary;
+  --search-input-icon: $color-text-tertiary;
+  --search-input-gap: 6px;
+
+  .search-input__field {
+    font-size: $font-size-sm;
+  }
+}
+
+.create-room-modal__selected-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-top: $spacing-xs;
+}
+
+.create-room-modal__selected-chip {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px $spacing-sm 2px 2px;
+  background: rgba($color-accent-blue, 0.15);
+  border: 1px solid rgba($color-accent-blue, 0.3);
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  color: $color-accent-blue;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($color-error, 0.15);
+    border-color: rgba($color-error, 0.3);
+    color: $color-error;
+  }
+}
+
+.create-room-modal__chip-remove {
+  font-size: 14px;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+}
+
+.create-room-modal__user-list {
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  background: $color-bg-secondary;
+  margin-top: $spacing-xs;
+  @include glass-scrollable;
+}
+
+.create-room-modal__no-users {
+  padding: $spacing-md;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.create-room-modal__user-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $color-border-subtle;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-fast;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: $color-bg-tertiary;
+  }
+
+  &.selected {
+    background: rgba($color-accent-blue, 0.08);
+  }
+}
+
+.create-room-modal__user-check {
+  margin-left: auto;
+  color: $color-accent-blue;
+}

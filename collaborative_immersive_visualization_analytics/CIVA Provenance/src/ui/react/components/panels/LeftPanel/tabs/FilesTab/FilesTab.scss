@@ -1,0 +1,1030 @@
+// tabs/FilesTab/FilesTab.scss
+// Files tab styling - darker theme matching LayoutPanel
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// FILES TAB CONTAINER
+// =============================================================================
+
+.files-tab,
+.datasets-tab {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0; // KEY: Fill available space in flex parent
+  min-height: 0; // KEY: Allow shrinking below content size
+  width: 100%;
+  overflow: hidden;
+  position: relative; // For absolute positioned overlay
+
+  // This is critical - sections container should grow but not push footer
+  &__sections,
+  .resizable-sections-container {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+
+    // SectionNavGroup fills the container
+    .section-nav-group {
+      height: 100%;
+    }
+  }
+
+  // Content area for V2 - grows to fill space, children scroll independently
+  &__content {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden; // Don't scroll the container - let children scroll
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Panel footer sticks to bottom
+  > .panel-footer {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// FILES TAB V2 SPECIFIC
+// =============================================================================
+
+.files-tab-v2 {
+  // Ensure proper flex layout
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// =============================================================================
+// UPLOAD DROPZONE OVERLAY
+// =============================================================================
+
+.upload-dropzone-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($color-accent-blue, 0.15);
+  border: 2px dashed rgba($color-accent-blue, 0.5);
+  border-radius: $radius-md;
+  z-index: $z-popover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    background: rgba($color-bg-primary, 0.95);
+    border-radius: $radius-md;
+    border: 1px solid rgba($color-accent-blue, 0.3);
+
+    svg {
+      color: $color-accent-blue;
+    }
+
+    span {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+// =============================================================================
+// LOADING OVERLAY
+// =============================================================================
+
+.panel-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($color-bg-primary, 0.85);
+  z-index: $z-popover - 1; // Below dropzone but above content
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+
+    svg {
+      color: $color-accent-blue;
+    }
+
+    span {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+// Section empty state
+.section-empty {
+  padding: $spacing-md;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+
+  p {
+    margin: 0 0 $spacing-xs 0;
+  }
+
+  &__hint {
+    font-size: 10px;
+    color: $color-text-tertiary;
+    font-style: italic;
+  }
+}
+
+// =============================================================================
+// FILE ITEM
+// =============================================================================
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  margin-bottom: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: $color-border-subtle;
+  }
+
+  &--selected {
+    background: rgba($color-accent-blue, 0.15);
+    border-color: rgba($color-accent-blue, 0.4);
+  }
+
+  &--can-viz:hover {
+    border-color: rgba($color-accent-green, 0.4);
+  }
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &__name {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__size {
+    font-size: 9px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &:hover &__actions {
+    opacity: 1;
+  }
+
+  &__action-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+// =============================================================================
+// FILE DETAILS MODAL
+// =============================================================================
+
+.file-details-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-modal;
+}
+
+.file-details-modal {
+  width: 360px;
+  max-width: 90vw;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-md;
+    flex-shrink: 0;
+  }
+
+  &__title-area {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__type {
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__content {
+    padding: $spacing-md;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid $color-border-subtle;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    svg {
+      color: $color-text-muted;
+      flex-shrink: 0;
+    }
+  }
+
+  &__label {
+    font-size: 10px;
+    color: $color-text-muted;
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  &__value {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-primary;
+
+    &--path {
+      font-family: monospace;
+      font-size: 10px;
+      word-break: break-all;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    border-top: 1px solid $color-border-subtle;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &__action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: $spacing-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &--primary {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+
+      &:hover {
+        background: rgba($color-accent-green, 0.25);
+      }
+    }
+
+    &--danger {
+      &:hover {
+        background: rgba($color-error, 0.15);
+        border-color: rgba($color-error, 0.4);
+        color: $color-error;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// PROCESSES TAB
+// =============================================================================
+
+.processes-tab {
+  padding: $spacing-sm;
+
+  &__loading,
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    text-align: center;
+    color: $color-text-muted;
+
+    svg {
+      opacity: 0.5;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      font-size: 11px;
+      margin-bottom: $spacing-xs;
+    }
+
+    span {
+      font-size: 10px;
+      color: $color-text-tertiary;
+    }
+  }
+
+  &__section {
+    margin-bottom: $spacing-md;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 10px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.process-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    display: block;
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__file {
+    display: block;
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__progress {
+    height: 3px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  &__progress-bar {
+    height: 100%;
+    background: $color-accent-amber;
+    transition: width 0.3s ease;
+  }
+
+  &__error {
+    display: block;
+    font-size: 9px;
+    color: $color-error;
+    margin-top: 4px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__action-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+// =============================================================================
+// SPIN ANIMATION
+// =============================================================================
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================================================
+// ICON HELPERS
+// =============================================================================
+
+.icon-amber,
+.icon--amber {
+  color: $color-accent-amber;
+}
+.icon-green,
+.icon--green {
+  color: $color-accent-green;
+}
+.icon-blue,
+.icon--blue {
+  color: $color-accent-blue;
+}
+.icon-red,
+.icon--red {
+  color: $color-error;
+}
+.icon-gray,
+.icon--gray {
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// CONTEXT MENU
+// =============================================================================
+
+.context-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-popover;
+}
+
+.context-menu {
+  position: fixed;
+  min-width: 160px;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: $z-popover + 1;
+  padding: $spacing-xs 0;
+  overflow: visible;
+
+  &__divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+
+  &__item-wrapper {
+    position: relative;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: none;
+    border: none;
+    color: $color-text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+    text-align: left;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: $color-text-primary;
+    }
+
+    &.has-submenu {
+      justify-content: space-between;
+    }
+
+    .submenu-arrow {
+      margin-left: auto;
+      opacity: 0.5;
+    }
+
+    &--loading,
+    &--disabled {
+      color: $color-text-muted;
+      cursor: default;
+
+      &:hover {
+        background: none;
+        color: $color-text-muted;
+      }
+    }
+
+    &--danger {
+      color: $color-accent-red;
+
+      &:hover {
+        background: rgba($color-accent-red, 0.1);
+        color: $color-accent-red;
+      }
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    min-width: 140px;
+    background: $color-bg-primary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    padding: $spacing-xs 0;
+  }
+}
+
+// =============================================================================
+// TREE ITEM (List View File/Folder)
+// =============================================================================
+
+.tree-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 4px $spacing-sm;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &.selected {
+    background: rgba($color-accent-blue, 0.25);
+    outline: 1px solid rgba($color-accent-blue, 0.5);
+  }
+
+  &.loaded {
+    border-left: 2px solid $color-accent-green;
+    padding-left: calc(#{$spacing-sm} - 2px);
+  }
+
+  .chevron {
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  .drag-handle {
+    flex-shrink: 0;
+    color: $color-text-muted;
+    cursor: grab;
+    transition: opacity $transition-fast;
+  }
+
+  // Chevron for folder expansion
+  &__chevron {
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  // File type icon
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: $color-text-muted;
+  }
+
+  // V7: Info wrapper for name + tags
+  &__info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+  }
+
+  // File/folder name
+  &__name {
+    font-size: 11px;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // V7: Tag chips below filename
+  &__tags {
+    margin-top: 2px;
+  }
+
+  .item-name {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .star-btn {
+    background: none;
+    border: none;
+    padding: 2px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+    flex-shrink: 0;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-accent-amber;
+    }
+
+    &--starred {
+      color: $color-accent-amber;
+    }
+  }
+
+  .menu-btn {
+    background: none;
+    border: none;
+    padding: 2px 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+    flex-shrink: 0;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .status-indicator__dot--active {
+    color: $color-accent-green;
+    flex-shrink: 0;
+  }
+
+  .item-meta {
+    font-size: 9px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  // File size display - always at the end
+  &__size {
+    font-size: 9px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+    min-width: 40px;
+    text-align: right;
+    margin-left: auto;
+  }
+
+  // Star indicator (always visible when starred)
+  &__star-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-accent-amber;
+    flex-shrink: 0;
+    padding: 2px;
+  }
+
+  // Hover actions container
+  &__actions {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  // Individual action button
+  &__action {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+    transition: color $transition-fast, background $transition-fast;
+
+    &:hover {
+      color: $color-text-primary;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &.starred {
+      color: $color-accent-amber;
+
+      &:hover {
+        color: color.adjust($color-accent-amber, $lightness: -10%);
+      }
+    }
+
+    // Add to workspace button - more prominent
+    &--add {
+      color: $color-accent-green;
+      background: rgba($color-accent-green, 0.1);
+
+      &:hover {
+        color: $color-accent-green;
+        background: rgba($color-accent-green, 0.2);
+      }
+    }
+  }
+}
+
+// =============================================================================
+// LOAD STATE INDICATOR (Animated for loading/processing)
+// =============================================================================
+
+.load-state-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &--animated {
+    .spin {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================================================
+// FILE CARD (Grid View)
+// =============================================================================
+
+.files-grid {
+  display: grid;
+  // Fixed 2 columns with equal width
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+}
+
+.file-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: $color-border-subtle;
+  }
+
+  &.selected {
+    background: rgba($color-accent-blue, 0.2);
+    border-color: rgba($color-accent-blue, 0.6);
+    box-shadow: 0 0 0 1px rgba($color-accent-blue, 0.3);
+  }
+
+  .thumbnail {
+    // Fill available width, maintain aspect ratio
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    max-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+    position: relative;
+    margin-bottom: $spacing-xs;
+    overflow: hidden;
+
+    &__preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $radius-sm;
+      overflow: hidden;
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; // Scale to fit, don't crop
+      border-radius: $radius-sm;
+      background: rgba(0, 0, 0, 0.1); // Show background for transparent areas
+    }
+  }
+
+  .thumbnail-actions {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: flex;
+    gap: 2px;
+    transition: opacity $transition-fast;
+  }
+
+  .thumbnail-action {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    padding: 3px;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+
+    &:hover {
+      color: $color-text-primary;
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    &.starred {
+      color: $color-accent-amber;
+
+      &:hover {
+        color: color.adjust($color-accent-amber, $lightness: -10%);
+      }
+    }
+
+    // Add to workspace button - more prominent
+    &--add {
+      color: $color-accent-green;
+      background: rgba($color-accent-green, 0.3);
+
+      &:hover {
+        background: rgba($color-accent-green, 0.5);
+      }
+    }
+  }
+
+  // Star indicator (always visible when starred, shown in top-left)
+  .thumbnail-star-indicator {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: $color-accent-amber;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  }
+
+  // Name row with load state indicator
+  &__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .file-name {
+    font-size: 10px;
+    color: $color-text-primary;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+
+  // V7: Tag chips for grid view
+  &__tags {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+
+  .file-size {
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+}

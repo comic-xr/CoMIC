@@ -1,0 +1,49 @@
+// src/ui/react/components/molecules/StatusIndicator/StatusIndicator.scss
+// StatusIndicator molecule styles
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    // Size variants
+    &--sm {
+        gap: 4px;
+    }
+
+    &--md {
+        gap: 6px;
+    }
+
+    &--lg {
+        gap: 8px;
+    }
+
+    // Reverse order
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+
+    // VR mode
+    &--vr {
+        gap: 10px;
+
+        &.status-indicator--sm {
+            gap: 8px;
+        }
+
+        &.status-indicator--lg {
+            gap: 12px;
+        }
+    }
+}
+
+// Dot element
+.status-indicator__dot {
+    flex-shrink: 0;
+}
+
+// Label element
+.status-indicator__label {
+    white-space: nowrap;
+}

@@ -1,0 +1,182 @@
+/**
+ * @file DatasetNode.scss
+ * @description Styles for DatasetNode component.
+ */
+
+@use "theme" as *;
+
+.dataset-node {
+  position: relative;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    cursor: pointer;
+    border-radius: $radius-sm;
+    transition: background $transition-fast;
+    position: relative;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &--expanded {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+
+  &__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  &__name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__meta {
+    font-size: 10px;
+    color: $color-text-muted;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__time {
+    color: $color-text-tertiary;
+  }
+
+  &__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: rgba($color-accent-teal, 0.2);
+    color: $color-accent-teal;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    border-radius: $radius-xs;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  &__children {
+    padding-left: 12px;
+    border-left: 1px solid $color-border-subtle;
+    margin-left: 10px;
+  }
+
+  // Context menu
+  &__menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: $z-popover;
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    background: $color-bg-primary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: $z-popover + 1;
+    padding: $spacing-xs 0;
+    overflow: hidden;
+  }
+
+  &__menu-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: none;
+    border: none;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    text-align: left;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: $color-text-primary;
+    }
+
+    &--danger {
+      color: $color-error;
+
+      &:hover {
+        background: rgba($color-error, 0.1);
+        color: $color-error;
+      }
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__menu-divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+}

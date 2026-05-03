@@ -1,0 +1,24 @@
+/**
+ * LayoutMiniPreview Styles
+ *
+ * Tiny pixel-art grid layout preview.
+ * Used for ViewGroup layout previews, grid templates, etc.
+ */
+
+@use "theme" as *;
+
+.layout-mini-preview {
+  position: relative;
+  flex-shrink: 0;
+
+  &__cell {
+    position: absolute;
+    border-radius: 1px;
+    background: color-mix(in srgb, var(--preview-color, #{$color-text-muted}) 30%, transparent);
+    transition: background-color $transition-fast;
+
+    &--filled {
+      background: var(--preview-color, #{$color-text-muted});
+    }
+  }
+}

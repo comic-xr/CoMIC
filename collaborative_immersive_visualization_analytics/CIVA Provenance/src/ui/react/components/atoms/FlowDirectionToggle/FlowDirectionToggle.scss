@@ -1,0 +1,46 @@
+/**
+ * @file FlowDirectionToggle.scss
+ * @description Styles for FlowDirectionToggle component.
+ */
+
+@use "theme" as *;
+
+.flow-direction-toggle {
+  display: flex;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:not(:last-child) {
+      border-right: 1px solid $color-border-subtle;
+    }
+
+    &:hover:not(.active) {
+      color: $color-text-secondary;
+      background: $color-bg-elevated;
+    }
+
+    &.active {
+      color: $color-accent-blue;
+      background: rgba($color-accent-blue, 0.15);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: -2px;
+    }
+  }
+}

@@ -1,0 +1,413 @@
+// StatusBar.scss - Bottom status bar with sync, online, cursors, recording, FPS
+// Matches artifact design tokens - no hardcoded values
+@use "theme" as *;
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  background: $color-bg-primary;
+  border-top: 1px solid $color-border-default;
+  padding: 0 $spacing-md;
+  font-size: 10px;
+  color: $color-text-muted;
+  flex-shrink: 0;
+  gap: $spacing-md;
+  z-index: 50;
+
+  &__left,
+  &__center,
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__left {
+    flex: 0 0 auto;
+  }
+
+  &__center {
+    flex: 1;
+    justify-content: center;
+  }
+
+  &__right {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+
+  // -------------------------------------------------------------------------
+  // Divider
+  // -------------------------------------------------------------------------
+  &__divider {
+    width: 1px;
+    height: 12px;
+    background: $color-border-default;
+  }
+
+  // -------------------------------------------------------------------------
+  // Status Items
+  // -------------------------------------------------------------------------
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: $color-text-muted;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &--success {
+      color: $color-accent-green;
+
+      svg {
+        color: $color-accent-green;
+      }
+    }
+
+    &--warning {
+      color: $color-accent-amber;
+
+      svg {
+        color: $color-accent-amber;
+      }
+    }
+
+    &--error {
+      color: $color-accent-red;
+
+      svg {
+        color: $color-accent-red;
+      }
+    }
+
+    // Interactive status item (hoverable)
+    &--interactive {
+      position: relative;
+      cursor: pointer;
+      padding: 2px $spacing-xs;
+      border-radius: $radius-xs;
+      transition: background $transition-fast;
+
+      &:hover {
+        background: $color-glass-light;
+      }
+    }
+
+    // Dev mode indicator - warning color
+    &--dev-mode {
+      color: $color-accent-amber;
+      padding: 2px $spacing-xs;
+      background: rgba($color-accent-amber, 0.1);
+      border-radius: $radius-xs;
+
+      svg {
+        color: $color-accent-amber;
+      }
+    }
+
+    // Authenticated mode indicator - secure/success color
+    &--auth {
+      color: $color-accent-green;
+
+      svg {
+        color: $color-accent-green;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Toggle Button (Cursors)
+  // -------------------------------------------------------------------------
+  &__toggle {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 2px $spacing-sm;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.3);
+      color: $color-accent-blue;
+
+      &:hover {
+        background: rgba($color-accent-blue, 0.2);
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Recording Controls (Enhanced with pause/stop)
+  // -------------------------------------------------------------------------
+  &__recording-controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__recording-indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 2px $spacing-sm;
+    background: rgba($color-accent-red, 0.15);
+    border: none;
+    border-radius: $radius-sm;
+    color: $color-accent-red;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.25);
+    }
+  }
+
+  &__recording-dot {
+    fill: $color-accent-red;
+    animation: pulse 1.5s infinite;
+
+    &.paused {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
+
+  &__recording-mode {
+    color: rgba($color-accent-red, 0.7);
+    font-size: 9px;
+  }
+
+  &__recording-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: rgba($color-accent-red, 0.1);
+    border: none;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-red, 0.2);
+      color: $color-accent-red;
+    }
+
+    &--stop {
+      &:hover {
+        background: rgba($color-accent-red, 0.3);
+        color: $color-accent-red;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Memory Usage
+  // -------------------------------------------------------------------------
+  &__memory {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 2px $spacing-xs;
+    border-radius: $radius-xs;
+    transition: background $transition-fast;
+    font-size: 10px;
+
+    &:hover {
+      background: $color-glass-light;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Transient Messages (center zone)
+  // -------------------------------------------------------------------------
+  &__transient {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 2px $spacing-sm;
+    background: rgba($color-accent-blue, 0.1);
+    border-radius: $radius-sm;
+    color: $color-accent-blue;
+    font-size: 10px;
+    animation: transient-fade 2s ease-out forwards;
+  }
+
+  // -------------------------------------------------------------------------
+  // Warnings Button
+  // -------------------------------------------------------------------------
+  &__item--warnings {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 2px $spacing-xs;
+    background: rgba($color-accent-amber, 0.1);
+    border: none;
+    border-radius: $radius-xs;
+    color: $color-accent-amber;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-amber, 0.2);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Panel Toggle Button
+  // -------------------------------------------------------------------------
+  &__item--toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-light;
+      color: $color-text-primary;
+    }
+  }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes transient-fade {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+// =============================================================================
+// ONLINE USERS POPOVER
+// =============================================================================
+
+.online-popover {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 160px;
+  z-index: $z-popover;
+
+  // Glassmorphism
+  background: rgba($color-bg-secondary, 0.95);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  // Animation
+  animation: popover-appear 0.15s ease-out;
+
+  // Pointer triangle
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid $color-border-default;
+  }
+
+  &__header {
+    padding: $spacing-xs $spacing-sm;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__list {
+    padding: $spacing-xs;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-xs;
+
+    &:hover {
+      background: $color-glass-light;
+    }
+  }
+
+  &__status {
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+  }
+
+  &__idle {
+    font-size: 9px;
+    color: $color-text-muted;
+    margin-left: auto;
+  }
+}
+
+@keyframes popover-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

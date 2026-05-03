@@ -1,0 +1,262 @@
+/**
+ * @file NotesTab.scss
+ * @description Styles for NotesTab component container.
+ * Uses BEM naming convention.
+ *
+ * Note: Component-level styles (note-card, note-edit-view) are in RightPanel.scss
+ * for shared styling across the panel.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// NOTES TAB CONTAINER
+// =============================================================================
+
+.notes-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// =============================================================================
+// NOTE EDITOR ENHANCEMENTS
+// =============================================================================
+
+.note-edit-view {
+  &__type-selector {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__type-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-teal, 0.15);
+      color: $color-accent-teal;
+
+      &[data-color="green"] {
+        background: rgba($color-accent-green, 0.15);
+        color: $color-accent-green;
+      }
+
+      &[data-color="purple"] {
+        background: rgba($color-accent-purple, 0.15);
+        color: $color-accent-purple;
+      }
+    }
+  }
+
+  &__type-divider {
+    width: 1px;
+    height: 20px;
+    background: $color-border-subtle;
+    margin: 0 4px;
+  }
+
+  &__visibility-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      background: rgba($color-accent-blue, 0.15);
+      color: $color-accent-blue;
+    }
+  }
+
+  &__toolbar-separator {
+    width: 1px;
+    height: 16px;
+    background: $color-border-subtle;
+    margin: 0 2px;
+  }
+
+  // Checklist styles
+  &__checklist {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 12px;
+  }
+
+  &__progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  &__progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: $color-accent-green;
+    border-radius: 2px;
+    transition: width 0.2s ease;
+  }
+
+  &__progress-text {
+    font-size: 10px;
+    color: $color-text-muted;
+    white-space: nowrap;
+  }
+
+  &__checklist-items {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__add-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    background: transparent;
+    border: 1px dashed $color-border-subtle;
+    border-radius: 4px;
+    color: $color-text-muted;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: $color-accent-green;
+      color: $color-accent-green;
+    }
+  }
+}
+
+// =============================================================================
+// CHECKLIST ITEM
+// =============================================================================
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+
+    .checklist-item__actions {
+      opacity: 1;
+    }
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: $color-accent-green;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: $color-text-primary;
+    font-size: 12px;
+    outline: none;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &--completed {
+      text-decoration: line-through;
+      color: $color-text-muted;
+    }
+  }
+
+  &__assignee {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-secondary;
+    }
+
+    &--remove:hover {
+      background: rgba($color-error, 0.15);
+      color: $color-error;
+    }
+  }
+}

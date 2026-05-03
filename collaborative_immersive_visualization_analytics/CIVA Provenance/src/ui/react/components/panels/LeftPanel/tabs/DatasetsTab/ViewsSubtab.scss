@@ -1,0 +1,154 @@
+@use "sass:color";
+@use "theme" as *;
+
+.views-subtab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  // Toolbar
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+    flex-shrink: 0;
+  }
+
+  &__dropdown {
+    position: relative;
+  }
+
+  &__dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background: $color-glass-subtle;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-tertiary;
+    font-size: $font-size-xs;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-light;
+      border-color: $color-border-default;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 140px;
+    margin-top: 4px;
+    padding: $spacing-xs;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    z-index: $z-dropdown;
+  }
+
+  &__menu-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-xs $spacing-sm;
+    border: none;
+    background: transparent;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    text-align: left;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-light;
+    }
+
+    &--active {
+      background: rgba($color-accent-blue, 0.1);
+      color: $color-accent-blue;
+    }
+  }
+
+  &__count {
+    margin-left: auto;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+
+  // Views list
+  &__list {
+    flex: 1;
+    overflow-y: auto;
+    @include glass-scrollable;
+  }
+
+  // Group
+  &__group {
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-border-subtle;
+    }
+  }
+
+  &__group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__group-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-tertiary;
+  }
+
+  &__group-count {
+    font-size: 10px;
+    color: $color-text-muted;
+    padding: 2px $spacing-xs;
+    background: $color-glass-subtle;
+    border-radius: $radius-xs;
+  }
+
+  &__group-items {
+    padding: $spacing-xs;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  // Empty state
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-4xl $spacing-lg;
+    text-align: center;
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-text-tertiary;
+      margin: 0;
+    }
+  }
+
+  &__empty-hint {
+    margin-top: $spacing-xs !important;
+    font-size: $font-size-xs !important;
+    color: $color-text-muted !important;
+  }
+}

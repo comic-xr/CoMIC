@@ -1,0 +1,367 @@
+/**
+ * WorkspaceLinksHub Styles
+ * Frosted glassmorphism aesthetic with VR-friendly blue hues
+ */
+
+@use "theme" as *;
+
+.workspace-links-hub {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    max-height: 600px;
+    background: $color-glass-panel;
+    backdrop-filter: $backdrop-glass-medium;
+    -webkit-backdrop-filter: $backdrop-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-glass-lg;
+    overflow: hidden;
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.workspace-links-hub__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: $color-glass-light;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.workspace-links-hub__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: $color-text-primary;
+
+    svg {
+        color: $color-accent-blue;
+    }
+}
+
+.workspace-links-hub__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-glass-medium;
+        border-color: $color-border-subtle;
+        color: $color-text-primary;
+    }
+}
+
+// =============================================================================
+// STATS SUMMARY
+// =============================================================================
+
+.stats-summary {
+    display: flex;
+    gap: 6px;
+    padding: 12px;
+    background: $color-glass-subtle;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.stats-summary__item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background: $color-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-lg;
+    transition: all $transition-fast;
+
+    svg {
+        color: $color-accent-blue;
+    }
+
+    span:first-of-type {
+        font-size: 16px;
+        font-weight: 600;
+        color: $color-text-primary;
+    }
+
+    &:hover {
+        background: $color-glass-strong;
+        border-color: $color-border-default;
+    }
+}
+
+.stats-summary__label {
+    font-size: 10px;
+    color: $color-text-muted;
+}
+
+// =============================================================================
+// TOOLBAR
+// =============================================================================
+
+.workspace-links-hub__toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-bottom: 1px solid $color-border-subtle;
+}
+
+.workspace-links-hub__search {
+    flex: 1;
+    --search-input-bg: #{$color-glass-medium};
+    --search-input-border: #{$color-border-subtle};
+    --search-input-focus-border: #{$color-accent-blue};
+    --search-input-color: #{$color-text-primary};
+    --search-input-placeholder: #{$color-text-muted};
+    --search-input-icon: #{$color-text-muted};
+
+    .search-input__field {
+        font-size: 13px;
+    }
+}
+
+.workspace-links-hub__create {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: rgba($color-accent-blue, 0.15);
+    border: 1px solid rgba($color-accent-blue, 0.3);
+    border-radius: $radius-lg;
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-accent-blue;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-accent-blue;
+        border-color: $color-accent-blue;
+        color: white;
+        box-shadow: $glow-blue;
+    }
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.workspace-links-hub__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-border-default;
+        border-radius: $radius-full;
+
+        &:hover {
+            background: $color-border-medium;
+        }
+    }
+}
+
+.workspace-links-hub__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 24px;
+    text-align: center;
+
+    svg {
+        color: $color-accent-blue;
+        opacity: 0.3;
+    }
+}
+
+.workspace-links-hub__empty-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-text-secondary;
+}
+
+.workspace-links-hub__empty-desc {
+    font-size: 12px;
+    color: $color-text-muted;
+}
+
+// =============================================================================
+// PROPERTY SECTION
+// =============================================================================
+
+.property-section {
+    margin-bottom: 6px;
+    background: $color-glass-subtle;
+    border: 1px solid transparent;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: all $transition-fast;
+
+    &:hover {
+        border-color: $color-border-subtle;
+    }
+
+    &--expanded {
+        background: $color-glass-light;
+        border-color: $color-border-subtle;
+    }
+}
+
+.property-section__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $color-glass-medium;
+    }
+}
+
+.property-section__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: rgba(var(--property-color-rgb, 96, 165, 250), 0.12);
+    border: 1px solid rgba(var(--property-color-rgb, 96, 165, 250), 0.2);
+    border-radius: $radius-md;
+    color: var(--property-color, $color-accent-blue);
+}
+
+.property-section__name {
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-text-primary;
+}
+
+.property-section__stats {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-muted;
+    text-align: right;
+}
+
+.property-section__chevron {
+    color: $color-text-muted;
+}
+
+.property-section__groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 10px 10px;
+}
+
+// =============================================================================
+// LINK GROUP CARD
+// =============================================================================
+
+.link-group-card {
+    position: relative;
+    padding: 12px;
+    background: $color-glass-medium;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-lg;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-glass-strong;
+        border-color: var(--property-color, $color-accent-blue);
+        box-shadow: 0 0 12px rgba(var(--property-color-rgb, 96, 165, 250), 0.15);
+
+        .link-group-card__expand {
+            opacity: 1;
+        }
+    }
+}
+
+.link-group-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.link-group-card__property {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--property-color, $color-accent-blue);
+}
+
+.link-group-card__name {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-text-primary;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link-group-card__members {
+    min-height: 28px;
+}
+
+.link-group-card__expand {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: $color-glass-strong;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    cursor: pointer;
+    opacity: 0;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $color-accent-blue;
+        border-color: $color-accent-blue;
+        color: white;
+    }
+}

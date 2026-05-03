@@ -1,0 +1,90 @@
+// src/ui/react/components/auth/LoginButton.scss
+// Login button styling with variants
+
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// BASE LOGIN BUTTON
+// =============================================================================
+
+.login-button {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: $color-glass-light;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    background: $color-glass-medium;
+    border-color: $color-border-medium;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  // Spinner animation
+  &__spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  // =============================================================================
+  // COMPACT VARIANT - Icon only
+  // =============================================================================
+
+  &--compact {
+    padding: $spacing-sm;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+
+    span {
+      display: none;
+    }
+  }
+
+  // =============================================================================
+  // FULL VARIANT - Large prominent button
+  // =============================================================================
+
+  &--full {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    background: color.adjust($color-accent-blue, $alpha: -0.85);
+    border-color: $color-accent-blue;
+    color: $color-accent-blue;
+
+    &:hover:not(:disabled) {
+      background: color.adjust($color-accent-blue, $alpha: -0.7);
+      box-shadow: 0 0 20px $color-accent-blue-glow;
+    }
+  }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

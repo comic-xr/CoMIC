@@ -1,0 +1,281 @@
+/**
+ * CanvasMapPanel V2 Styles
+ * Main panel layout and composition styles
+ *
+ * Uses glassmorphism and blue-tinted design system
+ */
+
+@use "theme" as *;
+
+.canvas-map-v2 {
+  // CSS variables for accent colors
+  --accent-blue: #{$color-accent-blue};
+  --accent-cyan: #{$color-accent-cyan};
+  --accent-green: #{$color-accent-green};
+  --accent-amber: #{$color-accent-amber};
+  --accent-purple: #{$color-accent-purple};
+  --accent-red: #{$color-accent-red};
+  --accent-teal: #{$color-accent-teal};
+  --accent-pink: #{$color-accent-pink};
+
+  // Mode color RGB values for transparency effects
+  --mode-color-rgb: 100, 100, 100;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // V2Spec frosted glassmorphism background
+  background: $color-glass-frosted;
+  backdrop-filter: $blur-strong;
+  -webkit-backdrop-filter: $blur-strong;
+  border: 1px solid $color-border-glow;
+  border-radius: $radius-xl;
+
+  color: $color-text-primary;
+  font-family: $font-family-base;
+  overflow: hidden;
+
+  // V2Spec shadow with glow
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(96, 165, 250, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  // VR mode adjustments
+  &[data-vr="true"] {
+    --btn-size: 44px;
+    --font-size-sm: 14px;
+    --font-size-xs: 12px;
+  }
+
+  &:not([data-vr="true"]) {
+    --btn-size: 28px;
+    --font-size-sm: 11px;
+    --font-size-xs: 9px;
+  }
+
+  // Mode-specific color theming
+  &--navigate {
+    --mode-color: #{$color-accent-blue};
+    --mode-color-rgb: 59, 130, 246;
+  }
+
+  &--layout {
+    --mode-color: #{$color-accent-green};
+    --mode-color-rgb: 34, 197, 94;
+  }
+
+  &--links {
+    --mode-color: #{$color-accent-purple};
+    --mode-color-rgb: 168, 85, 247;
+  }
+
+  &--team {
+    --mode-color: #{$color-accent-amber};
+    --mode-color-rgb: 245, 158, 11;
+  }
+
+  // -------------------------------------------------------------------------
+  // Main Layout
+  // -------------------------------------------------------------------------
+  &__body {
+    display: flex;
+    flex-direction: row; // Horizontal: [companion?] [main-content] [companion?]
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &__main-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  // Companion panel spans full height of body
+  &__body > .companion-panel {
+    flex-shrink: 0;
+  }
+
+  &__minimap-row {
+    display: flex;
+    align-items: stretch;
+    flex: 0 0 auto;
+    background: $color-bg-canvas;
+  }
+
+  &__minimap-row .quick-nav-toolbar {
+    margin: 0;
+  }
+
+  &__minimap-shell {
+    flex: 1;
+    min-width: 0;
+    padding: $spacing-sm;
+    display: flex;
+  }
+
+  &__quicknav {
+    display: flex;
+    align-items: stretch;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+  }
+
+  &__quicknav--right {
+    order: 1;
+  }
+
+  // -------------------------------------------------------------------------
+  // Breadcrumb (focused VG navigation)
+  // -------------------------------------------------------------------------
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: color-mix(in srgb, var(--vg-color) 15%, $color-bg-secondary);
+    border-bottom: 1px solid color-mix(in srgb, var(--vg-color) 30%, transparent);
+  }
+
+  &__breadcrumb-back {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    background: $color-bg-tertiary;
+    color: $color-text-secondary;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-bg-secondary;
+      color: $color-text-primary;
+    }
+  }
+
+  &__breadcrumb-sep {
+    color: $color-text-muted;
+  }
+
+  &__breadcrumb-current {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__breadcrumb-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: $radius-xs;
+  }
+
+  // -------------------------------------------------------------------------
+  // Minimap Container - Takes 55% of available space
+  // -------------------------------------------------------------------------
+  &__minimap-container {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background: $color-bg-canvas;
+    position: relative;
+  }
+
+  // -------------------------------------------------------------------------
+  // Contextual Panel - Takes 45% of available space
+  // -------------------------------------------------------------------------
+  &__panel {
+    flex: 1 1 auto;
+    min-height: 120px;
+    border-top: 1px solid $color-border-subtle;
+    overflow: auto;
+    background: $color-bg-secondary;
+
+    // Subtle glassmorphism for depth
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  // -------------------------------------------------------------------------
+  // Loading State
+  // -------------------------------------------------------------------------
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  // -------------------------------------------------------------------------
+  // Size Mode Responsive Adjustments
+  // -------------------------------------------------------------------------
+  &[data-size-mode="compact"] {
+    .canvas-map-v2__breadcrumb {
+      padding: $spacing-xs $spacing-sm;
+    }
+
+    // Minimap takes more space in compact mode
+    .canvas-map-v2__minimap-container {
+      min-height: 120px;
+    }
+
+    .canvas-map-v2__panel {
+      min-height: 100px;
+    }
+  }
+
+  &[data-size-mode="expanded"] {
+    // Panel can breathe in expanded mode
+    .canvas-map-v2__panel {
+      min-height: 140px;
+    }
+  }
+
+  &[data-density="dense"] {
+    .contextual-panel {
+      padding: $spacing-sm;
+    }
+
+    .contextual-panel__actions {
+      margin-bottom: $spacing-sm;
+      gap: 4px;
+    }
+
+    .contextual-panel__hint {
+      margin-bottom: $spacing-xs;
+    }
+
+    .panel-section {
+      margin-bottom: $spacing-sm;
+    }
+
+    .panel-section__header {
+      padding: 4px $spacing-xs;
+    }
+
+    .panel-section__title {
+      font-size: 10px;
+    }
+
+    .panel-section__content {
+      padding: $spacing-xs;
+    }
+
+    .team-subtab {
+      padding: $spacing-sm;
+    }
+  }
+}
+
+// Note: Component styles are imported directly in their respective JSX files
+// This file only contains the main panel layout styles

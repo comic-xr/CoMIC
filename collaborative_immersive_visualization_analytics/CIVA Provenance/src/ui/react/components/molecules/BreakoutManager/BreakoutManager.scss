@@ -1,0 +1,151 @@
+/**
+ * @file BreakoutManager.scss
+ * @description Styles for BreakoutManager component
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// BREAKOUT MANAGER
+// =============================================================================
+
+.breakout-manager {
+    position: relative;
+}
+
+// =============================================================================
+// TRIGGER
+// =============================================================================
+
+.breakout-manager__trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    height: 32px;
+    background: $color-bg-secondary;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: $color-bg-tertiary;
+        color: $color-text-primary;
+    }
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-green 15%, transparent);
+        border-color: color-mix(in srgb, $color-accent-green 40%, transparent);
+        color: $color-accent-green;
+    }
+}
+
+.breakout-manager__chevron {
+    transition: transform 0.15s ease;
+
+    &--open {
+        transform: rotate(180deg);
+    }
+}
+
+// =============================================================================
+// DROPDOWN
+// =============================================================================
+
+.breakout-manager__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    width: 240px;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    z-index: $z-dropdown;
+    overflow: hidden;
+}
+
+.breakout-manager__header {
+    font-size: 10px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: $spacing-sm $spacing-md;
+}
+
+// =============================================================================
+// LIST
+// =============================================================================
+
+.breakout-manager__list {
+    padding: 0 $spacing-sm $spacing-sm;
+}
+
+.breakout-manager__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-radius: $radius-md;
+    background: $color-hover-bg;
+    margin-bottom: 4px;
+    transition: background 0.15s ease;
+
+    &--active {
+        background: color-mix(in srgb, $color-accent-green 15%, transparent);
+    }
+}
+
+.breakout-manager__item-icon {
+    color: $color-accent-green;
+    flex-shrink: 0;
+}
+
+.breakout-manager__item-name {
+    flex: 1;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.breakout-manager__item-count {
+    font-size: 10px;
+    color: $color-text-muted;
+    flex-shrink: 0;
+}
+
+.breakout-manager__item-btn {
+    padding: 4px 8px;
+    border-radius: $radius-sm;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+
+    &--join {
+        background: color-mix(in srgb, $color-accent-green 20%, transparent);
+        color: $color-accent-green;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-green 30%, transparent);
+        }
+    }
+
+    &--leave {
+        background: color-mix(in srgb, $color-accent-red 20%, transparent);
+        color: $color-accent-red;
+
+        &:hover {
+            background: color-mix(in srgb, $color-accent-red 30%, transparent);
+        }
+    }
+}

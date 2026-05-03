@@ -1,0 +1,156 @@
+// src/ui/react/components/molecules/NumberStepper/NumberStepper.scss
+// Number stepper molecule styles
+
+@use "theme" as *;
+
+.number-stepper {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    // ==========================================================================
+    // LABEL
+    // ==========================================================================
+
+    &__label {
+        font-size: 10px;
+        font-weight: $font-weight-medium;
+        color: $color-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    // ==========================================================================
+    // CONTROL (buttons + value)
+    // ==========================================================================
+
+    &__control {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        padding: 2px;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid $color-border-subtle;
+        border-radius: $radius-sm;
+
+        &:focus {
+            outline: none;
+            border-color: $color-accent-sky;
+        }
+    }
+
+    // ==========================================================================
+    // VALUE DISPLAY
+    // ==========================================================================
+
+    &__value {
+        min-width: 32px;
+        padding: 0 $spacing-xs;
+        font-size: 12px;
+        font-weight: $font-weight-semibold;
+        font-family: $font-family-mono;
+        color: $color-text-primary;
+        text-align: center;
+        user-select: none;
+    }
+
+    &__unit {
+        margin-left: 2px;
+        font-size: 10px;
+        font-weight: $font-weight-normal;
+        color: $color-text-muted;
+    }
+
+    // ==========================================================================
+    // RANGE INDICATOR
+    // ==========================================================================
+
+    &__range {
+        font-size: 9px;
+        color: $color-text-muted;
+        text-align: center;
+    }
+
+    // ==========================================================================
+    // SIZE VARIANTS
+    // ==========================================================================
+
+    &--sm {
+        .number-stepper__value {
+            min-width: 24px;
+            font-size: 11px;
+        }
+
+        .number-stepper__label {
+            font-size: 9px;
+        }
+    }
+
+    &--lg {
+        .number-stepper__control {
+            gap: $spacing-xs;
+            padding: $spacing-xs;
+        }
+
+        .number-stepper__value {
+            min-width: 40px;
+            font-size: 14px;
+        }
+
+        .number-stepper__label {
+            font-size: 11px;
+        }
+    }
+
+    // ==========================================================================
+    // COMPACT MODE
+    // ==========================================================================
+
+    &--compact {
+        .number-stepper__control {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .number-stepper__value {
+            min-width: 28px;
+        }
+    }
+
+    // ==========================================================================
+    // DISABLED STATE
+    // ==========================================================================
+
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+
+        .number-stepper__value {
+            color: $color-text-muted;
+        }
+    }
+}
+
+// =============================================================================
+// VR MODE
+// =============================================================================
+
+.adaptive-vr {
+    .number-stepper {
+        &__control {
+            gap: $spacing-xs;
+            padding: $spacing-xs;
+        }
+
+        &__value {
+            min-width: 44px;
+            font-size: 14px;
+            padding: 0 $spacing-sm;
+        }
+
+        &__label {
+            font-size: 12px;
+        }
+    }
+}

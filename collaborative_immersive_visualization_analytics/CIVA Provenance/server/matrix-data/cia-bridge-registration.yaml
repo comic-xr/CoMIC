@@ -1,0 +1,52 @@
+# CIA Web Matrix Application Service Registration
+#
+# This file registers CIA Web as a Matrix Application Service (AS).
+# The AS will act as a bridge between CIA Web's Y.js chat system and Matrix federation.
+#
+# Reference: https://spec.matrix.org/latest/application-service-api/
+
+# Unique identifier for this application service
+id: cia-web-bridge
+
+# URL where Synapse can reach the application service
+# For development, this will be the CIA Web server
+url: "http://host.docker.internal:3000"
+
+# Application service token (used by Synapse to authenticate requests TO the AS)
+# Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+as_token: "d20e1866d22403e4cef2486e9f24c594c52afd519dae909cee4d3e82393237b1"
+
+# Homeserver token (used by AS to authenticate requests TO Synapse)
+# Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+hs_token: "524effc36cba16203cc75d6270d6ed796639e45f0afa10eaa72b841f1c382cd6"
+
+# Local part of the user associated with the AS
+sender_localpart: cia_bridge
+
+# Namespaces the AS will manage
+namespaces:
+  # Users namespace - AS can create/manage users matching this pattern
+  users:
+    - exclusive: true
+      regex: "@cia_.*:matrix.cia-web.local"
+
+  # Aliases namespace - AS can create/manage room aliases matching this pattern
+  aliases:
+    - exclusive: true
+      regex: "#cia_.*:matrix.cia-web.local"
+
+  # Rooms namespace - AS can receive events from these rooms
+  rooms: []
+
+# Rate limiting exemption
+rate_limited: false
+
+# Protocol information (optional, for user discovery)
+protocols:
+  - cia-web
+
+# Enable ephemeral events (typing indicators, read receipts)
+de.sorunome.msc2409.push_ephemeral: true
+
+# Enable message encryption events
+org.matrix.msc3202.e2ee: true

@@ -1,0 +1,271 @@
+// VRSessionPanel.scss
+// Styles for VR session management panel
+
+@use "sass:color";
+
+.vr-session-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-elevated);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+
+  // Header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--color-surface-secondary);
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background: var(--color-surface-hover);
+    }
+  }
+
+  &__header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__icon {
+    color: var(--color-primary);
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  &__status {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.125rem 0.375rem;
+    border-radius: 10px;
+
+    &--preparing {
+      background: color.adjust(#f59e0b, $lightness: -35%);
+      color: #f59e0b;
+    }
+
+    &--active {
+      background: color.adjust(#22c55e, $lightness: -35%);
+      color: #22c55e;
+    }
+
+    &--paused {
+      background: color.adjust(#6b7280, $lightness: -30%);
+      color: #9ca3af;
+    }
+
+    &--ended {
+      background: color.adjust(#ef4444, $lightness: -35%);
+      color: #ef4444;
+    }
+  }
+
+  &__toggle {
+    color: var(--color-text-secondary);
+  }
+
+  // Content
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  // Sections
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+  }
+
+  // Navigation modes
+  &__nav-modes {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  &__nav-mode {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: var(--color-surface-secondary);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      color: var(--color-text-primary);
+    }
+
+    &--active {
+      background: var(--color-primary-dim);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+
+  // Scale
+  &__scale-value {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  &__visibility-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.5rem;
+    background: var(--color-surface-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-border-hover);
+    }
+  }
+
+  // Participants
+  &__count {
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+    background: var(--color-surface-secondary);
+    padding: 0.125rem 0.375rem;
+    border-radius: 10px;
+  }
+
+  &__participants {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__participant-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__group-label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+    padding: 0.25rem 0;
+  }
+
+  &__participant {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.5rem;
+    background: var(--color-surface-secondary);
+    border-radius: 4px;
+
+    &--current {
+      background: var(--color-primary-dim);
+    }
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+  }
+
+  &__participant-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__participant-name {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__you {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+  }
+
+  &__owner-badge {
+    color: #f59e0b;
+  }
+
+  &__participant-mode {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.6875rem;
+    color: var(--color-text-tertiary);
+  }
+
+  &__participant-scale {
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+
+  // Actions
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__confirm {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+}

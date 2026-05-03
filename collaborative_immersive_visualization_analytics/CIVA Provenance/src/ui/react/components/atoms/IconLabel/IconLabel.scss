@@ -1,0 +1,95 @@
+// src/ui/react/components/atoms/IconLabel/IconLabel.scss
+// Icon + label atom styles
+
+@use "theme" as *;
+
+.icon-label {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    // Size variants
+    &--xs {
+        gap: 4px;
+
+        .icon-label__text {
+            font-size: 11px;
+        }
+    }
+
+    &--sm {
+        gap: $spacing-xs;
+
+        .icon-label__text {
+            font-size: 12px;
+        }
+    }
+
+    &--md {
+        gap: $spacing-sm;
+
+        .icon-label__text {
+            font-size: 13px;
+        }
+    }
+
+    &--lg {
+        gap: $spacing-sm;
+
+        .icon-label__text {
+            font-size: 14px;
+        }
+    }
+
+    // VR mode adjustments
+    &--vr {
+        gap: $spacing-sm;
+
+        &.icon-label--xs .icon-label__text {
+            font-size: 13px;
+        }
+
+        &.icon-label--sm .icon-label__text {
+            font-size: 14px;
+        }
+
+        &.icon-label--md .icon-label__text {
+            font-size: 15px;
+        }
+
+        &.icon-label--lg .icon-label__text {
+            font-size: 17px;
+        }
+    }
+
+    // Modifiers
+    &--subtle {
+        .icon-label__text {
+            color: $color-text-muted;
+        }
+
+        .icon-label__icon {
+            opacity: 0.7;
+        }
+    }
+
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+
+    // Elements
+    &__icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__text {
+        color: $color-text-primary;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

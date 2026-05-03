@@ -1,0 +1,151 @@
+/**
+ * @file CanvasSizeDisplay.scss
+ * @description Styles for CanvasSizeDisplay component.
+ */
+
+@use "theme" as *;
+
+.canvas-size-display {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  color: $color-text-secondary;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-bg-tertiary;
+    color: $color-text-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent-blue;
+    outline-offset: 2px;
+  }
+
+  &__popover {
+    padding: $spacing-sm;
+    min-width: 160px;
+  }
+
+  &__header {
+    font-size: 11px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__preset {
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-tertiary;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background: $color-bg-elevated;
+      border-color: $color-accent-purple;
+      color: $color-text-primary;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &--active {
+      background: color-mix(in srgb, $color-accent-purple 20%, transparent);
+      border-color: $color-accent-purple;
+      color: $color-accent-purple;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-sm 0;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-xs 0;
+
+    > span:first-child {
+      font-size: 13px;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: $color-bg-tertiary;
+      border: 1px solid $color-border-subtle;
+      border-radius: $radius-sm;
+      color: $color-text-secondary;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover:not(:disabled) {
+        background: $color-bg-elevated;
+        color: $color-text-primary;
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+
+    > span {
+      min-width: 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-text-primary;
+    }
+  }
+
+  &__hint {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $color-border-subtle;
+    font-size: 11px;
+    color: $color-text-muted;
+
+    .icon {
+      color: $color-accent-blue;
+      flex-shrink: 0;
+    }
+  }
+}

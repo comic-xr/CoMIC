@@ -1,0 +1,211 @@
+/**
+ * @file DropdownPortal.scss
+ * @description Styles for portal-rendered dropdowns.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// DROPDOWN PORTAL CONTAINER
+// =============================================================================
+
+.dropdown-portal {
+  // Animation
+  animation: dropdown-fade-in 0.15s ease-out;
+
+  // Ensure proper stacking
+  isolation: isolate;
+
+  // Base dropdown panel styling
+  &__panel {
+    background: $color-bg-elevated;
+    border: 1px solid $color-border-default;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    overflow: hidden;
+    min-width: 180px;
+    max-width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
+
+// =============================================================================
+// DROPDOWN MENU STYLES (common patterns)
+// =============================================================================
+
+.dropdown-menu {
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-xl;
+  padding: $spacing-xs;
+  min-width: 180px;
+  max-width: 320px;
+
+  // Scrollable if too long
+  max-height: 400px;
+  overflow-y: auto;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-glass-medium;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-glass-strong;
+    }
+  }
+}
+
+// Dropdown menu item
+.dropdown-menu__item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  text-align: left;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-primary;
+  }
+
+  &--active {
+    background: rgba($color-accent-primary, 0.15);
+    color: $color-accent-primary;
+
+    &:hover {
+      background: rgba($color-accent-primary, 0.2);
+    }
+  }
+
+  &--danger {
+    color: $color-error;
+
+    &:hover {
+      background: rgba($color-error, 0.1);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Icon slot
+  &__icon {
+    flex-shrink: 0;
+    color: inherit;
+  }
+
+  // Label
+  &__label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Right slot (badge, shortcut, etc.)
+  &__right {
+    flex-shrink: 0;
+    color: $color-text-tertiary;
+    font-size: $font-size-xs;
+  }
+}
+
+// Dropdown divider
+.dropdown-menu__divider {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs 0;
+}
+
+// Dropdown section header
+.dropdown-menu__header {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Search input in dropdown
+.dropdown-menu__search {
+  padding: $spacing-xs;
+  border-bottom: 1px solid $color-border-subtle;
+
+  input {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: $color-glass-light;
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-primary;
+      box-shadow: 0 0 0 2px rgba($color-accent-primary, 0.2);
+    }
+  }
+}
+
+// =============================================================================
+// ANIMATION
+// =============================================================================
+
+@keyframes dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// =============================================================================
+// POSITION VARIANTS
+// =============================================================================
+
+.dropdown-portal--top {
+  animation-name: dropdown-fade-in-top;
+}
+
+@keyframes dropdown-fade-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

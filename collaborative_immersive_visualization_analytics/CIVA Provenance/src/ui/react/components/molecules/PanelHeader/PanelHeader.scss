@@ -1,0 +1,173 @@
+// src/ui/react/components/molecules/PanelHeader/PanelHeader.scss
+// PanelHeader molecule styles
+
+.panel-header {
+    --panel-header-bg: rgba(255, 255, 255, 0.03);
+    --panel-header-border: rgba(255, 255, 255, 0.08);
+    --panel-header-color: var(--color-text-primary, #e0e0e0);
+    --panel-header-icon-color: var(--color-text-secondary, #a0a0a0);
+    --panel-header-accent: var(--color-accent, #4ecdc4);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--panel-header-bg);
+    border-bottom: 1px solid var(--panel-header-border);
+    user-select: none;
+
+    // Size variants
+    &--sm {
+        height: 32px;
+        padding: 0 8px;
+        gap: 6px;
+
+        .panel-header__title {
+            font-size: 12px;
+        }
+    }
+
+    &--md {
+        height: 40px;
+        padding: 0 12px;
+        gap: 8px;
+
+        .panel-header__title {
+            font-size: 13px;
+        }
+    }
+
+    &--lg {
+        height: 48px;
+        padding: 0 16px;
+        gap: 10px;
+
+        .panel-header__title {
+            font-size: 14px;
+        }
+    }
+
+    // Draggable state
+    &--draggable {
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    // Color variants
+    &--blue {
+        --panel-header-accent: #4a9eff;
+    }
+
+    &--purple {
+        --panel-header-accent: #a855f7;
+    }
+
+    &--teal {
+        --panel-header-accent: #4ecdc4;
+    }
+
+    &--amber {
+        --panel-header-accent: #f59e0b;
+    }
+
+    &--red {
+        --panel-header-accent: #ff6b6b;
+    }
+
+    &--green {
+        --panel-header-accent: #22c55e;
+    }
+
+    // VR mode
+    &--vr {
+        &.panel-header--sm {
+            height: 44px;
+            padding: 0 12px;
+        }
+
+        &.panel-header--md {
+            height: 52px;
+            padding: 0 16px;
+        }
+
+        &.panel-header--lg {
+            height: 60px;
+            padding: 0 20px;
+        }
+
+        .panel-header__title {
+            font-size: 15px;
+        }
+    }
+}
+
+// Drag handle
+.panel-header__drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--panel-header-icon-color);
+    opacity: 0.5;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    .panel-header:hover & {
+        opacity: 0.8;
+    }
+}
+
+// Icon
+.panel-header__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--panel-header-accent);
+}
+
+// Title
+.panel-header__title {
+    font-weight: 500;
+    color: var(--panel-header-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Spacer
+.panel-header__spacer {
+    flex: 1;
+    min-width: 0;
+}
+
+// Controls container
+.panel-header__controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 8px;
+
+    .panel-header--vr & {
+        gap: 4px;
+    }
+}
+
+// Danger button modifier
+.panel-header__btn--danger {
+    &:hover {
+        color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+    }
+}
+
+// Close button modifier
+.panel-header__btn--close {
+    &:hover {
+        color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+    }
+}

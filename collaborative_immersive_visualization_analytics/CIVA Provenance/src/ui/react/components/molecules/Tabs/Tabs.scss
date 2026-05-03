@@ -1,0 +1,136 @@
+/**
+ * Tabs Styles
+ */
+
+.tabs {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  padding: 4px;
+
+  &--full-width {
+    display: flex;
+    width: 100%;
+
+    .tabs__tab {
+      flex: 1;
+    }
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap);
+    min-height: var(--tab-height);
+    padding: 0 var(--padding);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 150ms ease;
+    white-space: nowrap;
+
+    &:hover:not(:disabled):not(.tabs__tab--active) {
+      background: var(--color-bg-tertiary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent-blue);
+      outline-offset: -2px;
+    }
+
+    &--active {
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__label {
+    font-size: var(--font-size);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+
+    .tabs__tab--active & {
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__count {
+    font-size: calc(var(--font-size) - 2px);
+    padding: 2px 6px;
+    background: var(--color-bg-tertiary);
+    border-radius: 10px;
+    color: var(--color-text-tertiary);
+
+    .tabs__tab--active & {
+      background: var(--color-accent-blue);
+      color: white;
+    }
+  }
+
+  // Variant: pills
+  &--pills {
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: var(--gap);
+
+    .tabs__tab {
+      border: 1px solid var(--color-border-default);
+
+      &--active {
+        background: var(--color-accent-blue);
+        border-color: var(--color-accent-blue);
+        color: white;
+
+        .tabs__label {
+          color: white;
+        }
+      }
+    }
+  }
+
+  // Variant: underline
+  &--underline {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-border-default);
+    border-radius: 0;
+    padding: 0;
+    gap: 0;
+
+    .tabs__tab {
+      border-radius: 0;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+
+      &--active {
+        background: transparent;
+        border-bottom-color: var(--color-accent-blue);
+        box-shadow: none;
+
+        .tabs__label {
+          color: var(--color-accent-blue);
+        }
+      }
+    }
+  }
+
+  &--vr {
+    border-radius: 12px;
+    padding: 6px;
+
+    .tabs__tab {
+      border-radius: 8px;
+    }
+  }
+}

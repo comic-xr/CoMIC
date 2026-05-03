@@ -1,0 +1,131 @@
+// SelectionContextMenu.scss
+// Context menu for canvas cell selection per spec
+
+@use "theme" as *;
+
+// =============================================================================
+// BACKDROP
+// =============================================================================
+
+.selection-context-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+// =============================================================================
+// MENU CONTAINER
+// =============================================================================
+
+.selection-context-menu {
+  position: fixed;
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 280px;
+  padding: $spacing-xs;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: context-menu-appear 0.12s ease-out;
+}
+
+@keyframes context-menu-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.selection-context-menu__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  margin-bottom: $spacing-xs;
+}
+
+.selection-context-menu__count {
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.selection-context-menu__view-count {
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// DIVIDER
+// =============================================================================
+
+.selection-context-menu__divider {
+  height: 1px;
+  background: $color-border-subtle;
+  margin: $spacing-xs 0;
+}
+
+// =============================================================================
+// SECTION
+// =============================================================================
+
+.selection-context-menu__section {
+  display: flex;
+  flex-direction: column;
+}
+
+// NOTE: Menu item styles now handled by MenuItem molecule
+
+// =============================================================================
+// SUBMENU
+// =============================================================================
+
+.selection-context-menu__submenu-container {
+  position: relative;
+
+  &:hover .selection-context-menu__submenu {
+    display: flex;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.selection-context-menu__submenu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 4px;
+  min-width: 120px;
+  padding: $spacing-xs;
+  background: $color-bg-secondary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.15s ease;
+
+  // Position on right side if needed
+  .selection-context-menu__submenu-container:nth-last-child(-n + 2) & {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 4px;
+    transform: translateX(8px);
+  }
+}
+
+// =============================================================================
+// INDEX EXPORT
+// =============================================================================

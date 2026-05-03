@@ -1,0 +1,642 @@
+// bootstrap.scss - Authentication and initialization screens
+// Blue-tinted dark theme matching index.html loader
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// THEME VARIABLES - Match index.html loader
+// ============================================================================
+
+$boot-bg-base: #020406;
+$boot-bg-elevated: #0c1220;
+$boot-accent: #60a5fa;
+$boot-accent-glow: rgba(96, 165, 250, 0.4);
+$boot-glass-bg: rgba(8, 14, 24, 0.6);
+$boot-glass-border: rgba(96, 165, 250, 0.12);
+$boot-text-primary: rgba(255, 255, 255, 0.95);
+$boot-text-secondary: rgba(180, 200, 240, 0.8);
+$boot-text-muted: rgba(180, 200, 240, 0.5);
+$boot-text-subtle: rgba(180, 200, 240, 0.6);
+
+// ============================================================================
+// SHARED BOOTSTRAP CONTAINER
+// ============================================================================
+
+%bootstrap-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, $boot-bg-elevated 0%, $boot-bg-base 70%);
+  padding: $spacing-xl;
+  position: relative;
+  overflow: hidden;
+}
+
+// Shared card styles - matches .loading-container from index.html
+%bootstrap-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: $boot-glass-bg;
+  border: 1px solid $boot-glass-border;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0 60px rgba(96, 165, 250, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  animation: slideUp 0.5s ease-out;
+}
+
+// ============================================================================
+// LOGO COMPONENT - Matches .loading-logo from index.html
+// ============================================================================
+
+.bootstrap-logo {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 24px;
+  position: relative;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: $boot-accent;
+    filter: drop-shadow(0 0 12px $boot-accent-glow);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+    animation: glow 2s ease-in-out infinite;
+  }
+}
+
+// ============================================================================
+// BRAND COMPONENT - Matches .loading-brand from index.html
+// ============================================================================
+
+.bootstrap-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.bootstrap-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: $boot-text-primary;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.bootstrap-subtitle {
+  font-size: 11px;
+  color: $boot-text-subtle;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+// ============================================================================
+// SPINNER - Matches .loading-spinner from index.html
+// ============================================================================
+
+.bootstrap-spinner-container {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
+}
+
+.bootstrap-spinner {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(96, 165, 250, 0.1);
+  border-radius: 50%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid transparent;
+    border-top-color: $boot-accent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid transparent;
+    border-top-color: rgba(96, 165, 250, 0.4);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite reverse;
+  }
+}
+
+// ============================================================================
+// STATUS TEXT - Matches .loading-status from index.html
+// ============================================================================
+
+.bootstrap-status {
+  font-size: 12px;
+  color: $boot-text-muted;
+  text-align: center;
+  letter-spacing: 0.5px;
+  min-height: 18px;
+}
+
+// ============================================================================
+// ERROR STATE
+// ============================================================================
+
+.bootstrap-error {
+  @extend %bootstrap-container;
+
+  // Error-specific gradient with red tint
+  background: radial-gradient(
+    ellipse at center,
+    color.mix($color-accent-red, $boot-bg-elevated, 15%) 0%,
+    $boot-bg-base 70%
+  );
+}
+
+.error-card {
+  @extend %bootstrap-card;
+  border-color: rgba($color-accent-red, 0.3);
+  box-shadow:
+    0 0 60px rgba($color-accent-red, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  h1 {
+    color: $color-accent-red;
+    margin: 0 0 $spacing-lg 0;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    text-shadow: 0 0 20px rgba($color-accent-red, 0.3);
+  }
+
+  p {
+    color: $boot-text-secondary;
+    margin: 0 0 $spacing-2xl 0;
+    line-height: $line-height-relaxed;
+    font-size: $font-size-base;
+  }
+
+  .button-group {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: center;
+  }
+}
+
+.retry-button,
+.reload-button {
+  padding: $spacing-md $spacing-xl;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all $transition-fast;
+  border-radius: $radius-md;
+  cursor: pointer;
+}
+
+.retry-button {
+  background: rgba($boot-accent, 0.15);
+  color: $boot-accent;
+  border: 1px solid rgba($boot-accent, 0.3);
+
+  &:hover {
+    background: rgba($boot-accent, 0.25);
+    box-shadow: 0 0 20px $boot-accent-glow;
+  }
+}
+
+.reload-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: $boot-text-primary;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ============================================================================
+// CHECKING STATE
+// ============================================================================
+
+.bootstrap-checking {
+  @extend %bootstrap-container;
+}
+
+.checking-card {
+  @extend %bootstrap-card;
+
+  h2 {
+    color: $boot-text-primary;
+    margin: 0 0 $spacing-2xl 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+  }
+
+  p {
+    color: $boot-text-muted;
+    margin: 0;
+    font-size: $font-size-base;
+  }
+}
+
+.checking-spinner {
+  @extend .bootstrap-spinner;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto $spacing-2xl;
+}
+
+// ============================================================================
+// LOGIN STATE
+// ============================================================================
+
+.bootstrap-login {
+  @extend %bootstrap-container;
+}
+
+.login-card {
+  @extend %bootstrap-card;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $boot-text-primary;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 6px 0;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    color: $boot-text-subtle;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 32px 0;
+  }
+
+  .description {
+    margin: 0 0 $spacing-2xl 0;
+    font-size: $font-size-base;
+    color: $boot-text-secondary;
+    line-height: $line-height-relaxed;
+  }
+
+  .login-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .login-info {
+    margin-top: $spacing-2xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $boot-glass-border;
+
+    p {
+      margin: 0;
+      font-size: $font-size-xs;
+      color: $boot-text-muted;
+    }
+  }
+
+  // Dev login section
+  .dev-login-section {
+    margin-top: $spacing-xl;
+    width: 100%;
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: $boot-glass-border;
+      }
+
+      span {
+        font-size: $font-size-xs;
+        color: $boot-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+
+    .dev-login-button {
+      width: 100%;
+      padding: $spacing-md $spacing-xl;
+      background: rgba($color-accent-amber, 0.1);
+      color: $color-accent-amber;
+      border: 1px solid rgba($color-accent-amber, 0.3);
+      border-radius: $radius-md;
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      transition: all $transition-fast;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba($color-accent-amber, 0.2);
+        box-shadow: 0 0 15px rgba($color-accent-amber, 0.2);
+      }
+    }
+
+    .dev-login-info {
+      margin: $spacing-sm 0 0 0;
+      font-size: $font-size-xs;
+      color: $boot-text-muted;
+    }
+  }
+}
+
+// ============================================================================
+// USERNAME STATE
+// ============================================================================
+
+.bootstrap-username {
+  @extend %bootstrap-container;
+}
+
+.username-card {
+  @extend %bootstrap-card;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $boot-text-primary;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 6px 0;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    color: $boot-text-subtle;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 32px 0;
+  }
+
+  .description {
+    margin: 0 0 $spacing-2xl 0;
+    font-size: $font-size-base;
+    color: $boot-text-secondary;
+    line-height: $line-height-relaxed;
+  }
+}
+
+.username-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+}
+
+.username-input {
+  padding: $spacing-lg $spacing-xl;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $boot-glass-border;
+  border-radius: $radius-lg;
+  font-size: $font-size-lg;
+  text-align: center;
+  color: $boot-text-primary;
+  transition: all $transition-fast;
+  outline: none;
+
+  &::placeholder {
+    color: $boot-text-muted;
+  }
+
+  &:hover {
+    border-color: rgba($boot-accent, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &:focus {
+    border-color: $boot-accent;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba($boot-accent, 0.15);
+  }
+}
+
+.username-submit,
+.username-button {
+  padding: $spacing-lg $spacing-2xl;
+  background: rgba($boot-accent, 0.15);
+  color: $boot-accent;
+  border: 1px solid rgba($boot-accent, 0.4);
+  border-radius: $radius-lg;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all $transition-fast;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: rgba($boot-accent, 0.25);
+    box-shadow: 0 0 20px $boot-accent-glow;
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.05);
+    color: $boot-text-muted;
+    border-color: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.room-info {
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $boot-glass-border;
+  font-size: $font-size-xs;
+  color: $boot-text-muted;
+}
+
+.username-error {
+  margin: $spacing-md 0 0 0;
+  padding: $spacing-md;
+  background: rgba($color-accent-red, 0.1);
+  border: 1px solid rgba($color-accent-red, 0.3);
+  border-radius: $radius-md;
+  color: $color-accent-red;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+// ============================================================================
+// INITIALIZING STATE
+// ============================================================================
+
+.bootstrap-initializing {
+  @extend %bootstrap-container;
+}
+
+.initializing-card {
+  @extend %bootstrap-card;
+
+  h2 {
+    color: $boot-text-primary;
+    margin: 0 0 $spacing-2xl 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+  }
+
+  p {
+    color: $boot-text-muted;
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(96, 165, 250, 0.1);
+  border-radius: $radius-full;
+  overflow: hidden;
+  margin-bottom: $spacing-2xl;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: $boot-accent;
+  border-radius: $radius-full;
+  box-shadow: 0 0 10px $boot-accent-glow;
+  transition: width 0.3s ease-out;
+}
+
+.initialization-steps {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: $spacing-xl 0 0 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $boot-glass-border;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+
+  li {
+    padding: $spacing-sm 0;
+    font-size: $font-size-sm;
+    color: $boot-text-muted;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &.step-complete {
+      color: $color-accent-green;
+    }
+
+    &.step-active {
+      color: $boot-accent;
+      font-weight: $font-weight-medium;
+    }
+
+    &.step-pending {
+      opacity: 0.4;
+    }
+
+    &.step-error {
+      color: $color-accent-red;
+    }
+  }
+
+  .step-icon {
+    margin-left: auto;
+    flex-shrink: 0;
+
+    &--spinning {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes step-loading {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// ============================================================================
+// ANIMATIONS - Match index.html
+// ============================================================================
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

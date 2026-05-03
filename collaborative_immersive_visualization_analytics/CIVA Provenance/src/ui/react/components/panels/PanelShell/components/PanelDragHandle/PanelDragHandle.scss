@@ -1,0 +1,49 @@
+@use "theme" as *;
+
+// =============================================================================
+// PANEL DRAG HANDLE
+// =============================================================================
+
+.panel-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-muted;
+  cursor: grab;
+  padding: 2px;
+  border-radius: 4px;
+  transition: color $transition-fast, background $transition-fast;
+  user-select: none;
+
+  &:hover {
+    color: $color-text-secondary;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &:active {
+    cursor: grabbing;
+    color: var(--panel-color, $color-accent-blue);
+  }
+
+  // Focus state for keyboard accessibility
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  // ===========================================================================
+  // VARIANTS
+  // ===========================================================================
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+}

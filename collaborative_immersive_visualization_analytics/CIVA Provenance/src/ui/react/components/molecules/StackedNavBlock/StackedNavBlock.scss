@@ -1,0 +1,175 @@
+/**
+ * @file StackedNavBlock.scss
+ * @description Styles for the StackedNavBlock navigation component.
+ * 
+ * TIGHTENED 2-column stacked layout:
+ * ┌──────┬─────────────────┐
+ * │  ⌂   │     12, 34      │  ← Position with generous padding
+ * ├──────┤  ◀  ▲  ▼  ▶    │  ← D-pad centered below
+ * │  ☆   │                 │
+ * └──────┴─────────────────┘
+ * 
+ * Changes from original:
+ * - Reduced outer padding
+ * - Tighter gaps between elements
+ * - Smaller buttons (22px instead of 24px)
+ * - Position display has more horizontal padding for readability
+ * - Overall height reduced from ~52px to ~44px
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// CONTAINER
+// =============================================================================
+
+.stacked-nav-block {
+  display: flex;
+  gap: $spacing-xs;
+  padding: 4px 6px; // Tighter outer padding
+  background: $color-glass-subtle;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-subtle;
+
+  // ==========================================================================
+  // LEFT COLUMN: Quick Jump (Home & Bookmark stacked)
+  // ==========================================================================
+
+  &__quick-jump {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding-right: $spacing-xs;
+    border-right: 1px solid $color-border-subtle;
+  }
+
+  // ==========================================================================
+  // RIGHT COLUMN: Position + D-pad
+  // ==========================================================================
+
+  &__navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 88px; // Room for "128, 256" style positions
+  }
+
+  // ==========================================================================
+  // POSITION DISPLAY - More horizontal padding for readability
+  // ==========================================================================
+
+  &__position {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs; // 11px
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    padding: 3px $spacing-md; // More horizontal padding
+    background: $color-glass-light;
+    border-radius: $radius-sm;
+    letter-spacing: 0.5px;
+    text-align: center;
+    min-width: 56px;
+    line-height: 1.2;
+
+    // Subtle inner shadow for depth
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  // ==========================================================================
+  // D-PAD ROW
+  // ==========================================================================
+
+  &__dpad {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+
+  // ==========================================================================
+  // NAVIGATION BUTTON - Slightly smaller
+  // ==========================================================================
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border-radius: $radius-sm;
+    border: 1px solid transparent;
+    background: transparent;
+    color: $color-text-tertiary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    // Icon styling
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    // Hover state
+    &:hover {
+      background: $color-glass-medium;
+      color: $color-text-secondary;
+      border-color: $color-border-subtle;
+    }
+
+    // Active/pressed state
+    &:active {
+      background: $color-glass-strong;
+      transform: scale(0.95);
+    }
+
+    // Focus visible (keyboard nav)
+    &:focus-visible {
+      outline: 2px solid $color-accent-primary;
+      outline-offset: 1px;
+    }
+
+    // Active state (like "at origin" for home button)
+    &--active {
+      background: rgba(251, 191, 36, 0.15); // Amber tint
+      color: $color-accent-amber;
+      border-color: rgba(251, 191, 36, 0.3);
+
+      &:hover {
+        background: rgba(251, 191, 36, 0.25);
+      }
+    }
+  }
+}
+
+// =============================================================================
+// RESPONSIVE - Even tighter on small screens
+// =============================================================================
+
+@media (max-width: 1200px) {
+  .stacked-nav-block {
+    padding: 3px 4px;
+    gap: 2px;
+
+    &__navigation {
+      min-width: 80px;
+    }
+
+    &__position {
+      padding: 2px $spacing-sm;
+      font-size: 10px;
+    }
+
+    &__btn {
+      width: 20px;
+      height: 20px;
+
+      svg {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+/**
+ * @file AnnotationContextMenu.scss
+ * @description Styles for the AnnotationContextMenu component.
+ * Context menu that appears on right-click of annotations.
+ * Uses BEM naming convention and CIA Web moonlight theme.
+ */
+
+@use "theme" as *;
+
+.annotation-context-menu {
+  position: fixed;
+  z-index: 10002;
+  min-width: 160px;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  font-size: $font-size-sm;
+  animation: menuIn 0.12s ease-out;
+  user-select: none;
+
+  @keyframes menuIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-md;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__title {
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 120px;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: $radius-sm;
+    display: flex;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-medium;
+      color: $color-text-primary;
+    }
+  }
+
+  &__items {
+    padding: $spacing-xs 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: none;
+    border: none;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    text-align: left;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-glass-light;
+      color: $color-text-primary;
+
+      svg {
+        color: $color-accent-blue;
+      }
+    }
+
+    svg {
+      color: $color-text-muted;
+      transition: color $transition-fast;
+    }
+
+    &--danger {
+      color: $color-text-secondary;
+
+      &:hover {
+        background: rgba($color-accent-red, 0.1);
+        color: $color-accent-red;
+
+        svg {
+          color: $color-accent-red;
+        }
+      }
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $color-border-subtle;
+    margin: $spacing-xs 0;
+  }
+}

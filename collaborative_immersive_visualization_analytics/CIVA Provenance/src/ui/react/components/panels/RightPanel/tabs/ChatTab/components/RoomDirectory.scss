@@ -1,0 +1,367 @@
+@use "sass:color";
+@use "theme" as *;
+
+// =============================================================================
+// ROOM DIRECTORY CONTAINER
+// =============================================================================
+
+.room-directory {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-glass-medium;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border-default;
+  overflow: hidden;
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.room-directory__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.room-directory__title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+
+  svg {
+    color: $color-accent-purple;
+  }
+}
+
+.room-directory__close {
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  padding: $spacing-xs;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-text-secondary;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+// =============================================================================
+// SEARCH CONTROLS
+// =============================================================================
+
+.room-directory__search {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.room-directory__search-input {
+  flex: 1;
+  --search-input-bg: $color-glass-light;
+  --search-input-border: $color-border-default;
+  --search-input-focus-border: $color-accent-purple;
+  --search-input-color: $color-text-primary;
+  --search-input-placeholder: $color-text-muted;
+  --search-input-icon: $color-text-muted;
+  --search-input-gap: 6px;
+
+  .search-input__field {
+    font-size: $font-size-sm;
+  }
+}
+
+.room-directory__server-select {
+  min-width: 140px;
+  background: $color-glass-light;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  padding: $spacing-xs $spacing-sm;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $color-accent-purple;
+  }
+
+  &:focus {
+    border-color: $color-accent-purple;
+    outline: none;
+  }
+}
+
+.room-directory__search-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background: $color-accent-purple;
+  border: none;
+  border-radius: $radius-md;
+  color: white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: color.adjust($color-accent-purple, $lightness: 5%);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+// =============================================================================
+// ERROR MESSAGE
+// =============================================================================
+
+.room-directory__error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-accent-red, 0.1);
+  border: 1px solid rgba($color-accent-red, 0.3);
+  border-radius: $radius-md;
+  margin: $spacing-md;
+  color: $color-accent-red;
+  font-size: $font-size-sm;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// RESULTS
+// =============================================================================
+
+.room-directory__results {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.room-directory__loading,
+.room-directory__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+
+  svg {
+    opacity: 0.4;
+  }
+
+  span {
+    font-size: $font-size-sm;
+  }
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+.room-directory__empty-hint {
+  font-size: $font-size-xs !important;
+  color: $color-text-muted;
+}
+
+// =============================================================================
+// ROOM ITEM
+// =============================================================================
+
+.room-directory__room {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba($color-accent-purple, 0.3);
+  }
+}
+
+.room-directory__room-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  min-width: 0;
+}
+
+.room-directory__room-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  justify-content: space-between;
+}
+
+.room-directory__room-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-directory__room-members {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  flex-shrink: 0;
+
+  svg {
+    color: $color-text-tertiary;
+  }
+}
+
+.room-directory__room-alias {
+  font-size: $font-size-xs;
+  color: $color-accent-purple;
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-directory__room-topic {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.room-directory__room-badges {
+  display: flex;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+}
+
+.room-directory__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px $spacing-xs;
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+
+  &--readable {
+    background: rgba($color-accent-blue, 0.15);
+    border: 1px solid rgba($color-accent-blue, 0.3);
+    color: $color-accent-blue;
+  }
+
+  &--guest {
+    background: rgba($color-accent-green, 0.15);
+    border: 1px solid rgba($color-accent-green, 0.3);
+    color: $color-accent-green;
+  }
+}
+
+.room-directory__join-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background: rgba($color-accent-purple, 0.2);
+  border: 1px solid rgba($color-accent-purple, 0.3);
+  border-radius: $radius-md;
+  color: $color-accent-purple;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+  height: fit-content;
+  align-self: center;
+
+  &:hover:not(:disabled) {
+    background: rgba($color-accent-purple, 0.3);
+    border-color: rgba($color-accent-purple, 0.5);
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+// =============================================================================
+// HELP TEXT
+// =============================================================================
+
+.room-directory__help {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-accent-purple, 0.05);
+  border-top: 1px solid $color-border-subtle;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+
+  svg {
+    color: $color-accent-purple;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

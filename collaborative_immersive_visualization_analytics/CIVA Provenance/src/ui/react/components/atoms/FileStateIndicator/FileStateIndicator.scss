@@ -1,0 +1,70 @@
+/**
+ * @file FileStateIndicator.scss
+ * @description Styles for FileStateIndicator component.
+ */
+
+@use "theme" as *;
+
+.file-state-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--state-color, $color-text-muted);
+
+  // Size variants
+  &--xs {
+    width: 8px;
+    height: 8px;
+  }
+
+  &--sm {
+    width: 10px;
+    height: 10px;
+  }
+
+  &--md {
+    width: 12px;
+    height: 12px;
+  }
+
+  // Animations
+  &--spin svg {
+    animation: file-state-spin 1s linear infinite;
+  }
+
+  // State-specific styles
+  &--stored {
+    opacity: 0.5;
+  }
+
+  &--loaded {
+    color: $color-accent-green;
+  }
+
+  &--loading {
+    color: $color-accent-blue;
+  }
+
+  &--processing {
+    color: $color-accent-amber;
+  }
+
+  &--error {
+    color: $color-accent-red;
+  }
+
+  &--restricted {
+    opacity: 0.4;
+  }
+}
+
+@keyframes file-state-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

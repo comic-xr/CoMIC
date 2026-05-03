@@ -1,0 +1,260 @@
+// src/ui/react/components/molecules/SliderWithPresets/SliderWithPresets.scss
+// Slider with presets molecule styles
+
+@use "sass:color";
+@use "theme" as *;
+
+// ============================================================================
+// SLIDER WITH PRESETS
+// ============================================================================
+
+.slider-with-presets {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+
+    &.disabled {
+        opacity: 0.6;
+
+        .slider-track-container {
+            &::before {
+                background: linear-gradient(
+                    90deg,
+                    rgba($color-error, 0.3),
+                    rgba($color-error, 0.15)
+                );
+            }
+        }
+
+        .slider-input {
+            cursor: not-allowed;
+
+            &::-webkit-slider-thumb {
+                background: $color-error;
+                cursor: not-allowed;
+            }
+
+            &::-moz-range-thumb {
+                background: $color-error;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+// ============================================================================
+// HEADER
+// ============================================================================
+
+.slider-with-presets .slider-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+}
+
+.slider-with-presets .slider-label-group {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.slider-with-presets .slider-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-tertiary;
+
+    svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.slider-with-presets .slider-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+}
+
+.slider-disabled-badge {
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $color-error;
+    background: rgba($color-error, 0.15);
+    border: 1px solid rgba($color-error, 0.3);
+    border-radius: $radius-sm;
+}
+
+.slider-with-presets .slider-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-primary;
+    font-family: "Monaco", "Courier New", monospace;
+    min-width: 48px;
+    text-align: right;
+}
+
+// ============================================================================
+// SLIDER TRACK
+// ============================================================================
+
+.slider-track-container {
+    position: relative;
+    height: 24px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: $color-bg-tertiary;
+        border-radius: $radius-full;
+        border: 1px solid $color-border-subtle;
+    }
+}
+
+.slider-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 6px;
+        width: var(--slider-progress, 0%);
+        background: linear-gradient(
+            90deg,
+            $color-accent-primary,
+            color.adjust($color-accent-primary, $lightness: 10%)
+        );
+        border-radius: $radius-full 0 0 $radius-full;
+        pointer-events: none;
+        box-shadow: 0 0 8px rgba($color-accent-primary, 0.4);
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: $color-accent-primary;
+        border-radius: $radius-full;
+        cursor: grab;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3),
+            0 0 0 2px rgba($color-accent-primary, 0.2);
+        transition: transform $transition-fast, box-shadow $transition-fast;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+    }
+
+    &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: $color-accent-primary;
+        border-radius: $radius-full;
+        cursor: grab;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    &::-moz-range-track {
+        height: 6px;
+        background: transparent;
+        border-radius: $radius-full;
+    }
+
+    &::-moz-range-progress {
+        height: 6px;
+        background: linear-gradient(
+            90deg,
+            $color-accent-primary,
+            color.adjust($color-accent-primary, $lightness: 10%)
+        );
+        border-radius: $radius-full 0 0 $radius-full;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+// ============================================================================
+// PRESETS ROW
+// ============================================================================
+
+.slider-presets-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: $spacing-xs;
+}
+
+.preset-btn {
+    flex: 1 1 auto;
+    padding: $spacing-xs $spacing-sm;
+    @include glass-button;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    min-width: fit-content;
+    white-space: nowrap;
+    text-align: center;
+
+    &:hover:not(:disabled):not(.active) {
+        @include glass-hover;
+        color: $color-text-primary;
+    }
+
+    &.active {
+        background: rgba($color-accent-primary, 0.2);
+        border-color: rgba($color-accent-primary, 0.4);
+        color: $color-accent-primary;
+        font-weight: $font-weight-semibold;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+// ============================================================================
+// DISABLED REASON
+// ============================================================================
+
+.slider-disabled-reason {
+    font-size: $font-size-xs;
+    color: $color-error;
+    text-align: center;
+    padding: $spacing-xs;
+    background: rgba($color-error, 0.08);
+    border-radius: $radius-sm;
+    margin-top: $spacing-xs;
+}

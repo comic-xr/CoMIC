@@ -1,0 +1,254 @@
+// GlobalFiltersBar.scss
+// Collapsible global filters bar with search, type filters, tags, and sort (V7)
+
+.global-filters-bar {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+
+    // Search row with inline controls
+    &__search-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 8px;
+    }
+
+    // Search input
+    &__search {
+        flex: 1;
+        min-width: 0;
+        --search-input-bg: rgba(255, 255, 255, 0.03);
+        --search-input-border: var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+        --search-input-focus-border: var(--color-accent-blue, #3b82f6);
+        --search-input-color: var(--color-text-primary, #e5e7eb);
+        --search-input-placeholder: var(--color-text-muted, #6b7280);
+        --search-input-icon: var(--color-text-muted, #6b7280);
+        --search-input-gap: 6px;
+
+        .search-input__field {
+            font-size: 11px;
+            font-family: inherit;
+        }
+    }
+
+    // Filter expand toggle button
+    &__filter-toggle {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+        border-radius: 6px;
+        color: var(--color-text-muted, #6b7280);
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-text-secondary, #9ca3af);
+        }
+
+        &--active {
+            background: rgba(251, 191, 36, 0.15);
+            border-color: rgba(251, 191, 36, 0.4);
+            color: var(--color-accent-amber, #fbbf24);
+        }
+    }
+
+    &__toggle-chevron {
+        transition: transform 0.2s ease;
+
+        &--expanded {
+            transform: rotate(180deg);
+        }
+    }
+
+    // Tags dropdown trigger
+    &__tags-trigger {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+        border-radius: 6px;
+        color: var(--color-text-muted, #6b7280);
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-text-secondary, #9ca3af);
+        }
+
+        &--active {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: var(--color-accent-purple, #a855f7);
+        }
+    }
+
+    &__tags-count {
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    // Filter chips row (collapsible)
+    &__filters {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 8px 6px;
+        gap: 8px;
+    }
+
+    &__type-filters {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+
+    &__clear-btn {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        background: none;
+        border: none;
+        color: var(--color-text-muted, #6b7280);
+        font-size: 10px;
+        font-family: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: color 0.15s ease, background 0.15s ease;
+        flex-shrink: 0;
+
+        &:hover {
+            color: var(--color-text-secondary, #9ca3af);
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    // Active tag chips row
+    &__active-tags {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px 6px;
+        flex-wrap: wrap;
+    }
+
+    &__tags-label {
+        font-size: 10px;
+        color: var(--color-text-muted, #6b7280);
+    }
+
+    // Active filters indicator
+    &__indicator {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 12px 6px;
+    }
+
+    &__indicator-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        background: rgba(251, 191, 36, 0.15);
+        color: var(--color-accent-amber, #fbbf24);
+        font-size: 9px;
+        font-weight: 500;
+        border-radius: 4px;
+
+        svg {
+            flex-shrink: 0;
+        }
+    }
+
+    &__clear-all {
+        padding: 2px 8px;
+        background: none;
+        border: none;
+        color: var(--color-text-muted, #6b7280);
+        font-size: 10px;
+        font-family: inherit;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: color 0.15s ease, background 0.15s ease;
+
+        &:hover {
+            color: var(--color-text-secondary, #9ca3af);
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    // VR mode - larger touch targets
+    &--vr {
+        .global-filters-bar__search-row {
+            padding: 10px 12px;
+            gap: 10px;
+        }
+
+        .global-filters-bar__search {
+            --search-input-gap: 10px;
+        }
+
+        .global-filters-bar__search .search-input__field {
+            font-size: 14px;
+        }
+
+        .global-filters-bar__filter-toggle,
+        .global-filters-bar__tags-trigger {
+            padding: 10px;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .global-filters-bar__tags-count {
+            font-size: 12px;
+        }
+
+        .global-filters-bar__filters {
+            padding: 8px 12px 10px;
+            gap: 12px;
+        }
+
+        .global-filters-bar__clear-btn {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .global-filters-bar__active-tags {
+            padding: 8px 16px 10px;
+            gap: 10px;
+        }
+
+        .global-filters-bar__tags-label {
+            font-size: 13px;
+        }
+
+        .global-filters-bar__indicator {
+            padding: 8px 16px 10px;
+        }
+
+        .global-filters-bar__indicator-badge {
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .global-filters-bar__clear-all {
+            padding: 6px 12px;
+            font-size: 13px;
+            min-height: 32px;
+        }
+    }
+}

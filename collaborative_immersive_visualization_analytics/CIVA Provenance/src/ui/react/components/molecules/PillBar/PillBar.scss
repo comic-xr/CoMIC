@@ -1,0 +1,142 @@
+@use "theme" as *;
+
+.pill-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  // Track container
+  &__track {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs;
+    background: $color-bg-primary;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border-subtle;
+  }
+
+  // Individual pill
+  &__pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    border: none;
+    background: transparent;
+    color: $color-text-tertiary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    &:hover:not(&--disabled):not(&--active) {
+      color: $color-text-secondary;
+      background: $color-glass-subtle;
+    }
+
+    &--active {
+      color: $color-text-primary;
+      background: $color-glass-medium;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+      // Color variants for active state
+      &[data-color="blue"] {
+        background: rgba($color-accent-blue, 0.15);
+        color: $color-accent-blue;
+      }
+
+      &[data-color="green"] {
+        background: rgba($color-accent-green, 0.15);
+        color: $color-accent-green;
+      }
+
+      &[data-color="pink"] {
+        background: rgba($color-accent-pink, 0.15);
+        color: $color-accent-pink;
+      }
+
+      &[data-color="amber"] {
+        background: rgba($color-accent-amber, 0.15);
+        color: $color-accent-amber;
+      }
+
+      &[data-color="teal"] {
+        background: rgba($color-accent-teal, 0.15);
+        color: $color-accent-teal;
+      }
+
+      &[data-color="purple"] {
+        background: rgba($color-accent-purple, 0.15);
+        color: $color-accent-purple;
+      }
+    }
+
+    &--disabled {
+      color: $color-text-muted;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  &__pill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__pill-label {
+    flex-shrink: 0;
+  }
+
+  &__pill-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 $spacing-xs;
+    background: $color-glass-medium;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-tertiary;
+
+    .pill-bar__pill--active & {
+      background: rgba(255, 255, 255, 0.15);
+      color: inherit;
+    }
+  }
+
+  // Size variants
+  &--sm {
+    .pill-bar__track {
+      padding: 2px;
+      border-radius: $radius-md;
+    }
+
+    .pill-bar__pill {
+      padding: 2px $spacing-sm;
+      font-size: $font-size-xs;
+      border-radius: $radius-sm;
+    }
+
+    .pill-bar__pill-badge {
+      min-width: 14px;
+      height: 14px;
+      font-size: 10px;
+    }
+  }
+
+  // Compact track variant
+  &--compact &__track {
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: $spacing-sm;
+  }
+}

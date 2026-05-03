@@ -1,0 +1,1077 @@
+// tabs/AnnotationsTab/AnnotationsTab.scss
+// Annotations tab styling - darker theme matching LayoutPanel
+
+@use "theme" as *;
+
+// =============================================================================
+// ANNOTATIONS TAB CONTAINER
+// =============================================================================
+
+.annotations-tab {
+  display: flex;
+  flex: 1 1 0; // Fill available space in flex parent
+  flex-direction: column;
+  min-height: 0; // Allow shrinking below content size
+  width: 100%;
+  overflow: hidden;
+
+  // Header
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid $color-border-default;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__count {
+    margin-left: auto;
+    font-size: 10px;
+    color: $color-text-muted;
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-full;
+  }
+
+  // Scope filter bar
+  &__scope-bar {
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+    background: rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+  }
+
+  // Search
+  &__search {
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+    flex-shrink: 0;
+  }
+
+  // Type filters
+  &__type-filters {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    border-bottom: 1px solid $color-border-subtle;
+    background: rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+  }
+
+  &__filter-btn {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: $radius-xs;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text-secondary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  // Section content wrapper
+  &__section-content {
+    padding: $spacing-xs;
+  }
+
+  // Resizable sections container
+  .resizable-sections-container {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  // Loading state
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+    font-size: 11px;
+  }
+
+  // Error state
+  &__error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    color: $color-error;
+    font-size: 11px;
+  }
+
+  // Empty state
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-lg;
+    text-align: center;
+    color: $color-text-muted;
+
+    svg {
+      opacity: 0.5;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      font-size: 11px;
+      margin: 0;
+    }
+  }
+}
+
+// =============================================================================
+// SCROLLABLE CONTENT AREA
+// =============================================================================
+
+.annotations-tab__content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  min-height: 0;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-border-subtle;
+    border-radius: 3px;
+    &:hover {
+      background: $color-border-default;
+    }
+  }
+}
+
+// =============================================================================
+// CONTEXT SELECTOR
+// =============================================================================
+
+.context-selector {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &__toggle {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      &[data-color="amber"] {
+        background: rgba($color-accent-amber, 0.15);
+        border-color: rgba($color-accent-amber, 0.4);
+        color: $color-accent-amber;
+      }
+      &[data-color="blue"] {
+        background: rgba($color-accent-blue, 0.15);
+        border-color: rgba($color-accent-blue, 0.4);
+        color: $color-accent-blue;
+      }
+    }
+  }
+
+  &__instance-picker {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding-left: $spacing-sm;
+    color: $color-text-muted;
+  }
+
+  &__select {
+    flex: 1;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-primary;
+    font-size: 10px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-blue;
+    }
+
+    option {
+      background: $color-bg-secondary;
+    }
+  }
+}
+
+// =============================================================================
+// ANNOTATION TOOLS
+// =============================================================================
+
+.annotation-tools {
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 9px;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &__btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: $color-text-secondary;
+    }
+
+    &--active {
+      &[data-color="blue"] {
+        background: rgba($color-accent-blue, 0.15);
+        border-color: rgba($color-accent-blue, 0.4);
+        color: $color-accent-blue;
+      }
+      &[data-color="pink"] {
+        background: rgba($color-accent-pink, 0.15);
+        border-color: rgba($color-accent-pink, 0.4);
+        color: $color-accent-pink;
+      }
+      &[data-color="amber"] {
+        background: rgba($color-accent-amber, 0.15);
+        border-color: rgba($color-accent-amber, 0.4);
+        color: $color-accent-amber;
+      }
+      &[data-color="purple"] {
+        background: rgba($color-accent-purple, 0.15);
+        border-color: rgba($color-accent-purple, 0.4);
+        color: $color-accent-purple;
+      }
+      &[data-color="green"] {
+        background: rgba($color-accent-green, 0.15);
+        border-color: rgba($color-accent-green, 0.4);
+        color: $color-accent-green;
+      }
+      &[data-color="teal"] {
+        background: rgba($color-accent-teal, 0.15);
+        border-color: rgba($color-accent-teal, 0.4);
+        color: $color-accent-teal;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// STATUS FILTER
+// =============================================================================
+
+.status-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: $radius-sm;
+
+  &__buttons {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-xs;
+    color: $color-text-muted;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--active {
+      &[data-color="blue"] {
+        background: rgba($color-accent-blue, 0.15);
+        border-color: rgba($color-accent-blue, 0.4);
+        color: $color-accent-blue;
+      }
+      &[data-color="green"] {
+        background: rgba($color-accent-green, 0.15);
+        border-color: rgba($color-accent-green, 0.4);
+        color: $color-accent-green;
+      }
+    }
+  }
+
+  &__archived {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: $color-text-muted;
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+    }
+  }
+}
+
+// =============================================================================
+// OWNERSHIP CHIPS
+// =============================================================================
+
+.ownership-chips-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ownership-chips {
+  display: inline-flex;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ownership-chip {
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(&--active) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--active {
+    &[data-color="blue"] {
+      background: rgba($color-accent-blue, 0.2);
+      color: $color-accent-blue;
+    }
+    &[data-color="teal"] {
+      background: rgba($color-accent-teal, 0.2);
+      color: $color-accent-teal;
+    }
+    &[data-color="amber"] {
+      background: rgba($color-accent-amber, 0.2);
+      color: $color-accent-amber;
+    }
+  }
+}
+
+// =============================================================================
+// SCOPE CHIPS WRAPPER - CENTERED (Legacy support)
+// =============================================================================
+
+.scope-chips-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-sm;
+  border-bottom: 1px solid $color-border-subtle;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// =============================================================================
+// SCOPE CHIPS (like LayoutPanel etched-toggle)
+// =============================================================================
+
+.scope-chips {
+  display: inline-flex;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.scope-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  color: $color-text-muted;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+
+  &:hover:not(&--active) {
+    color: $color-text-secondary;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--active {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+
+    &[data-color="amber"] {
+      background: rgba($color-accent-amber, 0.2);
+      color: $color-accent-amber;
+    }
+
+    &[data-color="teal"] {
+      background: rgba($color-accent-teal, 0.2);
+      color: $color-accent-teal;
+    }
+
+    &[data-color="blue"] {
+      background: rgba($color-accent-blue, 0.2);
+      color: $color-accent-blue;
+    }
+  }
+}
+
+// =============================================================================
+// SEARCH INPUT - Use SearchInput molecule, no overrides needed
+// =============================================================================
+
+// =============================================================================
+// TYPE FILTER WRAPPER - CENTERED
+// =============================================================================
+
+.type-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-sm;
+  border-bottom: 1px solid $color-border-subtle;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// =============================================================================
+// TYPE FILTER BUTTONS (dark etched style)
+// =============================================================================
+
+.type-filter-group {
+  display: flex;
+  gap: 4px;
+}
+
+// Type filter toggle with color-coded icons
+.type-filter-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  // Default (inactive) state - dark etched
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: $color-text-tertiary;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+
+  &:hover:not(&--active) {
+    color: $color-text-secondary;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  // Active state with color variants
+  &--active {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+
+    &[data-color="blue"] {
+      background: rgba($color-accent-blue, 0.2);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+
+    &[data-color="green"] {
+      background: rgba($color-accent-green, 0.2);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+    }
+
+    &[data-color="purple"] {
+      background: rgba($color-accent-purple, 0.2);
+      border-color: rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+    }
+
+    &[data-color="amber"] {
+      background: rgba($color-accent-amber, 0.2);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+  }
+}
+
+.type-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 9px;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  // Default (inactive) state - dark etched
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: $color-text-tertiary;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+
+  &:hover:not(&--active) {
+    color: $color-text-secondary;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  // Active state with color variants
+  &--active {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+
+    &[data-color="blue"] {
+      background: rgba($color-accent-blue, 0.2);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+
+    &[data-color="green"] {
+      background: rgba($color-accent-green, 0.2);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+    }
+
+    &[data-color="purple"] {
+      background: rgba($color-accent-purple, 0.2);
+      border-color: rgba($color-accent-purple, 0.4);
+      color: $color-accent-purple;
+    }
+
+    &[data-color="amber"] {
+      background: rgba($color-accent-amber, 0.2);
+      border-color: rgba($color-accent-amber, 0.4);
+      color: $color-accent-amber;
+    }
+  }
+}
+
+// =============================================================================
+// TYPE BADGE (shared)
+// =============================================================================
+
+.type-badge {
+  &--blue {
+    background: rgba($color-accent-blue, 0.15);
+    color: $color-accent-blue;
+  }
+
+  &--green {
+    background: rgba($color-accent-green, 0.15);
+    color: $color-accent-green;
+  }
+
+  &--purple {
+    background: rgba($color-accent-purple, 0.15);
+    color: $color-accent-purple;
+  }
+
+  &--amber {
+    background: rgba($color-accent-amber, 0.15);
+    color: $color-accent-amber;
+  }
+
+  &--pink {
+    background: rgba($color-accent-pink, 0.15);
+    color: $color-accent-pink;
+  }
+}
+
+// =============================================================================
+// DATASET GROUP (dark card style like layout-panel-card)
+// =============================================================================
+
+.dataset-group {
+  margin-bottom: $spacing-xs;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    &--expanded {
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid $color-border-subtle;
+    }
+  }
+
+  &__chevron {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    flex: 1;
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    font-size: 9px;
+    color: $color-text-muted;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: $radius-full;
+  }
+
+  &__items {
+    padding: $spacing-xs;
+  }
+}
+
+// Dot color variants
+.dot {
+  &--blue {
+    background: $color-accent-blue;
+  }
+  &--teal {
+    background: $color-accent-teal;
+  }
+  &--pink {
+    background: $color-accent-pink;
+  }
+  &--amber {
+    background: $color-accent-amber;
+  }
+  &--green {
+    background: $color-accent-green;
+  }
+  &--purple {
+    background: $color-accent-purple;
+  }
+}
+
+// =============================================================================
+// ANNOTATION ITEM (Enhanced with status, replies, snapshots)
+// =============================================================================
+
+.annotation-item {
+  margin-bottom: $spacing-xs;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  overflow: hidden;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    border-color: $color-border-medium;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  &--expanded {
+    border-color: $color-border-medium;
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    cursor: pointer;
+  }
+
+  &__status {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__chevron {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__visibility {
+    flex-shrink: 0;
+  }
+
+  &__type-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__text {
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+
+  &__reply-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: $color-accent-blue;
+  }
+
+  // Expanded content
+  &__expanded {
+    padding: $spacing-sm;
+    border-top: 1px solid $color-border-subtle;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  // Replies section
+  &__replies {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__replies-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 10px;
+    color: $color-text-muted;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__replies-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding-left: $spacing-sm;
+    border-left: 2px solid $color-border-subtle;
+  }
+
+  &__reply {
+    font-size: 10px;
+  }
+
+  &__reply-author {
+    color: $color-accent-blue;
+    font-weight: $font-weight-medium;
+    margin-right: 4px;
+  }
+
+  &__reply-text {
+    color: $color-text-secondary;
+  }
+
+  &__show-more {
+    background: none;
+    border: none;
+    color: $color-accent-blue;
+    font-size: 10px;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Restore view button
+  &__restore-view {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    width: 100%;
+    padding: $spacing-xs $spacing-sm;
+    margin-bottom: $spacing-sm;
+    background: rgba($color-accent-teal, 0.1);
+    border: 1px solid rgba($color-accent-teal, 0.3);
+    border-radius: $radius-xs;
+    color: $color-accent-teal;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-accent-teal, 0.2);
+    }
+  }
+
+  // Actions row
+  &__actions {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 8px;
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &[data-color="blue"]:hover {
+      background: rgba($color-accent-blue, 0.15);
+      border-color: rgba($color-accent-blue, 0.4);
+      color: $color-accent-blue;
+    }
+
+    &[data-color="green"]:hover {
+      background: rgba($color-accent-green, 0.15);
+      border-color: rgba($color-accent-green, 0.4);
+      color: $color-accent-green;
+    }
+
+    &[data-color="gray"]:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: $color-border-default;
+      color: $color-text-secondary;
+    }
+
+    &[data-color="red"]:hover {
+      background: rgba($color-error, 0.15);
+      border-color: rgba($color-error, 0.4);
+      color: $color-error;
+    }
+  }
+}
+
+// =============================================================================
+// WORKSPACE ANNOTATION
+// =============================================================================
+
+.workspace-annotation {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__badge {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__text {
+    font-size: 11px;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  &__links {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  &__link-badge {
+    font-size: 8px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: $radius-xs;
+    color: $color-text-tertiary;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    color: $color-text-muted;
+  }
+}
+
+// =============================================================================
+// ICON HELPERS
+// =============================================================================
+
+.icon-pink {
+  color: $color-accent-pink;
+}
+.icon-blue {
+  color: $color-accent-blue;
+}
+.icon-green {
+  color: $color-accent-green;
+}
+.icon-amber {
+  color: $color-accent-amber;
+}
+.icon-purple {
+  color: $color-accent-purple;
+}
+.icon-teal {
+  color: $color-accent-teal;
+}

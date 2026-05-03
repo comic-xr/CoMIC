@@ -1,0 +1,281 @@
+// src/ui/react/components/workspace/Canvas/CanvasInfoFooter/CanvasInfoFooter.scss
+// Canvas info footer styling
+//
+// Based on canvas-chrome-v12.jsx spec
+// Height: 24px
+
+@use "theme" as *;
+
+// =============================================================================
+// MAIN CONTAINER
+// =============================================================================
+
+.canvas-info-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px $spacing-md;
+  background: $color-bg-tertiary;
+  border-top: 1px solid $color-border-subtle;
+  font-size: 10px;
+  color: $color-text-muted;
+  height: 24px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+// =============================================================================
+// SECTIONS
+// =============================================================================
+
+.canvas-info-footer__section {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  &--left {
+    gap: $spacing-md;
+  }
+
+  &--right {
+    gap: $spacing-md;
+  }
+}
+
+// =============================================================================
+// ITEMS
+// =============================================================================
+
+.canvas-info-footer__item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &--collab {
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// SIZE TRIGGER
+// =============================================================================
+
+.canvas-info-footer__size-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-md;
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  padding: 2px $spacing-xs;
+  margin: -2px -#{$spacing-xs};
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+.canvas-info-footer__item--canvas {
+  color: $color-accent-amber;
+}
+
+.canvas-info-footer__item--viewport {
+  color: $color-accent-cyan;
+}
+
+// =============================================================================
+// NAVIGATOR BUTTON
+// =============================================================================
+
+.canvas-info-footer__nav-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: none;
+  border: none;
+  color: $color-text-muted;
+  cursor: pointer;
+  padding: 2px $spacing-xs;
+  margin: -2px -#{$spacing-xs};
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-light;
+    color: $color-text-secondary;
+  }
+}
+
+// =============================================================================
+// SYNC STATUS
+// =============================================================================
+
+.canvas-info-footer__sync {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.canvas-info-footer__sync-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-accent-green;
+  flex-shrink: 0;
+}
+
+.canvas-info-footer__sync--syncing {
+  .canvas-info-footer__sync-dot {
+    background: $color-accent-amber;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+.canvas-info-footer__sync--disconnected {
+  color: $color-error;
+
+  .canvas-info-footer__sync-dot {
+    background: $color-error;
+  }
+}
+
+// =============================================================================
+// POPOUT
+// =============================================================================
+
+.canvas-info-footer__popout {
+  position: absolute;
+  left: $spacing-md;
+  bottom: 28px;
+  display: flex;
+  gap: $spacing-lg;
+  padding: $spacing-md;
+  background: $color-glass-panel;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 1px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  z-index: 5;
+  min-width: 320px;
+}
+
+.canvas-info-footer__popout-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 150px;
+}
+
+.canvas-info-footer__popout-title {
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.canvas-info-footer__popout-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.canvas-info-footer__popout-label {
+  font-size: 10px;
+  color: $color-text-secondary;
+}
+
+.canvas-info-footer__stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  padding: 2px 4px;
+
+  span {
+    min-width: 20px;
+    text-align: center;
+    font-size: 11px;
+    color: $color-text-primary;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    color: $color-text-secondary;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: $radius-xs;
+
+    &:hover:not(:disabled) {
+      color: $color-text-primary;
+      background: $color-glass-light;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.canvas-info-footer__preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.canvas-info-footer__preset {
+  border: 1px solid $color-border-subtle;
+  background: rgba(255, 255, 255, 0.04);
+  color: $color-text-secondary;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    color: $color-text-primary;
+    border-color: $color-border-default;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 768px) {
+  .canvas-info-footer {
+    font-size: 9px;
+    padding: 2px $spacing-sm;
+  }
+
+  .canvas-info-footer__section {
+    gap: $spacing-sm;
+  }
+}

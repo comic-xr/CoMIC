@@ -1,0 +1,412 @@
+/**
+ * @file ActiveViewSelector.scss
+ * @description Styles for the ActiveViewSelector component.
+ * 
+ * Works with DropdownPortal for portal rendering.
+ */
+
+@use "theme" as *;
+
+// =============================================================================
+// CONTAINER
+// =============================================================================
+
+.active-view-selector {
+  position: relative;
+}
+
+// =============================================================================
+// TRIGGER BUTTON
+// =============================================================================
+
+.active-view-selector__trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+
+  // Fixed width that fits most long names, but responsive
+  width: 200px;
+  max-width: 200px;
+  min-width: 100px;
+
+  background: $color-glass-subtle;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-md;
+
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-glass-medium;
+    border-color: $color-border-default;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($color-accent-blue, 0.4);
+  }
+
+  // Empty state (no active view)
+  &--empty {
+    .active-view-selector__dot {
+      border: 1px dashed $color-border-default;
+    }
+
+    .active-view-selector__name {
+      color: $color-text-muted;
+      font-style: italic;
+    }
+  }
+
+  // Responsive: shrink on smaller screens
+  @media (max-width: 1400px) {
+    width: 180px;
+    max-width: 180px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 160px;
+    max-width: 160px;
+  }
+
+  @media (max-width: 1000px) {
+    width: 140px;
+    max-width: 140px;
+  }
+}
+
+// =============================================================================
+// TRIGGER CONTENTS
+// =============================================================================
+
+.active-view-selector__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--view-color, $color-accent-blue);
+}
+
+.active-view-selector__info {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.active-view-selector__label {
+  display: block;
+  font-size: 8px;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1px;
+}
+
+.active-view-selector__name {
+  display: block;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active-view-selector__chevron {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  transition: transform $transition-fast;
+
+  // Rotate when dropdown is open
+  .active-view-selector__trigger[aria-expanded="true"] & {
+    transform: rotate(180deg);
+  }
+}
+
+// =============================================================================
+// DROPDOWN (rendered via DropdownPortal)
+// The .dropdown-portal class is added by DropdownPortal component
+// =============================================================================
+
+.active-view-selector__dropdown {
+  // Styles for the dropdown panel
+  min-width: 320px;
+  max-width: min(420px, 92vw);
+  max-height: min(640px, 80vh);
+  background: $color-glass-panel;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow:
+    0 10px 36px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  overflow: hidden;
+
+  // Smooth entrance animation
+  animation: dropdown-slide-in 0.15s ease-out;
+}
+
+@keyframes dropdown-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// =============================================================================
+// CONTENT WRAPPER
+// =============================================================================
+
+.active-view-selector__content-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+}
+
+.active-view-selector__viewhub-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: $spacing-xs;
+
+  // Match dropdown scrollbar style
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-glass-medium;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-glass-strong;
+    }
+  }
+
+  .view-hub-flyout {
+    position: static;
+    bottom: auto;
+    left: auto;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.active-view-selector__clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  width: 100%;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border-subtle;
+  background: $color-glass-light;
+  color: $color-text-secondary;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-border-default;
+    background: $color-glass-medium;
+  }
+
+  svg {
+    color: $color-text-muted;
+  }
+}
+
+// =============================================================================
+// SEARCH (fixed at top)
+// =============================================================================
+
+.active-view-selector__search {
+  flex-shrink: 0;
+  padding: $spacing-sm;
+  border-bottom: 1px solid $color-border-subtle;
+  background: $color-glass-light;
+}
+
+.active-view-selector__search-input {
+  width: 100%;
+  --search-input-bg: $color-bg-tertiary;
+  --search-input-border: $color-border-subtle;
+  --search-input-focus-border: $color-accent-blue;
+  --search-input-color: $color-text-primary;
+  --search-input-placeholder: $color-text-muted;
+  --search-input-icon: $color-text-muted;
+  --search-input-gap: 6px;
+
+  .search-input__field {
+    font-size: 11px;
+  }
+}
+
+// =============================================================================
+// CONTENT (scrollable area)
+// =============================================================================
+
+.active-view-selector__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-xs 0;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border-default;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-border-medium;
+    }
+  }
+}
+
+// =============================================================================
+// SECTIONS
+// =============================================================================
+
+.active-view-selector__section {
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-border-subtle;
+    padding-bottom: $spacing-xs;
+    margin-bottom: $spacing-xs;
+  }
+}
+
+.active-view-selector__section-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  font-size: 9px;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// =============================================================================
+// ITEMS
+// =============================================================================
+
+.active-view-selector__item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+
+  &:hover {
+    background: rgba($color-accent-blue, 0.1);
+  }
+
+  &--active {
+    background: rgba($color-accent-blue, 0.15);
+
+    .active-view-selector__item-name {
+      color: $color-text-primary;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  &--available {
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &--clear {
+    border-bottom: 1px solid $color-border-subtle;
+    margin-bottom: $spacing-xs;
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
+
+    svg {
+      color: $color-text-muted;
+    }
+  }
+}
+
+.active-view-selector__item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.active-view-selector__item-name {
+  flex: 1;
+  font-size: 11px;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active-view-selector__item-position {
+  font-size: 10px;
+  font-family: $font-family-mono;
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.active-view-selector__item-check {
+  color: $color-accent-blue;
+  flex-shrink: 0;
+}
+
+.active-view-selector__item-add {
+  color: $color-text-muted;
+  flex-shrink: 0;
+  transition: color $transition-fast;
+
+  .active-view-selector__item:hover & {
+    color: $color-accent-blue;
+  }
+}
+
+// =============================================================================
+// EMPTY STATE
+// =============================================================================
+
+.active-view-selector__empty {
+  padding: $spacing-lg $spacing-md;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: 11px;
+  font-style: italic;
+}

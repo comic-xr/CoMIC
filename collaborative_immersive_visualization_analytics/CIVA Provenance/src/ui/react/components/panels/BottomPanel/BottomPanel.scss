@@ -1,0 +1,163 @@
+// src/ui/react/components/panels/BottomPanel/BottomPanel.scss
+// Styles for the collapsible bottom panel
+
+@use "theme" as *;
+
+.bottom-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-secondary, #1e1e1e);
+  border-top: 1px solid var(--color-border-subtle, #333);
+  position: relative;
+
+  // Smooth height transitions when not dragging
+  &:not(.is-resizing) {
+    transition: height 0.15s ease-out;
+  }
+
+  // =========================================================================
+  // RESIZE HANDLE
+  // =========================================================================
+  &__resize-handle {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: ns-resize;
+    z-index: 10;
+
+    // Subtle grip indicator
+    color: var(--color-text-muted, #666);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+
+    &:hover,
+    &:active {
+      opacity: 1;
+      color: var(--color-text-secondary, #999);
+    }
+
+    // Larger hit area
+    &::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  // =========================================================================
+  // HEADER WITH TABS
+  // =========================================================================
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-sm, 8px);
+    height: 32px;
+    min-height: 32px;
+    background: var(--color-bg-tertiary, #252526);
+    border-bottom: 1px solid var(--color-border-subtle, #333);
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 2px;
+    height: 100%;
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+    padding: 0 var(--spacing-sm, 8px);
+    height: 100%;
+
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-muted, #888);
+    font-size: var(--font-size-sm, 12px);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: var(--color-text-primary, #fff);
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.05));
+    }
+
+    &--active {
+      color: var(--color-text-primary, #fff);
+      border-bottom-color: var(--color-accent-primary, #0078d4);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text-muted, #888);
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: var(--color-text-primary, #fff);
+      background: var(--color-bg-hover, rgba(255, 255, 255, 0.1));
+    }
+  }
+
+  // =========================================================================
+  // CONTENT AREA
+  // =========================================================================
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  // =========================================================================
+  // PLACEHOLDER (for future tabs)
+  // =========================================================================
+  &__placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm, 8px);
+    color: var(--color-text-muted, #666);
+
+    p {
+      margin: 0;
+      font-size: var(--font-size-base, 14px);
+      color: var(--color-text-secondary, #999);
+    }
+
+    span {
+      font-size: var(--font-size-sm, 12px);
+    }
+  }
+}
