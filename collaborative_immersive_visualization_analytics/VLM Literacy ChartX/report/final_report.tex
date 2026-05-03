@@ -1,0 +1,323 @@
+\documentclass[sigconf, 10pt]{acmart}
+
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+\begin{document}
+
+\title{An Empirical Evaluation of Vision-Language Model Capabilities for Visualization Literacy Across Chart Types and Rendering Conditions}
+
+\author{Naga Venkata Sai Chennu}
+\affiliation{\institution{George Mason University}\city{Fairfax}\state{VA}}
+\email{nchennu@gmu.edu}
+
+\author{Hemanjali Buchireddy}
+\affiliation{\institution{George Mason University}\city{Fairfax}\state{VA}}
+\email{hbuchire@gmu.edu}
+
+\begin{abstract}
+We present a comprehensive empirical evaluation of GPT-5.4's visualization literacy across 18 chart types using the ChartX benchmark (6,000 images, 6,000 QA pairs). Our evaluation of 5,713 2D chart images reveals an overall accuracy of 85.7\%, with a striking 43-percentage-point gap between position-encoded charts (line: 95.3\%, bar: 92.1\%) and area-encoded charts (treemap: 51.6\%, radar: 68.2\%). We further demonstrate a 26.4-percentage-point accuracy collapse when the same data is rendered as 3D bar charts (59.3\%), confirming that perspective projection fundamentally degrades VLM chart comprehension. Critically, we identify an ``invisible ground truth'' problem in chart benchmarks: treemap evaluations penalize models for failing to extract exact percentages from images that display only proportionally-sized rectangles without numeric labels. As a targeted follow-up, we re-rendered the same ChartX raw data for the four worst-performing chart types into single-angle 3D and four-angle multi-angle 3D conditions; treemap accuracy rises from 51.6\% to 97.7\% under our 3D rendering with explicit value labels, while four-angle multi-image prompts do not improve over single-angle 3D for any of the four types. Our accuracy hierarchy maps with remarkable fidelity to Cleveland \& McGill's (1984) ranking of elementary perceptual tasks, suggesting VLMs have learned perceptual-like representations. We contribute seven evidence-based design guidelines for integrating VLM assistants into immersive analytics systems.
+\end{abstract}
+
+\maketitle
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+Vision-Language Models (VLMs) have demonstrated impressive capabilities in understanding static 2D data visualizations, achieving over 90\% accuracy on standardized chart question-answering benchmarks~\cite{chartqa}. As analytics increasingly adopts immersive technologies---virtual reality (VR), augmented reality (AR), and mixed reality (MR)---a fundamental question arises: how well can these models interpret visualizations across diverse chart types and rendering conditions?
+
+Immersive analytics introduces unique perceptual challenges including 3D spatial layouts with depth-dependent visual encoding, occlusion between overlapping data elements, and viewpoint-dependent perception~\cite{marriott2018}. While prior evaluations have focused narrowly on static 2D charts, single models (mostly GPT-4V), and a limited set of chart types~\cite{kim2024,wu2024}, there is no systematic evaluation spanning the full spectrum of chart types used in modern visualization practice.
+
+This project fills this gap through a comprehensive empirical evaluation of GPT-5.4 on the ChartX benchmark~\cite{chartx}, encompassing 18 chart types across 22 academic topics. Our evaluation addresses four research questions:
+\begin{itemize}
+    \item \textbf{RQ1:} How does VLM accuracy vary across chart types, and does this variation follow established perceptual science predictions?
+    \item \textbf{RQ2:} How much does 3D rendering degrade VLM chart comprehension?
+    \item \textbf{RQ3:} Are benchmark failures genuine VLM limitations or artifacts of evaluation design?
+    \item \textbf{RQ4:} What design guidelines emerge for VLM-assisted immersive analytics?
+\end{itemize}
+
+% ============================================================
+\section{Background and Prior Work}
+% ============================================================
+
+\subsection{Project Context}
+This project is conducted as part of CS 692 (Mobile Immersive Computing) at George Mason University under Dr.\ Bo Han, in collaboration with Fahim Arsad Nafis. The project evolved through three phases: (1) an initial evaluation using synthetic and ChartX-derived charts with GPT-5.2, Claude 3.5 Sonnet, and Gemini 2.5 Flash on matplotlib-rendered 2D/3D charts; (2) a VLAT benchmark evaluation establishing GPT-5.4 baseline performance (67.9\% on 53 multiple-choice questions); and (3) the current comprehensive evaluation using the full ChartX dataset with original images and ground truth QA pairs.
+
+Prior results from Phase 1 demonstrated a catastrophic 50.9-percentage-point drop from 2D (82.0\%) to 3D (31.1\%) with GPT-5.2, establishing the severity of the 3D comprehension challenge. Phase 3 represents a methodological improvement by using the benchmark's own images and questions rather than regenerated charts, eliminating potential confounds from our rendering pipeline.
+
+\subsection{Chart Comprehension Benchmarks}
+The chart understanding space has expanded rapidly since ChartQA~\cite{chartqa} established the standard with 32.7K questions on bar, line, and pie charts. ChartX~\cite{chartx} advanced the field with 6,000 samples across 18 chart types and 7 evaluation tasks, explicitly classifying rose, area, 3D-bar, bubble, multi-axes, and radar as ``difficult'' types where existing models show near-zero performance. CharXiv~\cite{charxiv} demonstrated that template-based questions produce over-optimistic estimates, with stress tests degrading performance by up to 34.5\%.
+
+Pandey \& Ottley~\cite{pandey2025} benchmarked GPT-4, Claude, Gemini, and Llama on VLAT and CALVI, finding line charts at 76--96\% but bubble charts at only 18.6--61.4\%---a pattern our results corroborate.
+
+\subsection{Perceptual Science Foundations}
+Cleveland \& McGill's~\cite{cleveland1984} experimentally validated ranking of elementary perceptual tasks---position along common scale $>$ length $>$ angle $>$ area---provides the theoretical framework for our findings. Stevens' Power Law explains the mechanism: the psychophysical exponent for line length is $a \approx 1.0$ (linear, unbiased) but only $a \approx 0.7$--$0.8$ for visual area (compressive, systematic underestimation). Heer \& Bostock~\cite{heer2010} replicated these findings with crowdsourcing, specifically confirming elevated error rates for rectangular area perception as used in treemaps.
+
+\subsection{3D Chart Comprehension}
+Zacks et al.~\cite{zacks1998} systematically demonstrated that ``the addition of 3-dimensional perspective depth cues lowered accuracy'' through conflicting depth cues. Wilke~\cite{wilke2019} identifies four distortion mechanisms: non-invertible projection, foreshortening, occlusion, and unequal scaling.
+
+% ============================================================
+\section{Methodology}
+% ============================================================
+
+\subsection{Dataset}
+We use the ChartX benchmark~\cite{chartx} from HuggingFace (\texttt{InternScience/ChartX}), containing 6,000 chart images across 18 chart types and 22 academic topics (Table~\ref{tab:dataset}). Each image has one question-answer pair authored by dataset creators. The dataset includes both 2D charts (5,720 images across 17 types) and 3D bar charts (280 images). All images are original PNG renders from the benchmark, not regenerated by our pipeline.
+
+\begin{table}[h]
+\caption{ChartX Dataset Composition}
+\label{tab:dataset}
+\small
+\begin{tabular}{lrrl}
+\toprule
+\textbf{Chart Type} & \textbf{Images} & \textbf{QA Pairs} & \textbf{Encoding} \\
+\midrule
+bar\_chart & 472 & 472 & Position \\
+bar\_chart\_num & 472 & 472 & Position \\
+line\_chart & 472 & 472 & Position \\
+line\_chart\_num & 472 & 472 & Position \\
+pie\_chart & 472 & 472 & Angle/Arc \\
+area\_chart & 280 & 280 & Area \\
+box & 280 & 280 & Position \\
+bubble & 280 & 280 & Position+Area \\
+candlestick & 280 & 280 & Position \\
+funnel & 280 & 280 & Length \\
+heatmap & 280 & 280 & Color \\
+histogram & 280 & 280 & Position \\
+multi-axes & 280 & 280 & Position \\
+radar & 280 & 280 & Position (polar) \\
+rings & 280 & 280 & Arc length \\
+rose & 280 & 280 & Angle+Area \\
+treemap & 280 & 280 & Area \\
+3D-Bar & 280 & 280 & Position (3D) \\
+\midrule
+\textbf{Total} & \textbf{6,000} & \textbf{6,000} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Model and Configuration}
+We evaluate \textbf{GPT-5.4} (OpenAI), accessed via both the OpenAI API and OpenRouter API. All queries use temperature 0 for deterministic outputs, with a maximum of 200 completion tokens. Each evaluation sends the original chart image alongside the dataset's question as a single vision-language query.
+
+\subsection{Evaluation Pipeline}
+Our automated pipeline processes each chart image through the following steps:
+\begin{enumerate}
+    \item Load the chart image and corresponding QA pair from the ChartX dataset
+    \item Send the image and question to GPT-5.4 via the API
+    \item Parse the model's free-text response
+    \item Score against ground truth using relaxed accuracy (10\% numeric tolerance) and keyword matching with synonym expansion
+    \item Cache responses as JSON files to enable re-analysis without re-querying
+\end{enumerate}
+
+The pipeline supports concurrent API calls (5 parallel) with exponential backoff retry logic. Total evaluation cost: approximately \$10 for the full 2D run.
+
+\subsection{Targeted 3D Re-rendering Follow-up}
+As a targeted follow-up to the main evaluation, we re-rendered the original ChartX raw data for the four worst-performing 2D chart types (treemap, radar, bubble, area chart; $n{=}1{,}107$ items after dropping 13 entries with non-numeric channels) into two new conditions: a single canonical 3D view (elevation $25\degree$, azimuth $45\degree$) and a four-angle multi-angle condition (azimuths $\{0\degree, 90\degree, 180\degree, 270\degree\}$ at the same elevation, all four images sent in a single GPT-5.4 call with a system prompt explaining they show the same chart from four different sides). Renderers were implemented in matplotlib at 300 dpi, $10\times8$ in figure size, with explicit on-chart value labels and transparent 3D panes; treemap uses extruded prisms with height proportional to value, radar uses a 3D polar bar layout, bubble uses cylinders in a normalized $[0,100]^3$ space, and area chart uses parallel ribbons separated along the $y$-axis. The QA pairs are taken verbatim from the same ChartX annotations used in the 2D baseline, enabling paired comparison at the chart-id level. Statistical comparison between the two new conditions uses McNemar's exact two-sided test on the per-question paired outcomes.
+
+% ============================================================
+\section{Results}
+% ============================================================
+
+\subsection{Overall 2D Performance}
+GPT-5.4 achieves \textbf{85.7\% overall accuracy} on 5,713 successfully evaluated 2D chart images (Table~\ref{tab:results}). Seven items failed due to transient API errors and are excluded.
+
+\begin{table}[h]
+\caption{GPT-5.4 Accuracy on ChartX 2D by Chart Type}
+\label{tab:results}
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Chart Type} & \textbf{Correct} & \textbf{Total} & \textbf{Accuracy} \\
+\midrule
+line\_chart\_num & 450 & 472 & \textbf{95.3\%} \\
+pie\_chart & 447 & 472 & 94.7\% \\
+bar\_chart\_num & 433 & 470 & 92.1\% \\
+rose & 256 & 279 & 91.8\% \\
+rings & 255 & 280 & 91.1\% \\
+line\_chart & 428 & 470 & 91.1\% \\
+box & 250 & 280 & 89.3\% \\
+heatmap & 249 & 280 & 88.9\% \\
+candlestick & 249 & 280 & 88.9\% \\
+bar\_chart & 414 & 472 & 87.7\% \\
+multi-axes & 243 & 280 & 86.8\% \\
+histogram & 239 & 280 & 85.4\% \\
+funnel & 233 & 280 & 83.2\% \\
+\midrule
+area\_chart & 216 & 279 & 77.4\% \\
+bubble & 199 & 280 & 71.1\% \\
+radar & 191 & 280 & 68.2\% \\
+treemap & 144 & 279 & \textbf{51.6\%} \\
+\midrule
+\textbf{Overall} & \textbf{4,896} & \textbf{5,713} & \textbf{85.7\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results reveal a clear performance hierarchy: 13 chart types exceed 83\% accuracy, while four types---area chart (77.4\%), bubble (71.1\%), radar (68.2\%), and treemap (51.6\%)---fall substantially below. The gap between the best-performing type (line\_chart\_num, 95.3\%) and worst (treemap, 51.6\%) spans \textbf{43.7 percentage points}.
+
+\subsection{3D Bar Chart Performance}
+Evaluating all 280 3D-Bar images yields \textbf{59.3\% accuracy}, compared to 87.7\% for 2D bar charts and 92.1\% for bar\_chart\_num---a \textbf{26.4--32.8 percentage-point collapse} (Table~\ref{tab:3d}).
+
+\begin{table}[h]
+\caption{2D vs 3D Bar Chart Accuracy}
+\label{tab:3d}
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Condition} & \textbf{Correct} & \textbf{Total} & \textbf{Accuracy} \\
+\midrule
+2D bar\_chart & 414 & 472 & 87.7\% \\
+2D bar\_chart\_num & 433 & 470 & 92.1\% \\
+3D-Bar & 166 & 280 & 59.3\% \\
+\midrule
+\textbf{2D$\rightarrow$3D Drop} & & & \textbf{--26.4 to --32.8pp} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Perceptual Hierarchy Alignment}
+The accuracy hierarchy maps with remarkable fidelity to Cleveland \& McGill's~\cite{cleveland1984} ranking of elementary perceptual tasks (Figure~\ref{fig:hierarchy}):
+
+\begin{itemize}
+    \item \textbf{Position-encoded} (bar, line, box, candlestick, histogram): 85--95\%
+    \item \textbf{Angle/arc-encoded} (pie, rings, rose): 91--95\%
+    \item \textbf{Color-encoded} (heatmap): 89\%
+    \item \textbf{Area-encoded} (treemap, bubble): 51--71\%
+    \item \textbf{Polar position} (radar): 68\%
+\end{itemize}
+
+Position along a common scale---ranked highest by Cleveland \& McGill---produces the highest VLM accuracy. Area---ranked fifth---produces the lowest. The correlation between perceptual channel effectiveness and VLM accuracy suggests that VLMs have learned representations that mirror human perceptual hierarchies, despite their fundamentally different processing mechanism (patch-based tokenization vs.\ Gestalt perception).
+
+\subsection{Failure Analysis}
+
+We analyze failures across the four weakest chart types to distinguish genuine VLM limitations from evaluation artifacts.
+
+\textbf{Treemap (51.6\%):} The most significant finding. Treemap images in ChartX display proportionally-sized colored rectangles with category labels but \textbf{no numeric values}. Ground truth answers require exact percentages (e.g., ``20\%'') derived from the underlying CSV data that is invisible in the image. The VLM must estimate percentages from rectangle area---a task where Stevens' Power Law predicts systematic underestimation (exponent $a \approx 0.7$). Of 135 incorrect answers, 79\% were completely wrong (not close to the expected value), consistent with the impossibility of precise area estimation.
+
+\textbf{Radar (68.2\%):} Failures stem from overlapping series on polar coordinates, making it difficult to distinguish which line belongs to which series. 22\% of failures were format mismatches where GPT-5.4 identified the correct answer but in different wording than the ground truth expected.
+
+\textbf{Bubble (71.1\%):} Bubble charts encode data in position \textit{and} bubble size. The VLM struggles to interpret size encoding precisely, particularly for questions about values mapped to bubble diameter.
+
+\textbf{Area chart (77.4\%):} Stacked/overlapping filled regions create confusion between individual series values and cumulative values.
+
+\subsection{Targeted 3D Re-rendering: Single- vs.\ Multi-Angle}
+Table~\ref{tab:stage2} reports per-chart-type accuracy across the original 2D baseline and the two new 3D conditions on the paired sample. We list the multi-angle minus single-angle delta in percentage points and the McNemar exact two-sided $p$-value.
+
+\begin{table}[h]
+\caption{Targeted follow-up: 2D vs.\ 3D-Single vs.\ 3D-Multi-Angle (per chart type, paired). $\Delta$~=~3D-Multi $-$ 3D-Single. McNemar exact two-sided.}
+\label{tab:stage2}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Type} & $n$ & \textbf{2D} & \textbf{3D-S} & \textbf{3D-M} & $\bm{\Delta}$ & $\bm{p}$ \\
+\midrule
+treemap     & 220 & 52.7\% & \textbf{97.7\%} & 89.1\% & $-$8.6 & 0.0003 \\
+radar       & 230 & 66.5\% & 67.0\%          & 63.0\% & $-$3.9 & 0.374 \\
+bubble      & 217 & 72.8\% & 61.3\%          & 63.1\% & $+$1.8 & 0.716 \\
+area\_chart & 220 & 76.4\% & 52.3\%          & 44.1\% & $-$8.2 & 0.054 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three observations stand out. First, the treemap 2D-to-3D-single jump is large ($+45.0$~pp): our 3D treemap renderer extrudes each cell to a height proportional to its percentage and prints the value above the prism, replacing the rank-4 area channel with a rank-1 height channel and exposing the otherwise-invisible numeric label. This is direct empirical support for our ``invisible ground truth'' interpretation in Section 5.1. Second, 3D rendering hurts bubble and area chart relative to 2D ($-11.5$~pp and $-24.1$~pp respectively), suggesting that perspective distortion and inter-element occlusion outweigh the benefit of a height channel for these types. Third, four-angle multi-image prompting does not improve over single-angle 3D for any of the four types: three deltas are negative and the only positive (bubble, $+1.8$~pp) is statistically indistinguishable from zero. The treemap regression is statistically significant ($p{=}0.0003$).
+
+% ============================================================
+\section{Discussion}
+% ============================================================
+
+\subsection{The Invisible Ground Truth Problem}
+Our most important methodological finding is that some benchmark ``failures'' measure evaluation design quality rather than VLM capability. We term this the \textbf{invisible ground truth} problem: when benchmark questions require data derivable only from underlying data tables, not from the rendered visualization.
+
+ChartX's own paper acknowledges this: ``for the percentage-related chart types, e.g., pie chart, ring chart, treemap, funnel chart, etc., the column label of values is usually invisible''~\cite{chartx}. This affects any benchmark where chart types lack explicit numeric labels. The VQA community has begun addressing this through unanswerable question detection~\cite{chartqapro}, but current chart benchmarks do not flag questions requiring invisible data.
+
+The follow-up study in Section 4.5 provides direct empirical support for this interpretation: re-rendering the same treemap data with explicit on-chart numeric labels closes 45 of the original 48 percentage points to ceiling, indicating that the original $51.6\%$ accuracy reflects benchmark information sufficiency rather than a perceptual ceiling on the model. We frame this as: benchmark accuracy on area-encoded charts without numeric labels reflects \textit{both} VLM perceptual capability \textit{and} the information sufficiency of the evaluation itself.
+
+\subsection{Implications for Immersive Analytics}
+The 26.4-point 3D accuracy collapse has direct implications for immersive analytics, where 3D is often the default rendering condition. VLMs process single static 2D projections---they lack the interactive rotation that helps humans compensate for 3D distortion~\cite{zacks1998}. In immersive VR environments, a VLM assistant would see only the user's current viewport, suffering the same perspective and occlusion limitations documented here. The negative result on multi-angle prompting in Section 4.5 suggests that simply showing the model multiple offline-rendered camera angles is not a viable workaround.
+
+\subsection{Design Guidelines}
+Based on converging evidence from our evaluation, perceptual science, and immersive analytics literature, we propose seven evidence-based design guidelines:
+
+\begin{enumerate}
+    \item \textbf{Prefer position-encoded chart types} for VLM-readable visualizations. Avoid treemaps and radar for quantitative tasks unless numeric labels are present.
+    \item \textbf{Always include numeric data labels} on charts intended for VLM interpretation, transforming the task from perceptual estimation to text extraction.
+    \item \textbf{Flatten 3D visualizations before VLM processing}---render 2D orthographic projections or provide underlying data tables alongside images.
+    \item \textbf{Use format-tolerant evaluation} with tiered tolerance: 5\% for position-encoded charts, 15\% for angle-encoded, 25\% for area-encoded.
+    \item \textbf{Structure prompts as ``describe $\rightarrow$ extract $\rightarrow$ reason'' pipelines} rather than direct question answering.
+    \item \textbf{Design immersive VLM interfaces for multimodal context fusion}, maintaining a VLM-interpretable 2D layer beneath 3D rendering.
+    \item \textbf{Do not assume multiple camera angles will help.} Our four-angle multi-image condition was not better than single-angle 3D for any of the four worst chart types, and was statistically worse for treemap. If multi-view input is needed, prefer two complementary views with explicit captions over four redundant ones.
+\end{enumerate}
+
+\subsection{Limitations}
+Our evaluation has several limitations. First, we evaluate only GPT-5.4; cross-model comparison would strengthen the findings. Second, ChartX provides one question per chart, limiting per-chart task diversity. Third, our scoring uses automated matching which may miss semantically correct but differently formatted answers. Fourth, the main 3D evaluation covers only bar charts (the only 3D type in ChartX), limiting 3D generalizability; the targeted re-rendering follow-up extends this to four additional types but introduces our own rendering as an intervening factor.
+
+% ============================================================
+\section{Conclusion and Future Work}
+% ============================================================
+
+We present the first comprehensive evaluation of GPT-5.4's visualization literacy across 18 chart types using the ChartX benchmark, revealing three key findings: (1) a 43-percentage-point accuracy gap between position-encoded and area-encoded charts that mirrors Cleveland \& McGill's perceptual hierarchy; (2) a 26.4-point accuracy collapse on 3D bar charts; and (3) an ``invisible ground truth'' problem where benchmark design conflates VLM capability with information sufficiency. A targeted re-rendering follow-up on the four worst-performing chart types provides direct empirical support for the invisible ground truth interpretation (treemap rises from 51.6\% to 97.7\% with on-chart value labels) and shows that four-angle multi-image prompting does not improve over single-angle 3D. We contribute seven design guidelines for VLM-assisted immersive analytics.
+
+Future work includes: extending the evaluation to immersive rendering conditions using the DXR toolkit in Unity with Meta Quest; testing two-view multi-angle conditions with explicit per-view captions to probe whether the negative four-angle result is driven by token-budget dilution or view-fusion failure; implementing structured grounding by providing system state JSON (data values, encodings, camera pose) alongside images; cross-model replication on Claude and Gemini; and conducting a human study comparing VLM-assisted vs.\ unassisted visualization comprehension in VR.
+
+% ============================================================
+% References
+% ============================================================
+
+\bibliographystyle{ACM-Reference-Format}
+\begin{thebibliography}{20}
+
+\bibitem{chartqa}
+A. Masry, D. X. Long, J. Q. Tan, S. Joty, and E. Hoque. ChartQA: A benchmark for question answering about charts with visual and logical reasoning. In \textit{Findings of ACL}, 2022.
+
+\bibitem{chartx}
+R. Xia, B. Song, J. Shi, et al. ChartX \& ChartVLM: A versatile benchmark and foundation model for complicated chart reasoning. \textit{IEEE Trans. Image Processing}, 2024.
+
+\bibitem{charxiv}
+Z. Wang, M. Xia, et al. CharXiv: Charting gaps in realistic chart understanding in multimodal LLMs. In \textit{NeurIPS Datasets \& Benchmarks}, 2024.
+
+\bibitem{chartqapro}
+A. Masry et al. ChartQAPro: A more diverse and challenging benchmark for chart question answering. In \textit{Findings of ACL}, 2025.
+
+\bibitem{cleveland1984}
+W. S. Cleveland and R. McGill. Graphical perception: Theory, experimentation, and application to the development of graphical methods. \textit{JASA}, 79(387):531--554, 1984.
+
+\bibitem{heer2010}
+J. Heer and M. Bostock. Crowdsourcing graphical perception: Using Mechanical Turk to assess visualization design. In \textit{CHI}, pp. 203--212, 2010.
+
+\bibitem{zacks1998}
+J. Zacks, E. Levy, B. Tversky, and D. J. Schiano. Reading bar graphs: Effects of extraneous depth cues and graphical context. \textit{J. Exp. Psych.: Applied}, 4:119--138, 1998.
+
+\bibitem{wilke2019}
+C. O. Wilke. \textit{Fundamentals of Data Visualization}. O'Reilly Media, 2019.
+
+\bibitem{marriott2018}
+K. Marriott, F. Schreiber, T. Dwyer, et al. \textit{Immersive Analytics}. Springer LNCS 11190, 2018.
+
+\bibitem{kim2024}
+H. S. Kim, S. Lee, et al. An empirical evaluation of the GPT-4 multimodal language model on visualization literacy tasks. \textit{IEEE VIS}, 2024.
+
+\bibitem{wu2024}
+J. Wu, S. Chen, et al. How visually literate are large language models? Reflections on recent advances and future directions. \textit{IEEE TVCG}, 2024.
+
+\bibitem{pandey2025}
+A. V. Pandey and E. Ottley. How well can vision language models see chart details? \textit{Computer Graphics Forum (EuroVis)}, 2025.
+
+\bibitem{islam2024}
+M. M. Islam et al. Are large vision language models up to the challenge of chart comprehension and reasoning? In \textit{EMNLP Findings}, 2024.
+
+\bibitem{munzner2014}
+T. Munzner. \textit{Visualization Analysis and Design}. CRC Press, 2014.
+
+\bibitem{tufte2001}
+E. R. Tufte. \textit{The Visual Display of Quantitative Information}. Graphics Press, 2nd ed., 2001.
+
+\end{thebibliography}
+
+\end{document}
