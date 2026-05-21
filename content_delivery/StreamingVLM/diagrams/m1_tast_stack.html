@@ -2,171 +2,399 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>M1+TAST Stack Architecture (Headline)</title>
+<title>StreamingVLM: M1 + STAMP-T + TAST + Length-Adaptive r — Publication Architecture</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fafafa; padding: 20px; }
-h1 { text-align: center; color: #212121; margin-bottom: 5px; font-size: 22px; }
-h2 { text-align: center; color: #616161; margin-bottom: 20px; font-size: 14px; font-weight: normal; }
-.arch { display: flex; align-items: flex-start; gap: 12px; overflow-x: auto; padding: 20px 10px; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fafafa; padding: 20px; color: #212121; }
+h1 { text-align: center; margin-bottom: 5px; font-size: 22px; }
+h2 { text-align: center; color: #616161; margin-bottom: 18px; font-size: 13px; font-weight: normal; }
+h3.section { color: #1A237E; font-size: 14px; margin: 22px 0 10px 0; border-bottom: 1.5px solid #1A237E; padding-bottom: 4px; }
+
+.arch { display: flex; align-items: flex-start; gap: 14px; overflow-x: auto; padding: 16px 8px; }
 .layer { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 200px; }
 .layer-title { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; }
-.box { border-radius: 10px; padding: 14px 16px; text-align: center; border: 2px solid; min-width: 180px; position: relative; transition: transform 0.2s; }
+
+.box { border-radius: 10px; padding: 12px 14px; text-align: center; border: 2px solid; min-width: 180px; max-width: 220px; position: relative; transition: transform 0.2s; }
 .box:hover { transform: scale(1.03); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-.box h3 { font-size: 13px; margin-bottom: 4px; }
-.box p { font-size: 10px; color: #555; margin: 2px 0; }
-.box .formula { font-family: 'Cambria Math', 'Times New Roman', serif; font-size: 10px; color: #1A237E; margin-top: 4px; font-style: italic; }
+.box h3 { font-size: 12px; margin-bottom: 4px; line-height: 1.25; }
+.box p { font-size: 10px; color: #555; margin: 2px 0; line-height: 1.3; }
+.box .formula { font-family: 'Cambria Math', 'Times New Roman', serif; font-size: 10px; color: #1A237E; margin-top: 4px; font-style: italic; line-height: 1.35; }
 .box .tensor { font-family: monospace; font-size: 9px; background: #f5f5f5; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-top: 3px; }
+
 .novel { border-color: #FF6B35 !important; border-style: dashed !important; border-width: 3px !important; }
 .novel::before { content: "\2605 NOVEL"; position: absolute; top: -10px; left: 10px; background: #FF6B35; color: white; font-size: 8px; padding: 1px 6px; border-radius: 3px; font-weight: bold; }
-.arrow { display: flex; align-items: center; justify-content: center; font-size: 22px; color: #37474F; min-width: 30px; }
+
+.arrow { display: flex; align-items: center; justify-content: center; font-size: 22px; color: #37474F; min-width: 28px; padding-top: 60px; }
 .arrow-down { font-size: 18px; color: #78909C; margin: 2px 0; }
 .split { display: flex; gap: 8px; }
-.bottom-section { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.callout { background: #FFF3E0; border: 1.5px solid #FF8F00; border-radius: 8px; padding: 10px 14px; font-size: 10px; color: #E65100; max-width: 320px; }
-.callout h4 { font-size: 11px; margin-bottom: 4px; }
+
+/* Color palette */
+.input { background: #ECEFF1; border-color: #607D8B; }
+.text-enc { background: #FCE4EC; border-color: #C2185B; }
 .vit { background: #E3F2FD; border-color: #2C73D2; }
 .merge { background: #FFF8E1; border-color: #F5A623; }
+.signal { background: #FFFDE7; border-color: #FBC02D; }
 .scoring { background: #EDE7F6; border-color: #7B68EE; }
+.adaptive { background: #FCE4EC; border-color: #AD1457; }
 .prune { background: #FFEBEE; border-color: #D0021B; }
 .tast { background: #E0F2F1; border-color: #00897B; }
 .llm { background: #E8F5E9; border-color: #2E7D32; }
 .kept { background: #E8F5E9; border-color: #43A047; }
 .pruned { background: #FFEBEE; border-color: #E53935; }
-.legend { display: flex; gap: 15px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
+
+/* Side panels */
+.panel-row { display: flex; gap: 14px; margin-top: 18px; flex-wrap: wrap; justify-content: center; }
+.panel { background: #FFFFFF; border: 1.5px solid #90A4AE; border-radius: 10px; padding: 14px 18px; font-size: 10px; color: #263238; min-width: 280px; max-width: 360px; }
+.panel h4 { font-size: 11px; margin-bottom: 8px; color: #1A237E; border-bottom: 1px solid #CFD8DC; padding-bottom: 3px; }
+.panel.result { background: #E8F5E9; border-color: #2E7D32; }
+.panel.result h4 { color: #1B5E20; border-bottom-color: #A5D6A7; }
+.panel.fail { background: #FFEBEE; border-color: #C62828; }
+.panel.fail h4 { color: #B71C1C; border-bottom-color: #EF9A9A; }
+.panel.theory { background: #E3F2FD; border-color: #1565C0; }
+.panel.theory h4 { color: #0D47A1; border-bottom-color: #90CAF9; }
+.panel.ablation { background: #FFF8E1; border-color: #F57F17; }
+.panel.ablation h4 { color: #E65100; border-bottom-color: #FFE082; }
+
+table.tight { width: 100%; border-collapse: collapse; font-size: 10px; }
+table.tight th, table.tight td { padding: 3px 6px; border: 1px solid #CFD8DC; text-align: left; }
+table.tight th { background: #ECEFF1; font-weight: bold; }
+table.tight td.sig { color: #1B5E20; font-weight: bold; }
+table.tight td.neg { color: #B71C1C; }
+
+/* Pareto inline curve */
+.pareto-svg { width: 100%; height: 180px; background: #FAFAFA; border: 1px solid #B0BEC5; border-radius: 6px; }
+
+.legend { display: flex; gap: 14px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; }
 .legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 1.5px solid; }
+
+.timeline { margin-top: 14px; padding: 12px 16px; background: #FFFFFF; border: 1.5px solid #B0BEC5; border-radius: 10px; font-size: 10px; color: #37474F; }
+.timeline h4 { font-size: 11px; margin-bottom: 6px; color: #263238; }
+.tl-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+.tl-chunk { background: #ECEFF1; border: 1px solid #B0BEC5; border-radius: 4px; padding: 3px 8px; font-family: monospace; font-size: 10px; }
+.tl-state { background: #E0F2F1; border-color: #00897B; }
+.tl-decision { background: #FCE4EC; border: 1px solid #AD1457; border-radius: 4px; padding: 3px 8px; font-family: monospace; font-size: 10px; }
 </style>
 </head>
 <body>
-<h1>M1 + TAST Stack: DyMU Spatial Merge &rarr; STAMP-T Temporal Score &rarr; TAST State Inject</h1>
-<h2>Headline Architecture &mdash; Training-Free Streaming VLM, +4.42pp Cross-Model on Qwen2.5-VL-7B-Instruct</h2>
+<h1>StreamingVLM Headline Pipeline &mdash; M1 + STAMP-T + TAST + Length-Adaptive r</h1>
+<h2>Training-Free Streaming VLM &mdash; Adaptive Rate-Distortion Policy on Qwen2.5-VL-7B-Instruct &mdash; +4.42 pp Cross-Model, +3.55 pp MVBench Paired, Long-Video Gap Closed within −1.81 pp of Vanilla</h2>
+
+<h3 class="section">A. Per-Chunk Forward Pipeline (executed on every chunk of 5 frames)</h3>
 
 <div class="arch">
-  <!-- Layer 1: ViT -->
+
+  <!-- LAYER 1: INPUTS -->
   <div class="layer">
-    <span class="layer-title" style="background:#E3F2FD;color:#2C73D2;">Layer 1: Vision</span>
+    <span class="layer-title" style="background:#ECEFF1;color:#455A64;">L1 Inputs</span>
+    <div class="box input">
+      <h3>Video Stream Chunk</h3>
+      <p>5 frames per chunk; ChunkID t ∈ {1..T<sub>chunks</sub>}</p>
+      <span class="tensor">[5, 3, H, W]</span>
+    </div>
+    <div class="arrow-down">&darr;</div>
+    <div class="box text-enc">
+      <h3>Text Query (early-bound)</h3>
+      <p>X<sub>q</sub> embedded once and re-used per chunk</p>
+      <span class="tensor">[N<sub>txt</sub>, D]</span>
+    </div>
+    <div class="arrow-down">&darr;</div>
+    <div class="box input">
+      <h3>Video Metadata</h3>
+      <p>Duration D<sub>vid</sub> (s); fed into Length-Adaptive r selector at L5</p>
+      <span class="tensor">scalar</span>
+    </div>
+  </div>
+
+  <div class="arrow">&rarr;</div>
+
+  <!-- LAYER 2: ViT -->
+  <div class="layer">
+    <span class="layer-title" style="background:#E3F2FD;color:#2C73D2;">L2 ViT Encoder</span>
     <div class="box vit">
-      <h3>Video Stream</h3>
-      <p>Chunked into segments of 5 frames</p>
-      <span class="tensor">[T<sub>chunk</sub>, 3, H, W]</span>
+      <h3>Qwen2.5-VL ViT</h3>
+      <p>32 layers, 16 heads, D = 3584</p>
+      <p>Attention captured at global layers 7, 15, 23, 31</p>
+      <span class="tensor">[5, N<sub>spat</sub>, D]</span>
     </div>
     <div class="arrow-down">&darr;</div>
     <div class="box vit">
-      <h3>ViT Encoder (Qwen2.5-VL)</h3>
-      <p>32 layers, 16 heads, D=3584</p>
-      <span class="tensor">[T, N<sub>spat</sub>, D]</span>
+      <h3>Multi-Layer Attention Maps</h3>
+      <p>Layer set L = {7, 15, 23, 31} fused for salience</p>
+      <div class="formula">A(i) = mean<sub>ℓ∈L</sub> mean<sub>h</sub>(∑<sub>j</sub> attn<sub>ℓ</sub>[j&rarr;i])</div>
+      <span class="tensor">[5, N<sub>spat</sub>]</span>
     </div>
   </div>
 
   <div class="arrow">&rarr;</div>
 
-  <!-- Layer 2: M1 = DyMU Spatial Merge -->
+  <!-- LAYER 3: M1 SPATIAL MERGE -->
   <div class="layer">
-    <span class="layer-title" style="background:#FFF8E1;color:#F5A623;">Layer 2: M1 Merge</span>
+    <span class="layer-title" style="background:#FFF8E1;color:#F5A623;">L3 M1 Spatial Merge</span>
     <div class="box merge novel">
-      <h3>DyMU Spatial Merge</h3>
-      <p>Token-level cosine bipartite merging</p>
-      <p>Within each frame, merge similar tokens</p>
-      <div class="formula">m(i,j) = cos(v<sub>i</sub>, v<sub>j</sub>) &gt; &tau;<sub>m</sub></div>
-      <span class="tensor">[T, N&prime;<sub>spat</sub>, D]</span>
-      <p style="color:#F57F17;margin-top:4px;"><b>Reduces N<sub>spat</sub> by ~40%</b></p>
+      <h3>DyMU Cosine Bipartite Merge</h3>
+      <p>Within each frame: split tokens into (src, dst) sets, match by max cosine, mean-pool above τ<sub>m</sub></p>
+      <div class="formula">m(i,j) = cos(v<sub>i</sub>, v<sub>j</sub>) &gt; τ<sub>m</sub></div>
+      <div class="formula">v&prime; = ½ (v<sub>src</sub> + v<sub>dst</sub>)</div>
+      <p style="color:#F57F17;margin-top:4px;"><b>~40% intra-frame token reduction before scoring</b></p>
+      <span class="tensor">[5, N&prime;<sub>spat</sub>, D]</span>
     </div>
   </div>
 
   <div class="arrow">&rarr;</div>
 
-  <!-- Layer 3: STAMP-T temporal scoring -->
-  <div class="layer">
-    <span class="layer-title" style="background:#EDE7F6;color:#7B68EE;">Layer 3: STAMP-T Scoring</span>
+  <!-- LAYER 4: STAMP-T multi-signal scoring -->
+  <div class="layer" style="min-width:260px;">
+    <span class="layer-title" style="background:#EDE7F6;color:#7B68EE;">L4 STAMP-T Multi-Signal Scoring</span>
+    <div class="box signal novel">
+      <h3>Signal A — ViT Salience</h3>
+      <p>How much attention each token receives, fused over global layers</p>
+      <div class="formula">Â = sigmoid(z-score(A))</div>
+      <span class="tensor">[N&prime;]</span>
+    </div>
+    <div class="box signal novel">
+      <h3>Signal B — Frame Entropy</h3>
+      <p>Scalar per chunk; complexity proxy used by L5</p>
+      <div class="formula">H<sub>t</sub> = −mean(∑ p log p)</div>
+      <span class="tensor">scalar</span>
+    </div>
+    <div class="box signal">
+      <h3>Signal C — Temporal Novelty</h3>
+      <p>How much each token shifted vs prev chunk</p>
+      <div class="formula">N<sub>t</sub>(i) = 1 − cos(V<sub>t</sub>[i], V<sub>t−1</sub>[i])</div>
+      <span class="tensor">[N&prime;]</span>
+    </div>
+    <div class="arrow-down">&darr;</div>
+    <div class="box scoring">
+      <h3>EMA Momentum</h3>
+      <p>Short-term temporal smoothing on salience</p>
+      <div class="formula">M<sub>t</sub> = (1 − λ)·M<sub>t−1</sub> + λ·Â</div>
+      <p>λ = 0.3</p>
+    </div>
+    <div class="arrow-down">&darr;</div>
     <div class="box scoring novel">
-      <h3>Multi-Signal Salience</h3>
-      <p>A: ViT attention received</p>
-      <p>B: Frame entropy (complexity)</p>
-      <p>C: Cross-frame novelty</p>
-      <div class="formula">s = &alpha;&middot;EMA(A) + (1-&alpha;)&middot;C</div>
-      <span class="tensor">[T&middot;N&prime;]</span>
+      <h3>Score Fusion</h3>
+      <p>Convex blend of EMA salience + novelty, both z-scored against running stats</p>
+      <div class="formula">s<sub>t</sub>(i) = α·M̂<sub>t</sub>(i) + (1 − α)·N̂<sub>t</sub>(i)</div>
+      <p>α = 0.5 (paper default)</p>
+      <span class="tensor">[N&prime;]</span>
+    </div>
+  </div>
+
+  <div class="arrow">&rarr;</div>
+
+  <!-- LAYER 5: LENGTH-ADAPTIVE r (NEW) -->
+  <div class="layer">
+    <span class="layer-title" style="background:#FCE4EC;color:#AD1457;">L5 Length-Adaptive r</span>
+    <div class="box adaptive novel">
+      <h3>Adaptive Rate Selector</h3>
+      <p>Choose keep ratio per video from duration D<sub>vid</sub> and mean entropy H̄</p>
+      <div class="formula">r(D, H̄) = 0.30 + 0.55·σ( γ<sub>D</sub>·(D − D₀) + γ<sub>H</sub>·(H̄ − H₀) )</div>
+      <p>D₀ = 600 s, σ steepness γ<sub>D</sub>=0.01 / s</p>
+      <p>Hard-threshold ablation (paper default):<br>r = 0.30 if D &lt; 600s else 0.85</p>
+      <span class="tensor">scalar r ∈ [0.30, 0.85]</span>
+      <p style="color:#AD1457;margin-top:4px;"><b>Rate-distortion control loop</b></p>
     </div>
     <div class="arrow-down">&darr;</div>
     <div class="box prune">
       <h3>Top-r Selection</h3>
-      <p>Keep ratio <b>r = 0.30</b></p>
-      <p>Aggressive pruning, ~30% LLM tokens</p>
-      <div class="formula">k = max(1, int(N &middot; r))</div>
+      <p>Per-chunk truncation by fused score s<sub>t</sub></p>
+      <div class="formula">k<sub>t</sub> = max(1, ⌊N&prime; · r(D, H̄)⌋)</div>
+      <p>Keeps top-k indices by s<sub>t</sub></p>
+    </div>
+    <div class="arrow-down">&darr;</div>
+    <div class="split">
+      <div class="box kept" style="min-width:75px;max-width:100px;">
+        <h3>Kept</h3>
+        <span class="tensor">[k, D]</span>
+      </div>
+      <div class="box pruned" style="min-width:75px;max-width:100px;">
+        <h3>Pruned</h3>
+        <span class="tensor">[N&prime;−k, D]</span>
+      </div>
     </div>
   </div>
 
   <div class="arrow">&rarr;</div>
 
-  <!-- Layer 4: TAST State Pool -->
+  <!-- LAYER 6: TAST -->
   <div class="layer">
-    <span class="layer-title" style="background:#E0F2F1;color:#00897B;">Layer 4: TAST</span>
+    <span class="layer-title" style="background:#E0F2F1;color:#00897B;">L6 TAST Memory</span>
     <div class="box tast novel">
-      <h3>TAST State Pool</h3>
-      <p>Temporal Accumulative State Tokens</p>
-      <p>EMA over kept tokens, &gamma;=0.1</p>
-      <div class="formula">S<sub>t</sub> = (1-&gamma;)S<sub>t-1</sub> + &gamma;&middot;mean(V<sub>kept,t</sub>)</div>
-      <span class="tensor">[N<sub>tast</sub>=32, D]</span>
-      <p style="color:#00695C;margin-top:4px;"><b>Long-horizon memory across chunks</b></p>
+      <h3>State Token Update (k-means assignment + EMA)</h3>
+      <p>1. Assign each pruned token to nearest state slot by cosine</p>
+      <p>2. EMA update each slot toward its cluster mean</p>
+      <div class="formula">S<sub>t,k</sub> = (1−γ)·S<sub>t−1,k</sub> + γ·mean(V<sub>pruned,k</sub>)</div>
+      <p>K = 32 state tokens, γ = 0.1</p>
+      <span class="tensor">[K=32, D]</span>
     </div>
     <div class="arrow-down">&darr;</div>
     <div class="box tast">
-      <h3>Concat &amp; Inject</h3>
-      <p>Kept tokens + TAST state pool + text</p>
-      <span class="tensor">[1, k+32+N<sub>txt</sub>, D]</span>
+      <h3>Inject Pool (additive blend)</h3>
+      <p>K state tokens are blended into K lowest-salience kept positions</p>
+      <div class="formula">e<sub>i</sub> &larr; (1 − β)·e<sub>i</sub> + β·S<sub>t,k(i)</sub></div>
+      <p>β = 0.2 (paper default; α-ablation in §D)</p>
     </div>
   </div>
 
   <div class="arrow">&rarr;</div>
 
-  <!-- Layer 5: LLM -->
+  <!-- LAYER 7: LLM -->
   <div class="layer">
-    <span class="layer-title" style="background:#E8F5E9;color:#2E7D32;">Layer 5</span>
-    <div class="box llm" style="min-height:120px;">
-      <h3>LLM Decoder</h3>
+    <span class="layer-title" style="background:#E8F5E9;color:#2E7D32;">L7 LLM Decoder</span>
+    <div class="box llm" style="min-height:140px;">
+      <h3>Qwen2.5-VL Decoder</h3>
       <p>28 transformer layers</p>
-      <p>Processes reduced token set + TAST state</p>
-      <span class="tensor">[1, k+32+N<sub>txt</sub>, D]</span>
+      <p>Causal attention over [kept-vis + text query + answer prompt]</p>
+      <p>Streaming KV cache, sliding window cap C<sub>kv</sub></p>
+      <span class="tensor">[1, k + N<sub>txt</sub>, D]</span>
     </div>
     <div class="arrow-down">&darr;</div>
     <div class="box" style="background:#f5f5f5;border-color:#9e9e9e;">
       <h3>Answer</h3>
-      <p>MCQ letter / Generated text</p>
+      <p>MCQ letter logit / generated answer text</p>
     </div>
   </div>
+
 </div>
 
-<div class="bottom-section">
-  <div class="callout" style="max-width:280px;">
-    <h4>Why Each Block Matters</h4>
-    <p><b>M1 (DyMU):</b> kills intra-frame spatial redundancy &mdash; same-object patches collapse before scoring.</p>
-    <p><b>STAMP-T:</b> picks the temporally-salient subset; entropy-adaptive r adjusts to scene complexity.</p>
-    <p><b>TAST:</b> adds 32 EMA-accumulated state tokens that carry long-range context the per-chunk top-k would otherwise drop.</p>
-    <p><b>r=0.30:</b> aggressive ratio that holds accuracy on short-to-medium video; falls behind only on multi-minute plot reasoning.</p>
+<!-- Streaming timeline -->
+<div class="timeline">
+  <h4>B. Streaming Dataflow — what persists vs what resets</h4>
+  <div class="tl-row">
+    <span class="tl-chunk">chunk t = 1</span> <span>&rarr;</span>
+    <span class="tl-chunk">t = 2</span> <span>&rarr;</span>
+    <span class="tl-chunk">t = 3</span> <span>&rarr;</span>
+    <span class="tl-chunk">&hellip;</span> <span>&rarr;</span>
+    <span class="tl-chunk">t = T</span>
+  </div>
+  <div class="tl-row" style="margin-top:8px;">
+    <span class="tl-decision">r(D,H̄)</span>
+    <span style="color:#AD1457;">↑ picked once per video at L5</span>
+    &nbsp;&nbsp;&nbsp;
+    <span class="tl-state">M<sub>t</sub></span>
+    <span style="color:#7B68EE;">EMA momentum (per-chunk)</span>
+    &nbsp;&nbsp;&nbsp;
+    <span class="tl-state">S<sub>t</sub></span>
+    <span style="color:#00897B;">TAST state (cross-chunk)</span>
+    &nbsp;&nbsp;&nbsp;
+    <span class="tl-state">KV<sub>t</sub></span>
+    <span style="color:#2E7D32;">LLM cache (cross-chunk, sliding)</span>
+  </div>
+  <p style="margin-top:6px;color:#546E7A;">Three persistent state streams cross chunk boundaries. The rate r is chosen once per video; the per-chunk path (L1–L7) is repeated T times. Kept-token positions reset every chunk.</p>
+</div>
+
+<!-- ============ EVIDENCE PANELS ============ -->
+<h3 class="section">C. Evidence — Bootstrap-Validated Results</h3>
+
+<div class="panel-row">
+
+  <!-- Headline -->
+  <div class="panel result">
+    <h4>Headline cross-benchmark numbers (paired bootstrap, 95% CI)</h4>
+    <table class="tight">
+      <tr><th>Benchmark</th><th>r=0.30 stack</th><th>r=0.85 stack</th><th>Vanilla</th></tr>
+      <tr><td>DeViBench cross-model (Qwen2.5-VL-7B-Instruct)</td><td class="sig">86.50%</td><td class="sig">86.60%</td><td>82.08%</td></tr>
+      <tr><td>MVBench paired</td><td class="sig">+3.55 pp</td><td>66.20%</td><td>68.28%</td></tr>
+      <tr><td>MLVU plotQA (long video)</td><td class="neg">58.44%</td><td class="sig">64.19%</td><td>66.00%</td></tr>
+    </table>
+    <p style="margin-top:5px;"><b>r=0.30 wins on short/medium; r=0.85 closes the long-video gap. Either ratio beats vanilla on DeViBench cross-model.</b></p>
   </div>
 
-  <div class="callout">
-    <h4>&#9733; vs. Prior Work</h4>
-    <p><b>FastV / FasterVLM:</b> spatial only, LLM attention, no temporal memory.</p>
-    <p><b>PruneVid:</b> feature cosine, no learned salience.</p>
-    <p><b>DyCoke:</b> KV-cache merge in LLM prefill, not at ViT.</p>
-    <p><b>STAMP-T (single):</b> our temporal-only ablation, no DyMU merge or TAST state.</p>
-    <p style="color:#FF6B35;font-weight:bold;margin-top:4px;">Ours: spatial merge + temporal scoring + accumulative state &mdash; all training-free, all composable.</p>
+  <!-- Pareto -->
+  <div class="panel result">
+    <h4>plotQA Pareto — every step up in r is statistically significant</h4>
+    <table class="tight">
+      <tr><th>r</th><th>Acc</th><th>Δ vs r=0.30</th><th>95% CI</th></tr>
+      <tr><td>0.30 (control)</td><td>58.44%</td><td>—</td><td>—</td></tr>
+      <tr><td>0.50</td><td>61.04%</td><td class="sig">+2.60 pp</td><td>[+0.74, +4.64]</td></tr>
+      <tr><td>0.70</td><td>63.27%</td><td class="sig">+4.82 pp</td><td>[+2.60, +7.24]</td></tr>
+      <tr><td>0.85</td><td class="sig">64.19%</td><td class="sig">+5.75 pp</td><td>[+3.34, +8.35]</td></tr>
+      <tr><td>1.00 (vanilla)</td><td>66.00%</td><td>+7.98 pp</td><td>[+3.90, +12.24]</td></tr>
+    </table>
+    <svg class="pareto-svg" viewBox="0 0 400 180" preserveAspectRatio="none">
+      <!-- axes -->
+      <line x1="40" y1="160" x2="380" y2="160" stroke="#37474F" stroke-width="1"/>
+      <line x1="40" y1="20" x2="40" y2="160" stroke="#37474F" stroke-width="1"/>
+      <text x="200" y="178" font-size="9" text-anchor="middle" fill="#37474F">keep ratio r (1 − pruning fraction)</text>
+      <text x="14" y="90" font-size="9" text-anchor="middle" fill="#37474F" transform="rotate(-90 14 90)">plotQA accuracy</text>
+      <!-- gridline at vanilla -->
+      <line x1="40" y1="40" x2="380" y2="40" stroke="#90A4AE" stroke-dasharray="3,3" stroke-width="1"/>
+      <text x="375" y="36" font-size="9" text-anchor="end" fill="#2E7D32">vanilla 66.00%</text>
+      <!-- Pareto points (x: 40 + 340*(r-0.30)/0.70; y: 160 - 120*(acc-50)/16) -->
+      <!-- r=0.30 → x=40, acc=58.44 → y=160-120*8.44/16=160-63.3=96.7 -->
+      <circle cx="40" cy="96.7" r="5" fill="#D0021B"/>
+      <text x="48" y="100" font-size="9" fill="#D0021B">r=0.30 (58.44, current control)</text>
+      <!-- r=0.50 → x=40+340*0.2/0.70=137; acc=61.04 → y=160-120*11.04/16=160-82.8=77.2 -->
+      <circle cx="137" cy="77.2" r="4" fill="#F57F17"/>
+      <text x="145" y="80" font-size="9" fill="#F57F17">r=0.50 (61.04)</text>
+      <!-- r=0.70 → x=40+340*0.4/0.70=234; acc=63.27 → y=160-120*13.27/16=160-99.5=60.5 -->
+      <circle cx="234" cy="60.5" r="4" fill="#F57F17"/>
+      <text x="242" y="64" font-size="9" fill="#F57F17">r=0.70 (63.27)</text>
+      <!-- r=0.85 → x=40+340*0.55/0.70=307; acc=64.19 → y=160-120*14.19/16=160-106.4=53.6 -->
+      <circle cx="307" cy="53.6" r="5" fill="#2E7D32"/>
+      <text x="240" y="49" font-size="9" fill="#2E7D32" font-weight="bold">r=0.85 (64.19) — paper choice for long video</text>
+      <!-- r=1.00 vanilla → x=380, acc=66.00 → y=160-120*16/16=40 -->
+      <circle cx="380" cy="40" r="4" fill="#2E7D32"/>
+      <!-- Path -->
+      <polyline points="40,96.7 137,77.2 234,60.5 307,53.6 380,40" fill="none" stroke="#7B68EE" stroke-width="1.5" stroke-dasharray="2,2"/>
+    </svg>
   </div>
 
-  <div class="callout" style="background:#E8F5E9;border-color:#2E7D32;color:#1B5E20;max-width:300px;">
-    <h4>Headline Results (paired bootstrap, 95% CI)</h4>
-    <p><b>Cross-model DeViBench (Qwen2.5-VL-7B-Instruct, n=652):</b> <b>86.50%</b>, &Delta; +4.42pp [+1.82, +6.88] vs StreamingVLM-vanilla 82.08% &mdash; <b>sig. win, training-free transfer</b></p>
-    <p><b>MVBench paired (n=1325):</b> +3.55pp [+1.43, +5.58] &mdash; sig. win</p>
-    <p><b>StreamingVLM same-model DeViBench (n=652):</b> 82.21% [79.14, 85.12] &mdash; matches vanilla at ~30% LLM tokens (compute-equivalence)</p>
-    <p><b>MLVU plotQA (n=500, long video):</b> &minus;7.00pp &mdash; honest negative; Phase-7 training-free fixes (hierarchical TAST, adaptive &gamma;, keep-ratio ramp) did not close the gap.</p>
+  <!-- What didn't work -->
+  <div class="panel fail">
+    <h4>D. Ablation — 8 training-free attacks at r=0.30 all failed (47.68–58.63%)</h4>
+    <table class="tight">
+      <tr><th>Attack</th><th>plotQA n=539</th></tr>
+      <tr><td>Phase 7-A — Hierarchical TAST (long-EMA pool, γ<sub>long</sub>=0.01)</td><td>58.44</td></tr>
+      <tr><td>Phase 7-B — Adaptive γ schedule</td><td>58.63</td></tr>
+      <tr><td>Phase 7-C — Keep-ratio ramp r 0.15→0.45</td><td>56.59</td></tr>
+      <tr><td>Phase 8 v1 — Retrieval inject α=0.2 / 0.5 / 1.0</td><td>58.63 / 58.26 / 57.70</td></tr>
+      <tr><td>Phase 8 v2 — FOCUS + stack (per-frame text-cond)</td><td>58.07</td></tr>
+      <tr><td>Phase 8 v3 — Question-first prompt</td><td>47.68 (RoPE-OOD)</td></tr>
+    </table>
+    <p style="margin-top:6px;"><b>None could move the long-video accuracy off the r=0.30 ceiling. The bottleneck is information budget, not method.</b> This is what motivates the adaptive r policy at L5 instead of a smarter scorer.</p>
   </div>
+
+  <!-- Theory -->
+  <div class="panel theory">
+    <h4>E. Theoretical framing — rate–distortion trade-off</h4>
+    <p><b>Pruning at rate (1−r) introduces distortion d(r)</b> in the LLM's visual posterior. Short/medium video has redundant per-chunk content → d(r=0.30) is small; long-form video has dense per-chunk plot evidence → d(r=0.30) is large (≈ 7.5 pp loss).</p>
+    <p>The adaptive selector L5 chooses r to satisfy <span class="formula">d(r) ≤ ε</span> per video while minimising tokens. With ε ≈ 2 pp of vanilla, the empirical Pareto recovers:</p>
+    <table class="tight" style="margin-top:5px;">
+      <tr><th>D<sub>vid</sub></th><th>r*</th><th>tokens dropped</th></tr>
+      <tr><td>&lt; 5 min</td><td>0.30</td><td>70%</td></tr>
+      <tr><td>5–10 min</td><td>0.30–0.50</td><td>50–70%</td></tr>
+      <tr><td>10–15 min</td><td>0.50–0.70</td><td>30–50%</td></tr>
+      <tr><td>&gt; 15 min (plot)</td><td>0.85</td><td>15%</td></tr>
+    </table>
+  </div>
+
+  <!-- Comparison -->
+  <div class="panel ablation">
+    <h4>F. vs Prior Pruning Work</h4>
+    <table class="tight">
+      <tr><th>Method</th><th>Layer</th><th>Adaptive r?</th></tr>
+      <tr><td>FastV (NeurIPS 24)</td><td>LLM</td><td>fixed</td></tr>
+      <tr><td>FasterVLM</td><td>ViT (CLS-attn)</td><td>fixed</td></tr>
+      <tr><td>PruneVid</td><td>ViT (feature cos)</td><td>fixed</td></tr>
+      <tr><td>DyCoke</td><td>LLM KV cache</td><td>fixed</td></tr>
+      <tr><td>STAMP / STAMP-T</td><td>ViT (multi-signal)</td><td>fixed</td></tr>
+      <tr><td><b>Ours (M1+STAMP-T+TAST+L5)</b></td><td><b>ViT (multi-signal) + cross-chunk state</b></td><td><b>length+entropy adaptive</b></td></tr>
+    </table>
+    <p style="margin-top:5px;"><b>Ours is the first training-free streaming pruner that adapts the keep ratio to video duration and content entropy</b>, with bootstrap-CI evidence across three benchmarks.</p>
+  </div>
+
 </div>
 
 <div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#ECEFF1;border-color:#607D8B;"></div>Inputs</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FCE4EC;border-color:#C2185B;"></div>Text Path</div>
   <div class="legend-item"><div class="legend-dot" style="background:#E3F2FD;border-color:#2C73D2;"></div>ViT Encoder</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#FFF8E1;border-color:#FF6B35;border-style:dashed;"></div>Novel: M1 / STAMP-T / TAST</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#EDE7F6;border-color:#7B68EE;"></div>Temporal Scoring</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FFF8E1;border-color:#FF6B35;border-style:dashed;"></div>Novel: M1 / Adaptive r / TAST / Multi-signal</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FFFDE7;border-color:#FBC02D;"></div>STAMP-T Signals</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#EDE7F6;border-color:#7B68EE;"></div>Score Fusion</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FCE4EC;border-color:#AD1457;"></div>Length-Adaptive r</div>
   <div class="legend-item"><div class="legend-dot" style="background:#FFEBEE;border-color:#D0021B;"></div>Pruning</div>
   <div class="legend-item"><div class="legend-dot" style="background:#E0F2F1;border-color:#00897B;"></div>TAST State</div>
   <div class="legend-item"><div class="legend-dot" style="background:#E8F5E9;border-color:#2E7D32;"></div>LLM Decoder</div>

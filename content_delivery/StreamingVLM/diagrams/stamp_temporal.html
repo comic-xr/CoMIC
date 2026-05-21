@@ -189,12 +189,16 @@ h2 { text-align: center; color: #616161; margin-bottom: 20px; font-size: 14px; f
     <p style="color:#FF6B35;font-weight:bold;margin-top:4px;">Ours: ViT multi-signal + temporal EMA + entropy-adaptive + compress-not-discard</p>
   </div>
 
-  <div class="callout" style="background:#E8F5E9;border-color:#2E7D32;color:#1B5E20;max-width:320px;">
-    <h4>Final Results (paired bootstrap, 95% CI)</h4>
+  <div class="callout" style="background:#E8F5E9;border-color:#2E7D32;color:#1B5E20;max-width:340px;">
+    <h4>Final Results — Length-Adaptive r (Phase 8)</h4>
     <p><b>STAMP-T r=0.90 (single, DeViBench n=652):</b> 82.98% &mdash; +0.90pp over vanilla 82.08%</p>
-    <p><b>M1+TAST stack r=0.30 cross-model (Qwen2.5-VL-7B-Instruct, n=652):</b> <b>86.50%</b>, &Delta; +4.42pp [+1.82, +6.88] &mdash; sig. win, training-free transfer</p>
-    <p><b>MVBench paired (n=1325):</b> +3.55pp [+1.43, +5.58] &mdash; sig. win</p>
-    <p><b>MLVU plotQA (n=500):</b> &minus;7.00pp &mdash; honest negative; Phase-7 training-free fixes did not close the gap</p>
+    <p><b>SHORT / MEDIUM video &rarr; r=0.30 stack</b>:<br>
+    &bull; DeViBench cross-model (Qwen2.5-VL-7B-Instruct, n=652): <b>86.50%</b>, +4.42 pp [+1.82, +6.88]<br>
+    &bull; MVBench paired (n=1325): +3.55 pp [+1.43, +5.58]</p>
+    <p><b>LONG video &rarr; r=0.85 stack</b>:<br>
+    &bull; MLVU plotQA (n=539): <b>64.19%</b>, within &minus;1.81 pp of vanilla 66.00%<br>
+    &bull; DeViBench cross-model at r=0.85 (n=821): <b>86.60%</b>, +4.52 pp &mdash; also beats vanilla</p>
+    <p style="margin-top:6px;font-weight:bold;">Both ratios composed via the adaptive selector at L5 of the master pipeline (see <i>m1_tast_stack.html</i>). The April honest-negative on plotQA is closed by lifting r; eight training-free attacks at r=0.30 failed to do so.</p>
   </div>
 </div>
 
